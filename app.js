@@ -154,16 +154,28 @@ Rules:
 
 async function doAnalyze(input, key, prompt, area) {
   try {
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
+    // Try multiple models as fallback — flash-lite has highest free limits
+    const models = ['gemini-2.0-flash-lite', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+    let res, lastErr;
 
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.4, maxOutputTokens: 1200 }
-      })
-    });
+    for (const model of models) {
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+      res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.4, maxOutputTokens: 1200 }
+        })
+      });
+
+      if (res.ok) break; // success, stop trying
+      if (res.status === 429) {
+        lastErr = '429';
+        continue; // rate limited, try next model
+      }
+      break; // other error, stop
+    }
 
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
