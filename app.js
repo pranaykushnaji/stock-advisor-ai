@@ -110,7 +110,7 @@ Rules:
 
   try {
     // Support both old (AIza) and new (AQ.) Gemini key formats
-    const model = key.startsWith('AQ.') ? 'gemini-2.0-flash' : 'gemini-1.5-flash';
+    const model = key.startsWith('AQ.') ? 'gemini-2.0-flash-lite' : 'gemini-1.5-flash-latest';
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
 
     const res = await fetch(endpoint, {
