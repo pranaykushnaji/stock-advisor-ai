@@ -45,7 +45,7 @@
       <div class="tab-pane active" id="tab-advisor">
         <div class="page-header">
           <h1>Stock Advisor</h1>
-          <p>AI-powered investment analysis using Google Gemini</p>
+          <p>AI-powered investment analysis — free, powered by Groq or Gemini</p>
         </div>
 
         <div class="search-card">
@@ -59,7 +59,7 @@
               Analyze
             </button>
           </div>
-          <p class="search-hint">Powered by Google Gemini (free). For educational purposes only — not financial advice.</p>
+          <p class="search-hint">For educational purposes only — not financial advice.</p>
         </div>
 
         <div id="result-area"></div>
@@ -97,16 +97,24 @@
         <button class="modal-close" id="modal-close">✕</button>
       </div>
       <div class="modal-body">
-        <p>This app uses Google Gemini AI (free tier — 1,500 requests/day, no credit card needed).</p>
-        <ol class="setup-steps">
-          <li>Go to <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></li>
-          <li>Sign in with your Google account</li>
-          <li>Click <strong>"Create API Key"</strong></li>
-          <li>Copy and paste it below</li>
-        </ol>
+        <div class="input-group" style="margin-bottom:16px;">
+          <label>AI Provider</label>
+          <select id="provider-select" style="width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);color:var(--text);font-size:14px;">
+            <option value="groq">Groq (recommended — fastest, 14,400 req/day free)</option>
+            <option value="gemini">Google Gemini (1,500 req/day free)</option>
+          </select>
+        </div>
+        <div id="provider-hint">
+          <ol class="setup-steps">
+            <li>Go to <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a></li>
+            <li>Sign up free (Google/GitHub login)</li>
+            <li>Click <strong>"Create API Key"</strong></li>
+            <li>Copy & paste below (starts with <code>gsk_</code>)</li>
+          </ol>
+        </div>
         <div class="input-group">
-          <label>Gemini API Key</label>
-          <input type="password" id="api-key-input" placeholder="AIza..." />
+          <label>API Key</label>
+          <input type="password" id="api-key-input" placeholder="gsk_..." />
           <button class="show-hide-btn" id="toggle-key">Show</button>
         </div>
         <div id="key-error" class="key-error"></div>
