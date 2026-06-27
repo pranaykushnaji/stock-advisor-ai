@@ -239,3 +239,62 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   .action-row { flex-direction: column; }
   .action-row .btn { width: 100%; justify-content: center; }
 }
+
+/* ─── Agent Cards ─── */
+.agents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.agent-card { background: var(--bg3); border-radius: var(--radius); padding: 14px 16px; }
+.agent-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.agent-icon { font-size: 18px; }
+.agent-name { font-size: 12px; font-weight: 600; color: var(--text2); flex: 1; text-transform: uppercase; letter-spacing: 0.05em; }
+.agent-score { font-size: 18px; font-weight: 700; }
+.agent-bar { height: 4px; background: var(--bg); border-radius: 2px; overflow: hidden; margin-bottom: 10px; }
+.agent-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease; }
+.agent-points { display: flex; flex-direction: column; gap: 4px; }
+.agent-point { display: flex; gap: 6px; font-size: 12px; color: var(--text2); line-height: 1.5; }
+.ap-icon { flex-shrink: 0; font-weight: 700; font-size: 11px; }
+.ap-pos { color: var(--green); }
+.ap-neg { color: var(--red); }
+
+/* ─── Meta pills ─── */
+.meta-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.pill { display: inline-flex; align-items: center; gap: 4px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+.pill-low { background: var(--green-bg); color: var(--green); border-color: rgba(34,200,122,0.25); }
+.pill-medium { background: var(--amber-bg); color: var(--amber); border-color: rgba(245,166,35,0.25); }
+.pill-high { background: var(--red-bg); color: var(--red); border-color: rgba(240,91,91,0.25); }
+.pill-green { background: var(--green-bg); color: var(--green); border-color: rgba(34,200,122,0.25); }
+
+/* ─── Confidence breakdown ─── */
+.conf-breakdown { background: var(--bg3); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 16px; }
+.conf-weights { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.cw-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.cw-label { width: 90px; color: var(--text2); }
+.cw-weight { width: 30px; color: var(--text3); text-align: right; }
+.cw-bar { flex: 1; height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.cw-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+.cw-score { width: 55px; text-align: right; color: var(--text2); font-weight: 500; }
+.cw-total { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+
+/* ─── Compare mini agents ─── */
+.agents-mini { display: flex; flex-direction: column; gap: 4px; margin-top: 12px; }
+.am-row { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--text2); }
+.am-row span:first-child { width: 75px; }
+.am-bar { flex: 1; height: 5px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+.am-row span:last-child { width: 25px; text-align: right; font-weight: 600; }
+
+/* ─── Dashboard ─── */
+.dash-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
+.dm-item { text-align: center; padding: 12px; background: var(--bg3); border-radius: var(--radius); }
+.dm-val { font-size: 22px; font-weight: 700; }
+.dm-lbl { font-size: 11px; color: var(--text3); margin-top: 3px; }
+
+.conf-dist { display: flex; flex-direction: column; gap: 6px; margin-top: 10px; }
+.cd-row { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.cd-label { width: 80px; color: var(--text2); }
+.cd-bar { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+.cd-count { width: 70px; text-align: right; color: var(--text3); }
+
+@media (max-width: 768px) {
+  .agents-grid { grid-template-columns: 1fr; }
+  .dash-metrics { grid-template-columns: repeat(2, 1fr); }
+  .summary-tiles { grid-template-columns: repeat(2, 1fr); }
+}
