@@ -111,7 +111,19 @@ async function callGemini(key,stock){
   }
   throw new Error('Gemini rate limited. Switch to Groq.');
 }
-async function callAI(stock){const k=getKey(),p=getProvider();if(!k){openModal();throw new Error('No API key');}return p==='groq'?callGroq(k,stock):callGemini(k,stock);}
+async function callAI(stock){
+  // Try server-side API first (no key needed)
+  try{
+    const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock})});
+    if(r.ok){const d=await r.json();if(d.raw)return d.raw;}
+    const e=await r.json().catch(()=>({}));
+    if(r.status!==500||!e.error?.includes('not configured'))throw new Error(e.error||'Server error');
+  }catch(e){if(!e.message.includes('not configured')&&!e.message.includes('Failed to fetch'))throw e;}
+  // Fallback to client-side key
+  const k=getKey(),p=getProvider();
+  if(!k){openModal();throw new Error('No API key — enter one or ask the admin to set GROQ_API_KEY');}
+  return p==='groq'?callGroq(k,stock):callGemini(k,stock);
+}
 
 function parseResult(raw,query){
   const c=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
@@ -394,7 +406,14 @@ document.getElementById('analyze-btn').addEventListener('click',analyzeStock);
 
 // ─── Init ───
 initTheme();load();
-if(!getKey()){setTimeout(()=>{document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
-  <div style="font-size:32px">🔑</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Setup your free API key</div>
-  <div style="font-size:13px;color:var(--text2);margin-bottom:14px;"><strong>Groq</strong> — free, 14,400 req/day · <a href="https://console.groq.com/keys" target="_blank" style="color:var(--accent);">Get key →</a></div>
-  <button class="btn btn-primary" onclick="openModal()">Setup API Key →</button></div></div>`;},100);}
+// Check if server-side key is configured
+fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock:'test'})}).then(r=>{
+  if(r.status===500)return r.json().then(d=>{
+    if(d.error?.includes('not configured')&&!getKey()){
+      document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
+        <div style="font-size:32px">🔑</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Setup API key</div>
+        <div style="font-size:13px;color:var(--text2);margin-bottom:14px;"><strong>Groq</strong> — free · <a href="https://console.groq.com/keys" target="_blank" style="color:var(--accent);">Get key →</a></div>
+        <button class="btn btn-primary" onclick="openModal()">Setup API Key →</button></div></div>`;
+    }
+  });
+}).catch(()=>{});
