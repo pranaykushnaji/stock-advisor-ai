@@ -69,6 +69,44 @@ document.getElementById('save-key-btn').addEventListener('click', () => {
   showToast('API key saved! Start analyzing stocks.');
 });
 
+// ─── Rate limit countdown + auto retry ───
+function showCountdown(area, stockName, key, prompt) {
+  let secs = 62;
+  area.innerHTML = `<div class="result-card" style="border-left:3px solid var(--amber);">
+    <div style="font-size:15px;font-weight:600;margin-bottom:8px;">⏳ Rate limit hit — auto-retrying in <span id="cd-num">${secs}</span>s</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:14px;">Google Gemini free tier allows 15 requests/minute. Waiting for reset…</div>
+    <div style="background:var(--bg3);border-radius:var(--radius);height:6px;overflow:hidden;">
+      <div id="cd-bar" style="height:100%;background:var(--amber);width:100%;transition:width 1s linear;"></div>
+    </div>
+    <button class="btn btn-ghost" style="margin-top:14px;" onclick="cancelCountdown()">Cancel</button>
+  </div>`;
+  
+  window._cdCancelled = false;
+  const interval = setInterval(async () => {
+    if (window._cdCancelled) { clearInterval(interval); return; }
+    secs--;
+    const numEl = document.getElementById('cd-num');
+    const barEl = document.getElementById('cd-bar');
+    if (numEl) numEl.textContent = secs;
+    if (barEl) barEl.style.width = (secs / 62 * 100) + '%';
+    if (secs <= 0) {
+      clearInterval(interval);
+      if (!window._cdCancelled) {
+        // Auto retry
+        area.innerHTML = `<div class="loading-wrap"><div class="spinner"></div><p>Retrying <strong>${stockName}</strong>…</p></div>`;
+        await doAnalyze(stockName, key, prompt, area);
+      }
+    }
+  }, 1000);
+  window._cdInterval = interval;
+}
+
+function cancelCountdown() {
+  window._cdCancelled = true;
+  if (window._cdInterval) clearInterval(window._cdInterval);
+  document.getElementById('result-area').innerHTML = '<p style="color:var(--text3);padding:8px 0;font-size:14px;">Cancelled. Try again when ready.</p>';
+}
+
 // ─── Stock Analysis ───
 async function analyzeStock() {
   const input = document.getElementById('stock-input').value.trim();
@@ -108,8 +146,14 @@ Rules:
 - confidence must be a number 0-100
 - Return ONLY the JSON object, nothing else`;
 
+  await doAnalyze(input, key, prompt, area);
+
+  btn.disabled = false;
+  btn.innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg> Analyze`;
+}
+
+async function doAnalyze(input, key, prompt, area) {
   try {
-    // Gemini API call - supports both AIza and AQ. key formats
     const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
 
     const res = await fetch(endpoint, {
@@ -127,8 +171,8 @@ Rules:
       const status = res.status;
       if (status === 400) throw new Error(`Invalid request or API key. Details: ${msg}`);
       if (status === 403) throw new Error(`API key rejected (403). Go to aistudio.google.com and make sure your key is active. Details: ${msg}`);
-      if (status === 429) throw new Error(`Rate limit hit (429). Wait 60 seconds and try again. Free tier: 15 requests/minute.`);
-      if (status === 404) throw new Error(`Model not found (404). Try refreshing the page. Details: ${msg}`);
+      if (status === 429) { showCountdown(area, input, key, prompt); return; }
+      if (status === 404) throw new Error(`Model not found (404). Try refreshing. Details: ${msg}`);
       throw new Error(`API error ${status}: ${msg}`);
     }
 
@@ -136,7 +180,7 @@ Rules:
     const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
     if (!rawText) throw new Error('Empty response from Gemini. Please try again.');
 
-    const cleaned = rawText.replace(/```json\s*/gi, '').replace(/```\s*/g, '').trim();
+    const cleaned = rawText.replace(/\`\`\`json\s*/gi, '').replace(/\`\`\`\s*/g, '').trim();
     const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('Could not parse Gemini response. Please try again.');
 
@@ -153,11 +197,8 @@ Rules:
     area.innerHTML = `<div class="error-card">
       <div class="error-title">⚠ Analysis failed</div>
       <div class="error-msg">${esc(err.message)}</div>
-      ${!getKey() || err.message.includes('key') ? `<br><button class="btn btn-ghost" onclick="openModal()" style="margin-top:8px;">Update API Key</button>` : ''}
+      ${err.message.includes('key') ? `<br><button class="btn btn-ghost" onclick="openModal()" style="margin-top:8px;">Update API Key</button>` : ''}
     </div>`;
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = `<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg> Analyze`;
   }
 }
 
