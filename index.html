@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="app">
-    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="logo">
         <span class="logo-icon">📈</span>
@@ -18,41 +17,46 @@
       <nav class="nav">
         <button class="nav-item active" data-tab="advisor">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          Advisor
+          <span>Advisor</span>
+        </button>
+        <button class="nav-item" data-tab="compare">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 3h5v5M8 3H3v5M3 16v5h5M16 21h5v-5"/></svg>
+          <span>Compare</span>
         </button>
         <button class="nav-item" data-tab="bouquet">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2M8 7V5a2 2 0 0 0-4 0v2"/></svg>
-          My Bouquet
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
+          <span>My Bouquet</span>
           <span class="badge" id="bouquet-badge"></span>
         </button>
         <button class="nav-item" data-tab="history">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
-          History
+          <span>History</span>
         </button>
       </nav>
       <div class="sidebar-footer">
+        <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+          <svg id="theme-icon-dark" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
+          <svg id="theme-icon-light" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
         <button class="settings-btn" id="settings-btn">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-          API Settings
+          <span>API Settings</span>
         </button>
       </div>
     </aside>
 
-    <!-- Main content -->
     <main class="main">
-
       <!-- ADVISOR TAB -->
       <div class="tab-pane active" id="tab-advisor">
         <div class="page-header">
           <h1>Stock Advisor</h1>
           <p>AI-powered investment analysis — free, powered by Groq or Gemini</p>
         </div>
-
         <div class="search-card">
           <div class="search-row">
             <div class="search-input-wrap">
               <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <input type="text" id="stock-input" placeholder="Search any stock — Reliance, TCS, HDFC Bank, Zomato, AAPL…" />
+              <input type="text" id="stock-input" placeholder="Search any stock — Reliance, TCS, Zomato, AAPL…" />
             </div>
             <button class="btn btn-primary" id="analyze-btn">
               <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
@@ -61,15 +65,36 @@
           </div>
           <p class="search-hint">For educational purposes only — not financial advice.</p>
         </div>
-
         <div id="result-area"></div>
+      </div>
+
+      <!-- COMPARE TAB -->
+      <div class="tab-pane" id="tab-compare">
+        <div class="page-header">
+          <h1>Compare Stocks</h1>
+          <p>Side-by-side AI analysis of two stocks</p>
+        </div>
+        <div class="search-card">
+          <div class="compare-row">
+            <input type="text" id="compare-a" placeholder="Stock A (e.g. TCS)" />
+            <span class="vs-badge">VS</span>
+            <input type="text" id="compare-b" placeholder="Stock B (e.g. Infosys)" />
+            <button class="btn btn-primary" id="compare-btn">Compare</button>
+          </div>
+        </div>
+        <div id="compare-result"></div>
       </div>
 
       <!-- BOUQUET TAB -->
       <div class="tab-pane" id="tab-bouquet">
-        <div class="page-header">
-          <h1>My Bouquet</h1>
-          <p>Stocks you've approved — track simulated performance</p>
+        <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <h1>My Bouquet</h1>
+            <p>Stocks you've approved — track simulated performance</p>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost" id="export-csv-btn">📥 Export CSV</button>
+          </div>
         </div>
         <div id="bouquet-content"></div>
       </div>
@@ -77,15 +102,11 @@
       <!-- HISTORY TAB -->
       <div class="tab-pane" id="tab-history">
         <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
-          <div>
-            <h1>Analysis History</h1>
-            <p>All stocks you've analyzed</p>
-          </div>
+          <div><h1>Analysis History</h1><p>All stocks you've analyzed</p></div>
           <button class="btn btn-ghost" id="clear-history-btn">Clear all</button>
         </div>
         <div id="history-content"></div>
       </div>
-
     </main>
   </div>
 
@@ -93,13 +114,13 @@
   <div class="modal-overlay" id="api-modal">
     <div class="modal">
       <div class="modal-header">
-        <h2>Setup Gemini API Key</h2>
+        <h2>Setup API Key</h2>
         <button class="modal-close" id="modal-close">✕</button>
       </div>
       <div class="modal-body">
         <div class="input-group" style="margin-bottom:16px;">
           <label>AI Provider</label>
-          <select id="provider-select" style="width:100%;padding:10px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius);color:var(--text);font-size:14px;">
+          <select id="provider-select">
             <option value="groq">Groq (recommended — fastest, 14,400 req/day free)</option>
             <option value="gemini">Google Gemini (1,500 req/day free)</option>
           </select>
@@ -122,6 +143,25 @@
       <div class="modal-footer">
         <button class="btn btn-ghost" id="modal-cancel">Cancel</button>
         <button class="btn btn-primary" id="save-key-btn">Save & Start Analyzing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Portfolio Simulator Modal -->
+  <div class="modal-overlay" id="portfolio-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>💰 Portfolio Simulator</h2>
+        <button class="modal-close" onclick="document.getElementById('portfolio-modal').classList.remove('open')">✕</button>
+      </div>
+      <div class="modal-body" id="portfolio-body">
+        <p>See what your bouquet would be worth if you had invested equally in each stock when you added it.</p>
+        <div class="input-group" style="margin:16px 0;">
+          <label>Total Investment Amount (₹)</label>
+          <input type="number" id="sim-amount" value="100000" min="1000" step="1000" />
+        </div>
+        <button class="btn btn-primary" onclick="runSimulation()" style="width:100%;">Calculate Returns</button>
+        <div id="sim-result" style="margin-top:16px;"></div>
       </div>
     </div>
   </div>
