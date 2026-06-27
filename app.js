@@ -155,7 +155,7 @@ Rules:
 async function doAnalyze(input, key, prompt, area) {
   try {
     // Try multiple models as fallback — flash-lite has highest free limits
-    const models = ['gemini-2.0-flash-lite', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+    const models = ['gemini-2.0-flash-lite', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-2.5-flash-preview-05-20'];
     let res, lastErr;
 
     for (const model of models) {
@@ -170,9 +170,9 @@ async function doAnalyze(input, key, prompt, area) {
       });
 
       if (res.ok) break; // success, stop trying
-      if (res.status === 429) {
-        lastErr = '429';
-        continue; // rate limited, try next model
+      if (res.status === 429 || res.status === 404) {
+        lastErr = String(res.status);
+        continue; // rate limited or model not found, try next
       }
       break; // other error, stop
     }
