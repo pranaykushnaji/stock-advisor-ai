@@ -63,7 +63,7 @@ toggleBtn.addEventListener('click', () => {
 document.getElementById('save-key-btn').addEventListener('click', () => {
   const k = keyInput.value.trim();
   if (!k) { keyError.textContent = 'Please enter a key.'; return; }
-  if (!k.startsWith('AIza')) { keyError.textContent = 'Gemini keys usually start with "AIza…" — double check.'; return; }
+  if (!k.startsWith('AIza') && !k.startsWith('AQ.')) { keyError.textContent = 'Key doesn\'t look right — it should start with "AIza" or "AQ." — double check.'; return; }
   saveKey(k);
   closeModal();
   showToast('API key saved! Start analyzing stocks.');
@@ -109,17 +109,18 @@ Rules:
 - Return ONLY the JSON object, nothing else`;
 
   try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: { temperature: 0.4, maxOutputTokens: 1200 }
-        })
-      }
-    );
+    // Support both old (AIza) and new (AQ.) Gemini key formats
+    const model = key.startsWith('AQ.') ? 'gemini-2.0-flash' : 'gemini-1.5-flash';
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.4, maxOutputTokens: 1200 }
+      })
+    });
 
     if (!res.ok) {
       const err = await res.json();
