@@ -109,9 +109,8 @@ Rules:
 - Return ONLY the JSON object, nothing else`;
 
   try {
-    // Support both old (AIza) and new (AQ.) Gemini key formats
-    const model = key.startsWith('AQ.') ? 'gemini-2.0-flash-lite' : 'gemini-1.5-flash-latest';
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${key}`;
+    // Gemini API call - supports both AIza and AQ. key formats
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
 
     const res = await fetch(endpoint, {
       method: 'POST',
@@ -123,12 +122,14 @@ Rules:
     });
 
     if (!res.ok) {
-      const err = await res.json();
+      const err = await res.json().catch(() => ({}));
       const msg = err?.error?.message || `HTTP ${res.status}`;
-      if (res.status === 400 && msg.includes('API_KEY')) throw new Error('Invalid API key. Click "API Settings" to update it.');
-      if (res.status === 403) throw new Error('API key does not have access. Make sure you enabled the Gemini API in Google AI Studio.');
-      if (res.status === 429) throw new Error('Rate limit hit. You have made too many requests. Wait a minute and try again.');
-      throw new Error(msg);
+      const status = res.status;
+      if (status === 400) throw new Error(`Invalid request or API key. Details: ${msg}`);
+      if (status === 403) throw new Error(`API key rejected (403). Go to aistudio.google.com and make sure your key is active. Details: ${msg}`);
+      if (status === 429) throw new Error(`Rate limit hit (429). Wait 60 seconds and try again. Free tier: 15 requests/minute.`);
+      if (status === 404) throw new Error(`Model not found (404). Try refreshing the page. Details: ${msg}`);
+      throw new Error(`API error ${status}: ${msg}`);
     }
 
     const data = await res.json();
