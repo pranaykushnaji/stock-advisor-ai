@@ -226,19 +226,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .toast.show { transform: translateY(0); opacity: 1; }
 
 /* ─── Responsive ─── */
-@media (max-width: 768px) {
-  .sidebar { width: 60px; padding: 16px 8px; }
-  .logo-text, .nav-item span, .settings-btn span { display: none; }
-  .nav-item { justify-content: center; padding: 10px; }
-  .main { margin-left: 60px; padding: 20px 16px; }
-  .section-grid, .compare-grid { grid-template-columns: 1fr; }
-  .summary-tiles { grid-template-columns: repeat(2, 1fr); }
-  .compare-row { flex-direction: column; }
-  .vs-badge { align-self: center; }
-  .stock-price { font-size: 22px; }
-  .action-row { flex-direction: column; }
-  .action-row .btn { width: 100%; justify-content: center; }
-}
+
 
 /* ─── Agent Cards ─── */
 .agents-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
@@ -293,8 +281,211 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .cd-bar { flex: 1; height: 8px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
 .cd-count { width: 70px; text-align: right; color: var(--text3); }
 
+
+
+/* ─── Mobile: Bottom tab bar ─── */
 @media (max-width: 768px) {
-  .agents-grid { grid-template-columns: 1fr; }
-  .dash-metrics { grid-template-columns: repeat(2, 1fr); }
-  .summary-tiles { grid-template-columns: repeat(2, 1fr); }
+  .app { flex-direction: column; }
+
+  .sidebar {
+    position: fixed;
+    top: auto; left: 0; right: 0; bottom: 0;
+    width: 100%; height: auto;
+    flex-direction: row;
+    padding: 0;
+    border-right: none;
+    border-top: 1px solid var(--border);
+    z-index: 50;
+    background: var(--bg2);
+  }
+
+  .logo { display: none; }
+
+  .nav {
+    flex-direction: row;
+    flex: 1;
+    gap: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 4px 6px;
+    border-radius: 0;
+    font-size: 10px;
+  }
+  .nav-item svg { width: 20px; height: 20px; }
+  .nav-item.active { background: none; border-top: 2px solid var(--accent); }
+  .nav-item span { display: block; }
+
+  .badge {
+    position: absolute;
+    top: 4px;
+    right: calc(50% - 18px);
+    font-size: 9px;
+    padding: 0 5px;
+    min-width: 16px;
+  }
+
+  .sidebar-footer { display: none; }
+
+  .main {
+    margin-left: 0;
+    padding: 16px 14px 90px 14px;
+    max-width: 100%;
+  }
+
+  /* Header */
+  .page-header { margin-bottom: 16px; }
+  .page-header h1 { font-size: 20px; }
+  .page-header p { font-size: 12px; }
+
+  /* Search */
+  .search-card { padding: 14px; margin-bottom: 16px; border-radius: 12px; }
+  .search-row { flex-direction: column; gap: 8px; }
+  .btn-primary { width: 100%; justify-content: center; }
+  #stock-input { font-size: 16px; padding: 12px 14px 12px 42px; }
+
+  /* Result cards */
+  .result-card { padding: 16px; border-radius: 12px; margin-bottom: 12px; }
+  .stock-name { font-size: 18px; }
+  .stock-meta { font-size: 12px; }
+  .stock-price { font-size: 22px; }
+  .stock-price-row { flex-wrap: wrap; gap: 6px; }
+  .summary { font-size: 13px; }
+
+  /* Agent grid - single column on mobile */
+  .agents-grid { grid-template-columns: 1fr; gap: 10px; }
+  .agent-card { padding: 12px; }
+  .agent-header { margin-bottom: 6px; }
+  .agent-score { font-size: 16px; }
+  .agent-point { font-size: 11px; }
+
+  /* Sections */
+  .section-grid { grid-template-columns: 1fr; gap: 10px; }
+  .section-box { padding: 12px; }
+
+  /* Meta pills */
+  .meta-pills { gap: 6px; }
+  .pill { font-size: 11px; padding: 3px 10px; }
+
+  /* Confidence breakdown */
+  .conf-breakdown { padding: 12px; }
+  .cw-label { width: 70px; font-size: 11px; }
+  .cw-score { width: 50px; font-size: 11px; }
+
+  /* Compare */
+  .compare-row { flex-direction: column; gap: 8px; }
+  .compare-row input { padding: 12px 14px; font-size: 16px; }
+  .vs-badge { align-self: center; }
+  .compare-grid { grid-template-columns: 1fr; }
+
+  /* Bouquet */
+  .summary-tiles { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .summary-tile { padding: 12px 8px; }
+  .tile-num { font-size: 18px; }
+  .tile-lbl { font-size: 10px; }
+  .bouquet-item { padding: 12px 14px; flex-wrap: wrap; gap: 8px; }
+  .bi-ticker { font-size: 14px; }
+  .bi-meta { font-size: 11px; }
+
+  /* Sector chart */
+  .sector-chart { padding: 14px; }
+  .sector-chart > div { flex-direction: column; align-items: flex-start; }
+
+  /* News */
+  .news-box { padding: 12px; }
+  .news-item { flex-direction: column; gap: 4px; padding: 8px 0; }
+  .news-item a { font-size: 13px; }
+
+  /* Chart */
+  .chart-container { padding: 12px; }
+  .chart-canvas { height: 140px; }
+
+  /* Action buttons */
+  .action-row { flex-direction: column; gap: 8px; }
+  .action-row .btn { width: 100%; justify-content: center; padding: 12px; }
+
+  /* Dashboard */
+  .dash-metrics { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .dm-val { font-size: 18px; }
+  .dm-lbl { font-size: 10px; }
+
+  /* History */
+  .history-item { padding: 12px 14px; flex-wrap: wrap; gap: 6px; }
+  .hi-ticker { font-size: 13px; min-width: 100%; }
+  .hi-date { font-size: 11px; }
+
+  /* Modal */
+  .modal { width: 95vw; max-height: 85vh; border-radius: 14px; }
+  .modal-header { padding: 16px 18px; }
+  .modal-body { padding: 16px 18px; }
+  .modal-footer { padding: 14px 18px; }
+  .input-group input, .input-group select { font-size: 16px; padding: 12px; }
+
+  /* Valuation */
+  .valuation-box { font-size: 12px; padding: 10px 14px; }
+
+  /* Catalysts */
+  .catalysts-box { padding: 12px; }
+
+  /* Error */
+  .error-card { padding: 16px; }
+
+  /* Toast */
+  .toast { left: 14px; right: 14px; bottom: 80px; }
+
+  /* Settings button - show as icon in top right */
+  .settings-floating {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 40;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text2);
+  }
+  .settings-floating:hover { background: var(--bg3); }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .main { padding: 12px 10px 90px 10px; }
+  .summary-tiles { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .page-header h1 { font-size: 18px; }
+  .stock-name { font-size: 16px; }
+  .agent-card { padding: 10px; }
+}
+
+/* ─── Mobile header ─── */
+.mobile-header { display: none; }
+.mobile-hdr-btn {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: 8px;
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text2);
+}
+.mobile-hdr-btn:hover { background: var(--bg2); }
+
+@media (max-width: 768px) {
+  .mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 0 2px;
+  }
+  .mobile-header .logo { display: flex; }
+  .mobile-header .logo-text { display: inline; }
+  .settings-floating { display: none !important; }
 }
