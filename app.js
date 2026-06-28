@@ -115,13 +115,17 @@ async function callAI(stock){
   // Try server-side API first (no key needed)
   try{
     const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock})});
-    if(r.ok){const d=await r.json();if(d.raw)return d.raw;}
-    const e=await r.json().catch(()=>({}));
-    if(r.status!==500||!e.error?.includes('not configured'))throw new Error(e.error||'Server error');
-  }catch(e){if(!e.message.includes('not configured')&&!e.message.includes('Failed to fetch'))throw e;}
+    const d=await r.json().catch(()=>({}));
+    if(r.ok&&d.raw)return d.raw;
+    // If server key not configured, fall through to client key
+    if(d.error&&d.error.includes('not configured')){/* fall through */}
+    else if(!r.ok)throw new Error(d.error||'Server error '+r.status);
+  }catch(e){
+    if(e.message&&!e.message.includes('not configured')&&!e.message.includes('Failed to fetch'))throw e;
+  }
   // Fallback to client-side key
   const k=getKey(),p=getProvider();
-  if(!k){openModal();throw new Error('No API key — enter one or ask the admin to set GROQ_API_KEY');}
+  if(!k){openModal();throw new Error('No API key');}
   return p==='groq'?callGroq(k,stock):callGemini(k,stock);
 }
 
@@ -406,14 +410,8 @@ document.getElementById('analyze-btn').addEventListener('click',analyzeStock);
 
 // ─── Init ───
 initTheme();load();
-// Check if server-side key is configured
-fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock:'test'})}).then(r=>{
-  if(r.status===500)return r.json().then(d=>{
-    if(d.error?.includes('not configured')&&!getKey()){
-      document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
-        <div style="font-size:32px">🔑</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Setup API key</div>
-        <div style="font-size:13px;color:var(--text2);margin-bottom:14px;"><strong>Groq</strong> — free · <a href="https://console.groq.com/keys" target="_blank" style="color:var(--accent);">Get key →</a></div>
-        <button class="btn btn-primary" onclick="openModal()">Setup API Key →</button></div></div>`;
-    }
-  });
-}).catch(()=>{});
+// Show welcome message
+document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
+  <div style="font-size:32px">🤖</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Welcome to StockAdvisor AI</div>
+  <div style="font-size:13px;color:var(--text2);line-height:1.7;">Type any stock name above and hit <strong>Analyze</strong> to get a multi-agent AI analysis with computed confidence scores.<br><br>
+  <strong>4 AI agents</strong> — Fundamental · News · Technical · Risk — each score independently, then confidence is calculated mathematically.</div></div></div>`;
