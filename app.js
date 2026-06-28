@@ -112,21 +112,10 @@ async function callGemini(key,stock){
   throw new Error('Gemini rate limited. Switch to Groq.');
 }
 async function callAI(stock){
-  // Try server-side API first (no key needed)
-  try{
-    const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock})});
-    const d=await r.json().catch(()=>({}));
-    if(r.ok&&d.raw)return d.raw;
-    // If server key not configured, fall through to client key
-    if(d.error&&d.error.includes('not configured')){/* fall through */}
-    else if(!r.ok)throw new Error(d.error||'Server error '+r.status);
-  }catch(e){
-    if(e.message&&!e.message.includes('not configured')&&!e.message.includes('Failed to fetch'))throw e;
-  }
-  // Fallback to client-side key
-  const k=getKey(),p=getProvider();
-  if(!k){openModal();throw new Error('No API key');}
-  return p==='groq'?callGroq(k,stock):callGemini(k,stock);
+  const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock})});
+  const d=await r.json().catch(()=>({}));
+  if(r.ok&&d.raw)return d.raw;
+  throw new Error(d.error||'Server error — please try again');
 }
 
 function parseResult(raw,query){
@@ -155,7 +144,7 @@ async function analyzeStock(){
     currentAnalysis=d;history.unshift(d);if(history.length>100)history=history.slice(0,100);save();
     renderResult(d,area,stockData,news);
   }catch(err){
-    area.innerHTML=`<div class="error-card"><div class="error-title">⚠ Analysis failed</div><div class="error-msg">${esc(err.message)}</div>${err.message.includes('key')?'<br><button class="btn btn-ghost" onclick="openModal()" style="margin-top:8px;">Update API Key</button>':''}</div>`;
+    area.innerHTML=`<div class="error-card"><div class="error-title">⚠ Analysis failed</div><div class="error-msg">${esc(err.message)}</div></div>`;
   }finally{btn.disabled=false;btn.innerHTML='<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg> Analyze';}
 }
 
