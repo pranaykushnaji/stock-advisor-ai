@@ -488,7 +488,7 @@ let sotdPick=null;
 
 async function fetchDailyPick(){
   try{
-    const r=await fetch('/api/daily?type=latest');
+    const r=await fetch('/data/daily-pick.json?t='+Date.now());
     if(!r.ok)return null;
     const d=await r.json();
     return d.pick||null;
@@ -497,7 +497,7 @@ async function fetchDailyPick(){
 
 async function fetchProjectBouquet(){
   try{
-    const r=await fetch('/api/daily?type=bouquet');
+    const r=await fetch('/data/project-bouquet.json?t='+Date.now());
     if(!r.ok)return[];
     const d=await r.json();
     return d.bouquet||[];

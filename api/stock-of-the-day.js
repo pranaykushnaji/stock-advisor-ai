@@ -1,6 +1,7 @@
-import { kv } from '@vercel/kv';
+// Stock of the Day — picks best stock daily, commits result to repo as JSON.
+// Storage = GitHub repo files (no KV needed). Requires GITHUB_TOKEN env var.
 
-// Candidate universe — liquid large/mid-cap Indian stocks to scan daily
+const REPO = 'pranaykushnaji/stock-advisor-ai';
 const CANDIDATES = [
   'Reliance Industries', 'TCS', 'HDFC Bank', 'Infosys', 'ICICI Bank',
   'Bharti Airtel', 'Larsen & Toubro', 'State Bank of India', 'Axis Bank',
@@ -14,58 +15,79 @@ const CANDIDATES = [
 function todayIST() {
   const now = new Date();
   const ist = new Date(now.getTime() + 5.5 * 3600 * 1000);
-  return ist.toISOString().slice(0, 10); // YYYY-MM-DD
+  return ist.toISOString().slice(0, 10);
+}
+
+async function ghGetFile(path, token) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json' }
+  });
+  if (!r.ok) return { content: null, sha: null };
+  const d = await r.json();
+  const content = Buffer.from(d.content, 'base64').toString('utf-8');
+  return { content, sha: d.sha };
+}
+
+async function ghPutFile(path, contentObj, sha, token, message) {
+  const body = {
+    message,
+    content: Buffer.from(JSON.stringify(contentObj, null, 2)).toString('base64'),
+    ...(sha ? { sha } : {})
+  };
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return r.ok;
 }
 
 export default async function handler(req, res) {
-  // Protect: only allow Vercel Cron or manual trigger with secret
+  const cronSecret = process.env.CRON_SECRET;
   const authHeader = req.headers.authorization || '';
-  const isCron = authHeader === `Bearer ${process.env.CRON_SECRET}`;
-  const isManual = req.query.key === process.env.CRON_SECRET;
-  if (!isCron && !isManual && process.env.CRON_SECRET) {
+  const isCron = cronSecret && authHeader === `Bearer ${cronSecret}`;
+  const isManual = cronSecret && req.query.key === cronSecret;
+  if (cronSecret && !isCron && !isManual) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
   const apiKey = process.env.GROQ_API_KEY;
+  const ghToken = process.env.GITHUB_TOKEN;
   if (!apiKey) return res.status(500).json({ error: 'GROQ_API_KEY not configured' });
+  if (!ghToken) return res.status(500).json({ error: 'GITHUB_TOKEN not configured' });
 
   const date = todayIST();
 
-  // Don't regenerate if already picked today
-  try {
-    const existing = await kv.get(`sotd:${date}`);
-    if (existing && !req.query.force) {
-      return res.status(200).json({ status: 'already_picked', pick: existing });
-    }
-  } catch (e) { /* kv may be empty, continue */ }
+  const existing = await ghGetFile('data/daily-pick.json', ghToken);
+  if (existing.content && !req.query.force) {
+    try {
+      const prev = JSON.parse(existing.content);
+      if (prev?.pick?.date === date) {
+        return res.status(200).json({ status: 'already_picked', pick: prev.pick });
+      }
+    } catch (e) {}
+  }
 
   const SELECTION_PROMPT = `You are the chief market strategist for an Indian stock advisory. Today is ${date}.
 
-From this candidate list, pick the SINGLE best stock to buy today based on current fundamentals, recent news, technical setup, and risk-reward. Consider recent earnings, news catalysts, sector momentum, and valuation.
+From this candidate list, pick the SINGLE best stock to buy today based on current fundamentals, recent news, technical setup, and risk-reward.
 
 Candidates: ${CANDIDATES.join(', ')}
 
 Return ONLY valid JSON (no markdown):
 {
-  "ticker": "SYMBOL",
-  "fullName": "Full Company Name",
-  "sector": "Sector",
-  "verdict": "BUY",
-  "estimatedUpside": "12-20%",
-  "riskLevel": "Low" or "Medium" or "High",
-  "horizon": "3-6 months",
+  "ticker": "SYMBOL", "fullName": "Full Name", "sector": "Sector",
+  "verdict": "BUY", "estimatedUpside": "12-20%", "riskLevel": "Low/Medium/High", "horizon": "3-6 months",
   "agents": {
-    "fundamental": {"score": 0-100, "subScores": {"revenueGrowth":0-100,"roce":0-100,"roe":0-100,"debtToEquity":0-100,"margins":0-100,"valuation":0-100}, "positives": ["..."], "negatives": ["..."]},
-    "news": {"score": 0-100, "subScores": {"recentCatalysts":0-100,"institutionalActivity":0-100,"sectorTrend":0-100,"sentiment":0-100}, "positives": ["..."], "negatives": ["..."]},
-    "technical": {"score": 0-100, "subScores": {"trend":0-100,"momentum_rsi":0-100,"macd":0-100,"volume_support":0-100}, "positives": ["..."], "negatives": ["..."]},
-    "risk": {"score": 0-100, "subScores": {"debtRisk":0-100,"pledgedShares":0-100,"volatility":0-100,"concentration":0-100}, "positives": ["..."], "negatives": ["..."]}
+    "fundamental": {"score":0,"subScores":{"revenueGrowth":0,"roce":0,"roe":0,"debtToEquity":0,"margins":0,"valuation":0},"positives":["..."],"negatives":["..."]},
+    "news": {"score":0,"subScores":{"recentCatalysts":0,"institutionalActivity":0,"sectorTrend":0,"sentiment":0},"positives":["..."],"negatives":["..."]},
+    "technical": {"score":0,"subScores":{"trend":0,"momentum_rsi":0,"macd":0,"volume_support":0},"positives":["..."],"negatives":["..."]},
+    "risk": {"score":0,"subScores":{"debtRisk":0,"pledgedShares":0,"volatility":0,"concentration":0},"positives":["..."],"negatives":["..."]}
   },
-  "summary": "Why this is today's top pick — 2-3 sentences with the key catalyst",
-  "priceContext": "CMP, 52-week range, PE",
-  "whyToday": "The single most important reason this stock stands out TODAY vs the others"
+  "summary": "Why this is today's pick", "priceContext": "CMP, range, PE",
+  "whyToday": "The single most important reason this stands out TODAY"
 }
-
-Pick the one with the best combination of strong fundamentals, positive recent catalysts, and favorable technicals. Return ONLY the JSON.`;
+Return ONLY the JSON.`;
 
   try {
     const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -77,8 +99,7 @@ Pick the one with the best combination of strong fundamentals, positive recent c
           { role: 'system', content: SELECTION_PROMPT },
           { role: 'user', content: `Pick the Stock of the Day for ${date}.` }
         ],
-        temperature: 0.4,
-        max_tokens: 3000
+        temperature: 0.4, max_tokens: 3000
       })
     });
 
@@ -100,28 +121,20 @@ Pick the one with the best combination of strong fundamentals, positive recent c
     pick.date = date;
     pick.pickedAt = new Date().toISOString();
 
-    // Store today's pick
-    await kv.set(`sotd:${date}`, pick);
-    await kv.set('sotd:latest', pick);
+    await ghPutFile('data/daily-pick.json', { pick }, existing.sha, ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
 
-    // Add to the shared project bouquet (append)
-    let bouquet = (await kv.get('project_bouquet')) || [];
+    const bq = await ghGetFile('data/project-bouquet.json', ghToken);
+    let bouquet = [];
+    try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) {}
     if (!bouquet.find(b => b.date === date)) {
       bouquet.unshift({
-        ticker: pick.ticker,
-        fullName: pick.fullName,
-        sector: pick.sector,
-        verdict: pick.verdict,
-        date: date,
-        addedAt: pick.pickedAt,
-        investedAmount: 10000,
-        estimatedUpside: pick.estimatedUpside,
-        riskLevel: pick.riskLevel,
-        summary: pick.summary,
-        whyToday: pick.whyToday
+        ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
+        verdict: pick.verdict, date, addedAt: pick.pickedAt, investedAmount: 10000,
+        estimatedUpside: pick.estimatedUpside, riskLevel: pick.riskLevel,
+        summary: pick.summary, whyToday: pick.whyToday, agents: pick.agents
       });
       if (bouquet.length > 365) bouquet = bouquet.slice(0, 365);
-      await kv.set('project_bouquet', bouquet);
+      await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Add ${pick.ticker} to project bouquet`);
     }
 
     return res.status(200).json({ status: 'picked', pick });
