@@ -16,7 +16,7 @@ function setTheme(t){document.documentElement.setAttribute('data-theme',t);local
 document.getElementById('theme-toggle').addEventListener('click',()=>{setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
 
 // ─── Tabs ───
-function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='history')renderHistory();if(n==='dashboard')renderDashboard();}
+function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='history')renderHistory();if(n==='dashboard')renderDashboard();if(n==='daily')renderDailyTab(sotdPick);}
 document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
 
 // ─── Modal ───
@@ -229,10 +229,14 @@ function renderResult(d,area,stockData,news){
   const vBadge=d.verdict==='BUY'?'verdict-buy':d.verdict==='AVOID'?'verdict-avoid':'verdict-hold';
 
   let priceHtml='';
-  if(stockData){
+  if(stockData&&stockData.price!=null){
+    const hasChange=stockData.change!=null&&!isNaN(stockData.change)&&stockData.changePercent!=null&&!isNaN(stockData.changePercent);
     const chg=stockData.change>=0;
-    priceHtml=`<div class="stock-price-row"><span class="stock-price">${stockData.currency==='INR'?'₹':'$'}${stockData.price?.toFixed(2)}</span>
-      <span class="stock-change ${chg?'up':'down'}">${chg?'+':''}${stockData.change} (${chg?'+':''}${stockData.changePercent}%)</span>
+    const changeHtml=hasChange
+      ?`<span class="stock-change ${chg?'up':'down'}">${chg?'+':''}${stockData.change} (${chg?'+':''}${stockData.changePercent}%)</span>`
+      :'';
+    priceHtml=`<div class="stock-price-row"><span class="stock-price">${stockData.currency==='INR'?'₹':'$'}${stockData.price.toFixed(2)}</span>
+      ${changeHtml}
       <span style="font-size:12px;color:var(--text3);">${stockData.exchange||''}</span></div>`;
   }
 
@@ -347,19 +351,38 @@ function simGain(item){
 
 const COLORS=['#4f8ef7','#22c87a','#f5a623','#f05b5b','#a855f7','#06b6d4','#ec4899','#84cc16','#f97316','#6366f1'];
 
-function renderBouquet(){
+let projectBouquet=[];
+let bouquetView='all'; // 'all' | 'daily' | 'personal'
+
+async function renderBouquet(){
   const el=document.getElementById('bouquet-content');
-  if(!bouquet.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">🌸</div><h3>Your bouquet is empty</h3><p>Analyze a stock and add it.</p></div>';return;}
-  const gains=bouquet.map(simGain),totalInvested=bouquet.reduce((a,b)=>a+(b.investedAmount||10000),0);
-  const totalValue=bouquet.reduce((a,b,i)=>a+(b.investedAmount||10000)*(1+gains[i]/100),0);
+  // Fetch shared project bouquet (daily picks)
+  if(!projectBouquet.length){projectBouquet=await fetchProjectBouquet();}
+
+  // Tag sources
+  const dailyPicks=projectBouquet.map(b=>({...b,source:'daily'}));
+  const personalPicks=bouquet.map(b=>({...b,source:'personal'}));
+  let combined;
+  if(bouquetView==='daily')combined=dailyPicks;
+  else if(bouquetView==='personal')combined=personalPicks;
+  else combined=[...dailyPicks,...personalPicks];
+
+  const toggle=`<div style="display:flex;gap:6px;margin-bottom:18px;">
+    ${[['all','All'],['daily','⭐ Daily Picks'],['personal','My Picks']].map(([v,l])=>`<button class="btn ${bouquetView===v?'btn-primary':'btn-ghost'}" style="padding:7px 14px;font-size:13px;" onclick="setBouquetView('${v}')">${l}</button>`).join('')}</div>`;
+
+  if(!combined.length){el.innerHTML=toggle+'<div class="empty-state"><div class="empty-icon">🌸</div><h3>No stocks yet</h3><p>Daily picks are added automatically each morning. Analyze a stock to add your own.</p></div>';return;}
+
+  const work=combined;
+  const gains=work.map(simGain),totalInvested=work.reduce((a,b)=>a+(b.investedAmount||10000),0);
+  const totalValue=work.reduce((a,b,i)=>a+(b.investedAmount||10000)*(1+gains[i]/100),0);
   const totalReturn=((totalValue-totalInvested)/totalInvested*100).toFixed(1);
   const wins=gains.filter(g=>g>0).length;
-  const sectors={};bouquet.forEach(b=>{const s=b.sector||'Other';sectors[s]=(sectors[s]||0)+1;});
+  const sectors={};work.forEach(b=>{const s=b.sector||'Other';sectors[s]=(sectors[s]||0)+1;});
   const sectorEntries=Object.entries(sectors).sort((a,b)=>b[1]-a[1]);
 
   let pieHtml='';
   if(sectorEntries.length>1){
-    let angle=0;const total=bouquet.length;
+    let angle=0;const total=work.length;
     const slices=sectorEntries.map((s,i)=>{const pct=s[1]/total;const start=angle;angle+=pct*360;
       const sr=(start-90)*Math.PI/180,er=(angle-90)*Math.PI/180;
       const x1=50+40*Math.cos(sr),y1=50+40*Math.sin(sr),x2=50+40*Math.cos(er),y2=50+40*Math.sin(er);
@@ -370,23 +393,27 @@ function renderBouquet(){
       <div class="sector-legend">${slices.map(s=>`<div class="sector-legend-item"><div class="sector-dot" style="background:${s.color};"></div>${esc(s.label)} (${s.count})</div>`).join('')}</div></div></div>`;
   }
 
-  el.innerHTML=`<div class="summary-tiles">
-    <div class="summary-tile"><div class="tile-num">${bouquet.length}</div><div class="tile-lbl">Stocks</div></div>
+  el.innerHTML=toggle+`<div class="summary-tiles">
+    <div class="summary-tile"><div class="tile-num">${work.length}</div><div class="tile-lbl">Stocks</div></div>
     <div class="summary-tile"><div class="tile-num">₹${totalInvested.toLocaleString('en-IN')}</div><div class="tile-lbl">Invested</div></div>
     <div class="summary-tile"><div class="tile-num" style="color:${parseFloat(totalReturn)>=0?'var(--green)':'var(--red)'};">₹${Math.round(totalValue).toLocaleString('en-IN')}</div><div class="tile-lbl">Current Value (sim)</div></div>
     <div class="summary-tile"><div class="tile-num" style="color:${parseFloat(totalReturn)>=0?'var(--green)':'var(--red)'};">${parseFloat(totalReturn)>=0?'+':''}${totalReturn}%</div><div class="tile-lbl">Total Return</div></div>
   </div>${pieHtml}
-  <div class="bouquet-list">${bouquet.map((item,i)=>{
+  <div class="bouquet-list">${work.map((item,i)=>{
     const g=gains[i],gStr=(g>0?'+':'')+g+'%',amt=item.investedAmount||10000,val=Math.round(amt*(1+g/100));
     const days=Math.max(1,Math.floor((Date.now()-new Date(item.addedAt).getTime())/86400000));
     const vB=item.verdict==='BUY'?'verdict-buy':item.verdict==='AVOID'?'verdict-avoid':'verdict-hold';
-    return`<div class="bouquet-item"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}</div>
-      <div class="bi-meta">${days}d · ₹${amt.toLocaleString('en-IN')} → ₹${val.toLocaleString('en-IN')} · ${item.confidence}% conf</div></div>
+    const srcTag=item.source==='daily'?'<span style="font-size:10px;color:var(--accent);font-weight:600;margin-left:6px;">⭐ DAILY</span>':'';
+    const removeBtn=item.source==='personal'?`<button class="bi-remove" onclick="removePersonalPick('${esc(item.ticker)}')">✕</button>`:'<span style="width:28px;"></span>';
+    return`<div class="bouquet-item"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}${srcTag}</div>
+      <div class="bi-meta">${days}d · ₹${amt.toLocaleString('en-IN')} → ₹${val.toLocaleString('en-IN')}${item.confidence?' · '+item.confidence+'% conf':''}</div></div>
       <span class="verdict-badge ${vB}" style="font-size:11px;padding:2px 10px;">${item.verdict}</span>
       <div class="bi-gain ${g>=0?'up':'down'}">${gStr}</div>
-      <button class="bi-remove" onclick="removePick(${i})">✕</button></div>`;
+      ${removeBtn}</div>`;
   }).join('')}<div class="sim-note">Simulated returns · ₹10,000 per stock · Not real money</div></div>`;
 }
+function setBouquetView(v){bouquetView=v;renderBouquet();}
+function removePersonalPick(ticker){const i=bouquet.findIndex(b=>b.ticker===ticker);if(i>=0){bouquet.splice(i,1);save();renderBouquet();}}
 function removePick(i){bouquet.splice(i,1);save();renderBouquet();}
 
 // ─── Dashboard ───
@@ -456,8 +483,104 @@ function showToast(msg,type='success'){let t=document.getElementById('toast');if
 document.getElementById('stock-input').addEventListener('keydown',e=>{if(e.key==='Enter')analyzeStock();});
 document.getElementById('analyze-btn').addEventListener('click',analyzeStock);
 
+// ═══ STOCK OF THE DAY ═══
+let sotdPick=null;
+
+async function fetchDailyPick(){
+  try{
+    const r=await fetch('/api/daily?type=latest');
+    if(!r.ok)return null;
+    const d=await r.json();
+    return d.pick||null;
+  }catch{return null;}
+}
+
+async function fetchProjectBouquet(){
+  try{
+    const r=await fetch('/api/daily?type=bouquet');
+    if(!r.ok)return[];
+    const d=await r.json();
+    return d.bouquet||[];
+  }catch{return[];}
+}
+
+function todayKey(){
+  const now=new Date();
+  const ist=new Date(now.getTime()+(5.5*3600*1000)-(now.getTimezoneOffset()*60000));
+  return ist.toISOString().slice(0,10);
+}
+
+async function checkSotd(){
+  const pick=await fetchDailyPick();
+  if(!pick)return;
+  sotdPick=pick;
+  // Badge on nav
+  const badge=document.getElementById('daily-badge');
+  if(badge)badge.textContent='NEW';
+  // Show popup once per day
+  const seen=localStorage.getItem('sotd_seen');
+  if(seen!==pick.date){
+    showSotdPopup(pick);
+  }
+  // Pre-render daily tab
+  renderDailyTab(pick);
+}
+
+function showSotdPopup(pick){
+  const body=document.getElementById('sotd-body');
+  const conf=computeConfidence(pick.agents);
+  body.innerHTML=`
+    <div style="text-align:center;margin-bottom:18px;">
+      <div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">${pick.date} · Today's Top Pick</div>
+      <div class="stock-name" style="font-size:30px;">${esc(pick.ticker)}</div>
+      <div class="stock-meta">${esc(pick.fullName)} · ${esc(pick.sector)}</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;">
+        <span class="verdict-badge verdict-buy" style="font-size:15px;padding:6px 18px;">${pick.verdict}</span>
+        <div class="conf-big" style="color:${scoreColor(conf)};">${conf}<span style="font-size:18px;color:var(--text3);">%</span></div>
+      </div>
+    </div>
+    <div class="valuation-box" style="margin-bottom:16px;"><span>Why today: </span>${esc(pick.whyToday||pick.summary)}</div>
+    <p class="summary" style="margin-bottom:16px;">${esc(pick.summary)}</p>
+    <div class="meta-pills" style="justify-content:center;margin-bottom:18px;">
+      <span class="pill pill-green">📈 ${esc(pick.estimatedUpside||'')}</span>
+      <span class="pill pill-${(pick.riskLevel||'Medium').toLowerCase()}">⚡ ${esc(pick.riskLevel||'')} Risk</span>
+      <span class="pill">📅 ${esc(pick.horizon||'')}</span>
+    </div>
+    <div style="background:var(--accent-dim);border:1px solid var(--border-glow);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--text2);text-align:center;margin-bottom:18px;">
+      ✓ Auto-added to the project bouquet with ₹10,000 virtual investment
+    </div>
+    <button class="btn btn-primary" style="width:100%;" onclick="dismissSotd();switchTab('daily');">View Full Analysis →</button>`;
+  document.getElementById('sotd-modal').classList.add('open');
+}
+
+function dismissSotd(){
+  document.getElementById('sotd-modal').classList.remove('open');
+  if(sotdPick)localStorage.setItem('sotd_seen',sotdPick.date);
+  const badge=document.getElementById('daily-badge');
+  if(badge)badge.textContent='';
+}
+
+function renderDailyTab(pick){
+  const el=document.getElementById('daily-content');
+  if(!pick){
+    el.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><h3>No pick yet</h3><p>The Stock of the Day is generated every morning at 9 AM IST.</p></div>';
+    return;
+  }
+  // Reuse the full analysis card renderer
+  pick.confidence=computeConfidence(pick.agents);
+  pick.verdict=computeVerdict(pick.confidence);
+  renderResult(pick,el,null,null);
+  // Prepend the "why today" banner
+  const banner=document.createElement('div');
+  banner.className='result-card';
+  banner.style.cssText='border-top:2px solid var(--accent);margin-bottom:16px;';
+  banner.innerHTML=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:22px;">⭐</span><div><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;">Picked for ${esc(pick.date)}</div><div style="font-size:12px;color:var(--text3);">Compared across 30+ Indian large & mid-caps</div></div></div><div style="font-size:14px;color:var(--text2);line-height:1.7;">${esc(pick.whyToday||'')}</div>`;
+  el.insertBefore(banner,el.firstChild);
+}
+
 // ─── Init ───
 initTheme();load();
+checkSotd();
 // Show welcome message
 document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
   <div style="font-size:32px">🤖</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Welcome to StockAdvisor AI</div>
