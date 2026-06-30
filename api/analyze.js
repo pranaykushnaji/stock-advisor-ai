@@ -97,7 +97,7 @@ RULES:
           { role: 'user', content: `Analyze this stock with all 4 agents: "${stock}"` }
         ],
         temperature: 0.3,
-        max_tokens: 1500
+        max_tokens: 3000
       })
     });
 

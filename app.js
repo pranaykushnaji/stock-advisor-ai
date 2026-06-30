@@ -121,7 +121,7 @@ function computeVerdict(confidence){
 
 // ─── API calls ───
 async function callGroq(key,stock){
-  const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},body:JSON.stringify({model:'openai/gpt-oss-120b',messages:[{role:'system',content:AGENT_PROMPT},{role:'user',content:`Analyze this stock with all 4 agents: "${stock}"`}],temperature:0.3,max_tokens:1500})});
+  const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},body:JSON.stringify({model:'openai/gpt-oss-120b',messages:[{role:'system',content:AGENT_PROMPT},{role:'user',content:`Analyze this stock with all 4 agents: "${stock}"`}],temperature:0.3,max_tokens:3000})});
   if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(r.status===401?'Invalid Groq key':e?.error?.message||`Error ${r.status}`);}
   return(await r.json())?.choices?.[0]?.message?.content||'';
 }
@@ -143,9 +143,28 @@ async function callAI(stock){
 }
 
 function parseResult(raw,query){
-  const c=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-  const m=c.match(/\{[\s\S]*\}/);if(!m)throw new Error('No JSON found');
-  const d=JSON.parse(m[0]);if(!d.ticker)throw new Error('Incomplete');
+  let c=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
+  // Strip any reasoning/thinking prefix before the JSON
+  const firstBrace=c.indexOf('{');
+  if(firstBrace>0)c=c.slice(firstBrace);
+  // Find the matching closing brace for the first opening brace
+  let depth=0,endIdx=-1;
+  for(let i=0;i<c.length;i++){
+    if(c[i]==='{')depth++;
+    else if(c[i]==='}'){depth--;if(depth===0){endIdx=i;break;}}
+  }
+  let jsonStr;
+  if(endIdx>0){jsonStr=c.slice(0,endIdx+1);}
+  else{
+    // Truncated response — try to salvage
+    const m=c.match(/\{[\s\S]*\}/);
+    if(!m)throw new Error('Response incomplete — please try again');
+    jsonStr=m[0];
+  }
+  let d;
+  try{d=JSON.parse(jsonStr);}
+  catch(e){throw new Error('Could not parse analysis — please try again');}
+  if(!d.ticker)throw new Error('Incomplete analysis — please try again');
   // Recompute agent scores from sub-metrics (deterministic), then confidence
   recomputeAgentScores(d.agents);
   d.confidence=computeConfidence(d.agents);
