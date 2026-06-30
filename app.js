@@ -80,6 +80,30 @@ RULES:
 
 // ─── Confidence Calculator (NOT from LLM) ───
 const WEIGHTS={fundamental:0.35,news:0.25,technical:0.20,risk:0.20};
+
+// Sub-metric weights for each agent (research-backed) — must sum to 1.0 per agent
+const SUB_WEIGHTS={
+  fundamental:{revenueGrowth:0.20,roce:0.20,roe:0.15,debtToEquity:0.15,margins:0.15,valuation:0.15},
+  news:{recentCatalysts:0.35,institutionalActivity:0.25,sectorTrend:0.25,sentiment:0.15},
+  technical:{trend:0.35,momentum_rsi:0.25,macd:0.25,volume_support:0.15},
+  risk:{debtRisk:0.30,pledgedShares:0.25,volatility:0.25,concentration:0.20}
+};
+
+// Recompute each agent score from its sub-scores (deterministic, not LLM-guessed)
+function recomputeAgentScores(agents){
+  if(!agents)return;
+  for(const[agentKey,subW]of Object.entries(SUB_WEIGHTS)){
+    const agent=agents[agentKey];
+    if(!agent||!agent.subScores)continue;
+    let total=0,wSum=0;
+    for(const[metric,weight]of Object.entries(subW)){
+      const v=agent.subScores[metric];
+      if(v!=null&&!isNaN(v)){total+=v*weight;wSum+=weight;}
+    }
+    if(wSum>0)agent.score=Math.round(total/wSum);
+  }
+}
+
 function computeConfidence(agents){
   if(!agents)return 50;
   let total=0,wSum=0;
@@ -122,7 +146,8 @@ function parseResult(raw,query){
   const c=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
   const m=c.match(/\{[\s\S]*\}/);if(!m)throw new Error('No JSON found');
   const d=JSON.parse(m[0]);if(!d.ticker)throw new Error('Incomplete');
-  // Compute confidence mathematically
+  // Recompute agent scores from sub-metrics (deterministic), then confidence
+  recomputeAgentScores(d.agents);
   d.confidence=computeConfidence(d.agents);
   d.verdict=computeVerdict(d.confidence);
   d.analyzedAt=new Date().toISOString();d.query=query;
@@ -149,12 +174,27 @@ async function analyzeStock(){
 }
 
 // ─── Render Agent Card ───
+const METRIC_LABELS={
+  revenueGrowth:'Revenue Growth',roce:'ROCE',roe:'ROE',debtToEquity:'Debt/Equity',margins:'Margins',valuation:'Valuation',
+  recentCatalysts:'Catalysts',institutionalActivity:'Institutional',sectorTrend:'Sector Trend',sentiment:'Sentiment',
+  trend:'Trend (DMA)',momentum_rsi:'RSI Momentum',macd:'MACD',volume_support:'Volume/Support',
+  debtRisk:'Debt Risk',pledgedShares:'Pledged Shares',volatility:'Volatility',concentration:'Diversification'
+};
+
 function agentCard(name,icon,data,color){
   if(!data)return'';
   const barW=Math.min(100,Math.max(0,data.score||0));
+  let subHtml='';
+  if(data.subScores){
+    subHtml=`<div class="sub-metrics">${Object.entries(data.subScores).map(([k,v])=>{
+      const sc=Math.round(v||0);
+      return`<div class="sub-metric"><span class="sm-label">${METRIC_LABELS[k]||k}</span><div class="sm-bar"><div class="sm-fill" style="width:${sc}%;background:${scoreColor(sc)};"></div></div><span class="sm-val">${sc}</span></div>`;
+    }).join('')}</div>`;
+  }
   return`<div class="agent-card">
     <div class="agent-header"><span class="agent-icon">${icon}</span><span class="agent-name">${name}</span><span class="agent-score" style="color:${color};">${data.score}/100</span></div>
     <div class="agent-bar"><div class="agent-bar-fill" style="width:${barW}%;background:${color};"></div></div>
+    ${subHtml}
     <div class="agent-points">
       ${(data.positives||[]).map(p=>`<div class="agent-point"><span class="ap-icon ap-pos">✔</span><span>${esc(p)}</span></div>`).join('')}
       ${(data.negatives||[]).map(p=>`<div class="agent-point"><span class="ap-icon ap-neg">✖</span><span>${esc(p)}</span></div>`).join('')}
