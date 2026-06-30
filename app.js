@@ -97,7 +97,7 @@ function computeVerdict(confidence){
 
 // ─── API calls ───
 async function callGroq(key,stock){
-  const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},body:JSON.stringify({model:'llama-3.3-70b-versatile',messages:[{role:'system',content:AGENT_PROMPT},{role:'user',content:`Analyze this stock with all 4 agents: "${stock}"`}],temperature:0.3,max_tokens:1500})});
+  const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},body:JSON.stringify({model:'openai/gpt-oss-120b',messages:[{role:'system',content:AGENT_PROMPT},{role:'user',content:`Analyze this stock with all 4 agents: "${stock}"`}],temperature:0.3,max_tokens:1500})});
   if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(r.status===401?'Invalid Groq key':e?.error?.message||`Error ${r.status}`);}
   return(await r.json())?.choices?.[0]?.message?.content||'';
 }

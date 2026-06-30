@@ -58,7 +58,7 @@ RULES:
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         messages: [
           { role: 'system', content: AGENT_PROMPT },
           { role: 'user', content: `Analyze this stock with all 4 agents: "${stock}"` }
