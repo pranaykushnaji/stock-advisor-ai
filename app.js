@@ -254,8 +254,8 @@ function renderResult(d,area,stockData,news){
       <div><div class="stock-name">${esc(d.ticker)}</div><div class="stock-meta">${esc(d.fullName)} · ${esc(d.sector)}</div></div>
       <div style="text-align:right;">
         <span class="verdict-badge ${vBadge}" style="font-size:16px;padding:6px 18px;">${d.verdict}</span>
-        <div style="font-size:32px;font-weight:800;margin-top:6px;color:${scoreColor(conf)};">${conf}%</div>
-        <div style="font-size:11px;color:var(--text3);">AI Confidence</div>
+        <div class="conf-big" style="margin-top:6px;color:${scoreColor(conf)};">${conf}<span style="font-size:18px;color:var(--text3);">%</span></div>
+        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">Confidence</div>
       </div>
     </div>
     ${priceHtml}
