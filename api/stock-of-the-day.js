@@ -1,16 +1,8 @@
-// Stock of the Day — picks best stock daily, commits result to repo as JSON.
-// Storage = GitHub repo files (no KV needed). Requires GITHUB_TOKEN env var.
+// Stock of the Day — picks best stock daily from LIVE-discovered candidates.
+// Storage = GitHub repo files. Requires GITHUB_TOKEN env var.
+import { discoverCandidates } from './_discover.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
-const CANDIDATES = [
-  'Reliance Industries', 'TCS', 'HDFC Bank', 'Infosys', 'ICICI Bank',
-  'Bharti Airtel', 'Larsen & Toubro', 'State Bank of India', 'Axis Bank',
-  'Kotak Mahindra Bank', 'Hindustan Unilever', 'ITC', 'Bajaj Finance',
-  'Maruti Suzuki', 'Sun Pharma', 'Tata Motors', 'NTPC', 'Power Grid',
-  'UltraTech Cement', 'Asian Paints', 'Titan', 'Wipro', 'Adani Ports',
-  'Coal India', 'JSW Steel', 'Tata Steel', 'Mahindra & Mahindra',
-  'Nestle India', 'Bajaj Auto', 'Hindalco', 'Zomato', 'DMart'
-];
 
 function todayIST() {
   const now = new Date();
@@ -110,11 +102,14 @@ export default async function handler(req, res) {
     } catch (e) {}
   }
 
+  // Discover today's candidates live (news + movers, Nifty-50 fallback)
+  const { candidates, sources } = await discoverCandidates(apiKey);
+
   const SELECTION_PROMPT = `You are the chief market strategist for an Indian stock advisory. Today is ${date}.
 
-From this candidate list, pick the SINGLE best stock to buy today based on current fundamentals, recent news, technical setup, and risk-reward.
+These candidates surfaced from TODAY's market news and top movers. Pick the SINGLE best stock to buy today based on current fundamentals, recent news catalysts, technical setup, and risk-reward.
 
-Candidates: ${CANDIDATES.join(', ')}
+Candidates: ${candidates.join(', ')}
 
 Return ONLY valid JSON (no markdown). ALL scores must be on a 0-100 scale (e.g. 85, not 8.5):
 {
@@ -162,6 +157,8 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
     const pick = JSON.parse(end > 0 ? text.slice(0, end + 1) : text);
     pick.date = date;
     pick.pickedAt = new Date().toISOString();
+    pick.discovery = sources;
+    pick.candidatePool = candidates.length;
 
     await ghPutFile('data/daily-pick.json', { pick }, existing.sha, ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
 
@@ -187,7 +184,7 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
       await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Add ${pick.ticker} to project bouquet`);
     }
 
-    return res.status(200).json({ status: 'picked', pick });
+    return res.status(200).json({ status: 'picked', pick, discovery: sources, candidates });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
