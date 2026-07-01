@@ -26,9 +26,33 @@ async function ghPutFile(path, contentObj, sha, token, message) {
   return r.ok;
 }
 
-async function fetchPrice(ticker, knownSymbol) {
-  const clean = (ticker || '').toUpperCase().replace(/[^A-Z0-9.&]/g, '');
-  const trySymbols = knownSymbol ? [knownSymbol] : (clean.includes('.') ? [clean] : [clean + '.NS', clean + '.BO', clean]);
+// Map company names / tickers to Yahoo NSE symbols
+const SYMBOL_MAP = {
+  'RELIANCE INDUSTRIES':'RELIANCE.NS','TCS':'TCS.NS','HDFC BANK':'HDFCBANK.NS',
+  'INFOSYS':'INFY.NS','ICICI BANK':'ICICIBANK.NS','BHARTI AIRTEL':'BHARTIARTL.NS',
+  'LARSEN & TOUBRO':'LT.NS','STATE BANK OF INDIA':'SBIN.NS','AXIS BANK':'AXISBANK.NS',
+  'KOTAK MAHINDRA BANK':'KOTAKBANK.NS','HINDUSTAN UNILEVER':'HINDUNILVR.NS','ITC':'ITC.NS',
+  'BAJAJ FINANCE':'BAJFINANCE.NS','MARUTI SUZUKI':'MARUTI.NS','SUN PHARMA':'SUNPHARMA.NS',
+  'TATA MOTORS':'TATAMOTORS.NS','NTPC':'NTPC.NS','POWER GRID':'POWERGRID.NS',
+  'ULTRATECH CEMENT':'ULTRACEMCO.NS','ASIAN PAINTS':'ASIANPAINT.NS','TITAN':'TITAN.NS',
+  'WIPRO':'WIPRO.NS','ADANI PORTS':'ADANIPORTS.NS','COAL INDIA':'COALINDIA.NS',
+  'JSW STEEL':'JSWSTEEL.NS','TATA STEEL':'TATASTEEL.NS','MAHINDRA & MAHINDRA':'M&M.NS',
+  'NESTLE INDIA':'NESTLEIND.NS','BAJAJ AUTO':'BAJAJ-AUTO.NS','HINDALCO':'HINDALCO.NS',
+  'ZOMATO':'ZOMATO.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
+};
+
+async function fetchPrice(ticker, fullName, knownSymbol) {
+  const upper = (ticker || '').toUpperCase();
+  const nameUpper = (fullName || '').toUpperCase().replace(/ LTD\.?| LIMITED/g, '').trim();
+  const mapped = SYMBOL_MAP[upper] || SYMBOL_MAP[nameUpper];
+  const clean = upper.replace(/[^A-Z0-9.&]/g, '');
+  const trySymbols = [
+    knownSymbol,
+    mapped,
+    clean.includes('.') ? clean : clean + '.NS',
+    clean + '.BO',
+    clean
+  ].filter(Boolean);
   for (const sym of trySymbols) {
     try {
       const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
@@ -59,17 +83,21 @@ export default async function handler(req, res) {
 
   const now = new Date().toISOString();
   let updated = 0;
+  const debug = [];
   for (const item of bouquet) {
-    const pd = await fetchPrice(item.ticker, item.yahooSymbol);
+    const pd = await fetchPrice(item.ticker, item.fullName, item.yahooSymbol);
     if (pd?.price) {
+      if (!item.entryPrice) item.entryPrice = pd.price; // backfill entry if missing
       item.currentPrice = pd.price;
       item.yahooSymbol = pd.symbol;
       item.lastPriceUpdate = now;
-      if (!item.entryPrice) item.entryPrice = pd.price; // backfill if missing
       updated++;
+      debug.push({ ticker: item.ticker, resolved: pd.symbol, entry: item.entryPrice, current: pd.price });
+    } else {
+      debug.push({ ticker: item.ticker, resolved: null, error: 'price fetch failed' });
     }
   }
 
   await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);
-  return res.status(200).json({ status: 'refreshed', updated, total: bouquet.length });
+  return res.status(200).json({ status: 'refreshed', updated, total: bouquet.length, debug });
 }

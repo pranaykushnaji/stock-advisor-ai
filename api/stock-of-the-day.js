@@ -18,10 +18,28 @@ function todayIST() {
   return ist.toISOString().slice(0, 10);
 }
 
-// Fetch live price from Yahoo — tries NSE/BSE suffixes
-async function fetchPrice(ticker) {
-  const clean = (ticker || '').toUpperCase().replace(/[^A-Z0-9.&]/g, '');
-  const trySymbols = clean.includes('.') ? [clean] : [clean + '.NS', clean + '.BO', clean];
+// Map company names / tickers to Yahoo NSE symbols
+const SYMBOL_MAP = {
+  'RELIANCE INDUSTRIES':'RELIANCE.NS','TCS':'TCS.NS','HDFC BANK':'HDFCBANK.NS',
+  'INFOSYS':'INFY.NS','ICICI BANK':'ICICIBANK.NS','BHARTI AIRTEL':'BHARTIARTL.NS',
+  'LARSEN & TOUBRO':'LT.NS','STATE BANK OF INDIA':'SBIN.NS','AXIS BANK':'AXISBANK.NS',
+  'KOTAK MAHINDRA BANK':'KOTAKBANK.NS','HINDUSTAN UNILEVER':'HINDUNILVR.NS','ITC':'ITC.NS',
+  'BAJAJ FINANCE':'BAJFINANCE.NS','MARUTI SUZUKI':'MARUTI.NS','SUN PHARMA':'SUNPHARMA.NS',
+  'TATA MOTORS':'TATAMOTORS.NS','NTPC':'NTPC.NS','POWER GRID':'POWERGRID.NS',
+  'ULTRATECH CEMENT':'ULTRACEMCO.NS','ASIAN PAINTS':'ASIANPAINT.NS','TITAN':'TITAN.NS',
+  'WIPRO':'WIPRO.NS','ADANI PORTS':'ADANIPORTS.NS','COAL INDIA':'COALINDIA.NS',
+  'JSW STEEL':'JSWSTEEL.NS','TATA STEEL':'TATASTEEL.NS','MAHINDRA & MAHINDRA':'M&M.NS',
+  'NESTLE INDIA':'NESTLEIND.NS','BAJAJ AUTO':'BAJAJ-AUTO.NS','HINDALCO':'HINDALCO.NS',
+  'ZOMATO':'ZOMATO.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
+};
+
+// Fetch live price from Yahoo — tries mapped symbol, then NSE/BSE suffixes
+async function fetchPrice(ticker, fullName) {
+  const upper = (ticker || '').toUpperCase();
+  const nameUpper = (fullName || '').toUpperCase().replace(/ LTD\.?| LIMITED/g, '').trim();
+  const mapped = SYMBOL_MAP[upper] || SYMBOL_MAP[nameUpper];
+  const clean = upper.replace(/[^A-Z0-9.&]/g, '');
+  const trySymbols = [mapped, clean.includes('.') ? clean : clean + '.NS', clean + '.BO', clean].filter(Boolean);
   for (const sym of trySymbols) {
     try {
       const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
@@ -147,7 +165,7 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
     try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) {}
     if (!bouquet.find(b => b.date === date)) {
       // Capture real entry price from Yahoo
-      const priceData = await fetchPrice(pick.ticker);
+      const priceData = await fetchPrice(pick.ticker, pick.fullName);
       const entryPrice = priceData?.price || null;
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,

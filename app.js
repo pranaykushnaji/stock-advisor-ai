@@ -312,10 +312,17 @@ async function renderBouquet(){
   if(!combined.length){el.innerHTML=toggle+'<div class="empty-state"><div class="empty-icon">🌸</div><h3>No stocks yet</h3><p>Daily picks are added automatically each morning. Analyze a stock to add your own.</p></div>';return;}
 
   const work=combined;
-  const gains=work.map(simGain),totalInvested=work.reduce((a,b)=>a+(b.investedAmount||10000),0);
-  const totalValue=work.reduce((a,b,i)=>a+(b.investedAmount||10000)*(1+gains[i]/100),0);
+  // Real gain if we have prices; null if a daily pick is still awaiting its price
+  const gainInfo=work.map(item=>{
+    const hasReal=item.entryPrice&&item.currentPrice&&item.entryPrice>0;
+    if(hasReal)return{gain:+(((item.currentPrice-item.entryPrice)/item.entryPrice)*100).toFixed(1),real:true,pending:false};
+    if(item.source==='daily')return{gain:0,real:false,pending:true}; // daily pick, price not fetched yet
+    return{gain:simGain(item),real:false,pending:false}; // personal pick uses sim
+  });
+  const priced=work.filter((_,i)=>!gainInfo[i].pending);
+  const totalInvested=work.reduce((a,b)=>a+(b.investedAmount||10000),0);
+  const totalValue=work.reduce((a,b,i)=>a+(b.investedAmount||10000)*(1+(gainInfo[i].pending?0:gainInfo[i].gain)/100),0);
   const totalReturn=((totalValue-totalInvested)/totalInvested*100).toFixed(1);
-  const wins=gains.filter(g=>g>0).length;
   const sectors={};work.forEach(b=>{const s=b.sector||'Other';sectors[s]=(sectors[s]||0)+1;});
   const sectorEntries=Object.entries(sectors).sort((a,b)=>b[1]-a[1]);
 
@@ -332,28 +339,39 @@ async function renderBouquet(){
       <div class="sector-legend">${slices.map(s=>`<div class="sector-legend-item"><div class="sector-dot" style="background:${s.color};"></div>${esc(s.label)} (${s.count})</div>`).join('')}</div></div></div>`;
   }
 
+  const allReal=work.every((_,i)=>gainInfo[i].real);
+  const valueLabel=allReal?'Current Value':'Current Value (partial)';
+
   el.innerHTML=toggle+`<div class="summary-tiles">
     <div class="summary-tile"><div class="tile-num">${work.length}</div><div class="tile-lbl">Stocks</div></div>
     <div class="summary-tile"><div class="tile-num">₹${totalInvested.toLocaleString('en-IN')}</div><div class="tile-lbl">Invested</div></div>
-    <div class="summary-tile"><div class="tile-num" style="color:${parseFloat(totalReturn)>=0?'var(--green)':'var(--red)'};">₹${Math.round(totalValue).toLocaleString('en-IN')}</div><div class="tile-lbl">Current Value (sim)</div></div>
+    <div class="summary-tile"><div class="tile-num" style="color:${parseFloat(totalReturn)>=0?'var(--green)':'var(--red)'};">₹${Math.round(totalValue).toLocaleString('en-IN')}</div><div class="tile-lbl">${valueLabel}</div></div>
     <div class="summary-tile"><div class="tile-num" style="color:${parseFloat(totalReturn)>=0?'var(--green)':'var(--red)'};">${parseFloat(totalReturn)>=0?'+':''}${totalReturn}%</div><div class="tile-lbl">Total Return</div></div>
   </div>${pieHtml}
   <div class="bouquet-list">${work.map((item,i)=>{
-    const g=gains[i],gStr=(g>0?'+':'')+g+'%',amt=item.investedAmount||10000,val=Math.round(amt*(1+g/100));
-    const days=Math.max(1,Math.floor((Date.now()-new Date(item.addedAt).getTime())/86400000));
+    const gi=gainInfo[i];
+    const days=Math.max(1,Math.floor((Date.now()-new Date(item.addedAt||item.date).getTime())/86400000));
     const vB=item.verdict==='BUY'?'verdict-buy':item.verdict==='AVOID'?'verdict-avoid':'verdict-hold';
     const srcTag=item.source==='daily'?'<span style="font-size:10px;color:var(--accent);font-weight:600;margin-left:6px;">⭐ DAILY</span>':'';
     const removeBtn=item.source==='personal'?`<button class="bi-remove" onclick="removePersonalPick('${esc(item.ticker)}')">✕</button>`:'<span style="width:28px;"></span>';
-    const hasReal=item.entryPrice&&item.currentPrice;
-    const metaLine=hasReal
-      ?`${days}d · ₹${item.entryPrice} → ₹${item.currentPrice}${item.lastPriceUpdate?' · live':''}`
-      :`${days}d · ₹${amt.toLocaleString('en-IN')} → ₹${val.toLocaleString('en-IN')}${item.confidence?' · '+item.confidence+'% conf':''}`;
+    let metaLine,gainCell;
+    if(gi.pending){
+      metaLine=`${days}d · entry price updating…`;
+      gainCell=`<div class="bi-gain" style="color:var(--text3);font-size:12px;">pending</div>`;
+    }else if(gi.real){
+      metaLine=`${days}d · ₹${item.entryPrice} → ₹${item.currentPrice} · live`;
+      gainCell=`<div class="bi-gain ${gi.gain>=0?'up':'down'}">${gi.gain>0?'+':''}${gi.gain}%</div>`;
+    }else{
+      const amt=item.investedAmount||10000,val=Math.round(amt*(1+gi.gain/100));
+      metaLine=`${days}d · ₹${amt.toLocaleString('en-IN')} → ₹${val.toLocaleString('en-IN')} · sim`;
+      gainCell=`<div class="bi-gain ${gi.gain>=0?'up':'down'}">${gi.gain>0?'+':''}${gi.gain}%</div>`;
+    }
     return`<div class="bouquet-item"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}${srcTag}</div>
       <div class="bi-meta">${metaLine}</div></div>
       <span class="verdict-badge ${vB}" style="font-size:11px;padding:2px 10px;">${item.verdict}</span>
-      <div class="bi-gain ${g>=0?'up':'down'}">${gStr}</div>
+      ${gainCell}
       ${removeBtn}</div>`;
-  }).join('')}<div class="sim-note">Simulated returns · ₹10,000 per stock · Not real money</div></div>`;
+  }).join('')}<div class="sim-note">Daily picks use real NSE prices · personal picks simulated · ₹10,000 each</div></div>`;
 }
 function setBouquetView(v){bouquetView=v;renderBouquet();}
 function removePersonalPick(ticker){const i=bouquet.findIndex(b=>b.ticker===ticker);if(i>=0){bouquet.splice(i,1);save();renderBouquet();}}
