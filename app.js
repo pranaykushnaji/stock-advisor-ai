@@ -1,12 +1,8 @@
 // ─── State ───
 let bouquet=[],history=[],currentAnalysis=null;
-const SK={KEY:'sa_api_key',BOUQUET:'sa_bouquet2',HISTORY:'sa_history2',PROVIDER:'sa_provider',THEME:'sa_theme'};
+const SK={BOUQUET:'sa_bouquet2',HISTORY:'sa_history2',THEME:'sa_theme'};
 function load(){try{bouquet=JSON.parse(localStorage.getItem(SK.BOUQUET)||'[]');}catch{bouquet=[];}try{history=JSON.parse(localStorage.getItem(SK.HISTORY)||'[]');}catch{history=[];}updateBadge();}
 function save(){localStorage.setItem(SK.BOUQUET,JSON.stringify(bouquet));localStorage.setItem(SK.HISTORY,JSON.stringify(history));updateBadge();}
-function getKey(){return localStorage.getItem(SK.KEY)||'';}
-function saveKey(k){localStorage.setItem(SK.KEY,k);}
-function getProvider(){return localStorage.getItem(SK.PROVIDER)||'groq';}
-function saveProvider(p){localStorage.setItem(SK.PROVIDER,p);}
 function updateBadge(){const b=document.getElementById('bouquet-badge');if(b)b.textContent=bouquet.length||'';}
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
@@ -18,65 +14,6 @@ document.getElementById('theme-toggle').addEventListener('click',()=>{setTheme(d
 // ─── Tabs ───
 function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='history')renderHistory();if(n==='dashboard')renderDashboard();if(n==='daily')renderDailyTab(sotdPick);}
 document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
-
-// ─── Modal ───
-const modal=document.getElementById('api-modal'),keyInput=document.getElementById('api-key-input'),keyError=document.getElementById('key-error'),providerSelect=document.getElementById('provider-select');
-function openModal(){keyInput.value=getKey();providerSelect.value=getProvider();updateHint();keyError.textContent='';modal.classList.add('open');setTimeout(()=>keyInput.focus(),200);}
-function closeModal(){modal.classList.remove('open');}
-function updateHint(){const h=document.getElementById('provider-hint'),p=providerSelect.value;h.innerHTML=p==='groq'?'<ol class="setup-steps"><li>Go to <a href="https://console.groq.com/keys" target="_blank">console.groq.com/keys</a></li><li>Sign up free</li><li>Create API Key → paste below (<code>gsk_</code>)</li></ol>':'<ol class="setup-steps"><li>Go to <a href="https://aistudio.google.com/apikey" target="_blank">aistudio.google.com/apikey</a></li><li>Create API Key → paste below</li></ol>';}
-providerSelect?.addEventListener('change',updateHint);
-document.getElementById('settings-btn').addEventListener('click',openModal);
-document.getElementById('modal-close').addEventListener('click',closeModal);
-document.getElementById('modal-cancel').addEventListener('click',closeModal);
-modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
-document.getElementById('toggle-key').addEventListener('click',()=>{const h=keyInput.type==='password';keyInput.type=h?'text':'password';document.getElementById('toggle-key').textContent=h?'Hide':'Show';});
-document.getElementById('save-key-btn').addEventListener('click',()=>{const k=keyInput.value.trim(),p=providerSelect.value;if(!k){keyError.textContent='Enter a key.';return;}if(p==='groq'&&!k.startsWith('gsk_')){keyError.textContent='Groq keys start with "gsk_"';return;}saveKey(k);saveProvider(p);closeModal();showToast('API key saved!');document.getElementById('result-area').innerHTML='';});
-
-// ─── Multi-Agent AI Prompt ───
-const AGENT_PROMPT=`You are a multi-agent stock analysis system with 4 specialist AI agents. For the given stock, each agent performs independent analysis and returns a score 0-100.
-
-Return ONLY valid JSON (no markdown):
-{
-  "ticker": "SYMBOL",
-  "fullName": "Full Company Name",
-  "sector": "Sector",
-  "verdict": "BUY" or "HOLD" or "AVOID",
-  "estimatedUpside": "15-25%" or "5-10%" etc,
-  "riskLevel": "Low" or "Medium" or "High",
-  "horizon": "3-6 months" or "6-12 months" or "1-2 years",
-  "agents": {
-    "fundamental": {
-      "score": 0-100,
-      "positives": ["Revenue CAGR 24%", "ROCE improving to 18%", "Debt reduced 30% YoY"],
-      "negatives": ["High PE of 48x", "Low dividend yield"]
-    },
-    "news": {
-      "score": 0-100,
-      "positives": ["Won ₹1000 Cr government tender", "Promoter increased holding 2%"],
-      "negatives": ["Sector facing regulatory headwinds"]
-    },
-    "technical": {
-      "score": 0-100,
-      "positives": ["Trading above 50DMA and 200DMA", "RSI at 62 - bullish momentum"],
-      "negatives": ["Near resistance at ₹1450"]
-    },
-    "risk": {
-      "score": 0-100,
-      "positives": ["Strong cash position", "No pledged promoter shares"],
-      "negatives": ["Small-cap volatility", "Low institutional holding"]
-    }
-  },
-  "summary": "2-3 sentence overall AI summary combining all agent views",
-  "priceContext": "CMP ₹182, 52-week range ₹120-210, PE 48x"
-}
-
-RULES:
-- Each agent score must be 0-100 based on actual analysis
-- Use REAL financial data and metrics where possible
-- Each agent must have at least 2 positives and 1 negative (be honest about risks)
-- verdict: BUY if weighted score > 70, HOLD if 50-70, AVOID if < 50
-- Be specific with numbers — revenue growth %, PE ratio, debt figures, actual news
-- Return ONLY the JSON`;
 
 // ─── Confidence Calculator (NOT from LLM) ───
 const WEIGHTS={fundamental:0.35,news:0.25,technical:0.20,risk:0.20};
@@ -128,22 +65,7 @@ function computeVerdict(confidence){
   return'AVOID';
 }
 
-// ─── API calls ───
-async function callGroq(key,stock){
-  const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},body:JSON.stringify({model:'openai/gpt-oss-120b',messages:[{role:'system',content:AGENT_PROMPT},{role:'user',content:`Analyze this stock with all 4 agents: "${stock}"`}],temperature:0.3,max_tokens:3000})});
-  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(r.status===401?'Invalid Groq key':e?.error?.message||`Error ${r.status}`);}
-  return(await r.json())?.choices?.[0]?.message?.content||'';
-}
-async function callGemini(key,stock){
-  const p=AGENT_PROMPT+`\nAnalyze: "${stock}"`;
-  for(const m of['gemini-2.0-flash-lite','gemini-2.0-flash']){
-    const r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${key}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:p}]}],generationConfig:{temperature:0.3,maxOutputTokens:1500}})});
-    if(r.ok)return(await r.json())?.candidates?.[0]?.content?.parts?.[0]?.text||'';
-    if(r.status===429||r.status===404)continue;
-    const e=await r.json().catch(()=>({}));throw new Error(`Gemini: ${e?.error?.message||r.status}`);
-  }
-  throw new Error('Gemini rate limited. Switch to Groq.');
-}
+// ─── API call (server-side, key stored on server) ───
 async function callAI(stock){
   const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock})});
   const d=await r.json().catch(()=>({}));
@@ -366,7 +288,7 @@ function simGain(item){
   return+((dir*cf*0.30+noise*0.10)*(days/365)*100).toFixed(1);
 }
 
-const COLORS=['#4f8ef7','#22c87a','#f5a623','#f05b5b','#a855f7','#06b6d4','#ec4899','#84cc16','#f97316','#6366f1'];
+const COLORS=['#C67C4E','#7FA663','#D19A5B','#A88BA3','#6E8CA0','#B4663A','#C25B4E','#9C8E7F','#8C6F87','#5E7D45'];
 
 let projectBouquet=[];
 let bouquetView='all'; // 'all' | 'daily' | 'personal'
