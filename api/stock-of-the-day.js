@@ -93,7 +93,7 @@ From this candidate list, pick the SINGLE best stock to buy today based on curre
 
 Candidates: ${CANDIDATES.join(', ')}
 
-Return ONLY valid JSON (no markdown):
+Return ONLY valid JSON (no markdown). ALL scores must be on a 0-100 scale (e.g. 85, not 8.5):
 {
   "ticker": "SYMBOL", "fullName": "Full Name", "sector": "Sector",
   "verdict": "BUY", "estimatedUpside": "12-20%", "riskLevel": "Low/Medium/High", "horizon": "3-6 months",
@@ -106,7 +106,7 @@ Return ONLY valid JSON (no markdown):
   "summary": "Why this is today's pick", "priceContext": "CMP, range, PE",
   "whyToday": "The single most important reason this stands out TODAY"
 }
-Return ONLY the JSON.`;
+Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
 
   try {
     const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {

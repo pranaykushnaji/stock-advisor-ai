@@ -95,6 +95,15 @@ function recomputeAgentScores(agents){
   for(const[agentKey,subW]of Object.entries(SUB_WEIGHTS)){
     const agent=agents[agentKey];
     if(!agent||!agent.subScores)continue;
+    // Detect scale: if EVERY sub-score is <=10, the model used a 0-10 scale — normalize to 0-100
+    const vals=Object.keys(subW).map(m=>agent.subScores[m]).filter(v=>v!=null&&!isNaN(v));
+    const isScale10=vals.length>0&&vals.every(v=>v<=10);
+    if(isScale10){
+      for(const metric of Object.keys(subW)){
+        const v=agent.subScores[metric];
+        if(v!=null&&!isNaN(v))agent.subScores[metric]=v*10;
+      }
+    }
     let total=0,wSum=0;
     for(const[metric,weight]of Object.entries(subW)){
       const v=agent.subScores[metric];
@@ -540,6 +549,7 @@ async function checkSotd(){
 
 function showSotdPopup(pick){
   const body=document.getElementById('sotd-body');
+  recomputeAgentScores(pick.agents);
   const conf=computeConfidence(pick.agents);
   body.innerHTML=`
     <div style="text-align:center;margin-bottom:18px;">
@@ -579,6 +589,7 @@ function renderDailyTab(pick){
     return;
   }
   // Reuse the full analysis card renderer
+  recomputeAgentScores(pick.agents);
   pick.confidence=computeConfidence(pick.agents);
   pick.verdict=computeVerdict(pick.confidence);
   renderResult(pick,el,null,null);
