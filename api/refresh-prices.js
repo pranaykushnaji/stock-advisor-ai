@@ -78,8 +78,19 @@ export default async function handler(req, res) {
 
   const bq = await ghGetFile('data/project-bouquet.json', ghToken);
   let bouquet = [];
-  try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) {}
-  if (!bouquet.length) return res.status(200).json({ status: 'empty' });
+  let parseErr = null;
+  try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) { parseErr = e.message; }
+  if (!bouquet.length) {
+    return res.status(200).json({
+      status: 'empty',
+      diagnostic: {
+        fileFound: bq.content != null,
+        contentLength: bq.content ? bq.content.length : 0,
+        parseError: parseErr,
+        hint: bq.content == null ? 'GitHub API returned no file — check GITHUB_TOKEN has repo read access' : 'File found but bouquet array is empty'
+      }
+    });
+  }
 
   const now = new Date().toISOString();
   let updated = 0;
