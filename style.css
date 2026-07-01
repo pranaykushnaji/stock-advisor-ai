@@ -499,3 +499,18 @@ body {
   .summary-tiles, .dash-metrics { grid-template-columns: 1fr 1fr; gap: 8px; }
   .page-header h1 { font-size: 21px; }
 }
+
+/* ─── Compare mini-cards (was missing) ─── */
+.agents-mini { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+.am-row { display: flex; align-items: center; gap: 9px; font-size: 12px; color: var(--text2); }
+.am-row > span:first-child { width: 92px; flex-shrink: 0; }
+.am-row > span:last-child { width: 26px; text-align: right; font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--text); }
+.am-bar { flex: 1; height: 5px; background: var(--bg); border-radius: 3px; overflow: hidden; }
+.chart-title { font-size: 12px; font-weight: 600; color: var(--text2); }
+
+/* ─── Disclaimer box ─── */
+.disclaimer-box {
+  margin-top: 16px; padding: 12px 16px;
+  background: var(--amber-bg); border: 1px solid rgba(200,150,80,0.25);
+  border-radius: 10px; font-size: 12px; color: var(--text2); line-height: 1.6;
+}

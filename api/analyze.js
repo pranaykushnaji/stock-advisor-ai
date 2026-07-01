@@ -9,7 +9,9 @@ export default async function handler(req, res) {
 
   try {
     const { stock, mode } = req.body || {};
-    if (!stock) return res.status(400).json({ error: 'stock name required' });
+    if (!stock || typeof stock !== 'string') return res.status(400).json({ error: 'stock name required' });
+    const cleanStock = stock.trim().slice(0, 100); // cap length to prevent abuse
+    if (cleanStock.length < 1) return res.status(400).json({ error: 'stock name required' });
 
     const AGENT_PROMPT = `You are a multi-agent stock analysis system. You have 4 specialist agents. Each agent scores specific sub-metrics from 0-100 against defined benchmarks, then you compute a weighted score for that agent.
 
@@ -94,7 +96,7 @@ RULES:
         model: 'openai/gpt-oss-120b',
         messages: [
           { role: 'system', content: AGENT_PROMPT },
-          { role: 'user', content: `Analyze this stock with all 4 agents: "${stock}"` }
+          { role: 'user', content: `Analyze this stock with all 4 agents: "${cleanStock}"` }
         ],
         temperature: 0.3,
         max_tokens: 3000

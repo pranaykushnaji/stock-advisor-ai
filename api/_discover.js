@@ -14,11 +14,22 @@ export const NIFTY50 = [
   'Tata Consumer','BPCL','Shriram Finance','Trent','IndusInd Bank'
 ];
 
+// Fetch with a hard timeout so a hanging source can't blow the serverless limit
+async function fetchWithTimeout(url, opts = {}, ms = 4000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { ...opts, signal: ctrl.signal });
+  } finally {
+    clearTimeout(t);
+  }
+}
+
 // Fetch Google News RSS for a query, return headlines
 async function fetchNewsHeadlines(query) {
   try {
     const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-IN&gl=IN&ceid=IN:en`;
-    const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const r = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 5000);
     if (!r.ok) return [];
     const text = await r.text();
     const items = [];
@@ -41,16 +52,15 @@ async function fetchMovers() {
   ];
   for (const url of endpoints) {
     try {
-      const r = await fetch(url, {
+      const r = await fetchWithTimeout(url, {
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
           'Accept': 'application/json',
           'Referer': 'https://www.nseindia.com/'
         }
-      });
+      }, 4000);
       if (!r.ok) continue;
       const d = await r.json();
-      // gainers structure: { NIFTY: { data: [{symbol}] } } ; most-active: { data: [{symbol}] }
       const rows = d?.NIFTY?.data || d?.data || d?.legends || [];
       for (const row of rows) {
         if (row?.symbol) movers.push(row.symbol);
@@ -70,7 +80,7 @@ ${headlines.slice(0, 25).map((h, i) => `${i + 1}. ${h}`).join('\n')}
 
 Return ONLY: ["Company A","Company B",...]`;
   try {
-    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const r = await fetchWithTimeout('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
@@ -78,7 +88,7 @@ Return ONLY: ["Company A","Company B",...]`;
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.2, max_tokens: 500
       })
-    });
+    }, 8000);
     if (!r.ok) return [];
     const d = await r.json();
     let text = d?.choices?.[0]?.message?.content || '';
@@ -86,6 +96,15 @@ Return ONLY: ["Company A","Company B",...]`;
     if (s < 0 || e < 0) return [];
     return JSON.parse(text.slice(s, e + 1)).filter(x => typeof x === 'string');
   } catch (e) { return []; }
+}
+
+// Normalize a company name/ticker for dedup (strip suffixes, punctuation, common words)
+function normName(s) {
+  return String(s || '')
+    .toUpperCase()
+    .replace(/\b(LTD|LIMITED|INDIA|INDUSTRIES|CORPORATION|CORP|COMPANY|CO|ENTERPRISES|THE)\b/g, '')
+    .replace(/[^A-Z0-9]/g, '')
+    .trim();
 }
 
 // Main: returns { candidates: [...], sources: {...} }
@@ -101,19 +120,22 @@ export async function discoverCandidates(apiKey) {
   const moverSymbols = await fetchMovers();
   sources.movers = moverSymbols.length;
 
-  // Combine, de-dupe (case-insensitive)
+  // Combine, de-dupe using normalized names (so "RELIANCE" == "Reliance Industries Ltd")
   const seen = new Set();
   let candidates = [];
   for (const name of [...newsStocks, ...moverSymbols]) {
-    const key = name.toUpperCase().trim();
-    if (key && !seen.has(key)) { seen.add(key); candidates.push(name); }
+    if (typeof name !== 'string') continue;
+    const clean = name.trim();
+    if (!clean || clean.length < 2 || clean.length > 60) continue; // sanity bounds
+    const key = normName(clean);
+    if (key && !seen.has(key)) { seen.add(key); candidates.push(clean); }
   }
 
   // 3. Fallback to Nifty-50 if discovery came up short
   if (candidates.length < 5) {
     sources.usedFallback = true;
     for (const name of NIFTY50) {
-      const key = name.toUpperCase().trim();
+      const key = normName(name);
       if (!seen.has(key)) { seen.add(key); candidates.push(name); }
     }
   }

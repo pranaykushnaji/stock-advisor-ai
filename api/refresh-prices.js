@@ -41,6 +41,14 @@ const SYMBOL_MAP = {
   'ZOMATO':'ZOMATO.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
 };
 
+// Fetch with a hard timeout so a hanging source can't blow the serverless limit
+async function fetchWithTimeout(url, opts = {}, ms = 4000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try { return await fetch(url, { ...opts, signal: ctrl.signal }); }
+  finally { clearTimeout(t); }
+}
+
 async function fetchPrice(ticker, fullName, knownSymbol) {
   const upper = (ticker || '').toUpperCase();
   const nameUpper = (fullName || '').toUpperCase().replace(/ LTD\.?| LIMITED/g, '').trim();
@@ -56,7 +64,7 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
   for (const sym of trySymbols) {
     try {
       const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
-      const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+      const r = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 4000);
       if (!r.ok) continue;
       const d = await r.json();
       const meta = d?.chart?.result?.[0]?.meta;
@@ -91,26 +99,32 @@ export default async function handler(req, res) {
   const now = new Date().toISOString();
   let updated = 0;
   const failed = [];
-  for (const item of bouquet) {
-    const pd = await fetchPrice(item.ticker, item.fullName, item.yahooSymbol);
-    if (pd?.price) {
-      // Entry price = the day's OPEN when the pick was made (morning price).
-      if (!item.entryPrice || item.entryPriceProvisional) {
-        item.entryPrice = pd.open || pd.prevClose || pd.price;
-        item.entryPriceProvisional = pd.open ? false : true;
+
+  // Process in parallel batches so a large bouquet doesn't run sequentially past the time limit
+  const BATCH = 8;
+  for (let i = 0; i < bouquet.length; i += BATCH) {
+    const slice = bouquet.slice(i, i + BATCH);
+    await Promise.all(slice.map(async (item) => {
+      const pd = await fetchPrice(item.ticker, item.fullName, item.yahooSymbol);
+      if (pd?.price) {
+        // Entry price = the day's OPEN when the pick was made (morning price).
+        if (!item.entryPrice || item.entryPriceProvisional) {
+          item.entryPrice = pd.open || pd.prevClose || pd.price;
+          item.entryPriceProvisional = pd.open ? false : true;
+        }
+        item.currentPrice = pd.price;
+        item.dayOpen = pd.open;
+        item.prevClose = pd.prevClose;
+        item.yahooSymbol = pd.symbol;
+        item.lastPriceUpdate = now;
+        const invested = item.investedAmount || 10000;
+        item.shares = item.entryPrice > 0 ? +(invested / item.entryPrice).toFixed(3) : 0;
+        item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
+        updated++;
+      } else {
+        failed.push(item.ticker);
       }
-      item.currentPrice = pd.price;
-      item.dayOpen = pd.open;
-      item.prevClose = pd.prevClose;
-      item.yahooSymbol = pd.symbol;
-      item.lastPriceUpdate = now;
-      const invested = item.investedAmount || 10000;
-      item.shares = item.entryPrice > 0 ? +(invested / item.entryPrice).toFixed(3) : 0;
-      item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
-      updated++;
-    } else {
-      failed.push(item.ticker);
-    }
+    }));
   }
 
   await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);

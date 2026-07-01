@@ -9,11 +9,28 @@
       "schedule": "0 12 * * *"
     }
   ],
+  "functions": {
+    "api/stock-of-the-day.js": { "maxDuration": 60 },
+    "api/refresh-prices.js": { "maxDuration": 60 },
+    "api/analyze.js": { "maxDuration": 30 }
+  },
   "headers": [
     {
       "source": "/data/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/app.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/style.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, must-revalidate" }
       ]
     }
   ]

@@ -4,7 +4,9 @@ const SK={BOUQUET:'sa_bouquet2',HISTORY:'sa_history2',THEME:'sa_theme'};
 function load(){try{bouquet=JSON.parse(localStorage.getItem(SK.BOUQUET)||'[]');}catch{bouquet=[];}try{history=JSON.parse(localStorage.getItem(SK.HISTORY)||'[]');}catch{history=[];}updateBadge();}
 function save(){localStorage.setItem(SK.BOUQUET,JSON.stringify(bouquet));localStorage.setItem(SK.HISTORY,JSON.stringify(history));updateBadge();}
 function updateBadge(){const b=document.getElementById('bouquet-badge');if(b)b.textContent=bouquet.length||'';}
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+// Escape a URL for safe use in href — only allow http/https, block javascript: etc.
+function safeUrl(u){const s=String(u==null?'':u).trim();if(/^https?:\/\//i.test(s))return esc(s);return '#';}
 
 // ─── Theme ───
 function initTheme(){const s=localStorage.getItem(SK.THEME);setTheme(s||(matchMedia('(prefers-color-scheme:light)').matches?'light':'dark'));}
@@ -175,7 +177,7 @@ function renderResult(d,area,stockData,news){
   if(stockData?.chart?.close?.length){chartHtml=`<div class="chart-container"><div class="chart-header"><span class="chart-title">Price History (3M)</span></div><canvas class="chart-canvas" id="price-chart"></canvas></div>`;}
 
   let newsHtml='';
-  if(news?.length){newsHtml=`<div class="news-box"><div class="section-title">📰 Latest News</div>${news.slice(0,5).map(n=>`<div class="news-item"><a href="${esc(n.link)}" target="_blank">${esc(n.title)}</a><span class="news-source">${esc(n.source)}</span></div>`).join('')}</div>`;}
+  if(news?.length){newsHtml=`<div class="news-box"><div class="section-title">📰 Latest News</div>${news.slice(0,5).map(n=>`<div class="news-item"><a href="${safeUrl(n.link)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a><span class="news-source">${esc(n.source)}</span></div>`).join('')}</div>`;}
 
   const ag=d.agents||{};
   const confBreakdown=`<div class="conf-breakdown"><div class="section-title">Confidence Breakdown (Weighted)</div>
@@ -319,7 +321,6 @@ async function renderBouquet(){
     if(item.source==='daily')return{gain:0,real:false,pending:true}; // daily pick, price not fetched yet
     return{gain:simGain(item),real:false,pending:false}; // personal pick uses sim
   });
-  const priced=work.filter((_,i)=>!gainInfo[i].pending);
   const totalInvested=work.reduce((a,b)=>a+(b.investedAmount||10000),0);
   const totalValue=work.reduce((a,b,i)=>a+(b.investedAmount||10000)*(1+(gainInfo[i].pending?0:gainInfo[i].gain)/100),0);
   const totalReturn=((totalValue-totalInvested)/totalInvested*100).toFixed(1);
@@ -373,43 +374,83 @@ async function renderBouquet(){
       <span class="verdict-badge ${vB}" style="font-size:11px;padding:2px 10px;">${item.verdict}</span>
       ${gainCell}
       ${removeBtn}</div>`;
-  }).join('')}<div class="sim-note">Daily picks use real NSE prices · personal picks simulated · ₹10,000 each</div></div>`;
+  }).join('')}<div class="sim-note">Daily picks use real NSE prices · personal picks simulated · ₹10,000 each${(()=>{const lu=work.map(w=>w.lastPriceUpdate).filter(Boolean).sort().pop();return lu?' · prices updated '+timeAgo(lu):'';})()}</div></div>`;
 }
+function timeAgo(iso){const s=Math.floor((Date.now()-new Date(iso).getTime())/1000);if(s<3600)return Math.max(1,Math.floor(s/60))+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
 function setBouquetView(v){bouquetView=v;renderBouquet();}
 function removePersonalPick(ticker){const i=bouquet.findIndex(b=>b.ticker===ticker);if(i>=0){bouquet.splice(i,1);save();renderBouquet();}}
 function removePick(i){bouquet.splice(i,1);save();renderBouquet();}
 
 // ─── Dashboard ───
-function renderDashboard(){
+async function renderDashboard(){
   const el=document.getElementById('dashboard-content');
-  if(history.length<3){el.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><h3>Need more data</h3><p>Analyze at least 3 stocks to see performance stats.</p></div>';return;}
-  const buys=history.filter(h=>h.verdict==='BUY'),holds=history.filter(h=>h.verdict==='HOLD'),avoids=history.filter(h=>h.verdict==='AVOID');
-  const avgConf=Math.round(history.reduce((a,h)=>a+h.confidence,0)/history.length);
-  const highConf=history.filter(h=>h.confidence>=80);
-  const bGains=bouquet.map(simGain),winRate=bGains.length?Math.round(bGains.filter(g=>g>0).length/bGains.length*100):0;
-  const avgReturn=bGains.length?(bGains.reduce((a,b)=>a+b,0)/bGains.length).toFixed(1):0;
+  // Pull the shared daily picks (real performance) alongside personal analysis history
+  if(!projectBouquet.length){projectBouquet=await fetchProjectBouquet();}
+  const daily=projectBouquet;
+  const pricedDaily=daily.filter(d=>d.entryPrice&&d.currentPrice&&d.entryPrice>0);
 
-  el.innerHTML=`<div class="summary-tiles">
-    <div class="summary-tile"><div class="tile-num">${history.length}</div><div class="tile-lbl">Total Analyzed</div></div>
-    <div class="summary-tile"><div class="tile-num" style="color:var(--green);">${buys.length}</div><div class="tile-lbl">BUY Calls</div></div>
-    <div class="summary-tile"><div class="tile-num" style="color:var(--amber);">${holds.length}</div><div class="tile-lbl">HOLD</div></div>
-    <div class="summary-tile"><div class="tile-num" style="color:var(--red);">${avoids.length}</div><div class="tile-lbl">AVOID</div></div>
-  </div>
-  <div class="result-card" style="margin-bottom:16px;">
-    <div class="section-title">📊 Performance Metrics</div>
-    <div class="dash-metrics">
-      <div class="dm-item"><div class="dm-val">${avgConf}%</div><div class="dm-lbl">Avg Confidence</div></div>
-      <div class="dm-item"><div class="dm-val">${highConf.length}</div><div class="dm-lbl">High Confidence (80%+)</div></div>
-      <div class="dm-item"><div class="dm-val" style="color:${winRate>=50?'var(--green)':'var(--red)'};">${winRate}%</div><div class="dm-lbl">Win Rate (bouquet)</div></div>
-      <div class="dm-item"><div class="dm-val" style="color:${parseFloat(avgReturn)>=0?'var(--green)':'var(--red)'};">${parseFloat(avgReturn)>=0?'+':''}${avgReturn}%</div><div class="dm-lbl">Avg Return (sim)</div></div>
+  const hasHistory=history.length>=1;
+  const hasDaily=daily.length>=1;
+  if(!hasHistory&&!hasDaily){el.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><h3>Need more data</h3><p>Analyze stocks or wait for daily picks to see performance stats.</p></div>';return;}
+
+  // Real daily-pick performance
+  let dailyPerfHtml='';
+  if(hasDaily){
+    const realGains=pricedDaily.map(d=>((d.currentPrice-d.entryPrice)/d.entryPrice)*100);
+    const dWins=realGains.filter(g=>g>0).length;
+    const dWinRate=realGains.length?Math.round(dWins/realGains.length*100):0;
+    const dAvg=realGains.length?(realGains.reduce((a,b)=>a+b,0)/realGains.length):0;
+    const totalInv=pricedDaily.length*10000;
+    const totalVal=pricedDaily.reduce((a,d)=>a+10000*(1+((d.currentPrice-d.entryPrice)/d.entryPrice)),0);
+    const totalRet=totalInv?((totalVal-totalInv)/totalInv*100):0;
+    const best=realGains.length?Math.max(...realGains):0;
+    const worst=realGains.length?Math.min(...realGains):0;
+    dailyPerfHtml=`<div class="result-card" style="margin-bottom:16px;border-top:2px solid var(--accent);">
+      <div class="section-title">⭐ Daily Picks — Real Performance</div>
+      <div class="dash-metrics">
+        <div class="dm-item"><div class="dm-val">${daily.length}</div><div class="dm-lbl">Total Picks</div></div>
+        <div class="dm-item"><div class="dm-val" style="color:${dWinRate>=50?'var(--green)':'var(--red)'};">${dWinRate}%</div><div class="dm-lbl">Win Rate (real)</div></div>
+        <div class="dm-item"><div class="dm-val" style="color:${totalRet>=0?'var(--green)':'var(--red)'};">${totalRet>=0?'+':''}${totalRet.toFixed(1)}%</div><div class="dm-lbl">Total Return</div></div>
+        <div class="dm-item"><div class="dm-val" style="color:${dAvg>=0?'var(--green)':'var(--red)'};">${dAvg>=0?'+':''}${dAvg.toFixed(1)}%</div><div class="dm-lbl">Avg / Pick</div></div>
+      </div>
+      ${pricedDaily.length?`<div style="display:flex;gap:16px;margin-top:14px;font-size:12px;color:var(--text3);">
+        <span>🟢 Best: <strong style="color:var(--green);">+${best.toFixed(1)}%</strong></span>
+        <span>🔴 Worst: <strong style="color:var(--red);">${worst.toFixed(1)}%</strong></span>
+        <span>💰 ₹${Math.round(totalVal).toLocaleString('en-IN')} of ₹${totalInv.toLocaleString('en-IN')}</span>
+      </div>`:'<div style="font-size:12px;color:var(--text3);margin-top:12px;">Prices updating — real returns appear after the next market close.</div>'}
+    </div>`;
+  }
+
+  // Personal analysis stats (verdict distribution + confidence)
+  let personalHtml='';
+  if(hasHistory){
+    const buys=history.filter(h=>h.verdict==='BUY'),holds=history.filter(h=>h.verdict==='HOLD'),avoids=history.filter(h=>h.verdict==='AVOID');
+    const avgConf=Math.round(history.reduce((a,h)=>a+(h.confidence||0),0)/history.length);
+    const highConf=history.filter(h=>h.confidence>=80);
+    personalHtml=`<div class="summary-tiles">
+      <div class="summary-tile"><div class="tile-num">${history.length}</div><div class="tile-lbl">Analyzed</div></div>
+      <div class="summary-tile"><div class="tile-num" style="color:var(--green);">${buys.length}</div><div class="tile-lbl">BUY</div></div>
+      <div class="summary-tile"><div class="tile-num" style="color:var(--amber);">${holds.length}</div><div class="tile-lbl">HOLD</div></div>
+      <div class="summary-tile"><div class="tile-num" style="color:var(--red);">${avoids.length}</div><div class="tile-lbl">AVOID</div></div>
     </div>
-  </div>
-  <div class="result-card"><div class="section-title">🎯 Confidence Distribution</div>
-    <div class="conf-dist">${[[90,100,'🔥'],[80,89,'🟢'],[70,79,'🟡'],[60,69,'🟠'],[0,59,'🔴']].map(([lo,hi,em])=>{
-      const count=history.filter(h=>h.confidence>=lo&&h.confidence<=hi).length;
-      const pct=Math.round(count/history.length*100);
-      return`<div class="cd-row"><span class="cd-label">${em} ${lo}-${hi}%</span><div class="cd-bar"><div style="width:${pct}%;background:${lo>=70?'var(--green)':lo>=50?'var(--amber)':'var(--red)'};height:100%;border-radius:3px;"></div></div><span class="cd-count">${count} (${pct}%)</span></div>`;
-    }).join('')}</div></div>`;
+    <div class="result-card" style="margin-bottom:16px;">
+      <div class="section-title">📊 Your Analysis Stats</div>
+      <div class="dash-metrics">
+        <div class="dm-item"><div class="dm-val">${avgConf}%</div><div class="dm-lbl">Avg Confidence</div></div>
+        <div class="dm-item"><div class="dm-val">${highConf.length}</div><div class="dm-lbl">High Conf (80%+)</div></div>
+        <div class="dm-item"><div class="dm-val">${buys.length}</div><div class="dm-lbl">Buy Signals</div></div>
+        <div class="dm-item"><div class="dm-val">${history.length}</div><div class="dm-lbl">Total</div></div>
+      </div>
+    </div>
+    <div class="result-card"><div class="section-title">🎯 Confidence Distribution</div>
+      <div class="conf-dist">${[[90,100,'🔥'],[80,89,'🟢'],[70,79,'🟡'],[60,69,'🟠'],[0,59,'🔴']].map(([lo,hi,em])=>{
+        const count=history.filter(h=>h.confidence>=lo&&h.confidence<=hi).length;
+        const pct=history.length?Math.round(count/history.length*100):0;
+        return`<div class="cd-row"><span class="cd-label">${em} ${lo}-${hi}%</span><div class="cd-bar"><div style="width:${pct}%;background:${lo>=70?'var(--green)':lo>=50?'var(--amber)':'var(--red)'};height:100%;border-radius:3px;"></div></div><span class="cd-count">${count} (${pct}%)</span></div>`;
+      }).join('')}</div></div>`;
+  }
+
+  el.innerHTML=dailyPerfHtml+personalHtml+`<div class="disclaimer-box">📌 Returns shown are for educational tracking only. Daily-pick returns use real NSE prices; this is not investment advice.</div>`;
 }
 
 // ─── History ───
@@ -465,12 +506,6 @@ async function fetchProjectBouquet(){
     const d=await r.json();
     return d.bouquet||[];
   }catch{return[];}
-}
-
-function todayKey(){
-  const now=new Date();
-  const ist=new Date(now.getTime()+(5.5*3600*1000)-(now.getTimezoneOffset()*60000));
-  return ist.toISOString().slice(0,10);
 }
 
 async function checkSotd(){
@@ -536,10 +571,11 @@ function renderDailyTab(pick){
   pick.verdict=computeVerdict(pick.confidence);
   renderResult(pick,el,null,null);
   // Prepend the "why today" banner
+  const poolTxt=pick.candidatePool?`Selected from ${pick.candidatePool} candidates discovered via live news + market movers`:'Selected from live market discovery';
   const banner=document.createElement('div');
   banner.className='result-card';
   banner.style.cssText='border-top:2px solid var(--accent);margin-bottom:16px;';
-  banner.innerHTML=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:22px;">⭐</span><div><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;">Picked for ${esc(pick.date)}</div><div style="font-size:12px;color:var(--text3);">Compared across 30+ Indian large & mid-caps</div></div></div><div style="font-size:14px;color:var(--text2);line-height:1.7;">${esc(pick.whyToday||'')}</div>`;
+  banner.innerHTML=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:22px;">⭐</span><div><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;">Picked for ${esc(pick.date)}</div><div style="font-size:12px;color:var(--text3);">${esc(poolTxt)}</div></div></div><div style="font-size:14px;color:var(--text2);line-height:1.7;">${esc(pick.whyToday||'')}</div>`;
   el.insertBefore(banner,el.firstChild);
 }
 

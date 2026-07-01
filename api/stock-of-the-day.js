@@ -25,6 +25,14 @@ const SYMBOL_MAP = {
   'ZOMATO':'ZOMATO.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
 };
 
+// Fetch with a hard timeout so a hanging source can't blow the serverless limit
+async function fetchWithTimeout(url, opts = {}, ms = 5000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try { return await fetch(url, { ...opts, signal: ctrl.signal }); }
+  finally { clearTimeout(t); }
+}
+
 // Fetch live price from Yahoo — tries mapped symbol, then NSE/BSE suffixes
 async function fetchPrice(ticker, fullName) {
   const upper = (ticker || '').toUpperCase();
@@ -35,7 +43,7 @@ async function fetchPrice(ticker, fullName) {
   for (const sym of trySymbols) {
     try {
       const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
-      const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+      const r = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 5000);
       if (!r.ok) continue;
       const d = await r.json();
       const meta = d?.chart?.result?.[0]?.meta;
@@ -74,6 +82,20 @@ async function ghPutFile(path, contentObj, sha, token, message) {
     body: JSON.stringify(body)
   });
   return r.ok;
+}
+
+// Write with one retry: if a 409 conflict (someone else wrote first), re-read the sha and try again.
+async function ghPutWithRetry(path, buildObj, token, message) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const current = await ghGetFile(path, token);
+    let existingObj = null;
+    try { existingObj = current.content ? JSON.parse(current.content) : null; } catch (e) {}
+    const obj = buildObj(existingObj);
+    if (obj === null) return true; // buildObj signals "no write needed"
+    const ok = await ghPutFile(path, obj, current.sha, token, message);
+    if (ok) return true;
+  }
+  return false;
 }
 
 export default async function handler(req, res) {
@@ -154,26 +176,38 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
       if (text[i] === '{') depth++;
       else if (text[i] === '}') { depth--; if (depth === 0) { end = i; break; } }
     }
-    const pick = JSON.parse(end > 0 ? text.slice(0, end + 1) : text);
+    let pick;
+    try {
+      pick = JSON.parse(end > 0 ? text.slice(0, end + 1) : text);
+    } catch (e) {
+      return res.status(502).json({ error: 'Could not parse AI pick', detail: e.message });
+    }
+    // Validate the pick has the essential fields before committing anything
+    if (!pick || !pick.ticker || !pick.agents) {
+      return res.status(502).json({ error: 'AI returned an incomplete pick', got: pick?.ticker || null });
+    }
     pick.date = date;
     pick.pickedAt = new Date().toISOString();
     pick.discovery = sources;
     pick.candidatePool = candidates.length;
 
-    await ghPutFile('data/daily-pick.json', { pick }, existing.sha, ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
+    // Save daily pick (retry-safe)
+    await ghPutWithRetry('data/daily-pick.json', () => ({ pick }), ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
 
-    const bq = await ghGetFile('data/project-bouquet.json', ghToken);
-    let bouquet = [];
-    try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) {}
-    if (!bouquet.find(b => b.date === date)) {
-      // Capture real entry price from Yahoo — use the day's OPEN (morning price)
-      const priceData = await fetchPrice(pick.ticker, pick.fullName);
-      const entryPrice = priceData ? (priceData.open || priceData.price) : null;
-      const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
+    // Capture real entry price (day's OPEN) before adding to bouquet
+    const priceData = await fetchPrice(pick.ticker, pick.fullName);
+    const entryPrice = priceData ? (priceData.open || priceData.price) : null;
+    const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
+
+    // Append to project bouquet (retry-safe, guards against double-add for same day)
+    await ghPutWithRetry('data/project-bouquet.json', (existing) => {
+      let bouquet = existing?.bouquet || [];
+      if (bouquet.find(b => b.date === date)) return null; // already added today — skip write
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         verdict: pick.verdict, date, addedAt: pick.pickedAt, investedAmount: 10000,
         entryPrice, currentPrice: priceData?.price || entryPrice, shares,
+        entryPriceProvisional: priceData?.open ? false : true,
         dayOpen: priceData?.open || null, prevClose: priceData?.prevClose || null,
         todayChangePct: (priceData?.prevClose && priceData?.price) ? +(((priceData.price - priceData.prevClose) / priceData.prevClose) * 100).toFixed(2) : null,
         lastPriceUpdate: pick.pickedAt, yahooSymbol: priceData?.symbol || null,
@@ -181,8 +215,8 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
         summary: pick.summary, whyToday: pick.whyToday, agents: pick.agents
       });
       if (bouquet.length > 365) bouquet = bouquet.slice(0, 365);
-      await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Add ${pick.ticker} to project bouquet`);
-    }
+      return { bouquet };
+    }, ghToken, `Add ${pick.ticker} to project bouquet`);
 
     return res.status(200).json({ status: 'picked', pick, discovery: sources, candidates });
   } catch (e) {
