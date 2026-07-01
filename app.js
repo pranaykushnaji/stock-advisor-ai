@@ -616,13 +616,13 @@ function dismissSotd(){
   if(badge)badge.textContent='';
 }
 
-function renderDailyTab(pick){
+async function renderDailyTab(pick){
   const el=document.getElementById('daily-content');
   if(!pick){
     el.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><h3>No pick yet</h3><p>The Stock of the Day is generated every morning at 9 AM IST.</p></div>';
     return;
   }
-  // Reuse the full analysis card renderer
+  // Reuse the full analysis card renderer for today's pick
   recomputeAgentScores(pick.agents);
   pick.confidence=computeConfidence(pick.agents);
   pick.verdict=computeVerdict(pick.confidence);
@@ -632,8 +632,64 @@ function renderDailyTab(pick){
   const banner=document.createElement('div');
   banner.className='result-card';
   banner.style.cssText='border-top:2px solid var(--accent);margin-bottom:16px;';
-  banner.innerHTML=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:22px;">⭐</span><div><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;">Picked for ${esc(pick.date)}</div><div style="font-size:12px;color:var(--text3);">${esc(poolTxt)}</div></div></div><div style="font-size:14px;color:var(--text2);line-height:1.7;">${esc(pick.whyToday||'')}</div>`;
+  banner.innerHTML=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:22px;">⭐</span><div><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;">Today's Pick · ${esc(pick.date)}</div><div style="font-size:12px;color:var(--text3);">${esc(poolTxt)}</div></div></div><div style="font-size:14px;color:var(--text2);line-height:1.7;">${esc(pick.whyToday||'')}</div>`;
   el.insertBefore(banner,el.firstChild);
+
+  // ── POTD history table + consolidated totals ──
+  const picks=await getProjectBouquet();
+  const historyHtml=buildPotdHistory(picks);
+  const wrap=document.createElement('div');
+  wrap.innerHTML=historyHtml;
+  el.appendChild(wrap);
+}
+
+function buildPotdHistory(picks){
+  if(!picks||!picks.length)return '';
+  // Sort newest first by date
+  const sorted=[...picks].sort((a,b)=>String(b.date||'').localeCompare(String(a.date||'')));
+  let totalInvested=0,totalCurrent=0,pricedCount=0;
+  const rows=sorted.map(p=>{
+    const invested=p.investedAmount||10000;
+    const hasPrice=p.entryPrice&&p.currentPrice&&p.entryPrice>0;
+    const g=hasPrice?((p.currentPrice-p.entryPrice)/p.entryPrice)*100:null;
+    const curVal=hasPrice?invested*(1+g/100):invested;
+    totalInvested+=invested;
+    totalCurrent+=curVal;
+    if(hasPrice)pricedCount++;
+    const gClass=g==null?'':g>=0?'up':'down';
+    const gTxt=g==null?'<span style="color:var(--text3);">—</span>':`<span class="${g>=0?'pf-up':'pf-down'}">${g>=0?'+':''}${g.toFixed(2)}%</span>`;
+    const entryTxt=p.entryPrice?'₹'+p.entryPrice.toLocaleString('en-IN'):'—';
+    const curTxt=p.currentPrice?'₹'+p.currentPrice.toLocaleString('en-IN'):'—';
+    return `<tr>
+      <td class="pf-date">${esc(p.date||'')}</td>
+      <td class="pf-name">${esc(p.ticker||'')}</td>
+      <td class="pf-num">${entryTxt}</td>
+      <td class="pf-num">${curTxt}</td>
+      <td class="pf-num" style="text-align:right;">${gTxt}</td>
+    </tr>`;
+  }).join('');
+
+  const totalG=totalInvested>0?((totalCurrent-totalInvested)/totalInvested)*100:0;
+  const totalClass=totalG>=0?'pf-up':'pf-down';
+
+  return `<div class="result-card" style="margin-top:20px;">
+    <div class="section-title">📜 Stock of the Day — History</div>
+    <div class="potd-table-wrap">
+      <table class="potd-table">
+        <thead><tr>
+          <th>Date</th><th>Stock</th><th>Entry</th><th>Current</th><th style="text-align:right;">Gain</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <div class="potd-totals">
+      <div class="pt-item"><div class="pt-lbl">Total Invested</div><div class="pt-val">₹${Math.round(totalInvested).toLocaleString('en-IN')}</div></div>
+      <div class="pt-item"><div class="pt-lbl">Current Value</div><div class="pt-val ${totalClass}">₹${Math.round(totalCurrent).toLocaleString('en-IN')}</div></div>
+      <div class="pt-item"><div class="pt-lbl">Total Return</div><div class="pt-val ${totalClass}">${totalG>=0?'+':''}${totalG.toFixed(2)}%</div></div>
+    </div>
+    ${pricedCount<sorted.length?`<div style="font-size:11px;color:var(--text3);margin-top:10px;">${sorted.length-pricedCount} pick(s) awaiting price — totals update after the next market close (5:30 PM IST).</div>`:''}
+    <div class="disclaimer-box" style="margin-top:14px;">📌 ₹10,000 virtual per pick · real NSE prices · educational tracking only, not investment advice.</div>
+  </div>`;
 }
 
 // ─── Init ───
