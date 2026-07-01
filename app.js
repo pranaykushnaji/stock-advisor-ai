@@ -262,43 +262,78 @@ document.getElementById('compare-btn')?.addEventListener('click',async()=>{
 });
 
 // ─── Bouquet with real entry price ───
-function approvePick(){
+async function approvePick(){
   if(!currentAnalysis)return;
   if(bouquet.find(b=>b.ticker===currentAnalysis.ticker)){showToast(currentAnalysis.ticker+' already in bouquet','warn');return;}
+  const ticker=currentAnalysis.ticker;
   const entry={...currentAnalysis,addedAt:new Date().toISOString(),investedAmount:10000};
-  bouquet.push(entry);save();showToast(currentAnalysis.ticker+' added with ₹10,000 virtual investment! 🌸');
+  // Capture real entry price now so returns are real, not simulated
+  const sd=await fetchStock(ticker);
+  if(sd&&sd.price!=null){
+    entry.entryPrice=+sd.price.toFixed(2);
+    entry.currentPrice=+sd.price.toFixed(2);
+    entry.shares=+(10000/sd.price).toFixed(3);
+    entry.prevClose=sd.previousClose??null;
+    entry.yahooSymbol=sd.symbol||null;
+    entry.lastPriceUpdate=new Date().toISOString();
+    entry.entryPriceProvisional=false;
+  }
+  bouquet.push(entry);save();showToast(ticker+' added with ₹10,000 virtual investment! 🌸');
   const area=document.getElementById('result-area');const n=document.createElement('div');n.className='result-card';n.style.cssText='border-left:3px solid var(--green);display:flex;align-items:center;gap:10px;';
-  n.innerHTML=`<span style="font-size:20px">✅</span><span><strong>${esc(currentAnalysis.ticker)}</strong> added with ₹10,000. Check <strong>My Bouquet</strong>.</span>`;area.appendChild(n);
+  n.innerHTML=`<span style="font-size:20px">✅</span><span><strong>${esc(ticker)}</strong> added with ₹10,000${entry.entryPrice?' @ ₹'+entry.entryPrice:''}. Check <strong>My Bouquet</strong>.</span>`;area.appendChild(n);
 }
 function skipPick(){currentAnalysis=null;document.getElementById('result-area').innerHTML='<p style="color:var(--text3);padding:8px 0;">Skipped.</p>';}
 function resetAdvisor(){currentAnalysis=null;document.getElementById('result-area').innerHTML='';document.getElementById('stock-input').value='';document.getElementById('stock-input').focus();}
 
-function simGain(item){
-  // If we have real entry + current prices, use the REAL return
+// Returns real % gain if we have prices, else null (never fabricated)
+function realGain(item){
   if(item.entryPrice&&item.currentPrice&&item.entryPrice>0){
     return+(((item.currentPrice-item.entryPrice)/item.entryPrice)*100).toFixed(1);
   }
-  // Otherwise fall back to simulated formula
-  const days=Math.max(1,Math.floor((Date.now()-new Date(item.addedAt||item.date).getTime())/86400000));
-  const seed=(item.ticker||'XX').split('').reduce((a,c)=>a+c.charCodeAt(0),0);
-  const dir=item.verdict==='BUY'?1:item.verdict==='AVOID'?-0.6:0.05;
-  let conf=item.confidence;
-  if(conf==null&&item.agents)conf=computeConfidence(item.agents);
-  if(conf==null)conf=65;
-  const cf=(conf-50)/50;
-  const noise=(Math.sin(seed*0.17+days*0.09)+Math.cos(seed*0.31+days*0.05))*0.5;
-  return+((dir*cf*0.30+noise*0.10)*(days/365)*100).toFixed(1);
+  return null;
+}
+// Back-compat alias — some call sites still reference simGain
+function simGain(item){const g=realGain(item);return g==null?0:g;}
+
+let personalPricesFetchedAt=0;
+async function refreshPersonalPrices(){
+  const withEntry=bouquet.filter(b=>b.entryPrice&&b.yahooSymbol);
+  if(!withEntry.length)return;
+  if(Date.now()-personalPricesFetchedAt<60000)return; // throttle to once/min
+  personalPricesFetchedAt=Date.now();
+  await Promise.all(withEntry.map(async b=>{
+    try{
+      const sd=await fetchStock(b.yahooSymbol||b.ticker);
+      if(sd&&sd.price!=null){
+        b.currentPrice=+sd.price.toFixed(2);
+        b.todayChangePct=(sd.changePercent!=null&&!isNaN(sd.changePercent))?sd.changePercent:b.todayChangePct;
+        b.lastPriceUpdate=new Date().toISOString();
+      }
+    }catch{}
+  }));
+  save();
 }
 
 const COLORS=['#C67C4E','#7FA663','#D19A5B','#A88BA3','#6E8CA0','#B4663A','#C25B4E','#9C8E7F','#8C6F87','#5E7D45'];
 
 let projectBouquet=[];
+let projectBouquetFetchedAt=0;
+async function getProjectBouquet(force){
+  const stale=Date.now()-projectBouquetFetchedAt>60000; // refetch if older than 60s
+  if(force||stale||!projectBouquet.length){
+    const fresh=await fetchProjectBouquet();
+    if(fresh.length||force){projectBouquet=fresh;projectBouquetFetchedAt=Date.now();}
+  }
+  return projectBouquet;
+}
 let bouquetView='all'; // 'all' | 'daily' | 'personal'
 
 async function renderBouquet(){
   const el=document.getElementById('bouquet-content');
-  // Fetch shared project bouquet (daily picks)
-  if(!projectBouquet.length){projectBouquet=await fetchProjectBouquet();}
+  // Fetch shared project bouquet (daily picks) — TTL-aware, refreshes if stale
+  await getProjectBouquet();
+  // Refresh personal picks' live prices (they live in localStorage, not touched by the cron)
+  await refreshPersonalPrices();
 
   // Tag sources
   const dailyPicks=projectBouquet.map(b=>({...b,source:'daily'}));
@@ -314,12 +349,11 @@ async function renderBouquet(){
   if(!combined.length){el.innerHTML=toggle+'<div class="empty-state"><div class="empty-icon">🌸</div><h3>No stocks yet</h3><p>Daily picks are added automatically each morning. Analyze a stock to add your own.</p></div>';return;}
 
   const work=combined;
-  // Real gain if we have prices; null if a daily pick is still awaiting its price
+  // Real gain if we have prices; pending if not (never fabricated)
   const gainInfo=work.map(item=>{
-    const hasReal=item.entryPrice&&item.currentPrice&&item.entryPrice>0;
-    if(hasReal)return{gain:+(((item.currentPrice-item.entryPrice)/item.entryPrice)*100).toFixed(1),real:true,pending:false};
-    if(item.source==='daily')return{gain:0,real:false,pending:true}; // daily pick, price not fetched yet
-    return{gain:simGain(item),real:false,pending:false}; // personal pick uses sim
+    const g=realGain(item);
+    if(g!=null)return{gain:g,real:true,pending:false};
+    return{gain:0,real:false,pending:true}; // awaiting price (both daily & personal)
   });
   const totalInvested=work.reduce((a,b)=>a+(b.investedAmount||10000),0);
   const totalValue=work.reduce((a,b,i)=>a+(b.investedAmount||10000)*(1+(gainInfo[i].pending?0:gainInfo[i].gain)/100),0);
@@ -358,15 +392,11 @@ async function renderBouquet(){
     let metaLine,gainCell;
     if(gi.pending){
       metaLine=`${days}d · entry price updating…`;
-      gainCell=`<div class="bi-gain" style="color:var(--text3);font-size:12px;">pending</div>`;
-    }else if(gi.real){
+      gainCell=`<div class="bi-gain" style="color:var(--text3);font-size:12px;">—</div>`;
+    }else{
       const shares=item.shares||(item.entryPrice>0?(item.investedAmount||10000)/item.entryPrice:0);
       const todayTxt=item.todayChangePct!=null?` · today ${item.todayChangePct>=0?'+':''}${item.todayChangePct}%`:'';
       metaLine=`${shares.toFixed(2)} sh @ ₹${item.entryPrice} → ₹${item.currentPrice}${todayTxt}`;
-      gainCell=`<div class="bi-gain ${gi.gain>=0?'up':'down'}">${gi.gain>0?'+':''}${gi.gain}%</div>`;
-    }else{
-      const amt=item.investedAmount||10000,val=Math.round(amt*(1+gi.gain/100));
-      metaLine=`${days}d · ₹${amt.toLocaleString('en-IN')} → ₹${val.toLocaleString('en-IN')} · sim`;
       gainCell=`<div class="bi-gain ${gi.gain>=0?'up':'down'}">${gi.gain>0?'+':''}${gi.gain}%</div>`;
     }
     return`<div class="bouquet-item"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}${srcTag}</div>
@@ -374,7 +404,7 @@ async function renderBouquet(){
       <span class="verdict-badge ${vB}" style="font-size:11px;padding:2px 10px;">${item.verdict}</span>
       ${gainCell}
       ${removeBtn}</div>`;
-  }).join('')}<div class="sim-note">Daily picks use real NSE prices · personal picks simulated · ₹10,000 each${(()=>{const lu=work.map(w=>w.lastPriceUpdate).filter(Boolean).sort().pop();return lu?' · prices updated '+timeAgo(lu):'';})()}</div></div>`;
+  }).join('')}<div class="sim-note">Real NSE prices · ₹10,000 per pick · educational tracking only${(()=>{const lu=work.map(w=>w.lastPriceUpdate).filter(Boolean).sort().pop();return lu?' · updated '+timeAgo(lu):'';})()}</div></div>`;
 }
 function timeAgo(iso){const s=Math.floor((Date.now()-new Date(iso).getTime())/1000);if(s<3600)return Math.max(1,Math.floor(s/60))+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
 function setBouquetView(v){bouquetView=v;renderBouquet();}
@@ -385,8 +415,7 @@ function removePick(i){bouquet.splice(i,1);save();renderBouquet();}
 async function renderDashboard(){
   const el=document.getElementById('dashboard-content');
   // Pull the shared daily picks (real performance) alongside personal analysis history
-  if(!projectBouquet.length){projectBouquet=await fetchProjectBouquet();}
-  const daily=projectBouquet;
+  const daily=await getProjectBouquet();
   const pricedDaily=daily.filter(d=>d.entryPrice&&d.currentPrice&&d.entryPrice>0);
 
   const hasHistory=history.length>=1;
@@ -405,6 +434,27 @@ async function renderDashboard(){
     const totalRet=totalInv?((totalVal-totalInv)/totalInv*100):0;
     const best=realGains.length?Math.max(...realGains):0;
     const worst=realGains.length?Math.min(...realGains):0;
+    // Alpha: how much the picks beat (or lagged) the Nifty over the same periods
+    const withNifty=pricedDaily.filter(d=>d.niftyAtEntry&&d.niftyNow&&d.niftyAtEntry>0);
+    let alphaHtml='';
+    if(withNifty.length){
+      const pickRet=withNifty.map(d=>((d.currentPrice-d.entryPrice)/d.entryPrice)*100);
+      const niftyRet=withNifty.map(d=>((d.niftyNow-d.niftyAtEntry)/d.niftyAtEntry)*100);
+      const avgPick=pickRet.reduce((a,b)=>a+b,0)/pickRet.length;
+      const avgNifty=niftyRet.reduce((a,b)=>a+b,0)/niftyRet.length;
+      const alpha=avgPick-avgNifty;
+      const beatCount=pickRet.filter((r,i)=>r>niftyRet[i]).length;
+      alphaHtml=`<div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+        <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">📈 vs Nifty 50 Benchmark</div>
+        <div class="dash-metrics">
+          <div class="dm-item"><div class="dm-val" style="color:${avgPick>=0?'var(--green)':'var(--red)'};">${avgPick>=0?'+':''}${avgPick.toFixed(1)}%</div><div class="dm-lbl">Picks Avg</div></div>
+          <div class="dm-item"><div class="dm-val" style="color:${avgNifty>=0?'var(--green)':'var(--red)'};">${avgNifty>=0?'+':''}${avgNifty.toFixed(1)}%</div><div class="dm-lbl">Nifty Avg</div></div>
+          <div class="dm-item"><div class="dm-val" style="color:${alpha>=0?'var(--green)':'var(--red)'};">${alpha>=0?'+':''}${alpha.toFixed(1)}%</div><div class="dm-lbl">Alpha (edge)</div></div>
+          <div class="dm-item"><div class="dm-val">${beatCount}/${withNifty.length}</div><div class="dm-lbl">Beat Market</div></div>
+        </div>
+        <div style="font-size:11px;color:var(--text3);margin-top:10px;line-height:1.5;">${alpha>=0?'✓ Picks are outperforming the index':'⚠ Picks are lagging the index — the market would have done better'} over the same periods.</div>
+      </div>`;
+    }
     dailyPerfHtml=`<div class="result-card" style="margin-bottom:16px;border-top:2px solid var(--accent);">
       <div class="section-title">⭐ Daily Picks — Real Performance</div>
       <div class="dash-metrics">
@@ -418,6 +468,7 @@ async function renderDashboard(){
         <span>🔴 Worst: <strong style="color:var(--red);">${worst.toFixed(1)}%</strong></span>
         <span>💰 ₹${Math.round(totalVal).toLocaleString('en-IN')} of ₹${totalInv.toLocaleString('en-IN')}</span>
       </div>`:'<div style="font-size:12px;color:var(--text3);margin-top:12px;">Prices updating — real returns appear after the next market close.</div>'}
+      ${alphaHtml}
     </div>`;
   }
 
@@ -470,14 +521,20 @@ function renderHistory(){
 document.getElementById('clear-history-btn')?.addEventListener('click',()=>{if(history.length&&confirm('Clear history?')){history=[];save();renderHistory();}});
 
 // ─── Export ───
-document.getElementById('export-csv-btn')?.addEventListener('click',()=>{
-  if(!bouquet.length){showToast('No stocks','warn');return;}
-  const gains=bouquet.map(simGain);
-  let csv='Ticker,Company,Sector,Verdict,Confidence,Fundamental,News,Technical,Risk,Sim Return,Invested,Value,Added\n';
-  bouquet.forEach((b,i)=>{const ag=b.agents||{};const amt=b.investedAmount||10000;
-    csv+=`${b.ticker},"${b.fullName||''}","${b.sector||''}",${b.verdict},${b.confidence}%,${ag.fundamental?.score||''},${ag.news?.score||''},${ag.technical?.score||''},${ag.risk?.score||''},${gains[i]}%,${amt},${Math.round(amt*(1+gains[i]/100))},${b.addedAt}\n`;
+document.getElementById('export-csv-btn')?.addEventListener('click',async()=>{
+  await getProjectBouquet();
+  const rows=[...projectBouquet.map(b=>({...b,src:'Daily'})),...bouquet.map(b=>({...b,src:'Personal'}))];
+  if(!rows.length){showToast('No stocks','warn');return;}
+  // Prevent CSV injection: prefix cells that start with = + - @ with a quote
+  const cell=v=>{let s=String(v==null?'':v);if(/^[=+\-@]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';};
+  let csv='Source,Ticker,Company,Sector,Verdict,Confidence,EntryPrice,CurrentPrice,Shares,Return%,TodayChange%,Invested,Value,Added\n';
+  rows.forEach(b=>{
+    const g=realGain(b);const amt=b.investedAmount||10000;
+    const val=g!=null?Math.round(amt*(1+g/100)):amt;
+    const conf=b.confidence!=null?b.confidence:(b.agents?computeConfidence(b.agents):'');
+    csv+=[cell(b.src),cell(b.ticker),cell(b.fullName||''),cell(b.sector||''),cell(b.verdict||''),cell(conf),cell(b.entryPrice||''),cell(b.currentPrice||''),cell(b.shares||''),cell(g!=null?g:''),cell(b.todayChangePct!=null?b.todayChangePct:''),cell(amt),cell(val),cell(b.addedAt||b.date||'')].join(',')+'\n';
   });
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`bouquet-${new Date().toISOString().slice(0,10)}.csv`;a.click();showToast('CSV exported!');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`stockadvisor-${new Date().toISOString().slice(0,10)}.csv`;a.click();showToast('CSV exported!');
 });
 
 // ─── Toast ───
@@ -582,6 +639,13 @@ function renderDailyTab(pick){
 // ─── Init ───
 initTheme();load();
 checkSotd();
+// First-visit disclaimer (financial tool — require acknowledgment once)
+(function(){
+  const seen=localStorage.getItem('disclaimer_ack');
+  const modal=document.getElementById('disclaimer-modal');
+  const ok=document.getElementById('disclaimer-ok');
+  if(modal&&ok&&!seen){modal.classList.add('open');ok.addEventListener('click',()=>{localStorage.setItem('disclaimer_ack','1');modal.classList.remove('open');});}
+})();
 // Show welcome message
 document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
   <div style="font-size:32px">🤖</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Welcome to StockAdvisor AI</div>

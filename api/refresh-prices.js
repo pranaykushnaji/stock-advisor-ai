@@ -100,6 +100,17 @@ export default async function handler(req, res) {
   let updated = 0;
   const failed = [];
 
+  // Fetch the Nifty 50 level for benchmark/alpha tracking
+  let niftyNow = null;
+  try {
+    const nr = await fetchWithTimeout('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=1d&interval=1d', { headers: { 'User-Agent': 'Mozilla/5.0' } }, 4000);
+    if (nr.ok) {
+      const nd = await nr.json();
+      const nm = nd?.chart?.result?.[0]?.meta;
+      if (nm?.regularMarketPrice) niftyNow = +nm.regularMarketPrice.toFixed(2);
+    }
+  } catch (e) {}
+
   // Process in parallel batches so a large bouquet doesn't run sequentially past the time limit
   const BATCH = 8;
   for (let i = 0; i < bouquet.length; i += BATCH) {
@@ -120,6 +131,9 @@ export default async function handler(req, res) {
         const invested = item.investedAmount || 10000;
         item.shares = item.entryPrice > 0 ? +(invested / item.entryPrice).toFixed(3) : 0;
         item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
+        // Nifty benchmark: record level at entry once, and the latest level always
+        if (niftyNow != null && item.niftyAtEntry == null) item.niftyAtEntry = niftyNow;
+        if (niftyNow != null) item.niftyNow = niftyNow;
         updated++;
       } else {
         failed.push(item.ticker);
@@ -128,7 +142,7 @@ export default async function handler(req, res) {
   }
 
   await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);
-  const out = { status: 'refreshed', updated, total: bouquet.length };
+  const out = { status: 'refreshed', updated, total: bouquet.length, nifty: niftyNow };
   if (failed.length) out.failed = failed;
   return res.status(200).json(out);
 }

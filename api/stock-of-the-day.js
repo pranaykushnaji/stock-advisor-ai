@@ -198,10 +198,16 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
     const priceData = await fetchPrice(pick.ticker, pick.fullName);
     const entryPrice = priceData ? (priceData.open || priceData.price) : null;
     const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
+    // Capture Nifty level at entry for alpha tracking
+    let niftyAtEntry = null;
+    try {
+      const nr = await fetchWithTimeout('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=1d&interval=1d', { headers: { 'User-Agent': 'Mozilla/5.0' } }, 4000);
+      if (nr.ok) { const nm = (await nr.json())?.chart?.result?.[0]?.meta; if (nm?.regularMarketPrice) niftyAtEntry = +nm.regularMarketPrice.toFixed(2); }
+    } catch (e) {}
 
     // Append to project bouquet (retry-safe, guards against double-add for same day)
-    await ghPutWithRetry('data/project-bouquet.json', (existing) => {
-      let bouquet = existing?.bouquet || [];
+    await ghPutWithRetry('data/project-bouquet.json', (current) => {
+      let bouquet = current?.bouquet || [];
       if (bouquet.find(b => b.date === date)) return null; // already added today — skip write
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
@@ -211,6 +217,7 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
         dayOpen: priceData?.open || null, prevClose: priceData?.prevClose || null,
         todayChangePct: (priceData?.prevClose && priceData?.price) ? +(((priceData.price - priceData.prevClose) / priceData.prevClose) * 100).toFixed(2) : null,
         lastPriceUpdate: pick.pickedAt, yahooSymbol: priceData?.symbol || null,
+        niftyAtEntry, niftyNow: niftyAtEntry,
         estimatedUpside: pick.estimatedUpside, riskLevel: pick.riskLevel,
         summary: pick.summary, whyToday: pick.whyToday, agents: pick.agents
       });
