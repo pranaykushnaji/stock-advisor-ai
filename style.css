@@ -391,14 +391,6 @@ body {
 .sim-note { font-size: 11px; color: var(--text3); text-align: center; padding: 14px; border-top: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; }
 
 /* History */
-.history-list { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
-.history-item { display: flex; align-items: center; gap: 13px; padding: 14px 20px; border-bottom: 1px solid var(--border); transition: background 0.15s; }
-.history-item:last-child { border-bottom: none; }
-.history-item:hover { background: var(--bg-elev2); }
-.hi-ticker { font-size: 14px; font-weight: 600; flex: 1; font-family: 'Space Grotesk', sans-serif; }
-.hi-date { font-size: 12px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
-.hi-bouquet { font-size: 11px; color: var(--green); margin-left: 4px; }
-
 /* Dashboard */
 .dash-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }
 .dm-item { text-align: center; padding: 14px; background: var(--bg-elev2); border: 1px solid var(--border); border-radius: 12px; }

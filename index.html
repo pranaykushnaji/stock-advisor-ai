@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Stock Advisor AI</title>
-  <link rel="stylesheet" href="style.css?v=23" />
+  <link rel="stylesheet" href="style.css?v=24" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>" />
 </head>
 <body>
@@ -32,10 +32,6 @@
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>
           <span>My Bouquet</span>
           <span class="badge" id="bouquet-badge"></span>
-        </button>
-        <button class="nav-item" data-tab="history">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/></svg>
-          <span>History</span>
         </button>
         <button class="nav-item" data-tab="dashboard">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>
@@ -126,15 +122,6 @@
         <div id="bouquet-content"></div>
       </div>
 
-      <!-- HISTORY TAB -->
-      <div class="tab-pane" id="tab-history">
-        <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
-          <div><h1>Analysis History</h1><p>All stocks you've analyzed</p></div>
-          <button class="btn btn-ghost" id="clear-history-btn">Clear all</button>
-        </div>
-        <div id="history-content"></div>
-      </div>
-
       <!-- DASHBOARD TAB -->
       <div class="tab-pane" id="tab-dashboard">
         <div class="page-header">
@@ -191,6 +178,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=23"></script>
+  <script src="app.js?v=24"></script>
 </body>
 </html>

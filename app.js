@@ -14,7 +14,7 @@ function setTheme(t){document.documentElement.setAttribute('data-theme',t);local
 document.getElementById('theme-toggle').addEventListener('click',()=>{setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
 
 // ─── Tabs ───
-function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='history')renderHistory();if(n==='dashboard')renderDashboard();if(n==='daily')renderDailyTab(sotdPick);}
+function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='dashboard')renderDashboard();if(n==='daily')renderDailyTab(sotdPick);}
 document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
 
 // ─── Confidence Calculator (NOT from LLM) ───
@@ -504,21 +504,6 @@ async function renderDashboard(){
   el.innerHTML=dailyPerfHtml+personalHtml+`<div class="disclaimer-box">📌 Returns shown are for educational tracking only. Daily-pick returns use real NSE prices; this is not investment advice.</div>`;
 }
 
-// ─── History ───
-function renderHistory(){
-  const el=document.getElementById('history-content');
-  if(!history.length){el.innerHTML='<div class="empty-state"><div class="empty-icon">📋</div><h3>No history</h3></div>';return;}
-  el.innerHTML=`<div class="history-list">${history.slice(0,50).map(item=>{
-    const ds=new Date(item.analyzedAt).toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'});
-    const vB=item.verdict==='BUY'?'verdict-buy':item.verdict==='AVOID'?'verdict-avoid':'verdict-hold';
-    const inB=bouquet.some(b=>b.ticker===item.ticker);
-    return`<div class="history-item"><div class="hi-ticker">${esc(item.ticker)} <span style="font-size:12px;color:var(--text3);font-weight:400;">${esc(item.fullName||'')}</span></div>
-      <span class="verdict-badge ${vB}" style="font-size:11px;padding:2px 10px;">${item.verdict}</span>
-      <span style="font-size:12px;color:${scoreColor(item.confidence)};">${item.confidence}%</span>
-      <span class="hi-date">${ds}</span>${inB?'<span class="hi-bouquet">✓</span>':''}</div>`;
-  }).join('')}</div>`;
-}
-document.getElementById('clear-history-btn')?.addEventListener('click',()=>{if(history.length&&confirm('Clear history?')){history=[];save();renderHistory();}});
 
 // ─── Export ───
 document.getElementById('export-csv-btn')?.addEventListener('click',async()=>{
