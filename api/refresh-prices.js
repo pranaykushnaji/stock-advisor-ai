@@ -83,56 +83,38 @@ export default async function handler(req, res) {
 
   const bq = await ghGetFile('data/project-bouquet.json', ghToken);
   let bouquet = [];
-  let parseErr = null;
-  try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) { parseErr = e.message; }
+  try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) {}
   if (!bouquet.length) {
-    return res.status(200).json({
-      status: 'empty',
-      diagnostic: {
-        tokenPresent: !!ghToken,
-        tokenPrefix: ghToken ? ghToken.slice(0, 4) + '…' : null,
-        githubApiStatus: bq.status,
-        githubApiStatusText: bq.statusText || null,
-        fileFound: bq.content != null,
-        contentLength: bq.content ? bq.content.length : 0,
-        parseError: parseErr,
-        hint: bq.status === 401 ? 'Token is invalid or expired'
-            : bq.status === 404 ? 'Token valid but cannot see this file — needs repo (Contents read) scope, or wrong repo'
-            : bq.content == null ? 'GitHub API returned no file'
-            : 'File found but bouquet array is empty'
-      }
-    });
+    return res.status(200).json({ status: 'empty', reason: bq.status === 401 ? 'github token invalid' : bq.content == null ? 'bouquet file not found' : 'bouquet empty' });
   }
 
   const now = new Date().toISOString();
   let updated = 0;
-  const debug = [];
+  const failed = [];
   for (const item of bouquet) {
     const pd = await fetchPrice(item.ticker, item.fullName, item.yahooSymbol);
     if (pd?.price) {
       // Entry price = the day's OPEN when the pick was made (morning price).
-      // Prefer open; fall back to prevClose; only use current as last resort.
       if (!item.entryPrice || item.entryPriceProvisional) {
         item.entryPrice = pd.open || pd.prevClose || pd.price;
-        item.entryPriceProvisional = pd.open ? false : true; // mark if we couldn't get a real open
+        item.entryPriceProvisional = pd.open ? false : true;
       }
       item.currentPrice = pd.price;
       item.dayOpen = pd.open;
       item.prevClose = pd.prevClose;
       item.yahooSymbol = pd.symbol;
       item.lastPriceUpdate = now;
-      // Shares bought with the invested amount at entry price
       const invested = item.investedAmount || 10000;
       item.shares = item.entryPrice > 0 ? +(invested / item.entryPrice).toFixed(3) : 0;
-      // Today's % change: current vs previous close
       item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
       updated++;
-      debug.push({ ticker: item.ticker, resolved: pd.symbol, entry: item.entryPrice, open: pd.open, current: pd.price, prevClose: pd.prevClose, shares: item.shares });
     } else {
-      debug.push({ ticker: item.ticker, resolved: null, error: 'price fetch failed' });
+      failed.push(item.ticker);
     }
   }
 
   await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);
-  return res.status(200).json({ status: 'refreshed', updated, total: bouquet.length, debug });
+  const out = { status: 'refreshed', updated, total: bouquet.length };
+  if (failed.length) out.failed = failed;
+  return res.status(200).json(out);
 }
