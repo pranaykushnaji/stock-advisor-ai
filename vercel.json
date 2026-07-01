@@ -3,17 +3,18 @@
     {
       "path": "/api/stock-of-the-day",
       "schedule": "30 3 * * *"
+    },
+    {
+      "path": "/api/refresh-prices",
+      "schedule": "0 12 * * *"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/data/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" }
   ]
 }

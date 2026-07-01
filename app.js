@@ -341,10 +341,18 @@ function skipPick(){currentAnalysis=null;document.getElementById('result-area').
 function resetAdvisor(){currentAnalysis=null;document.getElementById('result-area').innerHTML='';document.getElementById('stock-input').value='';document.getElementById('stock-input').focus();}
 
 function simGain(item){
-  const days=Math.max(1,Math.floor((Date.now()-new Date(item.addedAt).getTime())/86400000));
-  const seed=item.ticker.split('').reduce((a,c)=>a+c.charCodeAt(0),0);
+  // If we have real entry + current prices, use the REAL return
+  if(item.entryPrice&&item.currentPrice&&item.entryPrice>0){
+    return+(((item.currentPrice-item.entryPrice)/item.entryPrice)*100).toFixed(1);
+  }
+  // Otherwise fall back to simulated formula
+  const days=Math.max(1,Math.floor((Date.now()-new Date(item.addedAt||item.date).getTime())/86400000));
+  const seed=(item.ticker||'XX').split('').reduce((a,c)=>a+c.charCodeAt(0),0);
   const dir=item.verdict==='BUY'?1:item.verdict==='AVOID'?-0.6:0.05;
-  const cf=(item.confidence-50)/50;
+  let conf=item.confidence;
+  if(conf==null&&item.agents)conf=computeConfidence(item.agents);
+  if(conf==null)conf=65;
+  const cf=(conf-50)/50;
   const noise=(Math.sin(seed*0.17+days*0.09)+Math.cos(seed*0.31+days*0.05))*0.5;
   return+((dir*cf*0.30+noise*0.10)*(days/365)*100).toFixed(1);
 }
@@ -405,8 +413,12 @@ async function renderBouquet(){
     const vB=item.verdict==='BUY'?'verdict-buy':item.verdict==='AVOID'?'verdict-avoid':'verdict-hold';
     const srcTag=item.source==='daily'?'<span style="font-size:10px;color:var(--accent);font-weight:600;margin-left:6px;">⭐ DAILY</span>':'';
     const removeBtn=item.source==='personal'?`<button class="bi-remove" onclick="removePersonalPick('${esc(item.ticker)}')">✕</button>`:'<span style="width:28px;"></span>';
+    const hasReal=item.entryPrice&&item.currentPrice;
+    const metaLine=hasReal
+      ?`${days}d · ₹${item.entryPrice} → ₹${item.currentPrice}${item.lastPriceUpdate?' · live':''}`
+      :`${days}d · ₹${amt.toLocaleString('en-IN')} → ₹${val.toLocaleString('en-IN')}${item.confidence?' · '+item.confidence+'% conf':''}`;
     return`<div class="bouquet-item"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}${srcTag}</div>
-      <div class="bi-meta">${days}d · ₹${amt.toLocaleString('en-IN')} → ₹${val.toLocaleString('en-IN')}${item.confidence?' · '+item.confidence+'% conf':''}</div></div>
+      <div class="bi-meta">${metaLine}</div></div>
       <span class="verdict-badge ${vB}" style="font-size:11px;padding:2px 10px;">${item.verdict}</span>
       <div class="bi-gain ${g>=0?'up':'down'}">${gStr}</div>
       ${removeBtn}</div>`;

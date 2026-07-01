@@ -18,6 +18,25 @@ function todayIST() {
   return ist.toISOString().slice(0, 10);
 }
 
+// Fetch live price from Yahoo — tries NSE/BSE suffixes
+async function fetchPrice(ticker) {
+  const clean = (ticker || '').toUpperCase().replace(/[^A-Z0-9.&]/g, '');
+  const trySymbols = clean.includes('.') ? [clean] : [clean + '.NS', clean + '.BO', clean];
+  for (const sym of trySymbols) {
+    try {
+      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
+      const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+      if (!r.ok) continue;
+      const d = await r.json();
+      const meta = d?.chart?.result?.[0]?.meta;
+      if (meta?.regularMarketPrice) {
+        return { price: +meta.regularMarketPrice.toFixed(2), symbol: meta.symbol, currency: meta.currency };
+      }
+    } catch (e) { continue; }
+  }
+  return null;
+}
+
 async function ghGetFile(path, token) {
   const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
     headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json' }
@@ -127,9 +146,14 @@ Return ONLY the JSON.`;
     let bouquet = [];
     try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) {}
     if (!bouquet.find(b => b.date === date)) {
+      // Capture real entry price from Yahoo
+      const priceData = await fetchPrice(pick.ticker);
+      const entryPrice = priceData?.price || null;
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         verdict: pick.verdict, date, addedAt: pick.pickedAt, investedAmount: 10000,
+        entryPrice, currentPrice: entryPrice, lastPriceUpdate: pick.pickedAt,
+        yahooSymbol: priceData?.symbol || null,
         estimatedUpside: pick.estimatedUpside, riskLevel: pick.riskLevel,
         summary: pick.summary, whyToday: pick.whyToday, agents: pick.agents
       });
