@@ -7,9 +7,9 @@ async function ghGetFile(path, token) {
   const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
     headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json' }
   });
-  if (!r.ok) return { content: null, sha: null };
+  if (!r.ok) return { content: null, sha: null, status: r.status, statusText: r.statusText };
   const d = await r.json();
-  return { content: Buffer.from(d.content, 'base64').toString('utf-8'), sha: d.sha };
+  return { content: Buffer.from(d.content, 'base64').toString('utf-8'), sha: d.sha, status: 200 };
 }
 
 async function ghPutFile(path, contentObj, sha, token, message) {
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
   if (cronSecret && !isCron && !isManual) return res.status(401).json({ error: 'Unauthorized' });
 
   const ghToken = process.env.GITHUB_TOKEN;
-  if (!ghToken) return res.status(500).json({ error: 'GITHUB_TOKEN not configured' });
+  if (!ghToken) return res.status(500).json({ error: 'GITHUB_TOKEN not configured', hint: 'Add GITHUB_TOKEN in Vercel → Settings → Environment Variables, then redeploy' });
 
   const bq = await ghGetFile('data/project-bouquet.json', ghToken);
   let bouquet = [];
@@ -84,10 +84,17 @@ export default async function handler(req, res) {
     return res.status(200).json({
       status: 'empty',
       diagnostic: {
+        tokenPresent: !!ghToken,
+        tokenPrefix: ghToken ? ghToken.slice(0, 4) + '…' : null,
+        githubApiStatus: bq.status,
+        githubApiStatusText: bq.statusText || null,
         fileFound: bq.content != null,
         contentLength: bq.content ? bq.content.length : 0,
         parseError: parseErr,
-        hint: bq.content == null ? 'GitHub API returned no file — check GITHUB_TOKEN has repo read access' : 'File found but bouquet array is empty'
+        hint: bq.status === 401 ? 'Token is invalid or expired'
+            : bq.status === 404 ? 'Token valid but cannot see this file — needs repo (Contents read) scope, or wrong repo'
+            : bq.content == null ? 'GitHub API returned no file'
+            : 'File found but bouquet array is empty'
       }
     });
   }
