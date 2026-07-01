@@ -60,7 +60,12 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
       if (!r.ok) continue;
       const d = await r.json();
       const meta = d?.chart?.result?.[0]?.meta;
-      if (meta?.regularMarketPrice) return { price: +meta.regularMarketPrice.toFixed(2), symbol: meta.symbol };
+      if (meta?.regularMarketPrice) return {
+        price: +meta.regularMarketPrice.toFixed(2),
+        open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
+        prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
+        symbol: meta.symbol
+      };
     } catch (e) { continue; }
   }
   return null;
@@ -105,12 +110,24 @@ export default async function handler(req, res) {
   for (const item of bouquet) {
     const pd = await fetchPrice(item.ticker, item.fullName, item.yahooSymbol);
     if (pd?.price) {
-      if (!item.entryPrice) item.entryPrice = pd.price; // backfill entry if missing
+      // Entry price = the day's OPEN when the pick was made (morning price).
+      // Prefer open; fall back to prevClose; only use current as last resort.
+      if (!item.entryPrice || item.entryPriceProvisional) {
+        item.entryPrice = pd.open || pd.prevClose || pd.price;
+        item.entryPriceProvisional = pd.open ? false : true; // mark if we couldn't get a real open
+      }
       item.currentPrice = pd.price;
+      item.dayOpen = pd.open;
+      item.prevClose = pd.prevClose;
       item.yahooSymbol = pd.symbol;
       item.lastPriceUpdate = now;
+      // Shares bought with the invested amount at entry price
+      const invested = item.investedAmount || 10000;
+      item.shares = item.entryPrice > 0 ? +(invested / item.entryPrice).toFixed(3) : 0;
+      // Today's % change: current vs previous close
+      item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
       updated++;
-      debug.push({ ticker: item.ticker, resolved: pd.symbol, entry: item.entryPrice, current: pd.price });
+      debug.push({ ticker: item.ticker, resolved: pd.symbol, entry: item.entryPrice, open: pd.open, current: pd.price, prevClose: pd.prevClose, shares: item.shares });
     } else {
       debug.push({ ticker: item.ticker, resolved: null, error: 'price fetch failed' });
     }

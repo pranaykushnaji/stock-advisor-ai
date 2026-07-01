@@ -359,7 +359,9 @@ async function renderBouquet(){
       metaLine=`${days}d · entry price updating…`;
       gainCell=`<div class="bi-gain" style="color:var(--text3);font-size:12px;">pending</div>`;
     }else if(gi.real){
-      metaLine=`${days}d · ₹${item.entryPrice} → ₹${item.currentPrice} · live`;
+      const shares=item.shares||(item.entryPrice>0?(item.investedAmount||10000)/item.entryPrice:0);
+      const todayTxt=item.todayChangePct!=null?` · today ${item.todayChangePct>=0?'+':''}${item.todayChangePct}%`:'';
+      metaLine=`${shares.toFixed(2)} sh @ ₹${item.entryPrice} → ₹${item.currentPrice}${todayTxt}`;
       gainCell=`<div class="bi-gain ${gi.gain>=0?'up':'down'}">${gi.gain>0?'+':''}${gi.gain}%</div>`;
     }else{
       const amt=item.investedAmount||10000,val=Math.round(amt*(1+gi.gain/100));

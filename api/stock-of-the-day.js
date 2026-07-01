@@ -48,7 +48,12 @@ async function fetchPrice(ticker, fullName) {
       const d = await r.json();
       const meta = d?.chart?.result?.[0]?.meta;
       if (meta?.regularMarketPrice) {
-        return { price: +meta.regularMarketPrice.toFixed(2), symbol: meta.symbol, currency: meta.currency };
+        return {
+          price: +meta.regularMarketPrice.toFixed(2),
+          open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
+          prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
+          symbol: meta.symbol, currency: meta.currency
+        };
       }
     } catch (e) { continue; }
   }
@@ -164,14 +169,17 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
     let bouquet = [];
     try { bouquet = JSON.parse(bq.content)?.bouquet || []; } catch (e) {}
     if (!bouquet.find(b => b.date === date)) {
-      // Capture real entry price from Yahoo
+      // Capture real entry price from Yahoo — use the day's OPEN (morning price)
       const priceData = await fetchPrice(pick.ticker, pick.fullName);
-      const entryPrice = priceData?.price || null;
+      const entryPrice = priceData ? (priceData.open || priceData.price) : null;
+      const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         verdict: pick.verdict, date, addedAt: pick.pickedAt, investedAmount: 10000,
-        entryPrice, currentPrice: entryPrice, lastPriceUpdate: pick.pickedAt,
-        yahooSymbol: priceData?.symbol || null,
+        entryPrice, currentPrice: priceData?.price || entryPrice, shares,
+        dayOpen: priceData?.open || null, prevClose: priceData?.prevClose || null,
+        todayChangePct: (priceData?.prevClose && priceData?.price) ? +(((priceData.price - priceData.prevClose) / priceData.prevClose) * 100).toFixed(2) : null,
+        lastPriceUpdate: pick.pickedAt, yahooSymbol: priceData?.symbol || null,
         estimatedUpside: pick.estimatedUpside, riskLevel: pick.riskLevel,
         summary: pick.summary, whyToday: pick.whyToday, agents: pick.agents
       });
