@@ -10,7 +10,21 @@ async function fetchWithTimeout(url, opts = {}, ms = 6000) {
   finally { clearTimeout(t); }
 }
 
+// Ticker aliases for rebrands / known mismatches where the LLM returns a stale or
+// common name but the exchange uses a different symbol. Extend as new ones surface.
+const TICKER_ALIASES = {
+  'ZOMATO': 'ETERNAL',      // Zomato Ltd rebranded to Eternal Ltd (NSE: ETERNAL)
+  'MOTHERSUMI': 'MOTHERSON',
+  'MINDTREE': 'LTIM',       // merged into LTIMindtree
+};
+
+function resolveAlias(sym) {
+  const u = (sym || '').toUpperCase().replace(/\.(NS|BO)$/, '');
+  return TICKER_ALIASES[u] || sym;
+}
+
 async function fromYahoo(symbol, range, interval) {
+  symbol = resolveAlias(symbol);
   // NSE/BSE FIRST — a bare Indian ticker (INFY, WIT) otherwise resolves to the US ADR in USD.
   const suffixes = ['.NS', '.BO', ''];
   const trySymbols = symbol.includes('.') ? [symbol] : suffixes.map(s => symbol.toUpperCase() + s);
@@ -50,6 +64,7 @@ async function fromYahoo(symbol, range, interval) {
 
 async function fromAlphaVantage(symbol, apiKey) {
   if (!apiKey) return null;
+  symbol = resolveAlias(symbol);
   const base = symbol.toUpperCase().replace(/\.(NS|BO|BSE)$/, '');
   const trySymbols = symbol.includes('.') ? [symbol.toUpperCase()] : [`${base}.BSE`, base];
   for (const sym of trySymbols) {
