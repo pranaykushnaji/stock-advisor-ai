@@ -6,10 +6,15 @@ export default async function handler(req, res) {
   if (!q) return res.status(400).json({ error: 'query required' });
 
   try {
-    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q + ' stock')}&&hl=en-IN&gl=IN&ceid=IN:en`;
-    const response = await fetch(url, {
-      headers: { 'User-Agent': 'Mozilla/5.0' }
-    });
+    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q + ' stock')}&hl=en-IN&gl=IN&ceid=IN:en`;
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 5000);
+    let response;
+    try {
+      response = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' }, signal: ctrl.signal });
+    } finally {
+      clearTimeout(timer);
+    }
 
     const text = await response.text();
 

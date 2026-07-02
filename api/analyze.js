@@ -72,7 +72,7 @@ RULES:
         model: 'openai/gpt-oss-120b',
         messages: [
           { role: 'system', content: AGENT_PROMPT },
-          { role: 'user', content: `Analyze this stock with all 4 agents: "${cleanStock}"` }
+          { role: 'user', content: `Analyze this stock's Quality and Value factors: "${cleanStock}"` }
         ],
         temperature: 0.3,
         max_tokens: 3000

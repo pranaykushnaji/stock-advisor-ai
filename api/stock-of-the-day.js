@@ -25,6 +25,10 @@ const SYMBOL_MAP = {
   'ZOMATO':'ETERNAL.NS','ETERNAL':'ETERNAL.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
 };
 
+// Ticker aliases for rebrands (LLM ticker may be stale). Applied to AV fallback.
+const TICKER_ALIASES = { 'ZOMATO':'ETERNAL','MINDTREE':'LTIM','MOTHERSUMI':'MOTHERSON' };
+function aliasBase(sym){const u=(sym||'').toUpperCase().replace(/\.(NS|BO|BSE)$/,'');return TICKER_ALIASES[u]||u;}
+
 // Fetch with a hard timeout so a hanging source can't blow the serverless limit
 async function fetchWithTimeout(url, opts = {}, ms = 5000) {
   const ctrl = new AbortController();
@@ -64,8 +68,8 @@ async function fetchPrice(ticker, fullName) {
       }
     } catch (e) { continue; }
   }
-  // Fallback: Alpha Vantage (reliable from datacenter IPs) when Yahoo 403s
-  return await fetchPriceAV(clean);
+  // Fallback: Alpha Vantage (reliable from datacenter IPs) when Yahoo 403s (apply rebrand alias)
+  return await fetchPriceAV(aliasBase(clean));
 }
 
 // Alpha Vantage fallback — free key in ALPHAVANTAGE_KEY. Daily OHLC, oldest→newest.
@@ -208,8 +212,20 @@ export default async function handler(req, res) {
     } catch (e) {}
   }
 
-  // Discover today's candidates live (news + movers, Nifty-50 fallback)
-  const { candidates, sources } = await discoverCandidates(apiKey);
+  // Discover today's candidates live (news + movers, Nifty-50 fallback).
+  // Guard: discoverCandidates catches internally, but wrap defensively so a throw
+  // can never abort the pick with an unhandled 500.
+  let candidates = [], sources = { news: 0, movers: 0, usedFallback: true };
+  try {
+    const disc = await discoverCandidates(apiKey);
+    candidates = disc.candidates || [];
+    sources = disc.sources || sources;
+  } catch (e) { /* fall through to Nifty-50 below */ }
+  if (!candidates.length) {
+    // Absolute fallback so the cron always has something to pick from
+    candidates = ['Reliance Industries','TCS','HDFC Bank','Infosys','ICICI Bank','Bharti Airtel','ITC','Larsen & Toubro','Axis Bank','Kotak Mahindra Bank'];
+    sources.usedFallback = true;
+  }
 
   const SELECTION_PROMPT = `You are a factor-based equity strategist for Indian markets. Today is ${date}.
 

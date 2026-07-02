@@ -38,8 +38,12 @@ const SYMBOL_MAP = {
   'WIPRO':'WIPRO.NS','ADANI PORTS':'ADANIPORTS.NS','COAL INDIA':'COALINDIA.NS',
   'JSW STEEL':'JSWSTEEL.NS','TATA STEEL':'TATASTEEL.NS','MAHINDRA & MAHINDRA':'M&M.NS',
   'NESTLE INDIA':'NESTLEIND.NS','BAJAJ AUTO':'BAJAJ-AUTO.NS','HINDALCO':'HINDALCO.NS',
-  'ZOMATO':'ZOMATO.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
+  'ZOMATO':'ETERNAL.NS','ETERNAL':'ETERNAL.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
 };
+
+// Ticker aliases for rebrands (LLM/stored ticker may be stale). Applied to AV fallback too.
+const TICKER_ALIASES = { 'ZOMATO':'ETERNAL','MINDTREE':'LTIM','MOTHERSUMI':'MOTHERSON' };
+function aliasBase(sym){const u=(sym||'').toUpperCase().replace(/\.(NS|BO|BSE)$/,'');return TICKER_ALIASES[u]||u;}
 
 // Fetch with a hard timeout so a hanging source can't blow the serverless limit
 async function fetchWithTimeout(url, opts = {}, ms = 4000) {
@@ -91,8 +95,8 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
       }
     } catch (e) { continue; }
   }
-  // Fallback: Alpha Vantage when Yahoo fails
-  return await fetchPriceAV(clean);
+  // Fallback: Alpha Vantage when Yahoo fails (apply rebrand alias)
+  return await fetchPriceAV(aliasBase(clean));
 }
 
 // Alpha Vantage fallback for refresh — daily OHLC, last bar = today's candle
@@ -224,8 +228,9 @@ export default async function handler(req, res) {
     }));
   }
 
-  // Only write if something actually changed (avoids a needless commit when everything was pre-market)
-  if (updated > 0 || skippedPremarket === 0) {
+  // Write if any stock's data changed. Skip the commit only when nothing updated
+  // (e.g. everything was pre-market or all fetches failed) — avoids empty commits.
+  if (updated > 0) {
     await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);
   }
   const out = { status: 'refreshed', updated, total: bouquet.length, nifty: niftyNow };
