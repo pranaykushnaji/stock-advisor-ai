@@ -235,8 +235,13 @@ async function analyzeStock(){
   btn.disabled=true;btn.innerHTML='<div class="spinner" style="width:16px;height:16px;border-width:2px;"></div> Analyzing…';
   area.innerHTML=`<div class="loading-wrap"><div class="spinner"></div><p>Running factor analysis on <strong>${esc(input)}</strong>…</p><p style="font-size:12px;color:var(--text3);">Momentum · Quality · Value · Low-Volatility</p></div>`;
   try{
-    // Fetch 1y of prices for real momentum/volatility computation
-    const[raw,stockData,news]=await Promise.all([callAI(input),fetchStock(input,'1y'),fetchNews(input)]);
+    // First get the AI analysis (it resolves the correct ticker) + news in parallel
+    const[raw,news]=await Promise.all([callAI(input),fetchNews(input)]);
+    // Parse to get the resolved ticker, THEN fetch prices by ticker (not the typed name).
+    // Typing "Infosys" must map to INFY.NS — the LLM knows this, the raw input doesn't.
+    let prelim;try{prelim=JSON.parse((raw.match(/\{[\s\S]*\}/)||['{}'])[0]);}catch{prelim={};}
+    const priceSym=prelim.ticker||input;
+    const stockData=await fetchStock(priceSym,'1y');
     const d=parseResult(raw,input,stockData?.chart);
     currentAnalysis=d;history.unshift(d);if(history.length>100)history=history.slice(0,100);save();
     renderResult(d,area,stockData,news);
