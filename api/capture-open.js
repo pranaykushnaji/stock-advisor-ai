@@ -21,26 +21,32 @@ async function fetchOpen(ticker, fullName, knownSymbol) {
   const upper = (ticker || '').toUpperCase();
   const mapped = SYMBOL_MAP[upper];
   const clean = upper.replace(/[^A-Z0-9.&]/g, '');
-  const trySymbols = [knownSymbol, mapped, clean.includes('.') ? clean : clean + '.NS', clean + '.BO', clean].filter(Boolean);
-  for (const sym of trySymbols) {
-    try {
-      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
-      const r = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 4000);
-      if (!r.ok) continue;
-      const d = await r.json();
-      const meta = d?.chart?.result?.[0]?.meta;
-      if (meta?.regularMarketPrice) {
-        return {
-          open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
-          price: +meta.regularMarketPrice.toFixed(2),
-          prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
-          symbol: meta.symbol,
-          marketState: meta.marketState || null
-        };
-      }
-    } catch (e) { continue; }
+  const trySymbols = [...new Set([knownSymbol, mapped, clean.includes('.') ? clean : clean + '.NS', clean + '.BO', clean].filter(Boolean))];
+  let lastReason = 'no-symbols';
+  // Two passes: Yahoo occasionally returns empty/rate-limited on a single try
+  for (let attempt = 0; attempt < 2; attempt++) {
+    for (const sym of trySymbols) {
+      try {
+        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
+        const r = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 6000);
+        if (!r.ok) { lastReason = `http-${r.status}`; continue; }
+        const d = await r.json();
+        const meta = d?.chart?.result?.[0]?.meta;
+        if (meta?.regularMarketPrice) {
+          return {
+            open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
+            price: +meta.regularMarketPrice.toFixed(2),
+            prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
+            symbol: meta.symbol,
+            marketState: meta.marketState || null
+          };
+        }
+        lastReason = 'no-price-in-response';
+      } catch (e) { lastReason = e.name === 'AbortError' ? 'timeout' : 'fetch-error'; continue; }
+    }
+    if (attempt === 0) await new Promise(r => setTimeout(r, 800)); // brief backoff before retry
   }
-  return null;
+  return { error: lastReason };
 }
 
 async function ghGetFile(path, token) {
@@ -89,7 +95,7 @@ export default async function handler(req, res) {
   const stillWaiting = [];
   for (const item of pending) {
     const pd = await fetchOpen(item.ticker, item.fullName, item.yahooSymbol);
-    const reliable = pd && (pd.marketState === 'REGULAR' || pd.marketState === 'POST' || pd.marketState === 'CLOSED');
+    const reliable = pd && !pd.error && (pd.marketState === 'REGULAR' || pd.marketState === 'POST' || pd.marketState === 'CLOSED');
     if (reliable && pd.open) {
       item.entryPrice = pd.open;
       item.dayOpen = pd.open;
@@ -104,7 +110,7 @@ export default async function handler(req, res) {
       item.lastPriceUpdate = new Date().toISOString();
       locked.push({ ticker: item.ticker, open: pd.open, marketState: pd.marketState });
     } else {
-      stillWaiting.push({ ticker: item.ticker, marketState: pd?.marketState || 'no-data' });
+      stillWaiting.push({ ticker: item.ticker, reason: pd?.error || pd?.marketState || 'no-data', open: pd?.open ?? null });
     }
   }
 
