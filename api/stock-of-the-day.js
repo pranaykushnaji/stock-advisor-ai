@@ -50,6 +50,9 @@ async function fetchPrice(ticker, fullName) {
       const result = d?.chart?.result?.[0];
       const meta = result?.meta;
       if (meta?.regularMarketPrice) {
+        // Prefer INR (NSE/BSE); skip a USD ADR unless it's the last symbol we try
+        const isLast = sym === trySymbols[trySymbols.length - 1];
+        if (meta.currency && meta.currency !== 'INR' && !isLast) continue;
         return {
           price: +meta.regularMarketPrice.toFixed(2),
           open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,

@@ -70,6 +70,9 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
       const result = d?.chart?.result?.[0];
       const meta = result?.meta;
       if (meta?.regularMarketPrice) {
+        // Prefer INR (NSE/BSE); skip USD ADR unless last symbol
+        const isLast = sym === trySymbols[trySymbols.length - 1];
+        if (meta.currency && meta.currency !== 'INR' && !isLast) continue;
         // Today's daily candle (last bar) — has the real session open & close
         const q = result?.indicators?.quote?.[0] || {};
         const opens = (q.open || []).filter(v => v != null);
