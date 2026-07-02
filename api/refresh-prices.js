@@ -133,8 +133,13 @@ function todayISO() {
 
 // Is NSE currently in a live/complete trading state? (REGULAR = open, POST/CLOSED = has real close)
 // PRE/PREPRE = pre-market: prices are stale/indicative, do NOT trust as live.
+// Only PRE/PREPRE (pre-market) prices are stale/indicative and must be skipped.
+// Everything else — REGULAR, POST, CLOSED, or an unknown/null state — is treated as
+// usable. (The old allowlist failed closed on any unexpected value, wrongly skipping
+// valid post-close data, e.g. a 5:30 PM refresh finding marketState it didn't recognize.)
 function isTradingDataReliable(marketState) {
-  return marketState === 'REGULAR' || marketState === 'POST' || marketState === 'POSTPOST' || marketState === 'CLOSED';
+  const s = (marketState || '').toUpperCase();
+  return s !== 'PRE' && s !== 'PREPRE';
 }
 
 export default async function handler(req, res) {
