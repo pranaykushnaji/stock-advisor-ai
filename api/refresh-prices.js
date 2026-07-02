@@ -67,17 +67,34 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
       const r = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 4000);
       if (!r.ok) continue;
       const d = await r.json();
-      const meta = d?.chart?.result?.[0]?.meta;
-      if (meta?.regularMarketPrice) return {
-        price: +meta.regularMarketPrice.toFixed(2),
-        open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
-        prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
-        symbol: meta.symbol,
-        marketState: meta.marketState || null  // PRE/PREPRE, REGULAR, POST, CLOSED
-      };
+      const result = d?.chart?.result?.[0];
+      const meta = result?.meta;
+      if (meta?.regularMarketPrice) {
+        // Today's daily candle (last bar) — has the real session open & close
+        const q = result?.indicators?.quote?.[0] || {};
+        const opens = (q.open || []).filter(v => v != null);
+        const closes = (q.close || []).filter(v => v != null);
+        const candleOpen = opens.length ? +opens[opens.length - 1].toFixed(2) : null;
+        const candleClose = closes.length ? +closes[closes.length - 1].toFixed(2) : null;
+        return {
+          price: +meta.regularMarketPrice.toFixed(2),
+          open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
+          candleOpen,   // today's real opening price from the completed daily bar
+          candleClose,  // today's real closing price from the completed daily bar
+          prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
+          symbol: meta.symbol,
+          marketState: meta.marketState || null  // PRE/PREPRE, REGULAR, POST, CLOSED
+        };
+      }
     } catch (e) { continue; }
   }
   return null;
+}
+
+// Today's date in IST (YYYY-MM-DD) — matches the pick cron's date field
+function todayISO() {
+  const ist = new Date(Date.now() + 5.5 * 3600 * 1000);
+  return ist.toISOString().slice(0, 10);
 }
 
 // Is NSE currently in a live/complete trading state? (REGULAR = open, POST/CLOSED = has real close)
@@ -130,7 +147,17 @@ export default async function handler(req, res) {
         // Always safe to refresh reference data (prevClose) and the resolved symbol
         item.prevClose = pd.prevClose;
         item.yahooSymbol = pd.symbol;
-        // Lock entry only from a real OPEN captured during/after the session (never pre-market)
+        // UPGRADE entry to today's real OPEN once the daily candle is complete.
+        // The 9 AM cron locked entry = prevClose (never empty); here we improve it to the
+        // true session open when available. Guarded so it only happens on the pick's own day
+        // and only once (clears the flag). Falls back silently if the candle open isn't there.
+        if (item.entryFromPrevClose && reliable && pd.candleOpen && item.date === todayISO()) {
+          item.entryPrice = pd.candleOpen;
+          item.dayOpen = pd.candleOpen;
+          item.entryFromPrevClose = false;
+          item.entryPriceProvisional = false;
+        }
+        // Backfill: any entry still missing entirely
         if ((!item.entryPrice || item.entryPriceProvisional) && reliable && pd.open) {
           item.entryPrice = pd.open;
           item.entryPriceProvisional = false;
@@ -139,11 +166,12 @@ export default async function handler(req, res) {
         // Only update the LIVE price + today's move when the data is actually live/complete.
         // Pre-market (PRE/PREPRE) prices are stale or indicative — skip them to avoid bogus moves.
         if (reliable) {
-          item.currentPrice = pd.price;
+          // Prefer the completed candle close for "current" after market close; else live price
+          item.currentPrice = pd.candleClose || pd.price;
           item.lastPriceUpdate = now;
           const invested = item.investedAmount || 10000;
           if (item.entryPrice > 0) item.shares = +(invested / item.entryPrice).toFixed(3);
-          item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
+          item.todayChangePct = pd.prevClose ? +((((pd.candleClose || pd.price) - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
           item.marketState = pd.marketState;
           if (niftyNow != null && item.niftyAtEntry == null) item.niftyAtEntry = niftyNow;
           if (niftyNow != null) item.niftyNow = niftyNow;

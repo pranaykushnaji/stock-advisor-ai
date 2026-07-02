@@ -276,6 +276,9 @@ Every subScore is an integer 0-100. Return ONLY the JSON.`;
         verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: 10000,
         entryPrice, currentPrice: priceData?.price || entryPrice, shares,
         entryPriceProvisional: entryProvisional,
+        // If entry is prevClose (market wasn't open at pick time), flag it so the 5:30 PM
+        // cron can UPGRADE it to today's real open once the daily candle is complete.
+        entryFromPrevClose: !(marketOpen && priceData?.open),
         dayOpen: (marketOpen && priceData?.open) ? priceData.open : null, prevClose: priceData?.prevClose || null,
         todayChangePct: (priceData?.prevClose && priceData?.price) ? +(((priceData.price - priceData.prevClose) / priceData.prevClose) * 100).toFixed(2) : null,
         lastPriceUpdate: pick.pickedAt, yahooSymbol: priceData?.symbol || null,
