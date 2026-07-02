@@ -11,7 +11,8 @@ async function fetchWithTimeout(url, opts = {}, ms = 6000) {
 }
 
 async function fromYahoo(symbol, range, interval) {
-  const suffixes = ['', '.NS', '.BO'];
+  // NSE/BSE FIRST — a bare Indian ticker (INFY, WIT) otherwise resolves to the US ADR in USD.
+  const suffixes = ['.NS', '.BO', ''];
   const trySymbols = symbol.includes('.') ? [symbol] : suffixes.map(s => symbol.toUpperCase() + s);
   for (const sym of trySymbols) {
     try {
@@ -22,6 +23,10 @@ async function fromYahoo(symbol, range, interval) {
       const result = data?.chart?.result?.[0];
       if (!result || !result.timestamp) continue;
       const meta = result.meta;
+      // Prefer INR listings for this Indian-market app. If a bare ticker resolved to a
+      // USD ADR (e.g. INFY on NYSE), skip it UNLESS it's the final fallback symbol.
+      const isLast = sym === trySymbols[trySymbols.length - 1];
+      if (meta.currency && meta.currency !== 'INR' && !isLast) continue;
       const quotes = result.indicators?.quote?.[0];
       return {
         source: 'yahoo',
