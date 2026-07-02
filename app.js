@@ -493,11 +493,14 @@ async function renderBouquet(){
   if(!combined.length){el.innerHTML=toggle+'<div class="empty-state"><div class="empty-icon">🌸</div><h3>No stocks yet</h3><p>Daily picks are added automatically each morning. Analyze a stock to add your own.</p></div>';return;}
 
   const work=combined;
-  // Real gain if we have prices; pending if not (never fabricated)
+  // A pick is "pending" ONLY if it has no entry price yet. If it has an entry but no
+  // current price (e.g. a refresh got rate-limited), treat current = entry (0% so far)
+  // rather than showing "updating" — the entry is locked, the return is just 0 until refresh.
   const gainInfo=work.map(item=>{
-    const g=realGain(item);
-    if(g!=null)return{gain:g,real:true,pending:false};
-    return{gain:0,real:false,pending:true}; // awaiting price (both daily & personal)
+    if(!item.entryPrice||item.entryPrice<=0)return{gain:0,real:false,pending:true};
+    const cur=item.currentPrice||item.entryPrice;
+    const g=+(((cur-item.entryPrice)/item.entryPrice)*100).toFixed(1);
+    return{gain:g,real:true,pending:false};
   });
   const totalInvested=work.reduce((a,b)=>a+(b.investedAmount||10000),0);
   const totalValue=work.reduce((a,b,i)=>a+(b.investedAmount||10000)*(1+(gainInfo[i].pending?0:gainInfo[i].gain)/100),0);
@@ -539,8 +542,9 @@ async function renderBouquet(){
       gainCell=`<div class="bi-gain" style="color:var(--text3);font-size:12px;">—</div>`;
     }else{
       const shares=item.shares||(item.entryPrice>0?(item.investedAmount||10000)/item.entryPrice:0);
+      const cur=item.currentPrice||item.entryPrice;
       const todayTxt=item.todayChangePct!=null?` · today ${item.todayChangePct>=0?'+':''}${item.todayChangePct}%`:'';
-      metaLine=`${shares.toFixed(2)} sh @ ₹${item.entryPrice} → ₹${item.currentPrice}${todayTxt}`;
+      metaLine=`${shares.toFixed(2)} sh @ ₹${item.entryPrice} → ₹${cur}${todayTxt}`;
       gainCell=`<div class="bi-gain ${gi.gain>=0?'up':'down'}">${gi.gain>0?'+':''}${gi.gain}%</div>`;
     }
     return`<div class="bouquet-item"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}${srcTag}</div>
