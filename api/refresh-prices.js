@@ -88,6 +88,37 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
       }
     } catch (e) { continue; }
   }
+  // Fallback: Alpha Vantage when Yahoo fails
+  return await fetchPriceAV(clean);
+}
+
+// Alpha Vantage fallback for refresh — daily OHLC, last bar = today's candle
+async function fetchPriceAV(base) {
+  const apiKey = process.env.ALPHAVANTAGE_KEY;
+  if (!apiKey) return null;
+  for (const sym of [`${base}.BSE`, base]) {
+    try {
+      const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${encodeURIComponent(sym)}&outputsize=compact&apikey=${apiKey}`;
+      const r = await fetchWithTimeout(url, {}, 8000);
+      if (!r.ok) continue;
+      const d = await r.json();
+      const series = d?.['Time Series (Daily)'];
+      if (!series || typeof series !== 'object') continue;
+      const dates = Object.keys(series).sort();
+      if (!dates.length) continue;
+      const lastDt = dates[dates.length - 1], prevDt = dates[dates.length - 2];
+      const bar = series[lastDt];
+      const close = parseFloat(bar['4. close']);
+      const open = parseFloat(bar['1. open']);
+      const prevClose = prevDt ? parseFloat(series[prevDt]['4. close']) : close;
+      return {
+        price: +close.toFixed(2), open: +open.toFixed(2),
+        candleOpen: +open.toFixed(2), candleClose: +close.toFixed(2),
+        prevClose: +prevClose.toFixed(2), symbol: sym,
+        marketState: 'CLOSED'  // AV daily is end-of-day data
+      };
+    } catch (e) { continue; }
+  }
   return null;
 }
 

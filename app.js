@@ -192,7 +192,32 @@ function recomputeFactorScore(factor,subW){
   if(wSum>0)factor.score=Math.round(total/wSum);
 }
 
-async function fetchStock(sym,range){try{const r=await fetch(`/api/stock?symbol=${encodeURIComponent(sym)}${range?'&range='+range:''}`);return r.ok?await r.json():null;}catch{return null;}}
+// Fetch price data with a per-day cache. If a live fetch fails (Yahoo 403 + AV miss),
+// fall back to the last good cached series so momentum/volatility still compute.
+async function fetchStock(sym,range){
+  const key='px_'+sym.toUpperCase()+'_'+(range||'3mo');
+  const today=new Date().toISOString().slice(0,10);
+  try{
+    const r=await fetch(`/api/stock?symbol=${encodeURIComponent(sym)}${range?'&range='+range:''}`);
+    if(r.ok){
+      const data=await r.json();
+      // Cache good responses that carry real history
+      if(data?.chart?.close?.length){
+        try{localStorage.setItem(key,JSON.stringify({date:today,data}));}catch{}
+      }
+      return data;
+    }
+  }catch{}
+  // Live fetch failed — reuse last good cached series if we have one
+  try{
+    const cached=JSON.parse(localStorage.getItem(key)||'null');
+    if(cached?.data?.chart?.close?.length){
+      cached.data._stale=true; // mark so callers can note it's cached
+      return cached.data;
+    }
+  }catch{}
+  return null;
+}
 async function fetchNews(q){try{const r=await fetch(`/api/news?q=${encodeURIComponent(q)}`);return r.ok?(await r.json()).articles||[]:[];}catch{return[];}}
 
 // ─── Analyze ───

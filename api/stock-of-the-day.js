@@ -61,6 +61,37 @@ async function fetchPrice(ticker, fullName) {
       }
     } catch (e) { continue; }
   }
+  // Fallback: Alpha Vantage (reliable from datacenter IPs) when Yahoo 403s
+  return await fetchPriceAV(clean);
+}
+
+// Alpha Vantage fallback — free key in ALPHAVANTAGE_KEY. Daily OHLC, oldest→newest.
+async function fetchPriceAV(base) {
+  const apiKey = process.env.ALPHAVANTAGE_KEY;
+  if (!apiKey) return null;
+  const trySymbols = [`${base}.BSE`, base];
+  for (const sym of trySymbols) {
+    try {
+      const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${encodeURIComponent(sym)}&outputsize=full&apikey=${apiKey}`;
+      const r = await fetchWithTimeout(url, {}, 8000);
+      if (!r.ok) continue;
+      const d = await r.json();
+      const series = d?.['Time Series (Daily)'];
+      if (!series || typeof series !== 'object') continue;
+      const dates = Object.keys(series).sort();
+      if (dates.length < 40) continue;
+      const recent = dates.slice(-260);
+      const closes = recent.map(dt => parseFloat(series[dt]['4. close'])).filter(v => v != null && !isNaN(v));
+      const last = closes[closes.length - 1];
+      const prev = closes.length > 1 ? closes[closes.length - 2] : last;
+      // AV daily has no intraday open/marketState; treat as end-of-day close data
+      return {
+        price: +last.toFixed(2), open: null,
+        prevClose: +prev.toFixed(2), symbol: sym, currency: 'INR',
+        marketState: 'CLOSED', closes
+      };
+    } catch (e) { continue; }
+  }
   return null;
 }
 
