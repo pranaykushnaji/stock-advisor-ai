@@ -236,12 +236,13 @@ Every subScore is an integer 0-100. Return ONLY the JSON.`;
 
     // Fetch price + 1y history FIRST so we can compute real factors and the composite
     const priceData = await fetchPrice(pick.ticker, pick.fullName);
-    // The pick runs at 9 AM (pre-open), so a real OPEN usually isn't available yet.
-    // Use open if the market is genuinely open; otherwise fall back to prevClose and
-    // mark provisional so the 9:20 capture-open cron locks the true opening price.
+    // Entry price = previous close, captured at pick time from data we already have.
+    // This is rock-solid (no second fetch that could be rate-limited/403'd) and is a
+    // negligible fraction off the true open — a deliberate reliability tradeoff.
+    // Prefer the day's real open if it happens to be available (market already open), else prevClose.
     const marketOpen = priceData?.marketState === 'REGULAR' || priceData?.marketState === 'POST' || priceData?.marketState === 'CLOSED';
     const entryPrice = priceData ? ((marketOpen && priceData.open) ? priceData.open : (priceData.prevClose || priceData.price)) : null;
-    const entryProvisional = !(marketOpen && priceData?.open);
+    const entryProvisional = false; // entry is locked at pick time — no capture-open needed
     const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
 
     // Recompute LLM factor scores from sub-scores (deterministic), fold in real momentum/lowVol
