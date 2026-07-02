@@ -17,8 +17,53 @@ document.getElementById('theme-toggle').addEventListener('click',()=>{setTheme(d
 function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='dashboard')renderDashboard();if(n==='daily')renderDailyTab(sotdPick);}
 document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
 
-// ─── Confidence Calculator (NOT from LLM) ───
+// ─── FACTOR-BASED SCORING (research-backed) ───
+// Four factors with decades of academic evidence. Momentum & Low-Vol are computed
+// from REAL price data; Quality & Value come from fundamentals (LLM).
+// Weights reflect India risk-adjusted premia (NSE Multi-Factor whitepaper, Gulaq).
+const FACTOR_WEIGHTS={momentum:0.30,quality:0.28,value:0.22,lowVol:0.20};
+
+// Legacy agent weights (kept for backward-compat with old stored picks)
 const WEIGHTS={fundamental:0.35,news:0.25,technical:0.20,risk:0.20};
+
+// --- Real factor math from price history ---
+function periodReturn(closes,lookbackDays,skipDays){
+  if(!closes||closes.length<lookbackDays+skipDays+1)return null;
+  const end=closes.length-1-skipDays,start=end-lookbackDays;
+  if(start<0||end<=start)return null;
+  const p0=closes[start],p1=closes[end];
+  if(!p0||!p1||p0<=0)return null;
+  return((p1-p0)/p0)*100;
+}
+function annualizedVol(closes){
+  if(!closes||closes.length<30)return null;
+  const rets=[];
+  for(let i=1;i<closes.length;i++){if(closes[i]!=null&&closes[i-1]!=null&&closes[i-1]>0)rets.push((closes[i]-closes[i-1])/closes[i-1]);}
+  if(rets.length<20)return null;
+  const mean=rets.reduce((a,b)=>a+b,0)/rets.length;
+  const variance=rets.reduce((a,b)=>a+(b-mean)**2,0)/rets.length;
+  return Math.sqrt(variance)*Math.sqrt(252)*100;
+}
+function scoreMomentum(mom){if(mom==null)return null;return Math.max(0,Math.min(100,Math.round(50+mom*1.15)));}
+function scoreLowVol(vol){if(vol==null)return null;return Math.max(0,Math.min(100,Math.round(115-vol*2.05)));}
+function computeRealFactors(chart){
+  const closes=(chart?.close||[]).filter(v=>v!=null);
+  if(closes.length<40)return{momentum:{score:null},lowVol:{score:null},dataPoints:closes.length};
+  const m3=periodReturn(closes,63,21),m6=periodReturn(closes,126,21),m12=periodReturn(closes,252,21);
+  const avail=[m3,m6,m12].filter(v=>v!=null);
+  const momRaw=avail.length?avail.reduce((a,b)=>a+b,0)/avail.length:null;
+  const vol=annualizedVol(closes);
+  return{
+    momentum:{score:scoreMomentum(momRaw),raw:momRaw!=null?+momRaw.toFixed(1):null,m3:m3!=null?+m3.toFixed(1):null,m6:m6!=null?+m6.toFixed(1):null,m12:m12!=null?+m12.toFixed(1):null},
+    lowVol:{score:scoreLowVol(vol),vol:vol!=null?+vol.toFixed(1):null},
+    dataPoints:closes.length
+  };
+}
+function computeFactorComposite(factors){
+  let total=0,wSum=0;
+  for(const[k,w]of Object.entries(FACTOR_WEIGHTS)){const s=factors[k]?.score;if(s!=null&&!isNaN(s)){total+=s*w;wSum+=w;}}
+  return wSum>0?Math.round(total/wSum):50;
+}
 
 // Sub-metric weights for each agent (research-backed) — must sum to 1.0 per agent
 const SUB_WEIGHTS={
@@ -67,6 +112,15 @@ function computeVerdict(confidence){
   return'AVOID';
 }
 
+// Universal score: handles both new factor picks and legacy agent picks.
+function universalScore(item){
+  if(item.composite!=null)return item.composite;
+  if(item.confidence!=null)return item.confidence;
+  if(item.factors)return computeFactorComposite(item.factors);
+  if(item.agents){recomputeAgentScores(item.agents);return computeConfidence(item.agents);}
+  return 50;
+}
+
 // ─── API call (server-side, key stored on server) ───
 async function callAI(stock){
   const r=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({stock})});
@@ -75,12 +129,10 @@ async function callAI(stock){
   throw new Error(d.error||'Server error — please try again');
 }
 
-function parseResult(raw,query){
+function parseResult(raw,query,chart){
   let c=raw.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-  // Strip any reasoning/thinking prefix before the JSON
   const firstBrace=c.indexOf('{');
   if(firstBrace>0)c=c.slice(firstBrace);
-  // Find the matching closing brace for the first opening brace
   let depth=0,endIdx=-1;
   for(let i=0;i<c.length;i++){
     if(c[i]==='{')depth++;
@@ -88,25 +140,59 @@ function parseResult(raw,query){
   }
   let jsonStr;
   if(endIdx>0){jsonStr=c.slice(0,endIdx+1);}
-  else{
-    // Truncated response — try to salvage
-    const m=c.match(/\{[\s\S]*\}/);
-    if(!m)throw new Error('Response incomplete — please try again');
-    jsonStr=m[0];
-  }
+  else{const m=c.match(/\{[\s\S]*\}/);if(!m)throw new Error('Response incomplete — please try again');jsonStr=m[0];}
   let d;
   try{d=JSON.parse(jsonStr);}
   catch(e){throw new Error('Could not parse analysis — please try again');}
   if(!d.ticker)throw new Error('Incomplete analysis — please try again');
-  // Recompute agent scores from sub-metrics (deterministic), then confidence
-  recomputeAgentScores(d.agents);
-  d.confidence=computeConfidence(d.agents);
-  d.verdict=computeVerdict(d.confidence);
+  d=buildFactorModel(d,chart);
   d.analyzedAt=new Date().toISOString();d.query=query;
   return d;
 }
 
-async function fetchStock(sym){try{const r=await fetch(`/api/stock?symbol=${encodeURIComponent(sym)}`);return r.ok?await r.json():null;}catch{return null;}}
+// Merge LLM fundamental factors (quality, value) with REAL price-based factors
+// (momentum, lowVol), normalize scales, and compute the composite.
+function buildFactorModel(d,chart){
+  const llm=d.factors||{};
+  // Normalize any 0-10 scale sub-scores the model may have returned
+  normalizeFactorSubs(llm.quality);
+  normalizeFactorSubs(llm.value);
+  // Recompute quality/value from their sub-scores deterministically
+  recomputeFactorScore(llm.quality,QUALITY_SUBW);
+  recomputeFactorScore(llm.value,VALUE_SUBW);
+  // Compute real momentum & low-vol from price history
+  const real=computeRealFactors(chart);
+  d.factors={
+    momentum:real.momentum,
+    quality:llm.quality||{score:null},
+    value:llm.value||{score:null},
+    lowVol:real.lowVol
+  };
+  d.factorDataPoints=real.dataPoints||0;
+  d.composite=computeFactorComposite(d.factors);
+  d.confidence=d.composite; // keep field name for existing UI
+  d.verdict=computeVerdict(d.composite);
+  return d;
+}
+
+const QUALITY_SUBW={roe:0.25,roce:0.25,debtToEquity:0.20,earningsStability:0.15,margins:0.15};
+const VALUE_SUBW={peRatio:0.35,pbRatio:0.25,pegRatio:0.25,dividendYield:0.15};
+
+function normalizeFactorSubs(factor){
+  if(!factor||!factor.subScores)return;
+  const vals=Object.values(factor.subScores).filter(v=>v!=null&&!isNaN(v));
+  if(vals.length&&vals.every(v=>v<=10)){
+    for(const k of Object.keys(factor.subScores)){const v=factor.subScores[k];if(v!=null&&!isNaN(v))factor.subScores[k]=v*10;}
+  }
+}
+function recomputeFactorScore(factor,subW){
+  if(!factor||!factor.subScores)return;
+  let total=0,wSum=0;
+  for(const[m,w]of Object.entries(subW)){const v=factor.subScores[m];if(v!=null&&!isNaN(v)){total+=v*w;wSum+=w;}}
+  if(wSum>0)factor.score=Math.round(total/wSum);
+}
+
+async function fetchStock(sym,range){try{const r=await fetch(`/api/stock?symbol=${encodeURIComponent(sym)}${range?'&range='+range:''}`);return r.ok?await r.json():null;}catch{return null;}}
 async function fetchNews(q){try{const r=await fetch(`/api/news?q=${encodeURIComponent(q)}`);return r.ok?(await r.json()).articles||[]:[];}catch{return[];}}
 
 // ─── Analyze ───
@@ -114,10 +200,11 @@ async function analyzeStock(){
   const input=document.getElementById('stock-input').value.trim();if(!input)return;
   const btn=document.getElementById('analyze-btn'),area=document.getElementById('result-area');
   btn.disabled=true;btn.innerHTML='<div class="spinner" style="width:16px;height:16px;border-width:2px;"></div> Analyzing…';
-  area.innerHTML=`<div class="loading-wrap"><div class="spinner"></div><p>Running 4 AI agents on <strong>${esc(input)}</strong>…</p><p style="font-size:12px;color:var(--text3);">Fundamental · News · Technical · Risk</p></div>`;
+  area.innerHTML=`<div class="loading-wrap"><div class="spinner"></div><p>Running factor analysis on <strong>${esc(input)}</strong>…</p><p style="font-size:12px;color:var(--text3);">Momentum · Quality · Value · Low-Volatility</p></div>`;
   try{
-    const[raw,stockData,news]=await Promise.all([callAI(input),fetchStock(input),fetchNews(input)]);
-    const d=parseResult(raw,input);
+    // Fetch 1y of prices for real momentum/volatility computation
+    const[raw,stockData,news]=await Promise.all([callAI(input),fetchStock(input,'1y'),fetchNews(input)]);
+    const d=parseResult(raw,input,stockData?.chart);
     currentAnalysis=d;history.unshift(d);if(history.length>100)history=history.slice(0,100);save();
     renderResult(d,area,stockData,news);
   }catch(err){
@@ -127,7 +214,12 @@ async function analyzeStock(){
 
 // ─── Render Agent Card ───
 const METRIC_LABELS={
-  revenueGrowth:'Revenue Growth',roce:'ROCE',roe:'ROE',debtToEquity:'Debt/Equity',margins:'Margins',valuation:'Valuation',
+  // Quality factor
+  roe:'ROE',roce:'ROCE',debtToEquity:'Debt/Equity',earningsStability:'Earnings Stability',margins:'Margins',
+  // Value factor
+  peRatio:'P/E Ratio',pbRatio:'P/B Ratio',pegRatio:'PEG Ratio',dividendYield:'Dividend Yield',
+  // Legacy (old stored picks)
+  revenueGrowth:'Revenue Growth',valuation:'Valuation',
   recentCatalysts:'Catalysts',institutionalActivity:'Institutional',sectorTrend:'Sector Trend',sentiment:'Sentiment',
   trend:'Trend (DMA)',momentum_rsi:'RSI Momentum',macd:'MACD',volume_support:'Volume/Support',
   debtRisk:'Debt Risk',pledgedShares:'Pledged Shares',volatility:'Volatility',concentration:'Diversification'
@@ -157,7 +249,18 @@ function agentCard(name,icon,data,color){
 function scoreColor(s){return s>=70?'var(--green)':s>=50?'var(--amber)':'var(--red)';}
 
 function renderResult(d,area,stockData,news){
-  const conf=d.confidence;
+  // Legacy shim: old picks have .agents but no .factors — map them so they still render
+  if(!d.factors&&d.agents){
+    const a=d.agents;
+    d.factors={
+      momentum:{score:a.technical?.score??null,subScores:a.technical?.subScores,positives:a.technical?.positives,negatives:a.technical?.negatives},
+      quality:{score:a.fundamental?.score??null,subScores:a.fundamental?.subScores,positives:a.fundamental?.positives,negatives:a.fundamental?.negatives},
+      value:{score:a.risk?.score??null,subScores:a.risk?.subScores,positives:a.risk?.positives,negatives:a.risk?.negatives},
+      lowVol:{score:a.news?.score??null,subScores:a.news?.subScores,positives:a.news?.positives,negatives:a.news?.negatives}
+    };
+    if(d.composite==null)d.composite=d.confidence??computeFactorComposite(d.factors);
+  }
+  const conf=d.confidence??d.composite;
   const vClass=d.verdict==='BUY'?'buy':d.verdict==='AVOID'?'avoid':'hold';
   const vBadge=d.verdict==='BUY'?'verdict-buy':d.verdict==='AVOID'?'verdict-avoid':'verdict-hold';
 
@@ -179,11 +282,12 @@ function renderResult(d,area,stockData,news){
   let newsHtml='';
   if(news?.length){newsHtml=`<div class="news-box"><div class="section-title">📰 Latest News</div>${news.slice(0,5).map(n=>`<div class="news-item"><a href="${safeUrl(n.link)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a><span class="news-source">${esc(n.source)}</span></div>`).join('')}</div>`;}
 
-  const ag=d.agents||{};
-  const confBreakdown=`<div class="conf-breakdown"><div class="section-title">Confidence Breakdown (Weighted)</div>
+  const F=d.factors||{};
+  // Factor-weighted composite breakdown
+  const compBreakdown=`<div class="conf-breakdown"><div class="section-title">Factor Composite (Weighted)</div>
     <div class="conf-weights">
-      ${Object.entries(WEIGHTS).map(([k,w])=>{const s=ag[k]?.score||0;const weighted=Math.round(s*w);return`<div class="cw-row"><span class="cw-label">${k.charAt(0).toUpperCase()+k.slice(1)}</span><span class="cw-weight">${Math.round(w*100)}%</span><div class="cw-bar"><div class="cw-fill" style="width:${s}%;background:${scoreColor(s)};"></div></div><span class="cw-score">${s} → ${weighted}</span></div>`;}).join('')}
-      <div class="cw-row cw-total"><span class="cw-label"><strong>Total Confidence</strong></span><span class="cw-weight"></span><div class="cw-bar"><div class="cw-fill" style="width:${conf}%;background:${scoreColor(conf)};"></div></div><span class="cw-score"><strong>${conf}%</strong></span></div>
+      ${Object.entries(FACTOR_WEIGHTS).map(([k,w])=>{const s=F[k]?.score;const shown=s==null?0:s;const weighted=s==null?'—':Math.round(s*w);const label={momentum:'Momentum',quality:'Quality',value:'Value',lowVol:'Low Volatility'}[k];return`<div class="cw-row"><span class="cw-label">${label}</span><span class="cw-weight">${Math.round(w*100)}%</span><div class="cw-bar"><div class="cw-fill" style="width:${shown}%;background:${scoreColor(shown)};"></div></div><span class="cw-score">${s==null?'n/a':s+' → '+weighted}</span></div>`;}).join('')}
+      <div class="cw-row cw-total"><span class="cw-label"><strong>Composite Score</strong></span><span class="cw-weight"></span><div class="cw-bar"><div class="cw-fill" style="width:${conf}%;background:${scoreColor(conf)};"></div></div><span class="cw-score"><strong>${conf}</strong></span></div>
     </div></div>`;
 
   area.innerHTML=`<div class="result-card ${vClass}">
@@ -191,8 +295,8 @@ function renderResult(d,area,stockData,news){
       <div><div class="stock-name">${esc(d.ticker)}</div><div class="stock-meta">${esc(d.fullName)} · ${esc(d.sector)}</div></div>
       <div style="text-align:right;">
         <span class="verdict-badge ${vBadge}" style="font-size:16px;padding:6px 18px;">${d.verdict}</span>
-        <div class="conf-big" style="margin-top:6px;color:${scoreColor(conf)};">${conf}<span style="font-size:18px;color:var(--text3);">%</span></div>
-        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">Confidence</div>
+        <div class="conf-big" style="margin-top:6px;color:${scoreColor(conf)};">${conf}</div>
+        <div style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px;">Factor Score</div>
       </div>
     </div>
     ${priceHtml}
@@ -203,14 +307,15 @@ function renderResult(d,area,stockData,news){
     </div>
     <p class="summary">${esc(d.summary)}</p>
     ${chartHtml}
-    <div class="section-title" style="margin-bottom:12px;">🤖 Multi-Agent Analysis</div>
+    <div class="section-title" style="margin-bottom:12px;">🎯 Factor Analysis</div>
     <div class="agents-grid">
-      ${agentCard('Fundamental Analyst','📊',ag.fundamental,'#4f8ef7')}
-      ${agentCard('News Analyst','📰',ag.news,'#22c87a')}
-      ${agentCard('Technical Analyst','📈',ag.technical,'#f5a623')}
-      ${agentCard('Risk Analyst','🛡️',ag.risk,'#a855f7')}
+      ${factorCard('Momentum','🚀',F.momentum,'#C67C4E',momentumDetail(F.momentum))}
+      ${factorCard('Quality','💎',F.quality,'#7FA663',null)}
+      ${factorCard('Value','🏷️',F.value,'#6E8CA0',null)}
+      ${factorCard('Low Volatility','🛡️',F.lowVol,'#A88BA3',volDetail(F.lowVol))}
     </div>
-    ${confBreakdown}
+    ${compBreakdown}
+    ${d.newsSummary?`<div class="news-box"><div class="section-title">📰 News Context</div><p style="font-size:13px;color:var(--text2);line-height:1.6;">${esc(d.newsSummary)}</p></div>`:''}
     ${newsHtml}
     <div class="valuation-box"><span>Valuation: </span>${esc(d.priceContext||'')}</div>
     <div class="action-row">
@@ -220,6 +325,44 @@ function renderResult(d,area,stockData,news){
     </div></div>`;
 
   if(stockData?.chart?.close?.length)setTimeout(()=>drawChart(stockData.chart),100);
+}
+
+// Momentum detail line — shows the real computed returns
+function momentumDetail(m){
+  if(!m||m.score==null)return '<div style="font-size:11px;color:var(--text3);">Insufficient price history for momentum</div>';
+  const parts=[];
+  if(m.m3!=null)parts.push(`3M ${m.m3>=0?'+':''}${m.m3}%`);
+  if(m.m6!=null)parts.push(`6M ${m.m6>=0?'+':''}${m.m6}%`);
+  if(m.m12!=null)parts.push(`12M ${m.m12>=0?'+':''}${m.m12}%`);
+  return `<div class="factor-detail">📈 Real price momentum: ${parts.join(' · ')||'—'}</div>`;
+}
+function volDetail(lv){
+  if(!lv||lv.score==null)return '<div style="font-size:11px;color:var(--text3);">Insufficient data for volatility</div>';
+  return `<div class="factor-detail">📊 Annualized volatility: ${lv.vol}% ${lv.vol<18?'(low — stable)':lv.vol<30?'(moderate)':'(high)'}</div>`;
+}
+
+// Factor card renderer — like agentCard but for factors, with optional real-data detail
+function factorCard(name,icon,data,color,detailHtml){
+  if(!data)return'';
+  const hasScore=data.score!=null;
+  const barW=hasScore?Math.min(100,Math.max(0,data.score)):0;
+  let subHtml='';
+  if(data.subScores){
+    subHtml=`<div class="sub-metrics">${Object.entries(data.subScores).map(([k,v])=>{
+      const sc=Math.round(v||0);
+      return`<div class="sub-metric"><span class="sm-label">${METRIC_LABELS[k]||k}</span><div class="sm-bar"><div class="sm-fill" style="width:${sc}%;background:${scoreColor(sc)};"></div></div><span class="sm-val">${sc}</span></div>`;
+    }).join('')}</div>`;
+  }
+  return`<div class="agent-card">
+    <div class="agent-header"><span class="agent-icon">${icon}</span><span class="agent-name">${name}</span><span class="agent-score" style="color:${color};">${hasScore?data.score+'/100':'n/a'}</span></div>
+    <div class="agent-bar"><div class="agent-bar-fill" style="width:${barW}%;background:${color};"></div></div>
+    ${detailHtml||''}
+    ${subHtml}
+    <div class="agent-points">
+      ${(data.positives||[]).map(p=>`<div class="agent-point"><span class="ap-icon ap-pos">✔</span><span>${esc(p)}</span></div>`).join('')}
+      ${(data.negatives||[]).map(p=>`<div class="agent-point"><span class="ap-icon ap-neg">✖</span><span>${esc(p)}</span></div>`).join('')}
+    </div>
+  </div>`;
 }
 
 // ─── Chart ───
@@ -244,19 +387,20 @@ function drawChart(cd){
 document.getElementById('compare-btn')?.addEventListener('click',async()=>{
   const a=document.getElementById('compare-a').value.trim(),b=document.getElementById('compare-b').value.trim();
   if(!a||!b)return;const area=document.getElementById('compare-result');
-  area.innerHTML=`<div class="loading-wrap"><div class="spinner"></div><p>Comparing <strong>${esc(a)}</strong> vs <strong>${esc(b)}</strong> with 8 AI agents…</p></div>`;
+  area.innerHTML=`<div class="loading-wrap"><div class="spinner"></div><p>Comparing <strong>${esc(a)}</strong> vs <strong>${esc(b)}</strong> on 4 factors…</p></div>`;
   try{
-    const[rA,rB]=await Promise.all([callAI(a),callAI(b)]);
-    const dA=parseResult(rA,a),dB=parseResult(rB,b);
-    const miniCard=d=>{const ag=d.agents||{};return`<div class="result-card ${d.verdict==='BUY'?'buy':d.verdict==='AVOID'?'avoid':'hold'}">
+    const[rA,sA,rB,sB]=await Promise.all([callAI(a),fetchStock(a,'1y'),callAI(b),fetchStock(b,'1y')]);
+    const dA=parseResult(rA,a,sA?.chart),dB=parseResult(rB,b,sB?.chart);
+    const FL={momentum:'Momentum',quality:'Quality',value:'Value',lowVol:'Low Vol'};
+    const miniCard=d=>{const F=d.factors||{};return`<div class="result-card ${d.verdict==='BUY'?'buy':d.verdict==='AVOID'?'avoid':'hold'}">
       <div style="display:flex;justify-content:space-between;"><div><div class="stock-name" style="font-size:18px;">${esc(d.ticker)}</div><div class="stock-meta">${esc(d.fullName)}</div></div>
-      <div style="text-align:right;"><span class="verdict-badge ${d.verdict==='BUY'?'verdict-buy':d.verdict==='AVOID'?'verdict-avoid':'verdict-hold'}">${d.verdict}</span><div style="font-size:24px;font-weight:700;color:${scoreColor(d.confidence)};">${d.confidence}%</div></div></div>
+      <div style="text-align:right;"><span class="verdict-badge ${d.verdict==='BUY'?'verdict-buy':d.verdict==='AVOID'?'verdict-avoid':'verdict-hold'}">${d.verdict}</span><div style="font-size:24px;font-weight:700;color:${scoreColor(d.composite)};">${d.composite}</div></div></div>
       <div class="meta-pills" style="margin-top:12px;"><span class="pill">📈 ${esc(d.estimatedUpside||'N/A')}</span><span class="pill">⚡ ${esc(d.riskLevel||'Medium')}</span></div>
-      <div class="agents-mini">${['fundamental','news','technical','risk'].map(k=>`<div class="am-row"><span>${k.charAt(0).toUpperCase()+k.slice(1)}</span><div class="am-bar"><div style="width:${ag[k]?.score||0}%;background:${scoreColor(ag[k]?.score||0)};height:100%;border-radius:3px;"></div></div><span>${ag[k]?.score||0}</span></div>`).join('')}</div>
+      <div class="agents-mini">${['momentum','quality','value','lowVol'].map(k=>{const s=F[k]?.score;const shown=s==null?0:s;return`<div class="am-row"><span>${FL[k]}</span><div class="am-bar"><div style="width:${shown}%;background:${scoreColor(shown)};height:100%;border-radius:3px;"></div></div><span>${s==null?'—':s}</span></div>`;}).join('')}</div>
       <p class="summary" style="margin-top:12px;font-size:13px;">${esc(d.summary)}</p></div>`;};
-    const winner=dA.confidence>dB.confidence?dA:dB;
+    const winner=dA.composite>dB.composite?dA:dB;
     area.innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);margin-bottom:16px;padding:14px 20px;">
-      <span style="font-size:14px;">🏆 <strong>${esc(winner.ticker)}</strong> wins with ${winner.confidence}% confidence vs ${(winner===dA?dB:dA).confidence}%</span></div>
+      <span style="font-size:14px;">🏆 <strong>${esc(winner.ticker)}</strong> wins with factor score ${winner.composite} vs ${(winner===dA?dB:dA).composite}</span></div>
       <div class="compare-grid">${miniCard(dA)}${miniCard(dB)}</div>`;
   }catch(err){area.innerHTML=`<div class="error-card"><div class="error-title">⚠ Failed</div><div class="error-msg">${esc(err.message)}</div></div>`;}
 });
@@ -516,7 +660,7 @@ document.getElementById('export-csv-btn')?.addEventListener('click',async()=>{
   rows.forEach(b=>{
     const g=realGain(b);const amt=b.investedAmount||10000;
     const val=g!=null?Math.round(amt*(1+g/100)):amt;
-    const conf=b.confidence!=null?b.confidence:(b.agents?computeConfidence(b.agents):'');
+    const conf=universalScore(b);
     csv+=[cell(b.src),cell(b.ticker),cell(b.fullName||''),cell(b.sector||''),cell(b.verdict||''),cell(conf),cell(b.entryPrice||''),cell(b.currentPrice||''),cell(b.shares||''),cell(g!=null?g:''),cell(b.todayChangePct!=null?b.todayChangePct:''),cell(amt),cell(val),cell(b.addedAt||b.date||'')].join(',')+'\n';
   });
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=`stockadvisor-${new Date().toISOString().slice(0,10)}.csv`;a.click();showToast('CSV exported!');
@@ -568,8 +712,9 @@ async function checkSotd(){
 
 function showSotdPopup(pick){
   const body=document.getElementById('sotd-body');
-  recomputeAgentScores(pick.agents);
-  const conf=computeConfidence(pick.agents);
+  const conf=universalScore(pick);
+  if(pick.composite==null)pick.composite=conf;
+  if(!pick.verdict)pick.verdict=computeVerdict(conf);
   body.innerHTML=`
     <div style="text-align:center;margin-bottom:18px;">
       <div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">${pick.date} · Today's Top Pick</div>
@@ -577,7 +722,7 @@ function showSotdPopup(pick){
       <div class="stock-meta">${esc(pick.fullName)} · ${esc(pick.sector)}</div>
       <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;">
         <span class="verdict-badge verdict-buy" style="font-size:15px;padding:6px 18px;">${pick.verdict}</span>
-        <div class="conf-big" style="color:${scoreColor(conf)};">${conf}<span style="font-size:18px;color:var(--text3);">%</span></div>
+        <div class="conf-big" style="color:${scoreColor(conf)};">${conf}</div>
       </div>
     </div>
     <div class="valuation-box" style="margin-bottom:16px;"><span>Why today: </span>${esc(pick.whyToday||pick.summary)}</div>
@@ -607,9 +752,15 @@ async function renderDailyTab(pick){
     el.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><h3>No pick yet</h3><p>The Stock of the Day is generated every morning at 9 AM IST.</p></div>';
     return;
   }
-  // Reuse the full analysis card renderer for today's pick
-  recomputeAgentScores(pick.agents);
-  pick.confidence=computeConfidence(pick.agents);
+  // Compute score; support both new factor picks and legacy agent picks
+  if(pick.factors){
+    pick.composite=computeFactorComposite(pick.factors);
+    pick.confidence=pick.composite;
+  }else if(pick.agents){
+    recomputeAgentScores(pick.agents);
+    pick.confidence=computeConfidence(pick.agents);
+    pick.composite=pick.confidence;
+  }
   pick.verdict=computeVerdict(pick.confidence);
   renderResult(pick,el,null,null);
   // Prepend the "why today" banner
@@ -690,5 +841,5 @@ checkSotd();
 // Show welcome message
 document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
   <div style="font-size:32px">🤖</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Welcome to StockAdvisor AI</div>
-  <div style="font-size:13px;color:var(--text2);line-height:1.7;">Type any stock name above and hit <strong>Analyze</strong> to get a multi-agent AI analysis with computed confidence scores.<br><br>
-  <strong>4 AI agents</strong> — Fundamental · News · Technical · Risk — each score independently, then confidence is calculated mathematically.</div></div></div>`;
+  <div style="font-size:13px;color:var(--text2);line-height:1.7;">Type any stock name above and hit <strong>Analyze</strong> for an evidence-based factor analysis with a computed composite score.<br><br>
+  <strong>4 research-backed factors</strong> — Momentum · Quality · Value · Low-Volatility. Momentum &amp; volatility are computed from real price data; quality &amp; value from fundamentals. The composite is a weighted mean, not an LLM guess.</div></div></div>`;

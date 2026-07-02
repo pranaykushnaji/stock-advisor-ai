@@ -13,80 +13,56 @@ export default async function handler(req, res) {
     const cleanStock = stock.trim().slice(0, 100); // cap length to prevent abuse
     if (cleanStock.length < 1) return res.status(400).json({ error: 'stock name required' });
 
-    const AGENT_PROMPT = `You are a multi-agent stock analysis system. You have 4 specialist agents. Each agent scores specific sub-metrics from 0-100 against defined benchmarks, then you compute a weighted score for that agent.
+    const AGENT_PROMPT = `You are a factor-based equity analyst. Score two fundamental factors for the given stock. (Momentum and Low-Volatility are computed separately from real price data — do NOT score those.)
 
-CRITICAL: Do NOT pick scores arbitrarily. For EACH sub-metric, evaluate the actual data against the benchmark and assign a score. Then the agent score is the weighted average of its sub-metrics.
+Score each sub-metric 0-100 against the benchmark, then the factor score is the weighted average of its sub-metrics.
 
-=== FUNDAMENTAL ANALYST (sub-metrics & weights) ===
-Score each 0-100 vs benchmark, then weight:
-- revenueGrowth (weight 20%): >15% YoY=90+, 10-15%=70-85, 5-10%=50-65, <5%=below 50
-- roce (weight 20%): >20%=90+, 15-20%=75-90, 10-15%=55-70, <10%=below 50
-- roe (weight 15%): >18%=90+, 15-18%=75-85, 12-15%=60-72, <12%=below 55
-- debtToEquity (weight 15%): <0.3=90+, 0.3-0.6=75-88, 0.6-1.0=55-70, >1=below 50 (sector-adjusted)
+=== QUALITY FACTOR (sub-metrics & weights) ===
+High-quality = strong, stable, low-leverage businesses that compound.
+- roe (weight 25%): >18%=90+, 15-18%=75-88, 12-15%=60-72, <12%=below 55
+- roce (weight 25%): >20%=90+, 15-20%=75-90, 10-15%=55-70, <10%=below 50
+- debtToEquity (weight 20%): <0.3=90+, 0.3-0.6=75-88, 0.6-1.0=55-70, >1=below 50 (sector-adjusted)
+- earningsStability (weight 15%): consistent/growing profits 5y=85+, erratic=lower
 - margins (weight 15%): EBITDA margin >20% & stable/improving=85+, declining=lower
-- valuation (weight 15%): PEG<1=90+, PE below sector avg=75+, PE above sector avg=40-60, very expensive=below 40
 
-=== TECHNICAL ANALYST (sub-metrics & weights) ===
-- trend (weight 35%): price above 50DMA AND 200DMA=85+, above one=60, below both=below 40
-- momentum_rsi (weight 25%): RSI 40-60 healthy=80, 60-70 bullish=75, >70 overbought=45, <30 oversold=55 (could bounce)
-- macd (weight 25%): bullish crossover/above signal=85, bearish=35
-- volume_support (weight 15%): rising volume on up-moves + near support=80, near resistance=50
+=== VALUE FACTOR (sub-metrics & weights) ===
+Value = cheap relative to fundamentals. Cheaper = higher score.
+- peRatio (weight 35%): PE well below sector avg=90+, at par=60, above=40, very expensive=below 30
+- pbRatio (weight 25%): P/B low vs sector/history=85+, high=below 40
+- pegRatio (weight 25%): PEG<1=90+, 1-1.5=70, 1.5-2=50, >2=below 35
+- dividendYield (weight 15%): healthy sustainable yield=75+, none=45
 
-=== NEWS ANALYST (sub-metrics & weights) ===
-- recentCatalysts (weight 35%): major positive (orders, contracts, expansion)=85+, neutral=55, negative=below 40
-- institutionalActivity (weight 25%): promoter/FII increasing stake=85+, selling=below 40
-- sectorTrend (weight 25%): sector tailwinds/govt support=80+, headwinds=below 45
-- sentiment (weight 15%): overall news tone positive=75+, mixed=55, negative=below 40
-
-=== RISK ANALYST (sub-metrics & weights) — higher score = LOWER risk ===
-- debtRisk (weight 30%): low/no debt=90+, manageable=65, high leverage=below 40
-- pledgedShares (weight 25%): zero pledged=95, some=60, high pledge=below 35
-- volatility (weight 25%): large-cap stable=85, mid-cap=65, small-cap volatile=45
-- concentration (weight 20%): diversified revenue/clients=85, concentrated/single-customer=below 45
-
-Return ONLY valid JSON (no markdown):
+Return ONLY valid JSON (no markdown). ALL scores 0-100 integers:
 {
   "ticker": "SYMBOL",
   "fullName": "Full Company Name",
   "sector": "Sector",
-  "estimatedUpside": "15-25%",
+  "estimatedUpside": "12-20%",
   "riskLevel": "Low" or "Medium" or "High",
-  "horizon": "3-6 months" or "6-12 months" or "1-2 years",
-  "agents": {
-    "fundamental": {
-      "score": <weighted avg of sub-metrics below, 0-100>,
-      "subScores": {"revenueGrowth": 0-100, "roce": 0-100, "roe": 0-100, "debtToEquity": 0-100, "margins": 0-100, "valuation": 0-100},
-      "positives": ["Revenue CAGR 24% (>15% benchmark)", "ROCE 22% — excellent capital efficiency"],
-      "negatives": ["PE 48x vs sector 30x — expensive"]
-    },
-    "news": {
+  "horizon": "6-12 months" or "1-2 years",
+  "factors": {
+    "quality": {
       "score": <weighted avg>,
-      "subScores": {"recentCatalysts": 0-100, "institutionalActivity": 0-100, "sectorTrend": 0-100, "sentiment": 0-100},
-      "positives": ["Won 1000 Cr govt order", "Promoter raised stake 2%"],
-      "negatives": ["Sector facing regulatory pressure"]
+      "subScores": {"roe":0-100,"roce":0-100,"debtToEquity":0-100,"earningsStability":0-100,"margins":0-100},
+      "positives": ["ROE 22% — excellent", "Net cash positive"],
+      "negatives": ["Margins compressed 300bps YoY"]
     },
-    "technical": {
+    "value": {
       "score": <weighted avg>,
-      "subScores": {"trend": 0-100, "momentum_rsi": 0-100, "macd": 0-100, "volume_support": 0-100},
-      "positives": ["Above 50 & 200 DMA — uptrend", "RSI 58 — healthy momentum"],
-      "negatives": ["Near resistance at 1450"]
-    },
-    "risk": {
-      "score": <weighted avg, higher=safer>,
-      "subScores": {"debtRisk": 0-100, "pledgedShares": 0-100, "volatility": 0-100, "concentration": 0-100},
-      "positives": ["Zero pledged shares", "Net cash positive"],
-      "negatives": ["Small-cap — higher volatility"]
+      "subScores": {"peRatio":0-100,"pbRatio":0-100,"pegRatio":0-100,"dividendYield":0-100},
+      "positives": ["PE 18x vs sector 26x — cheap"],
+      "negatives": ["No dividend"]
     }
   },
-  "summary": "2-3 sentence summary explaining the overall verdict and key drivers",
-  "priceContext": "CMP, 52-week range, PE, sector PE"
+  "newsSummary": "1-2 sentences on any major recent catalyst or risk from news (informational only, not scored)",
+  "summary": "2-3 sentence overall view combining quality + value + what the price-based factors will likely add",
+  "priceContext": "CMP, 52-week range, PE, sector PE, P/B"
 }
 
 RULES:
-- Compute each agent score as the WEIGHTED AVERAGE of its subScores using the weights above
-- Use REAL financial data and actual metrics — never invent
-- Each positive/negative must reference the actual metric vs benchmark
-- subScores must justify the agent score
+- Compute each factor score as the WEIGHTED AVERAGE of its subScores
+- Use REAL financial data — never invent; if unsure, score conservatively toward 50
+- Each positive/negative references an actual metric vs benchmark
 - Return ONLY the JSON`
 
     const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {

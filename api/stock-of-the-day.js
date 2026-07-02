@@ -33,7 +33,8 @@ async function fetchWithTimeout(url, opts = {}, ms = 5000) {
   finally { clearTimeout(t); }
 }
 
-// Fetch live price from Yahoo — tries mapped symbol, then NSE/BSE suffixes
+// Fetch live price from Yahoo — tries mapped symbol, then NSE/BSE suffixes.
+// Also returns 1y of close prices for factor computation.
 async function fetchPrice(ticker, fullName) {
   const upper = (ticker || '').toUpperCase();
   const nameUpper = (fullName || '').toUpperCase().replace(/ LTD\.?| LIMITED/g, '').trim();
@@ -42,23 +43,64 @@ async function fetchPrice(ticker, fullName) {
   const trySymbols = [mapped, clean.includes('.') ? clean : clean + '.NS', clean + '.BO', clean].filter(Boolean);
   for (const sym of trySymbols) {
     try {
-      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1d&interval=1d`;
+      const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1y&interval=1d`;
       const r = await fetchWithTimeout(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 5000);
       if (!r.ok) continue;
       const d = await r.json();
-      const meta = d?.chart?.result?.[0]?.meta;
+      const result = d?.chart?.result?.[0];
+      const meta = result?.meta;
       if (meta?.regularMarketPrice) {
         return {
           price: +meta.regularMarketPrice.toFixed(2),
           open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
           prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
-          symbol: meta.symbol, currency: meta.currency
+          symbol: meta.symbol, currency: meta.currency,
+          closes: (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null)
         };
       }
     } catch (e) { continue; }
   }
   return null;
 }
+
+// --- Factor math (mirror of frontend factors) ---
+function periodReturn(closes, lb, skip) {
+  if (!closes || closes.length < lb + skip + 1) return null;
+  const end = closes.length - 1 - skip, start = end - lb;
+  if (start < 0 || end <= start) return null;
+  const p0 = closes[start], p1 = closes[end];
+  if (!p0 || !p1 || p0 <= 0) return null;
+  return ((p1 - p0) / p0) * 100;
+}
+function annualizedVol(closes) {
+  if (!closes || closes.length < 30) return null;
+  const rets = [];
+  for (let i = 1; i < closes.length; i++) if (closes[i] != null && closes[i-1] > 0) rets.push((closes[i] - closes[i-1]) / closes[i-1]);
+  if (rets.length < 20) return null;
+  const mean = rets.reduce((a, b) => a + b, 0) / rets.length;
+  const v = rets.reduce((a, b) => a + (b - mean) ** 2, 0) / rets.length;
+  return Math.sqrt(v) * Math.sqrt(252) * 100;
+}
+function computeRealFactors(closes) {
+  if (!closes || closes.length < 40) return { momentum: { score: null }, lowVol: { score: null } };
+  const m3 = periodReturn(closes, 63, 21), m6 = periodReturn(closes, 126, 21), m12 = periodReturn(closes, 252, 21);
+  const avail = [m3, m6, m12].filter(v => v != null);
+  const momRaw = avail.length ? avail.reduce((a, b) => a + b, 0) / avail.length : null;
+  const vol = annualizedVol(closes);
+  const scoreMom = momRaw == null ? null : Math.max(0, Math.min(100, Math.round(50 + momRaw * 1.15)));
+  const scoreVol = vol == null ? null : Math.max(0, Math.min(100, Math.round(115 - vol * 2.05)));
+  return {
+    momentum: { score: scoreMom, raw: momRaw != null ? +momRaw.toFixed(1) : null, m3: m3 != null ? +m3.toFixed(1) : null, m6: m6 != null ? +m6.toFixed(1) : null, m12: m12 != null ? +m12.toFixed(1) : null },
+    lowVol: { score: scoreVol, vol: vol != null ? +vol.toFixed(1) : null }
+  };
+}
+const FACTOR_WEIGHTS = { momentum: 0.30, quality: 0.28, value: 0.22, lowVol: 0.20 };
+function computeFactorComposite(f) {
+  let t = 0, w = 0;
+  for (const [k, wt] of Object.entries(FACTOR_WEIGHTS)) { const s = f[k]?.score; if (s != null && !isNaN(s)) { t += s * wt; w += wt; } }
+  return w > 0 ? Math.round(t / w) : 50;
+}
+
 
 async function ghGetFile(path, token) {
   const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
@@ -127,26 +169,26 @@ export default async function handler(req, res) {
   // Discover today's candidates live (news + movers, Nifty-50 fallback)
   const { candidates, sources } = await discoverCandidates(apiKey);
 
-  const SELECTION_PROMPT = `You are the chief market strategist for an Indian stock advisory. Today is ${date}.
+  const SELECTION_PROMPT = `You are a factor-based equity strategist for Indian markets. Today is ${date}.
 
-These candidates surfaced from TODAY's market news and top movers. Pick the SINGLE best stock to buy today based on current fundamentals, recent news catalysts, technical setup, and risk-reward.
+These candidates surfaced from TODAY's market news and top movers. Pick the SINGLE best stock to BUY, favoring strong Quality (high ROE/ROCE, low debt) and reasonable Value (not overpriced). Momentum and volatility will be measured separately from real price data, so weight fundamentals here.
 
 Candidates: ${candidates.join(', ')}
 
-Return ONLY valid JSON (no markdown). ALL scores must be on a 0-100 scale (e.g. 85, not 8.5):
+Return ONLY valid JSON (no markdown). ALL scores 0-100 integers:
 {
   "ticker": "SYMBOL", "fullName": "Full Name", "sector": "Sector",
-  "verdict": "BUY", "estimatedUpside": "12-20%", "riskLevel": "Low/Medium/High", "horizon": "3-6 months",
-  "agents": {
-    "fundamental": {"score":0,"subScores":{"revenueGrowth":0,"roce":0,"roe":0,"debtToEquity":0,"margins":0,"valuation":0},"positives":["..."],"negatives":["..."]},
-    "news": {"score":0,"subScores":{"recentCatalysts":0,"institutionalActivity":0,"sectorTrend":0,"sentiment":0},"positives":["..."],"negatives":["..."]},
-    "technical": {"score":0,"subScores":{"trend":0,"momentum_rsi":0,"macd":0,"volume_support":0},"positives":["..."],"negatives":["..."]},
-    "risk": {"score":0,"subScores":{"debtRisk":0,"pledgedShares":0,"volatility":0,"concentration":0},"positives":["..."],"negatives":["..."]}
+  "estimatedUpside": "12-20%", "riskLevel": "Low/Medium/High", "horizon": "6-12 months",
+  "factors": {
+    "quality": {"score":0,"subScores":{"roe":0,"roce":0,"debtToEquity":0,"earningsStability":0,"margins":0},"positives":["..."],"negatives":["..."]},
+    "value": {"score":0,"subScores":{"peRatio":0,"pbRatio":0,"pegRatio":0,"dividendYield":0},"positives":["..."],"negatives":["..."]}
   },
-  "summary": "Why this is today's pick", "priceContext": "CMP, range, PE",
+  "newsSummary": "1-2 sentences on the key catalyst that made this stand out today",
+  "summary": "Why this is today's pick — quality + value thesis",
+  "priceContext": "CMP, range, PE, P/B",
   "whyToday": "The single most important reason this stands out TODAY"
 }
-Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
+Every subScore is an integer 0-100. Return ONLY the JSON.`;
 
   try {
     const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -183,7 +225,7 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
       return res.status(502).json({ error: 'Could not parse AI pick', detail: e.message });
     }
     // Validate the pick has the essential fields before committing anything
-    if (!pick || !pick.ticker || !pick.agents) {
+    if (!pick || !pick.ticker || !pick.factors) {
       return res.status(502).json({ error: 'AI returned an incomplete pick', got: pick?.ticker || null });
     }
     pick.date = date;
@@ -191,13 +233,23 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
     pick.discovery = sources;
     pick.candidatePool = candidates.length;
 
-    // Save daily pick (retry-safe)
-    await ghPutWithRetry('data/daily-pick.json', () => ({ pick }), ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
-
-    // Capture real entry price (day's OPEN) before adding to bouquet
+    // Fetch price + 1y history FIRST so we can compute real factors and the composite
     const priceData = await fetchPrice(pick.ticker, pick.fullName);
     const entryPrice = priceData ? (priceData.open || priceData.price) : null;
     const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
+
+    // Recompute LLM factor scores from sub-scores (deterministic), fold in real momentum/lowVol
+    const QUALITY_SUBW = { roe: 0.25, roce: 0.25, debtToEquity: 0.20, earningsStability: 0.15, margins: 0.15 };
+    const VALUE_SUBW = { peRatio: 0.35, pbRatio: 0.25, pegRatio: 0.25, dividendYield: 0.15 };
+    const recomputeFactor = (f, w) => { if (!f?.subScores) return; let t = 0, s = 0; for (const [m, wt] of Object.entries(w)) { const v = f.subScores[m]; if (v != null && !isNaN(v)) { t += v * wt; s += wt; } } if (s > 0) f.score = Math.round(t / s); };
+    recomputeFactor(pick.factors.quality, QUALITY_SUBW);
+    recomputeFactor(pick.factors.value, VALUE_SUBW);
+    const real = computeRealFactors(priceData?.closes || []);
+    pick.factors.momentum = real.momentum;
+    pick.factors.lowVol = real.lowVol;
+    pick.composite = computeFactorComposite(pick.factors);
+    pick.verdict = pick.composite >= 70 ? 'BUY' : pick.composite >= 50 ? 'HOLD' : 'AVOID';
+
     // Capture Nifty level at entry for alpha tracking
     let niftyAtEntry = null;
     try {
@@ -205,13 +257,16 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
       if (nr.ok) { const nm = (await nr.json())?.chart?.result?.[0]?.meta; if (nm?.regularMarketPrice) niftyAtEntry = +nm.regularMarketPrice.toFixed(2); }
     } catch (e) {}
 
+    // Save daily pick (now complete with factors, composite, verdict) — retry-safe
+    await ghPutWithRetry('data/daily-pick.json', () => ({ pick }), ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
+
     // Append to project bouquet (retry-safe, guards against double-add for same day)
     await ghPutWithRetry('data/project-bouquet.json', (current) => {
       let bouquet = current?.bouquet || [];
       if (bouquet.find(b => b.date === date)) return null; // already added today — skip write
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
-        verdict: pick.verdict, date, addedAt: pick.pickedAt, investedAmount: 10000,
+        verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: 10000,
         entryPrice, currentPrice: priceData?.price || entryPrice, shares,
         entryPriceProvisional: priceData?.open ? false : true,
         dayOpen: priceData?.open || null, prevClose: priceData?.prevClose || null,
@@ -219,7 +274,7 @@ Every subScore is an integer from 0 to 100. Return ONLY the JSON.`;
         lastPriceUpdate: pick.pickedAt, yahooSymbol: priceData?.symbol || null,
         niftyAtEntry, niftyNow: niftyAtEntry,
         estimatedUpside: pick.estimatedUpside, riskLevel: pick.riskLevel,
-        summary: pick.summary, whyToday: pick.whyToday, agents: pick.agents
+        summary: pick.summary, whyToday: pick.whyToday, factors: pick.factors
       });
       if (bouquet.length > 365) bouquet = bouquet.slice(0, 365);
       return { bouquet };

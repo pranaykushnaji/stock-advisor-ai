@@ -3,7 +3,7 @@
 AI-powered stock analysis for Indian markets — completely free, no user API key required.
 
 ## Features
-- 🤖 **Multi-Agent AI Analysis** — 4 specialist agents (Fundamental, News, Technical, Risk) each score sub-metrics against research-backed benchmarks; confidence is a deterministic weighted mean computed in code, not guessed by the LLM
+- 🎯 **Factor-Based Analysis** — 4 research-backed factors (Momentum, Quality, Value, Low-Volatility). Momentum & volatility are computed from real price history; quality & value from fundamentals. The composite is a deterministic weighted mean (momentum 30%, quality 28%, value 22%, low-vol 20%), grounded in the NSE Multi-Factor whitepaper and factor-investing research — not guessed by the LLM
 - ⭐ **Stock of the Day** — every morning at 9 AM IST a cron discovers candidates live (market news + top movers), picks the single best stock, and tracks it with real NSE prices
 - 📊 **Real Price Tracking** — entry price captured at pick time; a daily cron refreshes current prices from Yahoo Finance so returns are real, not simulated
 - 📈 **Nifty 50 Benchmark** — every pick's return is compared against the index over the same period, so you can see actual alpha (edge) vs. just riding the market
