@@ -114,9 +114,16 @@ function annualizedVol(closes) {
   return Math.sqrt(v) * Math.sqrt(252) * 100;
 }
 function computeRealFactors(closes) {
-  if (!closes || closes.length < 40) return { momentum: { score: null }, lowVol: { score: null } };
-  const m3 = periodReturn(closes, 63, 21), m6 = periodReturn(closes, 126, 21), m12 = periodReturn(closes, 252, 21);
-  const avail = [m3, m6, m12].filter(v => v != null);
+  closes = (closes || []).filter(v => v != null && !isNaN(v));
+  if (closes.length < 30) return { momentum: { score: null }, lowVol: { score: null } };
+  const skip = closes.length >= 150 ? 21 : closes.length >= 90 ? 10 : 0;
+  const m3 = periodReturn(closes, 63, skip), m6 = periodReturn(closes, 126, skip), m12 = periodReturn(closes, 252, skip);
+  let avail = [m3, m6, m12].filter(v => v != null);
+  if (!avail.length) {
+    const lb = Math.min(closes.length - 1, Math.max(20, Math.floor(closes.length * 0.6)));
+    const fb = periodReturn(closes, lb, 0);
+    if (fb != null) avail = [fb];
+  }
   const momRaw = avail.length ? avail.reduce((a, b) => a + b, 0) / avail.length : null;
   const vol = annualizedVol(closes);
   const scoreMom = momRaw == null ? null : Math.max(0, Math.min(100, Math.round(50 + momRaw * 1.15)));
