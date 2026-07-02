@@ -72,11 +72,18 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
         price: +meta.regularMarketPrice.toFixed(2),
         open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
         prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
-        symbol: meta.symbol
+        symbol: meta.symbol,
+        marketState: meta.marketState || null  // PRE/PREPRE, REGULAR, POST, CLOSED
       };
     } catch (e) { continue; }
   }
   return null;
+}
+
+// Is NSE currently in a live/complete trading state? (REGULAR = open, POST/CLOSED = has real close)
+// PRE/PREPRE = pre-market: prices are stale/indicative, do NOT trust as live.
+function isTradingDataReliable(marketState) {
+  return marketState === 'REGULAR' || marketState === 'POST' || marketState === 'POSTPOST' || marketState === 'CLOSED';
 }
 
 export default async function handler(req, res) {
@@ -113,36 +120,49 @@ export default async function handler(req, res) {
 
   // Process in parallel batches so a large bouquet doesn't run sequentially past the time limit
   const BATCH = 8;
+  let skippedPremarket = 0;
   for (let i = 0; i < bouquet.length; i += BATCH) {
     const slice = bouquet.slice(i, i + BATCH);
     await Promise.all(slice.map(async (item) => {
       const pd = await fetchPrice(item.ticker, item.fullName, item.yahooSymbol);
       if (pd?.price) {
-        // Entry price = the day's OPEN when the pick was made (morning price).
-        if (!item.entryPrice || item.entryPriceProvisional) {
-          item.entryPrice = pd.open || pd.prevClose || pd.price;
-          item.entryPriceProvisional = pd.open ? false : true;
-        }
-        item.currentPrice = pd.price;
-        item.dayOpen = pd.open;
+        const reliable = isTradingDataReliable(pd.marketState);
+        // Always safe to refresh reference data (prevClose) and the resolved symbol
         item.prevClose = pd.prevClose;
         item.yahooSymbol = pd.symbol;
-        item.lastPriceUpdate = now;
-        const invested = item.investedAmount || 10000;
-        item.shares = item.entryPrice > 0 ? +(invested / item.entryPrice).toFixed(3) : 0;
-        item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
-        // Nifty benchmark: record level at entry once, and the latest level always
-        if (niftyNow != null && item.niftyAtEntry == null) item.niftyAtEntry = niftyNow;
-        if (niftyNow != null) item.niftyNow = niftyNow;
-        updated++;
+        // Lock entry only from a real OPEN captured during/after the session (never pre-market)
+        if ((!item.entryPrice || item.entryPriceProvisional) && reliable && pd.open) {
+          item.entryPrice = pd.open;
+          item.entryPriceProvisional = false;
+          item.dayOpen = pd.open;
+        }
+        // Only update the LIVE price + today's move when the data is actually live/complete.
+        // Pre-market (PRE/PREPRE) prices are stale or indicative — skip them to avoid bogus moves.
+        if (reliable) {
+          item.currentPrice = pd.price;
+          item.lastPriceUpdate = now;
+          const invested = item.investedAmount || 10000;
+          if (item.entryPrice > 0) item.shares = +(invested / item.entryPrice).toFixed(3);
+          item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
+          item.marketState = pd.marketState;
+          if (niftyNow != null && item.niftyAtEntry == null) item.niftyAtEntry = niftyNow;
+          if (niftyNow != null) item.niftyNow = niftyNow;
+          updated++;
+        } else {
+          skippedPremarket++;
+        }
       } else {
         failed.push(item.ticker);
       }
     }));
   }
 
-  await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);
+  // Only write if something actually changed (avoids a needless commit when everything was pre-market)
+  if (updated > 0 || skippedPremarket === 0) {
+    await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);
+  }
   const out = { status: 'refreshed', updated, total: bouquet.length, nifty: niftyNow };
+  if (skippedPremarket) out.skippedPremarket = skippedPremarket;
   if (failed.length) out.failed = failed;
   return res.status(200).json(out);
 }

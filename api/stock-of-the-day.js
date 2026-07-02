@@ -55,6 +55,7 @@ async function fetchPrice(ticker, fullName) {
           open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
           prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
           symbol: meta.symbol, currency: meta.currency,
+          marketState: meta.marketState || null,
           closes: (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null)
         };
       }
@@ -235,7 +236,12 @@ Every subScore is an integer 0-100. Return ONLY the JSON.`;
 
     // Fetch price + 1y history FIRST so we can compute real factors and the composite
     const priceData = await fetchPrice(pick.ticker, pick.fullName);
-    const entryPrice = priceData ? (priceData.open || priceData.price) : null;
+    // The pick runs at 9 AM (pre-open), so a real OPEN usually isn't available yet.
+    // Use open if the market is genuinely open; otherwise fall back to prevClose and
+    // mark provisional so the 9:20 capture-open cron locks the true opening price.
+    const marketOpen = priceData?.marketState === 'REGULAR' || priceData?.marketState === 'POST' || priceData?.marketState === 'CLOSED';
+    const entryPrice = priceData ? ((marketOpen && priceData.open) ? priceData.open : (priceData.prevClose || priceData.price)) : null;
+    const entryProvisional = !(marketOpen && priceData?.open);
     const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
 
     // Recompute LLM factor scores from sub-scores (deterministic), fold in real momentum/lowVol
@@ -268,8 +274,8 @@ Every subScore is an integer 0-100. Return ONLY the JSON.`;
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: 10000,
         entryPrice, currentPrice: priceData?.price || entryPrice, shares,
-        entryPriceProvisional: priceData?.open ? false : true,
-        dayOpen: priceData?.open || null, prevClose: priceData?.prevClose || null,
+        entryPriceProvisional: entryProvisional,
+        dayOpen: (marketOpen && priceData?.open) ? priceData.open : null, prevClose: priceData?.prevClose || null,
         todayChangePct: (priceData?.prevClose && priceData?.price) ? +(((priceData.price - priceData.prevClose) / priceData.prevClose) * 100).toFixed(2) : null,
         lastPriceUpdate: pick.pickedAt, yahooSymbol: priceData?.symbol || null,
         niftyAtEntry, niftyNow: niftyAtEntry,
