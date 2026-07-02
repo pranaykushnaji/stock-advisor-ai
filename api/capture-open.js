@@ -95,8 +95,8 @@ export default async function handler(req, res) {
   const stillWaiting = [];
   for (const item of pending) {
     const pd = await fetchOpen(item.ticker, item.fullName, item.yahooSymbol);
-    const reliable = pd && !pd.error && (pd.marketState === 'REGULAR' || pd.marketState === 'POST' || pd.marketState === 'CLOSED');
-    if (reliable && pd.open) {
+    const isLive = pd && !pd.error && (pd.marketState === 'REGULAR' || pd.marketState === 'POST' || pd.marketState === 'CLOSED');
+    if (isLive && pd.open) {
       item.entryPrice = pd.open;
       item.dayOpen = pd.open;
       item.entryPriceProvisional = false;
@@ -110,7 +110,12 @@ export default async function handler(req, res) {
       item.lastPriceUpdate = new Date().toISOString();
       locked.push({ ticker: item.ticker, open: pd.open, marketState: pd.marketState });
     } else {
-      stillWaiting.push({ ticker: item.ticker, reason: pd?.error || pd?.marketState || 'no-data', open: pd?.open ?? null });
+      // Distinguish: market not open on Yahoo's feed yet (pre-market) vs an actual fetch failure
+      let reason;
+      if (pd?.error) reason = pd.error;                                  // timeout/http-xxx/no-price
+      else if (pd?.marketState) reason = `market-${pd.marketState}`;      // e.g. market-PRE, market-PREPRE
+      else reason = 'no-data';
+      stillWaiting.push({ ticker: item.ticker, reason, marketState: pd?.marketState ?? null, open: pd?.open ?? null });
     }
   }
 
