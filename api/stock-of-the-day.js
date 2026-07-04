@@ -4,7 +4,7 @@ import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
 import { decideSell, markPending } from './_sell-engine.js';
 import { fetchFundamentals } from './_fundamentals.js';
-import { scoreUniverse } from './_scoring.js';
+import { scoreUniverse, scoreMomentumUniverse } from './_scoring.js';
 
 // Fetch up to 8 recent Google News headlines for a held stock (for the sell LLM).
 async function fetchHeadlines(query) {
@@ -88,7 +88,8 @@ async function fetchPrice(ticker, fullName) {
           prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
           symbol: meta.symbol, currency: meta.currency,
           marketState: meta.marketState || null,
-          closes: (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null)
+          closes: (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null),
+          volumes: (result?.indicators?.quote?.[0]?.volume || []).filter(v => v != null)
         };
       }
     } catch (e) { continue; }
@@ -114,13 +115,14 @@ async function fetchPriceAV(base) {
       if (dates.length < 40) continue;
       const recent = dates.slice(-260);
       const closes = recent.map(dt => parseFloat(series[dt]['4. close'])).filter(v => v != null && !isNaN(v));
+      const volumes = recent.map(dt => parseFloat(series[dt]['5. volume'])).filter(v => v != null && !isNaN(v));
       const last = closes[closes.length - 1];
       const prev = closes.length > 1 ? closes[closes.length - 2] : last;
       // AV daily has no intraday open/marketState; treat as end-of-day close data
       return {
         price: +last.toFixed(2), open: null,
         prevClose: +prev.toFixed(2), symbol: sym, currency: 'INR',
-        marketState: 'CLOSED', closes
+        marketState: 'CLOSED', closes, volumes
       };
     } catch (e) { continue; }
   }
@@ -248,7 +250,16 @@ export default async function handler(req, res) {
       for (const item of open) {
         sellReview.reviewed++;
         const headlines = await fetchHeadlines(item.fullName || item.ticker);
-        const decision = await decideSell(item, apiKey, headlines);
+        // Fetch recent closes so the sell engine can detect momentum fade.
+        let recentCloses = null;
+        try {
+          const pd = await fetchPrice(item.yahooSymbol || item.ticker, item.fullName);
+          if (pd?.closes?.length) {
+            recentCloses = pd.closes.filter(v => v != null && !isNaN(v));
+            item.currentPrice = pd.price ?? item.currentPrice; // freshen for rules gate
+          }
+        } catch (e) {}
+        const decision = await decideSell(item, apiKey, headlines, recentCloses);
         if (decision) {
           const idx = bouquet.indexOf(item);
           bouquet[idx] = markPending(item, decision);
@@ -285,24 +296,25 @@ export default async function handler(req, res) {
     sources.usedFallback = true;
   }
 
-  // ---- DETERMINISTIC SELECTION (replaces LLM-chooses-the-pick) ----
-  // Fetch price history + real fundamentals for every candidate, score them
-  // cross-sectionally, and take the top POTD-eligible stock. The LLM's role is
-  // downgraded to writing the narrative for the winner — it no longer picks or
-  // supplies fundamentals numbers.
+  // ---- MOMENTUM-DOMINANT SELECTION (bouquet / swing-trade mode) ----
+  // Short-term momentum leads (55%); quality is only a junk-filter; volume confirms
+  // interest. A liquidity/penny/volatility junk filter drops manipulated microcaps.
+  // Paired with the tightened sell engine (8% target / -5% stop / 7-day max hold).
   const fmpKey = process.env.FMP_KEY;
 
   const pool = candidates.slice(0, 12);
   const built = await Promise.all(pool.map(async (name) => {
     try {
       const pd = await fetchPrice(name, name);
-      if (!pd || !Array.isArray(pd.closes) || pd.closes.length < 30) return null;
+      if (!pd || !Array.isArray(pd.closes) || pd.closes.length < 20) return null;
       const ticker = (pd.symbol || name).replace(/\.(NS|BO)$/i, '').toUpperCase();
       const fundamentals = await fetchFundamentals(ticker, { fmpKey });
       return {
         symbol: ticker,
         fullName: pd.name || name,
         closes: pd.closes.filter(v => v != null && !isNaN(v)),
+        volumes: (pd.volumes || []).filter(v => v != null && !isNaN(v)),
+        price: pd.price,
         fundamentals,
         _price: pd,
       };
@@ -310,17 +322,18 @@ export default async function handler(req, res) {
   }));
   const universe = built.filter(Boolean);
 
-  const rankedEligible = scoreUniverse(universe, { potdOnly: true });
+  const { ranked: rankedEligible, rejected } = scoreMomentumUniverse(universe);
   const fundCoverage = {
     universe: universe.length,
-    eligible: rankedEligible.length,
+    tradeable: rankedEligible.length,
+    rejectedJunk: rejected.map(r => ({ ticker: r.symbol, reasons: r.junkReasons })),
     bySource: universe.reduce((a, s) => { const k = s.fundamentals.source; a[k] = (a[k] || 0) + 1; return a; }, {}),
   };
 
   if (!rankedEligible.length) {
     return res.status(200).json({
       status: 'no_eligible_pick',
-      reason: 'no candidate had real fundamentals today',
+      reason: 'no tradeable candidate after junk filter',
       fundCoverage, sellReview,
     });
   }
@@ -333,27 +346,28 @@ export default async function handler(req, res) {
     const realFund = winnerRow.fundamentals.fields;
 
     // ---- LLM writes ONLY the narrative for the already-chosen winner ----
-    const NARRATIVE_PROMPT = `You are an equity analyst writing a brief for Indian market investors. Today is ${date}.
+    const NARRATIVE_PROMPT = `You are a short-term momentum trader writing a quick brief for Indian market swing traders. Today is ${date}.
 
-The Stock of the Day has ALREADY been selected by a quantitative factor model (do not second-guess the pick). Explain it using ONLY the real data provided — do not invent numbers.
+This Stock of the Day was selected by a MOMENTUM model (short-term price strength + volume), NOT a long-term value model. It is a SWING TRADE, not a buy-and-hold. Explain it using ONLY the real data provided — do not invent numbers.
 
 Selected: ${winner.fullName} (${winner.symbol}), sector ${winner.sector}
-Factor scores (0-100, cross-sectional percentile): Momentum ${winner.factors.momentum}, Quality ${winner.factors.quality}, Value ${winner.factors.value}, Low-Volatility ${winner.factors.lowVol}. Composite ${winner.composite} (${winner.verdict}).
-Real fundamentals (source: ${winnerRow.fundamentals.source}): ${JSON.stringify(realFund)}
+Momentum-model scores (0-100 percentile): Momentum ${winner.factors.momentum}, Quality-filter ${winner.factors.quality}, Volume ${winner.factors.volume}, Low-Vol ${winner.factors.lowVol}. Composite ${winner.composite} (${winner.verdict}).
+Short-term returns: ${JSON.stringify(winner.shortReturns)} (r1d/r1w/r1m as decimals)
+Volume ratio (recent/baseline): ${winner.volumeRatio}
 Annualized volatility: ${winner.annualizedVol}%
+Real fundamentals (context only, source ${winnerRow.fundamentals.source}): ${JSON.stringify(realFund)}
 
 Return ONLY valid JSON (no markdown):
 {
-  "estimatedUpside": "e.g. 12-18%",
+  "estimatedUpside": "short-term, e.g. 5-8%",
   "riskLevel": "Low" | "Medium" | "High",
-  "horizon": "6-12 months" | "1-2 years",
-  "qualityNotes": {"positives":["ref a real metric"],"negatives":["ref a real metric"]},
-  "valueNotes": {"positives":["ref a real metric"],"negatives":["ref a real metric"]},
-  "newsSummary": "1-2 sentences on any recent catalyst (informational)",
-  "summary": "2-3 sentence thesis grounded in the factor scores + real fundamentals",
-  "whyToday": "The single most important reason this stands out today"
+  "horizon": "days to 1-2 weeks",
+  "momentumNotes": {"positives":["ref a real short-term metric"],"negatives":["ref a risk"]},
+  "newsSummary": "1-2 sentences on any recent catalyst driving the move",
+  "summary": "2-3 sentence swing-trade thesis: why the short-term momentum is attractive now",
+  "whyToday": "The single most important reason this has momentum today"
 }
-Reference only the real numbers above. Return ONLY the JSON.`;
+This is a short-term momentum trade. Reference only the real numbers above. Return ONLY the JSON.`;
 
     let narrative = {};
     try {
@@ -377,12 +391,15 @@ Reference only the real numbers above. Return ONLY the JSON.`;
     // Assemble pick from DETERMINISTIC scores + LLM narrative
     const pick = {
       ticker: winner.symbol, fullName: winner.fullName, sector: winner.sector,
+      strategy: 'momentum-swing',
       factors: {
-        momentum: { score: winner.factors.momentum },
-        quality: { score: winner.factors.quality, positives: narrative?.qualityNotes?.positives || [], negatives: narrative?.qualityNotes?.negatives || [] },
-        value: { score: winner.factors.value, positives: narrative?.valueNotes?.positives || [], negatives: narrative?.valueNotes?.negatives || [] },
+        momentum: { score: winner.factors.momentum, positives: narrative?.momentumNotes?.positives || [], negatives: narrative?.momentumNotes?.negatives || [] },
+        quality: { score: winner.factors.quality },
+        volume: { score: winner.factors.volume },
         lowVol: { score: winner.factors.lowVol },
       },
+      shortReturns: winner.shortReturns,
+      volumeRatio: winner.volumeRatio,
       fundamentals: realFund,
       fundamentalsSource: winnerRow.fundamentals.source,
       annualizedVol: winner.annualizedVol,
@@ -390,7 +407,7 @@ Reference only the real numbers above. Return ONLY the JSON.`;
       verdict: winner.verdict,
       estimatedUpside: narrative?.estimatedUpside || null,
       riskLevel: narrative?.riskLevel || null,
-      horizon: narrative?.horizon || null,
+      horizon: narrative?.horizon || 'days to 1-2 weeks',
       newsSummary: narrative?.newsSummary || null,
       summary: narrative?.summary || null,
       whyToday: narrative?.whyToday || null,

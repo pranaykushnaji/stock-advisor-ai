@@ -27,6 +27,49 @@ export function computeReturns(closes) {
   };
 }
 
+// SHORT-TERM returns for the momentum-trading (bouquet) mode: 1-day, 1-week, 1-month.
+// Tolerant of short series — returns whatever windows the data supports.
+export function computeShortReturns(closes) {
+  if (!Array.isArray(closes) || closes.length < 6) return null;
+  const last = closes[closes.length - 1];
+  const at = (n) => { const i = closes.length - 1 - n; return i >= 0 ? closes[i] : null; };
+  const r = (past) => (past && past > 0 ? (last - past) / past : null);
+  return {
+    r1d: r(at(1)),   // 1 day
+    r1w: r(at(5)),   // 1 week (~5 trading days)
+    r1m: r(at(21)),  // 1 month (~21 trading days)
+  };
+}
+
+// Short-term momentum blend, weighted toward the 1-week/1-month windows (the
+// swing-trade horizon). Vol-scaled downstream like the long-term momentum.
+export function shortMomentum(shortReturns) {
+  if (!shortReturns) return null;
+  const parts = [
+    { v: shortReturns.r1m, w: 0.45 },
+    { v: shortReturns.r1w, w: 0.40 },
+    { v: shortReturns.r1d, w: 0.15 },
+  ].filter(p => p.v != null && isFinite(p.v));
+  if (!parts.length) return null;
+  const wsum = parts.reduce((a, p) => a + p.w, 0);
+  return parts.reduce((a, p) => a + p.v * p.w, 0) / wsum;
+}
+
+// Liquidity/volume signal: recent avg volume vs longer-run avg (volume surge = higher).
+// Guards against illiquid junk: returns { ratio, avgRecent } — ratio ~1 is normal,
+// >1.3 is a volume surge, and very low avgRecent flags an illiquid (junk) name.
+export function volumeSignal(volumes) {
+  if (!Array.isArray(volumes)) return null;
+  const v = volumes.filter(x => x != null && isFinite(x) && x >= 0);
+  if (v.length < 10) return null;
+  const recent = v.slice(-5);
+  const baseline = v.slice(-30);
+  const avg = (a) => a.reduce((x, y) => x + y, 0) / a.length;
+  const avgRecent = avg(recent);
+  const avgBase = avg(baseline) || 1;
+  return { ratio: +(avgRecent / avgBase).toFixed(2), avgRecent: Math.round(avgRecent) };
+}
+
 // Annualized realized volatility from daily closes (std dev of daily log returns * sqrt(252)).
 export function annualizedVol(closes) {
   if (!Array.isArray(closes) || closes.length < 20) return null;
@@ -154,6 +197,74 @@ export function verdict(comp) {
   if (comp >= 70) return 'BUY';
   if (comp >= 50) return 'HOLD';
   return 'AVOID';
+}
+
+// ---------- MOMENTUM-DOMINANT scoring (bouquet / swing-trade mode) ----------
+// Aggressive, short-horizon: momentum leads, quality is only a junk-filter, volume
+// confirms interest, low-vol lightly penalizes wild names. Paired with tighter sell
+// engine. SEPARATE from scoreUniverse (the long-term model used by Advisor).
+export const MOMENTUM_WEIGHTS = { momentum: 0.55, quality: 0.20, volume: 0.15, lowVol: 0.10 };
+
+// Junk filter: reject names too illiquid or too wild to trade — the
+// "don't buy a manipulated microcap" guard. Tunable.
+export const JUNK_FILTER = { MIN_AVG_VOLUME: 50000, MAX_ANNUAL_VOL: 0.70, MIN_PRICE: 20 };
+
+function momentumComposite(scores) {
+  const parts = [];
+  for (const [k, w] of Object.entries(MOMENTUM_WEIGHTS)) {
+    if (scores[k] != null && isFinite(scores[k])) parts.push({ v: scores[k], w });
+  }
+  if (!parts.length) return null;
+  const wsum = parts.reduce((a, p) => a + p.w, 0);
+  return +(parts.reduce((a, p) => a + p.v * p.w, 0) / wsum).toFixed(1);
+}
+
+export function scoreMomentumUniverse(candidates) {
+  const enriched = candidates.map(c => {
+    const shortRet = computeShortReturns(c.closes);
+    const shortMom = shortMomentum(shortRet);
+    const vol = annualizedVol(c.closes);
+    const volSig = volumeSignal(c.volumes);
+    const lastPrice = Array.isArray(c.closes) && c.closes.length ? c.closes[c.closes.length - 1] : (c.price ?? null);
+    const reasons = [];
+    if (volSig && volSig.avgRecent < JUNK_FILTER.MIN_AVG_VOLUME) reasons.push('illiquid');
+    if (vol != null && vol > JUNK_FILTER.MAX_ANNUAL_VOL) reasons.push('too-volatile');
+    if (lastPrice != null && lastPrice < JUNK_FILTER.MIN_PRICE) reasons.push('penny-stock');
+    return { ...c, _shortRet: shortRet, _shortMom: shortMom, _vol: vol, _volSig: volSig, _lastPrice: lastPrice, _junkReasons: reasons };
+  });
+
+  const momRank = rankMetric(enriched, s => volScaledMomentum(s._shortMom, s._vol));
+  const volumeRank = rankMetric(enriched, s => s._volSig ? s._volSig.ratio : null);
+  const lowVolRank = rankMetric(enriched, s => s._vol != null ? -s._vol : null);
+  const qRank = rankMetric(enriched, s => {
+    const f = s.fundamentals?.fields || {};
+    const bits = [f.roe, f.debtToEquity != null ? -f.debtToEquity : null, f.netMargin].filter(v => v != null);
+    return bits.length ? bits.reduce((a, b) => a + b, 0) / bits.length : null;
+  });
+
+  const scored = enriched.map(s => {
+    const scores = {
+      momentum: momRank.get(s),
+      quality: qRank.get(s) ?? 50,
+      volume: volumeRank.get(s),
+      lowVol: lowVolRank.get(s),
+    };
+    const comp = momentumComposite(scores);
+    return {
+      symbol: s.symbol, fullName: s.fullName, sector: s.fundamentals?.fields?.sector || s.sector || 'UNKNOWN',
+      factors: scores, shortReturns: s._shortRet,
+      annualizedVol: s._vol != null ? +(s._vol * 100).toFixed(1) : null,
+      volumeRatio: s._volSig ? s._volSig.ratio : null,
+      composite: comp,
+      verdict: comp == null ? 'UNKNOWN' : comp >= 65 ? 'BUY' : comp >= 45 ? 'WATCH' : 'AVOID',
+      junkReasons: s._junkReasons,
+      tradeable: s._junkReasons.length === 0,
+    };
+  });
+
+  const clean = scored.filter(s => s.tradeable);
+  clean.sort((a, b) => (b.composite ?? -1) - (a.composite ?? -1));
+  return { ranked: clean, rejected: scored.filter(s => !s.tradeable) };
 }
 
 // ---------- orchestration: score a whole candidate universe cross-sectionally ----------
