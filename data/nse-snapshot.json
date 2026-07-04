@@ -1,1 +1,1074 @@
-{"fetchedAt":null,"diag":{},"data":{"topGainers":[],"topLosers":[],"bulkDeals":[],"blockDeals":[]}}
+{
+  "fetchedAt": "2026-07-04T23:11:43.146Z",
+  "diag": {
+    "marketStatus": true,
+    "moversCount": 210,
+    "largeDeals": true,
+    "deliveryData": true
+  },
+  "data": {
+    "marketStatus": {
+      "marketState": [
+        {
+          "market": "Capital Market",
+          "marketStatus": "Close",
+          "tradeDate": "03-Jul-2026 15:30",
+          "index": "NIFTY 50",
+          "last": 24270.85,
+          "variation": 95.14999999999782,
+          "percentChange": 0.39,
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Currency",
+          "marketStatus": "Close",
+          "tradeDate": "03-Jul-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Commodity",
+          "marketStatus": "Close",
+          "tradeDate": "03-Jul-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Debt",
+          "marketStatus": "Close",
+          "tradeDate": "03-Jul-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "currencyfuture",
+          "marketStatus": "Close",
+          "tradeDate": "03-Jul-2026",
+          "index": "",
+          "last": "95.4025",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed",
+          "expiryDate": "29-Jul-2026",
+          "underlying": "USDINR",
+          "updated_time": "03-Jul-2026 17:00",
+          "tradeDateFormatted": "03-Jul-2026 17:00",
+          "slickclass": "slick-item"
+        }
+      ],
+      "marketcap": {
+        "timeStamp": "03-Jul-2026",
+        "marketCapinTRDollars": 5.04,
+        "marketCapinLACCRRupees": 480.19864194057055,
+        "marketCapinCRRupees": 48019864.19,
+        "marketCapinCRRupeesFormatted": "48,019,864.19",
+        "marketCapinLACCRRupeesFormatted": "480.20",
+        "underlying": "Market Cap"
+      },
+      "indicativenifty50": {
+        "change": 95.16,
+        "closingValue": 24270.85,
+        "dateTime": "03-Jul-2026 15:30",
+        "finalClosingValue": 24270.85,
+        "indexLast": null,
+        "indexName": "NIFTY 50",
+        "indexPercChange": null,
+        "indexTimeVal": null,
+        "indicativeTime": null,
+        "perChange": 0.39,
+        "status": "CLOSE"
+      },
+      "giftnifty": {
+        "CONTRACTSTRADED": 41993,
+        "DAYCHANGE": -5,
+        "EXPIRYDATE": "28-Jul-2026",
+        "INSTRUMENTTYPE": "FUTIDX",
+        "LASTPRICE": 24350,
+        "OPTIONTYPE": "-",
+        "PERCHANGE": -0.02,
+        "STRIKEPRICE": 0,
+        "SYMBOL": "NIFTY",
+        "TIMESTMP": "04-Jul-2026 02:44",
+        "id": "2/NIFTYFUTIDX28-Jul-2026--"
+      }
+    },
+    "topGainers": [
+      {
+        "symbol": "HCLTECH",
+        "pChange": 5.74,
+        "lastPrice": "1140",
+        "dayHigh": "1159",
+        "dayLow": "1115.1",
+        "totalTradedVolume": 12768463,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LODHA",
+        "pChange": 5.46,
+        "lastPrice": "1061.1",
+        "dayHigh": "1062",
+        "dayLow": "1015",
+        "totalTradedVolume": 7862663,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KAYNES",
+        "pChange": 5.3,
+        "lastPrice": "3326",
+        "dayHigh": "3363",
+        "dayLow": "3174.9",
+        "totalTradedVolume": 2592315,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NATIONALUM",
+        "pChange": 4.68,
+        "lastPrice": "347.8",
+        "dayHigh": "349.2",
+        "dayLow": "338.9",
+        "totalTradedVolume": 12212575,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ZYDUSLIFE",
+        "pChange": 3.92,
+        "lastPrice": "1142.9",
+        "dayHigh": "1142.9",
+        "dayLow": "1104.1",
+        "totalTradedVolume": 1862016,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LTF",
+        "pChange": 3.9,
+        "lastPrice": "327.55",
+        "dayHigh": "329",
+        "dayLow": "317.75",
+        "totalTradedVolume": 8797473,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "360ONE",
+        "pChange": 3.74,
+        "lastPrice": "1110",
+        "dayHigh": "1120.9",
+        "dayLow": "1077.5",
+        "totalTradedVolume": 1319185,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INDUSINDBK",
+        "pChange": 3.53,
+        "lastPrice": "976.85",
+        "dayHigh": "978.4",
+        "dayLow": "942.1",
+        "totalTradedVolume": 3819865,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "OBEROIRLTY",
+        "pChange": 3.5,
+        "lastPrice": "1930",
+        "dayHigh": "1944.3",
+        "dayLow": "1864.7",
+        "totalTradedVolume": 900582,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "AMBUJACEM",
+        "pChange": 3.44,
+        "lastPrice": "443.7",
+        "dayHigh": "444.2",
+        "dayLow": "430",
+        "totalTradedVolume": 6168156,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MUTHOOTFIN",
+        "pChange": 3.4,
+        "lastPrice": "3050",
+        "dayHigh": "3103.9",
+        "dayLow": "3005",
+        "totalTradedVolume": 2030980,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "AUROPHARMA",
+        "pChange": 3.37,
+        "lastPrice": "1613.6",
+        "dayHigh": "1636.8",
+        "dayLow": "1567.7",
+        "totalTradedVolume": 2190579,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LUPIN",
+        "pChange": 3.19,
+        "lastPrice": "2476.1",
+        "dayHigh": "2481",
+        "dayLow": "2407.6",
+        "totalTradedVolume": 939595,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NUVAMA",
+        "pChange": 3.13,
+        "lastPrice": "1876",
+        "dayHigh": "1955",
+        "dayLow": "1827.9",
+        "totalTradedVolume": 1946356,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "UPL",
+        "pChange": 3.12,
+        "lastPrice": "607.1",
+        "dayHigh": "612.9",
+        "dayLow": "592.7",
+        "totalTradedVolume": 3200516,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "DLF",
+        "pChange": 2.89,
+        "lastPrice": "677.2",
+        "dayHigh": "678",
+        "dayLow": "656.6",
+        "totalTradedVolume": 6688508,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "OFSS",
+        "pChange": 2.49,
+        "lastPrice": "11260",
+        "dayHigh": "11279",
+        "dayLow": "10936",
+        "totalTradedVolume": 307902,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TORNTPHARM",
+        "pChange": 2.33,
+        "lastPrice": "4770",
+        "dayHigh": "4783",
+        "dayLow": "4680",
+        "totalTradedVolume": 345920,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BIOCON",
+        "pChange": 2.31,
+        "lastPrice": "427.75",
+        "dayHigh": "428.8",
+        "dayLow": "418.6",
+        "totalTradedVolume": 6403875,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MAXHEALTH",
+        "pChange": 2.19,
+        "lastPrice": "1150.1",
+        "dayHigh": "1160",
+        "dayLow": "1129.7",
+        "totalTradedVolume": 1456459,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ABCAPITAL",
+        "pChange": 2.18,
+        "lastPrice": "401.5",
+        "dayHigh": "405",
+        "dayLow": "393.85",
+        "totalTradedVolume": 6539560,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HYUNDAI",
+        "pChange": 2.17,
+        "lastPrice": "1993",
+        "dayHigh": "2000",
+        "dayLow": "1953.6",
+        "totalTradedVolume": 421007,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MPHASIS",
+        "pChange": 2.16,
+        "lastPrice": "2294",
+        "dayHigh": "2331",
+        "dayLow": "2268",
+        "totalTradedVolume": 1356520,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BAJAJHLDNG",
+        "pChange": 2.11,
+        "lastPrice": "11087",
+        "dayHigh": "11218",
+        "dayLow": "10921",
+        "totalTradedVolume": 65821,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LTM",
+        "pChange": 2.08,
+        "lastPrice": "3757.1",
+        "dayHigh": "3788",
+        "dayLow": "3705.2",
+        "totalTradedVolume": 285467,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PERSISTENT",
+        "pChange": 2.06,
+        "lastPrice": "4675.1",
+        "dayHigh": "4766",
+        "dayLow": "4640.4",
+        "totalTradedVolume": 1551490,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PHOENIXLTD",
+        "pChange": 2.06,
+        "lastPrice": "2054",
+        "dayHigh": "2059.9",
+        "dayLow": "2011.1",
+        "totalTradedVolume": 802256,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SHREECEM",
+        "pChange": 2.06,
+        "lastPrice": "26760",
+        "dayHigh": "26970",
+        "dayLow": "26345",
+        "totalTradedVolume": 21488,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MANAPPURAM",
+        "pChange": 1.97,
+        "lastPrice": "329.45",
+        "dayHigh": "335.5",
+        "dayLow": "326.55",
+        "totalTradedVolume": 5432673,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CONCOR",
+        "pChange": 1.94,
+        "lastPrice": "486.7",
+        "dayHigh": "491.05",
+        "dayLow": "477.2",
+        "totalTradedVolume": 6696249,
+        "index": "SECURITIES IN F&O"
+      }
+    ],
+    "topLosers": [
+      {
+        "symbol": "POWERINDIA",
+        "pChange": -8.08,
+        "lastPrice": "31045",
+        "dayHigh": "32085",
+        "dayLow": "30400",
+        "totalTradedVolume": 684714,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "GVT&D",
+        "pChange": -7.83,
+        "lastPrice": "4445",
+        "dayHigh": "4581.6",
+        "dayLow": "4320",
+        "totalTradedVolume": 3832553,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CGPOWER",
+        "pChange": -6.78,
+        "lastPrice": "894.4",
+        "dayHigh": "926",
+        "dayLow": "887.1",
+        "totalTradedVolume": 24732145,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "POLICYBZR",
+        "pChange": -5.71,
+        "lastPrice": "1586",
+        "dayHigh": "1620.2",
+        "dayLow": "1545.5",
+        "totalTradedVolume": 23208962,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "DMART",
+        "pChange": -4.71,
+        "lastPrice": "3990",
+        "dayHigh": "4090",
+        "dayLow": "3982.7",
+        "totalTradedVolume": 1901310,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BHEL",
+        "pChange": -4.62,
+        "lastPrice": "383.4",
+        "dayHigh": "403.2",
+        "dayLow": "383",
+        "totalTradedVolume": 29608874,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MCX",
+        "pChange": -4.07,
+        "lastPrice": "2804.1",
+        "dayHigh": "2949.4",
+        "dayLow": "2800",
+        "totalTradedVolume": 3916977,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TIINDIA",
+        "pChange": -3.71,
+        "lastPrice": "2976",
+        "dayHigh": "3114.9",
+        "dayLow": "2925.4",
+        "totalTradedVolume": 601938,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "UNIONBANK",
+        "pChange": -3.7,
+        "lastPrice": "163.09",
+        "dayHigh": "168.79",
+        "dayLow": "161.6",
+        "totalTradedVolume": 33777663,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BANKBARODA",
+        "pChange": -2.79,
+        "lastPrice": "253",
+        "dayHigh": "258.25",
+        "dayLow": "250",
+        "totalTradedVolume": 39345727,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BANDHANBNK",
+        "pChange": -2.75,
+        "lastPrice": "199.46",
+        "dayHigh": "206.12",
+        "dayLow": "198.36",
+        "totalTradedVolume": 5565751,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "JSWENERGY",
+        "pChange": -2.72,
+        "lastPrice": "550",
+        "dayHigh": "569.5",
+        "dayLow": "549.2",
+        "totalTradedVolume": 3196718,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "FORCEMOT",
+        "pChange": -2.42,
+        "lastPrice": "18898",
+        "dayHigh": "19604",
+        "dayLow": "18613",
+        "totalTradedVolume": 183601,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MARICO",
+        "pChange": -2.39,
+        "lastPrice": "835.5",
+        "dayHigh": "873",
+        "dayLow": "835.1",
+        "totalTradedVolume": 5349026,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INOXWIND",
+        "pChange": -2.25,
+        "lastPrice": "87.94",
+        "dayHigh": "90.52",
+        "dayLow": "87.54",
+        "totalTradedVolume": 7728023,
+        "index": "SECURITIES IN F&O"
+      }
+    ],
+    "bulkDeals": [
+      {
+        "buySell": "BUY",
+        "clientName": "VISHAL MAHESH WAGHELA",
+        "date": "03-Jul-2026",
+        "name": "Atal Realtech Limited",
+        "qty": "2167141",
+        "remarks": "-",
+        "symbol": "ATALREAL",
+        "watp": "28.23"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "ALTIZEN VENTURES LLP",
+        "date": "03-Jul-2026",
+        "name": "Atal Realtech Limited",
+        "qty": "681464",
+        "remarks": "-",
+        "symbol": "ATALREAL",
+        "watp": "28.07"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "GINNI FINANCE PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Avience Biomedicals Ltd",
+        "qty": "31800",
+        "remarks": "-",
+        "symbol": "AVIENCE",
+        "watp": "321.21"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MANSI SHARE AND STOCK BROKING PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Avience Biomedicals Ltd",
+        "qty": "90000",
+        "remarks": "-",
+        "symbol": "AVIENCE",
+        "watp": "321.2"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "NNM SECURITIES PVT LTD",
+        "date": "03-Jul-2026",
+        "name": "Balaji Phosphates Limited",
+        "qty": "838000",
+        "remarks": "-",
+        "symbol": "BALAJIPHOS",
+        "watp": "89.03"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "JUNOMONETA FINSOL PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Bharat Seats Limited",
+        "qty": "420996",
+        "remarks": "-",
+        "symbol": "BHARATSE",
+        "watp": "244.84"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "RATHOD MANOJ CHHAGANLAL HUF",
+        "date": "03-Jul-2026",
+        "name": "Bio Medica Laboratories L",
+        "qty": "30000",
+        "remarks": "-",
+        "symbol": "BMLL",
+        "watp": "140.26"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "BASE ENGINEERING LLP",
+        "date": "03-Jul-2026",
+        "name": "Bio Medica Laboratories L",
+        "qty": "116000",
+        "remarks": "-",
+        "symbol": "BMLL",
+        "watp": "140"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "SACHIN GOVINDLAL MODI",
+        "date": "03-Jul-2026",
+        "name": "Bio Medica Laboratories L",
+        "qty": "80000",
+        "remarks": "-",
+        "symbol": "BMLL",
+        "watp": "140.51"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "ALOK  KUMAR",
+        "date": "03-Jul-2026",
+        "name": "Bio Medica Laboratories L",
+        "qty": "95000",
+        "remarks": "-",
+        "symbol": "BMLL",
+        "watp": "140"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "TRADE DELTA LLP",
+        "date": "03-Jul-2026",
+        "name": "Commercial Syn Bags Ltd",
+        "qty": "300000",
+        "remarks": "-",
+        "symbol": "COMSYN",
+        "watp": "199.99"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "ARIHANT CAPITAL MARKETS LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Commercial Syn Bags Ltd",
+        "qty": "757252",
+        "remarks": "-",
+        "symbol": "COMSYN",
+        "watp": "193.62"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "JUNOMONETA FINSOL PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Commercial Syn Bags Ltd",
+        "qty": "245091",
+        "remarks": "-",
+        "symbol": "COMSYN",
+        "watp": "196.98"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "JUNOMONETA FINSOL PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Denta Water N Infra Sol L",
+        "qty": "193228",
+        "remarks": "-",
+        "symbol": "DENTA",
+        "watp": "354.25"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "QE SECURITIES LLP",
+        "date": "03-Jul-2026",
+        "name": "Denta Water N Infra Sol L",
+        "qty": "169792",
+        "remarks": "-",
+        "symbol": "DENTA",
+        "watp": "353.35"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "HRTI PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Denta Water N Infra Sol L",
+        "qty": "176867",
+        "remarks": "-",
+        "symbol": "DENTA",
+        "watp": "353.08"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Digitide Solutions Ltd",
+        "qty": "919755",
+        "remarks": "-",
+        "symbol": "DIGITIDE",
+        "watp": "100.94"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "L7 HITECH PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Gretex Corporate Services",
+        "qty": "20016",
+        "remarks": "-",
+        "symbol": "GCSL",
+        "watp": "488.94"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "SWATIPUSHP TRADELINK PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "Gretex Corporate Services",
+        "qty": "147004",
+        "remarks": "-",
+        "symbol": "GCSL",
+        "watp": "478.49"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "NNM SECURITIES PVT LTD",
+        "date": "03-Jul-2026",
+        "name": "Gretex Corporate Services",
+        "qty": "855",
+        "remarks": "-",
+        "symbol": "GCSL",
+        "watp": "477.51"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "SUMAN KUMAR SARAF",
+        "date": "03-Jul-2026",
+        "name": "Gretex Corporate Services",
+        "qty": "200000",
+        "remarks": "-",
+        "symbol": "GCSL",
+        "watp": "478.53"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "ELIXIR WEALTH MANAGEMENT PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "642913",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "194.02"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "SILVERLEAF CAPITAL SERVICES PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "570216",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "192.03"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "CLT RESEARCH TECH PRIVATE LTD",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "626844",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "194.96"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "1059397",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "194.65"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "ALPHAGREP SECURITIES PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "590533",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "191.88"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "GRT STRATEGIC VENTURES LLP",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "464749",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "194.75"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "IRAGE BROKING SERVICES LLP",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "718181",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "194.05"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "QE SECURITIES LLP",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "1474316",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "194.14"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "JUMP TRADING FINANCIAL INDIA PRIVATE LIMITED",
+        "date": "03-Jul-2026",
+        "name": "IKIO Technologies Limited",
+        "qty": "865107",
+        "remarks": "-",
+        "symbol": "IKIO",
+        "watp": "195.48"
+      }
+    ],
+    "blockDeals": [
+      {
+        "buySell": "BUY",
+        "clientName": "BUOYANT OPPORTUNITIES STRATEGY",
+        "date": "30-Jun-2026",
+        "name": "Genus Power Infrastru Ltd",
+        "qty": "2241379",
+        "remarks": null,
+        "symbol": "GENUSPOWER",
+        "watp": "290"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "BUOYANT OPPORTUNITIES STRATEGY-III",
+        "date": "30-Jun-2026",
+        "name": "Genus Power Infrastru Ltd",
+        "qty": "2241379",
+        "remarks": null,
+        "symbol": "GENUSPOWER",
+        "watp": "290"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "PROFITEX SHARES & SECURITIES PRIVATE LIMITED",
+        "date": "30-Jun-2026",
+        "name": "Genus Power Infrastru Ltd",
+        "qty": "4482759",
+        "remarks": null,
+        "symbol": "GENUSPOWER",
+        "watp": "290"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MADHURI MADHUSUDAN KELA",
+        "date": "30-Jun-2026",
+        "name": "Genus Power Infrastru Ltd",
+        "qty": "1379310",
+        "remarks": null,
+        "symbol": "GENUSPOWER",
+        "watp": "290"
+      },
+      {
+        "buySell": "SELL",
+        "clientName": "CHISWICK INVESTMENT PTE LTD",
+        "date": "30-Jun-2026",
+        "name": "Genus Power Infrastru Ltd",
+        "qty": "10344827",
+        "remarks": null,
+        "symbol": "GENUSPOWER",
+        "watp": "290"
+      }
+    ],
+    "shortDeals": [
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "AADHAR HOUSING FINANCE L",
+        "qty": "50",
+        "remarks": null,
+        "symbol": "AADHARHFC",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "ACME SOLAR HOLDINGS LTD",
+        "qty": "20",
+        "remarks": null,
+        "symbol": "ACMESOLAR",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "ADF FOODS LIMITED",
+        "qty": "19",
+        "remarks": null,
+        "symbol": "ADFFOODS",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "ALKEM LABORATORIES LTD.",
+        "qty": "5",
+        "remarks": null,
+        "symbol": "ALKEM",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "AMBUJA CEMENTS LTD",
+        "qty": "100",
+        "remarks": null,
+        "symbol": "AMBUJACEM",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "ASHOK LEYLAND LTD",
+        "qty": "40",
+        "remarks": null,
+        "symbol": "ASHOKLEY",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "AXIS BANK LIMITED",
+        "qty": "8",
+        "remarks": null,
+        "symbol": "AXISBANK",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BAJAJ AUTO LIMITED",
+        "qty": "2",
+        "remarks": null,
+        "symbol": "BAJAJ-AUTO",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BAJAJ HINDUSTAN LTD",
+        "qty": "3",
+        "remarks": null,
+        "symbol": "BAJAJHIND",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BAJAJ FINANCE LIMITED",
+        "qty": "2",
+        "remarks": null,
+        "symbol": "BAJFINANCE",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BALKRISHNA IND. LTD      ",
+        "qty": "1",
+        "remarks": null,
+        "symbol": "BALKRISIND",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BALU FORGE INDUSTRIES LTD",
+        "qty": "1",
+        "remarks": null,
+        "symbol": "BALUFORGE",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BANK OF BARODA",
+        "qty": "20",
+        "remarks": null,
+        "symbol": "BANKBARODA",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BANK OF INDIA",
+        "qty": "5",
+        "remarks": null,
+        "symbol": "BANKINDIA",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "BLACK BOX LIMITED",
+        "qty": "4",
+        "remarks": null,
+        "symbol": "BBOX",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "CEMINDIA PROJECTS LIMITED",
+        "qty": "1086",
+        "remarks": null,
+        "symbol": "CEMPRO",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "CG POWER AND INDUSTRIAL SOLUTIONS LIMITED",
+        "qty": "10",
+        "remarks": null,
+        "symbol": "CGPOWER",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "COCHIN SHIPYARD LIMITED",
+        "qty": "100",
+        "remarks": null,
+        "symbol": "COCHINSHIP",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "CYIENT LIMITED           ",
+        "qty": "5484",
+        "remarks": null,
+        "symbol": "CYIENT",
+        "watp": null
+      },
+      {
+        "buySell": null,
+        "clientName": null,
+        "date": "02-Jul-2026",
+        "name": "DEEPAK FERTILIZERS AND PETROCHEMICALS CORPORATION LIMITED",
+        "qty": "561",
+        "remarks": null,
+        "symbol": "DEEPAKFERT",
+        "watp": null
+      }
+    ],
+    "deliverySample": {
+      "symbol": "RELIANCE",
+      "note": "delivery% available via getEquityTradeInfo per-symbol at read time"
+    }
+  }
+}
