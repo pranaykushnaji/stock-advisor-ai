@@ -109,15 +109,39 @@ function normName(s) {
 
 // Main: returns { candidates: [...], sources: {...} }
 export async function discoverCandidates(apiKey) {
-  const sources = { news: 0, movers: 0, usedFallback: false };
+  const sources = { news: 0, movers: 0, usedFallback: false,
+    diag: { headlinesFetched: 0, newsQueryUsed: null, extractError: null, moversError: null } };
 
-  // 1. Live news → stock names
-  const headlines = await fetchNewsHeadlines('NSE India stocks buy sell target earnings today');
-  const newsStocks = await extractStocksFromNews(headlines, apiKey);
+  // 1. Live news → stock names. Try multiple queries so one dud query doesn't zero us out.
+  const newsQueries = [
+    'NSE stocks surge rally today',
+    'NSE India stocks buy target earnings results today',
+    'Nifty top gainers movers today',
+  ];
+  let headlines = [];
+  for (const q of newsQueries) {
+    headlines = await fetchNewsHeadlines(q);
+    if (headlines.length >= 5) { sources.diag.newsQueryUsed = q; break; }
+  }
+  sources.diag.headlinesFetched = headlines.length;
+
+  let newsStocks = [];
+  if (headlines.length) {
+    try {
+      newsStocks = await extractStocksFromNews(headlines, apiKey);
+    } catch (e) {
+      sources.diag.extractError = String(e?.message || e).slice(0, 100);
+    }
+  }
   sources.news = newsStocks.length;
 
   // 2. Market movers (best-effort)
-  const moverSymbols = await fetchMovers();
+  let moverSymbols = [];
+  try {
+    moverSymbols = await fetchMovers();
+  } catch (e) {
+    sources.diag.moversError = String(e?.message || e).slice(0, 100);
+  }
   sources.movers = moverSymbols.length;
 
   // Combine, de-dupe using normalized names (so "RELIANCE" == "Reliance Industries Ltd")

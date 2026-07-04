@@ -1,0 +1,27 @@
+name: Hourly Sell Check
+
+# NSE trades 09:15–15:30 IST = 03:45–10:00 UTC.
+# Run hourly across that window on weekdays. GitHub Actions cron is UTC and can
+# drift a few minutes under load, but for hourly exit checks that's fine.
+on:
+  schedule:
+    - cron: '0 4-10 * * 1-5'   # 04:00–10:00 UTC hourly, Mon–Fri (~09:30–15:30 IST)
+  workflow_dispatch:            # allow manual trigger from the Actions tab
+
+jobs:
+  sell-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit sell-check endpoint
+        run: |
+          echo "Triggering sell-check at $(date -u) UTC"
+          HTTP=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
+            -X POST \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://stock-advisor-ai-omega.vercel.app/api/sell-check")
+          echo "HTTP $HTTP"
+          echo "Response:"; cat /tmp/resp.json; echo ""
+          # Don't fail the workflow on a skipped/no-op run; only on hard errors.
+          if [ "$HTTP" -ge 500 ]; then
+            echo "Server error"; exit 1
+          fi

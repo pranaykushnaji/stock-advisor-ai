@@ -1,0 +1,142 @@
+// api/sell-check.js
+// LIGHTWEIGHT hourly sell check — intended to be called ~hourly by GitHub Actions.
+// Unlike the two-phase daily flow, this books exits IMMEDIATELY at the current price
+// when a downside/exit signal fires — the whole point of hourly checks is fast exits
+// for the momentum swing strategy (don't wait until 5:30 to cut a loser).
+//
+// Idempotent: safe to run many times a day. If nothing triggers, it writes nothing.
+
+import { marketStatus } from './_market-calendar.js';
+import { rulesGate, llmDecide, bookExit } from './_sell-engine.js';
+
+const REPO = 'pranaykushnaji/stock-advisor-ai';
+
+async function fetchWithTimeout(url, opts = {}, ms = 8000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try { return await fetch(url, { ...opts, signal: ctrl.signal }); }
+  finally { clearTimeout(t); }
+}
+
+const ALIASES = { ZOMATO: 'ETERNAL', MOTHERSUMI: 'MOTHERSON', MINDTREE: 'LTIM' };
+function aliasBase(sym) {
+  const u = (sym || '').replace(/\.(NS|BO)$/i, '').toUpperCase();
+  return ALIASES[u] || u;
+}
+
+async function ghGetFile(path, token) {
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json' }
+  });
+  if (!r.ok) return { content: null, sha: null, status: r.status };
+  const d = await r.json();
+  return { content: Buffer.from(d.content, 'base64').toString('utf-8'), sha: d.sha, status: 200 };
+}
+async function ghPutFile(path, contentObj, sha, token, message) {
+  const body = { message, content: Buffer.from(JSON.stringify(contentObj, null, 2)).toString('base64'), ...(sha ? { sha } : {}) };
+  const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return r.ok;
+}
+
+// Fetch live price + recent closes (Yahoo NSE-first, no heavy fallback to stay fast).
+async function fetchLive(ticker, yahooSymbol) {
+  const base = aliasBase(yahooSymbol || ticker);
+  for (const sym of [`${base}.NS`, `${base}.BO`]) {
+    try {
+      const r = await fetchWithTimeout(
+        `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1mo&interval=1d`,
+        { headers: { 'User-Agent': 'Mozilla/5.0' } }, 7000);
+      if (!r.ok) continue;
+      const result = (await r.json())?.chart?.result?.[0];
+      if (!result?.meta?.regularMarketPrice) continue;
+      const meta = result.meta;
+      if (meta.currency && meta.currency !== 'INR') continue;
+      return {
+        price: +meta.regularMarketPrice.toFixed(2),
+        marketState: meta.marketState || null,
+        closes: (result.indicators?.quote?.[0]?.close || []).filter(v => v != null && !isNaN(v)),
+      };
+    } catch (e) { continue; }
+  }
+  return null;
+}
+
+export default async function handler(req, res) {
+  // Auth — same CRON_SECRET pattern as the other crons.
+  const cronSecret = process.env.CRON_SECRET;
+  const auth = req.headers.authorization || '';
+  const provided = auth.replace(/^Bearer\s+/i, '') || req.query.key;
+  const isAuthed = !cronSecret || provided === cronSecret;
+  if (!isAuthed) return res.status(401).json({ error: 'Unauthorized' });
+
+  // Only act during/after market hours on trading days (unless forced).
+  const mkt = marketStatus();
+  if (!mkt.open && req.query.force !== 'true') {
+    return res.status(200).json({ status: 'skipped', reason: mkt.reason });
+  }
+
+  const ghToken = process.env.GITHUB_TOKEN;
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!ghToken) return res.status(500).json({ error: 'GITHUB_TOKEN missing' });
+
+  const bq = await ghGetFile('data/project-bouquet.json', ghToken);
+  if (!bq.content) return res.status(200).json({ status: 'no_bouquet' });
+  let bouquet;
+  try { bouquet = JSON.parse(bq.content).bouquet || []; } catch (e) { return res.status(500).json({ error: 'bad bouquet json' }); }
+
+  const open = bouquet.filter(b => !b.status || b.status === 'OPEN');
+  if (!open.length) return res.status(200).json({ status: 'no_open_positions' });
+
+  const closedTrades = [];
+  const checked = [];
+
+  for (const item of open) {
+    const live = await fetchLive(item.ticker, item.yahooSymbol);
+    if (!live) { checked.push({ ticker: item.ticker, result: 'no_price' }); continue; }
+    // Freshen current price for the rules gate.
+    item.currentPrice = live.price;
+
+    // Rules gate first (target/stop/max-hold/momentum-fade), then LLM for the ambiguous middle.
+    let decision = rulesGate(item, live.closes);
+    if (!decision) {
+      // Only spend an LLM call if there's downside pressure (small loss) — keeps hourly cost low.
+      const pnl = item.entryPrice ? ((live.price - item.entryPrice) / item.entryPrice) * 100 : 0;
+      if (pnl < 0 && apiKey) {
+        const d = await llmDecide(item, apiKey, []);
+        if (d.verdict === 'SELL') decision = d;
+      }
+    }
+
+    if (decision) {
+      // Book the exit IMMEDIATELY at the live price (fast momentum exit).
+      const closed = bookExit({ ...item, exitReason: decision.reason, exitSource: decision.source }, live.price);
+      closedTrades.push(closed);
+      checked.push({ ticker: item.ticker, result: 'SOLD', reason: decision.reason, price: live.price });
+    } else {
+      checked.push({ ticker: item.ticker, result: 'hold', price: live.price });
+    }
+  }
+
+  if (!closedTrades.length) {
+    return res.status(200).json({ status: 'checked', sold: 0, positions: checked });
+  }
+
+  // Persist: append to realized ledger, remove sold from bouquet.
+  const soldTickers = new Set(closedTrades.map(c => c.ticker));
+  const remaining = bouquet.filter(b => !soldTickers.has(b.ticker) || (b.status && b.status !== 'OPEN'));
+
+  const rl = await ghGetFile('data/realized.json', ghToken);
+  let ledger = { trades: [] };
+  try { if (rl.content) ledger = JSON.parse(rl.content); } catch (e) {}
+  if (!Array.isArray(ledger.trades)) ledger.trades = [];
+  ledger.trades.push(...closedTrades);
+
+  await ghPutFile('data/realized.json', ledger, rl.sha, ghToken, `Hourly sell-check: book ${closedTrades.length} exit(s)`);
+  await ghPutFile('data/project-bouquet.json', { bouquet: remaining }, bq.sha, ghToken, `Hourly sell-check: close ${closedTrades.length} position(s)`);
+
+  return res.status(200).json({ status: 'checked', sold: closedTrades.length, closed: closedTrades.map(c => ({ ticker: c.ticker, pnlPct: c.realizedPnlPct, reason: c.exitReason })), positions: checked });
+}
