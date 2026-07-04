@@ -1,0 +1,46 @@
+name: NSE Data Snapshot
+
+# Fetches real NSE data (movers, bulk/block deals, delivery) from a GitHub runner,
+# which may reach NSE where Vercel's datacenter IPs get 403'd. Commits the snapshot
+# so the app can read data/nse-snapshot.json. First run is a live diagnostic.
+
+on:
+  schedule:
+    - cron: '20 3 * * 1-5'    # ~08:50 IST (pre-open) Mon-Fri
+    - cron: '30 6 * * 1-5'    # ~12:00 IST (midday) Mon-Fri
+  workflow_dispatch:           # manual trigger for the first diagnostic run
+
+permissions:
+  contents: write              # allow committing the snapshot
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install NSE library
+        run: npm install stock-nse-india --no-save
+
+      - name: Fetch NSE snapshot
+        run: node scripts/fetch-nse-snapshot.js
+        continue-on-error: true   # don't fail the whole run on a block; we want the diagnostic
+
+      - name: Commit snapshot if changed
+        run: |
+          git config user.name "pranaykushnaji"
+          git config user.email "pranaykushnaji284@gmail.com"
+          if [ -n "$(git status --porcelain data/nse-snapshot.json)" ]; then
+            git add data/nse-snapshot.json
+            git commit -m "chore: update NSE snapshot [skip ci]"
+            git push
+            echo "Snapshot committed."
+          else
+            echo "No snapshot change to commit."
+          fi

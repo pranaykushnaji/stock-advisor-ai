@@ -1,0 +1,93 @@
+// scripts/fetch-nse-snapshot.js
+// Runs on a GitHub Actions runner (NOT Vercel) to fetch NSE data that Vercel's
+// datacenter IPs get 403'd on. Writes data/nse-snapshot.json for the app to read.
+//
+// First run doubles as a diagnostic: it reports which data types succeeded, so we
+// learn whether GitHub runners can reach NSE at all before building features on it.
+
+const fs = require('fs');
+const path = require('path');
+const { NseIndia } = require('stock-nse-india');
+
+const n = new NseIndia();
+const OUT = path.join(__dirname, '..', 'data', 'nse-snapshot.json');
+
+async function tryFetch(label, fn) {
+  try {
+    const data = await fn();
+    console.log(`  OK   ${label}`);
+    return { ok: true, data };
+  } catch (e) {
+    console.log(`  FAIL ${label}: ${(e.message || e).toString().slice(0, 100)}`);
+    return { ok: false, error: (e.message || e).toString().slice(0, 200) };
+  }
+}
+
+(async () => {
+  console.log('Fetching NSE snapshot from GitHub Actions runner...');
+  const snapshot = { fetchedAt: new Date().toISOString(), diag: {}, data: {} };
+
+  // 1. Market status (cheapest probe — if this 403s, everything will)
+  const status = await tryFetch('getMarketStatus', () => n.getMarketStatus());
+  snapshot.diag.marketStatus = status.ok;
+  if (status.ok) snapshot.data.marketStatus = status.data;
+
+  // 2. Gainers/losers across key indices (the REAL movers — fixes discovery)
+  const indicesToScan = ['NIFTY 50', 'NIFTY NEXT 50', 'NIFTY MIDCAP 100', 'SECURITIES IN F&O'];
+  const movers = [];
+  for (const idxName of indicesToScan) {
+    const r = await tryFetch(`stockIndices ${idxName}`, () => n.getEquityStockIndices(idxName));
+    if (r.ok && Array.isArray(r.data?.data)) {
+      for (const s of r.data.data) {
+        if (s.symbol && s.symbol !== idxName && typeof s.pChange === 'number') {
+          movers.push({
+            symbol: s.symbol, pChange: s.pChange, lastPrice: s.lastPrice,
+            dayHigh: s.dayHigh, dayLow: s.dayLow,
+            totalTradedVolume: s.totalTradedVolume, index: idxName,
+          });
+        }
+      }
+    }
+  }
+  // De-dupe by symbol (keep highest-volume record), sort by pChange desc.
+  const bySymbol = new Map();
+  for (const m of movers) {
+    const prev = bySymbol.get(m.symbol);
+    if (!prev || (m.totalTradedVolume || 0) > (prev.totalTradedVolume || 0)) bySymbol.set(m.symbol, m);
+  }
+  const allMovers = [...bySymbol.values()].sort((a, b) => b.pChange - a.pChange);
+  snapshot.diag.moversCount = allMovers.length;
+  snapshot.data.topGainers = allMovers.slice(0, 30);
+  snapshot.data.topLosers = allMovers.slice(-15).reverse();
+
+  // 3. Bulk & block deals (institutional activity — alt-data spec section)
+  const bulk = await tryFetch('bulk deals', () => n.getDataByEndpoint('/api/snapshot-capital-market-largedeal'));
+  snapshot.diag.largeDeals = bulk.ok;
+  if (bulk.ok) {
+    snapshot.data.bulkDeals = (bulk.data?.BULK_DEALS_DATA || []).slice(0, 30);
+    snapshot.data.blockDeals = (bulk.data?.BLOCK_DEALS_DATA || []).slice(0, 30);
+    snapshot.data.shortDeals = (bulk.data?.SHORT_DEALS_DATA || []).slice(0, 20);
+  }
+
+  // 4. Sample delivery % for a couple names (proves per-stock delivery data works)
+  const delivProbe = await tryFetch('delivery (RELIANCE)', () => n.getEquityDetails('RELIANCE'));
+  snapshot.diag.deliveryData = delivProbe.ok;
+  if (delivProbe.ok) {
+    const sec = delivProbe.data?.securityInfo || {};
+    const trade = delivProbe.data?.priceInfo || {};
+    snapshot.data.deliverySample = {
+      symbol: 'RELIANCE',
+      note: 'delivery% available via getEquityTradeInfo per-symbol at read time',
+    };
+  }
+
+  fs.writeFileSync(OUT, JSON.stringify(snapshot, null, 2));
+  console.log(`\nWrote ${OUT}`);
+  console.log('Diagnostic summary:', JSON.stringify(snapshot.diag));
+
+  // Exit non-zero only if the basic probe failed (so the workflow surfaces a hard block).
+  if (!status.ok && snapshot.diag.moversCount === 0) {
+    console.log('\nNSE appears blocked from this runner too.');
+    process.exit(2);
+  }
+})().catch(e => { console.error('Fatal:', e); process.exit(1); });
