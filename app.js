@@ -161,6 +161,14 @@ function parseResult(raw,query,chart){
 // Merge LLM fundamental factors (quality, value) with REAL price-based factors
 // (momentum, lowVol), normalize scales, and compute the composite.
 function buildFactorModel(d,chart){
+  // NEW SHAPE: analyze.js now computes all factors + composite server-side and tags
+  // fundamentalsSource. Trust it directly — don't re-derive or clobber the scores.
+  if(d.fundamentalsSource){
+    d.confidence=d.composite; // keep field name for existing UI
+    if(d.verdict==null)d.verdict=computeVerdict(d.composite);
+    return d;
+  }
+  // LEGACY SHAPE (old stored analyses): re-derive as before.
   const llm=d.factors||{};
   // Normalize any 0-10 scale sub-scores the model may have returned
   normalizeFactorSubs(llm.quality);
@@ -338,6 +346,7 @@ function renderResult(d,area,stockData,news){
       </div>
     </div>
     ${priceHtml}
+    ${d.fundamentalsSource?`<div style="margin:8px 0;"><span class="pill" style="font-size:11px;${d.fundamentalsSource==='estimated'?'background:rgba(192,106,75,0.12);color:var(--accent);':'background:rgba(127,166,99,0.12);color:var(--green);'}">${d.fundamentalsSource==='estimated'?'⚠ Price-only — fundamentals unavailable':'✓ Real fundamentals ('+esc(d.fundamentalsSource)+')'}</span></div>`:''}
     <div class="meta-pills">
       <span class="pill">📅 ${esc(d.horizon||'Medium-term')}</span>
       <span class="pill pill-${(d.riskLevel||'Medium').toLowerCase()}">⚡ ${esc(d.riskLevel||'Medium')} Risk</span>
@@ -355,7 +364,7 @@ function renderResult(d,area,stockData,news){
     ${compBreakdown}
     ${d.newsSummary?`<div class="news-box"><div class="section-title">📰 News Context</div><p style="font-size:13px;color:var(--text2);line-height:1.6;">${esc(d.newsSummary)}</p></div>`:''}
     ${newsHtml}
-    <div class="valuation-box"><span>Valuation: </span>${esc(d.priceContext||'')}</div>
+    <div class="valuation-box"><span>Valuation: </span>${esc(d.priceContext||(d.fundamentals?`PE ${d.fundamentals.peRatio??'n/a'} · P/B ${d.fundamentals.pbRatio??'n/a'} · ROE ${d.fundamentals.roe!=null?d.fundamentals.roe+'%':'n/a'} · D/E ${d.fundamentals.debtToEquity??'n/a'}`:''))}</div>
     <div class="action-row">
       <button class="btn btn-green" onclick="approvePick()">✓ Add to Bouquet (₹10,000)</button>
       <button class="btn btn-red" onclick="skipPick()">✕ Skip</button>

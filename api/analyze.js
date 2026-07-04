@@ -1,92 +1,170 @@
+// Advisor endpoint — analyze any stock on demand.
+// Now grounded in REAL fundamentals (FMP -> Yahoo -> estimated) and deterministic
+// factor scoring. Unlike POTD, this does NOT exclude no-fundamentals stocks — it
+// analyzes them with a visible "estimated / price-only" flag so the user still gets
+// an answer. The LLM writes only the qualitative narrative, never the numbers.
+
+import { fetchFundamentals } from './_fundamentals.js';
+import {
+  computeReturns, annualizedVol, rawMomentum, volScaledMomentum,
+  qualityInputs, valueInputs, composite, verdict,
+} from './_scoring.js';
+
+async function fetchWithTimeout(url, opts = {}, ms = 7000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try { return await fetch(url, { ...opts, signal: ctrl.signal }); }
+  finally { clearTimeout(t); }
+}
+
+// Single-stock absolute scoring (no cross-sectional peers available on demand).
+// Uses calibrated bands rather than percentile ranks. Momentum is vol-scaled.
+function scoreSingle(closes, fund) {
+  const returns = computeReturns(closes);
+  const vol = annualizedVol(closes);
+  const rawMom = rawMomentum(returns);
+  const volMom = volScaledMomentum(rawMom, vol);
+
+  // Momentum: map vol-scaled momentum through a sigmoid-ish band to 0-100.
+  const momScore = volMom == null ? null
+    : Math.max(0, Math.min(100, Math.round(50 + volMom * 12)));
+  // Low-vol: lower annualized vol = higher score (30% vol -> ~50, 10% -> ~90).
+  const lowVolScore = vol == null ? null
+    : Math.max(0, Math.min(100, Math.round(115 - vol * 100 * 2.05)));
+
+  // Quality/Value from real fundamentals via calibrated absolute bands.
+  const f = fund.fields;
+  const band = (v, pts) => { // pts: [[threshold, score], ...] descending
+    if (v == null) return null;
+    for (const [thr, sc] of pts) if (v >= thr) return sc;
+    return pts[pts.length - 1][1] - 5;
+  };
+  const qParts = [
+    band(f.roe, [[18, 90], [15, 78], [12, 65], [8, 52]]),
+    band(f.roce, [[20, 90], [15, 78], [10, 62], [6, 50]]),
+    f.debtToEquity == null ? null : band(-f.debtToEquity, [[-0.3, 90], [-0.6, 78], [-1.0, 62], [-2, 48]]),
+    band(f.netMargin, [[20, 88], [12, 72], [6, 58], [2, 48]]),
+    band(f.earningsGrowth, [[15, 85], [8, 70], [0, 55], [-10, 40]]),
+  ].filter(v => v != null);
+  const vParts = [
+    f.peRatio == null || f.peRatio <= 0 ? null : band(-f.peRatio, [[-12, 90], [-18, 74], [-25, 60], [-40, 42]]),
+    f.pbRatio == null || f.pbRatio <= 0 ? null : band(-f.pbRatio, [[-1.5, 88], [-3, 70], [-5, 55], [-8, 42]]),
+    f.pegRatio == null || f.pegRatio <= 0 ? null : band(-f.pegRatio, [[-1, 90], [-1.5, 72], [-2, 55], [-3, 40]]),
+    band(f.dividendYield, [[3, 78], [1.5, 65], [0.5, 55], [0, 45]]),
+  ].filter(v => v != null);
+
+  const mean = (a) => a.length ? Math.round(a.reduce((x, y) => x + y, 0) / a.length) : null;
+  const quality = mean(qParts);
+  const value = mean(vParts);
+  const scores = { momentum: momScore, quality, value, lowVol: lowVolScore };
+  const comp = composite(scores);
+  return {
+    factors: scores, composite: comp, verdict: verdict(comp),
+    annualizedVol: vol != null ? +(vol * 100).toFixed(1) : null,
+    momentumDetail: returns ? { r3: returns.r3, r6: returns.r6, r12: returns.r12 } : null,
+  };
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST');
-
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
 
   const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'GROQ_API_KEY not configured on server' });
+  if (!apiKey) return res.status(500).json({ error: 'GROQ_API_KEY not configured' });
 
   try {
-    const { stock, mode } = req.body || {};
+    const { stock } = req.body || {};
     if (!stock || typeof stock !== 'string') return res.status(400).json({ error: 'stock name required' });
-    const cleanStock = stock.trim().slice(0, 100); // cap length to prevent abuse
-    if (cleanStock.length < 1) return res.status(400).json({ error: 'stock name required' });
+    const cleanStock = stock.trim().slice(0, 100);
+    if (!cleanStock) return res.status(400).json({ error: 'stock name required' });
 
-    const AGENT_PROMPT = `You are a factor-based equity analyst. Score two fundamental factors for the given stock. (Momentum and Low-Volatility are computed separately from real price data — do NOT score those.)
+    // 1. Resolve to a ticker + price history via the existing stock endpoint logic.
+    const base = cleanStock.replace(/\.(NS|BO)$/i, '').toUpperCase();
+    let priceData = null;
+    try {
+      const host = req.headers.host;
+      const proto = (req.headers['x-forwarded-proto'] || 'https');
+      const pr = await fetchWithTimeout(`${proto}://${host}/api/stock?symbol=${encodeURIComponent(base)}&range=1y&interval=1d`, {}, 9000);
+      if (pr.ok) priceData = await pr.json();
+    } catch (e) {}
 
-Score each sub-metric 0-100 against the benchmark, then the factor score is the weighted average of its sub-metrics.
+    const closes = priceData?.chart?.close?.filter(v => v != null && !isNaN(v)) || [];
+    const ticker = (priceData?.symbol || base).replace(/\.(NS|BO)$/i, '').toUpperCase();
 
-=== QUALITY FACTOR (sub-metrics & weights) ===
-High-quality = strong, stable, low-leverage businesses that compound.
-- roe (weight 25%): >18%=90+, 15-18%=75-88, 12-15%=60-72, <12%=below 55
-- roce (weight 25%): >20%=90+, 15-20%=75-90, 10-15%=55-70, <10%=below 50
-- debtToEquity (weight 20%): <0.3=90+, 0.3-0.6=75-88, 0.6-1.0=55-70, >1=below 50 (sector-adjusted)
-- earningsStability (weight 15%): consistent/growing profits 5y=85+, erratic=lower
-- margins (weight 15%): EBITDA margin >20% & stable/improving=85+, declining=lower
+    // 2. Real fundamentals (FMP -> Yahoo -> estimated).
+    const fundamentals = await fetchFundamentals(ticker, { fmpKey: process.env.FMP_KEY });
 
-=== VALUE FACTOR (sub-metrics & weights) ===
-Value = cheap relative to fundamentals. Cheaper = higher score.
-- peRatio (weight 35%): PE well below sector avg=90+, at par=60, above=40, very expensive=below 30
-- pbRatio (weight 25%): P/B low vs sector/history=85+, high=below 40
-- pegRatio (weight 25%): PEG<1=90+, 1-1.5=70, 1.5-2=50, >2=below 35
-- dividendYield (weight 15%): healthy sustainable yield=75+, none=45
+    // 3. Deterministic scoring (single-stock absolute bands).
+    const scored = closes.length >= 30
+      ? scoreSingle(closes, fundamentals)
+      : { factors: { momentum: null, quality: null, value: null, lowVol: null }, composite: null, verdict: 'UNKNOWN', annualizedVol: null };
 
-Return ONLY valid JSON (no markdown). ALL scores 0-100 integers:
+    // 4. LLM writes ONLY the narrative, from the real numbers.
+    const NARRATIVE_PROMPT = `You are an equity analyst for Indian markets. Explain this stock using ONLY the real data provided — never invent numbers.
+
+Stock: ${priceData?.name || cleanStock} (${ticker}), sector ${fundamentals.fields.sector || 'n/a'}
+Factor scores (0-100): Momentum ${scored.factors.momentum}, Quality ${scored.factors.quality}, Value ${scored.factors.value}, Low-Vol ${scored.factors.lowVol}. Composite ${scored.composite} (${scored.verdict}).
+Real fundamentals (source: ${fundamentals.source}): ${JSON.stringify(fundamentals.fields)}
+Annualized volatility: ${scored.annualizedVol}%
+${fundamentals.source === 'estimated' ? 'NOTE: fundamentals could NOT be fetched — do not state specific fundamental figures; focus on price-based factors and say fundamentals are unavailable.' : ''}
+
+Return ONLY valid JSON (no markdown):
 {
-  "ticker": "SYMBOL",
-  "fullName": "Full Company Name",
-  "sector": "Sector",
-  "estimatedUpside": "12-20%",
-  "riskLevel": "Low" or "Medium" or "High",
-  "horizon": "6-12 months" or "1-2 years",
-  "factors": {
-    "quality": {
-      "score": <weighted avg>,
-      "subScores": {"roe":0-100,"roce":0-100,"debtToEquity":0-100,"earningsStability":0-100,"margins":0-100},
-      "positives": ["ROE 22% — excellent", "Net cash positive"],
-      "negatives": ["Margins compressed 300bps YoY"]
-    },
-    "value": {
-      "score": <weighted avg>,
-      "subScores": {"peRatio":0-100,"pbRatio":0-100,"pegRatio":0-100,"dividendYield":0-100},
-      "positives": ["PE 18x vs sector 26x — cheap"],
-      "negatives": ["No dividend"]
-    }
-  },
-  "newsSummary": "1-2 sentences on any major recent catalyst or risk from news (informational only, not scored)",
-  "summary": "2-3 sentence overall view combining quality + value + what the price-based factors will likely add",
-  "priceContext": "CMP, 52-week range, PE, sector PE, P/B"
+  "estimatedUpside": "e.g. 10-15%",
+  "riskLevel": "Low" | "Medium" | "High",
+  "horizon": "6-12 months" | "1-2 years",
+  "qualityNotes": {"positives":[],"negatives":[]},
+  "valueNotes": {"positives":[],"negatives":[]},
+  "newsSummary": "1-2 sentences (informational)",
+  "summary": "2-3 sentence overall view grounded in the scores + real data"
 }
+Return ONLY the JSON.`;
 
-RULES:
-- Compute each factor score as the WEIGHTED AVERAGE of its subScores
-- Use REAL financial data — never invent; if unsure, score conservatively toward 50
-- Each positive/negative references an actual metric vs benchmark
-- Return ONLY the JSON`
+    let narrative = {};
+    try {
+      const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          model: 'openai/gpt-oss-120b',
+          messages: [{ role: 'system', content: NARRATIVE_PROMPT }, { role: 'user', content: `Analyze ${ticker}.` }],
+          temperature: 0.3, max_tokens: 1500
+        })
+      });
+      if (r.ok) {
+        const d = await r.json();
+        let text = d?.choices?.[0]?.message?.content || '';
+        const s = text.indexOf('{'), e = text.lastIndexOf('}');
+        try { narrative = JSON.parse(s >= 0 && e > s ? text.slice(s, e + 1) : text); } catch (er) {}
+      }
+    } catch (er) {}
 
-    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-      body: JSON.stringify({
-        model: 'openai/gpt-oss-120b',
-        messages: [
-          { role: 'system', content: AGENT_PROMPT },
-          { role: 'user', content: `Analyze this stock's Quality and Value factors: "${cleanStock}"` }
-        ],
-        temperature: 0.3,
-        max_tokens: 3000
-      })
-    });
-
-    if (!r.ok) {
-      const err = await r.json().catch(() => ({}));
-      return res.status(r.status).json({ error: err?.error?.message || `Groq error ${r.status}` });
-    }
-
-    const data = await r.json();
-    const text = data?.choices?.[0]?.message?.content || '';
-    return res.status(200).json({ raw: text });
+    // 5. Assemble response (deterministic scores + LLM narrative + source flags).
+    const result = {
+      ticker, fullName: priceData?.name || cleanStock, sector: fundamentals.fields.sector || null,
+      price: priceData?.price ?? null, currency: priceData?.currency || 'INR',
+      factors: {
+        momentum: { score: scored.factors.momentum, detail: scored.momentumDetail },
+        quality: { score: scored.factors.quality, positives: narrative?.qualityNotes?.positives || [], negatives: narrative?.qualityNotes?.negatives || [] },
+        value: { score: scored.factors.value, positives: narrative?.valueNotes?.positives || [], negatives: narrative?.valueNotes?.negatives || [] },
+        lowVol: { score: scored.factors.lowVol },
+      },
+      fundamentals: fundamentals.fields,
+      fundamentalsSource: fundamentals.source,
+      dataQuality: fundamentals.source === 'estimated' ? 'price-only (fundamentals unavailable)' : `real (${fundamentals.source})`,
+      annualizedVol: scored.annualizedVol,
+      composite: scored.composite, verdict: scored.verdict,
+      estimatedUpside: narrative?.estimatedUpside || null,
+      riskLevel: narrative?.riskLevel || null,
+      horizon: narrative?.horizon || null,
+      newsSummary: narrative?.newsSummary || null,
+      summary: narrative?.summary || null,
+    };
+    // Backward-compat: the existing frontend expects `{ raw: "<json string>" }`.
+    // Include it so nothing breaks; new frontends can read the structured fields above.
+    result.raw = JSON.stringify(result);
+    return res.status(200).json(result);
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }

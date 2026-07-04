@@ -3,6 +3,8 @@
 import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
 import { decideSell, markPending } from './_sell-engine.js';
+import { fetchFundamentals } from './_fundamentals.js';
+import { scoreUniverse } from './_scoring.js';
 
 // Fetch up to 8 recent Google News headlines for a held stock (for the sell LLM).
 async function fetchHeadlines(query) {
@@ -283,72 +285,123 @@ export default async function handler(req, res) {
     sources.usedFallback = true;
   }
 
-  const SELECTION_PROMPT = `You are a factor-based equity strategist for Indian markets. Today is ${date}.
+  // ---- DETERMINISTIC SELECTION (replaces LLM-chooses-the-pick) ----
+  // Fetch price history + real fundamentals for every candidate, score them
+  // cross-sectionally, and take the top POTD-eligible stock. The LLM's role is
+  // downgraded to writing the narrative for the winner — it no longer picks or
+  // supplies fundamentals numbers.
+  const fmpKey = process.env.FMP_KEY;
 
-These candidates surfaced from TODAY's market news and top movers. Pick the SINGLE best stock to BUY, favoring strong Quality (high ROE/ROCE, low debt) and reasonable Value (not overpriced). Momentum and volatility will be measured separately from real price data, so weight fundamentals here.
+  const pool = candidates.slice(0, 12);
+  const built = await Promise.all(pool.map(async (name) => {
+    try {
+      const pd = await fetchPrice(name, name);
+      if (!pd || !Array.isArray(pd.closes) || pd.closes.length < 30) return null;
+      const ticker = (pd.symbol || name).replace(/\.(NS|BO)$/i, '').toUpperCase();
+      const fundamentals = await fetchFundamentals(ticker, { fmpKey });
+      return {
+        symbol: ticker,
+        fullName: pd.name || name,
+        closes: pd.closes.filter(v => v != null && !isNaN(v)),
+        fundamentals,
+        _price: pd,
+      };
+    } catch (e) { return null; }
+  }));
+  const universe = built.filter(Boolean);
 
-Candidates: ${candidates.join(', ')}
+  const rankedEligible = scoreUniverse(universe, { potdOnly: true });
+  const fundCoverage = {
+    universe: universe.length,
+    eligible: rankedEligible.length,
+    bySource: universe.reduce((a, s) => { const k = s.fundamentals.source; a[k] = (a[k] || 0) + 1; return a; }, {}),
+  };
 
-Return ONLY valid JSON (no markdown). ALL scores 0-100 integers:
-{
-  "ticker": "SYMBOL", "fullName": "Full Name", "sector": "Sector",
-  "estimatedUpside": "12-20%", "riskLevel": "Low/Medium/High", "horizon": "6-12 months",
-  "factors": {
-    "quality": {"score":0,"subScores":{"roe":0,"roce":0,"debtToEquity":0,"earningsStability":0,"margins":0},"positives":["..."],"negatives":["..."]},
-    "value": {"score":0,"subScores":{"peRatio":0,"pbRatio":0,"pegRatio":0,"dividendYield":0},"positives":["..."],"negatives":["..."]}
-  },
-  "newsSummary": "1-2 sentences on the key catalyst that made this stand out today",
-  "summary": "Why this is today's pick — quality + value thesis",
-  "priceContext": "CMP, range, PE, P/B",
-  "whyToday": "The single most important reason this stands out TODAY"
-}
-Every subScore is an integer 0-100. Return ONLY the JSON.`;
+  if (!rankedEligible.length) {
+    return res.status(200).json({
+      status: 'no_eligible_pick',
+      reason: 'no candidate had real fundamentals today',
+      fundCoverage, sellReview,
+    });
+  }
+
+  const winner = rankedEligible[0];
+  const winnerRow = universe.find(u => u.symbol === winner.symbol);
 
   try {
-    const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-      body: JSON.stringify({
-        model: 'openai/gpt-oss-120b',
-        messages: [
-          { role: 'system', content: SELECTION_PROMPT },
-          { role: 'user', content: `Pick the Stock of the Day for ${date}.` }
-        ],
-        temperature: 0.4, max_tokens: 3000
-      })
-    });
+    const priceData = winnerRow._price;
+    const realFund = winnerRow.fundamentals.fields;
 
-    if (!r.ok) {
-      const err = await r.json().catch(() => ({}));
-      return res.status(r.status).json({ error: err?.error?.message || `Groq ${r.status}` });
-    }
+    // ---- LLM writes ONLY the narrative for the already-chosen winner ----
+    const NARRATIVE_PROMPT = `You are an equity analyst writing a brief for Indian market investors. Today is ${date}.
 
-    const data = await r.json();
-    let text = data?.choices?.[0]?.message?.content || '';
-    const start = text.indexOf('{');
-    if (start > 0) text = text.slice(start);
-    let depth = 0, end = -1;
-    for (let i = 0; i < text.length; i++) {
-      if (text[i] === '{') depth++;
-      else if (text[i] === '}') { depth--; if (depth === 0) { end = i; break; } }
-    }
-    let pick;
+The Stock of the Day has ALREADY been selected by a quantitative factor model (do not second-guess the pick). Explain it using ONLY the real data provided — do not invent numbers.
+
+Selected: ${winner.fullName} (${winner.symbol}), sector ${winner.sector}
+Factor scores (0-100, cross-sectional percentile): Momentum ${winner.factors.momentum}, Quality ${winner.factors.quality}, Value ${winner.factors.value}, Low-Volatility ${winner.factors.lowVol}. Composite ${winner.composite} (${winner.verdict}).
+Real fundamentals (source: ${winnerRow.fundamentals.source}): ${JSON.stringify(realFund)}
+Annualized volatility: ${winner.annualizedVol}%
+
+Return ONLY valid JSON (no markdown):
+{
+  "estimatedUpside": "e.g. 12-18%",
+  "riskLevel": "Low" | "Medium" | "High",
+  "horizon": "6-12 months" | "1-2 years",
+  "qualityNotes": {"positives":["ref a real metric"],"negatives":["ref a real metric"]},
+  "valueNotes": {"positives":["ref a real metric"],"negatives":["ref a real metric"]},
+  "newsSummary": "1-2 sentences on any recent catalyst (informational)",
+  "summary": "2-3 sentence thesis grounded in the factor scores + real fundamentals",
+  "whyToday": "The single most important reason this stands out today"
+}
+Reference only the real numbers above. Return ONLY the JSON.`;
+
+    let narrative = {};
     try {
-      pick = JSON.parse(end > 0 ? text.slice(0, end + 1) : text);
-    } catch (e) {
-      return res.status(502).json({ error: 'Could not parse AI pick', detail: e.message });
-    }
-    // Validate the pick has the essential fields before committing anything
-    if (!pick || !pick.ticker || !pick.factors) {
-      return res.status(502).json({ error: 'AI returned an incomplete pick', got: pick?.ticker || null });
-    }
+      const nr = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({
+          model: 'openai/gpt-oss-120b',
+          messages: [{ role: 'system', content: NARRATIVE_PROMPT }, { role: 'user', content: `Write the brief for ${winner.symbol}.` }],
+          temperature: 0.4, max_tokens: 1500
+        })
+      });
+      if (nr.ok) {
+        const data = await nr.json();
+        let text = data?.choices?.[0]?.message?.content || '';
+        const s = text.indexOf('{'), e = text.lastIndexOf('}');
+        try { narrative = JSON.parse(s >= 0 && e > s ? text.slice(s, e + 1) : text); } catch (er) { narrative = {}; }
+      }
+    } catch (er) { narrative = {}; }
+
+    // Assemble pick from DETERMINISTIC scores + LLM narrative
+    const pick = {
+      ticker: winner.symbol, fullName: winner.fullName, sector: winner.sector,
+      factors: {
+        momentum: { score: winner.factors.momentum },
+        quality: { score: winner.factors.quality, positives: narrative?.qualityNotes?.positives || [], negatives: narrative?.qualityNotes?.negatives || [] },
+        value: { score: winner.factors.value, positives: narrative?.valueNotes?.positives || [], negatives: narrative?.valueNotes?.negatives || [] },
+        lowVol: { score: winner.factors.lowVol },
+      },
+      fundamentals: realFund,
+      fundamentalsSource: winnerRow.fundamentals.source,
+      annualizedVol: winner.annualizedVol,
+      composite: winner.composite,
+      verdict: winner.verdict,
+      estimatedUpside: narrative?.estimatedUpside || null,
+      riskLevel: narrative?.riskLevel || null,
+      horizon: narrative?.horizon || null,
+      newsSummary: narrative?.newsSummary || null,
+      summary: narrative?.summary || null,
+      whyToday: narrative?.whyToday || null,
+    };
     pick.date = date;
     pick.pickedAt = new Date().toISOString();
     pick.discovery = sources;
-    pick.candidatePool = candidates.length;
+    pick.candidatePool = universe.length;
+    pick.fundCoverage = fundCoverage;
+    pick.runnerUp = rankedEligible[1] ? { ticker: rankedEligible[1].symbol, composite: rankedEligible[1].composite } : null;
 
-    // Fetch price + 1y history FIRST so we can compute real factors and the composite
-    const priceData = await fetchPrice(pick.ticker, pick.fullName);
     // Entry price = previous close, captured at pick time from data we already have.
     // This is rock-solid (no second fetch that could be rate-limited/403'd) and is a
     // negligible fraction off the true open — a deliberate reliability tradeoff.
@@ -358,17 +411,7 @@ Every subScore is an integer 0-100. Return ONLY the JSON.`;
     const entryProvisional = false; // entry is locked at pick time — no capture-open needed
     const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
 
-    // Recompute LLM factor scores from sub-scores (deterministic), fold in real momentum/lowVol
-    const QUALITY_SUBW = { roe: 0.25, roce: 0.25, debtToEquity: 0.20, earningsStability: 0.15, margins: 0.15 };
-    const VALUE_SUBW = { peRatio: 0.35, pbRatio: 0.25, pegRatio: 0.25, dividendYield: 0.15 };
-    const recomputeFactor = (f, w) => { if (!f?.subScores) return; let t = 0, s = 0; for (const [m, wt] of Object.entries(w)) { const v = f.subScores[m]; if (v != null && !isNaN(v)) { t += v * wt; s += wt; } } if (s > 0) f.score = Math.round(t / s); };
-    recomputeFactor(pick.factors.quality, QUALITY_SUBW);
-    recomputeFactor(pick.factors.value, VALUE_SUBW);
-    const real = computeRealFactors(priceData?.closes || []);
-    pick.factors.momentum = real.momentum;
-    pick.factors.lowVol = real.lowVol;
-    pick.composite = computeFactorComposite(pick.factors);
-    pick.verdict = pick.composite >= 70 ? 'BUY' : pick.composite >= 50 ? 'HOLD' : 'AVOID';
+    // (Factors, composite, verdict are already set deterministically above — do NOT recompute.)
 
     // Capture Nifty level at entry for alpha tracking
     let niftyAtEntry = null;
