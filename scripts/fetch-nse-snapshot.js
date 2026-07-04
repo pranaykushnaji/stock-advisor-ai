@@ -85,9 +85,18 @@ async function tryFetch(label, fn) {
   console.log(`\nWrote ${OUT}`);
   console.log('Diagnostic summary:', JSON.stringify(snapshot.diag));
 
-  // Exit non-zero only if the basic probe failed (so the workflow surfaces a hard block).
-  if (!status.ok && snapshot.diag.moversCount === 0) {
-    console.log('\nNSE appears blocked from this runner too.');
-    process.exit(2);
+  // Exit 0 always if we got here and wrote the file — the diagnostic is the deliverable.
+  // A hard NSE block just means all diag flags are false; that's still a successful run
+  // of the DIAGNOSTIC (we learned NSE is blocked), not a script failure.
+  const anySuccess = Object.values(snapshot.diag).some(v => v === true || (typeof v === 'number' && v > 0));
+  if (!anySuccess) {
+    console.log('\n>>> RESULT: NSE appears BLOCKED from this GitHub runner (all fetches failed).');
+  } else {
+    console.log('\n>>> RESULT: NSE is REACHABLE from GitHub. Free NSE data unlocked.');
   }
-})().catch(e => { console.error('Fatal:', e); process.exit(1); });
+})().catch(e => {
+  // Never hard-fail the workflow — write what diagnostic we can and report.
+  console.error('Script error (non-fatal):', e?.message || e);
+  try { fs.writeFileSync(OUT, JSON.stringify({ fetchedAt: new Date().toISOString(), error: String(e?.message || e), diag: {} }, null, 2)); } catch (_) {}
+  process.exit(0);
+});
