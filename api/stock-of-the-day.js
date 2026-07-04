@@ -1,6 +1,29 @@
 // Stock of the Day — picks best stock daily from LIVE-discovered candidates.
 // Storage = GitHub repo files. Requires GITHUB_TOKEN env var.
 import { discoverCandidates } from './_discover.js';
+import { marketStatus } from './_market-calendar.js';
+import { decideSell, markPending } from './_sell-engine.js';
+
+// Fetch up to 8 recent Google News headlines for a held stock (for the sell LLM).
+async function fetchHeadlines(query) {
+  try {
+    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query + ' stock')}&hl=en-IN&gl=IN&ceid=IN:en`;
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 4000);
+    let resp;
+    try { resp = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' }, signal: ctrl.signal }); }
+    finally { clearTimeout(t); }
+    const text = await resp.text();
+    const titles = [];
+    const re = /<item>([\s\S]*?)<\/item>/g;
+    let m;
+    while ((m = re.exec(text)) !== null && titles.length < 8) {
+      const title = (m[1].match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '';
+      if (title) titles.push(title.replace(/<!\[CDATA\[|\]\]>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"'));
+    }
+    return titles;
+  } catch (e) { return []; }
+}
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
@@ -178,7 +201,7 @@ async function ghPutWithRetry(path, buildObj, token, message) {
     const current = await ghGetFile(path, token);
     let existingObj = null;
     try { existingObj = current.content ? JSON.parse(current.content) : null; } catch (e) {}
-    const obj = buildObj(existingObj);
+    const obj = await buildObj(existingObj);
     if (obj === null) return true; // buildObj signals "no write needed"
     const ok = await ghPutFile(path, obj, current.sha, token, message);
     if (ok) return true;
@@ -195,6 +218,13 @@ export default async function handler(req, res) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
+  // Skip on weekends / NSE holidays. Manual calls with ?force=true bypass (for testing).
+  const mkt = marketStatus();
+  if (!mkt.open && req.query.force !== 'true') {
+    console.log(`[market-guard] pick skipped — market closed (${mkt.reason})`);
+    return res.status(200).json({ status: 'skipped', reason: mkt.reason });
+  }
+
   const apiKey = process.env.GROQ_API_KEY;
   const ghToken = process.env.GITHUB_TOKEN;
   if (!apiKey) return res.status(500).json({ error: 'GROQ_API_KEY not configured' });
@@ -202,12 +232,38 @@ export default async function handler(req, res) {
 
   const date = todayIST();
 
+  // ---- PHASE 1: review held positions for SELL (runs before picking) ----
+  // For each OPEN holding: rules gate (target/stop/max-hold) -> LLM on fresh news.
+  // A SELL verdict flips it to SELL_PENDING with a provisional exit; the 5:30 PM
+  // refresh cron books the real exit price and moves it to the realized ledger.
+  let sellReview = { reviewed: 0, pending: 0 };
+  try {
+    await ghPutWithRetry('data/project-bouquet.json', async (current) => {
+      const bouquet = current?.bouquet || [];
+      const open = bouquet.filter(b => !b.status || b.status === 'OPEN');
+      if (!open.length) return null; // nothing to review — no write
+      let flipped = 0;
+      for (const item of open) {
+        sellReview.reviewed++;
+        const headlines = await fetchHeadlines(item.fullName || item.ticker);
+        const decision = await decideSell(item, apiKey, headlines);
+        if (decision) {
+          const idx = bouquet.indexOf(item);
+          bouquet[idx] = markPending(item, decision);
+          flipped++;
+        }
+      }
+      sellReview.pending = flipped;
+      return flipped > 0 ? { bouquet } : null; // only write if something changed
+    }, ghToken, 'Sell review: mark SELL_PENDING positions');
+  } catch (e) { /* sell review must never block the daily pick */ }
+
   const existing = await ghGetFile('data/daily-pick.json', ghToken);
   if (existing.content && !req.query.force) {
     try {
       const prev = JSON.parse(existing.content);
       if (prev?.pick?.date === date) {
-        return res.status(200).json({ status: 'already_picked', pick: prev.pick });
+        return res.status(200).json({ status: 'already_picked', pick: prev.pick, sellReview });
       }
     } catch (e) {}
   }
@@ -347,7 +403,7 @@ Every subScore is an integer 0-100. Return ONLY the JSON.`;
       return { bouquet };
     }, ghToken, `Add ${pick.ticker} to project bouquet`);
 
-    return res.status(200).json({ status: 'picked', pick, discovery: sources, candidates });
+    return res.status(200).json({ status: 'picked', pick, discovery: sources, candidates, sellReview });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }

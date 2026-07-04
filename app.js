@@ -516,6 +516,8 @@ async function renderBouquet(){
   await getProjectBouquet();
   // Refresh personal picks' live prices (they live in localStorage, not touched by the cron)
   await refreshPersonalPrices();
+  // Closed/realized trades (daily picks that were sold) — shown below open holdings
+  const realizedTrades=bouquetView==='personal'?[]:await fetchRealized();
 
   // Tag sources
   const dailyPicks=projectBouquet.map(b=>({...b,source:'daily'}));
@@ -528,7 +530,7 @@ async function renderBouquet(){
   const toggle=`<div style="display:flex;gap:6px;margin-bottom:18px;">
     ${[['all','All'],['daily','⭐ Daily Picks'],['personal','My Picks']].map(([v,l])=>`<button class="btn ${bouquetView===v?'btn-primary':'btn-ghost'}" style="padding:7px 14px;font-size:13px;" onclick="setBouquetView('${v}')">${l}</button>`).join('')}</div>`;
 
-  if(!combined.length){el.innerHTML=toggle+'<div class="empty-state"><div class="empty-icon">🌸</div><h3>No stocks yet</h3><p>Daily picks are added automatically each morning. Analyze a stock to add your own.</p></div>';return;}
+  if(!combined.length){el.innerHTML=toggle+'<div class="empty-state"><div class="empty-icon">🌸</div><h3>No stocks yet</h3><p>Daily picks are added automatically each morning. Analyze a stock to add your own.</p></div>'+renderRealizedSection(realizedTrades);return;}
 
   const work=combined;
   // A pick is "pending" ONLY if it has no entry price yet. If it has an entry but no
@@ -573,6 +575,7 @@ async function renderBouquet(){
     const days=Math.max(1,Math.floor((Date.now()-new Date(item.addedAt||item.date).getTime())/86400000));
     const vB=item.verdict==='BUY'?'verdict-buy':item.verdict==='AVOID'?'verdict-avoid':'verdict-hold';
     const srcTag=item.source==='daily'?'<span style="font-size:10px;color:var(--accent);font-weight:600;margin-left:6px;">⭐ DAILY</span>':'';
+    const pendingTag=item.status==='SELL_PENDING'?`<span class="sell-pending-tag" title="${esc(item.exitReason||'')}">● SELL PENDING</span>`:'';
     const removeBtn=item.source==='personal'?`<button class="bi-remove" onclick="removePersonalPick('${esc(item.ticker)}')">✕</button>`:'<span style="width:28px;"></span>';
     let metaLine,gainCell;
     if(gi.pending){
@@ -585,12 +588,12 @@ async function renderBouquet(){
       metaLine=`${shares.toFixed(2)} sh @ ₹${item.entryPrice} → ₹${cur}${todayTxt}`;
       gainCell=`<div class="bi-gain ${gi.gain>=0?'up':'down'}">${gi.gain>0?'+':''}${gi.gain}%</div>`;
     }
-    return`<div class="bouquet-item"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}${srcTag}</div>
-      <div class="bi-meta">${metaLine}</div></div>
+    return`<div class="bouquet-item${item.status==='SELL_PENDING'?' bi-pending':''}"><div class="bi-info"><div class="bi-ticker">${esc(item.ticker)}${srcTag}${pendingTag}</div>
+      <div class="bi-meta">${metaLine}${item.status==='SELL_PENDING'&&item.exitReason?` · <em style="color:var(--accent);">${esc(item.exitReason)}</em>`:''}</div></div>
       <span class="verdict-badge ${vB}" style="font-size:11px;padding:2px 10px;">${item.verdict}</span>
       ${gainCell}
       ${removeBtn}</div>`;
-  }).join('')}<div class="sim-note">Real NSE prices · ₹10,000 per pick · educational tracking only${(()=>{const lu=work.map(w=>w.lastPriceUpdate).filter(Boolean).sort().pop();return lu?' · updated '+timeAgo(lu):'';})()}</div></div>`;
+  }).join('')}<div class="sim-note">Real NSE prices · ₹10,000 per pick · educational tracking only${(()=>{const lu=work.map(w=>w.lastPriceUpdate).filter(Boolean).sort().pop();return lu?' · updated '+timeAgo(lu):'';})()}</div></div>`+renderRealizedSection(realizedTrades);
 }
 function timeAgo(iso){const s=Math.floor((Date.now()-new Date(iso).getTime())/1000);if(s<3600)return Math.max(1,Math.floor(s/60))+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago';}
 function setBouquetView(v){bouquetView=v;renderBouquet();}
@@ -734,6 +737,32 @@ async function fetchProjectBouquet(){
     const d=await r.json();
     return d.bouquet||[];
   }catch{return[];}
+}
+
+async function fetchRealized(){
+  try{
+    const r=await fetch('/data/realized.json?t='+Date.now());
+    if(!r.ok)return[];
+    const d=await r.json();
+    return Array.isArray(d.trades)?d.trades:[];
+  }catch{return[];}
+}
+function renderRealizedSection(trades){
+  if(!trades||!trades.length)return'';
+  const total=trades.reduce((a,t)=>a+(t.realizedPnl||0),0);
+  const tc=total>=0?'var(--green)':'var(--red)';
+  const rows=[...trades].reverse().map(t=>{
+    const pc=t.realizedPnlPct>=0?'up':'down';
+    const srcBadge=`<span class="rz-src">${esc((t.exitSource||'auto').toUpperCase())}</span>`;
+    return`<div class="rz-item"><div class="rz-info">
+      <div class="rz-ticker">${esc(t.ticker)} <span class="rz-dates">${esc(t.entryDate||'')} → ${esc(t.exitDate||'')}</span></div>
+      <div class="rz-meta">₹${t.entryPrice} → ₹${t.exitPrice}${t.exitReason?` · ${srcBadge}<em>${esc(t.exitReason)}</em>`:''}</div></div>
+      <div class="rz-pnl ${pc}">${t.realizedPnlPct>=0?'+':''}${t.realizedPnlPct}%</div></div>`;
+  }).join('');
+  return`<div class="realized-section">
+    <div class="rz-head"><div class="section-title" style="margin:0;">Realized</div>
+      <div class="rz-total">Booked P&L <strong style="color:${tc};">${total>=0?'+':''}₹${Math.round(total).toLocaleString('en-IN')}</strong></div></div>
+    <div class="realized-list">${rows}</div></div>`;
 }
 
 async function checkSotd(){

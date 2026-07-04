@@ -390,6 +390,31 @@ body {
 
 .sim-note { font-size: 11px; color: var(--text3); text-align: center; padding: 14px; border-top: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; }
 
+/* Sell-pending badge + card tint */
+.sell-pending-tag { font-size: 10px; font-weight: 700; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 8px; margin-left: 7px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.03em; white-space: nowrap; }
+.sell-pending-tag::first-letter { animation: sp-pulse 1.8s ease-in-out infinite; }
+@keyframes sp-pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+@media (prefers-reduced-motion: reduce){ .sell-pending-tag::first-letter{ animation:none; } }
+.bouquet-item.bi-pending { background: var(--accent-dim); }
+.bi-meta em { font-style: italic; }
+
+/* Realized (closed trades) section */
+.realized-section { margin-top: 26px; border-top: 2px solid var(--text); padding-top: 4px; }
+.rz-head { display: flex; align-items: baseline; justify-content: space-between; padding: 16px 20px 8px; }
+.rz-total { font-size: 12px; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+.rz-total strong { font-size: 15px; margin-left: 4px; }
+.realized-list { display: flex; flex-direction: column; }
+.rz-item { display: flex; align-items: center; gap: 13px; padding: 13px 20px; border-bottom: 1px solid var(--border); }
+.rz-item:last-child { border-bottom: none; }
+.rz-info { flex: 1; min-width: 0; }
+.rz-ticker { font-size: 14px; font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+.rz-dates { font-size: 11px; font-weight: 400; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+.rz-meta { font-size: 11px; color: var(--text3); margin-top: 3px; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+.rz-meta em { font-style: italic; }
+.rz-src { font-size: 9px; font-weight: 700; letter-spacing: 0.05em; padding: 1px 5px; border-radius: 4px; background: var(--bg-elev2); color: var(--text3); }
+.rz-pnl { font-size: 15px; font-weight: 700; min-width: 64px; text-align: right; font-family: 'JetBrains Mono', monospace; }
+.rz-pnl.up { color: var(--green); } .rz-pnl.down { color: var(--red); }
+
 /* History */
 /* Dashboard */
 .dash-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px; }

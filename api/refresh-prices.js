@@ -1,6 +1,9 @@
 // Refreshes current prices for all project-bouquet stocks.
 // Runs daily via cron; updates currentPrice so returns reflect real market moves.
 
+import { marketStatus } from './_market-calendar.js';
+import { bookExit } from './_sell-engine.js';
+
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
 async function ghGetFile(path, token) {
@@ -153,6 +156,13 @@ export default async function handler(req, res) {
   const isManual = cronSecret && req.query.key === cronSecret;
   if (cronSecret && !isCron && !isManual) return res.status(401).json({ error: 'Unauthorized' });
 
+  // Skip on weekends / NSE holidays. Manual calls with ?force=true bypass (for testing).
+  const mkt = marketStatus();
+  if (!mkt.open && req.query.force !== 'true') {
+    console.log(`[market-guard] refresh skipped — market closed (${mkt.reason})`);
+    return res.status(200).json({ status: 'skipped', reason: mkt.reason });
+  }
+
   const ghToken = process.env.GITHUB_TOKEN;
   if (!ghToken) return res.status(500).json({ error: 'GITHUB_TOKEN not configured', hint: 'Add GITHUB_TOKEN in Vercel → Settings → Environment Variables, then redeploy' });
 
@@ -211,6 +221,8 @@ export default async function handler(req, res) {
         if (reliable) {
           // Prefer the completed candle close for "current" after market close; else live price
           item.currentPrice = pd.candleClose || pd.price;
+          // For a SELL_PENDING position, this fresh price is the real exit to book at 5:30.
+          if (item.status === 'SELL_PENDING') item._realExit = pd.candleClose || pd.price;
           item.lastPriceUpdate = now;
           const invested = item.investedAmount || 10000;
           if (item.entryPrice > 0) item.shares = +(invested / item.entryPrice).toFixed(3);
@@ -228,13 +240,45 @@ export default async function handler(req, res) {
     }));
   }
 
-  // Write if any stock's data changed. Skip the commit only when nothing updated
-  // (e.g. everything was pre-market or all fetches failed) — avoids empty commits.
-  if (updated > 0) {
-    await ghPutFile('data/project-bouquet.json', { bouquet }, bq.sha, ghToken, `Refresh prices (${updated} stocks)`);
+  // ---- PHASE 2: finalize SELL_PENDING positions ----
+  // Book the real exit (fresh price captured above; fall back to provisional if the
+  // fetch failed), append to data/realized.json, and remove from the bouquet.
+  // A pending position with no fresh price stays pending and retries next cycle.
+  const closedTrades = [];
+  const remaining = [];
+  for (const item of bouquet) {
+    if (item.status === 'SELL_PENDING' && (item._realExit != null || item.provisionalExitPrice != null)) {
+      closedTrades.push(bookExit(item, item._realExit));
+    } else {
+      delete item._realExit; // never persist the scratch field
+      remaining.push(item);
+    }
+  }
+
+  let realizedWritten = 0;
+  if (closedTrades.length) {
+    // Append to the realized ledger (retry-safe: re-read, append, write).
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const rl = await ghGetFile('data/realized.json', ghToken);
+      let ledger = { trades: [] };
+      try { if (rl.content) ledger = JSON.parse(rl.content); } catch (e) {}
+      if (!Array.isArray(ledger.trades)) ledger.trades = [];
+      ledger.trades.push(...closedTrades);
+      const ok = await ghPutFile('data/realized.json', ledger, rl.sha, ghToken, `Book ${closedTrades.length} realized sell(s)`);
+      if (ok) { realizedWritten = closedTrades.length; break; }
+    }
+  }
+
+  // Write the bouquet if prices changed OR positions were closed out.
+  if (updated > 0 || closedTrades.length) {
+    const finalBouquet = closedTrades.length ? remaining : bouquet;
+    finalBouquet.forEach(it => delete it._realExit);
+    await ghPutFile('data/project-bouquet.json', { bouquet: finalBouquet }, bq.sha, ghToken,
+      closedTrades.length ? `Refresh prices + close ${closedTrades.length} position(s)` : `Refresh prices (${updated} stocks)`);
   }
   const out = { status: 'refreshed', updated, total: bouquet.length, nifty: niftyNow };
   if (skippedPremarket) out.skippedPremarket = skippedPremarket;
   if (failed.length) out.failed = failed;
+  if (realizedWritten) out.closed = realizedWritten;
   return res.status(200).json(out);
 }
