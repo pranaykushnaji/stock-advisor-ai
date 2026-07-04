@@ -80,13 +80,32 @@ export default async function handler(req, res) {
     if (!cleanStock) return res.status(400).json({ error: 'stock name required' });
 
     // 1. Resolve to a ticker + price history via the existing stock endpoint logic.
-    const base = cleanStock.replace(/\.(NS|BO)$/i, '').toUpperCase();
+    // Apply known rebrand aliases first (e.g. ZOMATO -> ETERNAL) so both price and
+    // fundamentals fetch against the live symbol, not the stale one.
+    const ALIASES = { ZOMATO: 'ETERNAL', MOTHERSUMI: 'MOTHERSON', MINDTREE: 'LTIM' };
+    let base = cleanStock.replace(/\.(NS|BO)$/i, '').toUpperCase();
+    if (ALIASES[base]) base = ALIASES[base];
     let priceData = null;
     try {
-      const host = req.headers.host;
-      const proto = (req.headers['x-forwarded-proto'] || 'https');
-      const pr = await fetchWithTimeout(`${proto}://${host}/api/stock?symbol=${encodeURIComponent(base)}&range=1y&interval=1d`, {}, 9000);
-      if (pr.ok) priceData = await pr.json();
+      // Fetch price+history directly from Yahoo (NSE first), avoiding a fragile
+      // serverless self-call to /api/stock. Falls through to null on failure —
+      // fundamentals still score without price history.
+      for (const sym of [`${base}.NS`, `${base}.BO`]) {
+        const yr = await fetchWithTimeout(
+          `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1y&interval=1d`,
+          { headers: { 'User-Agent': 'Mozilla/5.0' } }, 8000);
+        if (!yr.ok) continue;
+        const result = (await yr.json())?.chart?.result?.[0];
+        if (!result?.timestamp) continue;
+        const meta = result.meta || {};
+        if (meta.currency && meta.currency !== 'INR') continue; // avoid USD ADR
+        priceData = {
+          symbol: meta.symbol, name: meta.shortName || meta.longName || sym,
+          price: meta.regularMarketPrice, currency: meta.currency, exchange: meta.exchangeName,
+          chart: { close: result.indicators?.quote?.[0]?.close || [] },
+        };
+        break;
+      }
     } catch (e) {}
 
     const closes = priceData?.chart?.close?.filter(v => v != null && !isNaN(v)) || [];
@@ -95,10 +114,9 @@ export default async function handler(req, res) {
     // 2. Real fundamentals (FMP -> Yahoo -> estimated).
     const fundamentals = await fetchFundamentals(ticker, { fmpKey: process.env.FMP_KEY });
 
-    // 3. Deterministic scoring (single-stock absolute bands).
-    const scored = closes.length >= 30
-      ? scoreSingle(closes, fundamentals)
-      : { factors: { momentum: null, quality: null, value: null, lowVol: null }, composite: null, verdict: 'UNKNOWN', annualizedVol: null };
+    // 3. Deterministic scoring — score fundamentals even if price history is missing.
+    // (Previously an all-or-nothing gate nulled Quality/Value when closes were short.)
+    const scored = scoreSingle(closes, fundamentals);
 
     // 4. LLM writes ONLY the narrative, from the real numbers.
     const NARRATIVE_PROMPT = `You are an equity analyst for Indian markets. Explain this stock using ONLY the real data provided — never invent numbers.
