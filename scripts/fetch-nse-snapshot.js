@@ -1,13 +1,15 @@
 // scripts/fetch-nse-snapshot.js
 // Runs on a GitHub Actions runner (NOT Vercel) to fetch NSE data that Vercel's
 // datacenter IPs get 403'd on. Writes data/nse-snapshot.json for the app to read.
-//
-// First run doubles as a diagnostic: it reports which data types succeeded, so we
-// learn whether GitHub runners can reach NSE at all before building features on it.
+// ES module syntax (package.json has "type": "module").
 
-const fs = require('fs');
-const path = require('path');
-const { NseIndia } = require('stock-nse-india');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { NseIndia } from 'stock-nse-india';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const n = new NseIndia();
 const OUT = path.join(__dirname, '..', 'data', 'nse-snapshot.json');
