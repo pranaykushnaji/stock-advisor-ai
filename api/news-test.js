@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       fellBackToGoogle: news.sources.google,
       note: news.count === 0
         ? 'No source returned news for this ticker — coverage gap or keys missing.'
-        : `Merged ${news.count} headlines; sentiment ${news.sentiment} (${news.label}).`,
+        : `Merged ${news.count} headlines; sentiment ${news.sentiment} (${news.label}). CHECK: are these headlines actually about ${ticker}? If they are generic business news, the signal is not stock-specific.`,
     },
   });
 }

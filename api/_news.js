@@ -51,23 +51,35 @@ async function fromFinnhub(symbolBase, apiKey) {
 // ---- Source 2: NewsData.io ----
 async function fromNewsData(query, apiKey) {
   if (!apiKey) return null;
-  try {
-    const url = `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent(query)}&country=in&category=business&language=en`;
-    const r = await fetchWithTimeout(url, {}, 6000);
-    if (!r.ok) return null;
-    const d = await r.json();
-    const results = d?.results;
-    if (!Array.isArray(results) || !results.length) return null;
-    const headlines = results.slice(0, 10).map(a => a.title).filter(Boolean);
-    // NewsData paid tiers include sentiment; free tier usually doesn't → derive lexically.
-    const sentiments = results.map(a => a.sentiment).filter(s => typeof s === 'string');
-    let sentiment = null;
-    if (sentiments.length) {
-      const score = sentiments.reduce((acc, s) => acc + (s === 'positive' ? 1 : s === 'negative' ? -1 : 0), 0) / sentiments.length;
-      sentiment = +score.toFixed(2);
-    }
-    return headlines.length ? { headlines, sentiment, raw: results.length } : null;
-  } catch (e) { return null; }
+  // qInTitle forces the company name into the HEADLINE (not just anywhere in the
+  // article), which is what makes results actually stock-specific. Dropping the
+  // broad category/country filters that were returning generic business news.
+  const attempts = [
+    `https://newsdata.io/api/1/news?apikey=${apiKey}&qInTitle=${encodeURIComponent(query)}&language=en`,
+    `https://newsdata.io/api/1/news?apikey=${apiKey}&q=${encodeURIComponent('"' + query + '"')}&language=en&country=in`,
+  ];
+  for (const url of attempts) {
+    try {
+      const r = await fetchWithTimeout(url, {}, 6000);
+      if (!r.ok) continue;
+      const d = await r.json();
+      const results = d?.results;
+      if (!Array.isArray(results) || !results.length) continue;
+      // Keep only articles that actually mention the query term in the title.
+      const q = query.toLowerCase();
+      const relevant = results.filter(a => (a.title || '').toLowerCase().includes(q));
+      const use = relevant.length ? relevant : results;
+      const headlines = use.slice(0, 10).map(a => a.title).filter(Boolean);
+      const sentiments = use.map(a => a.sentiment).filter(s => typeof s === 'string');
+      let sentiment = null;
+      if (sentiments.length) {
+        const score = sentiments.reduce((acc, s) => acc + (s === 'positive' ? 1 : s === 'negative' ? -1 : 0), 0) / sentiments.length;
+        sentiment = +score.toFixed(2);
+      }
+      if (headlines.length) return { headlines, sentiment, raw: use.length, relevant: relevant.length };
+    } catch (e) { continue; }
+  }
+  return null;
 }
 
 // ---- Source 3: Google News RSS (fallback) ----
