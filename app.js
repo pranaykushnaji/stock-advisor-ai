@@ -359,7 +359,7 @@ function renderResult(d,area,stockData,news){
       ${factorCard('Momentum','🚀',F.momentum,'#C67C4E',momentumDetail(F.momentum))}
       ${factorCard('Quality','💎',F.quality,'#7FA663',null)}
       ${factorCard('Value','🏷️',F.value,'#6E8CA0',null)}
-      ${factorCard('Low Volatility','🛡️',F.lowVol,'#A88BA3',volDetail(F.lowVol))}
+      ${factorCard('Low Volatility','🛡️',F.lowVol,'#A88BA3',volDetail(F.lowVol,d.annualizedVol))}
     </div>
     ${compBreakdown}
     ${d.newsSummary?`<div class="news-box"><div class="section-title">📰 News Context</div><p style="font-size:13px;color:var(--text2);line-height:1.6;">${esc(d.newsSummary)}</p></div>`:''}
@@ -378,14 +378,26 @@ function renderResult(d,area,stockData,news){
 function momentumDetail(m){
   if(!m||m.score==null)return '<div style="font-size:11px;color:var(--text3);">Insufficient price history for momentum</div>';
   const parts=[];
-  if(m.m3!=null)parts.push(`3M ${m.m3>=0?'+':''}${m.m3}%`);
-  if(m.m6!=null)parts.push(`6M ${m.m6>=0?'+':''}${m.m6}%`);
-  if(m.m12!=null)parts.push(`12M ${m.m12>=0?'+':''}${m.m12}%`);
-  return `<div class="factor-detail">📈 Real price momentum: ${parts.join(' · ')||'—'}</div>`;
+  // New shape: m.detail.{r3,r6,r12} as decimals. Legacy: m.m3/m6/m12 as percents.
+  const d=m.detail;
+  const pct=(v)=>+(v*100).toFixed(1);
+  if(d){
+    if(d.r3!=null)parts.push(`3M ${d.r3>=0?'+':''}${pct(d.r3)}%`);
+    if(d.r6!=null)parts.push(`6M ${d.r6>=0?'+':''}${pct(d.r6)}%`);
+    if(d.r12!=null)parts.push(`12M ${d.r12>=0?'+':''}${pct(d.r12)}%`);
+  } else {
+    if(m.m3!=null)parts.push(`3M ${m.m3>=0?'+':''}${m.m3}%`);
+    if(m.m6!=null)parts.push(`6M ${m.m6>=0?'+':''}${m.m6}%`);
+    if(m.m12!=null)parts.push(`12M ${m.m12>=0?'+':''}${m.m12}%`);
+  }
+  if(!parts.length)return '<div style="font-size:11px;color:var(--text3);">Score from fundamentals (price history limited)</div>';
+  return `<div class="factor-detail">📈 Real price momentum: ${parts.join(' · ')}</div>`;
 }
-function volDetail(lv){
+function volDetail(lv,annualizedVol){
   if(!lv||lv.score==null)return '<div style="font-size:11px;color:var(--text3);">Insufficient data for volatility</div>';
-  return `<div class="factor-detail">📊 Annualized volatility: ${lv.vol}% ${lv.vol<18?'(low — stable)':lv.vol<30?'(moderate)':'(high)'}</div>`;
+  const v=annualizedVol!=null?annualizedVol:lv.vol; // new shape passes top-level annualizedVol
+  if(v==null)return '<div style="font-size:11px;color:var(--text3);">Volatility unavailable</div>';
+  return `<div class="factor-detail">📊 Annualized volatility: ${v}% ${v<18?'(low — stable)':v<30?'(moderate)':'(high)'}</div>`;
 }
 
 // Factor card renderer — like agentCard but for factors, with optional real-data detail

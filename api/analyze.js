@@ -108,6 +108,29 @@ export default async function handler(req, res) {
       }
     } catch (e) {}
 
+    // Alpha Vantage fallback — Yahoo frequently 403s Vercel datacenter IPs.
+    // Without this, momentum/low-vol silently go null on those runs.
+    if ((!priceData || !priceData.chart?.close?.length) && process.env.ALPHAVANTAGE_KEY) {
+      try {
+        for (const sym of [`${base}.BSE`, base]) {
+          const ar = await fetchWithTimeout(
+            `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${encodeURIComponent(sym)}&outputsize=full&apikey=${process.env.ALPHAVANTAGE_KEY}`,
+            {}, 9000);
+          if (!ar.ok) continue;
+          const series = (await ar.json())?.['Time Series (Daily)'];
+          if (!series || typeof series !== 'object') continue;
+          const dates = Object.keys(series).sort();
+          if (dates.length < 40) continue;
+          const closeArr = dates.slice(-260).map(dt => parseFloat(series[dt]['4. close']));
+          priceData = {
+            symbol: sym.replace(/\.BSE$/, ''), name: sym, price: closeArr[closeArr.length - 1],
+            currency: 'INR', exchange: 'NSE/BSE', chart: { close: closeArr },
+          };
+          break;
+        }
+      } catch (e) {}
+    }
+
     const closes = priceData?.chart?.close?.filter(v => v != null && !isNaN(v)) || [];
     const ticker = (priceData?.symbol || base).replace(/\.(NS|BO)$/i, '').toUpperCase();
 
