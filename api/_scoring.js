@@ -1,4 +1,5 @@
 // api/_scoring.js
+import { computeIndicators } from './_indicators.js';
 // Deterministic factor scoring. The LLM no longer supplies fundamentals numbers;
 // it only scores what real data can't provide, and writes qualitative summaries.
 //
@@ -201,9 +202,10 @@ export function verdict(comp) {
 
 // ---------- MOMENTUM-DOMINANT scoring (bouquet / swing-trade mode) ----------
 // Aggressive, short-horizon: momentum leads, quality is only a junk-filter, volume
-// confirms interest, low-vol lightly penalizes wild names. Paired with tighter sell
-// engine. SEPARATE from scoreUniverse (the long-term model used by Advisor).
-export const MOMENTUM_WEIGHTS = { momentum: 0.55, quality: 0.20, volume: 0.15, lowVol: 0.10 };
+// confirms interest, technicals confirm trend, low-vol lightly penalizes wild names.
+// SEPARATE from scoreUniverse (long-term model used by Advisor).
+// Weights: momentum 45%, technicals 15%, quality 15% (junk-filter), volume 15%, lowVol 10%.
+export const MOMENTUM_WEIGHTS = { momentum: 0.45, technicals: 0.15, quality: 0.15, volume: 0.15, lowVol: 0.10 };
 
 // Junk filter: reject names too illiquid or too wild to trade — the
 // "don't buy a manipulated microcap" guard. Tunable.
@@ -219,23 +221,26 @@ function momentumComposite(scores) {
   return +(parts.reduce((a, p) => a + p.v * p.w, 0) / wsum).toFixed(1);
 }
 
-export function scoreMomentumUniverse(candidates) {
+export function scoreMomentumUniverse(candidates, opts = {}) {
+  const benchCloses = opts.benchCloses || null; // Nifty closes for relative strength
   const enriched = candidates.map(c => {
     const shortRet = computeShortReturns(c.closes);
     const shortMom = shortMomentum(shortRet);
     const vol = annualizedVol(c.closes);
     const volSig = volumeSignal(c.volumes);
     const lastPrice = Array.isArray(c.closes) && c.closes.length ? c.closes[c.closes.length - 1] : (c.price ?? null);
+    const indicators = computeIndicators(c.closes || [], { highs: c.highs, lows: c.lows, benchCloses });
     const reasons = [];
     if (volSig && volSig.avgRecent < JUNK_FILTER.MIN_AVG_VOLUME) reasons.push('illiquid');
     if (vol != null && vol > JUNK_FILTER.MAX_ANNUAL_VOL) reasons.push('too-volatile');
     if (lastPrice != null && lastPrice < JUNK_FILTER.MIN_PRICE) reasons.push('penny-stock');
-    return { ...c, _shortRet: shortRet, _shortMom: shortMom, _vol: vol, _volSig: volSig, _lastPrice: lastPrice, _junkReasons: reasons };
+    return { ...c, _shortRet: shortRet, _shortMom: shortMom, _vol: vol, _volSig: volSig, _lastPrice: lastPrice, _ind: indicators, _junkReasons: reasons };
   });
 
   const momRank = rankMetric(enriched, s => volScaledMomentum(s._shortMom, s._vol));
   const volumeRank = rankMetric(enriched, s => s._volSig ? s._volSig.ratio : null);
   const lowVolRank = rankMetric(enriched, s => s._vol != null ? -s._vol : null);
+  const techRank = rankMetric(enriched, s => s._ind?.techScore ?? null);
   const qRank = rankMetric(enriched, s => {
     const f = s.fundamentals?.fields || {};
     const bits = [f.roe, f.debtToEquity != null ? -f.debtToEquity : null, f.netMargin].filter(v => v != null);
@@ -245,6 +250,7 @@ export function scoreMomentumUniverse(candidates) {
   const scored = enriched.map(s => {
     const scores = {
       momentum: momRank.get(s),
+      technicals: techRank.get(s) ?? 50,
       quality: qRank.get(s) ?? 50,
       volume: volumeRank.get(s),
       lowVol: lowVolRank.get(s),
@@ -253,6 +259,7 @@ export function scoreMomentumUniverse(candidates) {
     return {
       symbol: s.symbol, fullName: s.fullName, sector: s.fundamentals?.fields?.sector || s.sector || 'UNKNOWN',
       factors: scores, shortReturns: s._shortRet,
+      indicators: s._ind ? { rsi: s._ind.rsi, macdHist: s._ind.macd?.histogram ?? null, maAlignment: s._ind.maAlignment, relativeStrength: s._ind.relativeStrength, techScore: s._ind.techScore } : null,
       annualizedVol: s._vol != null ? +(s._vol * 100).toFixed(1) : null,
       volumeRatio: s._volSig ? s._volSig.ratio : null,
       composite: comp,
