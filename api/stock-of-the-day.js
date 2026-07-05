@@ -4,7 +4,23 @@ import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
 import { decideSell, markPending } from './_sell-engine.js';
 import { fetchFundamentals } from './_fundamentals.js';
-import { scoreUniverse, scoreMomentumUniverse } from './_scoring.js';
+import { scoreUniverse, scoreMomentumUniverse,
+  computeShortReturns, shortMomentum, volumeSignal, annualizedVol, volScaledMomentum } from './_scoring.js';
+
+// The 'estimated' fundamentals shell — identical shape to _fundamentals.js's null case.
+// Used for names outside the fundamentals shortlist so they score without a paid FMP call.
+// source:'estimated' → isPotdEligible() returns false, so these are never auto-picked.
+function estimatedFundamentals() {
+  return {
+    source: 'estimated',
+    fields: {
+      roe: null, roce: null, debtToEquity: null, netMargin: null, ebitdaMargin: null,
+      earningsGrowth: null, peRatio: null, pbRatio: null, pegRatio: null,
+      dividendYield: null, sector: null,
+    },
+    partial: true,
+  };
+}
 
 // Fetch up to 8 recent Google News headlines for a held stock (for the sell LLM).
 async function fetchHeadlines(query) {
@@ -297,30 +313,76 @@ export default async function handler(req, res) {
   }
 
   // ---- MOMENTUM-DOMINANT SELECTION (bouquet / swing-trade mode) ----
-  // Short-term momentum leads (55%); quality is only a junk-filter; volume confirms
-  // interest. A liquidity/penny/volatility junk filter drops manipulated microcaps.
-  // Paired with the tightened sell engine (8% target / -5% stop / 7-day max hold).
+  // Short-term momentum leads (momentum weight 0.45, see MOMENTUM_WEIGHTS); quality is
+  // only a junk-filter; volume confirms interest. A liquidity/penny/volatility junk
+  // filter drops manipulated microcaps. Paired with the tightened sell engine
+  // (8% target / -5% stop / 7-day max hold).
+  //
+  // V2 COST DISCIPLINE (two-phase fetch):
+  //   Phase 1 — fetch 1y PRICES for a wide pool (cheap-ish: Yahoo, cached/staggered).
+  //   Phase 2 — pre-rank on price+volume momentum only, then fetch FMP FUNDAMENTALS for
+  //             just the top shortlist. FMP free tier is ~250 calls/day, so fetching
+  //             fundamentals for the whole wide universe daily would blow the quota.
+  //             Non-shortlisted names still get scored (fundamentals → 'estimated' shell,
+  //             which scoreMomentumUniverse tolerates; quality is only a 15% junk-filter).
   const fmpKey = process.env.FMP_KEY;
 
-  const pool = candidates.slice(0, 12);
-  const built = await Promise.all(pool.map(async (name) => {
+  // Pool sizes — tunable. PRICE_POOL widened from the old hard 12; FUND_SHORTLIST bounds
+  // the expensive fundamentals calls so we stay inside free tiers.
+  const PRICE_POOL = 40;      // how many discovered names get a 1y price fetch
+  const FUND_SHORTLIST = 12;  // how many of those (best momentum) get real fundamentals
+
+  const pool = candidates.slice(0, PRICE_POOL);
+
+  // Phase 1: prices only (no fundamentals yet).
+  const priced = (await Promise.all(pool.map(async (name) => {
     try {
       const pd = await fetchPrice(name, name);
       if (!pd || !Array.isArray(pd.closes) || pd.closes.length < 20) return null;
       const ticker = (pd.symbol || name).replace(/\.(NS|BO)$/i, '').toUpperCase();
-      const fundamentals = await fetchFundamentals(ticker, { fmpKey });
+      const closes = pd.closes.filter(v => v != null && !isNaN(v));
+      const volumes = (pd.volumes || []).filter(v => v != null && !isNaN(v));
+      // Cheap price/volume momentum score for pre-ranking (no API cost).
+      const sr = computeShortReturns(closes);
+      const preScore = volScaledMomentum(shortMomentum(sr), annualizedVol(closes));
+      const vs = volumeSignal(volumes);
       return {
         symbol: ticker,
         fullName: pd.name || name,
-        closes: pd.closes.filter(v => v != null && !isNaN(v)),
-        volumes: (pd.volumes || []).filter(v => v != null && !isNaN(v)),
+        closes, volumes,
         price: pd.price,
-        fundamentals,
         _price: pd,
+        _preScore: (preScore == null ? -Infinity : preScore),
+        _volRatio: vs ? vs.ratio : 0,
       };
     } catch (e) { return null; }
+  }))).filter(Boolean);
+
+  // Phase 2: shortlist the best momentum names and fetch REAL fundamentals only for them.
+  // Tie-break by volume surge so a genuine breakout beats a quiet drifter.
+  const shortlist = priced
+    .slice()
+    .sort((a, b) => (b._preScore - a._preScore) || (b._volRatio - a._volRatio))
+    .slice(0, FUND_SHORTLIST);
+  const shortlistSet = new Set(shortlist.map(s => s.symbol));
+
+  const universe = await Promise.all(priced.map(async (s) => {
+    let fundamentals;
+    if (shortlistSet.has(s.symbol)) {
+      try { fundamentals = await fetchFundamentals(s.symbol, { fmpKey }); }
+      catch (e) { fundamentals = estimatedFundamentals(); }
+    } else {
+      // Not in the shortlist → skip the paid fundamentals call, use an estimated shell.
+      // These names are still scored & tradeable, but never POTD-picked (isPotdEligible
+      // requires real fundamentals), so the daily pick stays grounded in real data.
+      fundamentals = estimatedFundamentals();
+    }
+    return {
+      symbol: s.symbol, fullName: s.fullName,
+      closes: s.closes, volumes: s.volumes, price: s.price,
+      fundamentals, _price: s._price,
+    };
   }));
-  const universe = built.filter(Boolean);
 
   const { ranked: rankedEligible, rejected } = scoreMomentumUniverse(universe);
   const fundCoverage = {
@@ -338,7 +400,17 @@ export default async function handler(req, res) {
     });
   }
 
-  const winner = rankedEligible[0];
+  // V2 GROUNDING GUARD: the daily pick must have REAL fundamentals. With two-phase
+  // fetching, non-shortlisted names carry an 'estimated' shell, so we pick the best
+  // ranked name that ALSO has real fundamentals (i.e. was in the fundamentals shortlist).
+  // The pre-rank is momentum-based like the final score, so the top ranked name is
+  // almost always shortlisted anyway — this just guarantees it. Falls back to the top
+  // ranked name only if somehow none of the ranked names have real fundamentals.
+  const hasRealFund = (sym) => {
+    const row = universe.find(u => u.symbol === sym);
+    return row && row.fundamentals && row.fundamentals.source !== 'estimated';
+  };
+  const winner = rankedEligible.find(r => hasRealFund(r.symbol)) || rankedEligible[0];
   const winnerRow = universe.find(u => u.symbol === winner.symbol);
 
   try {

@@ -14,15 +14,39 @@ const __dirname = path.dirname(__filename);
 const n = new NseIndia();
 const OUT = path.join(__dirname, '..', 'data', 'nse-snapshot.json');
 
-async function tryFetch(label, fn) {
-  try {
-    const data = await fn();
-    console.log(`  OK   ${label}`);
-    return { ok: true, data };
-  } catch (e) {
-    console.log(`  FAIL ${label}: ${(e.message || e).toString().slice(0, 100)}`);
-    return { ok: false, error: (e.message || e).toString().slice(0, 200) };
+// Retry/backoff wrapper. NSE rate-limits at the wider universe volume where the old
+// 4-index scan didn't — so each index fetch gets a couple of retries with growing
+// backoff, and we throttle BETWEEN indices (see UNIVERSE_INDICES loop) to stay polite.
+async function tryFetch(label, fn, { retries = 2, backoffMs = 1500 } = {}) {
+  let lastErr = null;
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const data = await fn();
+      console.log(`  OK   ${label}${attempt ? ` (attempt ${attempt + 1})` : ''}`);
+      return { ok: true, data };
+    } catch (e) {
+      lastErr = e;
+      const msg = (e.message || e).toString().slice(0, 100);
+      if (attempt < retries) {
+        const wait = backoffMs * (attempt + 1);
+        console.log(`  RETRY ${label}: ${msg} — waiting ${wait}ms`);
+        await sleep(wait);
+      } else {
+        console.log(`  FAIL ${label}: ${msg}`);
+      }
+    }
   }
+  return { ok: false, error: (lastErr?.message || lastErr || 'unknown').toString().slice(0, 200) };
+}
+
+// Simple sleep for throttling between requests.
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// Coerce NSE's string-or-number numeric fields (lastPrice etc. arrive as strings).
+function toNum(v) {
+  if (v == null) return null;
+  const n = typeof v === 'number' ? v : parseFloat(String(v).replace(/,/g, ''));
+  return isFinite(n) ? n : null;
 }
 
 (async () => {
@@ -34,10 +58,26 @@ async function tryFetch(label, fn) {
   snapshot.diag.marketStatus = status.ok;
   if (status.ok) snapshot.data.marketStatus = status.data;
 
-  // 2. Gainers/losers across key indices (the REAL movers — fixes discovery)
-  const indicesToScan = ['NIFTY 50', 'NIFTY NEXT 50', 'NIFTY MIDCAP 100', 'SECURITIES IN F&O'];
+  // 2. Gainers/losers AND full liquid universe across the broad NSE indices.
+  //    V2 universe expansion: was 4 indices → now covers Nifty-500-equivalent breadth
+  //    (large + mid + small + F&O) so discovery sees ~500-800 liquid names, not ~210.
+  //    These are INDEX endpoints (one call returns every constituent), so widening the
+  //    list costs a handful of extra calls, not one-per-stock. We still throttle between
+  //    them because NSE rate-limits the broader endpoints harder than NIFTY 50.
+  const UNIVERSE_INDICES = [
+    'NIFTY 50',
+    'NIFTY NEXT 50',
+    'NIFTY MIDCAP 100',
+    'NIFTY MIDCAP 150',
+    'NIFTY SMALLCAP 100',
+    'NIFTY SMALLCAP 250',
+    'NIFTY 500',
+    'SECURITIES IN F&O',
+  ];
+  const THROTTLE_MS = 1200; // polite gap between index calls
   const movers = [];
-  for (const idxName of indicesToScan) {
+  for (let i = 0; i < UNIVERSE_INDICES.length; i++) {
+    const idxName = UNIVERSE_INDICES[i];
     const r = await tryFetch(`stockIndices ${idxName}`, () => n.getEquityStockIndices(idxName));
     if (r.ok && Array.isArray(r.data?.data)) {
       for (const s of r.data.data) {
@@ -50,6 +90,7 @@ async function tryFetch(label, fn) {
         }
       }
     }
+    if (i < UNIVERSE_INDICES.length - 1) await sleep(THROTTLE_MS); // throttle between indices
   }
   // De-dupe by symbol (keep highest-volume record), sort by pChange desc.
   const bySymbol = new Map();
@@ -59,8 +100,40 @@ async function tryFetch(label, fn) {
   }
   const allMovers = [...bySymbol.values()].sort((a, b) => b.pChange - a.pChange);
   snapshot.diag.moversCount = allMovers.length;
+
+  // BACKWARD-COMPAT: keep topGainers/topLosers exactly as before so _discover.js and
+  // anything else reading the old schema keeps working with ZERO changes.
   snapshot.data.topGainers = allMovers.slice(0, 30);
   snapshot.data.topLosers = allMovers.slice(-15).reverse();
+
+  // NEW (superset field): the full de-duped liquid universe with a lightweight
+  // tradeability pre-filter applied on the Actions side. _discover.js reads this when
+  // present and falls back to topGainers when it isn't. Numbers are coerced from NSE's
+  // string form so downstream consumers get real numbers.
+  //   UNIVERSE_FILTER lives here (fetch side) so junk never even enters the committed
+  //   JSON; _discover.js layers its own JUNK_FILTER on top at read time.
+  const UNIVERSE_FILTER = {
+    MIN_PRICE: 20,          // no sub-₹20 penny names (mirrors JUNK_FILTER.MIN_PRICE)
+    MIN_TRADED_VOLUME: 50000, // day's traded volume floor — drops illiquid shells
+  };
+  const universe = allMovers
+    .map((m) => ({
+      symbol: m.symbol,
+      pChange: m.pChange,
+      lastPrice: toNum(m.lastPrice),
+      dayHigh: toNum(m.dayHigh),
+      dayLow: toNum(m.dayLow),
+      totalTradedVolume: toNum(m.totalTradedVolume),
+      index: m.index,
+    }))
+    .filter((m) =>
+      m.lastPrice != null &&
+      m.lastPrice >= UNIVERSE_FILTER.MIN_PRICE &&
+      (m.totalTradedVolume ?? 0) >= UNIVERSE_FILTER.MIN_TRADED_VOLUME
+    );
+  snapshot.data.universe = universe;
+  snapshot.diag.universeCount = universe.length;
+  snapshot.diag.universeIndicesScanned = UNIVERSE_INDICES.length;
 
   // 3. Bulk & block deals (institutional activity — alt-data spec section)
   const bulk = await tryFetch('bulk deals', () => n.getDataByEndpoint('/api/snapshot-capital-market-largedeal'));

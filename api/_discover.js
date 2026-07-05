@@ -14,6 +14,15 @@ export const NIFTY50 = [
   'Tata Consumer','BPCL','Shriram Finance','Trent','IndusInd Bank'
 ];
 
+// V2 universe-expansion knobs. Tradeability floors applied when reading the wide
+// `data.universe` snapshot field (mirrors _scoring.js JUNK_FILTER semantics).
+// UNIVERSE_CANDIDATE_CAP bounds how many names discovery hands downstream — the real
+// per-name cost (1y prices + fundamentals) is gated in stock-of-the-day.js, but we
+// still cap here so a runaway universe can't balloon the candidate list.
+const UNIVERSE_MIN_PRICE = 20;
+const UNIVERSE_MIN_VOLUME = 50000;
+const UNIVERSE_CANDIDATE_CAP = 120; // was effectively 15; wide universe ranked by pChange
+
 // Fetch with a hard timeout so a hanging source can't blow the serverless limit
 async function fetchWithTimeout(url, opts = {}, ms = 4000) {
   const ctrl = new AbortController();
@@ -38,17 +47,30 @@ async function readNseSnapshot() {
     const gainers = (data.topGainers || []).map(g => ({
       symbol: g.symbol, pChange: g.pChange, volume: g.totalTradedVolume, index: g.index,
     })).filter(g => g.symbol);
+    // V2: full liquid universe (superset field). Present only on snapshots written by the
+    // expanded fetcher; older snapshots don't have it, so callers must handle empty.
+    // Layer JUNK_FILTER-style tradeability on top of the fetch-side pre-filter.
+    const universe = (data.universe || []).map(u => ({
+      symbol: u.symbol, pChange: u.pChange, price: u.lastPrice,
+      volume: u.totalTradedVolume, index: u.index,
+    })).filter(u =>
+      u.symbol &&
+      (u.price == null || u.price >= UNIVERSE_MIN_PRICE) &&
+      (u.volume == null || u.volume >= UNIVERSE_MIN_VOLUME)
+    );
     // Symbols with institutional bulk/block buying today (a confirmation signal).
+    // NOTE: NSE symbols here (e.g. "ATALREAL"); matching against them is fixed in
+    // discoverCandidates via symbol-aware comparison (see bulkConfirmed below).
     const bulkSymbols = new Set();
     for (const d of (data.bulkDeals || [])) {
       const sym = d?.symbol || d?.SYMBOL;
       const type = (d?.buySell || d?.BUY_SELL || '').toString().toUpperCase();
-      if (sym && type.includes('B')) bulkSymbols.add(sym.toUpperCase());
+      if (sym && type.includes('B')) bulkSymbols.add(String(sym).toUpperCase().trim());
     }
     // Staleness: snapshot older than ~20h means the Action may be failing.
     const fetchedAt = snap?.fetchedAt ? new Date(snap.fetchedAt).getTime() : 0;
     const stale = !fetchedAt || (Date.now() - fetchedAt) > 20 * 3600 * 1000;
-    return { gainers, bulkSymbols, stale, fetchedAt: snap?.fetchedAt || null };
+    return { gainers, universe, bulkSymbols, stale, fetchedAt: snap?.fetchedAt || null };
   } catch (e) { return null; }
 }
 
@@ -136,21 +158,35 @@ function normName(s) {
 
 // Main: returns { candidates: [...], sources: {...} }
 export async function discoverCandidates(apiKey) {
-  const sources = { news: 0, movers: 0, nseSnapshot: 0, usedFallback: false,
+  const sources = { news: 0, movers: 0, nseSnapshot: 0, nseUniverse: 0, usedFallback: false,
     diag: { headlinesFetched: 0, newsQueryUsed: null, extractError: null, moversError: null, snapshotStale: null, snapshotAt: null } };
 
   // 0. PRIMARY source: real NSE movers from the committed snapshot (GitHub Action
   //    fetches these from unblocked IPs). This is the day's ACTUAL gainers — the
   //    biggest discovery improvement. Includes mid-caps momentum actually lives in.
+  //    V2: prefer the full liquid `universe` (500-800 names) when the expanded fetcher
+  //    has written it; fall back to the legacy top-30 `gainers` on older snapshots.
   const snap = await readNseSnapshot();
   let snapshotGainers = [];
   let bulkBuySymbols = new Set();
-  if (snap && Array.isArray(snap.gainers)) {
-    snapshotGainers = snap.gainers.map(g => g.symbol);
+  if (snap) {
     bulkBuySymbols = snap.bulkSymbols || new Set();
-    sources.nseSnapshot = snapshotGainers.length;
     sources.diag.snapshotStale = snap.stale;
     sources.diag.snapshotAt = snap.fetchedAt;
+    const wide = Array.isArray(snap.universe) ? snap.universe : [];
+    if (wide.length) {
+      // Rank the wide universe by today's move (pChange desc) — momentum-first ordering,
+      // consistent with the old top-gainers behaviour but over the full liquid set.
+      snapshotGainers = wide
+        .slice()
+        .sort((a, b) => (b.pChange ?? -Infinity) - (a.pChange ?? -Infinity))
+        .map(u => u.symbol);
+      sources.nseUniverse = snapshotGainers.length;
+      sources.nseSnapshot = snapshotGainers.length;
+    } else if (Array.isArray(snap.gainers)) {
+      snapshotGainers = snap.gainers.map(g => g.symbol);
+      sources.nseSnapshot = snapshotGainers.length;
+    }
   }
 
   // 1. Live news → stock names. Try multiple queries so one dud query doesn't zero us out.
@@ -205,9 +241,21 @@ export async function discoverCandidates(apiKey) {
     }
   }
 
-  // Cap to keep the analysis within serverless time limits
-  candidates = candidates.slice(0, 15);
+  // Cap the candidate list. With the wide universe this is much larger than the old 15;
+  // the expensive per-name work (1y prices + fundamentals) is shortlisted downstream in
+  // stock-of-the-day.js, so a bigger candidate pool here is cheap (just strings).
+  // Older snapshots (no universe) still produce a small list, so the cap is a ceiling.
+  candidates = candidates.slice(0, UNIVERSE_CANDIDATE_CAP);
+
   // Expose which candidates have institutional bulk-buying today (confirmation signal).
-  const bulkConfirmed = candidates.filter(c => bulkBuySymbols.has(normName(c).toUpperCase()) || bulkBuySymbols.has(c.toUpperCase()));
+  // FIX: bulkBuySymbols holds NSE SYMBOLS (e.g. "ATALREAL") but candidates are often
+  // company NAMES ("Reliance Industries"), so the old exact-match returned empty. We now
+  // compare on normalized forms both ways so symbol- and name-based candidates both match.
+  const bulkNormSet = new Set([...bulkBuySymbols].map(s => normName(s)));
+  const bulkConfirmed = candidates.filter(c => {
+    const upper = c.toUpperCase().trim();
+    const norm = normName(c);
+    return bulkBuySymbols.has(upper) || bulkNormSet.has(norm);
+  });
   return { candidates, sources, bulkConfirmed };
 }
