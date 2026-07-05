@@ -5,7 +5,10 @@ import { marketStatus } from './_market-calendar.js';
 import { decideSell, markPending } from './_sell-engine.js';
 import { fetchFundamentals } from './_fundamentals.js';
 import { scoreUniverse, scoreMomentumUniverse,
-  computeShortReturns, shortMomentum, volumeSignal, annualizedVol, volScaledMomentum } from './_scoring.js';
+  computeShortReturns, shortMomentum, volumeSignal, volScaledMomentum } from './_scoring.js';
+// NOTE: annualizedVol is NOT imported — this file already defines its own local
+// annualizedVol() below (see ~line 157). Importing it too caused a duplicate-declaration
+// SyntaxError that crashed the whole function. The local version is used instead.
 
 // The 'estimated' fundamentals shell — identical shape to _fundamentals.js's null case.
 // Used for names outside the fundamentals shortlist so they score without a paid FMP call.
