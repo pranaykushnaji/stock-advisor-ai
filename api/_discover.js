@@ -25,6 +25,33 @@ async function fetchWithTimeout(url, opts = {}, ms = 4000) {
   }
 }
 
+// Read the NSE snapshot committed by the GitHub Action (real movers/delivery/bulk
+// deals — fetched from GitHub's unblocked IPs, unlike Vercel which NSE 403s).
+// Returns { gainers:[{symbol,pChange,volume,index}], bulkSymbols:Set, stale:bool } or null.
+async function readNseSnapshot() {
+  try {
+    const url = 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/nse-snapshot.json';
+    const r = await fetchWithTimeout(url, {}, 4000);
+    if (!r.ok) return null;
+    const snap = await r.json();
+    const data = snap?.data || {};
+    const gainers = (data.topGainers || []).map(g => ({
+      symbol: g.symbol, pChange: g.pChange, volume: g.totalTradedVolume, index: g.index,
+    })).filter(g => g.symbol);
+    // Symbols with institutional bulk/block buying today (a confirmation signal).
+    const bulkSymbols = new Set();
+    for (const d of (data.bulkDeals || [])) {
+      const sym = d?.symbol || d?.SYMBOL;
+      const type = (d?.buySell || d?.BUY_SELL || '').toString().toUpperCase();
+      if (sym && type.includes('B')) bulkSymbols.add(sym.toUpperCase());
+    }
+    // Staleness: snapshot older than ~20h means the Action may be failing.
+    const fetchedAt = snap?.fetchedAt ? new Date(snap.fetchedAt).getTime() : 0;
+    const stale = !fetchedAt || (Date.now() - fetchedAt) > 20 * 3600 * 1000;
+    return { gainers, bulkSymbols, stale, fetchedAt: snap?.fetchedAt || null };
+  } catch (e) { return null; }
+}
+
 // Fetch Google News RSS for a query, return headlines
 async function fetchNewsHeadlines(query) {
   try {
@@ -109,8 +136,22 @@ function normName(s) {
 
 // Main: returns { candidates: [...], sources: {...} }
 export async function discoverCandidates(apiKey) {
-  const sources = { news: 0, movers: 0, usedFallback: false,
-    diag: { headlinesFetched: 0, newsQueryUsed: null, extractError: null, moversError: null } };
+  const sources = { news: 0, movers: 0, nseSnapshot: 0, usedFallback: false,
+    diag: { headlinesFetched: 0, newsQueryUsed: null, extractError: null, moversError: null, snapshotStale: null, snapshotAt: null } };
+
+  // 0. PRIMARY source: real NSE movers from the committed snapshot (GitHub Action
+  //    fetches these from unblocked IPs). This is the day's ACTUAL gainers — the
+  //    biggest discovery improvement. Includes mid-caps momentum actually lives in.
+  const snap = await readNseSnapshot();
+  let snapshotGainers = [];
+  let bulkBuySymbols = new Set();
+  if (snap && Array.isArray(snap.gainers)) {
+    snapshotGainers = snap.gainers.map(g => g.symbol);
+    bulkBuySymbols = snap.bulkSymbols || new Set();
+    sources.nseSnapshot = snapshotGainers.length;
+    sources.diag.snapshotStale = snap.stale;
+    sources.diag.snapshotAt = snap.fetchedAt;
+  }
 
   // 1. Live news → stock names. Try multiple queries so one dud query doesn't zero us out.
   const newsQueries = [
@@ -135,7 +176,7 @@ export async function discoverCandidates(apiKey) {
   }
   sources.news = newsStocks.length;
 
-  // 2. Market movers (best-effort)
+  // 2. Legacy NSE-direct movers (best-effort; usually 403s from Vercel — snapshot supersedes)
   let moverSymbols = [];
   try {
     moverSymbols = await fetchMovers();
@@ -144,18 +185,18 @@ export async function discoverCandidates(apiKey) {
   }
   sources.movers = moverSymbols.length;
 
-  // Combine, de-dupe using normalized names (so "RELIANCE" == "Reliance Industries Ltd")
+  // Combine, snapshot gainers FIRST (highest-priority real movers), then news, then legacy.
   const seen = new Set();
   let candidates = [];
-  for (const name of [...newsStocks, ...moverSymbols]) {
+  for (const name of [...snapshotGainers, ...newsStocks, ...moverSymbols]) {
     if (typeof name !== 'string') continue;
     const clean = name.trim();
-    if (!clean || clean.length < 2 || clean.length > 60) continue; // sanity bounds
+    if (!clean || clean.length < 2 || clean.length > 60) continue;
     const key = normName(clean);
     if (key && !seen.has(key)) { seen.add(key); candidates.push(clean); }
   }
 
-  // 3. Fallback to Nifty-50 if discovery came up short
+  // 3. Fallback to Nifty-50 only if everything above came up short
   if (candidates.length < 5) {
     sources.usedFallback = true;
     for (const name of NIFTY50) {
@@ -166,5 +207,7 @@ export async function discoverCandidates(apiKey) {
 
   // Cap to keep the analysis within serverless time limits
   candidates = candidates.slice(0, 15);
-  return { candidates, sources };
+  // Expose which candidates have institutional bulk-buying today (confirmation signal).
+  const bulkConfirmed = candidates.filter(c => bulkBuySymbols.has(normName(c).toUpperCase()) || bulkBuySymbols.has(c.toUpperCase()));
+  return { candidates, sources, bulkConfirmed };
 }
