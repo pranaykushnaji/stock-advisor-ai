@@ -19,6 +19,7 @@
 
 import { scoreMomentumUniverse } from './_scoring.js';
 import { fetchFundamentals } from './_fundamentals.js';
+import { SELL_RULES } from './_sell-engine.js';
 
 async function fetchWithTimeout(url, opts = {}, ms = 9000) {
   const ctrl = new AbortController();
@@ -122,15 +123,43 @@ function benchForwardReturn(bench, entryDate, holdDays) {
   return +(((exit - entry) / entry) * 100).toFixed(2);
 }
 
-// Simulate the tightened sell engine (+8 target / -5 stop / max-hold) over a forward window.
-function simSellEngine(entry, fwd) {
+// Faithfully simulate the PRODUCTION sell engine over a forward window.
+// Mirrors rulesGate() in _sell-engine.js: target -> stop -> max-hold -> momentum-fade,
+// evaluated in that precedence order, using the SAME thresholds (imported SELL_RULES)
+// so the backtest can never drift from live rules.
+//
+// Key correctness detail vs the live gate: daysHeld() in production measures to
+// wall-clock today, which is meaningless in a replay. Here "held" is measured along
+// the SIMULATED timeline: after forward day index i, the position has been held i+1
+// trading rows. The momentum-fade 1-week window uses the trailing close series
+// reconstructed as-of each forward day (entry history + forward closes seen so far),
+// matching how the live cron passes recentCloses.
+//
+// entryCloses = the point-in-time close series up to and including entry day (oldest->newest).
+function simSellEngine(entry, fwd, entryCloses = null) {
+  const trail = Array.isArray(entryCloses) ? entryCloses.slice() : [];
   for (let i = 0; i < fwd.length; i++) {
-    const ret = ((fwd[i].close - entry) / entry) * 100;
-    if (ret >= 8) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: 'target +8%' };
-    if (ret <= -5) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: 'stop -5%' };
+    const close = fwd[i].close;
+    trail.push(close);
+    const ret = ((close - entry) / entry) * 100;
+    const held = i + 1; // trading rows held so far along the simulated timeline
+    // Precedence must match rulesGate exactly.
+    if (ret >= SELL_RULES.TARGET_PCT) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `target hit (+${ret.toFixed(1)}%)`, day: held };
+    if (ret <= SELL_RULES.STOP_PCT) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `stop-loss (${ret.toFixed(1)}%)`, day: held };
+    if (held >= SELL_RULES.MAX_HOLD_DAYS) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `max hold ${held}d`, day: held };
+    // Momentum-fade: same window math as production (last vs close 6 rows back),
+    // only after day 2, only if the trailing series is long enough.
+    if (trail.length >= 6) {
+      const last = trail[trail.length - 1];
+      const wkAgo = trail[trail.length - 6];
+      if (wkAgo > 0) {
+        const wkTrend = ((last - wkAgo) / wkAgo) * 100;
+        if (held >= 2 && wkTrend <= -3) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `momentum faded (1wk ${wkTrend.toFixed(1)}%)`, day: held };
+      }
+    }
   }
   const last = fwd[fwd.length - 1];
-  return last ? { date: last.date, retPct: +(((last.close - entry) / entry) * 100).toFixed(2), reason: `held ${fwd.length}d (max)` } : null;
+  return last ? { date: last.date, retPct: +(((last.close - entry) / entry) * 100).toFixed(2), reason: `held ${fwd.length}d (window end)`, day: fwd.length } : null;
 }
 
 // Build the point-in-time scored universe as of `date`. Returns { scored, candidates } or null.
@@ -175,8 +204,8 @@ function evalVariantForDay(ranked, weights, holdDays, bench) {
     const fwd = row._forward.slice(0, holdDays);
     const last = fwd[fwd.length - 1];
     const holdReturn = last ? +(((last.close - row._entryClose) / row._entryClose) * 100).toFixed(2) : null;
-    const sim = simSellEngine(row._entryClose, fwd);
-    return { holdReturn, simReturn: sim ? sim.retPct : null, entryDate: row._entryDate };
+    const sim = simSellEngine(row._entryClose, fwd, row.closes);
+    return { holdReturn, simReturn: sim ? sim.retPct : null, simReason: sim ? sim.reason : null, entryDate: row._entryDate };
   };
 
   const top = reranked[0].r;
@@ -333,7 +362,7 @@ export default async function handler(req, res) {
   const holdReturn = exitRow ? +(((exitRow.close - entry) / entry) * 100).toFixed(2) : null;
   const bestDay = perf.reduce((m, p) => p.retPct > (m?.retPct ?? -999) ? p : m, null);
   const worstDay = perf.reduce((m, p) => p.retPct < (m?.retPct ?? 999) ? p : m, null);
-  const simExit = simSellEngine(entry, fwd);
+  const simExit = simSellEngine(entry, fwd, pickRow.closes);
   const benchRet = benchForwardReturn(bench, pickRow._entryDate, holdDays);
 
   const leaderboard = ranked.slice(0, 5).map(r => {
