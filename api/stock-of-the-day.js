@@ -255,6 +255,17 @@ export default async function handler(req, res) {
 
   const date = todayIST();
 
+  // Reliability: GitHub's scheduled Actions are flaky (free tier drops runs), so the
+  // NSE snapshot may go stale. Trigger a fresh snapshot fetch from THIS reliable Vercel
+  // cron via workflow_dispatch. Fire-and-forget — never block the pick on it.
+  try {
+    fetch('https://api.github.com/repos/pranaykushnaji/stock-advisor-ai/actions/workflows/nse-snapshot.yml/dispatches', {
+      method: 'POST',
+      headers: { 'Authorization': `token ${ghToken}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: 'main' }),
+    }).catch(() => {});
+  } catch (e) { /* best-effort */ }
+
   // ---- PHASE 1: review held positions for SELL (runs before picking) ----
   // For each OPEN holding: rules gate (target/stop/max-hold) -> LLM on fresh news.
   // A SELL verdict flips it to SELL_PENDING with a provisional exit; the 5:30 PM

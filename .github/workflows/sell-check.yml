@@ -5,8 +5,9 @@ name: Hourly Sell Check
 # minutes under load, but for hourly exit checks that's fine.
 on:
   schedule:
-    - cron: '0 4-10 * * 1-5'   # 04:00-10:00 UTC hourly, Mon-Fri (~09:30-15:30 IST)
-  workflow_dispatch:            # allow manual trigger from the Actions tab
+    - cron: '0 4-10 * * 1-5'    # top of each hour, 04-10 UTC (~09:30-15:30 IST)
+    - cron: '30 4-9 * * 1-5'    # redundant half-past trigger — GitHub sometimes drops one
+  workflow_dispatch:            # manual + API-triggered from Vercel crons
 
 jobs:
   sell-check:
