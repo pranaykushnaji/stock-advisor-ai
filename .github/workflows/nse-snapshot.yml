@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history so `git pull --rebase` in the commit step works reliably
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -39,8 +41,25 @@ jobs:
           if [ -n "$(git status --porcelain data/nse-snapshot.json)" ]; then
             git add data/nse-snapshot.json
             git commit -m "chore: update NSE snapshot [skip ci]"
-            git push
-            echo "Snapshot committed."
+            # Other writers (Stock of the Day / sell-check via the Vercel GitHub API) may
+            # push to main at the same moment, which makes a plain `git push` fail with a
+            # non-fast-forward rejection. Rebase onto the latest main and retry so our
+            # snapshot push survives that race instead of failing the run.
+            pushed=false
+            for attempt in 1 2 3 4 5; do
+              if git push; then
+                echo "Snapshot committed (push attempt $attempt)."
+                pushed=true
+                break
+              fi
+              echo "Push rejected (main moved) — rebasing and retrying ($attempt/5)..."
+              git pull --rebase --autostash origin main || true
+              sleep 3
+            done
+            if [ "$pushed" != "true" ]; then
+              echo "ERROR: push still failing after 5 attempts."
+              exit 1
+            fi
           else
             echo "No snapshot change to commit."
           fi

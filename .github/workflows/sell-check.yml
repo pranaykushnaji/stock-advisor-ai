@@ -22,6 +22,12 @@ jobs:
             "https://stock-advisor-ai-omega.vercel.app/api/sell-check")
           echo "HTTP $HTTP"
           echo "Response:"; cat /tmp/resp.json; echo ""
+          # A 401/403 means the CRON_SECRET is missing/expired — the endpoint did NOTHING.
+          # Fail loudly instead of showing a green check that hides a broken secret.
+          if [ "$HTTP" = "401" ] || [ "$HTTP" = "403" ]; then
+            echo "AUTH ERROR ($HTTP): CRON_SECRET is missing or expired — sell-check did not run."
+            exit 1
+          fi
           if [ "$HTTP" -ge 500 ]; then
             echo "Server error"; exit 1
           fi
