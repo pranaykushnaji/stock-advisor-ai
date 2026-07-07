@@ -200,6 +200,34 @@ function simSellEngine(entry, fwd, entryCloses = null, opts = {}) {
   return last ? { date: last.date, retPct: netRet(last.close), reason: `held ${fwd.length}d (window end)`, day: fwd.length } : null;
 }
 
+// LEGACY fixed-rule exit (+8% target / -5% stop / 7d max-hold + momentum-fade), with the
+// same gap + slippage modelling — kept ONLY so the backtest can A/B the old rules against the
+// new vol-adaptive ones in the same run (?exit=fixed). Production uses simSellEngine.
+function simSellEngineFixed(entry, fwd, entryCloses = null, opts = {}) {
+  const L = { TARGET: 8, STOP: -5, MAXHOLD: 7 };
+  const slipFrac = (opts.slippageBps ?? SLIPPAGE_BPS) / 10000;
+  const target = entry * (1 + L.TARGET / 100), stop = entry * (1 + L.STOP / 100);
+  const trail = Array.isArray(entryCloses) ? entryCloses.slice() : [];
+  const netRet = (f) => +((((f * (1 - slipFrac)) - entry) / entry) * 100).toFixed(2);
+  for (let i = 0; i < fwd.length; i++) {
+    const row = fwd[i];
+    const o = row.open ?? row.close, hi = row.high ?? row.close, lo = row.low ?? row.close, c = row.close;
+    trail.push(c);
+    const held = i + 1;
+    if (o <= stop) return { date: row.date, retPct: netRet(o), reason: `stop gap-down`, day: held };
+    if (lo <= stop) return { date: row.date, retPct: netRet(stop), reason: `stop-loss (-5%)`, day: held };
+    if (o >= target) return { date: row.date, retPct: netRet(o), reason: `target gap-up`, day: held };
+    if (hi >= target) return { date: row.date, retPct: netRet(target), reason: `target hit (+8%)`, day: held };
+    if (held >= L.MAXHOLD) return { date: row.date, retPct: netRet(c), reason: `max hold ${held}d`, day: held };
+    if (trail.length >= 6) {
+      const last = trail[trail.length - 1], wkAgo = trail[trail.length - 6];
+      if (wkAgo > 0) { const wk = ((last - wkAgo) / wkAgo) * 100; if (held >= 2 && wk <= -3) return { date: row.date, retPct: netRet(c), reason: `momentum faded`, day: held }; }
+    }
+  }
+  const last = fwd[fwd.length - 1];
+  return last ? { date: last.date, retPct: netRet(last.close), reason: `held ${fwd.length}d (window end)`, day: fwd.length } : null;
+}
+
 // Build the point-in-time scored universe as of `date`. Returns { scored, candidates } or null.
 // `scored` = full ranked output (each carries .factors for variant recomposition).
 function buildScoredUniverse(withData, date) {
@@ -242,7 +270,7 @@ function evalVariantForDay(ranked, weights, holdDays, bench, opts = {}) {
     const fwd = row._forward.slice(0, holdDays);
     const last = fwd[fwd.length - 1];
     const holdReturn = last ? +(((last.close - row._entryClose) / row._entryClose) * 100).toFixed(2) : null;
-    const sim = simSellEngine(row._entryClose, fwd, row.closes, opts);
+    const sim = (opts.simFn || simSellEngine)(row._entryClose, fwd, row.closes, opts);
     return { holdReturn, simReturn: sim ? sim.retPct : null, simReason: sim ? sim.reason : null, entryDate: row._entryDate };
   };
 
@@ -284,6 +312,8 @@ export default async function handler(req, res) {
   const holdDays = Math.min(30, Math.max(1, parseInt(req.query.hold || '5', 10)));
   const extra = (req.query.extra || '').split(',').map(s => aliasBase(s.trim())).filter(Boolean);
   const slippageBps = Math.max(0, parseInt(req.query.slippage || String(SLIPPAGE_BPS), 10));
+  const exitMode = (req.query.exit || 'vol').toLowerCase() === 'fixed' ? 'fixed' : 'vol';
+  const simFn = exitMode === 'fixed' ? simSellEngineFixed : simSellEngine;
   const uniChoice = (req.query.universe || 'nifty50').toLowerCase();
   const baseUniverse = uniChoice === 'midcap' ? MIDCAP_SYMBOLS
     : uniChoice === 'all' ? [...NIFTY50_SYMBOLS, ...MIDCAP_SYMBOLS]
@@ -330,7 +360,7 @@ export default async function handler(req, res) {
       if (!built) continue; // non-trading day or no eligible candidates
       tradingDays++;
       for (const [name, weights] of Object.entries(VARIANTS)) {
-        const ev = evalVariantForDay(built.ranked, weights, holdDays, bench, { slippageBps });
+        const ev = evalVariantForDay(built.ranked, weights, holdDays, bench, { slippageBps, simFn });
         if (!ev || ev.holdReturn == null) continue;
         acc[name].trades.push(ev);
         acc[name].picks.push({ date, ...ev });
@@ -372,7 +402,7 @@ export default async function handler(req, res) {
       mode: 'range_variants',
       engine: 'vol-adaptive-v2',
       from, to, step, holdDays,
-      universe: uniChoice, slippageBps,
+      universe: uniChoice, slippageBps, exitMode,
       calendarDays: dates.length,
       tradingDays,
       universeSize: withData.length,
@@ -409,7 +439,7 @@ export default async function handler(req, res) {
   const holdReturn = exitRow ? +(((exitRow.close - entry) / entry) * 100).toFixed(2) : null;
   const bestDay = perf.reduce((m, p) => p.retPct > (m?.retPct ?? -999) ? p : m, null);
   const worstDay = perf.reduce((m, p) => p.retPct < (m?.retPct ?? 999) ? p : m, null);
-  const simExit = simSellEngine(entry, fwd, pickRow.closes, { slippageBps });
+  const simExit = simFn(entry, fwd, pickRow.closes, { slippageBps });
   const benchRet = benchForwardReturn(bench, pickRow._entryDate, holdDays);
 
   const leaderboard = ranked.slice(0, 5).map(r => {
