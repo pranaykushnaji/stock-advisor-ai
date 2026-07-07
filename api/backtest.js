@@ -31,6 +31,25 @@ async function fetchWithTimeout(url, opts = {}, ms = 9000) {
 const ALIASES = { ZOMATO: 'ETERNAL', MOTHERSUMI: 'MOTHERSON', MINDTREE: 'LTIM' };
 const aliasBase = (s) => { const u = (s || '').replace(/\.(NS|BO)$/i, '').toUpperCase(); return ALIASES[u] || u; };
 
+// Simulated execution friction: every modelled exit fills this much WORSE than its trigger
+// (0.15%), approximating spread + slippage. Bigger for thin midcaps — tune via ?slippage=<bps>.
+const SLIPPAGE_BPS = 15;
+
+// Broader / midcap NSE universe — where short-term momentum actually lives. This is the real
+// hunting ground for the swing strategy, vs. the slow Nifty-50. Select with ?universe=midcap
+// (or ?universe=all to combine). Names span sectors; a few may be large-cap now — fine, the
+// point is more volatile, higher-momentum names than the index heavyweights.
+const MIDCAP_SYMBOLS = [
+  'PERSISTENT','COFORGE','MPHASIS','OFSS','LTTS','MAXHEALTH','FORTIS','ASHOKLEY','BHARATFORG',
+  'MRF','BALKRISIND','TVSMOTOR','CUMMINSIND','ABB','SIEMENS','POLYCAB','DIXON','VOLTAS','HAVELLS',
+  'CROMPTON','PIIND','SRF','DEEPAKNTR','AARTIIND','DALBHARAT','AMBUJACEM','ACC','JUBLFOOD','PAGEIND',
+  'GODREJPROP','OBEROIRLTY','PHOENIXLTD','PRESTIGE','LODHA','AUBANK','BANKBARODA','PNB','CANBK',
+  'FEDERALBNK','INDHOTEL','PETRONET','IGL','TATAPOWER','TORNTPOWER','NHPC','IRCTC','IRFC','RVNL',
+  'HAL','BEL','MAZDOCK','CONCOR','NYKAA','PAYTM','POLICYBZR','CHOLAFIN','MUTHOOTFIN','RECLTD','PFC',
+  'TATACOMM','INDUSTOWER','ADANIPOWER','GAIL','HINDPETRO','IOC','ABCAPITAL','GMRAIRPORT','SUZLON',
+  'IDFCFIRSTB','ETERNAL','NMDC','SAIL','VEDL','JINDALSTEL','APLAPOLLO','LICHSGFIN','TATAELXSI','KPITTECH',
+];
+
 // Compact Nifty-50 symbol set (NSE tickers) for the candidate universe.
 const NIFTY50_SYMBOLS = [
   'RELIANCE','TCS','HDFCBANK','INFY','ICICIBANK','BHARTIARTL','LT','SBIN','AXISBANK','KOTAKBANK',
@@ -45,10 +64,11 @@ const NIFTY50_SYMBOLS = [
 // Each variant's weights are renormalized over whatever factors are present.
 // 'composite' MUST mirror the live MOMENTUM_WEIGHTS so the backtest tracks production.
 const VARIANTS = {
-  composite:            { momentum: 0.45, technicals: 0.15, quality: 0.15, volume: 0.15, lowVol: 0.10 },
-  pure_momentum:        { momentum: 1.00 },
-  momentum_volume:      { momentum: 0.70, volume: 0.30 },
-  momentum_technicals:  { momentum: 0.60, technicals: 0.40 },
+  composite:              { momentum: 0.70, volume: 0.30 },  // == live MOMENTUM_WEIGHTS (post-reweight)
+  legacy_blend:           { momentum: 0.45, technicals: 0.15, quality: 0.15, volume: 0.15, lowVol: 0.10 }, // pre-reweight, for before/after
+  pure_momentum:          { momentum: 1.00 },
+  momentum_technicals:    { momentum: 0.60, technicals: 0.40 },
+  momentum_volume_lowvol: { momentum: 0.60, volume: 0.25, lowVol: 0.15 }, // does taming volatility help on midcaps?
 };
 
 // Recompute a composite from an already-scored stock's per-factor percentile scores
@@ -80,6 +100,7 @@ async function fetchSeries(base) {
       const q = result.indicators?.quote?.[0] || {};
       const rows = ts.map((t, i) => ({
         date: new Date(t * 1000).toISOString().slice(0, 10),
+        open: q.open?.[i], high: q.high?.[i], low: q.low?.[i],
         close: q.close?.[i], volume: q.volume?.[i],
       })).filter(r => r.close != null && !isNaN(r.close));
       if (rows.length < 30) continue;
@@ -123,43 +144,46 @@ function benchForwardReturn(bench, entryDate, holdDays) {
   return +(((exit - entry) / entry) * 100).toFixed(2);
 }
 
-// Faithfully simulate the PRODUCTION sell engine over a forward window.
-// Mirrors rulesGate() in _sell-engine.js: target -> stop -> max-hold -> momentum-fade,
-// evaluated in that precedence order, using the SAME thresholds (imported SELL_RULES)
-// so the backtest can never drift from live rules.
-//
-// Key correctness detail vs the live gate: daysHeld() in production measures to
-// wall-clock today, which is meaningless in a replay. Here "held" is measured along
-// the SIMULATED timeline: after forward day index i, the position has been held i+1
-// trading rows. The momentum-fade 1-week window uses the trailing close series
-// reconstructed as-of each forward day (entry history + forward closes seen so far),
-// matching how the live cron passes recentCloses.
-//
-// entryCloses = the point-in-time close series up to and including entry day (oldest->newest).
-function simSellEngine(entry, fwd, entryCloses = null) {
+// Simulate the production sell engine over a forward window, WITH realistic execution.
+// Same rule thresholds as rulesGate() (imported SELL_RULES: target / stop / max-hold /
+// momentum-fade), but modelled against intraday OHLC and net of slippage so the numbers
+// aren't rosier than real trading would be:
+//   • STOP is checked before TARGET (conservative: if a volatile day touches both, assume
+//     you were stopped — the opposite of production's target-first precedence, on purpose).
+//   • Gap risk: if the day OPENS beyond the stop/target, you fill at the OPEN (a gap-down
+//     through the stop fills WORSE than -5%), not at the trigger price.
+//   • Slippage: every exit fills `slippageBps` worse than its trigger price.
+// "held" is measured along the simulated timeline (i+1 rows). The momentum-fade 1-week
+// window uses the trailing close series reconstructed as-of each forward day.
+// entryCloses = point-in-time close series up to and including entry day (oldest->newest).
+function simSellEngine(entry, fwd, entryCloses = null, opts = {}) {
+  const slipFrac = (opts.slippageBps ?? SLIPPAGE_BPS) / 10000;
+  const target = entry * (1 + SELL_RULES.TARGET_PCT / 100);
+  const stop = entry * (1 + SELL_RULES.STOP_PCT / 100);
   const trail = Array.isArray(entryCloses) ? entryCloses.slice() : [];
+  // A sell fills slightly below the trigger price -> slippage always reduces the return.
+  const netRet = (fillPrice) => +((((fillPrice * (1 - slipFrac)) - entry) / entry) * 100).toFixed(2);
   for (let i = 0; i < fwd.length; i++) {
-    const close = fwd[i].close;
-    trail.push(close);
-    const ret = ((close - entry) / entry) * 100;
-    const held = i + 1; // trading rows held so far along the simulated timeline
-    // Precedence must match rulesGate exactly.
-    if (ret >= SELL_RULES.TARGET_PCT) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `target hit (+${ret.toFixed(1)}%)`, day: held };
-    if (ret <= SELL_RULES.STOP_PCT) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `stop-loss (${ret.toFixed(1)}%)`, day: held };
-    if (held >= SELL_RULES.MAX_HOLD_DAYS) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `max hold ${held}d`, day: held };
-    // Momentum-fade: same window math as production (last vs close 6 rows back),
-    // only after day 2, only if the trailing series is long enough.
+    const row = fwd[i];
+    const o = row.open ?? row.close, hi = row.high ?? row.close, lo = row.low ?? row.close, c = row.close;
+    trail.push(c);
+    const held = i + 1;
+    if (o <= stop) return { date: row.date, retPct: netRet(o), reason: `stop gap-down (open ₹${o.toFixed(2)})`, day: held };
+    if (lo <= stop) return { date: row.date, retPct: netRet(stop), reason: `stop-loss (${SELL_RULES.STOP_PCT}%)`, day: held };
+    if (o >= target) return { date: row.date, retPct: netRet(o), reason: `target gap-up (open ₹${o.toFixed(2)})`, day: held };
+    if (hi >= target) return { date: row.date, retPct: netRet(target), reason: `target hit (+${SELL_RULES.TARGET_PCT}%)`, day: held };
+    if (held >= SELL_RULES.MAX_HOLD_DAYS) return { date: row.date, retPct: netRet(c), reason: `max hold ${held}d`, day: held };
     if (trail.length >= 6) {
       const last = trail[trail.length - 1];
       const wkAgo = trail[trail.length - 6];
       if (wkAgo > 0) {
         const wkTrend = ((last - wkAgo) / wkAgo) * 100;
-        if (held >= 2 && wkTrend <= -3) return { date: fwd[i].date, retPct: +ret.toFixed(2), reason: `momentum faded (1wk ${wkTrend.toFixed(1)}%)`, day: held };
+        if (held >= 2 && wkTrend <= -3) return { date: row.date, retPct: netRet(c), reason: `momentum faded (1wk ${wkTrend.toFixed(1)}%)`, day: held };
       }
     }
   }
   const last = fwd[fwd.length - 1];
-  return last ? { date: last.date, retPct: +(((last.close - entry) / entry) * 100).toFixed(2), reason: `held ${fwd.length}d (window end)`, day: fwd.length } : null;
+  return last ? { date: last.date, retPct: netRet(last.close), reason: `held ${fwd.length}d (window end)`, day: fwd.length } : null;
 }
 
 // Build the point-in-time scored universe as of `date`. Returns { scored, candidates } or null.
@@ -193,7 +217,7 @@ function buildScoredUniverse(withData, date) {
 
 // For one variant on one day: re-rank scored stocks by the variant composite, pick #1,
 // measure forward hold-return, sim-sell return, vs-Nifty, and #1-vs-shortlist-average.
-function evalVariantForDay(ranked, weights, holdDays, bench) {
+function evalVariantForDay(ranked, weights, holdDays, bench, opts = {}) {
   const reranked = ranked
     .map(r => ({ r, comp: recomposite(r.factors, weights) }))
     .filter(x => x.comp != null)
@@ -204,7 +228,7 @@ function evalVariantForDay(ranked, weights, holdDays, bench) {
     const fwd = row._forward.slice(0, holdDays);
     const last = fwd[fwd.length - 1];
     const holdReturn = last ? +(((last.close - row._entryClose) / row._entryClose) * 100).toFixed(2) : null;
-    const sim = simSellEngine(row._entryClose, fwd, row.closes);
+    const sim = simSellEngine(row._entryClose, fwd, row.closes, opts);
     return { holdReturn, simReturn: sim ? sim.retPct : null, simReason: sim ? sim.reason : null, entryDate: row._entryDate };
   };
 
@@ -245,7 +269,12 @@ export default async function handler(req, res) {
   const fmpKey = process.env.FMP_KEY;
   const holdDays = Math.min(30, Math.max(1, parseInt(req.query.hold || '5', 10)));
   const extra = (req.query.extra || '').split(',').map(s => aliasBase(s.trim())).filter(Boolean);
-  const universeSymbols = [...new Set([...NIFTY50_SYMBOLS, ...extra].map(aliasBase))];
+  const slippageBps = Math.max(0, parseInt(req.query.slippage || String(SLIPPAGE_BPS), 10));
+  const uniChoice = (req.query.universe || 'nifty50').toLowerCase();
+  const baseUniverse = uniChoice === 'midcap' ? MIDCAP_SYMBOLS
+    : uniChoice === 'all' ? [...NIFTY50_SYMBOLS, ...MIDCAP_SYMBOLS]
+    : NIFTY50_SYMBOLS;
+  const universeSymbols = [...new Set([...baseUniverse, ...extra].map(aliasBase))];
 
   const from = (req.query.from || '').slice(0, 10);
   const to = (req.query.to || '').slice(0, 10);
@@ -257,7 +286,7 @@ export default async function handler(req, res) {
   }
 
   // Fetch all series ONCE (2y range covers any backtest date), reused across all days.
-  const fetched = await Promise.all(universeSymbols.slice(0, 55).map(async (base) => {
+  const fetched = await Promise.all(universeSymbols.slice(0, 90).map(async (base) => {
     const s = await fetchSeries(base);
     return s ? { base, ...s } : null;
   }));
@@ -287,7 +316,7 @@ export default async function handler(req, res) {
       if (!built) continue; // non-trading day or no eligible candidates
       tradingDays++;
       for (const [name, weights] of Object.entries(VARIANTS)) {
-        const ev = evalVariantForDay(built.ranked, weights, holdDays, bench);
+        const ev = evalVariantForDay(built.ranked, weights, holdDays, bench, { slippageBps });
         if (!ev || ev.holdReturn == null) continue;
         acc[name].trades.push(ev);
         acc[name].picks.push({ date, ...ev });
@@ -328,6 +357,7 @@ export default async function handler(req, res) {
     return res.status(200).json({
       mode: 'range_variants',
       from, to, step, holdDays,
+      universe: uniChoice, slippageBps,
       calendarDays: dates.length,
       tradingDays,
       universeSize: withData.length,
@@ -337,9 +367,11 @@ export default async function handler(req, res) {
       leaderboard,
       picksByVariant: Object.fromEntries(Object.entries(acc).map(([k, v]) => [k, v.picks])),
       caveats: [
-        'Universe = Nifty-50 + extras, NOT that day\'s live discovery output.',
+        `Universe = ${uniChoice} + extras, NOT that day\'s live discovery output.`,
         'All variants share point-in-time factor ranks; only composite weights differ.',
         'Fundamentals junk-filter uses CURRENT ratios (not point-in-time).',
+        `Sim exits model gap-downs (fill at open through the stop) + ${slippageBps}bps slippage; buy-and-hold return does not.`,
+        'Survivorship bias: the universe is names liquid TODAY, so failed/delisted names are absent (results skew optimistic).',
         'Small samples (few trading days) are noise. Interpret >20 trades cautiously, <10 not at all.',
         'Approximation for learning, not a broker-grade backtest. Past != future.',
       ],
@@ -362,7 +394,7 @@ export default async function handler(req, res) {
   const holdReturn = exitRow ? +(((exitRow.close - entry) / entry) * 100).toFixed(2) : null;
   const bestDay = perf.reduce((m, p) => p.retPct > (m?.retPct ?? -999) ? p : m, null);
   const worstDay = perf.reduce((m, p) => p.retPct < (m?.retPct ?? 999) ? p : m, null);
-  const simExit = simSellEngine(entry, fwd, pickRow.closes);
+  const simExit = simSellEngine(entry, fwd, pickRow.closes, { slippageBps });
   const benchRet = benchForwardReturn(bench, pickRow._entryDate, holdDays);
 
   const leaderboard = ranked.slice(0, 5).map(r => {
@@ -378,6 +410,7 @@ export default async function handler(req, res) {
   return res.status(200).json({
     mode: 'single_date',
     date, holdDays,
+    universe: uniChoice, slippageBps,
     universeSize: built.candidates.length,
     benchmark: bench ? 'NIFTY50 (^NSEI)' : 'unavailable',
     rejectedJunk: rejected.map(r => ({ symbol: r.symbol, reasons: r.junkReasons })),

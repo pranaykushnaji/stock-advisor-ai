@@ -204,8 +204,14 @@ export function verdict(comp) {
 // Aggressive, short-horizon: momentum leads, quality is only a junk-filter, volume
 // confirms interest, technicals confirm trend, low-vol lightly penalizes wild names.
 // SEPARATE from scoreUniverse (long-term model used by Advisor).
-// Weights: momentum 45%, technicals 15%, quality 15% (junk-filter), volume 15%, lowVol 10%.
-export const MOMENTUM_WEIGHTS = { momentum: 0.45, technicals: 0.15, quality: 0.15, volume: 0.15, lowVol: 0.10 };
+//
+// WEIGHTS — momentum + volume only. Backtest evidence (61 trades, Mar–Jun 2026, hold=5):
+// this pairing returned +0.56%/trade at a 60.7% win rate and beat the Nifty 57% of the time,
+// while the old 5-factor blend was a coin flip (~-0.01%, ~50%) and the technicals factor
+// actively hurt (-1.09%). The other factors (technicals, quality, lowVol) are still COMPUTED
+// — shown in the UI/narrative and used by the junk filter — they just no longer drive the
+// composite. Revisit once the midcap backtest (see api/backtest.js ?universe=midcap) lands.
+export const MOMENTUM_WEIGHTS = { momentum: 0.70, volume: 0.30 };
 
 // Junk filter: reject names too illiquid or too wild to trade — the
 // "don't buy a manipulated microcap" guard. Tunable.
