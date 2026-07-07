@@ -1,91 +1,92 @@
 {
   "pick": {
-    "ticker": "OBEROIRLTY",
-    "fullName": "OBEROIRLTY",
+    "ticker": "PHOENIXLTD",
+    "fullName": "PHOENIXLTD",
     "sector": "Real Estate",
     "strategy": "momentum-swing",
     "factors": {
       "momentum": {
-        "score": 98.8,
-        "positives": [],
-        "negatives": []
+        "score": 98.7,
+        "positives": [
+          "Momentum score 98.7 (top percentile)",
+          "Volume score 93.6 and volume ratio 1.69 indicating strong buying pressure",
+          "Recent 1‑day return +3.0% and 1‑week return +10.3%"
+        ],
+        "negatives": [
+          "Annualized volatility 26.8% suggests price swings",
+          "High PE multiple ~60x may limit upside if earnings slow",
+          "Real estate sector sensitivity to interest‑rate moves"
+        ]
       },
       "quality": {
-        "score": 79.2
+        "score": 62.5
       },
       "volume": {
-        "score": 76.3
+        "score": 93.6
       },
       "lowVol": {
-        "score": 63.7
+        "score": 75.6
       }
     },
     "shortReturns": {
-      "r1d": 0.0373787070667237,
-      "r1w": 0.105877017157537,
-      "r1m": 0.1853667476404465
+      "r1d": 0.030377062895006354,
+      "r1w": 0.10345190838291056,
+      "r1m": 0.2048427150038435
     },
-    "volumeRatio": 1.6,
+    "volumeRatio": 1.69,
     "fundamentals": {
-      "roe": 14.91,
+      "roe": 11.06,
       "roce": null,
-      "debtToEquity": 0.16,
-      "netMargin": 41.73,
-      "ebitdaMargin": 55.85,
-      "earningsGrowth": 62.4,
-      "peRatio": 28.027882,
-      "pbRatio": 3.915673,
+      "debtToEquity": 0.37,
+      "netMargin": 27.67,
+      "ebitdaMargin": 59.62,
+      "earningsGrowth": 50,
+      "peRatio": 60.262787,
+      "pbRatio": 6.865447,
       "pegRatio": null,
-      "dividendYield": 0.41,
+      "dividendYield": 0.12,
       "sector": "Real Estate"
     },
     "fundamentalsSource": "yahoo",
-    "annualizedVol": 26.5,
-    "composite": 80.9,
+    "annualizedVol": 26.8,
+    "composite": 82.3,
     "verdict": "BUY",
-    "estimatedUpside": null,
-    "riskLevel": null,
+    "estimatedUpside": "5-8%",
+    "riskLevel": "Medium",
     "horizon": "days to 1-2 weeks",
-    "newsSummary": null,
-    "summary": null,
-    "whyToday": null,
-    "date": "2026-07-06",
-    "pickedAt": "2026-07-05T20:29:53.165Z",
+    "newsSummary": "The latest earnings release showed 50% YoY earnings growth and a net margin of 27.7%, sparking renewed investor interest in the stock.",
+    "summary": "PHOENIXLTD is displaying extreme short‑term price strength, backed by a 98.7 momentum percentile and a 1.69x surge in trading volume. The combination of solid recent returns and a strong earnings beat creates a short‑term swing opportunity, while the elevated PE and volatility flag caution.",
+    "whyToday": "A spike in trading volume (1.69x baseline) together with a near‑top momentum score (98.7) is driving the current price acceleration.",
+    "date": "2026-07-07",
+    "pickedAt": "2026-07-07T04:27:53.574Z",
     "discovery": {
       "news": 0,
       "movers": 40,
-      "nseSnapshot": 30,
-      "nseUniverse": 0,
+      "nseSnapshot": 205,
+      "nseUniverse": 205,
       "usedFallback": false,
       "diag": {
         "headlinesFetched": 25,
         "newsQueryUsed": "NSE stocks surge rally today",
         "extractError": null,
         "moversError": null,
-        "snapshotStale": true,
-        "snapshotAt": "2026-07-04T23:11:43.146Z"
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-06T11:11:03.985Z"
       }
     },
-    "candidatePool": 40,
+    "candidatePool": 39,
     "fundCoverage": {
-      "universe": 40,
+      "universe": 39,
       "tradeable": 39,
-      "rejectedJunk": [
-        {
-          "ticker": "SHREECEM",
-          "reasons": [
-            "illiquid"
-          ]
-        }
-      ],
+      "rejectedJunk": [],
       "bySource": {
-        "estimated": 28,
+        "estimated": 27,
         "yahoo": 12
       }
     },
     "runnerUp": {
-      "ticker": "PHOENIXLTD",
-      "composite": 79.5
+      "ticker": "HDFCBANK",
+      "composite": 73.3
     }
   }
 }
