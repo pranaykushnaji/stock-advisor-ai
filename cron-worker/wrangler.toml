@@ -1,0 +1,19 @@
+# Cloudflare Worker config for the StockAdvisor cron scheduler.
+# NOTE: no secrets live here. CRON_SECRET and GITHUB_TOKEN are set separately with
+#       `wrangler secret put` and stored encrypted by Cloudflare.
+
+name = "stock-advisor-cron"
+main = "worker.js"
+compatibility_date = "2025-01-01"
+
+# One trigger that ticks every 5 minutes across the NSE market window on weekdays
+# (03:00–10:59 UTC = 08:30–16:29 IST). The worker's SCHEDULE table decides what actually
+# fires at each exact minute, so this stays well under any cron-count limits.
+[triggers]
+crons = ["*/5 3-10 * * 1-5"]
+
+# Non-secret configuration.
+[vars]
+VERCEL_BASE = "https://stock-advisor-ai-omega.vercel.app"
+GITHUB_REPO = "pranaykushnaji/stock-advisor-ai"
+GITHUB_WORKFLOW = "nse-snapshot.yml"
