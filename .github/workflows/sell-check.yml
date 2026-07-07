@@ -4,10 +4,10 @@ name: Hourly Sell Check
 # Run hourly across that window on weekdays. GitHub Actions cron can drift a few
 # minutes under load, but for hourly exit checks that's fine.
 on:
-  schedule:
-    - cron: '0 4-10 * * 1-5'    # top of each hour, 04-10 UTC (~09:30-15:30 IST)
-    - cron: '30 4-9 * * 1-5'    # redundant half-past trigger — GitHub sometimes drops one
-  workflow_dispatch:            # manual + API-triggered from Vercel crons
+  # The hourly sell-check is now driven by the Cloudflare Worker (see cron-worker/), which
+  # calls the Vercel /api/sell-check endpoint directly at :10 past each market hour. GitHub's
+  # cron was late/dropped, so it has been removed. This workflow is kept as a manual fallback.
+  workflow_dispatch:
 
 jobs:
   sell-check:

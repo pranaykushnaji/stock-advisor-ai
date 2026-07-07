@@ -1,14 +1,5 @@
 {
-  "crons": [
-    {
-      "path": "/api/stock-of-the-day",
-      "schedule": "30 3 * * 1-5"
-    },
-    {
-      "path": "/api/refresh-prices",
-      "schedule": "0 12 * * 1-5"
-    }
-  ],
+  "//": "Scheduling moved to the Cloudflare Worker (cron-worker/) for exact timing; it calls these endpoints directly. Vercel crons removed to avoid duplicate runs.",
   "functions": {
     "api/stock-of-the-day.js": { "maxDuration": 60 },
     "api/capture-open.js": { "maxDuration": 30 },

@@ -5,10 +5,10 @@ name: NSE Data Snapshot
 # so the app can read data/nse-snapshot.json. First run is a live diagnostic.
 
 on:
-  schedule:
-    - cron: '20 3 * * 1-5'    # ~08:50 IST (pre-open) Mon-Fri
-    - cron: '30 6 * * 1-5'    # ~12:00 IST (midday) Mon-Fri
-  workflow_dispatch:           # manual trigger for the first diagnostic run
+  # Scheduling moved to the Cloudflare Worker (see cron-worker/) for exact timing — it
+  # triggers this workflow via workflow_dispatch at 08:45 & 12:00 IST. GitHub's own cron
+  # fired hours late / dropped runs on this low-traffic repo, so it has been removed.
+  workflow_dispatch:
 
 permissions:
   contents: write              # allow committing the snapshot
