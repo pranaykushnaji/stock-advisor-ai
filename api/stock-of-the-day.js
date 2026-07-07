@@ -48,6 +48,10 @@ async function fetchHeadlines(query) {
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
+// Max % the captured entry price may differ from the INDEPENDENT NSE snapshot price before
+// we distrust it and refuse to trade the pick (prevents phantom P&L from a bad price source).
+const ENTRY_SANITY_TOLERANCE_PCT = 20;
+
 function todayIST() {
   const now = new Date();
   const ist = new Date(now.getTime() + 5.5 * 3600 * 1000);
@@ -514,6 +518,24 @@ This is a short-term momentum trade. Reference only the real numbers above. Retu
     const entryProvisional = false; // entry is locked at pick time — no capture-open needed
     const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
 
+    // ENTRY-PRICE SANITY CHECK — guard against a bad price source booking phantom P&L.
+    // Cross-check the captured entry against the INDEPENDENT NSE snapshot's lastPrice for this
+    // symbol; if they disagree badly, don't add the position (still record the narrative pick).
+    // (PHOENIXLTD 2026-07-07: entry ₹1549 vs snapshot ₹2075 → this would have caught it.)
+    let entryRejected = null;
+    try {
+      const snapFile = await ghGetFile('data/nse-snapshot.json', ghToken);
+      const snapData = snapFile.content ? JSON.parse(snapFile.content)?.data : null;
+      const rows = [...(snapData?.universe || []), ...(snapData?.topGainers || []), ...(snapData?.topLosers || [])];
+      const ref = rows.find(r => r.symbol === winner.symbol)?.lastPrice;
+      if (entryPrice && ref && Math.abs(entryPrice - ref) / ref > ENTRY_SANITY_TOLERANCE_PCT / 100) {
+        entryRejected = `entry ₹${entryPrice} is >${ENTRY_SANITY_TOLERANCE_PCT}% off the NSE snapshot price ₹${ref} — likely a bad price source; not trading this pick today`;
+        console.warn(`[entry-guard] ${winner.symbol}: ${entryRejected}`);
+      }
+    } catch (e) { /* snapshot missing/unparseable → skip cross-check, never block the pick */ }
+    pick.entryPrice = entryPrice;
+    pick.entryRejected = entryRejected;
+
     // (Factors, composite, verdict are already set deterministically above — do NOT recompute.)
 
     // Capture Nifty level at entry for alpha tracking
@@ -526,8 +548,10 @@ This is a short-term momentum trade. Reference only the real numbers above. Retu
     // Save daily pick (now complete with factors, composite, verdict) — retry-safe
     await ghPutWithRetry('data/daily-pick.json', () => ({ pick }), ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
 
-    // Append to project bouquet (retry-safe, guards against double-add for same day)
-    await ghPutWithRetry('data/project-bouquet.json', (current) => {
+    // Append to project bouquet (retry-safe, guards against double-add for same day).
+    // Skip entirely if the entry price failed the sanity check — better no trade than a
+    // phantom one. The narrative pick is still saved above for visibility.
+    if (!entryRejected) await ghPutWithRetry('data/project-bouquet.json', (current) => {
       let bouquet = current?.bouquet || [];
       if (bouquet.find(b => b.date === date)) return null; // already added today — skip write
       bouquet.unshift({
@@ -549,7 +573,7 @@ This is a short-term momentum trade. Reference only the real numbers above. Retu
       return { bouquet };
     }, ghToken, `Add ${pick.ticker} to project bouquet`);
 
-    return res.status(200).json({ status: 'picked', pick, discovery: sources, candidates, sellReview });
+    return res.status(200).json({ status: entryRejected ? 'picked_not_traded' : 'picked', entryRejected, pick, discovery: sources, candidates, sellReview });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }

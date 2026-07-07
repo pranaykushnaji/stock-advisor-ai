@@ -7,7 +7,7 @@
 // Idempotent: safe to run many times a day. If nothing triggers, it writes nothing.
 
 import { marketStatus } from './_market-calendar.js';
-import { rulesGate, llmDecide, bookExit } from './_sell-engine.js';
+import { rulesGate, llmDecide, bookExit, isSuspiciousMove } from './_sell-engine.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
@@ -40,6 +40,22 @@ async function ghPutFile(path, contentObj, sha, token, message) {
     body: JSON.stringify(body)
   });
   return r.ok;
+}
+
+// Read-modify-write with retry: re-reads the file (fresh sha) and re-applies the change on
+// each attempt, so a concurrent write by another cron (pick / refresh / another sell-check)
+// can't silently clobber ours with a stale-sha 409. buildObj returns null to signal "no
+// write needed". Returns true only if the write actually landed.
+async function ghPutWithRetry(path, buildObj, token, message, attempts = 4) {
+  for (let i = 0; i < attempts; i++) {
+    const cur = await ghGetFile(path, token);
+    let existing = null;
+    try { existing = cur.content ? JSON.parse(cur.content) : null; } catch (e) {}
+    const obj = buildObj(existing);
+    if (obj === null) return true; // nothing to write
+    if (await ghPutFile(path, obj, cur.sha, token, message)) return true;
+  }
+  return false;
 }
 
 // Fetch live price + recent closes (Yahoo NSE-first, no heavy fallback to stay fast).
@@ -105,7 +121,10 @@ export default async function handler(req, res) {
     if (!decision) {
       // Only spend an LLM call if there's downside pressure (small loss) — keeps hourly cost low.
       const pnl = item.entryPrice ? ((live.price - item.entryPrice) / item.entryPrice) * 100 : 0;
-      if (pnl < 0 && apiKey) {
+      const heldDays = item.date ? Math.floor((Date.now() - new Date(item.date + 'T00:00:00Z').getTime()) / 86400000) : 0;
+      // Skip the LLM (and any exit) on an implausibly large move for a fresh position — it's
+      // almost certainly a bad price, not a real signal. Never book a phantom loss on it.
+      if (pnl < 0 && !isSuspiciousMove(pnl, heldDays) && apiKey) {
         const d = await llmDecide(item, apiKey, []);
         if (d.verdict === 'SELL') decision = d;
       }
@@ -125,18 +144,29 @@ export default async function handler(req, res) {
     return res.status(200).json({ status: 'checked', sold: 0, positions: checked });
   }
 
-  // Persist: append to realized ledger, remove sold from bouquet.
-  const soldTickers = new Set(closedTrades.map(c => c.ticker));
-  const remaining = bouquet.filter(b => !soldTickers.has(b.ticker) || (b.status && b.status !== 'OPEN'));
+  // Persist (concurrency-safe): append to the realized ledger, then remove sold from the
+  // bouquet. Both writes re-read + retry on conflict so an overlapping cron can't clobber
+  // them. A position is keyed by ticker+entryDate so it can be booked AT MOST ONCE, even if
+  // two runs overlap or one retries — this is what prevents double-booked (phantom) P&L.
+  const tradeKey = t => `${t.ticker}|${t.entryDate}`;
+  const soldKeys = new Set(closedTrades.map(tradeKey));
 
-  const rl = await ghGetFile('data/realized.json', ghToken);
-  let ledger = { trades: [] };
-  try { if (rl.content) ledger = JSON.parse(rl.content); } catch (e) {}
-  if (!Array.isArray(ledger.trades)) ledger.trades = [];
-  ledger.trades.push(...closedTrades);
+  const realizedOk = await ghPutWithRetry('data/realized.json', (existing) => {
+    const ledger = existing && Array.isArray(existing.trades) ? existing : { trades: [] };
+    const seen = new Set(ledger.trades.map(tradeKey));
+    const toAdd = closedTrades.filter(t => !seen.has(tradeKey(t)));
+    if (!toAdd.length) return null; // already booked by a concurrent run — no write
+    ledger.trades.push(...toAdd);
+    return ledger;
+  }, ghToken, `Hourly sell-check: book ${closedTrades.length} exit(s)`);
 
-  await ghPutFile('data/realized.json', ledger, rl.sha, ghToken, `Hourly sell-check: book ${closedTrades.length} exit(s)`);
-  await ghPutFile('data/project-bouquet.json', { bouquet: remaining }, bq.sha, ghToken, `Hourly sell-check: close ${closedTrades.length} position(s)`);
+  const bouquetOk = await ghPutWithRetry('data/project-bouquet.json', (existing) => {
+    const list = existing?.bouquet || [];
+    // Drop only the positions we just sold that are still OPEN in the freshest bouquet.
+    const remaining = list.filter(b => !(soldKeys.has(`${b.ticker}|${b.date}`) && (!b.status || b.status === 'OPEN')));
+    if (remaining.length === list.length) return null; // nothing to remove — no write
+    return { bouquet: remaining };
+  }, ghToken, `Hourly sell-check: close ${closedTrades.length} position(s)`);
 
-  return res.status(200).json({ status: 'checked', sold: closedTrades.length, closed: closedTrades.map(c => ({ ticker: c.ticker, pnlPct: c.realizedPnlPct, reason: c.exitReason })), positions: checked });
+  return res.status(200).json({ status: 'checked', sold: closedTrades.length, realizedOk, bouquetOk, closed: closedTrades.map(c => ({ ticker: c.ticker, pnlPct: c.realizedPnlPct, reason: c.exitReason })), positions: checked });
 }

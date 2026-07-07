@@ -29,6 +29,30 @@ async function ghPutFile(path, contentObj, sha, token, message) {
   return r.ok;
 }
 
+// Read-modify-write with retry: re-reads the file (fresh sha) and re-applies the change on
+// each attempt, so an overlapping cron (pick / sell-check / another refresh) can't silently
+// clobber this write with a stale-sha 409. buildObj returns null for "no write needed".
+async function ghPutWithRetry(path, buildObj, token, message, attempts = 4) {
+  for (let i = 0; i < attempts; i++) {
+    const cur = await ghGetFile(path, token);
+    let existing = null;
+    try { existing = cur.content ? JSON.parse(cur.content) : null; } catch (e) {}
+    const obj = buildObj(existing);
+    if (obj === null) return true;
+    if (await ghPutFile(path, obj, cur.sha, token, message)) return true;
+  }
+  return false;
+}
+
+// Only these fields are owned/updated by the price-refresh cron. On a conflicting write we
+// overlay just these onto the freshest bouquet row, so a concurrent status/structure change
+// (a new pick, a SELL_PENDING flip, a sell-check removal) is preserved rather than clobbered.
+const REFRESH_PRICE_FIELDS = [
+  'prevClose', 'yahooSymbol', 'entryPrice', 'dayOpen', 'entryFromPrevClose',
+  'entryPriceProvisional', 'currentPrice', 'lastPriceUpdate', 'shares',
+  'todayChangePct', 'marketState', 'niftyAtEntry', 'niftyNow',
+];
+
 // Map company names / tickers to Yahoo NSE symbols
 const SYMBOL_MAP = {
   'RELIANCE INDUSTRIES':'RELIANCE.NS','TCS':'TCS.NS','HDFC BANK':'HDFCBANK.NS',
@@ -245,36 +269,60 @@ export default async function handler(req, res) {
   // fetch failed), append to data/realized.json, and remove from the bouquet.
   // A pending position with no fresh price stays pending and retries next cycle.
   const closedTrades = [];
-  const remaining = [];
   for (const item of bouquet) {
     if (item.status === 'SELL_PENDING' && (item._realExit != null || item.provisionalExitPrice != null)) {
       closedTrades.push(bookExit(item, item._realExit));
-    } else {
-      delete item._realExit; // never persist the scratch field
-      remaining.push(item);
     }
+  }
+
+  // A position (ticker + entry date) is realized AT MOST ONCE — this dedupe is what stops
+  // a phantom double-booking if this run overlaps/retries against sell-check or another refresh.
+  const tradeKey = t => `${t.ticker}|${t.entryDate}`;
+  const closedKeys = new Set(closedTrades.map(tradeKey));
+
+  // Map of our computed price updates by position key, for the merge-on-conflict write below.
+  const updatesByKey = new Map();
+  for (const it of bouquet) {
+    const k = `${it.ticker}|${it.date}`;
+    if (!closedKeys.has(k)) updatesByKey.set(k, it);
   }
 
   let realizedWritten = 0;
   if (closedTrades.length) {
-    // Append to the realized ledger (retry-safe: re-read, append, write).
-    for (let attempt = 0; attempt < 2; attempt++) {
-      const rl = await ghGetFile('data/realized.json', ghToken);
-      let ledger = { trades: [] };
-      try { if (rl.content) ledger = JSON.parse(rl.content); } catch (e) {}
-      if (!Array.isArray(ledger.trades)) ledger.trades = [];
-      ledger.trades.push(...closedTrades);
-      const ok = await ghPutFile('data/realized.json', ledger, rl.sha, ghToken, `Book ${closedTrades.length} realized sell(s)`);
-      if (ok) { realizedWritten = closedTrades.length; break; }
-    }
+    // Append to the realized ledger — retry-safe AND de-duped (idempotent).
+    const ok = await ghPutWithRetry('data/realized.json', (existing) => {
+      const ledger = existing && Array.isArray(existing.trades) ? existing : { trades: [] };
+      const seen = new Set(ledger.trades.map(tradeKey));
+      const toAdd = closedTrades.filter(t => !seen.has(tradeKey(t)));
+      if (!toAdd.length) return null; // already booked elsewhere — no write
+      ledger.trades.push(...toAdd);
+      return ledger;
+    }, ghToken, `Book ${closedTrades.length} realized sell(s)`);
+    if (ok) realizedWritten = closedTrades.length;
   }
 
-  // Write the bouquet if prices changed OR positions were closed out.
+  // Write the bouquet if prices changed OR positions were closed out. On conflict, re-read
+  // the freshest bouquet and overlay ONLY our price fields per position (and drop closed
+  // ones), so a concurrent add/removal/status-change by another cron is never clobbered.
   if (updated > 0 || closedTrades.length) {
-    const finalBouquet = closedTrades.length ? remaining : bouquet;
-    finalBouquet.forEach(it => delete it._realExit);
-    await ghPutFile('data/project-bouquet.json', { bouquet: finalBouquet }, bq.sha, ghToken,
-      closedTrades.length ? `Refresh prices + close ${closedTrades.length} position(s)` : `Refresh prices (${updated} stocks)`);
+    await ghPutWithRetry('data/project-bouquet.json', (existing) => {
+      const fresh = existing?.bouquet || [];
+      const out = [];
+      for (const fb of fresh) {
+        const k = `${fb.ticker}|${fb.date}`;
+        if (closedKeys.has(k)) continue; // realized/closed this run — remove it
+        const upd = updatesByKey.get(k);
+        if (upd) {
+          const merged = { ...fb };
+          for (const f of REFRESH_PRICE_FIELDS) if (upd[f] !== undefined) merged[f] = upd[f];
+          delete merged._realExit;
+          out.push(merged);
+        } else {
+          out.push(fb); // a position we didn't process (e.g. added concurrently) — leave as-is
+        }
+      }
+      return { bouquet: out };
+    }, ghToken, closedTrades.length ? `Refresh prices + close ${closedTrades.length} position(s)` : `Refresh prices (${updated} stocks)`);
   }
   const out = { status: 'refreshed', updated, total: bouquet.length, nifty: niftyNow };
   if (skippedPremarket) out.skippedPremarket = skippedPremarket;

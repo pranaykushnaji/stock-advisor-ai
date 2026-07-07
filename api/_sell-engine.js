@@ -11,7 +11,21 @@
 // Tightened for swing-trade (momentum) horizon: quicker profit-taking, tighter stop,
 // short max-hold. The whole point of the shorter horizon is faster exits — this is
 // the risk control that makes momentum-trading survivable.
-export const SELL_RULES = { TARGET_PCT: 8, STOP_PCT: -5, MAX_HOLD_DAYS: 7 };
+export const SELL_RULES = {
+  TARGET_PCT: 8, STOP_PCT: -5, MAX_HOLD_DAYS: 7,
+  // Data-sanity guard: a move this large on a position only a day (or less) old is almost
+  // always a bad price (wrong symbol / stale fallback source), NOT a real target/stop.
+  // We refuse to auto-book an exit on it so we never realize phantom P&L. (See PHOENIXLTD
+  // 2026-07-07: entry ₹1549 vs real ₹2018 → a fake +33% "target hit".)
+  SANITY_MAX_MOVE_PCT: 25, SANITY_MAX_MOVE_DAYS: 1,
+};
+
+// True when a P&L% is too large to be believable for how long we've held — i.e. it looks
+// like a data glitch, not a real market move. Shared by the rules gate and the LLM path.
+export function isSuspiciousMove(pnlPct, heldDays) {
+  return heldDays <= SELL_RULES.SANITY_MAX_MOVE_DAYS
+    && Math.abs(pnlPct) >= SELL_RULES.SANITY_MAX_MOVE_PCT;
+}
 
 function daysHeld(dateStr) {
   if (!dateStr) return 0;
@@ -26,6 +40,9 @@ export function rulesGate(item, recentCloses = null) {
   if (!entry || !cur) return null;
   const pnlPct = ((cur - entry) / entry) * 100;
   const held = daysHeld(item.date);
+  // Never auto-sell on an implausibly large move for a brand-new position — treat it as a
+  // bad price and defer (return null) instead of booking a phantom target/stop.
+  if (isSuspiciousMove(pnlPct, held)) return null;
   if (pnlPct >= SELL_RULES.TARGET_PCT) return { verdict: 'SELL', source: 'rule', reason: `target hit (+${pnlPct.toFixed(1)}%)` };
   if (pnlPct <= SELL_RULES.STOP_PCT) return { verdict: 'SELL', source: 'rule', reason: `stop-loss breached (${pnlPct.toFixed(1)}%)` };
   if (held >= SELL_RULES.MAX_HOLD_DAYS) return { verdict: 'SELL', source: 'rule', reason: `max hold ${held}d reached` };
@@ -82,7 +99,14 @@ export async function llmDecide(item, apiKey, headlines = []) {
 export async function decideSell(item, apiKey, headlines = [], recentCloses = null) {
   if (item.status && item.status !== 'OPEN') return null; // already pending/closed
   const forced = rulesGate(item, recentCloses);
-  const decision = forced || (await llmDecide(item, apiKey, headlines));
+  if (forced) return forced; // rulesGate only ever returns a SELL decision or null
+  // Data-sanity: don't even ask the LLM on an implausibly large move for a fresh position —
+  // it's almost certainly a bad entry price, and we must not auto-book a phantom exit.
+  if (item.entryPrice && item.currentPrice) {
+    const pnlPct = ((item.currentPrice - item.entryPrice) / item.entryPrice) * 100;
+    if (isSuspiciousMove(pnlPct, daysHeld(item.date))) return null;
+  }
+  const decision = await llmDecide(item, apiKey, headlines);
   if (decision.verdict !== 'SELL') return null;
   return decision; // { verdict:'SELL', source, reason }
 }
