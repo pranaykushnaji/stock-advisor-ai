@@ -1,67 +1,66 @@
 {
   "pick": {
-    "ticker": "PHOENIXLTD",
-    "fullName": "PHOENIXLTD",
-    "sector": "Real Estate",
+    "ticker": "TITAN",
+    "fullName": "TITAN",
+    "sector": "Consumer Cyclical",
     "strategy": "momentum-swing",
     "factors": {
       "momentum": {
-        "score": 98.7,
+        "score": 78.8,
         "positives": [
-          "Momentum score 98.7 (top percentile)",
-          "Volume score 93.6 and volume ratio 1.69 indicating strong buying pressure",
-          "Recent 1‑day return +3.0% and 1‑week return +10.3%"
+          "Momentum score 78.8 (top 20% percentile)",
+          "Volume score 86.3 and volume ratio 1.46 indicating strong buying pressure",
+          "1‑week return of 4.84% shows recent price strength"
         ],
         "negatives": [
-          "Annualized volatility 26.8% suggests price swings",
-          "High PE multiple ~60x may limit upside if earnings slow",
-          "Real estate sector sensitivity to interest‑rate moves"
+          "High forward P/E of 80.85 suggests valuation risk",
+          "Annualized volatility of 23.8% adds price swing risk"
         ]
       },
       "quality": {
-        "score": 62.5
+        "score": 79.2
       },
       "volume": {
-        "score": 93.6
+        "score": 86.3
       },
       "lowVol": {
-        "score": 75.6
+        "score": 81.3
       }
     },
     "shortReturns": {
-      "r1d": 0.030377062895006354,
-      "r1w": 0.10345190838291056,
-      "r1m": 0.2048427150038435
+      "r1d": 0.005222883185190382,
+      "r1w": 0.04844283586686585,
+      "r1m": 0.05262656606558937
     },
-    "volumeRatio": 1.69,
+    "volumeRatio": 1.46,
     "fundamentals": {
-      "roe": 11.06,
+      "roe": 37.13,
       "roce": null,
-      "debtToEquity": 0.37,
-      "netMargin": 27.67,
-      "ebitdaMargin": 59.62,
-      "earningsGrowth": 50,
-      "peRatio": 60.262787,
-      "pbRatio": 6.865447,
+      "debtToEquity": 1.95,
+      "netMargin": 5.79,
+      "ebitdaMargin": 9,
+      "earningsGrowth": 35.1,
+      "peRatio": 80.84636,
+      "pbRatio": 26.030813,
       "pegRatio": null,
-      "dividendYield": 0.12,
-      "sector": "Real Estate"
+      "dividendYield": 0.33,
+      "sector": "Consumer Cyclical"
     },
     "fundamentalsSource": "yahoo",
-    "annualizedVol": 26.8,
-    "composite": 82.3,
+    "annualizedVol": 23.8,
+    "composite": 82.7,
     "verdict": "BUY",
     "estimatedUpside": "5-8%",
     "riskLevel": "Medium",
-    "horizon": "days to 1-2 weeks",
-    "newsSummary": "The latest earnings release showed 50% YoY earnings growth and a net margin of 27.7%, sparking renewed investor interest in the stock.",
-    "summary": "PHOENIXLTD is displaying extreme short‑term price strength, backed by a 98.7 momentum percentile and a 1.69x surge in trading volume. The combination of solid recent returns and a strong earnings beat creates a short‑term swing opportunity, while the elevated PE and volatility flag caution.",
-    "whyToday": "A spike in trading volume (1.69x baseline) together with a near‑top momentum score (98.7) is driving the current price acceleration.",
-    "date": "2026-07-07",
-    "pickedAt": "2026-07-07T04:27:53.574Z",
+    "horizon": "1-2 weeks",
+    "newsSummary": "Titan reported a 35.1% YoY earnings growth in its latest quarter, beating consensus estimates and triggering a surge in trading volume.",
+    "summary": "Titan is displaying robust short‑term price strength backed by a sharp earnings beat and a 46% increase in volume. The momentum and quality scores are in the top quartile, and recent weekly returns near 5% indicate the rally may continue over the next few days to two weeks.",
+    "whyToday": "A recent earnings surprise with 35% YoY growth sparked a volume‑driven price surge, pushing the momentum model into a strong buy signal.",
+    "date": "2026-07-08",
+    "pickedAt": "2026-07-07T19:21:14.052Z",
     "discovery": {
       "news": 0,
-      "movers": 40,
+      "movers": 39,
       "nseSnapshot": 205,
       "nseUniverse": 205,
       "usedFallback": false,
@@ -71,22 +70,24 @@
         "extractError": null,
         "moversError": null,
         "snapshotStale": false,
-        "snapshotAt": "2026-07-06T11:11:03.985Z"
+        "snapshotAt": "2026-07-07T10:05:15.460Z"
       }
     },
-    "candidatePool": 39,
+    "candidatePool": 40,
     "fundCoverage": {
-      "universe": 39,
-      "tradeable": 39,
+      "universe": 40,
+      "tradeable": 40,
       "rejectedJunk": [],
       "bySource": {
-        "estimated": 27,
+        "estimated": 28,
         "yahoo": 12
       }
     },
     "runnerUp": {
-      "ticker": "HDFCBANK",
-      "composite": 73.3
-    }
+      "ticker": "INDHOTEL",
+      "composite": 82.2
+    },
+    "entryPrice": 3666.1,
+    "entryRejected": "entry ₹3666.1 is >20% off the NSE snapshot price ₹4591.2 — likely a bad price source; not trading this pick today"
   }
 }
