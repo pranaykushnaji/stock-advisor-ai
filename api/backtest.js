@@ -19,7 +19,7 @@
 
 import { scoreMomentumUniverse } from './_scoring.js';
 import { fetchFundamentals } from './_fundamentals.js';
-import { SELL_RULES } from './_sell-engine.js';
+import { SELL_RULES, exitBands } from './_sell-engine.js';
 
 async function fetchWithTimeout(url, opts = {}, ms = 9000) {
   const ctrl = new AbortController();
@@ -158,21 +158,35 @@ function benchForwardReturn(bench, entryDate, holdDays) {
 // entryCloses = point-in-time close series up to and including entry day (oldest->newest).
 function simSellEngine(entry, fwd, entryCloses = null, opts = {}) {
   const slipFrac = (opts.slippageBps ?? SLIPPAGE_BPS) / 10000;
-  const target = entry * (1 + SELL_RULES.TARGET_PCT / 100);
-  const stop = entry * (1 + SELL_RULES.STOP_PCT / 100);
+  const { stopPct, trailPct } = exitBands(entryCloses); // same vol-adaptive bands as production
+  const stopPrice = entry * (1 - stopPct / 100);
+  const targetPrice = entry * (1 + SELL_RULES.HARD_TARGET_PCT / 100);
+  const trailFrac = trailPct / 100;
   const trail = Array.isArray(entryCloses) ? entryCloses.slice() : [];
   // A sell fills slightly below the trigger price -> slippage always reduces the return.
   const netRet = (fillPrice) => +((((fillPrice * (1 - slipFrac)) - entry) / entry) * 100).toFixed(2);
+  let peak = entry;
   for (let i = 0; i < fwd.length; i++) {
     const row = fwd[i];
     const o = row.open ?? row.close, hi = row.high ?? row.close, lo = row.low ?? row.close, c = row.close;
     trail.push(c);
     const held = i + 1;
-    if (o <= stop) return { date: row.date, retPct: netRet(o), reason: `stop gap-down (open ₹${o.toFixed(2)})`, day: held };
-    if (lo <= stop) return { date: row.date, retPct: netRet(stop), reason: `stop-loss (${SELL_RULES.STOP_PCT}%)`, day: held };
-    if (o >= target) return { date: row.date, retPct: netRet(o), reason: `target gap-up (open ₹${o.toFixed(2)})`, day: held };
-    if (hi >= target) return { date: row.date, retPct: netRet(target), reason: `target hit (+${SELL_RULES.TARGET_PCT}%)`, day: held };
+    // 1. Initial vol-stop (checked first, conservative). Gap-down through it fills at the open.
+    if (o <= stopPrice) return { date: row.date, retPct: netRet(o), reason: `stop gap-down (open ₹${o.toFixed(2)})`, day: held };
+    if (lo <= stopPrice) return { date: row.date, retPct: netRet(stopPrice), reason: `vol-stop (-${stopPct.toFixed(1)}%)`, day: held };
+    // 2. Trailing stop — arm once the peak (incl. today's high) is up more than a trail band.
+    peak = Math.max(peak, hi);
+    if ((peak - entry) / entry * 100 >= trailPct) {
+      const trig = peak * (1 - trailFrac);
+      if (o <= trig) return { date: row.date, retPct: netRet(o), reason: `trailing gap (open ₹${o.toFixed(2)})`, day: held };
+      if (lo <= trig) return { date: row.date, retPct: netRet(trig), reason: `trailing stop (-${trailPct.toFixed(1)}% from peak)`, day: held };
+    }
+    // 3. Failsafe target (rare).
+    if (o >= targetPrice) return { date: row.date, retPct: netRet(o), reason: `failsafe gap-up (open ₹${o.toFixed(2)})`, day: held };
+    if (hi >= targetPrice) return { date: row.date, retPct: netRet(targetPrice), reason: `failsafe target (+${SELL_RULES.HARD_TARGET_PCT}%)`, day: held };
+    // 4. Max hold.
     if (held >= SELL_RULES.MAX_HOLD_DAYS) return { date: row.date, retPct: netRet(c), reason: `max hold ${held}d`, day: held };
+    // 5. Momentum-fade.
     if (trail.length >= 6) {
       const last = trail[trail.length - 1];
       const wkAgo = trail[trail.length - 6];
@@ -356,6 +370,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       mode: 'range_variants',
+      engine: 'vol-adaptive-v2',
       from, to, step, holdDays,
       universe: uniChoice, slippageBps,
       calendarDays: dates.length,

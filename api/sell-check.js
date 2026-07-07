@@ -113,8 +113,9 @@ export default async function handler(req, res) {
   for (const item of open) {
     const live = await fetchLive(item.ticker, item.yahooSymbol);
     if (!live) { checked.push({ ticker: item.ticker, result: 'no_price' }); continue; }
-    // Freshen current price for the rules gate.
+    // Freshen current price + peak (for the trailing stop) for the rules gate.
     item.currentPrice = live.price;
+    item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? live.price, live.price);
 
     // Rules gate first (target/stop/max-hold/momentum-fade), then LLM for the ambiguous middle.
     let decision = rulesGate(item, live.closes);

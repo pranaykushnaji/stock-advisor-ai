@@ -49,7 +49,7 @@ async function ghPutWithRetry(path, buildObj, token, message, attempts = 4) {
 // (a new pick, a SELL_PENDING flip, a sell-check removal) is preserved rather than clobbered.
 const REFRESH_PRICE_FIELDS = [
   'prevClose', 'yahooSymbol', 'entryPrice', 'dayOpen', 'entryFromPrevClose',
-  'entryPriceProvisional', 'currentPrice', 'lastPriceUpdate', 'shares',
+  'entryPriceProvisional', 'currentPrice', 'peakPrice', 'lastPriceUpdate', 'shares',
   'todayChangePct', 'marketState', 'niftyAtEntry', 'niftyNow',
 ];
 
@@ -245,6 +245,9 @@ export default async function handler(req, res) {
         if (reliable) {
           // Prefer the completed candle close for "current" after market close; else live price
           item.currentPrice = pd.candleClose || pd.price;
+          // Track the peak since entry for the trailing stop (use the day's HIGH when available).
+          const dayHigh = pd.candleClose && pd.open ? Math.max(pd.candleClose, pd.open) : item.currentPrice;
+          item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? item.currentPrice, item.currentPrice, dayHigh);
           // For a SELL_PENDING position, this fresh price is the real exit to book at 5:30.
           if (item.status === 'SELL_PENDING') item._realExit = pd.candleClose || pd.price;
           item.lastPriceUpdate = now;

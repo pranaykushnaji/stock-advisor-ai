@@ -52,6 +52,10 @@ const REPO = 'pranaykushnaji/stock-advisor-ai';
 // we distrust it and refuse to trade the pick (prevents phantom P&L from a bad price source).
 const ENTRY_SANITY_TOLERANCE_PCT = 20;
 
+// Don't re-pick a name we already hold or picked within this many days — stops the model
+// chasing the same stock on consecutive days (the backtest showed POLYCAB picked 3x running).
+const DEDUP_DAYS = 5;
+
 function todayIST() {
   const now = new Date();
   const ist = new Date(now.getTime() + 5.5 * 3600 * 1000);
@@ -428,7 +432,27 @@ export default async function handler(req, res) {
     const row = universe.find(u => u.symbol === sym);
     return row && row.fundamentals && row.fundamentals.source !== 'estimated';
   };
-  const winner = rankedEligible.find(r => hasRealFund(r.symbol)) || rankedEligible[0];
+  // De-dup: skip names we already hold or picked in the last DEDUP_DAYS (avoids concentrating
+  // into one rolling-over stock). Read the current bouquet to know what to exclude.
+  const recentlyPicked = new Set();
+  try {
+    const bqNow = await ghGetFile('data/project-bouquet.json', ghToken);
+    const list = bqNow.content ? (JSON.parse(bqNow.content).bouquet || []) : [];
+    const cutoff = new Date(Date.now() - DEDUP_DAYS * 86400000 + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
+    for (const b of list) {
+      if (!b.ticker) continue;
+      const isOpen = !b.status || b.status === 'OPEN' || b.status === 'SELL_PENDING';
+      const isRecent = b.date && b.date >= cutoff;
+      if (isOpen || isRecent) recentlyPicked.add(String(b.ticker).toUpperCase());
+    }
+  } catch (e) { /* if the bouquet can't be read, don't block the pick */ }
+  const fresh = (r) => !recentlyPicked.has(String(r.symbol).toUpperCase());
+
+  const winner =
+       rankedEligible.find(r => hasRealFund(r.symbol) && fresh(r))  // best fresh name with real fundamentals
+    || rankedEligible.find(r => fresh(r))                           // else best fresh name
+    || rankedEligible.find(r => hasRealFund(r.symbol))              // else all fresh names exhausted — fall back
+    || rankedEligible[0];
   const winnerRow = universe.find(u => u.symbol === winner.symbol);
 
   try {
@@ -558,6 +582,7 @@ This is a short-term momentum trade. Reference only the real numbers above. Retu
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: 10000,
         entryPrice, currentPrice: priceData?.price || entryPrice, shares,
+        peakPrice: Math.max(entryPrice || 0, priceData?.price || entryPrice || 0), // for the trailing stop
         entryPriceProvisional: entryProvisional,
         // If entry is prevClose (market wasn't open at pick time), flag it so the 5:30 PM
         // cron can UPGRADE it to today's real open once the daily candle is complete.

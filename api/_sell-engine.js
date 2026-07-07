@@ -12,12 +12,24 @@
 // short max-hold. The whole point of the shorter horizon is faster exits — this is
 // the risk control that makes momentum-trading survivable.
 export const SELL_RULES = {
-  TARGET_PCT: 8, STOP_PCT: -5, MAX_HOLD_DAYS: 7,
+  MAX_HOLD_DAYS: 10,   // give winners a little more room than the old 7d
+
   // Data-sanity guard: a move this large on a position only a day (or less) old is almost
   // always a bad price (wrong symbol / stale fallback source), NOT a real target/stop.
   // We refuse to auto-book an exit on it so we never realize phantom P&L. (See PHOENIXLTD
   // 2026-07-07: entry ₹1549 vs real ₹2018 → a fake +33% "target hit".)
   SANITY_MAX_MOVE_PCT: 25, SANITY_MAX_MOVE_DAYS: 1,
+
+  // VOLATILITY-ADAPTIVE EXITS (replaces the old fixed +8% target / -5% stop). The backtest
+  // showed a flat -5% stop got whipsawed constantly on midcaps while the +8% target capped
+  // the few big winners momentum lives on. So: the stop distance scales to each stock's own
+  // daily volatility (a calm large-cap gets a tight-ish band, a wild midcap a wider one), and
+  // a TRAILING stop lets winners run instead of selling at a fixed target. "Balanced but
+  // accepts swings": moderate multipliers, floored/capped so bands stay sane.
+  STOP_VOL_MULT: 2.5, STOP_MIN_PCT: 4, STOP_MAX_PCT: 12,   // initial stop = clamp(2.5×dailyVol%)
+  TRAIL_VOL_MULT: 2.2, TRAIL_MIN_PCT: 4, TRAIL_MAX_PCT: 11, // trail band once in profit
+  HARD_TARGET_PCT: 25,          // rare failsafe so a moonshot still books
+  DEFAULT_DAILY_VOL_PCT: 2.2,   // used when we can't measure vol from a price series
 };
 
 // True when a P&L% is too large to be believable for how long we've held — i.e. it looks
@@ -33,20 +45,56 @@ function daysHeld(dateStr) {
   return Math.floor((Date.now() - from.getTime()) / 86400000);
 }
 
+const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
+
+// Daily realized volatility (%) from a close series — drives the adaptive stop/trail widths.
+export function dailyVolPct(closes) {
+  if (!Array.isArray(closes) || closes.length < 15) return null;
+  const rets = [];
+  for (let i = 1; i < closes.length; i++) if (closes[i] > 0 && closes[i - 1] > 0) rets.push(Math.log(closes[i] / closes[i - 1]));
+  if (rets.length < 10) return null;
+  const mean = rets.reduce((a, b) => a + b, 0) / rets.length;
+  const variance = rets.reduce((a, b) => a + (b - mean) ** 2, 0) / (rets.length - 1);
+  return Math.sqrt(variance) * 100;
+}
+
+// The volatility-adaptive stop/trail band widths (%) for a stock, given its recent closes.
+export function exitBands(recentCloses) {
+  const dv = dailyVolPct(recentCloses) ?? SELL_RULES.DEFAULT_DAILY_VOL_PCT;
+  return {
+    stopPct: clamp(SELL_RULES.STOP_VOL_MULT * dv, SELL_RULES.STOP_MIN_PCT, SELL_RULES.STOP_MAX_PCT),
+    trailPct: clamp(SELL_RULES.TRAIL_VOL_MULT * dv, SELL_RULES.TRAIL_MIN_PCT, SELL_RULES.TRAIL_MAX_PCT),
+  };
+}
+
 // Deterministic gate. Returns a forced SELL decision, or null to defer to the LLM.
-// `recentCloses` (optional) enables a momentum-fade exit for swing trades.
+// `recentCloses` (optional) enables vol-adaptive stops, a trailing exit, and momentum-fade.
+// Trailing uses item.peakPrice (highest price seen since entry, kept fresh by the refresh /
+// sell-check crons); if it's missing we fall back to the current price.
 export function rulesGate(item, recentCloses = null) {
   const entry = item.entryPrice, cur = item.currentPrice;
   if (!entry || !cur) return null;
   const pnlPct = ((cur - entry) / entry) * 100;
   const held = daysHeld(item.date);
   // Never auto-sell on an implausibly large move for a brand-new position — treat it as a
-  // bad price and defer (return null) instead of booking a phantom target/stop.
+  // bad price and defer (return null) instead of booking a phantom exit.
   if (isSuspiciousMove(pnlPct, held)) return null;
-  if (pnlPct >= SELL_RULES.TARGET_PCT) return { verdict: 'SELL', source: 'rule', reason: `target hit (+${pnlPct.toFixed(1)}%)` };
-  if (pnlPct <= SELL_RULES.STOP_PCT) return { verdict: 'SELL', source: 'rule', reason: `stop-loss breached (${pnlPct.toFixed(1)}%)` };
+
+  const { stopPct, trailPct } = exitBands(recentCloses);
+
+  // 1. Failsafe target — a genuine moonshot still books.
+  if (pnlPct >= SELL_RULES.HARD_TARGET_PCT) return { verdict: 'SELL', source: 'rule', reason: `failsafe target (+${pnlPct.toFixed(1)}%)` };
+  // 2. Initial volatility stop, measured from entry.
+  if (pnlPct <= -stopPct) return { verdict: 'SELL', source: 'rule', reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)` };
+  // 3. Trailing stop — once the peak is up more than a trail band, protect gains from the peak.
+  const peak = Math.max(item.peakPrice ?? entry, cur);
+  if ((peak - entry) / entry * 100 >= trailPct) {
+    const dropFromPeak = (peak - cur) / peak * 100;
+    if (dropFromPeak >= trailPct) return { verdict: 'SELL', source: 'rule', reason: `trailing stop (-${dropFromPeak.toFixed(1)}% from peak, +${pnlPct.toFixed(1)}% locked)` };
+  }
+  // 4. Max hold.
   if (held >= SELL_RULES.MAX_HOLD_DAYS) return { verdict: 'SELL', source: 'rule', reason: `max hold ${held}d reached` };
-  // Momentum-fade exit: the short-term trend that justified the buy has reversed.
+  // 5. Momentum-fade: the short-term trend that justified the buy has reversed.
   if (Array.isArray(recentCloses) && recentCloses.length >= 6) {
     const last = recentCloses[recentCloses.length - 1];
     const wkAgo = recentCloses[recentCloses.length - 6];
