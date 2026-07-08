@@ -23,17 +23,17 @@ const SELL = { kind: 'vercel', path: '/api/sell-check' };
 // The cron trigger ticks every 5 minutes across the market window; the handler acts only
 // when the current HH:MM matches a row here, so timing is precise to the tick.
 const SCHEDULE = {
-  '03:15': { kind: 'github' },                               // 08:45 IST — NSE snapshot (pre-open)
-  '03:35': { kind: 'vercel', path: '/api/stock-of-the-day' }, // 09:05 IST — Stock of the Day pick
-  // '03:50': { kind: 'vercel', path: '/api/capture-open' },  // 09:20 IST — enable if you use capture-open
-  '04:40': SELL,                                             // 10:10 IST — hourly sell-check
-  '05:40': SELL,                                             // 11:10 IST
-  '06:30': { kind: 'github' },                               // 12:00 IST — NSE snapshot (midday)
-  '06:40': SELL,                                             // 12:10 IST
-  '07:40': SELL,                                             // 13:10 IST
-  '08:40': SELL,                                             // 14:10 IST
-  '09:40': SELL,                                             // 15:10 IST
-  '10:10': { kind: 'vercel', path: '/api/refresh-prices' },   // 15:40 IST — refresh + book exits
+  '03:15': { kind: 'github' },                                // 08:45 IST — NSE snapshot (pre-open)
+  '06:30': { kind: 'github' },                                // 12:00 IST — NSE snapshot (midday)
+  '08:45': { kind: 'github' },                                // 14:15 IST — NSE snapshot (pre-pick: ~85% of the day's volume in)
+  '09:00': { kind: 'vercel', path: '/api/stock-of-the-day' }, // 14:30 IST — pick, on near-full-day volume so the 1.8x filter is valid
+  '04:40': SELL,                                              // 10:10 IST — hourly sell-check
+  '05:40': SELL,                                              // 11:10 IST
+  '06:40': SELL,                                              // 12:10 IST
+  '07:40': SELL,                                              // 13:10 IST
+  '08:40': SELL,                                              // 14:10 IST
+  '09:40': SELL,                                              // 15:10 IST
+  '10:10': { kind: 'vercel', path: '/api/refresh-prices' },    // 15:40 IST — refresh + book exits
 };
 
 function hhmm(date) {
