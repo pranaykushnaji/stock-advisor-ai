@@ -13,6 +13,14 @@ on:
 permissions:
   contents: write              # allow committing the snapshot
 
+# Serialize snapshot runs. Rapid triggers (the pick's fire-and-forget dispatch + scheduled
+# snapshots) used to run concurrently and collide when they all rewrite data/nse-snapshot.json,
+# causing rebase conflicts and failed pushes. With a shared group + cancel-in-progress, only the
+# LATEST snapshot request runs — no concurrent pushes, and we always end up with the freshest data.
+concurrency:
+  group: nse-snapshot
+  cancel-in-progress: true
+
 jobs:
   snapshot:
     runs-on: ubuntu-latest
@@ -53,7 +61,9 @@ jobs:
                 break
               fi
               echo "Push rejected (main moved) — rebasing and retrying ($attempt/5)..."
-              git pull --rebase --autostash origin main || true
+              # -X theirs auto-resolves any conflict on the snapshot file in favour of OUR fresh
+              # fetch (latest-writer-wins); abort cleanly if the rebase still can't proceed.
+              git pull --rebase -X theirs --autostash origin main || git rebase --abort || true
               sleep 3
             done
             if [ "$pushed" != "true" ]; then
