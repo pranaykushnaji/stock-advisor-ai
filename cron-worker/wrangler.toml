@@ -17,3 +17,8 @@ crons = ["*/5 3-10 * * 1-5"]
 VERCEL_BASE = "https://stock-advisor-ai-omega.vercel.app"
 GITHUB_REPO = "pranaykushnaji/stock-advisor-ai"
 GITHUB_WORKFLOW = "nse-snapshot.yml"
+
+# Run-log store for the Tracker tab (every trigger + its outcome). No repo churn.
+[[kv_namespaces]]
+binding = "CRON_LOG"
+id = "ce0b67b2b758422689f0a47d59a4afe0"

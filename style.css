@@ -573,3 +573,21 @@ body {
   background: var(--accent-dim); border-radius: 6px;
   padding: 6px 9px; margin-bottom: 10px; line-height: 1.4;
 }
+
+/* ---- Cron Tracker tab ---- */
+.trk-note{font-size:13px;color:var(--text2);margin-bottom:16px;}
+.trk-card{background:var(--card,var(--bg2,#fff));border:1px solid var(--border,#e5e7eb);border-radius:12px;padding:16px 18px;margin-bottom:16px;}
+.trk-h{font-size:14px;font-weight:600;margin-bottom:12px;}
+.trk-kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border,#eee);font-size:13px;}
+.trk-kv:last-child{border-bottom:none;}
+.trk-kv span{color:var(--text2);}
+.trk-tbl{width:100%;border-collapse:collapse;font-size:13px;}
+.trk-tbl th{text-align:left;font-weight:600;color:var(--text2);font-size:11px;text-transform:uppercase;letter-spacing:.04em;padding:6px 10px;border-bottom:1px solid var(--border,#e5e7eb);}
+.trk-tbl td{padding:8px 10px;border-bottom:1px solid var(--border,#f0f0f0);vertical-align:top;}
+.trk-tbl tr:last-child td{border-bottom:none;}
+.trk-pill{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11px;font-weight:600;white-space:nowrap;}
+.trk-ok{background:rgba(34,197,94,.15);color:#16a34a;}
+.trk-bad{background:rgba(239,68,68,.15);color:#dc2626;}
+.trk-muted{background:var(--bg2,#f3f4f6);color:var(--text2);}
+.trk-up{color:#16a34a;font-weight:600;}
+.trk-down{color:#dc2626;font-weight:600;}

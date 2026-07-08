@@ -14,7 +14,7 @@ function setTheme(t){document.documentElement.setAttribute('data-theme',t);local
 document.getElementById('theme-toggle').addEventListener('click',()=>{setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');});
 
 // ─── Tabs ───
-function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='dashboard')renderDashboard();if(n==='daily')renderDailyTab(sotdPick);}
+function switchTab(n){document.querySelectorAll('.nav-item').forEach(e=>e.classList.toggle('active',e.dataset.tab===n));document.querySelectorAll('.tab-pane').forEach(e=>e.classList.toggle('active',e.id==='tab-'+n));if(n==='bouquet')renderBouquet();if(n==='dashboard')renderDashboard();if(n==='daily')renderDailyTab(sotdPick);if(n==='tracker')renderTracker();}
 document.querySelectorAll('.nav-item').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
 
 // ─── FACTOR-BASED SCORING (research-backed) ───
@@ -930,6 +930,58 @@ checkSotd();
   const ok=document.getElementById('disclaimer-ok');
   if(modal&&ok&&!seen){modal.classList.add('open');ok.addEventListener('click',()=>{localStorage.setItem('disclaimer_ack','1');modal.classList.remove('open');});}
 })();
+// ---- Cron Tracker tab: did every scheduled job run, and what did it decide (stock-wise) ----
+const CRON_LOG_URL='https://stock-advisor-cron.pranaykushnaji.workers.dev/log';
+async function renderTracker(){
+  const el=document.getElementById('tracker-content');if(!el)return;
+  el.innerHTML='<div class="empty-state"><p>Loading run history…</p></div>';
+  const j=async(u)=>{try{const r=await fetch(u,{cache:'no-store'});return r.ok?await r.json():null;}catch{return null;}};
+  const [log,snap,bouq,real]=await Promise.all([j(CRON_LOG_URL),j('/data/nse-snapshot.json?t='+Date.now()),j('/data/project-bouquet.json?t='+Date.now()),j('/data/realized.json?t='+Date.now())]);
+  const runs=Array.isArray(log)?log:[];
+  const IST={timeZone:'Asia/Kolkata'};
+  const istDate=d=>new Date(d).toLocaleDateString('en-CA',IST);
+  const istTime=d=>new Date(d).toLocaleTimeString('en-GB',{...IST,hour:'2-digit',minute:'2-digit'});
+  const toMin=t=>{const[a,b]=t.split(':');return +a*60+ +b;};
+  const today=istDate(Date.now());
+  const dow=new Date().toLocaleDateString('en-US',{...IST,weekday:'short'});
+  const isWeekend=(dow==='Sat'||dow==='Sun');
+  const todayRuns=runs.filter(r=>istDate(r.ts)===today);
+  const nowMin=toMin(istTime(Date.now()));
+  const firstLoggedMin=todayRuns.length?Math.min(...todayRuns.map(r=>toMin(istTime(r.ts)))):9999;
+  function outcome(r){const s=r.summary||{};
+    if(r.job==='nse-snapshot')return s.dispatched?'snapshot triggered':'dispatch failed';
+    if(r.job==='sell-check'){const sold=s.sold||0,held=(s.positions||[]).filter(p=>p.result==='hold').length,soldT=(s.closed||[]).map(c=>c.ticker).join(', ');return `checked ${(s.positions||[]).length} · held ${held}${sold?` · SOLD ${sold} (${soldT})`:''}`;}
+    if(r.job==='stock-of-the-day'){if(s.pick)return `picked ${s.pick.ticker} (score ${s.pick.composite})`;if(s.entryRejected)return `not traded — ${s.entryRejected}`;if(s.reason)return `No Trade — ${s.reason}`;return s.status||'ran';}
+    if(r.job==='refresh-prices')return `updated ${s.updated||0}${s.closed?` · booked ${s.closed}`:''}`;
+    return s.status||(s.ok?'ok':'?');}
+  const EXPECTED=[{t:'08:45',job:'nse-snapshot',label:'Snapshot · pre-open'},{t:'10:10',job:'sell-check',label:'Sell-check'},{t:'11:10',job:'sell-check',label:'Sell-check'},{t:'12:00',job:'nse-snapshot',label:'Snapshot · midday'},{t:'12:10',job:'sell-check',label:'Sell-check'},{t:'13:10',job:'sell-check',label:'Sell-check'},{t:'14:10',job:'sell-check',label:'Sell-check'},{t:'14:15',job:'nse-snapshot',label:'Snapshot · pre-pick'},{t:'14:30',job:'stock-of-the-day',label:'Daily pick'},{t:'15:10',job:'sell-check',label:'Sell-check'},{t:'15:40',job:'refresh-prices',label:'Refresh + exits'}];
+  const schedRows=EXPECTED.slice().sort((a,b)=>toMin(a.t)-toMin(b.t)).map(e=>{
+    const em=toMin(e.t);const hit=todayRuns.find(r=>r.job===e.job&&Math.abs(toMin(istTime(r.ts))-em)<=12&&!r._used);if(hit)hit._used=true;
+    let st,cls,detail='';
+    if(hit){st='✓ ran';cls='ok';detail=outcome(hit)+' · '+istTime(hit.ts);}
+    else if(isWeekend){st='— closed';cls='muted';}
+    else if(em>nowMin+5){st='⏳ upcoming';cls='muted';}
+    else if(em<firstLoggedMin){st='— pre-logging';cls='muted';}
+    else{st='✗ missed';cls='bad';}
+    return `<tr><td style="white-space:nowrap;font-variant-numeric:tabular-nums;">${e.t}</td><td>${e.label}</td><td><span class="trk-pill trk-${cls}">${st}</span></td><td style="color:var(--text2);font-size:12px;">${detail}</td></tr>`;
+  }).join('');
+  const diag=snap?.diag||{};
+  const snapHtml=`<div class="trk-card"><div class="trk-h">📸 NSE Snapshot health</div>
+    <div class="trk-kv"><span>Last fetched</span><b>${snap?.fetchedAt?istTime(snap.fetchedAt)+' IST · '+timeAgo(snap.fetchedAt):'never'}</b></div>
+    <div class="trk-kv"><span>Universe</span><b>${diag.universeCount||diag.moversCount||0} stocks</b></div>
+    <div class="trk-kv"><span>Sources OK</span><b>${['marketStatus','largeDeals','deliveryData'].filter(k=>diag[k]).length}/3</b></div>
+    <div class="trk-kv"><span>Surveillance list</span><b>${(snap?.data?.surveillance||[]).length} names</b></div></div>`;
+  const logRows=runs.slice(0,25).map(r=>`<tr><td style="white-space:nowrap;color:var(--text2);font-size:12px;">${istDate(r.ts)===today?'':istDate(r.ts).slice(5)+' '}${istTime(r.ts)}</td><td><b>${r.job}</b>${r.trigger==='manual'?' <span class="trk-pill trk-muted">manual</span>':''}</td><td style="font-size:12px;">${outcome(r)}</td></tr>`).join('')||'<tr><td colspan="3" style="color:var(--text2);">No runs logged yet.</td></tr>';
+  const posRows=(bouq?.bouquet||[]).map(p=>{const pnl=p.entryPrice&&p.currentPrice?((p.currentPrice-p.entryPrice)/p.entryPrice*100):null;const cls=pnl==null?'':pnl>=0?'up':'down';return `<tr><td><b>${p.ticker}</b></td><td>${p.status||'OPEN'}</td><td style="font-variant-numeric:tabular-nums;">₹${p.entryPrice??'—'}</td><td style="font-variant-numeric:tabular-nums;">₹${p.currentPrice??'—'}</td><td style="font-variant-numeric:tabular-nums;">₹${p.peakPrice??'—'}</td><td class="trk-${cls}" style="font-variant-numeric:tabular-nums;">${pnl==null?'—':(pnl>=0?'+':'')+pnl.toFixed(1)+'%'}</td><td style="color:var(--text2);font-size:12px;">${p.lastPriceUpdate?timeAgo(p.lastPriceUpdate):'—'}</td></tr>`;}).join('')||'<tr><td colspan="7" style="color:var(--text2);">No open positions.</td></tr>';
+  const exitRows=(real?.trades||[]).slice(-8).reverse().map(t=>`<tr><td><b>${t.ticker}</b></td><td style="color:var(--text2);font-size:12px;">${t.entryDate} → ${t.exitDate}</td><td class="trk-${t.realizedPnlPct>=0?'up':'down'}" style="font-variant-numeric:tabular-nums;">${t.realizedPnlPct>=0?'+':''}${t.realizedPnlPct}%</td><td style="color:var(--text2);font-size:12px;">${t.exitReason||''}</td></tr>`).join('')||'<tr><td colspan="4" style="color:var(--text2);">No closed trades yet.</td></tr>';
+  el.innerHTML=`<div class="trk-note">Now ${istTime(Date.now())} IST (${dow})${isWeekend?' · <b>weekend — market closed</b>':''} · crons run Mon–Fri, NSE hours</div>
+   <div class="trk-card"><div class="trk-h">⏱️ Today's schedule — ${today}</div><table class="trk-tbl"><thead><tr><th>IST</th><th>Job</th><th>Status</th><th>Outcome</th></tr></thead><tbody>${schedRows}</tbody></table></div>
+   ${snapHtml}
+   <div class="trk-card"><div class="trk-h">📜 Recent runs (Cloudflare scheduler log)</div><table class="trk-tbl"><thead><tr><th>Time IST</th><th>Job</th><th>Outcome</th></tr></thead><tbody>${logRows}</tbody></table></div>
+   <div class="trk-card"><div class="trk-h">📦 Open positions (stock-wise)</div><table class="trk-tbl"><thead><tr><th>Stock</th><th>Status</th><th>Entry</th><th>Now</th><th>Peak</th><th>P&amp;L</th><th>Updated</th></tr></thead><tbody>${posRows}</tbody></table></div>
+   <div class="trk-card"><div class="trk-h">✅ Recent exits</div><table class="trk-tbl"><thead><tr><th>Stock</th><th>Held</th><th>Result</th><th>Reason</th></tr></thead><tbody>${exitRows}</tbody></table></div>`;
+}
+
 // Show welcome message
 document.getElementById('result-area').innerHTML=`<div class="result-card" style="border-left:3px solid var(--accent);display:flex;align-items:flex-start;gap:16px;">
   <div style="font-size:32px">🤖</div><div><div style="font-size:15px;font-weight:600;margin-bottom:6px;">Welcome to StockAdvisor AI</div>

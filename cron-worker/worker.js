@@ -73,6 +73,45 @@ async function runJob(env, entry) {
   return { ok: false, status: 0, body: `unknown job kind: ${entry.kind}` };
 }
 
+function jobName(entry) {
+  return entry.kind === 'github' ? 'nse-snapshot' : (entry.path || '').replace('/api/', '');
+}
+
+// Extract a compact, stock-wise outcome from a downstream response for the Tracker.
+function summarize(job, res) {
+  const out = { httpStatus: res.status, ok: res.ok };
+  if (job === 'nse-snapshot') { out.dispatched = res.ok; return out; }
+  let b = null; try { b = JSON.parse(res.body); } catch (e) {}
+  if (!b) { out.raw = (res.body || '').slice(0, 140); return out; }
+  out.status = b.status;
+  if (job === 'sell-check') {
+    out.sold = b.sold;
+    out.positions = (b.positions || []).map(p => ({ ticker: p.ticker, result: p.result, price: p.price }));
+    if (b.closed && b.closed.length) out.closed = b.closed;
+  } else if (job === 'stock-of-the-day') {
+    if (b.reason) out.reason = b.reason;
+    if (b.pick && b.pick.ticker) out.pick = { ticker: b.pick.ticker, composite: b.pick.composite };
+    if (b.entryRejected) out.entryRejected = b.entryRejected;
+    if (b.considered) out.considered = b.considered;
+  } else if (job === 'refresh-prices') {
+    out.updated = b.updated; out.total = b.total; if (b.closed) out.closed = b.closed;
+  }
+  return out;
+}
+
+// Append a run to the KV log (newest first, capped). Never throws.
+async function logRun(env, entry) {
+  if (!env.CRON_LOG) return;
+  try {
+    const raw = await env.CRON_LOG.get('runs');
+    const runs = raw ? JSON.parse(raw) : [];
+    runs.unshift(entry);
+    await env.CRON_LOG.put('runs', JSON.stringify(runs.slice(0, 150)));
+  } catch (e) { /* logging must never break a run */ }
+}
+
+const CORS = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Cache-Control': 'no-store' };
+
 export default {
   // Fires on the cron schedule in wrangler.toml.
   async scheduled(event, env, ctx) {
@@ -81,7 +120,9 @@ export default {
     const entry = SCHEDULE[key];
     if (!entry) return; // a tick with nothing scheduled — do nothing
     const res = await runJob(env, entry);
-    console.log(`[cron ${key}] ${entry.kind}${entry.path || ''} -> ${res.status} ${res.ok ? 'OK' : 'FAIL'} ${res.body}`);
+    const job = jobName(entry);
+    console.log(`[cron ${key}] ${job} -> ${res.status} ${res.ok ? 'OK' : 'FAIL'} ${res.body}`);
+    await logRun(env, { ts: new Date().toISOString(), hhmm: key, job, trigger: 'cron', summary: summarize(job, res) });
   },
 
   // Manual test endpoint (for the "verify before switching off GitHub" step):
@@ -89,8 +130,15 @@ export default {
   // Valid jobs: nse-snapshot, stock-of-the-day, refresh-prices, sell-check, capture-open
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // Public run-log for the Tracker tab (CORS-open, read-only).
+    if (url.pathname === '/log') {
+      const raw = env.CRON_LOG ? await env.CRON_LOG.get('runs') : null;
+      return new Response(raw || '[]', { headers: CORS });
+    }
+
     if (url.pathname !== '/run') {
-      return new Response('StockAdvisor cron worker. Use /run?job=<name>&key=<CRON_SECRET> to test.', { status: 200 });
+      return new Response('StockAdvisor cron worker. /log for the run history; /run?job=<name>&key=<CRON_SECRET> to test.', { status: 200 });
     }
     if (url.searchParams.get('key') !== env.CRON_SECRET) {
       return new Response('unauthorized', { status: 401 });
@@ -106,9 +154,7 @@ export default {
     const entry = MAP[job];
     if (!entry) return new Response(`unknown job "${job}". Valid: ${Object.keys(MAP).join(', ')}`, { status: 400 });
     const res = await runJob(env, entry);
-    return new Response(JSON.stringify({ job, ...res }, null, 2), {
-      status: res.ok ? 200 : 502,
-      headers: { 'Content-Type': 'application/json' },
-    });
+    await logRun(env, { ts: new Date().toISOString(), hhmm: hhmm(new Date()), job, trigger: 'manual', summary: summarize(job, res) });
+    return new Response(JSON.stringify({ job, ...res }, null, 2), { status: res.ok ? 200 : 502, headers: CORS });
   },
 };
