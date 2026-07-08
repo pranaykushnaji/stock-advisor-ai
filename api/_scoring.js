@@ -288,7 +288,7 @@ export function scoreMomentumUniverse(candidates, opts = {}) {
 // ctx: { niftyGainPct, tradedValueCr, pChange, open, prevClose, dayHigh, dayLow, surveillance }.
 export function qualityMomentumChecks(closes, volumes, ctx = {}) {
   const price = Array.isArray(closes) && closes.length ? closes[closes.length - 1] : (ctx.price ?? null);
-  const ema20 = ema(closes, 20), ema50 = ema(closes, 50);
+  const ema20 = ema(closes, 20), ema50 = ema(closes, 50), ema200 = ema(closes, 200);
   const hi52 = Array.isArray(closes) && closes.length ? Math.max(...closes.slice(-252)) : null;
   const vols = (volumes || []).filter(v => v != null && isFinite(v));
   const todayVol = ctx.todayVolume ?? (vols.length ? vols[vols.length - 1] : null);
@@ -318,7 +318,43 @@ export function qualityMomentumChecks(closes, volumes, ctx = {}) {
     else if (price != null && price >= ctx.dayHigh * 0.999 && ctx.pChange >= 5) rejects.push('near upper circuit');
     else if (price != null && price <= ctx.dayLow * 1.001 && ctx.pChange <= -5) rejects.push('near lower circuit');
   }
-  return { pass, checks, failed, undetermined, relVol: relVol != null ? +relVol.toFixed(2) : null, hi52, rejects };
+  // 200-EMA trend + room-to-52w-high are SOFT signals (directive: "above 200 EMA where
+  // practical", "avoid late-stage") — surfaced for scoring/confidence, not hard-filtered.
+  const aboveEma200 = (price != null && ema200 != null) ? price > ema200 : null;
+  const roomTo52wHighPct = (price != null && hi52) ? +((hi52 - price) / price * 100).toFixed(1) : null;
+  return { pass, checks, failed, undetermined, relVol: relVol != null ? +relVol.toFixed(2) : null, hi52, aboveEma200, roomTo52wHighPct, rejects };
+}
+
+// Multi-signal CONFIDENCE = agreement between independent signals (directive: "no single
+// factor decides"). High when many signals are strong and few are weak; a supportive market
+// regime lifts it, a weak one drags it.
+export function agreementConfidence(signals, regimeScore = null) {
+  const vals = Object.values(signals).filter(v => v != null && isFinite(v));
+  if (!vals.length) return 0;
+  const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+  const strong = vals.filter(v => v >= 60).length;
+  const weak = vals.filter(v => v < 40).length;
+  let conf = mean * 0.55 + (strong / vals.length) * 100 * 0.45 - weak * 6;
+  if (regimeScore != null) conf = conf * 0.85 + regimeScore * 0.15;
+  return Math.max(0, Math.min(100, +conf.toFixed(1)));
+}
+
+// Deterministic reward/risk estimate for a momentum swing. Downside = a vol-based stop;
+// upside = a continuation estimate (part of last month's move) plus room to the prior high,
+// floored above the stop. Transparent, not a black box.
+export function rewardRisk(closes, shortRet, roomTo52wHighPct) {
+  const c = (closes || []).filter(v => v != null && isFinite(v));
+  let dv = 2.2;
+  if (c.length >= 15) {
+    const r = []; for (let i = 1; i < c.length; i++) if (c[i] > 0 && c[i - 1] > 0) r.push(Math.log(c[i] / c[i - 1]));
+    const m = r.reduce((a, b) => a + b, 0) / (r.length || 1);
+    const v = r.reduce((a, b) => a + (b - m) ** 2, 0) / Math.max(1, r.length - 1);
+    dv = Math.sqrt(v) * 100 || 2.2;
+  }
+  const downsidePct = Math.max(4, Math.min(12, 2.5 * dv));
+  const r1m = shortRet?.r1m != null ? shortRet.r1m * 100 : 0;
+  const upsidePct = Math.max(4, Math.min(25, Math.max(0, r1m) * 0.4 + Math.max(0, roomTo52wHighPct || 0) + downsidePct));
+  return { rr: +(upsidePct / downsidePct).toFixed(2), upsidePct: +upsidePct.toFixed(1), downsidePct: +downsidePct.toFixed(1) };
 }
 
 // Generic weighted composite over present factors (renormalized over what's available).
@@ -331,41 +367,51 @@ export function weightedComposite(scores, weights) {
 }
 
 // Final ranking for the quality-momentum strategy. NO fundamentals — for 5-10 day trades,
-// price/volume/catalysts matter, not valuation. Momentum 45 / Volume 25 / Catalyst 20 / Tech 10.
-// Each candidate must carry catalystPoints (0-40) attached by the caller.
-export const QUALITY_MOMENTUM_WEIGHTS = { momentum: 0.45, volume: 0.25, catalyst: 0.20, technicals: 0.10 };
+// price/volume/relative-strength/catalyst matter, not valuation. No single factor decides;
+// candidates are ordered by multi-signal CONFIDENCE (agreement), then composite.
+// Weights: momentum 30 / relative-strength 20 / catalyst 20 / volume 15 / technicals 10 / sector 5.
+// Callers attach catalystPoints (0-40) and sectorScore (0-100); opts carries benchCloses
+// (Nifty, for relative strength) and regimeScore (market supportiveness).
+export const QUALITY_MOMENTUM_WEIGHTS = { momentum: 0.30, relStrength: 0.20, catalyst: 0.20, volume: 0.15, technicals: 0.10, sector: 0.05 };
 export function scoreQualityMomentum(candidates, opts = {}) {
   const benchCloses = opts.benchCloses || null;
-  const enriched = candidates.map(c => ({
-    ...c,
-    _shortRet: computeShortReturns(c.closes),
-    _shortMom: shortMomentum(computeShortReturns(c.closes)),
-    _vol: annualizedVol(c.closes),
-    _volSig: volumeSignal(c.volumes),
-    _ind: computeIndicators(c.closes || [], { benchCloses }),
-  }));
+  const regimeScore = opts.regimeScore ?? null;
+  const enriched = candidates.map(c => {
+    const shortRet = computeShortReturns(c.closes);
+    return { ...c, _shortRet: shortRet, _shortMom: shortMomentum(shortRet), _vol: annualizedVol(c.closes),
+      _volSig: volumeSignal(c.volumes), _ind: computeIndicators(c.closes || [], { benchCloses }) };
+  });
   const momRank = rankMetric(enriched, s => volScaledMomentum(s._shortMom, s._vol));
   const volRank = rankMetric(enriched, s => s._volSig ? s._volSig.ratio : null);
+  const rsRank = rankMetric(enriched, s => s._ind?.relativeStrength ?? null);
   const scored = enriched.map(s => {
     const scores = {
       momentum: momRank.get(s),
-      volume: volRank.get(s),
+      relStrength: rsRank.get(s),
       catalyst: Math.max(0, Math.min(100, (s.catalystPoints || 0) / 40 * 100)),
+      volume: volRank.get(s),
       technicals: s._ind?.techScore ?? 50,
+      sector: (s.sectorScore != null && isFinite(s.sectorScore)) ? s.sectorScore : 50,
     };
     const comp = weightedComposite(scores, QUALITY_MOMENTUM_WEIGHTS);
+    const confidence = agreementConfidence(scores, regimeScore);
+    const hi52 = (s.closes && s.closes.length) ? Math.max(...s.closes.slice(-252)) : null;
+    const room = (hi52 && s.closes.length) ? (hi52 - s.closes[s.closes.length - 1]) / s.closes[s.closes.length - 1] * 100 : null;
+    const rr = rewardRisk(s.closes, s._shortRet, room);
     return {
       symbol: s.symbol, fullName: s.fullName, sector: s.sector || 'UNKNOWN',
       factors: scores, shortReturns: s._shortRet,
       volumeRatio: s._volSig ? s._volSig.ratio : null,
+      relStrength: s._ind?.relativeStrength ?? null,
       annualizedVol: s._vol != null ? +(s._vol * 100).toFixed(1) : null,
       catalystPoints: s.catalystPoints || 0, catalyst: s.catalyst || null,
-      indicators: s._ind ? { rsi: s._ind.rsi, techScore: s._ind.techScore, relativeStrength: s._ind.relativeStrength } : null,
-      composite: comp,
+      indicators: s._ind ? { rsi: s._ind.rsi, techScore: s._ind.techScore, relativeStrength: s._ind.relativeStrength, maAlignment: s._ind.maAlignment } : null,
+      composite: comp, confidence, rewardRisk: rr,
       verdict: comp == null ? 'UNKNOWN' : comp >= 65 ? 'BUY' : comp >= 45 ? 'WATCH' : 'AVOID',
     };
   });
-  scored.sort((a, b) => (b.composite ?? -1) - (a.composite ?? -1));
+  // Directive: agreement between independent signals leads, not one strong factor.
+  scored.sort((a, b) => (b.confidence - a.confidence) || ((b.composite ?? -1) - (a.composite ?? -1)));
   return scored;
 }
 

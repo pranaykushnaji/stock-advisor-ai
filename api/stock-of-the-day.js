@@ -4,6 +4,8 @@ import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
 import { decideSell, markPending } from './_sell-engine.js';
 import { assessCatalyst } from './_catalyst.js';
+import { classifyRegime, regimeGates } from './_market-regime.js';
+import { sectorStrength, sectorScoreFor } from './_sector.js';
 import { qualityMomentumChecks, scoreQualityMomentum,
   computeShortReturns, shortMomentum, volScaledMomentum } from './_scoring.js';
 // NOTE: annualizedVol is NOT imported — this file already defines its own local
@@ -339,12 +341,23 @@ export default async function handler(req, res) {
     for (const s of (sd?.surveillance || [])) surveillanceSet.add(String(s).toUpperCase());
   } catch (e) { /* snapshot missing → filter falls back to price-derived values */ }
 
-  // Nifty's own % change today (for the relative-strength condition).
-  let niftyGainPct = null;
+  // Nifty 1y series → today's % change (relative-strength filter), relative-strength ranking
+  // (benchCloses), and the MARKET REGIME (adaptive selectivity).
+  let niftyGainPct = null, niftyCloses = null;
   try {
-    const nr = await fetchWithTimeout('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=1d&interval=1d', { headers: { 'User-Agent': 'Mozilla/5.0' } }, 4000);
-    if (nr.ok) { const nm = (await nr.json())?.chart?.result?.[0]?.meta; if (nm?.regularMarketPrice && nm?.chartPreviousClose) niftyGainPct = (nm.regularMarketPrice - nm.chartPreviousClose) / nm.chartPreviousClose * 100; }
+    const nr = await fetchWithTimeout('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=1y&interval=1d', { headers: { 'User-Agent': 'Mozilla/5.0' } }, 5000);
+    if (nr.ok) {
+      const result = (await nr.json())?.chart?.result?.[0];
+      const nm = result?.meta;
+      if (nm?.regularMarketPrice && nm?.chartPreviousClose) niftyGainPct = (nm.regularMarketPrice - nm.chartPreviousClose) / nm.chartPreviousClose * 100;
+      niftyCloses = (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null && !isNaN(v));
+    }
   } catch (e) {}
+  const regime = classifyRegime(niftyCloses || []);
+  const gates = regimeGates(regime.regime);
+
+  // Sector strength from the day's snapshot universe (breadth + average move per sector).
+  const sectorMap = sectorStrength([...snapBySym.values()]);
 
   const pool = candidates.slice(0, PRICE_POOL);
   const priced = (await Promise.all(pool.map(async (name) => {
@@ -404,12 +417,14 @@ export default async function handler(req, res) {
 
   if (!tradeable.length) {
     return noTrade('no stock had BOTH volume confirmation and a high-confidence catalyst', {
-      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, negative: s._catalyst?.negative })),
+      regime: regime.regime, market: regime.reason,
+      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, verification: s._catalyst?.verification, negative: s._catalyst?.negative })),
     });
   }
 
-  // Final ranking: momentum 45 / volume 25 / catalyst 20 / technicals 10.
-  const ranked = scoreQualityMomentum(tradeable);
+  // Attach sector strength, then rank by multi-signal CONFIDENCE (agreement), regime-aware.
+  for (const s of tradeable) s.sectorScore = sectorScoreFor(s.symbol, sectorMap);
+  const ranked = scoreQualityMomentum(tradeable, { benchCloses: niftyCloses, regimeScore: regime.score });
 
   // De-dup: skip names we already hold or picked in the last DEDUP_DAYS.
   const recentlyPicked = new Set();
@@ -430,6 +445,21 @@ export default async function handler(req, res) {
   const winnerSrc = tradeable.find(s => s.symbol === winner.symbol);
   const winnerCatalyst = winnerSrc?._catalyst || null;
 
+  // REGIME-ADAPTIVE ENTRY GATES — the final check the directive demands: ranking #1 does not
+  // justify buying. Require multi-signal confidence, asymmetric reward/risk, and (in weak or
+  // volatile markets) a VERIFIED catalyst. Fail any → NO TRADE (capital preservation first).
+  const rr = winner.rewardRisk?.rr ?? 0;
+  const gateFail = [];
+  if ((winner.confidence ?? 0) < gates.minConfidence) gateFail.push(`confidence ${winner.confidence} < ${gates.minConfidence}`);
+  if (rr < gates.minRR) gateFail.push(`reward/risk ${rr} < ${gates.minRR}`);
+  if (gates.requireVerified && winnerCatalyst?.verification !== 'VERIFIED') gateFail.push(`catalyst ${winnerCatalyst?.verification || 'UNVERIFIED'} (need VERIFIED in ${regime.regime} market)`);
+  if (gateFail.length) {
+    return noTrade(`${winner.symbol} failed ${regime.regime}-market entry gates: ${gateFail.join('; ')}`, {
+      regime: regime.regime, market: regime.reason,
+      candidate: { ticker: winner.symbol, confidence: winner.confidence, rewardRisk: winner.rewardRisk, catalyst: winnerCatalyst?.type, verification: winnerCatalyst?.verification },
+    });
+  }
+
   try {
     const priceData = winnerSrc?._price;
 
@@ -437,10 +467,11 @@ export default async function handler(req, res) {
     const NARRATIVE_PROMPT = `You are a short-term momentum trader writing a quick brief for Indian swing traders. Today is ${date}. This is a SWING TRADE (5-10 days), not buy-and-hold. Use ONLY the real data provided — do not invent numbers.
 
 Selected: ${winner.fullName} (${winner.symbol}), sector ${winner.sector}
-Scores (0-100): Momentum ${winner.factors.momentum}, Volume ${winner.factors.volume}, Catalyst ${winner.factors.catalyst}, Technicals ${winner.factors.technicals}. Composite ${winner.composite} (${winner.verdict}).
+Scores (0-100): Momentum ${winner.factors.momentum}, Relative-strength ${winner.factors.relStrength}, Volume ${winner.factors.volume}, Catalyst ${winner.factors.catalyst}, Technicals ${winner.factors.technicals}, Sector ${winner.factors.sector}. Multi-signal confidence ${winner.confidence}, composite ${winner.composite} (${winner.verdict}).
+Market regime: ${regime.reason}. Reward/risk ≈ ${winner.rewardRisk?.rr} (upside ~${winner.rewardRisk?.upsidePct}% vs downside ~${winner.rewardRisk?.downsidePct}%).
 Short-term returns (r1d/r1w/r1m): ${JSON.stringify(winner.shortReturns)}
-Relative volume (today vs 20-day avg): ${winnerSrc?._qm?.relVol}x
-Catalyst: ${winnerCatalyst ? `${winnerCatalyst.type} (confidence ${winnerCatalyst.confidence}, impact ${winnerCatalyst.impact}/10) — ${winnerCatalyst.summary}` : 'none identified'}
+Relative volume (today vs 20-day avg): ${winnerSrc?._qm?.relVol}x · Relative strength vs Nifty: ${winner.relStrength}
+Catalyst: ${winnerCatalyst ? `${winnerCatalyst.type} — ${winnerCatalyst.verification} (${winnerCatalyst.sources} src, confidence ${winnerCatalyst.confidence}, impact ${winnerCatalyst.impact}/10) — ${winnerCatalyst.summary}` : 'none identified'}
 
 CRITICAL RULE: If this stock is only moving because of general market momentum, or you cannot point to the specific company catalyst above as a genuine reason to buy, set "noPick": true. Do NOT force a thesis on a weak pick.
 
@@ -486,14 +517,20 @@ Return ONLY valid JSON (no markdown):
       strategy: 'quality-momentum',
       factors: {
         momentum: { score: winner.factors.momentum, positives: narrative?.momentumNotes?.positives || [], negatives: narrative?.momentumNotes?.negatives || [] },
+        relStrength: { score: winner.factors.relStrength },
         volume: { score: winner.factors.volume },
         catalyst: { score: winner.factors.catalyst },
         technicals: { score: winner.factors.technicals },
+        sector: { score: winner.factors.sector },
       },
       shortReturns: winner.shortReturns,
       volumeRatio: winner.volumeRatio,
       relVol: winnerSrc?._qm?.relVol ?? null,
-      catalyst: winnerCatalyst ? { type: winnerCatalyst.type, confidence: winnerCatalyst.confidence, impact: winnerCatalyst.impact, stars: winnerCatalyst.stars, points: winnerCatalyst.points, summary: winnerCatalyst.summary } : null,
+      relStrength: winner.relStrength,
+      catalyst: winnerCatalyst ? { type: winnerCatalyst.type, confidence: winnerCatalyst.confidence, impact: winnerCatalyst.impact, stars: winnerCatalyst.stars, points: winnerCatalyst.points, verification: winnerCatalyst.verification, sources: winnerCatalyst.sources, summary: winnerCatalyst.summary } : null,
+      confidence: winner.confidence,
+      rewardRisk: winner.rewardRisk,
+      regime: regime.regime, market: regime.reason,
       annualizedVol: winner.annualizedVol,
       composite: winner.composite,
       verdict: winner.verdict,

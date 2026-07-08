@@ -143,19 +143,29 @@ export async function classifyCatalyst(company, articles, apiKey) {
   } catch (e) { return null; }
 }
 
-// Freshness multiplier from the newest article age.
+// Freshness multiplier from the newest article age — finer buckets (momentum news decays fast).
 function freshnessWeight(newestAgeH) {
   if (newestAgeH == null) return 0;
-  if (newestAgeH <= FRESH_H) return 1;
-  if (newestAgeH <= MAX_AGE_H) return 0.6;
+  if (newestAgeH <= 12) return 1.0;   // 0-12h
+  if (newestAgeH <= 24) return 0.9;   // 12-24h
+  if (newestAgeH <= 48) return 0.75;  // 24-48h
+  if (newestAgeH <= MAX_AGE_H) return 0.55; // 48-72h
   return 0;
+}
+
+// Verification from independent-source count (proxy for cross-source confirmation). Phase 2
+// upgrades this with true event clustering + official NSE/BSE filings.
+function verify(distinctSources) {
+  if (distinctSources >= 2) return { status: 'VERIFIED', mult: 1.0 };
+  if (distinctSources === 1) return { status: 'PARTIAL', mult: 0.6 };
+  return { status: 'UNVERIFIED', mult: 0.3 };
 }
 
 // Convert a classification + articles into the 0-40 catalyst score (+ red-flag info).
 // Points are awarded ONLY for a bullish, high-confidence (>=80), high-impact (>=7),
 // concrete catalyst — everything weak scores 0. Negative events are flagged for hard-reject.
 export function scoreCatalyst(classification, articles) {
-  const empty = { points: 0, hasCatalyst: false, negative: false, type: 'no catalyst', confidence: 0, impact: 0, stars: 0, freshness: 0, summary: null };
+  const empty = { points: 0, hasCatalyst: false, negative: false, type: 'no catalyst', confidence: 0, impact: 0, stars: 0, freshness: 0, verification: 'UNVERIFIED', sources: 0, summary: null };
   if (!classification) return empty;
   const type = String(classification.catalyst_type || '').toLowerCase().trim();
   const stars = CATALYST_STARS[type] ?? 1;
@@ -164,17 +174,23 @@ export function scoreCatalyst(classification, articles) {
   const impact = Math.max(0, Math.min(10, Number(classification.impact_score) || 0));
   const newestAgeH = articles.length ? hoursAgo(Math.max(...articles.map(a => a.publishedAt))) : null;
   const freshness = freshnessWeight(newestAgeH);
+  const distinctSources = new Set((articles || []).map(a => a.source)).size;
+  const v = verify(distinctSources);
 
   // Red flag: a confident bearish/negative event -> can hard-reject the stock.
   if (stars < 0 && confidence >= 60) {
-    return { ...empty, negative: true, type, confidence, impact, stars, summary: classification.summary || null };
+    return { ...empty, negative: true, type, confidence, impact, stars, verification: v.status, sources: distinctSources, summary: classification.summary || null };
   }
-  // Gate: only a real, fresh, confident, high-impact bullish catalyst earns points.
+  // Gate: only a real, fresh, confident, high-impact bullish catalyst earns points. UNVERIFIED
+  // (single-source) catalysts are down-weighted hard so they can't drive a pick on their own.
+  const base = { type, confidence, impact, stars, freshness, verification: v.status, sources: distinctSources, summary: classification.summary || null };
   if (!bullish || stars <= 1 || confidence < 80 || impact < 7 || freshness === 0) {
-    return { ...empty, type, confidence, impact, stars, freshness, summary: classification.summary || null };
+    return { ...empty, ...base };
   }
-  const points = Math.round((stars / 5) * 40 * freshness); // 0-40
-  return { points, hasCatalyst: true, negative: false, type, confidence, impact, stars, freshness, summary: classification.summary || null };
+  const points = Math.round((stars / 5) * 40 * freshness * v.mult); // 0-40, verification-scaled
+  // "Has a usable catalyst" requires it not be UNVERIFIED — the directive says single-source
+  // rumours must not affect ranking.
+  return { points, hasCatalyst: v.status !== 'UNVERIFIED' && points > 0, negative: false, ...base };
 }
 
 // One-shot: fetch → classify → score for a single stock.
