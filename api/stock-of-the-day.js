@@ -7,9 +7,11 @@
 // Storage = GitHub repo files. Requires GITHUB_TOKEN env var.
 import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
-import { assessCatalyst } from './_catalyst.js';
+import { assessCatalyst, rememberCatalyst, recallCatalyst, pruneCatalystMemory } from './_catalyst.js';
 import { classifyRegime, regimeGates } from './_market-regime.js';
 import { sectorStrength, sectorScoreFor } from './_sector.js';
+import { institutionalAccumulationScore } from './_institutional.js';
+import { freshStore, recordObservation, prevVolumeMap, markBought, hhmmIST } from './_intraday-store.js';
 import { qualityMomentumChecks, scoreQualityMomentum,
   computeShortReturns, shortMomentum, volScaledMomentum } from './_scoring.js';
 // NOTE: annualizedVol is NOT imported — this file already defines its own local
@@ -277,14 +279,79 @@ export default async function handler(req, res) {
     }
   } catch (e) { /* if the bouquet can't be read, don't block the scan */ }
 
-  // Discover today's candidates live (news + movers, Nifty-50 fallback).
+  // How far into today's session we are (0-1). Needed early so the discovery score can normalize
+  // cross-scan volume acceleration and the quality filter can normalize the volume surge.
+  const sessionFrac = sessionElapsedFraction();
+
+  // PRIORITY 2/3: load the persistent INTRADAY CANDIDATE STORE (near-misses remembered across the
+  // day + confidence history). PRIORITY 6: load the CATALYST MEMORY (multi-day catalyst persistence).
+  // Both are best-effort — a missing/corrupt file just starts fresh.
+  let intradayStore = { date, candidates: {} };
+  try {
+    const f = await ghGetFile('data/intraday-candidates.json', ghToken);
+    intradayStore = freshStore(f.content ? JSON.parse(f.content) : null, date);
+  } catch (e) { intradayStore = { date, candidates: {} }; }
+  const prevVols = prevVolumeMap(intradayStore); // symbol -> {volume, frac} from the last scan
+
+  let catalystMemory = { catalysts: {} };
+  try {
+    const f = await ghGetFile('data/catalyst-memory.json', ghToken);
+    catalystMemory = pruneCatalystMemory(f.content ? JSON.parse(f.content) : null);
+  } catch (e) { catalystMemory = { catalysts: {} }; }
+
+  // PRIORITY 5: load the LLM scorecard so the veto's influence reflects its MEASURED track record.
+  let llmScorecard = { recommendedInfluence: 1, verdict: 'insufficient-data' };
+  try {
+    const f = await ghGetFile('data/llm-scorecard.json', ghToken);
+    if (f.content) llmScorecard = { ...llmScorecard, ...JSON.parse(f.content) };
+  } catch (e) {}
+
+  // PRIORITY 4: rejected candidates are accumulated here and flushed by persistLearning() so the
+  // analytics endpoint can forward-evaluate them (did we reject a future winner?). persistLearning
+  // also writes the intraday store; it runs on EVERY exit path (no-trade and buy) so the day's
+  // confidence history + near-miss memory are never lost.
+  const rejectedForLog = [];
+  const addRejection = (ticker, stage, reasons, extra = {}) => {
+    if (!ticker) return;
+    rejectedForLog.push({
+      id: `${date}|${String(ticker).toUpperCase()}|${hhmmIST()}`,
+      date, ts: new Date().toISOString(), ticker: String(ticker).toUpperCase(),
+      stage, reasons: Array.isArray(reasons) ? reasons : [reasons],
+      evaluated: false, outcome: null, ...extra,
+    });
+  };
+  const persistLearning = async () => {
+    try {
+      await ghPutWithRetry('data/intraday-candidates.json', () => intradayStore, ghToken, `Intraday candidates ${date} @${hhmmIST()}`);
+    } catch (e) {}
+    if (rejectedForLog.length) {
+      try {
+        await ghPutWithRetry('data/rejected-candidates.json', (existing) => {
+          const db = existing && Array.isArray(existing.rejected) ? existing : { rejected: [] };
+          const seen = new Set(db.rejected.map(r => r.id));
+          const toAdd = rejectedForLog.filter(r => !seen.has(r.id));
+          if (!toAdd.length) return null;
+          db.rejected.push(...toAdd);
+          if (db.rejected.length > 4000) db.rejected = db.rejected.slice(-4000);
+          return db;
+        }, ghToken, `Rejected-candidate analytics: +${rejectedForLog.length} (${date})`);
+      } catch (e) {}
+    }
+    if (Object.keys(catalystMemory.catalysts || {}).length) {
+      try { await ghPutWithRetry('data/catalyst-memory.json', () => catalystMemory, ghToken, `Catalyst memory (${date})`); } catch (e) {}
+    }
+  };
+
+  // Discover today's candidates live — now ranked by the composite DISCOVERY SCORE (Priority 1),
+  // fed the previous scan's volumes so it can see intraday volume ACCELERATION.
   // Guard: discoverCandidates catches internally, but wrap defensively so a throw
   // can never abort the pick with an unhandled 500.
-  let candidates = [], sources = { news: 0, movers: 0, usedFallback: true };
+  let candidates = [], sources = { news: 0, movers: 0, usedFallback: true }, discoveryMeta = new Map();
   try {
-    const disc = await discoverCandidates(apiKey);
+    const disc = await discoverCandidates(apiKey, { prevVolumes: prevVols, sessionFrac });
     candidates = disc.candidates || [];
     sources = disc.sources || sources;
+    discoveryMeta = disc.discoveryMeta || new Map();
   } catch (e) { /* fall through to Nifty-50 below */ }
   if (!candidates.length) {
     // Absolute fallback so the cron always has something to pick from
@@ -304,6 +371,7 @@ export default async function handler(req, res) {
   const snapBySym = new Map();
   const surveillanceSet = new Set();
   const filingsBySym = new Map();
+  const bulkBuySet = new Set(); // symbols with a bulk/block BUY print today (institutional signal)
   try {
     const snapFile = await ghGetFile('data/nse-snapshot.json', ghToken);
     const sd = snapFile.content ? JSON.parse(snapFile.content)?.data : null;
@@ -316,6 +384,11 @@ export default async function handler(req, res) {
       if (!sym) continue;
       if (!filingsBySym.has(sym)) filingsBySym.set(sym, []);
       filingsBySym.get(sym).push({ subject: a.subject, date: a.date });
+    }
+    for (const d of [...(sd?.bulkDeals || []), ...(sd?.blockDeals || [])]) {
+      const sym = d?.symbol || d?.SYMBOL;
+      const type = (d?.buySell || d?.BUY_SELL || '').toString().toUpperCase();
+      if (sym && type.includes('B')) bulkBuySet.add(String(sym).toUpperCase().trim());
     }
   } catch (e) { /* snapshot missing → filter falls back to price-derived values */ }
 
@@ -349,11 +422,7 @@ export default async function handler(req, res) {
     } catch (e) { return null; }
   }))).filter(Boolean);
 
-  // How far into today's session we are — normalizes the volume-surge check below so it's
-  // equally hard to pass whether this run is the 10:00 or the 15:00 hourly scan.
-  const sessionFrac = sessionElapsedFraction();
-
-  // Quality-momentum ALL-filter + hard rejects.
+  // Quality-momentum ALL-filter + hard rejects. (sessionFrac was computed above, before discovery.)
   const passed = [], rejectedNames = [];
   for (const s of priced) {
     const snap = snapBySym.get(s.symbol) || {};
@@ -368,12 +437,14 @@ export default async function handler(req, res) {
       sessionElapsedFraction: sessionFrac,
     });
     s._qm = qm; s._pChange = pChange; s._tradedValueCr = tradedValueCr;
-    if (qm.rejects.length) { rejectedNames.push({ ticker: s.symbol, reasons: qm.rejects }); continue; }
-    if (!qm.pass) { rejectedNames.push({ ticker: s.symbol, reasons: qm.failed }); continue; }
+    const rejCtx = { relVol: qm.relVol ?? null, pChange: pChange != null ? +pChange.toFixed(2) : null, sector: sectorScoreFor(s.symbol, sectorMap), entryRefPrice: s.price ?? null, yahooSymbol: s._price?.symbol || null };
+    if (qm.rejects.length) { rejectedNames.push({ ticker: s.symbol, reasons: qm.rejects }); addRejection(s.symbol, 'hard-reject', qm.rejects, rejCtx); continue; }
+    if (!qm.pass) { rejectedNames.push({ ticker: s.symbol, reasons: qm.failed }); addRejection(s.symbol, 'quality-filter', qm.failed, rejCtx); continue; }
     passed.push(s);
   }
 
   const noTrade = async (reason, extra) => {
+    await persistLearning(); // flush intraday store + rejected log + catalyst memory before exit
     await ghPutWithRetry('data/daily-pick.json', () => ({ pick: { date, noTrade: true, reason, pickedAt: new Date().toISOString(), ...extra } }), ghToken, `No Trade Today (${date})`);
     return res.status(200).json({ status: 'no_trade', reason, ...extra });
   };
@@ -387,11 +458,42 @@ export default async function handler(req, res) {
   const catalystPool = preRank.slice(0, CATALYST_SHORTLIST);
   const newsKeys = { finnhubKey: process.env.FINNHUB_KEY, newsdataKey: process.env.NEWSDATA_KEY, alphaVantageKey: process.env.ALPHAVANTAGE_KEY, marketauxKey: process.env.MARKETAUX_KEY };
   await Promise.all(catalystPool.map(async (s) => {
-    try { s._catalyst = await assessCatalyst(s.fullName || s.symbol, s.symbol, apiKey, newsKeys, filingsBySym.get(s.symbol) || []); }
-    catch (e) { s._catalyst = { points: 0, hasCatalyst: false, negative: false }; }
-    s.catalystPoints = s._catalyst?.points || 0;
-    s.catalyst = s._catalyst || null;
+    let cat;
+    try { cat = await assessCatalyst(s.fullName || s.symbol, s.symbol, apiKey, newsKeys, filingsBySym.get(s.symbol) || []); }
+    catch (e) { cat = { points: 0, hasCatalyst: false, negative: false }; }
+    // PRIORITY 6: if fresh news found nothing usable but a VERIFIED catalyst was remembered on an
+    // earlier day and is still within its influence window, fall back to the decayed memory —
+    // important catalysts keep counting for the days they actually matter.
+    if (!cat.hasCatalyst && !cat.negative) {
+      const recalled = recallCatalyst(catalystMemory.catalysts[s.symbol]);
+      if (recalled) cat = recalled;
+    }
+    // Remember a fresh VERIFIED catalyst so later scans/days can recall it.
+    if (cat.hasCatalyst && cat.verification === 'VERIFIED' && !cat.recalled) {
+      const mem = rememberCatalyst(cat);
+      if (mem) {
+        const prev = catalystMemory.catalysts[s.symbol];
+        // Keep the original firstSeen; refresh lastConfirmed.
+        catalystMemory.catalysts[s.symbol] = prev ? { ...mem, firstSeenMs: prev.firstSeenMs || mem.firstSeenMs } : mem;
+      }
+    }
+    s._catalyst = cat;
+    s.catalystPoints = cat?.points || 0;
+    s.catalyst = cat || null;
+    // PRIORITY 7: institutional accumulation footprint (from price/volume history + snapshot).
+    const snap = snapBySym.get(s.symbol) || {};
+    const todayClosingStrength = (snap.dayHigh != null && snap.dayLow != null && snap.dayHigh > snap.dayLow && s.price != null)
+      ? (s.price - snap.dayLow) / (snap.dayHigh - snap.dayLow) : null;
+    s._inst = institutionalAccumulationScore(s.closes, s.volumes, {
+      bulkBuy: bulkBuySet.has(s.symbol), todayClosingStrength,
+    });
+    s.sectorScore = sectorScoreFor(s.symbol, sectorMap);
   }));
+
+  // Score the WHOLE shortlist (not just the tradeable subset) so every near-miss gets a real
+  // multi-signal confidence — that's what the intraday store records as confidence history.
+  const scoredPool = scoreQualityMomentum(catalystPool, { benchCloses: niftyCloses, regimeScore: regime.score });
+  const scoredBySym = new Map(scoredPool.map(r => [r.symbol, r]));
 
   // THE CORE RULE: tradeable only if BOTH high relative volume AND a high-confidence bullish
   // catalyst. Drop any name with a confident NEGATIVE catalyst (red flag).
@@ -399,19 +501,66 @@ export default async function handler(req, res) {
   // so this 2.1x bar means the same thing whether this run is the 10:00 or the 15:00 hourly
   // scan — "trading at 2.1x the pace it should be by this point in the session".
   const RELVOL_INTRADAY_MIN = 2.1;
+
+  // PRIORITY 2/3: record every shortlisted name into the intraday store with WHY it did/didn't
+  // qualify, and read back its confidence-evolution bonus (a setup strengthening across scans is
+  // trusted more than a one-scan spike). PRIORITY 7: fold the institutional score into an
+  // "effective confidence" that also carries the trend bonus. These refine ranking + the gate;
+  // they never bypass the hard relVol/catalyst rule below.
+  const effConf = new Map();     // symbol -> effective confidence
+  const trendBonusBySym = new Map();
+  for (const s of catalystPool) {
+    const scored = scoredBySym.get(s.symbol);
+    const relVol = s._qm?.relVol ?? null;
+    const hasCat = !!s._catalyst?.hasCatalyst, neg = !!s._catalyst?.negative;
+    const isTradeable = (relVol != null && relVol >= RELVOL_INTRADAY_MIN) && hasCat && !neg;
+    const missing = [];
+    if (!(relVol != null && relVol >= RELVOL_INTRADAY_MIN)) missing.push(`relVol ${relVol ?? 'n/a'}<${RELVOL_INTRADAY_MIN}`);
+    if (!hasCat) missing.push(`catalyst ${s._catalyst?.verification || 'none'} (need VERIFIED)`);
+    if (neg) missing.push(`negative catalyst (${s._catalyst?.type})`);
+    const inst = s._inst?.score ?? 50;
+    const instAdj = Math.max(-8, Math.min(10, (inst - 50) * 0.15)); // accumulation nudges up, distribution down
+    const entry = recordObservation(intradayStore, {
+      ticker: s.symbol, fullName: s.fullName, sector: s.sector || scored?.sector,
+      relVol, confidence: scored?.confidence ?? null,
+      discoveryScore: discoveryMeta.get(s.symbol)?.discoveryScore ?? null,
+      catalystType: s._catalyst?.type ?? null, verification: s._catalyst?.verification ?? null,
+      volume: (snapBySym.get(s.symbol) || {}).totalTradedVolume ?? null, sessionFrac,
+      missing, passedFilter: true, tradeable: isTradeable,
+    });
+    const trendBonus = entry?.trendBonus ?? 0;
+    trendBonusBySym.set(s.symbol, trendBonus);
+    effConf.set(s.symbol, Math.max(0, Math.min(100, (scored?.confidence ?? 0) + trendBonus + instAdj)));
+    s._instAdj = instAdj; s._effConf = effConf.get(s.symbol);
+  }
+
   const tradeable = catalystPool.filter(s =>
     (s._qm?.relVol != null && s._qm.relVol >= RELVOL_INTRADAY_MIN) && s._catalyst?.hasCatalyst && !s._catalyst?.negative);
 
   if (!tradeable.length) {
+    // Record the near-misses as rejections so analytics can learn whether the volume/catalyst
+    // bars are too strict (did any of these go on to run without us?).
+    for (const s of catalystPool) {
+      const scored = scoredBySym.get(s.symbol);
+      addRejection(s.symbol, 'core-gate', (s._catalyst?.negative ? ['negative catalyst'] : []).concat(
+        (s._qm?.relVol == null || s._qm.relVol < RELVOL_INTRADAY_MIN) ? [`relVol<${RELVOL_INTRADAY_MIN}`] : [],
+        (!s._catalyst?.hasCatalyst) ? [`catalyst ${s._catalyst?.verification || 'none'}`] : []),
+        { relVol: s._qm?.relVol ?? null, momentum: scored?.factors?.momentum ?? null, catalystScore: scored?.factors?.catalyst ?? null,
+          confidence: scored?.confidence ?? null, effectiveConfidence: s._effConf ?? null, regime: regime.regime,
+          sector: s.sectorScore ?? null, techScore: scored?.factors?.technicals ?? null,
+          institutional: s._inst?.score ?? null, entryRefPrice: s.price ?? null, yahooSymbol: s._price?.symbol || null });
+    }
     return noTrade('no stock had BOTH volume confirmation and a high-confidence catalyst', {
       regime: regime.regime, market: regime.reason,
-      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, verification: s._catalyst?.verification, filing: s._catalyst?.hasFiling, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative })),
+      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, confidence: scoredBySym.get(s.symbol)?.confidence, effectiveConfidence: s._effConf, institutional: s._inst?.score, catalyst: s._catalyst?.type, verification: s._catalyst?.verification, filing: s._catalyst?.hasFiling, recalled: s._catalyst?.recalled, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative })),
     });
   }
 
-  // Attach sector strength, then rank by multi-signal CONFIDENCE (agreement), regime-aware.
-  for (const s of tradeable) s.sectorScore = sectorScoreFor(s.symbol, sectorMap);
-  const ranked = scoreQualityMomentum(tradeable, { benchCloses: niftyCloses, regimeScore: regime.score });
+  // Rank the tradeable set by EFFECTIVE confidence (multi-signal agreement + intraday trend bonus
+  // + institutional adjustment), then composite as the tiebreak — regime-aware throughout.
+  const ranked = tradeable
+    .map(s => { const sc = scoredBySym.get(s.symbol); return { ...sc, effectiveConfidence: s._effConf ?? sc.confidence, trendBonus: trendBonusBySym.get(s.symbol) ?? 0, institutional: s._inst?.score ?? null }; })
+    .sort((a, b) => (b.effectiveConfidence - a.effectiveConfidence) || ((b.composite ?? -1) - (a.composite ?? -1)));
 
   // De-dup: skip names we already hold or picked in the last DEDUP_DAYS.
   const recentlyPicked = new Set();
@@ -436,14 +585,22 @@ export default async function handler(req, res) {
   // justify buying. Require multi-signal confidence, asymmetric reward/risk, and (in weak or
   // volatile markets) a VERIFIED catalyst. Fail any → NO TRADE (capital preservation first).
   const rr = winner.rewardRisk?.rr ?? 0;
+  const winnerConf = winner.effectiveConfidence ?? winner.confidence ?? 0;
   const gateFail = [];
-  if ((winner.confidence ?? 0) < gates.minConfidence) gateFail.push(`confidence ${winner.confidence} < ${gates.minConfidence}`);
+  if (winnerConf < gates.minConfidence) gateFail.push(`confidence ${+winnerConf.toFixed(1)} < ${gates.minConfidence}`);
   if (rr < gates.minRR) gateFail.push(`reward/risk ${rr} < ${gates.minRR}`);
   if (gates.requireVerified && winnerCatalyst?.verification !== 'VERIFIED') gateFail.push(`catalyst ${winnerCatalyst?.verification || 'UNVERIFIED'} (need VERIFIED in ${regime.regime} market)`);
   if (gateFail.length) {
+    addRejection(winner.symbol, 'regime-gate', gateFail, {
+      momentum: winner.factors?.momentum ?? null, catalystScore: winner.factors?.catalyst ?? null,
+      confidence: winner.confidence ?? null, effectiveConfidence: +winnerConf.toFixed(1), regime: regime.regime,
+      sector: winner.factors?.sector ?? null, techScore: winner.factors?.technicals ?? null,
+      rewardRisk: winner.rewardRisk ?? null, institutional: winner.institutional ?? null,
+      entryRefPrice: winnerSrc?.price ?? null, yahooSymbol: winnerSrc?._price?.symbol || null,
+    });
     return noTrade(`${winner.symbol} failed ${regime.regime}-market entry gates: ${gateFail.join('; ')}`, {
       regime: regime.regime, market: regime.reason,
-      candidate: { ticker: winner.symbol, confidence: winner.confidence, rewardRisk: winner.rewardRisk, catalyst: winnerCatalyst?.type, verification: winnerCatalyst?.verification },
+      candidate: { ticker: winner.symbol, confidence: winner.confidence, effectiveConfidence: +winnerConf.toFixed(1), rewardRisk: winner.rewardRisk, catalyst: winnerCatalyst?.type, verification: winnerCatalyst?.verification },
     });
   }
 
@@ -493,28 +650,43 @@ Return ONLY valid JSON (no markdown):
       }
     } catch (er) { narrative = {}; }
 
-    // Item 6: the LLM can veto a pick it can't justify with a specific catalyst. Log every
-    // veto with the deterministic scores at veto time — this is the only way to later check
-    // (by backtest) whether the LLM's vetoes are actually catching bad trades, or whether it's
-    // just being overly conservative and costing real opportunities. Research on LLM-driven
-    // trading strategies shows they can skew too conservative in up markets — this log is what
-    // lets that be verified with data instead of assumed.
+    // PRIORITY 5: the LLM can veto a pick, but its authority is now EARNED. Every veto is logged
+    // with entry-reference price so the analytics endpoint can forward-measure what the vetoed
+    // pick would have done, and the scorecard's recommendedInfluence (built from that history)
+    // decides whether this veto is BINDING or merely ADVISORY. Until ≥5 vetoes have matured the
+    // influence stays 1 (binding); if the LLM is later shown to block winners, its influence
+    // drops and a veto becomes advisory — logged, but the deterministic pick proceeds.
+    const vetoInfluence = llmScorecard.recommendedInfluence ?? 1;
+    const vetoBinding = vetoInfluence >= 0.5; // below 0.5 → the LLM has NOT earned a hard veto
     if (narrative?.noPick === true) {
       try {
         await ghPutWithRetry('data/llm-veto-log.json', (existing) => {
           const log = existing && Array.isArray(existing.vetoes) ? existing : { vetoes: [] };
           log.vetoes.unshift({
+            id: `${date}|${winner.symbol}|${hhmmIST()}`,
             date, ticker: winner.symbol, fullName: winner.fullName,
-            confidence: winner.confidence, composite: winner.composite, verdict: winner.verdict,
+            confidence: winner.confidence, effectiveConfidence: winner.effectiveConfidence ?? null,
+            composite: winner.composite, verdict: winner.verdict,
             rewardRisk: winner.rewardRisk, regime: regime.regime,
             catalyst: winnerCatalyst?.type || null, verification: winnerCatalyst?.verification || null,
-            vetoedAt: new Date().toISOString(),
+            binding: vetoBinding, influence: vetoInfluence,
+            entryRefPrice: winnerSrc?._price?.price ?? null, yahooSymbol: winnerSrc?._price?.symbol || null,
+            evaluated: false, outcome: null, vetoedAt: new Date().toISOString(),
           });
-          if (log.vetoes.length > 200) log.vetoes = log.vetoes.slice(0, 200);
+          if (log.vetoes.length > 300) log.vetoes = log.vetoes.slice(0, 300);
           return log;
         }, ghToken, `LLM veto log: ${winner.symbol} (${date})`);
       } catch (e) { /* logging must never block the no-trade response */ }
-      return noTrade(`LLM vetoed ${winner.symbol}: no convincing company-specific catalyst`, { rejectedPick: winner.symbol });
+      if (vetoBinding) {
+        addRejection(winner.symbol, 'llm-veto', ['llm: no convincing company-specific catalyst'], {
+          confidence: winner.confidence ?? null, effectiveConfidence: winner.effectiveConfidence ?? null,
+          regime: regime.regime, entryRefPrice: winnerSrc?._price?.price ?? null, yahooSymbol: winnerSrc?._price?.symbol || null,
+        });
+        return noTrade(`LLM vetoed ${winner.symbol}: no convincing company-specific catalyst`, { rejectedPick: winner.symbol });
+      }
+      // Advisory-only: the LLM's track record no longer justifies a hard block — proceed, but note it.
+      console.warn(`[llm-veto] ${winner.symbol}: veto overridden (influence ${vetoInfluence} < 0.5, verdict ${llmScorecard.verdict})`);
+      narrative.llmVetoOverridden = true;
     }
 
     // Assemble pick from DETERMINISTIC scores + LLM narrative
@@ -533,8 +705,16 @@ Return ONLY valid JSON (no markdown):
       volumeRatio: winner.volumeRatio,
       relVol: winnerSrc?._qm?.relVol ?? null,
       relStrength: winner.relStrength,
-      catalyst: winnerCatalyst ? { type: winnerCatalyst.type, confidence: winnerCatalyst.confidence, impact: winnerCatalyst.impact, stars: winnerCatalyst.stars, points: winnerCatalyst.points, verification: winnerCatalyst.verification, sources: winnerCatalyst.sources, summary: winnerCatalyst.summary } : null,
+      catalyst: winnerCatalyst ? { type: winnerCatalyst.type, confidence: winnerCatalyst.confidence, impact: winnerCatalyst.impact, stars: winnerCatalyst.stars, points: winnerCatalyst.points, verification: winnerCatalyst.verification, sources: winnerCatalyst.sources, summary: winnerCatalyst.summary, impactClass: winnerCatalyst.impactClass ?? null, decay: winnerCatalyst.decay ?? null, influenceDays: winnerCatalyst.influenceDays ?? null, recalled: !!winnerCatalyst.recalled } : null,
       confidence: winner.confidence,
+      effectiveConfidence: winner.effectiveConfidence ?? winner.confidence,
+      confidenceTrend: intradayStore.candidates[winner.symbol]?.confidenceTrend ?? null,
+      trendBonus: winner.trendBonus ?? 0,
+      institutional: winner.institutional ?? (winnerSrc?._inst?.score ?? null),
+      institutionalFlags: winnerSrc?._inst?.flags ?? [],
+      discoveryScore: discoveryMeta.get(winner.symbol)?.discoveryScore ?? null,
+      discoveryReasons: discoveryMeta.get(winner.symbol)?.discoveryReasons ?? [],
+      llmVetoOverridden: !!narrative.llmVetoOverridden,
       rewardRisk: winner.rewardRisk,
       regime: regime.regime, market: regime.reason,
       annualizedVol: winner.annualizedVol,
@@ -617,6 +797,11 @@ Return ONLY valid JSON (no markdown):
       if (bouquet.length > 365) bouquet = bouquet.slice(0, 365);
       return { bouquet };
     }, ghToken, `Add ${pick.ticker} to project bouquet`);
+
+    // Mark it bought in the intraday store (so later scans don't re-chase it), then flush the
+    // intraday store + rejected log + catalyst memory. Never let persistence failure break the pick.
+    if (!entryRejected) markBought(intradayStore, winner.symbol);
+    await persistLearning();
 
     return res.status(200).json({ status: entryRejected ? 'picked_not_traded' : 'picked', entryRejected, pick, discovery: sources, candidates });
   } catch (e) {

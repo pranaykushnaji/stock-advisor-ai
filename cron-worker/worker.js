@@ -57,6 +57,7 @@ const SCHEDULE = {
   '09:40': SELL,   // 15:10 IST — sell-check #6
 
   '10:10': { kind: 'vercel', path: '/api/refresh-prices' }, // 15:40 IST — EOD refresh + booking
+  '10:40': { kind: 'vercel', path: '/api/analytics' },       // 16:10 IST — forward-eval rejected picks + LLM vetoes (Phase 3)
 };
 
 function hhmm(date) {
@@ -173,6 +174,7 @@ export default {
       'refresh-prices': { kind: 'vercel', path: '/api/refresh-prices' },
       'sell-check': { kind: 'vercel', path: '/api/sell-check' },
       'capture-open': { kind: 'vercel', path: '/api/capture-open' },
+      'analytics': { kind: 'vercel', path: '/api/analytics' },
     };
     const entry = MAP[job];
     if (!entry) return new Response(`unknown job "${job}". Valid: ${Object.keys(MAP).join(', ')}`, { status: 400 });
