@@ -2,36 +2,157 @@
   "pick": {
     "date": "2026-07-08",
     "noTrade": true,
-    "reason": "no stock had BOTH volume confirmation and a high-confidence catalyst",
-    "pickedAt": "2026-07-08T04:42:08.750Z",
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-07-08T11:27:41.001Z",
+    "rejected": [
       {
-        "ticker": "TITAN",
-        "relVol": 4.49,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "negative": false
+        "ticker": "KALYANKJIL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
       },
       {
-        "ticker": "INDUSINDBK",
-        "relVol": 2.27,
-        "catalyst": "broker upgrade",
-        "confidence": 85,
-        "negative": false
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       },
       {
-        "ticker": "360ONE",
-        "relVol": 2.03,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "negative": false
+        "ticker": "MCX",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       },
       {
-        "ticker": "PNBHOUSING",
-        "relVol": 2.84,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "negative": false
+        "ticker": "PREMIERENE",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "INDUSTOWER",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "OIL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ONGC",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NYKAA",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "EXIDEIND",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "GVT&D",
+        "reasons": [
+          "surveillance (ASM/GSM)"
+        ]
+      },
+      {
+        "ticker": "CUMMINSIND",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHEL",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ICICIGI",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ADANIENSOL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "WIPRO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LODHA",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TORNTPHARM",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HINDALCO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
