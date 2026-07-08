@@ -282,10 +282,11 @@ export function scoreMomentumUniverse(candidates, opts = {}) {
 
 // ---------- QUALITY-MOMENTUM entry filter + scoring (the discovery-quality rework) ----------
 // Only trade high-quality momentum, not every top gainer. A candidate must pass ALL of:
-//   price > 20 EMA, 20 EMA > 50 EMA, today's vol > 1.8× 20-day avg, today's gain > Nifty gain,
-//   price within 8% of the 52-week high, and daily traded value > ₹75 Cr.
+//   price > 20 EMA, 20 EMA > 50 EMA, today's vol > 1.8× (session-time-adjusted) 20-day avg,
+//   today's gain > Nifty gain, price within 8% of the 52-week high, and daily traded value > ₹75 Cr.
 // Plus hard-reject red flags (gap-up >8%, circuit-locked, ASM/GSM surveillance, illiquid).
-// ctx: { niftyGainPct, tradedValueCr, pChange, open, prevClose, dayHigh, dayLow, surveillance }.
+// ctx: { niftyGainPct, tradedValueCr, pChange, open, prevClose, dayHigh, dayLow, surveillance,
+//        sessionElapsedFraction }.
 export function qualityMomentumChecks(closes, volumes, ctx = {}) {
   const price = Array.isArray(closes) && closes.length ? closes[closes.length - 1] : (ctx.price ?? null);
   const ema20 = ema(closes, 20), ema50 = ema(closes, 50), ema200 = ema(closes, 200);
@@ -294,7 +295,14 @@ export function qualityMomentumChecks(closes, volumes, ctx = {}) {
   const todayVol = ctx.todayVolume ?? (vols.length ? vols[vols.length - 1] : null);
   const avg20Vol = vols.length >= 21 ? vols.slice(-21, -1).reduce((a, b) => a + b, 0) / 20
     : (vols.length ? vols.reduce((a, b) => a + b, 0) / vols.length : null);
-  const relVol = (todayVol != null && avg20Vol) ? todayVol / avg20Vol : null;
+  // Buy-scans now run hourly, so `todayVol` is a PARTIAL-day figure most of the time. Comparing
+  // it against a FULL-session 20-day average would make the surge bar trivial late in the day
+  // and unreachable early. Prorate the average by how much of today's session has elapsed, so
+  // "2x average" means the same thing at 10:00 as it does at 15:00. A caller that doesn't pass
+  // sessionElapsedFraction (e.g. an EOD/backtest context) gets the old full-session behavior.
+  const sessionFrac = ctx.sessionElapsedFraction != null ? Math.max(0.1, Math.min(1, ctx.sessionElapsedFraction)) : 1;
+  const expectedVolByNow = avg20Vol != null ? avg20Vol * sessionFrac : null;
+  const relVol = (todayVol != null && expectedVolByNow) ? todayVol / expectedVolByNow : null;
 
   const checks = {
     priceAboveEma20: (price != null && ema20 != null) ? price > ema20 : null,

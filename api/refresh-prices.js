@@ -156,12 +156,6 @@ async function fetchPriceAV(base) {
   return null;
 }
 
-// Today's date in IST (YYYY-MM-DD) — matches the pick cron's date field
-function todayISO() {
-  const ist = new Date(Date.now() + 5.5 * 3600 * 1000);
-  return ist.toISOString().slice(0, 10);
-}
-
 // Is NSE currently in a live/complete trading state? (REGULAR = open, POST/CLOSED = has real close)
 // PRE/PREPRE = pre-market: prices are stale/indicative, do NOT trust as live.
 // Only PRE/PREPRE (pre-market) prices are stale/indicative and must be skipped.
@@ -224,16 +218,10 @@ export default async function handler(req, res) {
         // Always safe to refresh reference data (prevClose) and the resolved symbol
         item.prevClose = pd.prevClose;
         item.yahooSymbol = pd.symbol;
-        // UPGRADE entry to today's real OPEN once the daily candle is complete.
-        // The 9 AM cron locked entry = prevClose (never empty); here we improve it to the
-        // true session open when available. Guarded so it only happens on the pick's own day
-        // and only once (clears the flag). Falls back silently if the candle open isn't there.
-        if (item.entryFromPrevClose && reliable && pd.candleOpen && item.date === todayISO()) {
-          item.entryPrice = pd.candleOpen;
-          item.dayOpen = pd.candleOpen;
-          item.entryFromPrevClose = false;
-          item.entryPriceProvisional = false;
-        }
+        // NOTE: entry is locked at the actual signal-time price by stock-of-the-day.js and must
+        // NEVER be overwritten with the day's open here — that would reintroduce the lookahead
+        // bias (a "free" head-start on every trade) this fix removed. Only a genuinely missing
+        // entry price gets backfilled below.
         // Backfill: any entry still missing entirely
         if ((!item.entryPrice || item.entryPriceProvisional) && reliable && pd.open) {
           item.entryPrice = pd.open;

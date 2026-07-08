@@ -18,22 +18,45 @@
 // need its own holiday calendar. It only avoids weekends (the cron is Mon–Fri).
 
 const SELL = { kind: 'vercel', path: '/api/sell-check' };
+const BUY  = { kind: 'vercel', path: '/api/stock-of-the-day' };
+const SNAP = { kind: 'github' };
 
 // Exact firing table, keyed by "HH:MM" in UTC (IST = UTC + 5:30).
 // The cron trigger ticks every 5 minutes across the market window; the handler acts only
 // when the current HH:MM matches a row here, so timing is precise to the tick.
+//
+// BUY now runs hourly (not once at 14:30) so a genuine opportunity mid-session isn't missed.
+// Each buy-scan is preceded by its own NSE snapshot refresh ~15 min earlier, so the volume/
+// filing data it reads is never more than ~15-20 min stale. SELL (sell-check) is unchanged —
+// still hourly at :10 past, independent of the buy cadence.
 const SCHEDULE = {
-  '03:15': { kind: 'github' },                                // 08:45 IST — NSE snapshot (pre-open)
-  '06:30': { kind: 'github' },                                // 12:00 IST — NSE snapshot (midday)
-  '08:45': { kind: 'github' },                                // 14:15 IST — NSE snapshot (pre-pick: ~85% of the day's volume in)
-  '09:00': { kind: 'vercel', path: '/api/stock-of-the-day' }, // 14:30 IST — pick, on near-full-day volume so the 1.8x filter is valid
-  '04:40': SELL,                                              // 10:10 IST — hourly sell-check
-  '05:40': SELL,                                              // 11:10 IST
-  '06:40': SELL,                                              // 12:10 IST
-  '07:40': SELL,                                              // 13:10 IST
-  '08:40': SELL,                                              // 14:10 IST
-  '09:40': SELL,                                              // 15:10 IST
-  '10:10': { kind: 'vercel', path: '/api/refresh-prices' },    // 15:40 IST — refresh + book exits
+  '03:15': SNAP,   // 08:45 IST — pre-open snapshot (surveillance/announcements refresh)
+
+  '04:15': SNAP,   // 09:45 IST — snapshot ahead of the first buy-scan
+  '04:30': BUY,    // 10:00 IST — buy-scan #1 (first hour of real post-open volume)
+  '04:40': SELL,   // 10:10 IST — sell-check #1
+
+  '05:15': SNAP,   // 10:45 IST
+  '05:30': BUY,    // 11:00 IST — buy-scan #2
+  '05:40': SELL,   // 11:10 IST — sell-check #2
+
+  '06:15': SNAP,   // 11:45 IST
+  '06:30': BUY,    // 12:00 IST — buy-scan #3
+  '06:40': SELL,   // 12:10 IST — sell-check #3
+
+  '07:15': SNAP,   // 12:45 IST
+  '07:30': BUY,    // 13:00 IST — buy-scan #4
+  '07:40': SELL,   // 13:10 IST — sell-check #4
+
+  '08:15': SNAP,   // 13:45 IST
+  '08:30': BUY,    // 14:00 IST — buy-scan #5
+  '08:40': SELL,   // 14:10 IST — sell-check #5
+
+  '09:15': SNAP,   // 14:45 IST
+  '09:30': BUY,    // 15:00 IST — buy-scan #6 (last — leaves 30 min before close to settle)
+  '09:40': SELL,   // 15:10 IST — sell-check #6
+
+  '10:10': { kind: 'vercel', path: '/api/refresh-prices' }, // 15:40 IST — EOD refresh + booking
 };
 
 function hhmm(date) {

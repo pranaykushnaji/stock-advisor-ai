@@ -120,12 +120,14 @@ export default async function handler(req, res) {
     // Rules gate first (target/stop/max-hold/momentum-fade), then LLM for the ambiguous middle.
     let decision = rulesGate(item, live.closes);
     if (!decision) {
-      // Only spend an LLM call if there's downside pressure (small loss) — keeps hourly cost low.
+      // Ask the LLM regardless of whether the position is up or down — a winning position can
+      // have its thesis reverse (earnings miss, bad news) just as easily as a losing one, and
+      // only checking losers means that deterioration goes undetected until it becomes a loss.
       const pnl = item.entryPrice ? ((live.price - item.entryPrice) / item.entryPrice) * 100 : 0;
       const heldDays = item.date ? Math.floor((Date.now() - new Date(item.date + 'T00:00:00Z').getTime()) / 86400000) : 0;
       // Skip the LLM (and any exit) on an implausibly large move for a fresh position — it's
       // almost certainly a bad price, not a real signal. Never book a phantom loss on it.
-      if (pnl < 0 && !isSuspiciousMove(pnl, heldDays) && apiKey) {
+      if (!isSuspiciousMove(pnl, heldDays) && apiKey) {
         const d = await llmDecide(item, apiKey, []);
         if (d.verdict === 'SELL') decision = d;
       }

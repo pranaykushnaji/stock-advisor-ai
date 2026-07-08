@@ -1,8 +1,12 @@
-// Stock of the Day — picks best stock daily from LIVE-discovered candidates.
+// Stock BUY scan — runs HOURLY during market hours (not just once at 14:30), evaluating
+// LIVE-discovered candidates every time so a genuine opportunity that emerges mid-session
+// isn't missed just because it wasn't the single best name at one fixed moment. This file
+// only ever OPENS new positions — selling is handled entirely by sell-check.js, which
+// already runs hourly and independently; duplicating sell logic here would mean the same
+// position gets reviewed twice within 10-20 minutes for no benefit.
 // Storage = GitHub repo files. Requires GITHUB_TOKEN env var.
 import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
-import { decideSell, markPending } from './_sell-engine.js';
 import { assessCatalyst } from './_catalyst.js';
 import { classifyRegime, regimeGates } from './_market-regime.js';
 import { sectorStrength, sectorScoreFor } from './_sector.js';
@@ -11,27 +15,6 @@ import { qualityMomentumChecks, scoreQualityMomentum,
 // NOTE: annualizedVol is NOT imported — this file already defines its own local
 // annualizedVol() below (see ~line 157). Importing it too caused a duplicate-declaration
 // SyntaxError that crashed the whole function. The local version is used instead.
-
-// Fetch up to 8 recent Google News headlines for a held stock (for the sell LLM).
-async function fetchHeadlines(query) {
-  try {
-    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query + ' stock')}&hl=en-IN&gl=IN&ceid=IN:en`;
-    const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), 4000);
-    let resp;
-    try { resp = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' }, signal: ctrl.signal }); }
-    finally { clearTimeout(t); }
-    const text = await resp.text();
-    const titles = [];
-    const re = /<item>([\s\S]*?)<\/item>/g;
-    let m;
-    while ((m = re.exec(text)) !== null && titles.length < 8) {
-      const title = (m[1].match(/<title>([\s\S]*?)<\/title>/) || [])[1] || '';
-      if (title) titles.push(title.replace(/<!\[CDATA\[|\]\]>/g, '').replace(/&amp;/g, '&').replace(/&#39;/g, "'").replace(/&quot;/g, '"'));
-    }
-    return titles;
-  } catch (e) { return []; }
-}
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
@@ -43,10 +26,29 @@ const ENTRY_SANITY_TOLERANCE_PCT = 20;
 // chasing the same stock on consecutive days (the backtest showed POLYCAB picked 3x running).
 const DEDUP_DAYS = 5;
 
+// Cap on NEW positions opened per calendar day. With buy-scans now running hourly instead of
+// once, an uncapped strong trending day could open far more positions than a sane paper
+// portfolio should carry — this bounds that without blocking genuinely separate opportunities.
+const MAX_NEW_BUYS_PER_DAY = 3;
+
 function todayIST() {
   const now = new Date();
   const ist = new Date(now.getTime() + 5.5 * 3600 * 1000);
   return ist.toISOString().slice(0, 10);
+}
+
+// How far into today's NSE session we are, as a 0-1 fraction (09:15-15:30 IST = 375 min).
+// Buy-scans run hourly now, so "today's volume" is genuinely partial at every check except
+// the last one — this fraction lets the volume-surge filter compare against how much volume
+// SHOULD have traded by this point, not a full-day average, so the bar is equally hard to
+// clear at 10:00 as it is at 15:00.
+function sessionElapsedFraction() {
+  const now = new Date();
+  const ist = new Date(now.getTime() + 5.5 * 3600 * 1000);
+  const minutesSinceMidnight = ist.getUTCHours() * 60 + ist.getUTCMinutes();
+  const openMin = 9 * 60 + 15, closeMin = 15 * 60 + 30;
+  const frac = (minutesSinceMidnight - openMin) / (closeMin - openMin);
+  return Math.max(0.15, Math.min(1, frac));
 }
 
 // Map company names / tickers to Yahoo NSE symbols
@@ -251,9 +253,10 @@ export default async function handler(req, res) {
 
   const date = todayIST();
 
-  // Reliability: GitHub's scheduled Actions are flaky (free tier drops runs), so the
-  // NSE snapshot may go stale. Trigger a fresh snapshot fetch from THIS reliable Vercel
-  // cron via workflow_dispatch. Fire-and-forget — never block the pick on it.
+  // Reliability: this endpoint may run standalone (manual test) without the Cloudflare
+  // Worker's own snapshot dispatch having just fired, so still nudge a fresh snapshot fetch
+  // here too. Fire-and-forget — never block the scan on it. (The Worker's SCHEDULE is now
+  // the primary driver of snapshot freshness — see cron-worker/worker.js — this is a backstop.)
   try {
     fetch('https://api.github.com/repos/pranaykushnaji/stock-advisor-ai/actions/workflows/nse-snapshot.yml/dispatches', {
       method: 'POST',
@@ -262,50 +265,17 @@ export default async function handler(req, res) {
     }).catch(() => {});
   } catch (e) { /* best-effort */ }
 
-  // ---- PHASE 1: review held positions for SELL (runs before picking) ----
-  // For each OPEN holding: rules gate (target/stop/max-hold) -> LLM on fresh news.
-  // A SELL verdict flips it to SELL_PENDING with a provisional exit; the 5:30 PM
-  // refresh cron books the real exit price and moves it to the realized ledger.
-  let sellReview = { reviewed: 0, pending: 0 };
+  // Daily buy cap — cheap check before any of the expensive discovery/pricing/catalyst work.
+  // Buy-scans run hourly now, so this is what actually bounds how many positions can open in
+  // one day (replaces the old "one pick per day" gate, which no longer fits an hourly cadence).
   try {
-    await ghPutWithRetry('data/project-bouquet.json', async (current) => {
-      const bouquet = current?.bouquet || [];
-      const open = bouquet.filter(b => !b.status || b.status === 'OPEN');
-      if (!open.length) return null; // nothing to review — no write
-      let flipped = 0;
-      for (const item of open) {
-        sellReview.reviewed++;
-        const headlines = await fetchHeadlines(item.fullName || item.ticker);
-        // Fetch recent closes so the sell engine can detect momentum fade.
-        let recentCloses = null;
-        try {
-          const pd = await fetchPrice(item.yahooSymbol || item.ticker, item.fullName);
-          if (pd?.closes?.length) {
-            recentCloses = pd.closes.filter(v => v != null && !isNaN(v));
-            item.currentPrice = pd.price ?? item.currentPrice; // freshen for rules gate
-          }
-        } catch (e) {}
-        const decision = await decideSell(item, apiKey, headlines, recentCloses);
-        if (decision) {
-          const idx = bouquet.indexOf(item);
-          bouquet[idx] = markPending(item, decision);
-          flipped++;
-        }
-      }
-      sellReview.pending = flipped;
-      return flipped > 0 ? { bouquet } : null; // only write if something changed
-    }, ghToken, 'Sell review: mark SELL_PENDING positions');
-  } catch (e) { /* sell review must never block the daily pick */ }
-
-  const existing = await ghGetFile('data/daily-pick.json', ghToken);
-  if (existing.content && !req.query.force) {
-    try {
-      const prev = JSON.parse(existing.content);
-      if (prev?.pick?.date === date) {
-        return res.status(200).json({ status: 'already_picked', pick: prev.pick, sellReview });
-      }
-    } catch (e) {}
-  }
+    const bqCap = await ghGetFile('data/project-bouquet.json', ghToken);
+    const bqCapList = bqCap.content ? (JSON.parse(bqCap.content).bouquet || []) : [];
+    const boughtToday = bqCapList.filter(b => b.date === date).length;
+    if (boughtToday >= MAX_NEW_BUYS_PER_DAY && req.query.force !== 'true') {
+      return res.status(200).json({ status: 'daily_cap_reached', boughtToday, cap: MAX_NEW_BUYS_PER_DAY });
+    }
+  } catch (e) { /* if the bouquet can't be read, don't block the scan */ }
 
   // Discover today's candidates live (news + movers, Nifty-50 fallback).
   // Guard: discoverCandidates catches internally, but wrap defensively so a throw
@@ -379,6 +349,10 @@ export default async function handler(req, res) {
     } catch (e) { return null; }
   }))).filter(Boolean);
 
+  // How far into today's session we are — normalizes the volume-surge check below so it's
+  // equally hard to pass whether this run is the 10:00 or the 15:00 hourly scan.
+  const sessionFrac = sessionElapsedFraction();
+
   // Quality-momentum ALL-filter + hard rejects.
   const passed = [], rejectedNames = [];
   for (const s of priced) {
@@ -391,6 +365,7 @@ export default async function handler(req, res) {
       open: s._price?.open, prevClose: s._price?.prevClose,
       dayHigh: snap.dayHigh, dayLow: snap.dayLow,
       surveillance: surveillanceSet.has(s.symbol),
+      sessionElapsedFraction: sessionFrac,
     });
     s._qm = qm; s._pChange = pChange; s._tradedValueCr = tradedValueCr;
     if (qm.rejects.length) { rejectedNames.push({ ticker: s.symbol, reasons: qm.rejects }); continue; }
@@ -400,7 +375,7 @@ export default async function handler(req, res) {
 
   const noTrade = async (reason, extra) => {
     await ghPutWithRetry('data/daily-pick.json', () => ({ pick: { date, noTrade: true, reason, pickedAt: new Date().toISOString(), ...extra } }), ghToken, `No Trade Today (${date})`);
-    return res.status(200).json({ status: 'no_trade', reason, ...extra, sellReview });
+    return res.status(200).json({ status: 'no_trade', reason, ...extra });
   };
 
   if (!passed.length) return noTrade('no stock passed the quality-momentum filter', { rejected: rejectedNames.slice(0, 20) });
@@ -420,8 +395,12 @@ export default async function handler(req, res) {
 
   // THE CORE RULE: tradeable only if BOTH high relative volume AND a high-confidence bullish
   // catalyst. Drop any name with a confident NEGATIVE catalyst (red flag).
+  // relVol itself is already session-time-normalized (see sessionElapsedFraction / _scoring.js),
+  // so this 2.1x bar means the same thing whether this run is the 10:00 or the 15:00 hourly
+  // scan — "trading at 2.1x the pace it should be by this point in the session".
+  const RELVOL_INTRADAY_MIN = 2.1;
   const tradeable = catalystPool.filter(s =>
-    (s._qm?.relVol != null && s._qm.relVol >= 1.8) && s._catalyst?.hasCatalyst && !s._catalyst?.negative);
+    (s._qm?.relVol != null && s._qm.relVol >= RELVOL_INTRADAY_MIN) && s._catalyst?.hasCatalyst && !s._catalyst?.negative);
 
   if (!tradeable.length) {
     return noTrade('no stock had BOTH volume confirmation and a high-confidence catalyst', {
@@ -514,8 +493,27 @@ Return ONLY valid JSON (no markdown):
       }
     } catch (er) { narrative = {}; }
 
-    // Item 6: the LLM can veto a pick it can't justify with a specific catalyst.
+    // Item 6: the LLM can veto a pick it can't justify with a specific catalyst. Log every
+    // veto with the deterministic scores at veto time — this is the only way to later check
+    // (by backtest) whether the LLM's vetoes are actually catching bad trades, or whether it's
+    // just being overly conservative and costing real opportunities. Research on LLM-driven
+    // trading strategies shows they can skew too conservative in up markets — this log is what
+    // lets that be verified with data instead of assumed.
     if (narrative?.noPick === true) {
+      try {
+        await ghPutWithRetry('data/llm-veto-log.json', (existing) => {
+          const log = existing && Array.isArray(existing.vetoes) ? existing : { vetoes: [] };
+          log.vetoes.unshift({
+            date, ticker: winner.symbol, fullName: winner.fullName,
+            confidence: winner.confidence, composite: winner.composite, verdict: winner.verdict,
+            rewardRisk: winner.rewardRisk, regime: regime.regime,
+            catalyst: winnerCatalyst?.type || null, verification: winnerCatalyst?.verification || null,
+            vetoedAt: new Date().toISOString(),
+          });
+          if (log.vetoes.length > 200) log.vetoes = log.vetoes.slice(0, 200);
+          return log;
+        }, ghToken, `LLM veto log: ${winner.symbol} (${date})`);
+      } catch (e) { /* logging must never block the no-trade response */ }
       return noTrade(`LLM vetoed ${winner.symbol}: no convincing company-specific catalyst`, { rejectedPick: winner.symbol });
     }
 
@@ -556,12 +554,11 @@ Return ONLY valid JSON (no markdown):
     pick.pipeline = { priced: priced.length, passedFilter: passed.length, catalystChecked: catalystPool.length, tradeable: tradeable.length };
     pick.runnerUp = ranked[1] ? { ticker: ranked[1].symbol, composite: ranked[1].composite } : null;
 
-    // Entry price = previous close, captured at pick time from data we already have.
-    // This is rock-solid (no second fetch that could be rate-limited/403'd) and is a
-    // negligible fraction off the true open — a deliberate reliability tradeoff.
-    // Prefer the day's real open if it happens to be available (market already open), else prevClose.
-    const marketOpen = priceData?.marketState === 'REGULAR' || priceData?.marketState === 'POST' || priceData?.marketState === 'CLOSED';
-    const entryPrice = priceData ? ((marketOpen && priceData.open) ? priceData.open : (priceData.prevClose || priceData.price)) : null;
+    // Entry price = the ACTUAL market price at signal time (14:30 IST), not the day's 9:15
+    // open. Using the day's open would silently give every pick a "free" head start equal to
+    // whatever the stock already moved before the signal fired — that's lookahead bias, not a
+    // realistic fill. This is the price you could actually transact at right now.
+    const entryPrice = priceData ? (priceData.price ?? priceData.prevClose) : null;
     const entryProvisional = false; // entry is locked at pick time — no capture-open needed
     const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
 
@@ -604,13 +601,13 @@ Return ONLY valid JSON (no markdown):
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: 10000,
-        entryPrice, currentPrice: priceData?.price || entryPrice, shares,
-        peakPrice: Math.max(entryPrice || 0, priceData?.price || entryPrice || 0), // for the trailing stop
+        entryPrice, currentPrice: priceData?.price ?? entryPrice, shares,
+        peakPrice: Math.max(entryPrice || 0, priceData?.price ?? entryPrice ?? 0), // for the trailing stop
         entryPriceProvisional: entryProvisional,
-        // If entry is prevClose (market wasn't open at pick time), flag it so the 5:30 PM
-        // cron can UPGRADE it to today's real open once the daily candle is complete.
-        entryFromPrevClose: !(marketOpen && priceData?.open),
-        dayOpen: (marketOpen && priceData?.open) ? priceData.open : null, prevClose: priceData?.prevClose || null,
+        // Entry is now locked at the actual signal-time price — never upgraded to the day's
+        // open (that upgrade was the source of the lookahead bias this fix removes).
+        entryFromPrevClose: false,
+        dayOpen: priceData?.open ?? null, prevClose: priceData?.prevClose || null,
         todayChangePct: (priceData?.prevClose && priceData?.price) ? +(((priceData.price - priceData.prevClose) / priceData.prevClose) * 100).toFixed(2) : null,
         lastPriceUpdate: pick.pickedAt, yahooSymbol: priceData?.symbol || null,
         niftyAtEntry, niftyNow: niftyAtEntry,
@@ -621,7 +618,7 @@ Return ONLY valid JSON (no markdown):
       return { bouquet };
     }, ghToken, `Add ${pick.ticker} to project bouquet`);
 
-    return res.status(200).json({ status: entryRejected ? 'picked_not_traded' : 'picked', entryRejected, pick, discovery: sources, candidates, sellReview });
+    return res.status(200).json({ status: entryRejected ? 'picked_not_traded' : 'picked', entryRejected, pick, discovery: sources, candidates });
   } catch (e) {
     return res.status(500).json({ error: e.message });
   }
