@@ -11,8 +11,8 @@
 // Vantage News, Marketaux, Google News RSS. Whatever keys are present get used; results are
 // merged and de-duped. Nothing here throws — a dead source just contributes nothing.
 
-const MAX_AGE_H = 72;      // ignore anything older than this
-const FRESH_H = 48;        // <48h = full weight
+const MAX_AGE_H = 72;      // hard limit on how old a NEWS article we'll even fetch (source cutoff)
+const FRESH_H = 48;        // <48h = full weight (legacy bucket constant, retained for reference)
 
 // Event → star strength (1-5). Negatives (< 0) are red flags that can hard-reject a name.
 export const CATALYST_STARS = {
@@ -26,6 +26,65 @@ export const CATALYST_STARS = {
   // Red flags:
   'fraud': -5, 'sebi action': -5, 'investigation': -4, 'regulatory action': -4, 'resignation': -3,
 };
+
+// PRIORITY 6 — CATALYST PERSISTENCE. Different events keep moving a stock for very different
+// spans: a government/defence order or a capacity expansion is a structural, multi-week story,
+// while a broker upgrade or a generic headline is spent in days. Each type gets an INFLUENCE
+// WINDOW (days); the weight decays smoothly across it (see decayWeight) instead of the old flat
+// "full until 48h, then a cliff, then zero at 72h" bucketing. A catalyst therefore FADES rather
+// than vanishing, and important ones stay meaningful for the days they actually matter.
+export const CATALYST_INFLUENCE_DAYS = {
+  'government order': 13, 'government approval': 13, 'large contract': 13, 'contract win': 13,
+  'capacity expansion': 12, 'acquisition': 12,
+  'regulatory approval': 11, 'debt reduction': 10,
+  'promoter buying': 9, 'institution buying': 9, 'institutional buying': 9,
+  'earnings beat': 6, 'results beat': 6,
+  'new product': 5, 'broker upgrade': 3, 'management change': 3,
+  'general news': 1.5, 'no catalyst': 1,
+  // Red flags decay slowly too — a fraud/SEBI cloud lingers.
+  'fraud': 20, 'sebi action': 20, 'investigation': 15, 'regulatory action': 12, 'resignation': 8,
+};
+const DEFAULT_INFLUENCE_DAYS = 3;
+
+export function influenceDaysFor(type) {
+  return CATALYST_INFLUENCE_DAYS[String(type || '').toLowerCase().trim()] ?? DEFAULT_INFLUENCE_DAYS;
+}
+
+// PRIORITY 8 — EVENT IMPACT WEIGHTING. Maps each event to a signed impact CLASS + a 0-1 weight
+// used to scale (not replace) the catalyst's contribution. This makes the "not all verified news
+// is equal" hierarchy explicit and tunable. It influences the catalyst score (and thus the
+// multi-signal confidence) but never overrides momentum/technical quality — the catalyst factor
+// is only 20% of the composite and confidence is an AGREEMENT measure, so a strong catalyst on a
+// technically-broken stock still can't force a buy.
+export const EVENT_IMPACT = {
+  'government order': { class: 'very-high+', weight: 1.0 }, 'government approval': { class: 'very-high+', weight: 1.0 },
+  'large contract': { class: 'very-high+', weight: 1.0 }, 'contract win': { class: 'very-high+', weight: 1.0 },
+  'capacity expansion': { class: 'high+', weight: 0.85 }, 'acquisition': { class: 'high+', weight: 0.85 },
+  'earnings beat': { class: 'high+', weight: 0.85 }, 'results beat': { class: 'high+', weight: 0.85 },
+  'regulatory approval': { class: 'high+', weight: 0.85 },
+  'promoter buying': { class: 'high+', weight: 0.8 }, 'institution buying': { class: 'high+', weight: 0.8 }, 'institutional buying': { class: 'high+', weight: 0.8 },
+  'debt reduction': { class: 'medium+', weight: 0.7 },
+  'broker upgrade': { class: 'medium+', weight: 0.6 }, 'new product': { class: 'medium+', weight: 0.55 },
+  'management change': { class: 'low+', weight: 0.4 },
+  'general news': { class: 'low+', weight: 0.3 }, 'no catalyst': { class: 'neutral', weight: 0.0 },
+  'fraud': { class: 'very-high-', weight: 1.0 }, 'sebi action': { class: 'very-high-', weight: 1.0 },
+  'investigation': { class: 'high-', weight: 0.85 }, 'regulatory action': { class: 'high-', weight: 0.8 }, 'resignation': { class: 'medium-', weight: 0.6 },
+};
+export function eventImpact(type) {
+  return EVENT_IMPACT[String(type || '').toLowerCase().trim()] || { class: 'low+', weight: 0.3 };
+}
+
+// Smooth decay of a catalyst's weight with age, over its event-specific influence window.
+// Half-life = window/2, so: age 0 → 1.0, age = window/2 → 0.5, age = window → 0.25, and it's
+// cut to 0 once well past the window (~1.6×) so genuinely stale catalysts stop counting.
+// `ageDays` is the age of the FRESHEST evidence for the catalyst; `type` selects the window.
+export function decayWeight(ageDays, type) {
+  if (ageDays == null || !isFinite(ageDays) || ageDays < 0) return 0;
+  const window = influenceDaysFor(type);
+  if (ageDays > window * 1.6) return 0;
+  const halfLife = Math.max(0.5, window / 2);
+  return +Math.pow(0.5, ageDays / halfLife).toFixed(3);
+}
 
 function fetchWithTimeout(url, opts = {}, ms = 6000) {
   const ctrl = new AbortController();
@@ -164,8 +223,11 @@ function verify(distinctSources) {
 // Convert a classification + articles into the 0-40 catalyst score (+ red-flag info).
 // Points are awarded ONLY for a bullish, high-confidence (>=80), high-impact (>=7),
 // concrete catalyst — everything weak scores 0. Negative events are flagged for hard-reject.
+// PRIORITY 6: the age weight now DECAYS over the event's influence window (decayWeight) rather
+// than dropping off a 72h cliff. PRIORITY 8: the event's impact weight (eventImpact) scales the
+// score, so a government order counts for more than a broker upgrade even at equal freshness.
 export function scoreCatalyst(classification, articles) {
-  const empty = { points: 0, hasCatalyst: false, negative: false, type: 'no catalyst', confidence: 0, impact: 0, stars: 0, freshness: 0, verification: 'UNVERIFIED', sources: 0, summary: null };
+  const empty = { points: 0, hasCatalyst: false, negative: false, type: 'no catalyst', confidence: 0, impact: 0, stars: 0, freshness: 0, decay: 0, impactClass: 'neutral', influenceDays: 0, ageDays: null, verification: 'UNVERIFIED', sources: 0, summary: null };
   if (!classification) return empty;
   const type = String(classification.catalyst_type || '').toLowerCase().trim();
   const stars = CATALYST_STARS[type] ?? 1;
@@ -173,27 +235,36 @@ export function scoreCatalyst(classification, articles) {
   const confidence = Math.max(0, Math.min(100, Number(classification.confidence) || 0));
   const impact = Math.max(0, Math.min(10, Number(classification.impact_score) || 0));
   const newestAgeH = articles.length ? hoursAgo(Math.max(...articles.map(a => a.publishedAt))) : null;
-  const freshness = freshnessWeight(newestAgeH);
+  const ageDays = newestAgeH != null ? +(newestAgeH / 24).toFixed(2) : null;
+  const decay = decayWeight(ageDays, type);          // PRIORITY 6: per-type time decay
+  const imp = eventImpact(type);                      // PRIORITY 8: signed impact class + weight
+  const influenceDays = influenceDaysFor(type);
   const distinctSources = new Set((articles || []).map(a => a.source)).size;
   const hasFiling = (articles || []).some(a => a.source === 'nse-filing');
   // An official NSE filing IS verification (strongest tier); otherwise fall back to
   // independent-source counting.
   const v = hasFiling ? { status: 'VERIFIED', mult: 1.0 } : verify(distinctSources);
 
+  // `freshness` retained in the return (== decay now) for backward compatibility with any reader.
+  const base = { type, confidence, impact, stars, freshness: decay, decay, impactClass: imp.class, influenceDays, ageDays, verification: v.status, sources: distinctSources, summary: classification.summary || null };
+
   // Red flag: a confident bearish/negative event -> can hard-reject the stock.
   if (stars < 0 && confidence >= 60) {
-    return { ...empty, negative: true, type, confidence, impact, stars, verification: v.status, sources: distinctSources, summary: classification.summary || null };
+    return { ...empty, ...base, negative: true };
   }
-  // Gate: only a real, fresh, confident, high-impact bullish catalyst earns points. UNVERIFIED
-  // (single-source) catalysts are down-weighted hard so they can't drive a pick on their own.
-  const base = { type, confidence, impact, stars, freshness, verification: v.status, sources: distinctSources, summary: classification.summary || null };
-  if (!bullish || stars <= 1 || confidence < 80 || impact < 7 || freshness === 0) {
+  // Gate: only a real, still-influential, confident, high-impact bullish catalyst earns points.
+  if (!bullish || stars <= 1 || confidence < 80 || impact < 7 || decay === 0) {
     return { ...empty, ...base };
   }
-  const points = Math.round((stars / 5) * 40 * freshness * v.mult); // 0-40, verification-scaled
-  // "Has a usable catalyst" requires it not be UNVERIFIED — the directive says single-source
-  // rumours must not affect ranking.
-  return { points, hasCatalyst: v.status !== 'UNVERIFIED' && points > 0, negative: false, ...base };
+  // 0-40, scaled by verification, time-decay AND event impact weight (Priority 8).
+  const points = Math.round((stars / 5) * 40 * decay * v.mult * imp.weight);
+  // "Has a usable catalyst" requires VERIFIED specifically (2+ independent sources, or an
+  // official NSE filing) — a single-source (PARTIAL) headline is not enough to act on. This
+  // matches how small-cap momentum traders operate in practice: every headline must be
+  // corroborated by at least one other trusted source, or the primary filing, before it's
+  // treated as real. PARTIAL still scores (so it's visible in diagnostics) but can no longer
+  // drive a trade on its own.
+  return { points, hasCatalyst: v.status === 'VERIFIED' && points > 0, negative: false, ...base };
 }
 
 // One-shot: fetch news → inject official filings → classify → score for a single stock.
@@ -208,4 +279,55 @@ export async function assessCatalyst(company, base, apiKey, keys = {}, filings =
   const classification = await classifyCatalyst(company, articles, apiKey);
   const scored = scoreCatalyst(classification, articles);
   return { ...scored, articleCount: articles.length, hasFiling: filingArticles.length > 0 };
+}
+
+// ---- PRIORITY 6: CATALYST MEMORY (multi-day persistence) ----
+// The news APIs only surface the last ~72h, and the NSE filing window is ~3 days — so without
+// memory a genuine 2-week catalyst (a defence order, a big capacity expansion) would silently
+// vanish from the engine's view after a few days even though it's still moving the stock. These
+// pure helpers let the buy-scan persist a VERIFIED catalyst the day it's found and RECALL it on
+// later scans/days with a decayed weight, so important catalysts fade over their real influence
+// window instead of disappearing. Store shape: { catalysts: { TICKER: {…} } }.
+
+// Write/refresh a memory entry from a freshly scored, VERIFIED catalyst. Returns the entry.
+export function rememberCatalyst(scored, nowMs = Date.now()) {
+  if (!scored || !scored.hasCatalyst || scored.verification !== 'VERIFIED') return null;
+  return {
+    type: scored.type, stars: scored.stars, verification: 'VERIFIED',
+    impactClass: scored.impactClass, summary: scored.summary || null,
+    firstSeenMs: nowMs, lastConfirmedMs: nowMs,
+  };
+}
+
+// Recall a remembered catalyst as a scored-shaped object with a DECAYED weight, or null if it's
+// missing / past its influence window. `mem` is the stored entry; age is measured from when the
+// catalyst was last confirmed. Recalled catalysts are marked recalled:true and never re-verify —
+// they inherit the VERIFIED status they earned when first detected.
+export function recallCatalyst(mem, nowMs = Date.now()) {
+  if (!mem || mem.verification !== 'VERIFIED') return null;
+  const ageDays = (nowMs - (mem.lastConfirmedMs || mem.firstSeenMs || nowMs)) / 86400000;
+  const decay = decayWeight(ageDays, mem.type);
+  if (decay <= 0) return null; // fully faded — forget it
+  const imp = eventImpact(mem.type);
+  const stars = mem.stars ?? (CATALYST_STARS[String(mem.type || '').toLowerCase().trim()] ?? 1);
+  const points = Math.round((stars / 5) * 40 * decay * imp.weight);
+  if (points <= 0) return null;
+  return {
+    points, hasCatalyst: true, negative: false, recalled: true,
+    type: mem.type, stars, confidence: 80, impact: 7,
+    freshness: decay, decay, impactClass: imp.class,
+    influenceDays: influenceDaysFor(mem.type), ageDays: +ageDays.toFixed(2),
+    verification: 'VERIFIED', sources: 1, summary: mem.summary || null,
+    articleCount: 0, hasFiling: false,
+  };
+}
+
+// Drop fully-faded entries so the memory file stays small. Returns a new {catalysts} object.
+export function pruneCatalystMemory(memory, nowMs = Date.now()) {
+  const out = {};
+  for (const [sym, mem] of Object.entries(memory?.catalysts || {})) {
+    const ageDays = (nowMs - (mem.lastConfirmedMs || mem.firstSeenMs || nowMs)) / 86400000;
+    if (decayWeight(ageDays, mem.type) > 0) out[sym] = mem;
+  }
+  return { catalysts: out };
 }

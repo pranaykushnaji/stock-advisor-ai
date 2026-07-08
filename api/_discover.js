@@ -1,5 +1,12 @@
 // Discovers today's candidate stocks dynamically from live news + market movers.
 // Falls back to Nifty-50 if live sources come up empty.
+//
+// PRIORITY 1 (Phase 3): the wide NSE universe is now ordered by a composite DISCOVERY SCORE
+// (see _discovery-score.js) instead of raw today's-% gain, so the expensive downstream work is
+// spent on emerging-momentum names, not stocks that already made their move.
+
+import { rankByDiscoveryScore } from './_discovery-score.js';
+import { sectorStrength, sectorScoreFor } from './_sector.js';
 
 // Nifty-50 constituents (fallback + name→symbol resolution aid)
 export const NIFTY50 = [
@@ -50,9 +57,12 @@ async function readNseSnapshot() {
     // V2: full liquid universe (superset field). Present only on snapshots written by the
     // expanded fetcher; older snapshots don't have it, so callers must handle empty.
     // Layer JUNK_FILTER-style tradeability on top of the fetch-side pre-filter.
+    // Keep dayHigh/dayLow/lastPrice/totalTradedVolume so the discovery score can read the day
+    // range (closing strength) and traded value (liquidity) without another fetch.
     const universe = (data.universe || []).map(u => ({
-      symbol: u.symbol, pChange: u.pChange, price: u.lastPrice,
-      volume: u.totalTradedVolume, index: u.index,
+      symbol: u.symbol, pChange: u.pChange, price: u.lastPrice, lastPrice: u.lastPrice,
+      volume: u.totalTradedVolume, totalTradedVolume: u.totalTradedVolume,
+      dayHigh: u.dayHigh, dayLow: u.dayLow, index: u.index,
     })).filter(u =>
       u.symbol &&
       (u.price == null || u.price >= UNIVERSE_MIN_PRICE) &&
@@ -67,10 +77,21 @@ async function readNseSnapshot() {
       const type = (d?.buySell || d?.BUY_SELL || '').toString().toUpperCase();
       if (sym && type.includes('B')) bulkSymbols.add(String(sym).toUpperCase().trim());
     }
+    for (const d of (data.blockDeals || [])) {
+      const sym = d?.symbol || d?.SYMBOL;
+      const type = (d?.buySell || d?.BUY_SELL || '').toString().toUpperCase();
+      if (sym && type.includes('B')) bulkSymbols.add(String(sym).toUpperCase().trim());
+    }
+    // Symbols with a fresh official filing/announcement (cheap catalyst-present flag for discovery).
+    const announcementSymbols = new Set();
+    for (const a of (data.announcements || [])) {
+      const sym = a?.symbol || a?.SYMBOL;
+      if (sym) announcementSymbols.add(String(sym).toUpperCase().trim());
+    }
     // Staleness: snapshot older than ~20h means the Action may be failing.
     const fetchedAt = snap?.fetchedAt ? new Date(snap.fetchedAt).getTime() : 0;
     const stale = !fetchedAt || (Date.now() - fetchedAt) > 20 * 3600 * 1000;
-    return { gainers, universe, bulkSymbols, stale, fetchedAt: snap?.fetchedAt || null };
+    return { gainers, universe, bulkSymbols, announcementSymbols, stale, fetchedAt: snap?.fetchedAt || null };
   } catch (e) { return null; }
 }
 
@@ -156,10 +177,14 @@ function normName(s) {
     .trim();
 }
 
-// Main: returns { candidates: [...], sources: {...} }
-export async function discoverCandidates(apiKey) {
+// Main: returns { candidates: [...], sources: {...}, discoveryMeta: Map }
+// opts.prevVolumes: optional Map(symbol -> { volume, frac }) from the previous intraday scan,
+//   enabling the cross-scan volume-acceleration signal in the discovery score.
+// opts.sessionFrac: fraction of today's session elapsed (0-1), for that same signal.
+export async function discoverCandidates(apiKey, opts = {}) {
   const sources = { news: 0, movers: 0, nseSnapshot: 0, nseUniverse: 0, usedFallback: false,
-    diag: { headlinesFetched: 0, newsQueryUsed: null, extractError: null, moversError: null, snapshotStale: null, snapshotAt: null } };
+    diag: { headlinesFetched: 0, newsQueryUsed: null, extractError: null, moversError: null, snapshotStale: null, snapshotAt: null, rankedBy: 'pChange' } };
+  const discoveryMeta = new Map(); // symbol -> { discoveryScore, discoveryParts, discoveryReasons }
 
   // 0. PRIMARY source: real NSE movers from the committed snapshot (GitHub Action
   //    fetches these from unblocked IPs). This is the day's ACTUAL gainers — the
@@ -171,16 +196,33 @@ export async function discoverCandidates(apiKey) {
   let bulkBuySymbols = new Set();
   if (snap) {
     bulkBuySymbols = snap.bulkSymbols || new Set();
+    const announcementSymbols = snap.announcementSymbols || new Set();
     sources.diag.snapshotStale = snap.stale;
     sources.diag.snapshotAt = snap.fetchedAt;
     const wide = Array.isArray(snap.universe) ? snap.universe : [];
     if (wide.length) {
-      // Rank the wide universe by today's move (pChange desc) — momentum-first ordering,
-      // consistent with the old top-gainers behaviour but over the full liquid set.
-      snapshotGainers = wide
-        .slice()
-        .sort((a, b) => (b.pChange ?? -Infinity) - (a.pChange ?? -Infinity))
-        .map(u => u.symbol);
+      // PRIORITY 1: rank the wide universe by the composite DISCOVERY SCORE (emerging momentum),
+      // not raw pChange. Sector strength comes from the universe's own breadth; catalyst/
+      // institutional flags are cheap set lookups; volume acceleration uses the previous scan's
+      // volumes when the buy-scan passes them in.
+      const strengthMap = sectorStrength(wide);
+      const prevVolumes = opts.prevVolumes || null;
+      const curFrac = opts.sessionFrac ?? null;
+      const rankedRows = rankByDiscoveryScore(wide, (row) => {
+        const sym = String(row.symbol || '').toUpperCase();
+        const prev = prevVolumes ? prevVolumes.get(sym) : null;
+        return {
+          sectorScore: sectorScoreFor(sym, strengthMap),
+          hasCatalyst: announcementSymbols.has(sym),
+          institutional: bulkBuySymbols.has(sym),
+          curFrac,
+          prevVolume: prev?.volume ?? null,
+          prevFrac: prev?.frac ?? null,
+        };
+      });
+      snapshotGainers = rankedRows.map(u => u.symbol);
+      for (const u of rankedRows) discoveryMeta.set(String(u.symbol).toUpperCase(), { discoveryScore: u.discoveryScore, discoveryParts: u.discoveryParts, discoveryReasons: u.discoveryReasons, tradedValueCr: u.tradedValueCr });
+      sources.diag.rankedBy = 'discoveryScore';
       sources.nseUniverse = snapshotGainers.length;
       sources.nseSnapshot = snapshotGainers.length;
     } else if (Array.isArray(snap.gainers)) {
@@ -257,5 +299,5 @@ export async function discoverCandidates(apiKey) {
     const norm = normName(c);
     return bulkBuySymbols.has(upper) || bulkNormSet.has(norm);
   });
-  return { candidates, sources, bulkConfirmed };
+  return { candidates, sources, bulkConfirmed, discoveryMeta };
 }
