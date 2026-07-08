@@ -2,61 +2,20 @@
   "pick": {
     "date": "2026-07-08",
     "noTrade": true,
-    "reason": "no stock had BOTH volume confirmation and a high-confidence catalyst",
-    "pickedAt": "2026-07-08T12:27:58.638Z",
+    "reason": "TORNTPHARM failed weak-market entry gates: confidence 36.6 < 72; reward/risk 1.88 < 2.2; catalyst PARTIAL (need VERIFIED in weak market)",
+    "pickedAt": "2026-07-08T17:34:55.697Z",
     "regime": "weak",
     "market": "weak — Nifty +2.8% 20d, below 50EMA, vol 13%",
-    "considered": [
-      {
-        "ticker": "TORNTPHARM",
-        "relVol": 2.13,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "verification": "UNVERIFIED",
-        "sources": 0,
-        "articles": 1,
-        "negative": false
+    "candidate": {
+      "ticker": "TORNTPHARM",
+      "confidence": 36.6,
+      "rewardRisk": {
+        "rr": 1.88,
+        "upsidePct": 7.5,
+        "downsidePct": 4
       },
-      {
-        "ticker": "UNITDSPR",
-        "relVol": 2.61,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "verification": "UNVERIFIED",
-        "sources": 0,
-        "articles": 1,
-        "negative": false
-      },
-      {
-        "ticker": "EXIDEIND",
-        "relVol": 2.04,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "verification": "UNVERIFIED",
-        "sources": 0,
-        "articles": 0,
-        "negative": false
-      },
-      {
-        "ticker": "ADANIENSOL",
-        "relVol": 1.85,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "verification": "UNVERIFIED",
-        "sources": 0,
-        "articles": 1,
-        "negative": false
-      },
-      {
-        "ticker": "ZYDUSLIFE",
-        "relVol": 1.91,
-        "catalyst": "no catalyst",
-        "confidence": 0,
-        "verification": "UNVERIFIED",
-        "sources": 0,
-        "articles": 0,
-        "negative": false
-      }
-    ]
+      "catalyst": "acquisition",
+      "verification": "PARTIAL"
+    }
   }
 }
