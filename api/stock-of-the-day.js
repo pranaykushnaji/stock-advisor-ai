@@ -418,7 +418,7 @@ export default async function handler(req, res) {
   if (!tradeable.length) {
     return noTrade('no stock had BOTH volume confirmation and a high-confidence catalyst', {
       regime: regime.regime, market: regime.reason,
-      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, verification: s._catalyst?.verification, negative: s._catalyst?.negative })),
+      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, verification: s._catalyst?.verification, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative })),
     });
   }
 
