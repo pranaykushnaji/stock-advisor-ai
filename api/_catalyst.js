@@ -128,7 +128,7 @@ export async function fetchArticles(company, base, keys = {}) {
 // Ask the LLM to classify the single strongest catalyst across the supplied articles.
 export async function classifyCatalyst(company, articles, apiKey) {
   if (!articles.length || !apiKey) return null;
-  const sys = `You are an equity event classifier for NSE swing trades. From the article titles for ONE company, identify the SINGLE strongest company-specific catalyst in the last 72 hours. Classify it into EXACTLY one type from: Government order, Large contract, Capacity expansion, Earnings beat, Broker upgrade, Promoter buying, Institution buying, New product, Regulatory approval, Debt reduction, Acquisition, Management change, Fraud, Investigation, SEBI action, Resignation, No catalyst. Ignore generic market/index commentary. Respond ONLY with strict JSON: {"catalyst_type":"<one type>","direction":"bullish"|"bearish","confidence":0-100,"impact_score":1-10,"summary":"<max 20 words>"}`;
+  const sys = `You are an equity event classifier for NSE swing trades. From the article titles for ONE company, identify the SINGLE strongest company-specific catalyst in the last 72 hours. An item prefixed [OFFICIAL NSE FILING] is an authoritative company filing — prioritize it and judge whether it is a genuine bullish catalyst (an order/contract win, results beat, capacity expansion, etc.) versus a routine filing (board meeting, trading-window closure, investor call — these are "No catalyst"). Classify into EXACTLY one type from: Government order, Large contract, Capacity expansion, Earnings beat, Broker upgrade, Promoter buying, Institution buying, New product, Regulatory approval, Debt reduction, Acquisition, Management change, Fraud, Investigation, SEBI action, Resignation, No catalyst. Ignore generic market/index commentary. Respond ONLY with strict JSON: {"catalyst_type":"<one type>","direction":"bullish"|"bearish","confidence":0-100,"impact_score":1-10,"summary":"<max 20 words>"}`;
   const user = `Company: ${company}\nArticles (newest first):\n${articles.slice(0, 10).map((a, i) => `${i + 1}. ${a.title}`).join('\n')}`;
   try {
     const r = await fetchWithTimeout('https://api.groq.com/openai/v1/chat/completions', {
@@ -175,7 +175,10 @@ export function scoreCatalyst(classification, articles) {
   const newestAgeH = articles.length ? hoursAgo(Math.max(...articles.map(a => a.publishedAt))) : null;
   const freshness = freshnessWeight(newestAgeH);
   const distinctSources = new Set((articles || []).map(a => a.source)).size;
-  const v = verify(distinctSources);
+  const hasFiling = (articles || []).some(a => a.source === 'nse-filing');
+  // An official NSE filing IS verification (strongest tier); otherwise fall back to
+  // independent-source counting.
+  const v = hasFiling ? { status: 'VERIFIED', mult: 1.0 } : verify(distinctSources);
 
   // Red flag: a confident bearish/negative event -> can hard-reject the stock.
   if (stars < 0 && confidence >= 60) {
@@ -193,10 +196,16 @@ export function scoreCatalyst(classification, articles) {
   return { points, hasCatalyst: v.status !== 'UNVERIFIED' && points > 0, negative: false, ...base };
 }
 
-// One-shot: fetch → classify → score for a single stock.
-export async function assessCatalyst(company, base, apiKey, keys = {}) {
-  const articles = await fetchArticles(company, base, keys);
+// One-shot: fetch news → inject official filings → classify → score for a single stock.
+// `filings` = [{subject, date}] from the NSE snapshot; a fresh filing is authoritative and
+// makes the catalyst VERIFIED (the strongest tier — no cross-source guessing needed).
+export async function assessCatalyst(company, base, apiKey, keys = {}, filings = []) {
+  const news = await fetchArticles(company, base, keys);
+  const filingArticles = (filings || [])
+    .map(f => ({ title: '[OFFICIAL NSE FILING] ' + (f.subject || ''), url: '', publishedAt: f.date ? Date.parse(String(f.date).replace(' ', 'T')) : Date.now(), source: 'nse-filing' }))
+    .filter(a => a.title && isFinite(a.publishedAt) && hoursAgo(a.publishedAt) <= MAX_AGE_H);
+  const articles = [...filingArticles, ...news]; // filings first (highest priority)
   const classification = await classifyCatalyst(company, articles, apiKey);
   const scored = scoreCatalyst(classification, articles);
-  return { ...scored, articleCount: articles.length };
+  return { ...scored, articleCount: articles.length, hasFiling: filingArticles.length > 0 };
 }

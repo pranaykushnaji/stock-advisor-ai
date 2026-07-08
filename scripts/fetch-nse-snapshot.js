@@ -159,6 +159,31 @@ function toNum(v) {
     snapshot.data.surveillance = [...new Set(syms)];
   }
 
+  // 3c. Corporate announcements (official filings) — the AUTHORITATIVE catalyst source for
+  //     Indian stocks. Fetched from GitHub's unblocked IP (Vercel/global news APIs barely
+  //     cover Indian mid/small-caps). Keep the last ~72h; the catalyst engine treats a fresh
+  //     filing as a VERIFIED catalyst and lets the LLM classify the filing subject.
+  const ann = await tryFetch('announcements', () => n.getDataByEndpoint('/api/corporate-announcements?index=equities'));
+  snapshot.diag.announcements = ann.ok;
+  if (ann.ok) {
+    const list = Array.isArray(ann.data) ? ann.data : (ann.data?.data || []);
+    const cutoff = Date.now() - 72 * 3600 * 1000;
+    const rows = [];
+    for (const a of list) {
+      const sym = a?.symbol || a?.SYMBOL;
+      if (!sym) continue;
+      const rawDt = a?.an_dt || a?.sort_date || a?.exchdisstime || a?.broadcastdate || null;
+      const t = rawDt ? Date.parse(String(rawDt).replace(' ', 'T')) : Date.now();
+      if (isFinite(t) && t < cutoff) continue;
+      const subject = (a?.desc || a?.attchmntText || a?.sub || a?.smIndustry || '').toString().replace(/\s+/g, ' ').trim().slice(0, 240);
+      if (!subject) continue;
+      rows.push({ symbol: String(sym).toUpperCase().trim(), subject, date: rawDt });
+      if (rows.length >= 500) break;
+    }
+    snapshot.data.announcements = rows;
+    snapshot.diag.announcementCount = rows.length;
+  }
+
   // 4. Sample delivery % for a couple names (proves per-stock delivery data works)
   const delivProbe = await tryFetch('delivery (RELIANCE)', () => n.getEquityDetails('RELIANCE'));
   snapshot.diag.deliveryData = delivProbe.ok;

@@ -330,9 +330,10 @@ export default async function handler(req, res) {
   const PRICE_POOL = 40;         // discovered names that get a 1y price fetch
   const CATALYST_SHORTLIST = 8;  // momentum survivors that get the (costly) catalyst pass
 
-  // Real NSE today-data + surveillance list from the committed snapshot, keyed by symbol.
+  // Real NSE today-data + surveillance list + corporate filings from the committed snapshot.
   const snapBySym = new Map();
   const surveillanceSet = new Set();
+  const filingsBySym = new Map();
   try {
     const snapFile = await ghGetFile('data/nse-snapshot.json', ghToken);
     const sd = snapFile.content ? JSON.parse(snapFile.content)?.data : null;
@@ -340,6 +341,12 @@ export default async function handler(req, res) {
       if (r.symbol && !snapBySym.has(r.symbol)) snapBySym.set(r.symbol, r);
     }
     for (const s of (sd?.surveillance || [])) surveillanceSet.add(String(s).toUpperCase());
+    for (const a of (sd?.announcements || [])) {
+      const sym = String(a.symbol || '').toUpperCase();
+      if (!sym) continue;
+      if (!filingsBySym.has(sym)) filingsBySym.set(sym, []);
+      filingsBySym.get(sym).push({ subject: a.subject, date: a.date });
+    }
   } catch (e) { /* snapshot missing → filter falls back to price-derived values */ }
 
   // Nifty 1y series → today's % change (relative-strength filter), relative-strength ranking
@@ -405,7 +412,7 @@ export default async function handler(req, res) {
   const catalystPool = preRank.slice(0, CATALYST_SHORTLIST);
   const newsKeys = { finnhubKey: process.env.FINNHUB_KEY, newsdataKey: process.env.NEWSDATA_KEY, alphaVantageKey: process.env.ALPHAVANTAGE_KEY, marketauxKey: process.env.MARKETAUX_KEY };
   await Promise.all(catalystPool.map(async (s) => {
-    try { s._catalyst = await assessCatalyst(s.fullName || s.symbol, s.symbol, apiKey, newsKeys); }
+    try { s._catalyst = await assessCatalyst(s.fullName || s.symbol, s.symbol, apiKey, newsKeys, filingsBySym.get(s.symbol) || []); }
     catch (e) { s._catalyst = { points: 0, hasCatalyst: false, negative: false }; }
     s.catalystPoints = s._catalyst?.points || 0;
     s.catalyst = s._catalyst || null;
@@ -419,7 +426,7 @@ export default async function handler(req, res) {
   if (!tradeable.length) {
     return noTrade('no stock had BOTH volume confirmation and a high-confidence catalyst', {
       regime: regime.regime, market: regime.reason,
-      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, verification: s._catalyst?.verification, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative })),
+      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, verification: s._catalyst?.verification, filing: s._catalyst?.hasFiling, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative })),
     });
   }
 
