@@ -1,93 +1,38 @@
 {
   "pick": {
-    "ticker": "TITAN",
-    "fullName": "TITAN",
-    "sector": "Consumer Cyclical",
-    "strategy": "momentum-swing",
-    "factors": {
-      "momentum": {
-        "score": 78.8,
-        "positives": [
-          "Momentum score 78.8 (top 20% percentile)",
-          "Volume score 86.3 and volume ratio 1.46 indicating strong buying pressure",
-          "1‑week return of 4.84% shows recent price strength"
-        ],
-        "negatives": [
-          "High forward P/E of 80.85 suggests valuation risk",
-          "Annualized volatility of 23.8% adds price swing risk"
-        ]
-      },
-      "quality": {
-        "score": 79.2
-      },
-      "volume": {
-        "score": 86.3
-      },
-      "lowVol": {
-        "score": 81.3
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.005222883185190382,
-      "r1w": 0.04844283586686585,
-      "r1m": 0.05262656606558937
-    },
-    "volumeRatio": 1.46,
-    "fundamentals": {
-      "roe": 37.13,
-      "roce": null,
-      "debtToEquity": 1.95,
-      "netMargin": 5.79,
-      "ebitdaMargin": 9,
-      "earningsGrowth": 35.1,
-      "peRatio": 80.84636,
-      "pbRatio": 26.030813,
-      "pegRatio": null,
-      "dividendYield": 0.33,
-      "sector": "Consumer Cyclical"
-    },
-    "fundamentalsSource": "yahoo",
-    "annualizedVol": 23.8,
-    "composite": 82.7,
-    "verdict": "BUY",
-    "estimatedUpside": "5-8%",
-    "riskLevel": "Medium",
-    "horizon": "1-2 weeks",
-    "newsSummary": "Titan reported a 35.1% YoY earnings growth in its latest quarter, beating consensus estimates and triggering a surge in trading volume.",
-    "summary": "Titan is displaying robust short‑term price strength backed by a sharp earnings beat and a 46% increase in volume. The momentum and quality scores are in the top quartile, and recent weekly returns near 5% indicate the rally may continue over the next few days to two weeks.",
-    "whyToday": "A recent earnings surprise with 35% YoY growth sparked a volume‑driven price surge, pushing the momentum model into a strong buy signal.",
     "date": "2026-07-08",
-    "pickedAt": "2026-07-07T19:21:14.052Z",
-    "discovery": {
-      "news": 0,
-      "movers": 39,
-      "nseSnapshot": 205,
-      "nseUniverse": 205,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-07-07T10:05:15.460Z"
+    "noTrade": true,
+    "reason": "no stock had BOTH volume confirmation and a high-confidence catalyst",
+    "pickedAt": "2026-07-08T04:42:08.750Z",
+    "considered": [
+      {
+        "ticker": "TITAN",
+        "relVol": 4.49,
+        "catalyst": "no catalyst",
+        "confidence": 0,
+        "negative": false
+      },
+      {
+        "ticker": "INDUSINDBK",
+        "relVol": 2.27,
+        "catalyst": "broker upgrade",
+        "confidence": 85,
+        "negative": false
+      },
+      {
+        "ticker": "360ONE",
+        "relVol": 2.03,
+        "catalyst": "no catalyst",
+        "confidence": 0,
+        "negative": false
+      },
+      {
+        "ticker": "PNBHOUSING",
+        "relVol": 2.84,
+        "catalyst": "no catalyst",
+        "confidence": 0,
+        "negative": false
       }
-    },
-    "candidatePool": 40,
-    "fundCoverage": {
-      "universe": 40,
-      "tradeable": 40,
-      "rejectedJunk": [],
-      "bySource": {
-        "estimated": 28,
-        "yahoo": 12
-      }
-    },
-    "runnerUp": {
-      "ticker": "INDHOTEL",
-      "composite": 82.2
-    },
-    "entryPrice": 3666.1,
-    "entryRejected": "entry ₹3666.1 is >20% off the NSE snapshot price ₹4591.2 — likely a bad price source; not trading this pick today"
+    ]
   }
 }
