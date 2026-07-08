@@ -3,27 +3,12 @@
 import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
 import { decideSell, markPending } from './_sell-engine.js';
-import { fetchFundamentals } from './_fundamentals.js';
-import { scoreUniverse, scoreMomentumUniverse,
-  computeShortReturns, shortMomentum, volumeSignal, volScaledMomentum } from './_scoring.js';
+import { assessCatalyst } from './_catalyst.js';
+import { qualityMomentumChecks, scoreQualityMomentum,
+  computeShortReturns, shortMomentum, volScaledMomentum } from './_scoring.js';
 // NOTE: annualizedVol is NOT imported — this file already defines its own local
 // annualizedVol() below (see ~line 157). Importing it too caused a duplicate-declaration
 // SyntaxError that crashed the whole function. The local version is used instead.
-
-// The 'estimated' fundamentals shell — identical shape to _fundamentals.js's null case.
-// Used for names outside the fundamentals shortlist so they score without a paid FMP call.
-// source:'estimated' → isPotdEligible() returns false, so these are never auto-picked.
-function estimatedFundamentals() {
-  return {
-    source: 'estimated',
-    fields: {
-      roe: null, roce: null, debtToEquity: null, netMargin: null, ebitdaMargin: null,
-      earningsGrowth: null, peRatio: null, pbRatio: null, pegRatio: null,
-      dividendYield: null, sector: null,
-    },
-    partial: true,
-  };
-}
 
 // Fetch up to 8 recent Google News headlines for a held stock (for the sell LLM).
 async function fetchHeadlines(query) {
@@ -334,29 +319,34 @@ export default async function handler(req, res) {
     sources.usedFallback = true;
   }
 
-  // ---- MOMENTUM-DOMINANT SELECTION (bouquet / swing-trade mode) ----
-  // Short-term momentum leads (momentum weight 0.45, see MOMENTUM_WEIGHTS); quality is
-  // only a junk-filter; volume confirms interest. A liquidity/penny/volatility junk
-  // filter drops manipulated microcaps. Paired with the tightened sell engine
-  // (8% target / -5% stop / 7-day max hold).
-  //
-  // V2 COST DISCIPLINE (two-phase fetch):
-  //   Phase 1 — fetch 1y PRICES for a wide pool (cheap-ish: Yahoo, cached/staggered).
-  //   Phase 2 — pre-rank on price+volume momentum only, then fetch FMP FUNDAMENTALS for
-  //             just the top shortlist. FMP free tier is ~250 calls/day, so fetching
-  //             fundamentals for the whole wide universe daily would blow the quota.
-  //             Non-shortlisted names still get scored (fundamentals → 'estimated' shell,
-  //             which scoreMomentumUniverse tolerates; quality is only a 15% junk-filter).
-  const fmpKey = process.env.FMP_KEY;
+  // ---- QUALITY-MOMENTUM SELECTION (only high-quality momentum WITH a real catalyst) ----
+  // 1) fetch prices; 2) apply the quality-momentum ALL-filter + hard rejects using real NSE
+  // today-data; 3) run a news/catalyst LLM pass on the momentum leaders; 4) require BOTH
+  // volume confirmation AND a high-confidence company catalyst — else "No Trade Today".
+  // NO fundamentals: for 5-10 day trades, price/volume/catalyst matter, not valuation.
+  const PRICE_POOL = 40;         // discovered names that get a 1y price fetch
+  const CATALYST_SHORTLIST = 8;  // momentum survivors that get the (costly) catalyst pass
 
-  // Pool sizes — tunable. PRICE_POOL widened from the old hard 12; FUND_SHORTLIST bounds
-  // the expensive fundamentals calls so we stay inside free tiers.
-  const PRICE_POOL = 40;      // how many discovered names get a 1y price fetch
-  const FUND_SHORTLIST = 12;  // how many of those (best momentum) get real fundamentals
+  // Real NSE today-data + surveillance list from the committed snapshot, keyed by symbol.
+  const snapBySym = new Map();
+  const surveillanceSet = new Set();
+  try {
+    const snapFile = await ghGetFile('data/nse-snapshot.json', ghToken);
+    const sd = snapFile.content ? JSON.parse(snapFile.content)?.data : null;
+    for (const r of [...(sd?.universe || []), ...(sd?.topGainers || []), ...(sd?.topLosers || [])]) {
+      if (r.symbol && !snapBySym.has(r.symbol)) snapBySym.set(r.symbol, r);
+    }
+    for (const s of (sd?.surveillance || [])) surveillanceSet.add(String(s).toUpperCase());
+  } catch (e) { /* snapshot missing → filter falls back to price-derived values */ }
+
+  // Nifty's own % change today (for the relative-strength condition).
+  let niftyGainPct = null;
+  try {
+    const nr = await fetchWithTimeout('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=1d&interval=1d', { headers: { 'User-Agent': 'Mozilla/5.0' } }, 4000);
+    if (nr.ok) { const nm = (await nr.json())?.chart?.result?.[0]?.meta; if (nm?.regularMarketPrice && nm?.chartPreviousClose) niftyGainPct = (nm.regularMarketPrice - nm.chartPreviousClose) / nm.chartPreviousClose * 100; }
+  } catch (e) {}
 
   const pool = candidates.slice(0, PRICE_POOL);
-
-  // Phase 1: prices only (no fundamentals yet).
   const priced = (await Promise.all(pool.map(async (name) => {
     try {
       const pd = await fetchPrice(name, name);
@@ -364,76 +354,64 @@ export default async function handler(req, res) {
       const ticker = (pd.symbol || name).replace(/\.(NS|BO)$/i, '').toUpperCase();
       const closes = pd.closes.filter(v => v != null && !isNaN(v));
       const volumes = (pd.volumes || []).filter(v => v != null && !isNaN(v));
-      // Cheap price/volume momentum score for pre-ranking (no API cost).
-      const sr = computeShortReturns(closes);
-      const preScore = volScaledMomentum(shortMomentum(sr), annualizedVol(closes));
-      const vs = volumeSignal(volumes);
-      return {
-        symbol: ticker,
-        fullName: pd.name || name,
-        closes, volumes,
-        price: pd.price,
-        _price: pd,
-        _preScore: (preScore == null ? -Infinity : preScore),
-        _volRatio: vs ? vs.ratio : 0,
-      };
+      return { symbol: ticker, fullName: pd.name || name, closes, volumes, price: pd.price, _price: pd };
     } catch (e) { return null; }
   }))).filter(Boolean);
 
-  // Phase 2: shortlist the best momentum names and fetch REAL fundamentals only for them.
-  // Tie-break by volume surge so a genuine breakout beats a quiet drifter.
-  const shortlist = priced
-    .slice()
-    .sort((a, b) => (b._preScore - a._preScore) || (b._volRatio - a._volRatio))
-    .slice(0, FUND_SHORTLIST);
-  const shortlistSet = new Set(shortlist.map(s => s.symbol));
+  // Quality-momentum ALL-filter + hard rejects.
+  const passed = [], rejectedNames = [];
+  for (const s of priced) {
+    const snap = snapBySym.get(s.symbol) || {};
+    const pChange = snap.pChange ?? (s._price?.prevClose && s._price?.price ? (s._price.price - s._price.prevClose) / s._price.prevClose * 100 : null);
+    const tradedValueCr = (snap.lastPrice && snap.totalTradedVolume) ? (snap.lastPrice * snap.totalTradedVolume) / 1e7 : null; // ₹Cr
+    const qm = qualityMomentumChecks(s.closes, s.volumes, {
+      niftyGainPct, pChange, tradedValueCr,
+      todayVolume: snap.totalTradedVolume ?? undefined,
+      open: s._price?.open, prevClose: s._price?.prevClose,
+      dayHigh: snap.dayHigh, dayLow: snap.dayLow,
+      surveillance: surveillanceSet.has(s.symbol),
+    });
+    s._qm = qm; s._pChange = pChange; s._tradedValueCr = tradedValueCr;
+    if (qm.rejects.length) { rejectedNames.push({ ticker: s.symbol, reasons: qm.rejects }); continue; }
+    if (!qm.pass) { rejectedNames.push({ ticker: s.symbol, reasons: qm.failed }); continue; }
+    passed.push(s);
+  }
 
-  const universe = await Promise.all(priced.map(async (s) => {
-    let fundamentals;
-    if (shortlistSet.has(s.symbol)) {
-      try { fundamentals = await fetchFundamentals(s.symbol, { fmpKey }); }
-      catch (e) { fundamentals = estimatedFundamentals(); }
-    } else {
-      // Not in the shortlist → skip the paid fundamentals call, use an estimated shell.
-      // These names are still scored & tradeable, but never POTD-picked (isPotdEligible
-      // requires real fundamentals), so the daily pick stays grounded in real data.
-      fundamentals = estimatedFundamentals();
-    }
-    return {
-      symbol: s.symbol, fullName: s.fullName,
-      closes: s.closes, volumes: s.volumes, price: s.price,
-      fundamentals, _price: s._price,
-    };
-  }));
-
-  const { ranked: rankedEligible, rejected } = scoreMomentumUniverse(universe);
-  const fundCoverage = {
-    universe: universe.length,
-    tradeable: rankedEligible.length,
-    rejectedJunk: rejected.map(r => ({ ticker: r.symbol, reasons: r.junkReasons })),
-    bySource: universe.reduce((a, s) => { const k = s.fundamentals.source; a[k] = (a[k] || 0) + 1; return a; }, {}),
+  const noTrade = async (reason, extra) => {
+    await ghPutWithRetry('data/daily-pick.json', () => ({ pick: { date, noTrade: true, reason, pickedAt: new Date().toISOString(), ...extra } }), ghToken, `No Trade Today (${date})`);
+    return res.status(200).json({ status: 'no_trade', reason, ...extra, sellReview });
   };
 
-  if (!rankedEligible.length) {
-    return res.status(200).json({
-      status: 'no_eligible_pick',
-      reason: 'no tradeable candidate after junk filter',
-      fundCoverage, sellReview,
+  if (!passed.length) return noTrade('no stock passed the quality-momentum filter', { rejected: rejectedNames.slice(0, 20) });
+
+  // Catalyst pass on the momentum leaders among the survivors.
+  const preRank = passed
+    .map(s => ({ s, m: volScaledMomentum(shortMomentum(computeShortReturns(s.closes)), annualizedVol(s.closes)) }))
+    .sort((a, b) => (b.m ?? -Infinity) - (a.m ?? -Infinity)).map(x => x.s);
+  const catalystPool = preRank.slice(0, CATALYST_SHORTLIST);
+  const newsKeys = { finnhubKey: process.env.FINNHUB_KEY, newsdataKey: process.env.NEWSDATA_KEY, alphaVantageKey: process.env.ALPHAVANTAGE_KEY, marketauxKey: process.env.MARKETAUX_KEY };
+  await Promise.all(catalystPool.map(async (s) => {
+    try { s._catalyst = await assessCatalyst(s.fullName || s.symbol, s.symbol, apiKey, newsKeys); }
+    catch (e) { s._catalyst = { points: 0, hasCatalyst: false, negative: false }; }
+    s.catalystPoints = s._catalyst?.points || 0;
+    s.catalyst = s._catalyst || null;
+  }));
+
+  // THE CORE RULE: tradeable only if BOTH high relative volume AND a high-confidence bullish
+  // catalyst. Drop any name with a confident NEGATIVE catalyst (red flag).
+  const tradeable = catalystPool.filter(s =>
+    (s._qm?.relVol != null && s._qm.relVol >= 1.8) && s._catalyst?.hasCatalyst && !s._catalyst?.negative);
+
+  if (!tradeable.length) {
+    return noTrade('no stock had BOTH volume confirmation and a high-confidence catalyst', {
+      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, catalyst: s._catalyst?.type, confidence: s._catalyst?.confidence, negative: s._catalyst?.negative })),
     });
   }
 
-  // V2 GROUNDING GUARD: the daily pick must have REAL fundamentals. With two-phase
-  // fetching, non-shortlisted names carry an 'estimated' shell, so we pick the best
-  // ranked name that ALSO has real fundamentals (i.e. was in the fundamentals shortlist).
-  // The pre-rank is momentum-based like the final score, so the top ranked name is
-  // almost always shortlisted anyway — this just guarantees it. Falls back to the top
-  // ranked name only if somehow none of the ranked names have real fundamentals.
-  const hasRealFund = (sym) => {
-    const row = universe.find(u => u.symbol === sym);
-    return row && row.fundamentals && row.fundamentals.source !== 'estimated';
-  };
-  // De-dup: skip names we already hold or picked in the last DEDUP_DAYS (avoids concentrating
-  // into one rolling-over stock). Read the current bouquet to know what to exclude.
+  // Final ranking: momentum 45 / volume 25 / catalyst 20 / technicals 10.
+  const ranked = scoreQualityMomentum(tradeable);
+
+  // De-dup: skip names we already hold or picked in the last DEDUP_DAYS.
   const recentlyPicked = new Set();
   try {
     const bqNow = await ghGetFile('data/project-bouquet.json', ghToken);
@@ -448,40 +426,35 @@ export default async function handler(req, res) {
   } catch (e) { /* if the bouquet can't be read, don't block the pick */ }
   const fresh = (r) => !recentlyPicked.has(String(r.symbol).toUpperCase());
 
-  const winner =
-       rankedEligible.find(r => hasRealFund(r.symbol) && fresh(r))  // best fresh name with real fundamentals
-    || rankedEligible.find(r => fresh(r))                           // else best fresh name
-    || rankedEligible.find(r => hasRealFund(r.symbol))              // else all fresh names exhausted — fall back
-    || rankedEligible[0];
-  const winnerRow = universe.find(u => u.symbol === winner.symbol);
+  const winner = ranked.find(fresh) || ranked[0];
+  const winnerSrc = tradeable.find(s => s.symbol === winner.symbol);
+  const winnerCatalyst = winnerSrc?._catalyst || null;
 
   try {
-    const priceData = winnerRow._price;
-    const realFund = winnerRow.fundamentals.fields;
+    const priceData = winnerSrc?._price;
 
-    // ---- LLM writes ONLY the narrative for the already-chosen winner ----
-    const NARRATIVE_PROMPT = `You are a short-term momentum trader writing a quick brief for Indian market swing traders. Today is ${date}.
-
-This Stock of the Day was selected by a MOMENTUM model (short-term price strength + volume), NOT a long-term value model. It is a SWING TRADE, not a buy-and-hold. Explain it using ONLY the real data provided — do not invent numbers.
+    // ---- LLM writes the narrative AND gets a final veto on weak picks ----
+    const NARRATIVE_PROMPT = `You are a short-term momentum trader writing a quick brief for Indian swing traders. Today is ${date}. This is a SWING TRADE (5-10 days), not buy-and-hold. Use ONLY the real data provided — do not invent numbers.
 
 Selected: ${winner.fullName} (${winner.symbol}), sector ${winner.sector}
-Momentum-model scores (0-100 percentile): Momentum ${winner.factors.momentum}, Quality-filter ${winner.factors.quality}, Volume ${winner.factors.volume}, Low-Vol ${winner.factors.lowVol}. Composite ${winner.composite} (${winner.verdict}).
-Short-term returns: ${JSON.stringify(winner.shortReturns)} (r1d/r1w/r1m as decimals)
-Volume ratio (recent/baseline): ${winner.volumeRatio}
-Annualized volatility: ${winner.annualizedVol}%
-Real fundamentals (context only, source ${winnerRow.fundamentals.source}): ${JSON.stringify(realFund)}
+Scores (0-100): Momentum ${winner.factors.momentum}, Volume ${winner.factors.volume}, Catalyst ${winner.factors.catalyst}, Technicals ${winner.factors.technicals}. Composite ${winner.composite} (${winner.verdict}).
+Short-term returns (r1d/r1w/r1m): ${JSON.stringify(winner.shortReturns)}
+Relative volume (today vs 20-day avg): ${winnerSrc?._qm?.relVol}x
+Catalyst: ${winnerCatalyst ? `${winnerCatalyst.type} (confidence ${winnerCatalyst.confidence}, impact ${winnerCatalyst.impact}/10) — ${winnerCatalyst.summary}` : 'none identified'}
+
+CRITICAL RULE: If this stock is only moving because of general market momentum, or you cannot point to the specific company catalyst above as a genuine reason to buy, set "noPick": true. Do NOT force a thesis on a weak pick.
 
 Return ONLY valid JSON (no markdown):
 {
-  "estimatedUpside": "short-term, e.g. 5-8%",
+  "noPick": false,
+  "estimatedUpside": "e.g. 5-8%",
   "riskLevel": "Low" | "Medium" | "High",
-  "horizon": "days to 1-2 weeks",
-  "momentumNotes": {"positives":["ref a real short-term metric"],"negatives":["ref a risk"]},
-  "newsSummary": "1-2 sentences on any recent catalyst driving the move",
-  "summary": "2-3 sentence swing-trade thesis: why the short-term momentum is attractive now",
-  "whyToday": "The single most important reason this has momentum today"
-}
-This is a short-term momentum trade. Reference only the real numbers above. Return ONLY the JSON.`;
+  "horizon": "5-10 days",
+  "momentumNotes": {"positives":["ref a real metric"],"negatives":["ref a risk"]},
+  "newsSummary": "1-2 sentences on the catalyst",
+  "summary": "2-3 sentence swing thesis grounded in the catalyst + momentum",
+  "whyToday": "the single most important reason to buy today"
+}`;
 
     let narrative = {};
     try {
@@ -502,36 +475,41 @@ This is a short-term momentum trade. Reference only the real numbers above. Retu
       }
     } catch (er) { narrative = {}; }
 
+    // Item 6: the LLM can veto a pick it can't justify with a specific catalyst.
+    if (narrative?.noPick === true) {
+      return noTrade(`LLM vetoed ${winner.symbol}: no convincing company-specific catalyst`, { rejectedPick: winner.symbol });
+    }
+
     // Assemble pick from DETERMINISTIC scores + LLM narrative
     const pick = {
       ticker: winner.symbol, fullName: winner.fullName, sector: winner.sector,
-      strategy: 'momentum-swing',
+      strategy: 'quality-momentum',
       factors: {
         momentum: { score: winner.factors.momentum, positives: narrative?.momentumNotes?.positives || [], negatives: narrative?.momentumNotes?.negatives || [] },
-        quality: { score: winner.factors.quality },
         volume: { score: winner.factors.volume },
-        lowVol: { score: winner.factors.lowVol },
+        catalyst: { score: winner.factors.catalyst },
+        technicals: { score: winner.factors.technicals },
       },
       shortReturns: winner.shortReturns,
       volumeRatio: winner.volumeRatio,
-      fundamentals: realFund,
-      fundamentalsSource: winnerRow.fundamentals.source,
+      relVol: winnerSrc?._qm?.relVol ?? null,
+      catalyst: winnerCatalyst ? { type: winnerCatalyst.type, confidence: winnerCatalyst.confidence, impact: winnerCatalyst.impact, stars: winnerCatalyst.stars, points: winnerCatalyst.points, summary: winnerCatalyst.summary } : null,
       annualizedVol: winner.annualizedVol,
       composite: winner.composite,
       verdict: winner.verdict,
       estimatedUpside: narrative?.estimatedUpside || null,
       riskLevel: narrative?.riskLevel || null,
-      horizon: narrative?.horizon || 'days to 1-2 weeks',
-      newsSummary: narrative?.newsSummary || null,
+      horizon: narrative?.horizon || '5-10 days',
+      newsSummary: narrative?.newsSummary || winnerCatalyst?.summary || null,
       summary: narrative?.summary || null,
       whyToday: narrative?.whyToday || null,
     };
     pick.date = date;
     pick.pickedAt = new Date().toISOString();
     pick.discovery = sources;
-    pick.candidatePool = universe.length;
-    pick.fundCoverage = fundCoverage;
-    pick.runnerUp = rankedEligible[1] ? { ticker: rankedEligible[1].symbol, composite: rankedEligible[1].composite } : null;
+    pick.candidatePool = passed.length;
+    pick.pipeline = { priced: priced.length, passedFilter: passed.length, catalystChecked: catalystPool.length, tradeable: tradeable.length };
+    pick.runnerUp = ranked[1] ? { ticker: ranked[1].symbol, composite: ranked[1].composite } : null;
 
     // Entry price = previous close, captured at pick time from data we already have.
     // This is rock-solid (no second fetch that could be rate-limited/403'd) and is a

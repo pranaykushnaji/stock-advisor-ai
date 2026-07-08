@@ -144,6 +144,21 @@ function toNum(v) {
     snapshot.data.shortDeals = (bulk.data?.SHORT_DEALS_DATA || []).slice(0, 20);
   }
 
+  // 3b. ASM/GSM surveillance list — best-effort. Stocks under Additional/Graded Surveillance
+  //     are operator-prone; the pick filter hard-rejects them. If the endpoint shape changes
+  //     or NSE blocks it, this just stays empty and the filter simply skips the surveillance
+  //     check (graceful). Symbols are collected from whatever nested arrays are present.
+  const asm = await tryFetch('ASM list', () => n.getDataByEndpoint('/api/reportASM'));
+  snapshot.diag.surveillance = asm.ok;
+  if (asm.ok) {
+    const syms = [];
+    const pull = (arr) => { for (const x of (arr || [])) { const s = x?.symbol || x?.SYMBOL; if (s) syms.push(String(s).toUpperCase().trim()); } };
+    pull(asm.data?.longterm?.data);
+    pull(asm.data?.shortterm?.data);
+    pull(asm.data?.data);
+    snapshot.data.surveillance = [...new Set(syms)];
+  }
+
   // 4. Sample delivery % for a couple names (proves per-stock delivery data works)
   const delivProbe = await tryFetch('delivery (RELIANCE)', () => n.getEquityDetails('RELIANCE'));
   snapshot.diag.deliveryData = delivProbe.ok;

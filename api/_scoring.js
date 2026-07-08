@@ -1,5 +1,5 @@
 // api/_scoring.js
-import { computeIndicators } from './_indicators.js';
+import { computeIndicators, ema } from './_indicators.js';
 // Deterministic factor scoring. The LLM no longer supplies fundamentals numbers;
 // it only scores what real data can't provide, and writes qualitative summaries.
 //
@@ -278,6 +278,95 @@ export function scoreMomentumUniverse(candidates, opts = {}) {
   const clean = scored.filter(s => s.tradeable);
   clean.sort((a, b) => (b.composite ?? -1) - (a.composite ?? -1));
   return { ranked: clean, rejected: scored.filter(s => !s.tradeable) };
+}
+
+// ---------- QUALITY-MOMENTUM entry filter + scoring (the discovery-quality rework) ----------
+// Only trade high-quality momentum, not every top gainer. A candidate must pass ALL of:
+//   price > 20 EMA, 20 EMA > 50 EMA, today's vol > 1.8× 20-day avg, today's gain > Nifty gain,
+//   price within 8% of the 52-week high, and daily traded value > ₹75 Cr.
+// Plus hard-reject red flags (gap-up >8%, circuit-locked, ASM/GSM surveillance, illiquid).
+// ctx: { niftyGainPct, tradedValueCr, pChange, open, prevClose, dayHigh, dayLow, surveillance }.
+export function qualityMomentumChecks(closes, volumes, ctx = {}) {
+  const price = Array.isArray(closes) && closes.length ? closes[closes.length - 1] : (ctx.price ?? null);
+  const ema20 = ema(closes, 20), ema50 = ema(closes, 50);
+  const hi52 = Array.isArray(closes) && closes.length ? Math.max(...closes.slice(-252)) : null;
+  const vols = (volumes || []).filter(v => v != null && isFinite(v));
+  const todayVol = ctx.todayVolume ?? (vols.length ? vols[vols.length - 1] : null);
+  const avg20Vol = vols.length >= 21 ? vols.slice(-21, -1).reduce((a, b) => a + b, 0) / 20
+    : (vols.length ? vols.reduce((a, b) => a + b, 0) / vols.length : null);
+  const relVol = (todayVol != null && avg20Vol) ? todayVol / avg20Vol : null;
+
+  const checks = {
+    priceAboveEma20: (price != null && ema20 != null) ? price > ema20 : null,
+    ema20AboveEma50: (ema20 != null && ema50 != null) ? ema20 > ema50 : null,
+    volumeSurge: relVol != null ? relVol >= 1.8 : null,
+    beatsNifty: (ctx.pChange != null && ctx.niftyGainPct != null) ? ctx.pChange > ctx.niftyGainPct : null,
+    near52wHigh: (price != null && hi52) ? price >= 0.92 * hi52 : null,
+    liquidValue: ctx.tradedValueCr != null ? ctx.tradedValueCr > 75 : null,
+  };
+  const failed = Object.entries(checks).filter(([, v]) => v === false).map(([k]) => k);
+  const undetermined = Object.entries(checks).filter(([, v]) => v == null).map(([k]) => k);
+  const pass = failed.length === 0 && undetermined.length <= 1; // tolerate 1 missing input
+
+  const rejects = [];
+  const gapUp = (ctx.open != null && ctx.prevClose) ? (ctx.open - ctx.prevClose) / ctx.prevClose * 100 : null;
+  if (gapUp != null && gapUp > 8) rejects.push(`gap-up ${gapUp.toFixed(1)}%`);
+  if (ctx.surveillance) rejects.push('surveillance (ASM/GSM)');
+  if (ctx.tradedValueCr != null && ctx.tradedValueCr < 75) rejects.push(`illiquid (₹${ctx.tradedValueCr.toFixed(0)}Cr)`);
+  if (ctx.dayHigh != null && ctx.dayLow != null && ctx.pChange != null) {
+    if (ctx.dayHigh === ctx.dayLow) rejects.push('circuit-locked');
+    else if (price != null && price >= ctx.dayHigh * 0.999 && ctx.pChange >= 5) rejects.push('near upper circuit');
+    else if (price != null && price <= ctx.dayLow * 1.001 && ctx.pChange <= -5) rejects.push('near lower circuit');
+  }
+  return { pass, checks, failed, undetermined, relVol: relVol != null ? +relVol.toFixed(2) : null, hi52, rejects };
+}
+
+// Generic weighted composite over present factors (renormalized over what's available).
+export function weightedComposite(scores, weights) {
+  const parts = [];
+  for (const [k, w] of Object.entries(weights)) if (scores[k] != null && isFinite(scores[k])) parts.push({ v: scores[k], w });
+  if (!parts.length) return null;
+  const wsum = parts.reduce((a, p) => a + p.w, 0);
+  return +(parts.reduce((a, p) => a + p.v * p.w, 0) / wsum).toFixed(1);
+}
+
+// Final ranking for the quality-momentum strategy. NO fundamentals — for 5-10 day trades,
+// price/volume/catalysts matter, not valuation. Momentum 45 / Volume 25 / Catalyst 20 / Tech 10.
+// Each candidate must carry catalystPoints (0-40) attached by the caller.
+export const QUALITY_MOMENTUM_WEIGHTS = { momentum: 0.45, volume: 0.25, catalyst: 0.20, technicals: 0.10 };
+export function scoreQualityMomentum(candidates, opts = {}) {
+  const benchCloses = opts.benchCloses || null;
+  const enriched = candidates.map(c => ({
+    ...c,
+    _shortRet: computeShortReturns(c.closes),
+    _shortMom: shortMomentum(computeShortReturns(c.closes)),
+    _vol: annualizedVol(c.closes),
+    _volSig: volumeSignal(c.volumes),
+    _ind: computeIndicators(c.closes || [], { benchCloses }),
+  }));
+  const momRank = rankMetric(enriched, s => volScaledMomentum(s._shortMom, s._vol));
+  const volRank = rankMetric(enriched, s => s._volSig ? s._volSig.ratio : null);
+  const scored = enriched.map(s => {
+    const scores = {
+      momentum: momRank.get(s),
+      volume: volRank.get(s),
+      catalyst: Math.max(0, Math.min(100, (s.catalystPoints || 0) / 40 * 100)),
+      technicals: s._ind?.techScore ?? 50,
+    };
+    const comp = weightedComposite(scores, QUALITY_MOMENTUM_WEIGHTS);
+    return {
+      symbol: s.symbol, fullName: s.fullName, sector: s.sector || 'UNKNOWN',
+      factors: scores, shortReturns: s._shortRet,
+      volumeRatio: s._volSig ? s._volSig.ratio : null,
+      annualizedVol: s._vol != null ? +(s._vol * 100).toFixed(1) : null,
+      catalystPoints: s.catalystPoints || 0, catalyst: s.catalyst || null,
+      indicators: s._ind ? { rsi: s._ind.rsi, techScore: s._ind.techScore, relativeStrength: s._ind.relativeStrength } : null,
+      composite: comp,
+      verdict: comp == null ? 'UNKNOWN' : comp >= 65 ? 'BUY' : comp >= 45 ? 'WATCH' : 'AVOID',
+    };
+  });
+  scored.sort((a, b) => (b.composite ?? -1) - (a.composite ?? -1));
+  return scored;
 }
 
 // ---------- orchestration: score a whole candidate universe cross-sectionally ----------
