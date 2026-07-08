@@ -101,6 +101,7 @@ async function fetchPrice(ticker, fullName) {
           open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
           prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
           symbol: meta.symbol, currency: meta.currency,
+          name: meta.longName || meta.shortName || null, // real company name → better news queries
           marketState: meta.marketState || null,
           closes: (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null),
           volumes: (result?.indicators?.quote?.[0]?.volume || []).filter(v => v != null)
