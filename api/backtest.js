@@ -17,7 +17,8 @@
 //    the composite WEIGHTS differ between variants, so the comparison is apples-to-apples.
 //  - This is an approximation for learning, not a broker-grade backtest.
 
-import { scoreMomentumUniverse } from './_scoring.js';
+import { scoreMomentumUniverse, scoreQualityMomentum } from './_scoring.js';
+import { classifyRegime, regimeGates } from './_market-regime.js';
 import { fetchFundamentals } from './_fundamentals.js';
 import { SELL_RULES, exitBands } from './_sell-engine.js';
 
@@ -294,6 +295,48 @@ function evalVariantForDay(ranked, weights, holdDays, bench, opts = {}) {
   };
 }
 
+// Point-in-time benchmark close series as of `date` (for regime + relative strength).
+function benchClosesAsOf(bench, date) {
+  if (!bench) return null;
+  return bench.filter(r => r.date <= date).map(r => r.close).filter(v => v != null && !isNaN(v));
+}
+
+// LIVE-ENGINE variant: score the day's candidates with the SAME deterministic scorer production
+// uses (scoreQualityMomentum → multi-signal confidence + reward/risk), classify the market regime
+// from the point-in-time Nifty series, and apply the regime-adaptive confidence/RR gates. This is
+// what keeps the backtest synchronized with production for the parts that CAN be replayed on
+// history. What CANNOT (and is therefore neutralized here, not faked): the verified-catalyst
+// requirement, official NSE filings, the intraday relVol/session normalization, sector-breadth
+// strength, and institutional bulk-deal data — none of which are stored historically. So this
+// tests the momentum/RS/volume/technicals + regime + RR spine; it does NOT prove the catalyst
+// gate. A NO-TRADE day (gates not met) is recorded as such, mirroring production's core rule.
+function evalQualityMomentumLive(candidates, holdDays, bench, benchCloses, opts = {}) {
+  const regime = classifyRegime(benchCloses || []);
+  const gates = regimeGates(regime.regime);
+  const scored = scoreQualityMomentum(
+    candidates.map(c => ({ symbol: c.symbol, fullName: c.fullName, closes: c.closes, volumes: c.volumes, sectorScore: 50, catalystPoints: 0 })),
+    { benchCloses, regimeScore: regime.score });
+  if (!scored.length) return { noTrade: true, reason: 'no candidates', regime: regime.regime };
+  const winner = scored[0]; // already ranked by confidence
+  const rr = winner.rewardRisk?.rr ?? 0;
+  if ((winner.confidence ?? 0) < gates.minConfidence || rr < gates.minRR) {
+    return { noTrade: true, reason: `gates: conf ${winner.confidence}<${gates.minConfidence} or rr ${rr}<${gates.minRR}`, regime: regime.regime, pick: winner.symbol, confidence: winner.confidence };
+  }
+  const src = candidates.find(c => c.symbol === winner.symbol);
+  if (!src) return { noTrade: true, reason: 'winner missing forward data', regime: regime.regime };
+  const fwd = src._forward.slice(0, holdDays);
+  const last = fwd[fwd.length - 1];
+  const holdReturn = last ? +(((last.close - src._entryClose) / src._entryClose) * 100).toFixed(2) : null;
+  const sim = (opts.simFn || simSellEngine)(src._entryClose, fwd, src.closes, opts);
+  const benchRet = benchForwardReturn(bench, src._entryDate, holdDays);
+  return {
+    noTrade: false, pick: winner.symbol, confidence: winner.confidence, regime: regime.regime,
+    rewardRisk: rr, holdReturn, simReturn: sim ? sim.retPct : null,
+    benchReturn: benchRet, vsBench: (holdReturn != null && benchRet != null) ? +(holdReturn - benchRet).toFixed(2) : null,
+    entryDate: src._entryDate,
+  };
+}
+
 // Enumerate ISO dates from `from` to `to` inclusive (calendar days; non-trading days
 // simply yield no candidates and are skipped in aggregation).
 function enumerateDates(from, to, step) {
@@ -353,6 +396,9 @@ export default async function handler(req, res) {
     for (const name of Object.keys(VARIANTS)) {
       acc[name] = { trades: [], picks: [] };
     }
+    // The live-engine variant tracked separately: it has NO-TRADE days (regime/RR gates), so its
+    // denominator differs from the always-picks weight variants above.
+    const live = { trades: [], picks: [], noTradeDays: 0 };
     let tradingDays = 0;
 
     for (const date of dates) {
@@ -365,6 +411,10 @@ export default async function handler(req, res) {
         acc[name].trades.push(ev);
         acc[name].picks.push({ date, ...ev });
       }
+      // Live quality-momentum + regime scorer (production-synchronized deterministic spine).
+      const lv = evalQualityMomentumLive(built.candidates, holdDays, bench, benchClosesAsOf(bench, date), { slippageBps, simFn });
+      if (lv.noTrade) { live.noTradeDays++; live.picks.push({ date, ...lv }); }
+      else if (lv.holdReturn != null) { live.trades.push(lv); live.picks.push({ date, ...lv }); }
     }
 
     // Aggregate per variant.
@@ -392,6 +442,20 @@ export default async function handler(req, res) {
       };
     }
 
+    // Live-engine variant summary (production-synchronized): includes NO-TRADE selectivity.
+    const lt = live.trades;
+    const liveSummary = lt.length ? {
+      tradingDaysConsidered: tradingDays,
+      trades: lt.length,
+      noTradeDays: live.noTradeDays,
+      tradeRate: +((lt.length / Math.max(1, tradingDays)) * 100).toFixed(1),
+      avgHoldReturn: +(lt.reduce((a, x) => a + (x.holdReturn ?? 0), 0) / lt.length).toFixed(2),
+      avgSimReturn: +(lt.reduce((a, x) => a + (x.simReturn ?? 0), 0) / lt.length).toFixed(2),
+      winRateSim: +((lt.filter(x => x.simReturn != null && x.simReturn > 0).length / lt.length) * 100).toFixed(1),
+      avgVsNifty: +(lt.reduce((a, x) => a + (x.vsBench ?? 0), 0) / lt.length).toFixed(2),
+      avgConfidence: +(lt.reduce((a, x) => a + (x.confidence ?? 0), 0) / lt.length).toFixed(1),
+    } : { trades: 0, noTradeDays: live.noTradeDays, tradingDaysConsidered: tradingDays };
+
     // Rank variants by avg sim-engine return (the metric closest to how it'd actually trade).
     const leaderboard = Object.entries(summary)
       .filter(([, s]) => s.trades > 0)
@@ -409,11 +473,15 @@ export default async function handler(req, res) {
       benchmark: bench ? 'NIFTY50 (^NSEI)' : 'unavailable',
       variantWeights: VARIANTS,
       summary,
+      liveEngine: liveSummary,
       leaderboard,
       picksByVariant: Object.fromEntries(Object.entries(acc).map(([k, v]) => [k, v.picks])),
+      livePicks: live.picks,
       caveats: [
         `Universe = ${uniChoice} + extras, NOT that day\'s live discovery output.`,
-        'All variants share point-in-time factor ranks; only composite weights differ.',
+        'All weight variants share point-in-time factor ranks; only composite weights differ.',
+        'liveEngine = production scoreQualityMomentum + regime + reward/risk gates (the synchronized spine).',
+        'liveEngine does NOT test the verified-catalyst gate, NSE filings, intraday relVol, sector-breadth, or institutional data — none are stored historically, so they are neutralized (catalyst=0, sector=50), NOT faked.',
         'Fundamentals junk-filter uses CURRENT ratios (not point-in-time).',
         `Sim exits model gap-downs (fill at open through the stop) + ${slippageBps}bps slippage; buy-and-hold return does not.`,
         'Survivorship bias: the universe is names liquid TODAY, so failed/delisted names are absent (results skew optimistic).',
@@ -442,6 +510,9 @@ export default async function handler(req, res) {
   const simExit = simFn(entry, fwd, pickRow.closes, { slippageBps });
   const benchRet = benchForwardReturn(bench, pickRow._entryDate, holdDays);
 
+  // Production-synchronized live-engine pick for the same day (regime + confidence + RR gates).
+  const livePick = evalQualityMomentumLive(built.candidates, holdDays, bench, benchClosesAsOf(bench, date), { slippageBps, simFn });
+
   const leaderboard = ranked.slice(0, 5).map(r => {
     const ex = r._row._forward.slice(0, holdDays);
     const last = ex[ex.length - 1];
@@ -467,10 +538,12 @@ export default async function handler(req, res) {
     },
     performance: { holdReturn, vsNifty: (holdReturn != null && benchRet != null) ? +(holdReturn - benchRet).toFixed(2) : null, niftyReturn: benchRet, bestDay, worstDay, dayByDay: perf },
     simulatedSellEngine: simExit,
+    liveEnginePick: livePick,
     leaderboard,
     caveats: [
       'Candidate pool = Nifty-50 + extras, NOT that day\'s live discovery output.',
       'Momentum/volume are point-in-time accurate; fundamentals junk-filter uses current ratios.',
+      'liveEnginePick = production scoreQualityMomentum + regime + RR gates; catalyst/sector/institutional are neutralized (not stored historically), so it tests the deterministic spine only.',
       'Approximation for learning, not a broker-grade backtest. Past results != future results.',
     ],
   });
