@@ -163,7 +163,12 @@ function toNum(v) {
   //     Indian stocks. Fetched from GitHub's unblocked IP (Vercel/global news APIs barely
   //     cover Indian mid/small-caps). Keep the last ~72h; the catalyst engine treats a fresh
   //     filing as a VERIFIED catalyst and lets the LLM classify the filing subject.
-  const ann = await tryFetch('announcements', () => n.getDataByEndpoint('/api/corporate-announcements?index=equities'));
+  // Pull the full trailing 3-day window (NSE wants DD-MM-YYYY) so we capture ALL recent
+  // filings, not just the latest ~20 the default call returns.
+  const _pad = (x) => String(x).padStart(2, '0');
+  const _fmt = (d) => `${_pad(d.getDate())}-${_pad(d.getMonth() + 1)}-${d.getFullYear()}`;
+  const annEndpoint = `/api/corporate-announcements?index=equities&from_date=${_fmt(new Date(Date.now() - 3 * 86400000))}&to_date=${_fmt(new Date())}`;
+  const ann = await tryFetch('announcements', () => n.getDataByEndpoint(annEndpoint));
   snapshot.diag.announcements = ann.ok;
   if (ann.ok) {
     const list = Array.isArray(ann.data) ? ann.data : (ann.data?.data || []);
