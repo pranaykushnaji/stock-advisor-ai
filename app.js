@@ -1028,7 +1028,32 @@ async function renderTracker(){
     if(r.job==='stock-of-the-day'){if(s.pick)return `picked ${s.pick.ticker} (score ${s.pick.composite})`;if(s.entryRejected)return `not traded — ${s.entryRejected}`;if(s.reason)return `No Trade — ${s.reason}`;return s.status||'ran';}
     if(r.job==='refresh-prices')return `updated ${s.updated||0}${s.closed?` · booked ${s.closed}`:''}`;
     return s.status||(s.ok?'ok':'?');}
-  const EXPECTED=[{t:'08:45',job:'nse-snapshot',label:'Snapshot · pre-open'},{t:'10:10',job:'sell-check',label:'Sell-check'},{t:'11:10',job:'sell-check',label:'Sell-check'},{t:'12:00',job:'nse-snapshot',label:'Snapshot · midday'},{t:'12:10',job:'sell-check',label:'Sell-check'},{t:'13:10',job:'sell-check',label:'Sell-check'},{t:'14:10',job:'sell-check',label:'Sell-check'},{t:'14:15',job:'nse-snapshot',label:'Snapshot · pre-pick'},{t:'14:30',job:'stock-of-the-day',label:'Daily pick'},{t:'15:10',job:'sell-check',label:'Sell-check'},{t:'15:40',job:'refresh-prices',label:'Refresh + exits'}];
+  // Matches the deployed Cloudflare Worker schedule (hourly engine): a snapshot at :45 past,
+  // a buy-scan at :00, a sell-check at :10, then EOD refresh + analytics. Keep in sync with
+  // cron-worker/worker.js — a mismatch here shows phantom "missed" rows.
+  const EXPECTED=[
+    {t:'08:45',job:'nse-snapshot',label:'Snapshot · pre-open'},
+    {t:'09:45',job:'nse-snapshot',label:'Snapshot'},
+    {t:'10:00',job:'stock-of-the-day',label:'Buy scan'},
+    {t:'10:10',job:'sell-check',label:'Sell-check'},
+    {t:'10:45',job:'nse-snapshot',label:'Snapshot'},
+    {t:'11:00',job:'stock-of-the-day',label:'Buy scan'},
+    {t:'11:10',job:'sell-check',label:'Sell-check'},
+    {t:'11:45',job:'nse-snapshot',label:'Snapshot'},
+    {t:'12:00',job:'stock-of-the-day',label:'Buy scan'},
+    {t:'12:10',job:'sell-check',label:'Sell-check'},
+    {t:'12:45',job:'nse-snapshot',label:'Snapshot'},
+    {t:'13:00',job:'stock-of-the-day',label:'Buy scan'},
+    {t:'13:10',job:'sell-check',label:'Sell-check'},
+    {t:'13:45',job:'nse-snapshot',label:'Snapshot'},
+    {t:'14:00',job:'stock-of-the-day',label:'Buy scan'},
+    {t:'14:10',job:'sell-check',label:'Sell-check'},
+    {t:'14:45',job:'nse-snapshot',label:'Snapshot'},
+    {t:'15:00',job:'stock-of-the-day',label:'Buy scan'},
+    {t:'15:10',job:'sell-check',label:'Sell-check'},
+    {t:'15:40',job:'refresh-prices',label:'Refresh + book exits'},
+    {t:'16:10',job:'analytics',label:'Analytics · learn from rejects'}
+  ];
   const schedRows=EXPECTED.slice().sort((a,b)=>toMin(a.t)-toMin(b.t)).map(e=>{
     const em=toMin(e.t);const hit=todayRuns.find(r=>r.job===e.job&&Math.abs(toMin(istTime(r.ts))-em)<=12&&!r._used);if(hit)hit._used=true;
     let st,cls,detail='';
