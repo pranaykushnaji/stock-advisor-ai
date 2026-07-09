@@ -788,17 +788,16 @@ function renderRealizedSection(trades){
 
 async function checkSotd(){
   const pick=await fetchDailyPick();
-  if(!pick)return;
-  sotdPick=pick;
-  // Badge on nav
+  sotdPick=pick||null;
+  // Only a real, actionable buy is "NEW" — a no-trade scan has nothing to pop up.
+  const isRealPick=pick&&pick.ticker&&!pick.noTrade;
   const badge=document.getElementById('daily-badge');
-  if(badge)badge.textContent='NEW';
-  // Show popup once per day
-  const seen=localStorage.getItem('sotd_seen');
-  if(seen!==pick.date){
-    showSotdPopup(pick);
+  if(badge)badge.textContent=isRealPick?'NEW':'';
+  if(isRealPick){
+    const seen=localStorage.getItem('sotd_seen');
+    if(seen!==pick.date)showSotdPopup(pick);
   }
-  // Pre-render daily tab
+  // Always (re)render the AI Pick tab — it features the latest bought stock or the watchlist.
   renderDailyTab(pick);
 }
 
@@ -809,7 +808,7 @@ function showSotdPopup(pick){
   if(!pick.verdict)pick.verdict=computeVerdict(conf);
   body.innerHTML=`
     <div style="text-align:center;margin-bottom:18px;">
-      <div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">${pick.date} · Today's Top Pick</div>
+      <div style="font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;">${pick.date} · AI Pick</div>
       <div class="stock-name" style="font-size:30px;">${esc(pick.ticker)}</div>
       <div class="stock-meta">${esc(pick.fullName)} · ${esc(pick.sector)}</div>
       <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px;">
@@ -838,37 +837,112 @@ function dismissSotd(){
   if(badge)badge.textContent='';
 }
 
+// Quality-momentum factor labels (the shape the hourly buy-scan now emits).
+const QM_FACTOR_LABELS=[['momentum','Momentum'],['relStrength','Rel. Strength'],['volume','Volume'],['catalyst','Catalyst'],['technicals','Technicals'],['sector','Sector']];
+
+// Featured "AI Pick" card — renders the latest bought stock (or a fresh pick) using the
+// quality-momentum fields the engine actually produces (confidence, per-signal scores,
+// catalyst, regime, reward/risk, live return). Works for both a bouquet entry and a raw pick.
+function featuredPickCard(p){
+  const conf=Math.round(p.effectiveConfidence??p.confidence??p.composite??universalScore(p));
+  const verdict=p.verdict||computeVerdict(conf);
+  const vBadge=verdict==='BUY'?'verdict-buy':verdict==='AVOID'?'verdict-avoid':'verdict-hold';
+  const vClass=verdict==='BUY'?'buy':verdict==='AVOID'?'avoid':'hold';
+  const cur=p.currentPrice||p.entryPrice;
+  const gain=(p.entryPrice&&cur&&p.entryPrice>0)?((cur-p.entryPrice)/p.entryPrice*100):null;
+  const F=p.factors||{};
+  const factorRows=QM_FACTOR_LABELS.map(([k,lbl])=>{
+    const raw=F[k]; const s=(raw&&typeof raw==='object')?raw.score:raw;
+    if(s==null)return '';
+    const shown=Math.max(0,Math.min(100,s));
+    return`<div class="cw-row"><span class="cw-label">${lbl}</span><div class="cw-bar"><div class="cw-fill" style="width:${shown}%;background:${scoreColor(shown)};"></div></div><span class="cw-score">${s}</span></div>`;
+  }).join('');
+  const cat=p.catalyst;
+  const catHtml=(cat&&cat.type)?`<div class="valuation-box"><span>Catalyst: </span>${esc(cat.type)}${cat.verification?` · <strong style="color:${cat.verification==='VERIFIED'?'var(--green)':'var(--amber)'};">${esc(cat.verification)}</strong>`:''}${cat.summary?` — ${esc(cat.summary)}`:''}</div>`:'';
+  const priceHtml=p.entryPrice?`<div class="stock-price-row"><span class="stock-price">₹${cur}</span>${gain!=null?`<span class="stock-change ${gain>=0?'up':'down'}">${gain>=0?'+':''}${gain.toFixed(2)}%</span>`:''}<span style="font-size:12px;color:var(--text3);">entry ₹${p.entryPrice}</span></div>`:'';
+  const pills=[
+    p.regime?`<span class="pill">🌐 ${esc(p.regime)} market</span>`:'',
+    (p.rewardRisk&&p.rewardRisk.rr)?`<span class="pill pill-green">⚖ R/R ${p.rewardRisk.rr}</span>`:'',
+    p.riskLevel?`<span class="pill pill-${String(p.riskLevel).toLowerCase()}">⚡ ${esc(p.riskLevel)} Risk</span>`:'',
+    p.estimatedUpside?`<span class="pill">📈 ${esc(p.estimatedUpside)}</span>`:''
+  ].filter(Boolean).join('');
+  return`<div class="result-card ${vClass}">
+    <div class="ai-pick-head">
+      <div style="min-width:0;">
+        <div class="pick-eyebrow"><span class="pick-live">Latest AI Pick</span>${p.date?' · '+esc(p.date):''}</div>
+        <div class="stock-name" style="margin-top:8px;">${esc(p.ticker)}</div>
+        <div class="stock-meta">${esc(p.fullName||'')}${p.sector?' · '+esc(p.sector):''}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;">
+        <span class="verdict-badge ${vBadge}">${verdict}</span>
+        <div class="conf-big" style="color:${scoreColor(conf)};margin-top:8px;">${conf}</div>
+        <div class="pick-eyebrow" style="margin-top:2px;">Confidence</div>
+      </div>
+    </div>
+    ${priceHtml}
+    ${pills?`<div class="meta-pills">${pills}</div>`:''}
+    ${p.whyToday?`<div class="valuation-box"><span>Why: </span>${esc(p.whyToday)}</div>`:''}
+    ${p.summary?`<p class="summary">${esc(p.summary)}</p>`:''}
+    ${catHtml}
+    ${factorRows?`<div class="conf-breakdown"><div class="section-title">Signal Breakdown</div><div class="conf-weights">${factorRows}</div></div>`:''}
+  </div>`;
+}
+
+// "No trade" view — the engine is selective, so most scans hold out. Surface the top-5
+// candidates it evaluated (ranked by effective confidence) with WHY each fell short.
+function consideredCard(pick){
+  const list=[...(pick.considered||[])]
+    .sort((a,b)=>((b.effectiveConfidence??b.confidence??0)-(a.effectiveConfidence??a.confidence??0)))
+    .slice(0,5);
+  const rows=list.map((c,i)=>{
+    const conf=Math.round(c.effectiveConfidence??c.confidence??0);
+    const relvol=c.relVol!=null?(+c.relVol).toFixed(1)+'×':'—';
+    const cat=c.catalyst?esc(c.catalyst):'no catalyst';
+    const ver=c.verification&&c.verification!=='UNVERIFIED'?' · '+esc(c.verification):'';
+    const inst=c.institutional!=null?Math.round(c.institutional):'—';
+    return`<div class="cand-row">
+      <div class="cand-rank">${i+1}</div>
+      <div class="cand-main"><div class="cand-tkr">${esc(c.ticker)}</div>
+        <div class="cand-sub">RVOL ${relvol} · ${cat}${ver}${c.negative?' · ⚠ negative':''}</div></div>
+      <div class="cand-metrics"><div class="cand-conf" style="color:${scoreColor(conf)};">${conf}</div><div class="cand-lbl">conf</div></div>
+      <div class="cand-metrics"><div class="cand-conf">${inst}</div><div class="cand-lbl">inst</div></div>
+    </div>`;
+  }).join('')||'<div style="color:var(--text3);font-size:13px;padding:8px 0;">No candidates in the last scan.</div>';
+  return`<div class="result-card hold">
+    <div class="pick-eyebrow" style="color:var(--amber);">◆ No trade right now</div>
+    <div class="stock-name" style="font-size:21px;margin:8px 0 4px;">Top candidates being watched</div>
+    <div class="stock-meta" style="margin-bottom:16px;">${esc(pick.reason||"Holding out for a verified catalyst plus confirmed volume.")}</div>
+    <div class="cand-list">${rows}</div>
+    ${pick.market?`<div class="valuation-box" style="margin-top:16px;"><span>Market: </span>${esc(pick.market)}</div>`:''}
+  </div>`;
+}
+
+// AI Pick tab: feature the LATEST stock actually added to the bouquet; if none, show the
+// engine's current top-5 watchlist from the latest scan. History table below either way.
 async function renderDailyTab(pick){
   const el=document.getElementById('daily-content');
-  if(!pick){
-    el.innerHTML='<div class="empty-state"><div class="empty-icon">⭐</div><h3>No pick yet</h3><p>The Stock of the Day is generated every morning at 9 AM IST.</p></div>';
-    return;
-  }
-  // Compute score; support both new factor picks and legacy agent picks
-  if(pick.factors){
-    pick.composite=computeFactorComposite(pick.factors);
-    pick.confidence=pick.composite;
-  }else if(pick.agents){
-    recomputeAgentScores(pick.agents);
-    pick.confidence=computeConfidence(pick.agents);
-    pick.composite=pick.confidence;
-  }
-  pick.verdict=computeVerdict(pick.confidence);
-  renderResult(pick,el,null,null);
-  // Prepend the "why today" banner
-  const poolTxt=pick.candidatePool?`Selected from ${pick.candidatePool} candidates discovered via live news + market movers`:'Selected from live market discovery';
-  const banner=document.createElement('div');
-  banner.className='result-card';
-  banner.style.cssText='border-top:2px solid var(--accent);margin-bottom:16px;';
-  banner.innerHTML=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;"><span style="font-size:22px;">⭐</span><div><div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;">Today's Pick · ${esc(pick.date)}</div><div style="font-size:12px;color:var(--text3);">${esc(poolTxt)}</div></div></div><div style="font-size:14px;color:var(--text2);line-height:1.7;">${esc(pick.whyToday||'')}</div>`;
-  el.insertBefore(banner,el.firstChild);
-
-  // ── POTD history table + consolidated totals ──
   const picks=await getProjectBouquet();
-  const historyHtml=buildPotdHistory(picks);
-  const wrap=document.createElement('div');
-  wrap.innerHTML=historyHtml;
-  el.appendChild(wrap);
+  // Most-recent buy = latest by date, then addedAt.
+  const sorted=[...picks].sort((a,b)=>(String(b.date||'')+String(b.addedAt||'')).localeCompare(String(a.date||'')+String(a.addedAt||'')));
+  const latest=sorted[0]||null;
+
+  let html='';
+  if(latest){
+    html+=featuredPickCard(latest);
+    // If the most recent SCAN found no new trade, still surface what it's watching now.
+    if(pick&&pick.noTrade&&Array.isArray(pick.considered)&&pick.considered.length){
+      html+=consideredCard(pick);
+    }
+  } else if(pick&&Array.isArray(pick.considered)&&pick.considered.length){
+    html+=consideredCard(pick);
+  } else if(pick&&!pick.noTrade&&pick.ticker){
+    html+=featuredPickCard(pick);
+  } else {
+    html+='<div class="empty-state"><div class="empty-icon">🤖</div><h3>No pick yet</h3><p>The engine scans every market hour and only buys on a verified catalyst with confirmed volume. Nothing has qualified yet.</p></div>';
+  }
+  el.innerHTML=html;
+  // POTD history table + consolidated totals.
+  el.insertAdjacentHTML('beforeend', buildPotdHistory(picks));
 }
 
 function buildPotdHistory(picks){
@@ -901,7 +975,7 @@ function buildPotdHistory(picks){
   const totalClass=totalG>=0?'pf-up':'pf-down';
 
   return `<div class="result-card" style="margin-top:20px;">
-    <div class="section-title">📜 Stock of the Day — History</div>
+    <div class="section-title">📜 AI Pick — History</div>
     <div class="potd-table-wrap">
       <table class="potd-table">
         <thead><tr>
