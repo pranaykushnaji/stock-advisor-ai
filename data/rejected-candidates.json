@@ -1,3 +1,736 @@
 {
-  "rejected": []
+  "rejected": [
+    {
+      "id": "2026-07-09|MCX|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.307Z",
+      "ticker": "MCX",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 3.17,
+      "pChange": 4.42,
+      "sector": 50,
+      "entryRefPrice": 2800,
+      "yahooSymbol": "MCX.NS"
+    },
+    {
+      "id": "2026-07-09|NATIONALUM|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.307Z",
+      "ticker": "NATIONALUM",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.9,
+      "pChange": 2.47,
+      "sector": 41,
+      "entryRefPrice": 349.75,
+      "yahooSymbol": "NATIONALUM.NS"
+    },
+    {
+      "id": "2026-07-09|BSE|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.308Z",
+      "ticker": "BSE",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.61,
+      "pChange": 2.13,
+      "sector": 50,
+      "entryRefPrice": 3807,
+      "yahooSymbol": "BSE.NS"
+    },
+    {
+      "id": "2026-07-09|KALYANKJIL|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.308Z",
+      "ticker": "KALYANKJIL",
+      "stage": "hard-reject",
+      "reasons": [
+        "near upper circuit"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 11.67,
+      "pChange": 5.71,
+      "sector": 50,
+      "entryRefPrice": 434.5,
+      "yahooSymbol": "KALYANKJIL.NS"
+    },
+    {
+      "id": "2026-07-09|UNOMINDA|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.308Z",
+      "ticker": "UNOMINDA",
+      "stage": "quality-filter",
+      "reasons": [
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 5.75,
+      "pChange": 0.77,
+      "sector": 50,
+      "entryRefPrice": 1166.2,
+      "yahooSymbol": "UNOMINDA.NS"
+    },
+    {
+      "id": "2026-07-09|OIL|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "OIL",
+      "stage": "quality-filter",
+      "reasons": [
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 3.38,
+      "pChange": 1.97,
+      "sector": 50,
+      "entryRefPrice": 429.7,
+      "yahooSymbol": "OIL.NS"
+    },
+    {
+      "id": "2026-07-09|INDUSTOWER|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "INDUSTOWER",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 5.02,
+      "pChange": 1.88,
+      "sector": 50,
+      "entryRefPrice": 394.3,
+      "yahooSymbol": "INDUSTOWER.NS"
+    },
+    {
+      "id": "2026-07-09|ONGC|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "ONGC",
+      "stage": "quality-filter",
+      "reasons": [
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 3.08,
+      "pChange": 1.15,
+      "sector": 31,
+      "entryRefPrice": 245.53,
+      "yahooSymbol": "ONGC.NS"
+    },
+    {
+      "id": "2026-07-09|TATASTEEL|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "TATASTEEL",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.35,
+      "pChange": -0.7,
+      "sector": 41,
+      "entryRefPrice": 188.09,
+      "yahooSymbol": "TATASTEEL.NS"
+    },
+    {
+      "id": "2026-07-09|GVT&D|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "GVT&D",
+      "stage": "hard-reject",
+      "reasons": [
+        "surveillance (ASM/GSM)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.44,
+      "pChange": 0.77,
+      "sector": 50,
+      "entryRefPrice": 4602.4,
+      "yahooSymbol": "GVT&D.NS"
+    },
+    {
+      "id": "2026-07-09|HINDALCO|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "HINDALCO",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.08,
+      "pChange": 0.42,
+      "sector": 41,
+      "entryRefPrice": 965.25,
+      "yahooSymbol": "HINDALCO.NS"
+    },
+    {
+      "id": "2026-07-09|LODHA|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "LODHA",
+      "stage": "quality-filter",
+      "reasons": [
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 7.82,
+      "pChange": 1.57,
+      "sector": 29,
+      "entryRefPrice": 1141.2,
+      "yahooSymbol": "LODHA.NS"
+    },
+    {
+      "id": "2026-07-09|COALINDIA|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.309Z",
+      "ticker": "COALINDIA",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.26,
+      "pChange": 0.4,
+      "sector": 31,
+      "entryRefPrice": 431.65,
+      "yahooSymbol": "COALINDIA.NS"
+    },
+    {
+      "id": "2026-07-09|CUMMINSIND|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "CUMMINSIND",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.83,
+      "pChange": 0.65,
+      "sector": 27,
+      "entryRefPrice": 5541,
+      "yahooSymbol": "CUMMINSIND.NS"
+    },
+    {
+      "id": "2026-07-09|APLAPOLLO|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "APLAPOLLO",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 3.27,
+      "pChange": -0.02,
+      "sector": 41,
+      "entryRefPrice": 1789.3,
+      "yahooSymbol": "APLAPOLLO.NS"
+    },
+    {
+      "id": "2026-07-09|JSWENERGY|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "JSWENERGY",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.65,
+      "pChange": -0.93,
+      "sector": 26,
+      "entryRefPrice": 537.75,
+      "yahooSymbol": "JSWENERGY.NS"
+    },
+    {
+      "id": "2026-07-09|SUPREMEIND|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "SUPREMEIND",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹63Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.87,
+      "pChange": 0.02,
+      "sector": 50,
+      "entryRefPrice": 3229,
+      "yahooSymbol": "SUPREMEIND.NS"
+    },
+    {
+      "id": "2026-07-09|NMDC|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "NMDC",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.14,
+      "pChange": -0.65,
+      "sector": 41,
+      "entryRefPrice": 84.64,
+      "yahooSymbol": "NMDC.NS"
+    },
+    {
+      "id": "2026-07-09|HINDZINC|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "HINDZINC",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.69,
+      "pChange": 0.28,
+      "sector": 41,
+      "entryRefPrice": 529.2,
+      "yahooSymbol": "HINDZINC.NS"
+    },
+    {
+      "id": "2026-07-09|INDIANB|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "INDIANB",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 3.35,
+      "pChange": -1.39,
+      "sector": 50,
+      "entryRefPrice": 785,
+      "yahooSymbol": "INDIANB.NS"
+    },
+    {
+      "id": "2026-07-09|SBIN|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "SBIN",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.84,
+      "pChange": -1.76,
+      "sector": 20,
+      "entryRefPrice": 1025.8,
+      "yahooSymbol": "SBIN.NS"
+    },
+    {
+      "id": "2026-07-09|JSWSTEEL|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.310Z",
+      "ticker": "JSWSTEEL",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.5,
+      "pChange": -1.87,
+      "sector": 41,
+      "entryRefPrice": 1230.7,
+      "yahooSymbol": "JSWSTEEL.NS"
+    },
+    {
+      "id": "2026-07-09|CGPOWER|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "CGPOWER",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.4,
+      "pChange": -0.16,
+      "sector": 50,
+      "entryRefPrice": 910.1,
+      "yahooSymbol": "CGPOWER.NS"
+    },
+    {
+      "id": "2026-07-09|BHEL|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "BHEL",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.03,
+      "pChange": 0.41,
+      "sector": 27,
+      "entryRefPrice": 386.25,
+      "yahooSymbol": "BHEL.NS"
+    },
+    {
+      "id": "2026-07-09|KFINTECH|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "KFINTECH",
+      "stage": "quality-filter",
+      "reasons": [
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 4.19,
+      "pChange": -2.15,
+      "sector": 50,
+      "entryRefPrice": 874.75,
+      "yahooSymbol": "KFINTECH.NS"
+    },
+    {
+      "id": "2026-07-09|DIXON|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "DIXON",
+      "stage": "quality-filter",
+      "reasons": [
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.93,
+      "pChange": -2.16,
+      "sector": 27,
+      "entryRefPrice": 13559,
+      "yahooSymbol": "DIXON.NS"
+    },
+    {
+      "id": "2026-07-09|NHPC|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "NHPC",
+      "stage": "quality-filter",
+      "reasons": [
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.6,
+      "pChange": -0.1,
+      "sector": 26,
+      "entryRefPrice": 79.08,
+      "yahooSymbol": "NHPC.NS"
+    },
+    {
+      "id": "2026-07-09|NTPC|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "NTPC",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.61,
+      "pChange": -1.54,
+      "sector": 26,
+      "entryRefPrice": 346.75,
+      "yahooSymbol": "NTPC.NS"
+    },
+    {
+      "id": "2026-07-09|LAURUSLABS|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "LAURUSLABS",
+      "stage": "quality-filter",
+      "reasons": [
+        "volumeSurge"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.61,
+      "pChange": -0.64,
+      "sector": 50,
+      "entryRefPrice": 1509.4,
+      "yahooSymbol": "LAURUSLABS.NS"
+    },
+    {
+      "id": "2026-07-09|BIOCON|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:50.311Z",
+      "ticker": "BIOCON",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.85,
+      "pChange": -2.14,
+      "sector": 50,
+      "entryRefPrice": 403.8,
+      "yahooSymbol": "BIOCON.NS"
+    },
+    {
+      "id": "2026-07-09|NYKAA|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "NYKAA",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.27,
+      "momentum": 93.8,
+      "catalystScore": 0,
+      "confidence": 41.3,
+      "effectiveConfidence": 45.245,
+      "regime": "weak",
+      "sector": 37,
+      "techScore": 85,
+      "institutional": 76.3,
+      "entryRefPrice": 324.75,
+      "yahooSymbol": "NYKAA.NS"
+    },
+    {
+      "id": "2026-07-09|LUPIN|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "LUPIN",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 3.24,
+      "momentum": 81.3,
+      "catalystScore": 0,
+      "confidence": 45.1,
+      "effectiveConfidence": 49.42,
+      "regime": "weak",
+      "sector": 50,
+      "techScore": 80.3,
+      "institutional": 78.8,
+      "entryRefPrice": 2511.3,
+      "yahooSymbol": "LUPIN.NS"
+    },
+    {
+      "id": "2026-07-09|TORNTPHARM|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "TORNTPHARM",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 4.57,
+      "momentum": 68.8,
+      "catalystScore": 0,
+      "confidence": 20.6,
+      "effectiveConfidence": 24.665,
+      "regime": "weak",
+      "sector": 50,
+      "techScore": 79.3,
+      "institutional": 77.1,
+      "entryRefPrice": 4905.3,
+      "yahooSymbol": "TORNTPHARM.NS"
+    },
+    {
+      "id": "2026-07-09|UNITDSPR|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "UNITDSPR",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 5.6,
+      "momentum": 56.3,
+      "catalystScore": 0,
+      "confidence": 30.3,
+      "effectiveConfidence": 33.6,
+      "regime": "weak",
+      "sector": 50,
+      "techScore": 81.7,
+      "institutional": 72,
+      "entryRefPrice": 1408.5,
+      "yahooSymbol": "UNITDSPR.NS"
+    },
+    {
+      "id": "2026-07-09|BOSCHLTD|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "BOSCHLTD",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 2.99,
+      "momentum": 43.8,
+      "catalystScore": 0,
+      "confidence": 20.9,
+      "effectiveConfidence": 24.424999999999997,
+      "regime": "weak",
+      "sector": 50,
+      "techScore": 80,
+      "institutional": 73.5,
+      "entryRefPrice": 42000,
+      "yahooSymbol": "BOSCHLTD.NS"
+    },
+    {
+      "id": "2026-07-09|EXIDEIND|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "EXIDEIND",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 4.02,
+      "momentum": 31.3,
+      "catalystScore": 0,
+      "confidence": 30.1,
+      "effectiveConfidence": 34.525,
+      "regime": "weak",
+      "sector": 50,
+      "techScore": 85.6,
+      "institutional": 79.5,
+      "entryRefPrice": 424.4,
+      "yahooSymbol": "EXIDEIND.NS"
+    },
+    {
+      "id": "2026-07-09|ADANIENSOL|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "ADANIENSOL",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 3.8,
+      "momentum": 18.8,
+      "catalystScore": 0,
+      "confidence": 22.5,
+      "effectiveConfidence": 27.794999999999998,
+      "regime": "weak",
+      "sector": 50,
+      "techScore": 78.4,
+      "institutional": 85.3,
+      "entryRefPrice": 1657,
+      "yahooSymbol": "ADANIENSOL.NS"
+    },
+    {
+      "id": "2026-07-09|PREMIERENE|12:10",
+      "date": "2026-07-09",
+      "ts": "2026-07-09T06:40:51.878Z",
+      "ticker": "PREMIERENE",
+      "stage": "core-gate",
+      "reasons": [
+        "catalyst UNVERIFIED"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 4.91,
+      "momentum": 6.3,
+      "catalystScore": 0,
+      "confidence": 17.6,
+      "effectiveConfidence": 19.040000000000003,
+      "regime": "weak",
+      "sector": 50,
+      "techScore": 65.2,
+      "institutional": 59.6,
+      "entryRefPrice": 1075,
+      "yahooSymbol": "PREMIERENE.NS"
+    }
+  ]
 }
