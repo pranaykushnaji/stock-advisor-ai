@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-07-08T17:36:44.526Z",
+  "fetchedAt": "2026-07-09T03:15:54.408Z",
   "diag": {
     "marketStatus": true,
     "moversCount": 210,
@@ -16,7 +16,7 @@
       "marketState": [
         {
           "market": "Capital Market",
-          "marketStatus": "Closed",
+          "marketStatus": "Open",
           "tradeDate": "08-Jul-2026 15:30",
           "index": "NIFTY 50",
           "last": 23882.05,
@@ -26,8 +26,8 @@
         },
         {
           "market": "Currency",
-          "marketStatus": "Closed",
-          "tradeDate": "08-Jul-2026",
+          "marketStatus": "Open",
+          "tradeDate": "09-Jul-2026",
           "index": "",
           "last": "",
           "variation": "",
@@ -37,17 +37,17 @@
         {
           "market": "Commodity",
           "marketStatus": "Open",
-          "tradeDate": "08-Jul-2026",
+          "tradeDate": "09-Jul-2026",
           "index": "",
           "last": "",
           "variation": "",
           "percentChange": "",
-          "marketStatusMessage": "Market is Open"
+          "marketStatusMessage": "Market is Closed"
         },
         {
           "market": "Debt",
-          "marketStatus": "Closed",
-          "tradeDate": "08-Jul-2026",
+          "marketStatus": "Open",
+          "tradeDate": "09-Jul-2026",
           "index": "",
           "last": "",
           "variation": "",
@@ -56,8 +56,8 @@
         },
         {
           "market": "currencyfuture",
-          "marketStatus": "Closed",
-          "tradeDate": "08-Jul-2026",
+          "marketStatus": "Open",
+          "tradeDate": "09-Jul-2026",
           "index": "",
           "last": "95.7150",
           "variation": "",
@@ -79,30 +79,17 @@
         "marketCapinLACCRRupeesFormatted": "471.22",
         "underlying": "Market Cap"
       },
-      "indicativenifty50": {
-        "change": -516.66,
-        "closingValue": 23882.05,
-        "dateTime": "08-Jul-2026 15:30",
-        "finalClosingValue": 23882.05,
-        "indexLast": null,
-        "indexName": "NIFTY 50",
-        "indexPercChange": null,
-        "indexTimeVal": null,
-        "indicativeTime": null,
-        "perChange": -2.12,
-        "status": "CLOSE"
-      },
       "giftnifty": {
-        "CONTRACTSTRADED": 96031,
-        "DAYCHANGE": 118.5,
+        "CONTRACTSTRADED": 4129,
+        "DAYCHANGE": 26,
         "EXPIRYDATE": "28-Jul-2026",
         "INSTRUMENTTYPE": "FUTIDX",
-        "LASTPRICE": 23996.5,
+        "LASTPRICE": 23965,
         "OPTIONTYPE": "-",
-        "PERCHANGE": 0.5,
+        "PERCHANGE": 0.11,
         "STRIKEPRICE": 0,
         "SYMBOL": "NIFTY",
-        "TIMESTMP": "08-Jul-2026 23:02",
+        "TIMESTMP": "09-Jul-2026 08:41",
         "id": "0/NIFTYFUTIDX28-Jul-2026--"
       }
     },
@@ -2917,7 +2904,6 @@
     ],
     "surveillance": [
       "21STCENMGM",
-      "AARTECH",
       "ACUTAAS",
       "ADDICTIVE",
       "ADL",
@@ -2976,6 +2962,7 @@
       "HOMESFY",
       "IBLFL",
       "IITL",
+      "IOLCP",
       "IRMENERGY",
       "ISHANCH",
       "JAINAM",
@@ -3073,7 +3060,6 @@
       "AMCL",
       "AMIRCHAND",
       "AUSL",
-      "BETA",
       "BHARATSE",
       "CARTRADE",
       "CHANDAN",
@@ -3082,7 +3068,8 @@
       "EEPL",
       "ELGNZ",
       "EPACKPEB",
-      "GNRL",
+      "FORCAS",
+      "FRESHARA",
       "GRANDOAK",
       "GRMOVER",
       "HEXAGON",
@@ -3090,9 +3077,7 @@
       "IFGLEXPOR",
       "IKIO",
       "IZMO",
-      "KWIL",
       "MACPOWER",
-      "MHLXMIRU",
       "NATIONSTD",
       "NFPSAMPOOR",
       "ORIENTHOT",
@@ -3102,24 +3087,85 @@
       "RUBICON",
       "SACHEEROME",
       "SAIFL",
-      "SAKSOFT",
       "SHAH",
       "SHUBHLAXMI",
       "SILVERTUC",
-      "SKMEGGPROD",
       "SOTL",
       "SPRL",
       "SYLVANPLY",
       "TAALTECH",
+      "TARSONS",
       "TBZ",
+      "TEAMTECH",
       "TICL",
       "TIRUPATIFL",
       "UTKAL",
       "VMARCIND",
       "VOGL",
-      "WALPAR"
+      "WALPAR",
+      "ZSARACOM"
     ],
     "announcements": [
+      {
+        "symbol": "BIOCON",
+        "subject": "Press Release",
+        "date": "09-Jul-2026 08:45:13"
+      },
+      {
+        "symbol": "DEEDEV",
+        "subject": "Updates",
+        "date": "09-Jul-2026 07:30:44"
+      },
+      {
+        "symbol": "AWHCL",
+        "subject": "Strikes/Lockouts/Disturbances",
+        "date": "09-Jul-2026 00:02:36"
+      },
+      {
+        "symbol": "SBIN",
+        "subject": "General Updates",
+        "date": "08-Jul-2026 23:59:50"
+      },
+      {
+        "symbol": "SWELECTES",
+        "subject": "General Updates",
+        "date": "08-Jul-2026 23:46:33"
+      },
+      {
+        "symbol": "NAM-INDIA",
+        "subject": "Shareholders meeting",
+        "date": "08-Jul-2026 23:39:46"
+      },
+      {
+        "symbol": "KALPATARU",
+        "subject": "General Updates",
+        "date": "08-Jul-2026 23:33:38"
+      },
+      {
+        "symbol": "GUJENERGY",
+        "subject": "General Updates",
+        "date": "08-Jul-2026 23:31:00"
+      },
+      {
+        "symbol": "KALPATARU",
+        "subject": "Demerger",
+        "date": "08-Jul-2026 23:18:43"
+      },
+      {
+        "symbol": "ARIS",
+        "subject": "General Updates",
+        "date": "08-Jul-2026 23:17:00"
+      },
+      {
+        "symbol": "ARIS",
+        "subject": "General Updates",
+        "date": "08-Jul-2026 23:13:51"
+      },
+      {
+        "symbol": "ARIS",
+        "subject": "Shareholders meeting",
+        "date": "08-Jul-2026 23:09:22"
+      },
       {
         "symbol": "SWELECTES",
         "subject": "Shareholders meeting",
@@ -5559,66 +5605,6 @@
         "symbol": "DHAMPURSUG",
         "subject": "Copy of Newspaper Publication",
         "date": "08-Jul-2026 13:15:43"
-      },
-      {
-        "symbol": "SHAREINDIA",
-        "subject": "Allotment of Securities",
-        "date": "08-Jul-2026 13:15:04"
-      },
-      {
-        "symbol": "AVADHSUGAR",
-        "subject": "Copy of Newspaper Publication",
-        "date": "08-Jul-2026 13:14:54"
-      },
-      {
-        "symbol": "INCREDIBLE",
-        "subject": "Credit Rating",
-        "date": "08-Jul-2026 13:14:53"
-      },
-      {
-        "symbol": "CEIGALL",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "08-Jul-2026 13:12:56"
-      },
-      {
-        "symbol": "AADHARHFC",
-        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
-        "date": "08-Jul-2026 13:12:09"
-      },
-      {
-        "symbol": "SUVEN",
-        "subject": "General Updates",
-        "date": "08-Jul-2026 13:10:32"
-      },
-      {
-        "symbol": "DEEDEV",
-        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
-        "date": "08-Jul-2026 13:10:05"
-      },
-      {
-        "symbol": "KAYNES",
-        "subject": "Copy of Newspaper Publication",
-        "date": "08-Jul-2026 13:09:30"
-      },
-      {
-        "symbol": "UNIDT",
-        "subject": "Press Release",
-        "date": "08-Jul-2026 13:08:36"
-      },
-      {
-        "symbol": "INCREDIBLE",
-        "subject": "Credit Rating- Revision",
-        "date": "08-Jul-2026 13:08:29"
-      },
-      {
-        "symbol": "ATGL",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "08-Jul-2026 13:06:38"
-      },
-      {
-        "symbol": "TICL",
-        "subject": "Updates",
-        "date": "08-Jul-2026 13:05:59"
       }
     ],
     "deliverySample": {
