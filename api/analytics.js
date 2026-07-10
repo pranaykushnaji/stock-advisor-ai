@@ -128,6 +128,57 @@ const isWinner = (o) => o && o.closeReturnPct != null && o.closeReturnPct >= WIN
 const isLoser = (o) => o && o.closeReturnPct != null && o.closeReturnPct <= LOSER_CLOSE_PCT;
 const avg = (arr) => arr.length ? +(arr.reduce((a, b) => a + b, 0) / arr.length).toFixed(2) : null;
 
+// ---- V2: ADAPTIVE DISCOVERY-WEIGHT OPTIMIZER (quarterly, NOT machine learning) ----
+// Uses the evaluated rejected-candidate DB (each record carries its per-component
+// discoveryParts and its measured 5-day forward return) to nudge the discovery weights
+// toward the components that actually predicted forward performance. Deliberately boring
+// math: Pearson correlation per component → an integer delta clamped to ±4 points per
+// quarter → zero-sum balanced so points always total 100 → floors so no component ever
+// dies (min 4). Every version is kept in history for rollback.
+const OPTIMIZE_AFTER_DAYS = 85;   // ~quarterly
+const OPTIMIZE_MIN_SAMPLES = 100; // don't learn from noise
+const WEIGHT_MIN = 4, WEIGHT_DELTA_CAP = 4;
+
+function pearson(xs, ys) {
+  const n = xs.length;
+  if (n < 3) return 0;
+  const mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
+  let num = 0, dx = 0, dy = 0;
+  for (let i = 0; i < n; i++) { num += (xs[i] - mx) * (ys[i] - my); dx += (xs[i] - mx) ** 2; dy += (ys[i] - my) ** 2; }
+  const den = Math.sqrt(dx * dy);
+  return den > 0 ? num / den : 0;
+}
+
+function optimizeDiscoveryWeights(current, samples) {
+  const comps = Object.keys(current.weights);
+  const corr = {};
+  for (const c of comps) {
+    const pairs = samples.filter(s => s.discoveryParts?.[c] != null && s.outcome?.closeReturnPct != null);
+    corr[c] = pairs.length >= 30 ? pearson(pairs.map(p => p.discoveryParts[c]), pairs.map(p => p.outcome.closeReturnPct)) : 0;
+  }
+  // Desired deltas: correlation scaled to points, clamped ±4.
+  const delta = {};
+  for (const c of comps) delta[c] = Math.max(-WEIGHT_DELTA_CAP, Math.min(WEIGHT_DELTA_CAP, Math.round(corr[c] * 12)));
+  // Zero-sum balance (keep total at 100) while staying inside the ±cap and the floor.
+  const room = (c, dir) => dir > 0
+    ? (delta[c] < WEIGHT_DELTA_CAP)
+    : (delta[c] > -WEIGHT_DELTA_CAP && current.weights[c] + delta[c] - 1 >= WEIGHT_MIN);
+  let guard = 60;
+  while (guard-- > 0) {
+    const sum = comps.reduce((a, c) => a + delta[c], 0);
+    if (sum === 0) break;
+    // Push the imbalance onto the least-deserving component that still has room.
+    const order = [...comps].sort((a, b) => (sum > 0 ? corr[a] - corr[b] : corr[b] - corr[a]));
+    const target = order.find(c => room(c, sum > 0 ? -1 : 1));
+    if (!target) return null; // no feasible balanced adjustment — skip this quarter
+    delta[target] += sum > 0 ? -1 : 1;
+  }
+  const weights = {};
+  for (const c of comps) weights[c] = current.weights[c] + delta[c];
+  if (comps.some(c => weights[c] < WEIGHT_MIN) || comps.reduce((a, c) => a + weights[c], 0) !== 100) return null;
+  return { weights, corr: Object.fromEntries(comps.map(c => [c, +corr[c].toFixed(3)])), delta };
+}
+
 // Per rejection-reason breakdown: for each reason, how often the rejected name went on to WIN
 // (opportunity cost) vs LOSE (protection value).
 function reasonBreakdown(rejected) {
@@ -223,11 +274,49 @@ export default async function handler(req, res) {
     sample: { allowed: realized.length, vetoedEvaluated: evaluatedVetoes.length },
   }), ghToken, 'Analytics: update LLM scorecard');
 
+  // ---- V2: quarterly discovery-weight optimization (age- and sample-gated) ----
+  let weightsUpdate = { ran: false };
+  try {
+    const wf = await ghGetFile('data/discovery-weights.json', ghToken);
+    const wcfg = wf.content ? JSON.parse(wf.content) : null;
+    const ageDays = wcfg?.updatedAt ? (Date.now() - Date.parse(wcfg.updatedAt)) / 86400000 : Infinity;
+    const trainSamples = rejected.filter(e => e.evaluated && e.outcome && e.discoveryParts);
+    const due = req.query.optimize === 'weights' || ageDays >= OPTIMIZE_AFTER_DAYS;
+    if (wcfg && due && trainSamples.length >= OPTIMIZE_MIN_SAMPLES) {
+      const opt = optimizeDiscoveryWeights(wcfg, trainSamples);
+      if (opt) {
+        await ghPutWithRetry('data/discovery-weights.json', () => ({
+          version: (wcfg.version || 1) + 1,
+          updatedAt: new Date().toISOString(),
+          method: `quarterly corr-optimization over ${trainSamples.length} evaluated candidates`,
+          weights: opt.weights,
+          correlations: opt.corr,
+          history: [{ version: wcfg.version, weights: wcfg.weights, updatedAt: wcfg.updatedAt, method: wcfg.method }, ...(wcfg.history || [])].slice(0, 8),
+        }), ghToken, `Analytics: discovery weights v${(wcfg.version || 1) + 1}`);
+        weightsUpdate = { ran: true, newVersion: (wcfg.version || 1) + 1, weights: opt.weights, correlations: opt.corr };
+      } else weightsUpdate = { ran: false, note: 'no feasible balanced adjustment — kept current weights' };
+    } else {
+      weightsUpdate = { ran: false, note: !wcfg ? 'weights file missing' : !due ? `next optimization in ~${Math.max(0, Math.round(OPTIMIZE_AFTER_DAYS - ageDays))}d` : `need ${OPTIMIZE_MIN_SAMPLES} evaluated samples with discoveryParts (have ${trainSamples.length})` };
+    }
+  } catch (e) { weightsUpdate = { ran: false, error: String(e?.message || e).slice(0, 120) }; }
+
+  // ---- V2: expected-edge calibration — does predicted edge line up with realized returns? ----
+  const edgeBuckets = {};
+  for (const t of realized) {
+    const e = t.expectedEdge?.edgePct;
+    if (e == null || t.realizedPnlPct == null) continue;
+    const b = e < 2 ? '<2%' : e < 5 ? '2-5%' : e < 8 ? '5-8%' : '8%+';
+    (edgeBuckets[b] = edgeBuckets[b] || []).push(t.realizedPnlPct);
+  }
+  const edgeCalibration = Object.fromEntries(Object.entries(edgeBuckets).map(([b, rets]) => [b, { trades: rets.length, avgRealized: avg(rets) }]));
+
   return res.status(200).json({
     status: 'ok',
     evaluatedThisRun: { rejected: newRej, vetoes: newVeto },
     rejectedAnalytics: rejectedStats,
     llmPerformance: llmStats,
+    discoveryWeights: weightsUpdate,
+    edgeCalibration,
     notes: [
       `Forward window = ${EVAL_TRADING_DAYS} trading days; winner ≥ +${WINNER_CLOSE_PCT}% close-return, loss ≤ ${LOSER_CLOSE_PCT}%.`,
       'Rejected/vetoed names are measured from the price at rejection time (entryRefPrice).',
