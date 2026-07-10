@@ -41,6 +41,87 @@ export function classifyRegime(niftyCloses) {
   };
 }
 
+// ---- V2 FACTOR-BASED REGIME (computed once per scan, reused everywhere) ----
+// Eight independently-scored factors instead of three EMA checks. Each factor is 0-100
+// (higher = more supportive of buying momentum); the overall regime label maps from the
+// weighted blend, and regime CONFIDENCE measures how much the factors agree — a market where
+// half the factors scream bull and half scream bear gets a low-confidence label, which is
+// itself information (the gates stay at the blended label either way; confidence is surfaced
+// for the narrative/analytics).
+//
+// Factors and their data sources (all already fetched per scan — zero new requests):
+//   indexTrend      — Nifty EMA structure + 20/50d returns        (Nifty 1y closes)
+//   volatility      — Nifty 30d realized vol, inverted            (Nifty 1y closes)
+//   breadth         — % of the snapshot universe up today         (snapshot universe)
+//   momentumBreadth — % of the universe up >1% today              (snapshot universe)
+//   largeCap        — NIFTY-50 members' avg move vs whole universe (snapshot `index` field)
+//   sectorPart      — share of sectors with positive average move (sectorStrength map)
+//   gapEnv          — universe closing-strength: are stocks holding their intraday gains
+//                     (close near day-high = healthy) or fading (near day-low = trap-ish)
+//   riskAppetite    — advancer strength: avg gain of gainers vs avg loss of decliners
+export function classifyRegimeV2(niftyCloses, universeRows = [], sectorMap = null) {
+  const v1 = classifyRegime(niftyCloses); // reuse the proven index-trend math
+  const rows = (universeRows || []).filter(r => typeof r.pChange === 'number');
+  const f = {};
+
+  // Index factors from v1's computation.
+  f.indexTrend = v1.regime === 'unknown' ? 50
+    : Math.round(Math.max(0, Math.min(100, 50 + (v1.aboveE50 ? 15 : -15) + (v1.aboveE200 ? 10 : -10) + v1.r20 * 3)));
+  f.volatility = v1.annVol == null ? 50 : Math.round(Math.max(0, Math.min(100, 115 - v1.annVol * 3))); // vol 12%→79, 22%→49, 30%→25
+
+  if (rows.length >= 50) {
+    const up = rows.filter(r => r.pChange > 0).length / rows.length;
+    f.breadth = Math.round(up * 100);
+    f.momentumBreadth = Math.round((rows.filter(r => r.pChange > 1).length / rows.length) * 100 * 2.2); // 45%+ strong-movers ≈ 100
+    f.momentumBreadth = Math.min(100, f.momentumBreadth);
+    const nifty50 = rows.filter(r => r.index === 'NIFTY 50');
+    if (nifty50.length >= 20) {
+      const avgAll = rows.reduce((a, r) => a + r.pChange, 0) / rows.length;
+      const avgLarge = nifty50.reduce((a, r) => a + r.pChange, 0) / nifty50.length;
+      f.largeCap = Math.round(Math.max(0, Math.min(100, 50 + (avgLarge - avgAll) * 25 + avgLarge * 10)));
+    } else f.largeCap = 50;
+    // Gap environment / intraday conviction: where are closes sitting in the day range?
+    const strengths = rows.filter(r => r.dayHigh > r.dayLow && r.lastPrice != null)
+      .map(r => (r.lastPrice - r.dayLow) / (r.dayHigh - r.dayLow));
+    f.gapEnv = strengths.length >= 50 ? Math.round((strengths.reduce((a, b) => a + b, 0) / strengths.length) * 100) : 50;
+    // Risk appetite: are gainers gaining more than losers are losing?
+    const gains = rows.filter(r => r.pChange > 0).map(r => r.pChange);
+    const losses = rows.filter(r => r.pChange < 0).map(r => -r.pChange);
+    const avgG = gains.length ? gains.reduce((a, b) => a + b, 0) / gains.length : 0;
+    const avgL = losses.length ? losses.reduce((a, b) => a + b, 0) / losses.length : 0.01;
+    f.riskAppetite = Math.round(Math.max(0, Math.min(100, 50 + (avgG - avgL) * 22)));
+  } else { f.breadth = 50; f.momentumBreadth = 50; f.largeCap = 50; f.gapEnv = 50; f.riskAppetite = 50; }
+
+  if (sectorMap && sectorMap.size >= 4) {
+    const secs = [...sectorMap.values()];
+    f.sectorPart = Math.round((secs.filter(s => s.avgPChange > 0).length / secs.length) * 100);
+  } else f.sectorPart = 50;
+
+  // Weighted blend → overall score; index trend and vol carry the most, breadth family next.
+  const W = { indexTrend: 0.24, volatility: 0.16, breadth: 0.14, momentumBreadth: 0.12, largeCap: 0.08, sectorPart: 0.08, gapEnv: 0.09, riskAppetite: 0.09 };
+  let score = 0; for (const [k, w] of Object.entries(W)) score += f[k] * w;
+  score = Math.round(score);
+
+  // Label mapping keeps the four established labels so regimeGates stays valid.
+  let regime;
+  if (v1.annVol != null && v1.annVol > 22 && score < 62) regime = 'volatile';
+  else if (score >= 62) regime = 'bullish';
+  else if (score >= 47) regime = 'neutral';
+  else regime = 'weak';
+
+  // Regime confidence = factor agreement (low dispersion around the blend = high confidence).
+  const vals = Object.values(f);
+  const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+  const disp = Math.sqrt(vals.reduce((a, b) => a + (b - mean) ** 2, 0) / vals.length);
+  const regimeConfidence = Math.round(Math.max(0, Math.min(100, 100 - disp * 2.2)));
+
+  return {
+    regime, score, regimeConfidence, factors: f,
+    annVol: v1.annVol, r20: v1.r20, r50: v1.r50, aboveE50: v1.aboveE50, aboveE200: v1.aboveE200,
+    reason: `${regime} (v2 score ${score}, conf ${regimeConfidence}) — trend ${f.indexTrend}, breadth ${f.breadth}, vol-factor ${f.volatility}`,
+  };
+}
+
 // Regime-adaptive gates. The weaker/wilder the market, the higher the bar and the more we
 // insist on a verified catalyst and asymmetric reward/risk.
 export function regimeGates(regime) {

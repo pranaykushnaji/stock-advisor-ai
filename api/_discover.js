@@ -5,7 +5,7 @@
 // (see _discovery-score.js) instead of raw today's-% gain, so the expensive downstream work is
 // spent on emerging-momentum names, not stocks that already made their move.
 
-import { rankByDiscoveryScore } from './_discovery-score.js';
+import { rankByDiscoveryScore, normalizeWeights } from './_discovery-score.js';
 import { sectorStrength, sectorScoreFor } from './_sector.js';
 
 // Nifty-50 constituents (fallback + name→symbol resolution aid)
@@ -208,6 +208,9 @@ export async function discoverCandidates(apiKey, opts = {}) {
       const strengthMap = sectorStrength(wide);
       const prevVolumes = opts.prevVolumes || null;
       const curFrac = opts.sessionFrac ?? null;
+      // V2: adaptive weights (quarterly-optimized points from data/discovery-weights.json,
+      // passed in by the buy scan); defaults apply when absent/malformed.
+      const dw = normalizeWeights(opts.discoveryWeights);
       const rankedRows = rankByDiscoveryScore(wide, (row) => {
         const sym = String(row.symbol || '').toUpperCase();
         const prev = prevVolumes ? prevVolumes.get(sym) : null;
@@ -219,7 +222,7 @@ export async function discoverCandidates(apiKey, opts = {}) {
           prevVolume: prev?.volume ?? null,
           prevFrac: prev?.frac ?? null,
         };
-      });
+      }, dw);
       snapshotGainers = rankedRows.map(u => u.symbol);
       for (const u of rankedRows) discoveryMeta.set(String(u.symbol).toUpperCase(), { discoveryScore: u.discoveryScore, discoveryParts: u.discoveryParts, discoveryReasons: u.discoveryReasons, tradedValueCr: u.tradedValueCr });
       sources.diag.rankedBy = 'discoveryScore';

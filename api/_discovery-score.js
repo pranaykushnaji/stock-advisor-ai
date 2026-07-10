@@ -25,6 +25,11 @@
 // Blend weights for the base score (before the catalyst/institutional additive bonuses).
 // Tuned so "quietly strengthening" beats "already gapped": closing strength + breadth-relative
 // strength + volume acceleration dominate; raw momentum is deliberately a minor, capped input.
+//
+// V2 ADAPTIVE WEIGHTS: these are the DEFAULTS. Production passes the current weight set from
+// data/discovery-weights.json (points summing to 100 → converted to fractions here); the file
+// is re-optimized quarterly by analytics.js from measured forward outcomes of past candidates,
+// with each weight limited to ±4 points per quarter and every version kept for rollback.
 const W = {
   closingStrength: 0.24,
   containedMomentum: 0.14,
@@ -33,6 +38,22 @@ const W = {
   sector: 0.14,
   volAccel: 0.16,
 };
+
+// Convert a {component: points} map (sum 100) into fractions, falling back to defaults for any
+// missing/invalid component so a malformed weights file can never zero out discovery.
+export function normalizeWeights(points) {
+  if (!points || typeof points !== 'object') return W;
+  const out = {};
+  let sum = 0;
+  for (const k of Object.keys(W)) {
+    const v = Number(points[k]);
+    out[k] = (isFinite(v) && v > 0) ? v : W[k] * 100;
+    sum += out[k];
+  }
+  if (sum <= 0) return W;
+  for (const k of Object.keys(out)) out[k] = out[k] / sum;
+  return out;
+}
 // Additive bonuses (points added on top of the 0-100 weighted base, then re-clamped).
 const CATALYST_BONUS = 10;      // a fresh verified-able filing exists for this name
 const INSTITUTIONAL_BONUS = 8;  // bulk/block BUY printed today
@@ -89,7 +110,8 @@ function volAccelScore(curVol, curFrac, prevVol, prevFrac) {
 //   row = { symbol, pChange, lastPrice, dayHigh, dayLow, totalTradedVolume }
 //   ctx = { sectorScore, hasCatalyst, institutional, medianPChange, tradedValueCr,
 //           curFrac, prevVolume, prevFrac }
-export function computeDiscoveryScore(row, ctx = {}) {
+//   weights (optional) = fraction map from normalizeWeights() — defaults to W.
+export function computeDiscoveryScore(row, ctx = {}, weights = W) {
   const last = row.lastPrice, vol = row.totalTradedVolume;
   const tradedValueCr = ctx.tradedValueCr ?? ((last && vol) ? (last * vol) / 1e7 : null);
 
@@ -103,7 +125,7 @@ export function computeDiscoveryScore(row, ctx = {}) {
   };
 
   let base = 0, wsum = 0;
-  for (const [k, w] of Object.entries(W)) { base += parts[k] * w; wsum += w; }
+  for (const [k, w] of Object.entries(weights)) { if (parts[k] != null) { base += parts[k] * w; wsum += w; } }
   base = wsum > 0 ? base / wsum : 50;
 
   let score = base;
@@ -136,12 +158,12 @@ export function median(nums) {
 // Rank a whole snapshot universe by discovery score. Returns rows sorted desc, each annotated
 // with { discoveryScore, discoveryParts, discoveryReasons }. ctxFor(row) supplies per-row context
 // (sector score, catalyst/institutional flags, prev-scan volume). marketMedian is computed here
-// from the universe so callers don't have to.
-export function rankByDiscoveryScore(rows, ctxFor) {
+// from the universe so callers don't have to. `weights` = fraction map (see normalizeWeights).
+export function rankByDiscoveryScore(rows, ctxFor, weights = W) {
   const medianPChange = median((rows || []).map(r => r.pChange));
   const scored = (rows || []).map(row => {
     const ctx = { medianPChange, ...(ctxFor ? ctxFor(row) : {}) };
-    const d = computeDiscoveryScore(row, ctx);
+    const d = computeDiscoveryScore(row, ctx, weights);
     return { ...row, discoveryScore: d.score, discoveryParts: d.parts, discoveryReasons: d.reasons, tradedValueCr: d.tradedValueCr };
   });
   scored.sort((a, b) => (b.discoveryScore ?? -1) - (a.discoveryScore ?? -1));

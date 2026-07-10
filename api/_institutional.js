@@ -82,15 +82,22 @@ export function institutionalAccumulationScore(closes, volumes, opts = {}) {
     closingStrength: closingStrengthScore(opts.highs, opts.lows, c) ,
   };
   // Weighted blend over whatever components are present (renormalized).
-  const W = { upDownVolume: 0.38, volumeExpansion: 0.24, persistentGains: 0.18, closingStrength: 0.20 };
+  // V2 REWEIGHT (double-counting review): volumeExpansion largely repeats the relVol gate and
+  // persistentGains repeats the momentum factor — both already drive entry decisions elsewhere,
+  // so counting them heavily here made "institutional" partly an echo of signals we already
+  // use. Weight now concentrates on the genuinely INDEPENDENT information: the up/down-day
+  // volume split (directional money flow) and closing strength (who wins the daily auction).
+  // Delivery% and shareholding changes aren't available per-symbol from our sources — omitted
+  // rather than faked; the bulk/block-deal print (truly independent) gets a bigger boost.
+  const W = { upDownVolume: 0.48, closingStrength: 0.30, volumeExpansion: 0.12, persistentGains: 0.10 };
   let acc = 0, wsum = 0;
   for (const [k, w] of Object.entries(W)) {
     if (components[k] != null && isFinite(components[k])) { acc += components[k] * w; wsum += w; }
   }
   let score = wsum > 0 ? acc / wsum : 50;
 
-  // Explicit signals layered on top (capped).
-  if (opts.bulkBuy) score = Math.min(100, score + 8);                 // an actual institutional print
+  // Explicit independent signals layered on top (capped).
+  if (opts.bulkBuy) score = Math.min(100, score + 12);                // an actual institutional print
   if (opts.todayClosingStrength != null) {                            // live: finishing today strong
     score = Math.min(100, score + (opts.todayClosingStrength - 0.5) * 12);
   }
