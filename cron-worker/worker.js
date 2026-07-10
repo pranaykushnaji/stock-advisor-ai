@@ -140,6 +140,12 @@ export default {
   // Fires on the cron schedule in wrangler.toml.
   async scheduled(event, env, ctx) {
     const now = new Date(event.scheduledTime);
+    // Belt-and-braces weekend guard: the cron expression already says mon-fri, but Cloudflare's
+    // day-of-week numbering (1=Sunday) once silently skewed the schedule (Fri 2026-07-10 ran
+    // nothing) — so never trust the expression alone. IST == UTC+5:30 and the window is
+    // mid-day IST, so UTC day == IST day here.
+    const dow = now.getUTCDay(); // 0=Sun .. 6=Sat
+    if (dow === 0 || dow === 6) return;
     const key = hhmm(now);
     const entry = SCHEDULE[key];
     if (!entry) return; // a tick with nothing scheduled — do nothing

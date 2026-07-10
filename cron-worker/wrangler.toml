@@ -9,8 +9,13 @@ compatibility_date = "2025-01-01"
 # One trigger that ticks every 5 minutes across the NSE market window on weekdays
 # (03:00–10:59 UTC = 08:30–16:29 IST). The worker's SCHEDULE table decides what actually
 # fires at each exact minute, so this stays well under any cron-count limits.
+#
+# NAMED days, never numbers: Cloudflare numbers weekdays 1=SUNDAY…7=Saturday (unlike
+# standard cron where 1=Monday), so the old "1-5" actually meant Sun–Thu — which is how
+# the entire trading day of Fri 2026-07-10 ran ZERO jobs (first Friday of this worker's
+# life). "mon-fri" is unambiguous under every interpretation.
 [triggers]
-crons = ["*/5 3-10 * * 1-5"]
+crons = ["*/5 3-10 * * mon-fri"]
 
 # Non-secret configuration.
 [vars]
