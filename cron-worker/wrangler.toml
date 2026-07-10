@@ -14,8 +14,9 @@ compatibility_date = "2025-01-01"
 # standard cron where 1=Monday), so the old "1-5" actually meant Sun–Thu — which is how
 # the entire trading day of Fri 2026-07-10 ran ZERO jobs (first Friday of this worker's
 # life). "mon-fri" is unambiguous under every interpretation.
+# Hours 2-10 UTC: window starts 02:15 UTC (07:45 IST) for the pre-market research pipeline.
 [triggers]
-crons = ["*/5 3-10 * * mon-fri"]
+crons = ["*/5 2-10 * * mon-fri"]
 
 # Non-secret configuration.
 [vars]

@@ -1028,11 +1028,18 @@ async function renderTracker(){
     if(r.job==='sell-check'){const sold=s.sold||0,held=(s.positions||[]).filter(p=>p.result==='hold').length,soldT=(s.closed||[]).map(c=>c.ticker).join(', ');return `checked ${(s.positions||[]).length} · held ${held}${sold?` · SOLD ${sold} (${soldT})`:''}`;}
     if(r.job==='stock-of-the-day'){if(s.pick)return `picked ${s.pick.ticker} (score ${s.pick.composite})`;if(s.entryRejected)return `not traded — ${s.entryRejected}`;if(s.reason)return `No Trade — ${s.reason}`;return s.status||'ran';}
     if(r.job==='refresh-prices')return `updated ${s.updated||0}${s.closed?` · booked ${s.closed}`:''}`;
+    if(r.job==='premarket')return s.watchlist?`watchlist: ${(s.watchlist||[]).join(', ')||'empty'}`:(s.status||'ran');
+    if(r.job==='open-scan')return s.pick?`BOUGHT ${s.pick.ticker} @ ₹${s.pick.entry} (${s.pick.lane} lane)`:(s.reason||s.status||'no entry');
     return s.status||(s.ok?'ok':'?');}
-  // Matches the deployed Cloudflare Worker schedule (hourly engine): a snapshot at :45 past,
-  // a buy-scan at :00, a sell-check at :10, then EOD refresh + analytics. Keep in sync with
+  // Matches the deployed Cloudflare Worker schedule (morning capture + hourly engine): overnight
+  // snapshot 07:45, pre-market research 08:05, open scan 09:25, then hourly snapshot :45 /
+  // buy-scan :00 / sell-check :10, EOD refresh + analytics. Keep in sync with
   // cron-worker/worker.js — a mismatch here shows phantom "missed" rows.
   const EXPECTED=[
+    {t:'07:45',job:'nse-snapshot',label:'Snapshot · overnight filings'},
+    {t:'08:05',job:'premarket',label:'Pre-market research'},
+    {t:'09:25',job:'open-scan',label:'Open scan · early entries'},
+    {t:'09:40',job:'sell-check',label:'Sell-check · early'},
     {t:'08:45',job:'nse-snapshot',label:'Snapshot · pre-open'},
     {t:'09:45',job:'nse-snapshot',label:'Snapshot'},
     {t:'10:00',job:'stock-of-the-day',label:'Buy scan'},

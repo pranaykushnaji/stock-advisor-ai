@@ -30,6 +30,12 @@ const SNAP = { kind: 'github' };
 // filing data it reads is never more than ~15-20 min stale. SELL (sell-check) is unchanged —
 // still hourly at :10 past, independent of the buy cadence.
 const SCHEDULE = {
+  // ---- Morning capture (research early, act at the open) ----
+  '02:15': SNAP,                                             // 07:45 IST — overnight-filings snapshot
+  '02:35': { kind: 'vercel', path: '/api/premarket' },       // 08:05 IST — pre-market research → watchlist
+  '03:55': { kind: 'vercel', path: '/api/open-scan' },       // 09:25 IST — early entries from the watchlist
+  '04:10': SELL,                                             // 09:40 IST — early sell-check for open entries
+
   '03:15': SNAP,   // 08:45 IST — pre-open snapshot (surveillance/announcements refresh)
 
   '04:15': SNAP,   // 09:45 IST — snapshot ahead of the first buy-scan
@@ -119,6 +125,11 @@ function summarize(job, res) {
     if (b.considered) out.considered = b.considered;
   } else if (job === 'refresh-prices') {
     out.updated = b.updated; out.total = b.total; if (b.closed) out.closed = b.closed;
+  } else if (job === 'premarket') {
+    out.watchlist = b.watchlist; out.overnight = b.verifiedOvernightCatalysts;
+  } else if (job === 'open-scan') {
+    if (b.pick) out.pick = { ticker: b.pick.ticker, lane: b.lane, entry: b.pick.entryPrice };
+    else out.reason = b.status;
   }
   return out;
 }
@@ -181,6 +192,8 @@ export default {
       'sell-check': { kind: 'vercel', path: '/api/sell-check' },
       'capture-open': { kind: 'vercel', path: '/api/capture-open' },
       'analytics': { kind: 'vercel', path: '/api/analytics' },
+      'premarket': { kind: 'vercel', path: '/api/premarket' },
+      'open-scan': { kind: 'vercel', path: '/api/open-scan' },
     };
     const entry = MAP[job];
     if (!entry) return new Response(`unknown job "${job}". Valid: ${Object.keys(MAP).join(', ')}`, { status: 400 });
