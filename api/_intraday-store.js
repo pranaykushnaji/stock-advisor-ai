@@ -91,6 +91,7 @@ export function recordObservation(store, obs) {
     hhmm, ts,
     relVol: obs.relVol ?? null,
     confidence: obs.confidence ?? null,
+    components: obs.components ?? null, // v2 modular scores {technical,flow,catalyst,liquidity}
     discoveryScore: obs.discoveryScore ?? null,
     catalystType: obs.catalystType ?? null,
     verification: obs.verification ?? null,

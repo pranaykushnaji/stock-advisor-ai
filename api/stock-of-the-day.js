@@ -8,9 +8,12 @@
 import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
 import { assessCatalyst, rememberCatalyst, recallCatalyst, pruneCatalystMemory } from './_catalyst.js';
-import { classifyRegime, regimeGates } from './_market-regime.js';
+import { classifyRegimeV2, regimeGates } from './_market-regime.js';
 import { sectorStrength, sectorScoreFor } from './_sector.js';
 import { institutionalAccumulationScore } from './_institutional.js';
+import { confidenceComponents, effectiveConfidence as combineConfidence } from './_confidence.js';
+import { expectedEdge, laneStats } from './_edge.js';
+import { concentrationCheck } from './_correlation.js';
 import { freshStore, recordObservation, prevVolumeMap, markBought, hhmmIST } from './_intraday-store.js';
 import { qualityMomentumChecks, scoreQualityMomentum,
   computeShortReturns, shortMomentum, volScaledMomentum } from './_scoring.js';
@@ -53,8 +56,28 @@ const MOMENTUM_LANE = {
   MIN_INSTITUTIONAL: 65,
   REGIMES: ['bullish', 'neutral'],
   MAX_PER_DAY: 1,
-  INVEST_AMOUNT: 6000,      // catalyst lane stays at 10000
+  SIZE_MULT: 0.6,           // momentum-lane positions run at 60% of the ladder size
 };
+
+// V2 DYNAMIC POSITION SIZING — conviction decides capital, not a flat number. The ladder maps
+// the lane-relevant effective confidence to a base size; the momentum lane then takes 60% of
+// it (no verified catalyst = less capital), a strong/weak expected edge nudges ±20%, and the
+// concentration guard can halve it. Bounds [₹4,000, ₹18,000]; existing daily caps unchanged.
+function sizeLadder(conf) {
+  if (conf >= 80) return 18000;
+  if (conf >= 75) return 15000;
+  if (conf >= 70) return 12000;
+  if (conf >= 65) return 10000;
+  if (conf >= 60) return 8000;
+  return 6000; // 55-59 (gates prevent anything below the regime bar reaching here)
+}
+function positionSize({ conf, lane, edgePct, concentrationFactor }) {
+  let amt = sizeLadder(conf);
+  if (lane === 'momentum') amt *= MOMENTUM_LANE.SIZE_MULT;
+  if (edgePct != null) { if (edgePct >= 8) amt *= 1.2; else if (edgePct < 2) amt *= 0.8; }
+  if (concentrationFactor != null) amt *= concentrationFactor;
+  return Math.max(4000, Math.min(18000, Math.round(amt / 500) * 500));
+}
 
 function todayIST() {
   const now = new Date();
@@ -295,9 +318,11 @@ export default async function handler(req, res) {
   // one day (replaces the old "one pick per day" gate, which no longer fits an hourly cadence).
   // Also counts today's momentum-lane buys so that lane's own 1/day cap can bind below.
   let momLaneUsedToday = 0;
+  let openPositions = []; // for the concentration guard (sector/theme overlap with holdings)
   try {
     const bqCap = await ghGetFile('data/project-bouquet.json', ghToken);
     const bqCapList = bqCap.content ? (JSON.parse(bqCap.content).bouquet || []) : [];
+    openPositions = bqCapList.filter(b => !b.status || b.status === 'OPEN');
     const todayRows = bqCapList.filter(b => b.date === date);
     momLaneUsedToday = todayRows.filter(b => b.entryLane === 'momentum').length;
     if (todayRows.length >= MAX_NEW_BUYS_PER_DAY && req.query.force !== 'true') {
@@ -331,6 +356,12 @@ export default async function handler(req, res) {
     const f = await ghGetFile('data/llm-scorecard.json', ghToken);
     if (f.content) llmScorecard = { ...llmScorecard, ...JSON.parse(f.content) };
   } catch (e) {}
+
+  // V2: adaptive discovery weights (quarterly-optimized, versioned) + realized ledger (edge
+  // probability anchoring + lane win rates). Both best-effort with safe defaults.
+  let discoveryWeights = null, realizedTrades = [];
+  try { const f = await ghGetFile('data/discovery-weights.json', ghToken); discoveryWeights = f.content ? JSON.parse(f.content)?.weights : null; } catch (e) {}
+  try { const f = await ghGetFile('data/realized.json', ghToken); realizedTrades = f.content ? (JSON.parse(f.content).trades || []) : []; } catch (e) {}
 
   // PRIORITY 4: rejected candidates are accumulated here and flushed by persistLearning() so the
   // analytics endpoint can forward-evaluate them (did we reject a future winner?). persistLearning
@@ -374,7 +405,7 @@ export default async function handler(req, res) {
   // can never abort the pick with an unhandled 500.
   let candidates = [], sources = { news: 0, movers: 0, usedFallback: true }, discoveryMeta = new Map();
   try {
-    const disc = await discoverCandidates(apiKey, { prevVolumes: prevVols, sessionFrac });
+    const disc = await discoverCandidates(apiKey, { prevVolumes: prevVols, sessionFrac, discoveryWeights });
     candidates = disc.candidates || [];
     sources = disc.sources || sources;
     discoveryMeta = disc.discoveryMeta || new Map();
@@ -430,11 +461,14 @@ export default async function handler(req, res) {
       niftyCloses = (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null && !isNaN(v));
     }
   } catch (e) {}
-  const regime = classifyRegime(niftyCloses || []);
-  const gates = regimeGates(regime.regime);
-
   // Sector strength from the day's snapshot universe (breadth + average move per sector).
   const sectorMap = sectorStrength([...snapBySym.values()]);
+
+  // V2 REGIME: eight-factor model (trend, breadth, momentum breadth, large-cap leadership,
+  // sector participation, volatility, gap environment, risk appetite) + regime confidence.
+  // Computed ONCE per scan here and reused by every downstream layer.
+  const regime = classifyRegimeV2(niftyCloses || [], [...snapBySym.values()], sectorMap);
+  const gates = regimeGates(regime.regime);
 
   const pool = candidates.slice(0, PRICE_POOL);
   const priced = (await Promise.all(pool.map(async (name) => {
@@ -463,7 +497,7 @@ export default async function handler(req, res) {
       sessionElapsedFraction: sessionFrac,
     });
     s._qm = qm; s._pChange = pChange; s._tradedValueCr = tradedValueCr;
-    const rejCtx = { relVol: qm.relVol ?? null, pChange: pChange != null ? +pChange.toFixed(2) : null, sector: sectorScoreFor(s.symbol, sectorMap), entryRefPrice: s.price ?? null, yahooSymbol: s._price?.symbol || null };
+    const rejCtx = { relVol: qm.relVol ?? null, pChange: pChange != null ? +pChange.toFixed(2) : null, sector: sectorScoreFor(s.symbol, sectorMap), entryRefPrice: s.price ?? null, yahooSymbol: s._price?.symbol || null, discoveryParts: discoveryMeta.get(s.symbol)?.discoveryParts ?? null };
     if (qm.rejects.length) { rejectedNames.push({ ticker: s.symbol, reasons: qm.rejects }); addRejection(s.symbol, 'hard-reject', qm.rejects, rejCtx); continue; }
     if (!qm.pass) { rejectedNames.push({ ticker: s.symbol, reasons: qm.failed }); addRejection(s.symbol, 'quality-filter', qm.failed, rejCtx); continue; }
     passed.push(s);
@@ -528,12 +562,12 @@ export default async function handler(req, res) {
   // scan — "trading at 2.1x the pace it should be by this point in the session".
   const RELVOL_INTRADAY_MIN = 2.1;
 
-  // PRIORITY 2/3: record every shortlisted name into the intraday store with WHY it did/didn't
-  // qualify, and read back its confidence-evolution bonus (a setup strengthening across scans is
-  // trusted more than a one-scan spike). PRIORITY 7: fold the institutional score into an
-  // "effective confidence" that also carries the trend bonus. These refine ranking + the gate;
-  // they never bypass the hard relVol/catalyst rule below.
-  const effConf = new Map();     // symbol -> effective confidence
+  // V2 MODULAR CONFIDENCE: four independent component scores per candidate (technical, flow,
+  // catalyst, liquidity), combined lane-aware — the momentum lane's confidence excludes the
+  // catalyst component (zero by definition on that lane) so it isn't structurally penalized.
+  // The intraday trend bonus (setup strengthening across scans) rides on top as before.
+  // Everything is recorded per-scan in the intraday store, per-candidate on rejections, and on
+  // the final pick/position — component-level learning data for analytics.
   const trendBonusBySym = new Map();
   for (const s of catalystPool) {
     const scored = scoredBySym.get(s.symbol);
@@ -544,11 +578,22 @@ export default async function handler(req, res) {
     if (!(relVol != null && relVol >= RELVOL_INTRADAY_MIN)) missing.push(`relVol ${relVol ?? 'n/a'}<${RELVOL_INTRADAY_MIN}`);
     if (!hasCat) missing.push(`catalyst ${s._catalyst?.verification || 'none'} (need VERIFIED)`);
     if (neg) missing.push(`negative catalyst (${s._catalyst?.type})`);
-    const inst = s._inst?.score ?? 50;
-    const instAdj = Math.max(-8, Math.min(10, (inst - 50) * 0.15)); // accumulation nudges up, distribution down
+
+    s._comps = confidenceComponents({
+      technical: {
+        techScore: scored?.factors?.technicals, momentumRank: scored?.factors?.momentum,
+        relStrengthRank: scored?.factors?.relStrength, maAlignment: scored?.indicators?.maAlignment,
+        aboveEma200: s._qm?.aboveEma200, roomTo52wHighPct: s._qm?.roomTo52wHighPct,
+        shortReturns: scored?.shortReturns,
+      },
+      flow: { relVol, volumeRank: scored?.factors?.volume, institutional: s._inst?.score, instFlags: s._inst?.flags },
+      catalyst: { points: s.catalystPoints, verification: s._catalyst?.verification, impactClass: s._catalyst?.impactClass, recalled: s._catalyst?.recalled },
+      liquidity: { tradedValueCr: s._tradedValueCr, price: s.price },
+    });
+
     const entry = recordObservation(intradayStore, {
       ticker: s.symbol, fullName: s.fullName, sector: s.sector || scored?.sector,
-      relVol, confidence: scored?.confidence ?? null,
+      relVol, confidence: scored?.confidence ?? null, components: s._comps,
       discoveryScore: discoveryMeta.get(s.symbol)?.discoveryScore ?? null,
       catalystType: s._catalyst?.type ?? null, verification: s._catalyst?.verification ?? null,
       volume: (snapBySym.get(s.symbol) || {}).totalTradedVolume ?? null, sessionFrac,
@@ -556,8 +601,9 @@ export default async function handler(req, res) {
     });
     const trendBonus = entry?.trendBonus ?? 0;
     trendBonusBySym.set(s.symbol, trendBonus);
-    effConf.set(s.symbol, Math.max(0, Math.min(100, (scored?.confidence ?? 0) + trendBonus + instAdj)));
-    s._instAdj = instAdj; s._effConf = effConf.get(s.symbol);
+    s._effConfMom = combineConfidence(s._comps, 'momentum', { regimeScore: regime.score, extras: trendBonus });
+    s._effConfCat = combineConfidence(s._comps, 'catalyst', { regimeScore: regime.score, extras: trendBonus });
+    s._effConf = Math.max(s._effConfMom, s._effConfCat); // provisional (lane not yet assigned)
   }
 
   // TWO ENTRY LANES. Lane A (catalyst): verified catalyst + volume — unchanged. Lane B
@@ -571,11 +617,15 @@ export default async function handler(req, res) {
     if (relVol != null && relVol >= RELVOL_INTRADAY_MIN && s._catalyst?.hasCatalyst) return 'catalyst';
     if (momLaneOpen
       && relVol != null && relVol >= MOMENTUM_LANE.MIN_RELVOL
-      && (s._effConf ?? 0) >= gates.minConfidence + MOMENTUM_LANE.CONF_EXTRA
+      && (s._effConfMom ?? 0) >= gates.minConfidence + MOMENTUM_LANE.CONF_EXTRA
       && (s._inst?.score ?? 0) >= MOMENTUM_LANE.MIN_INSTITUTIONAL) return 'momentum';
     return null;
   };
-  for (const s of catalystPool) s._lane = laneOf(s);
+  for (const s of catalystPool) {
+    s._lane = laneOf(s);
+    // Lock the lane-relevant confidence once the lane is known.
+    if (s._lane) s._effConf = s._lane === 'momentum' ? s._effConfMom : s._effConfCat;
+  }
   const tradeable = catalystPool.filter(s => s._lane);
 
   if (!tradeable.length) {
@@ -589,6 +639,7 @@ export default async function handler(req, res) {
         { relVol: s._qm?.relVol ?? null, momentum: scored?.factors?.momentum ?? null, catalystScore: scored?.factors?.catalyst ?? null,
           confidence: scored?.confidence ?? null, effectiveConfidence: s._effConf ?? null, regime: regime.regime,
           sector: s.sectorScore ?? null, techScore: scored?.factors?.technicals ?? null,
+          components: s._comps ?? null, discoveryParts: discoveryMeta.get(s.symbol)?.discoveryParts ?? null,
           institutional: s._inst?.score ?? null, entryRefPrice: s.price ?? null, yahooSymbol: s._price?.symbol || null });
     }
     return noTrade('no stock qualified on either lane (verified catalyst, or high-bar momentum)', {
@@ -597,12 +648,28 @@ export default async function handler(req, res) {
     });
   }
 
-  // Rank the tradeable set by EFFECTIVE confidence (multi-signal agreement + intraday trend bonus
-  // + institutional adjustment), then composite as the tiebreak — regime-aware throughout.
-  // Catalyst-lane candidates win ties over momentum-lane (verified evidence beats inferred).
+  // V2 EXPECTED EDGE per tradeable candidate: probability from confidence/regime/catalyst/vol
+  // (anchored to the lane's measured win rate), expectancy from the reward/risk model. Used as
+  // the ranking tiebreak, a positive-expectancy gate, and a sizing input — and stored on every
+  // trade + rejection so the edge model itself becomes auditable.
+  const laneHist = { catalyst: laneStats(realizedTrades, 'catalyst'), momentum: laneStats(realizedTrades, 'momentum') };
+  for (const s of tradeable) {
+    const sc = scoredBySym.get(s.symbol);
+    s._edge = expectedEdge({
+      confidence: s._effConf, regime: regime.regime, catalystPoints: s.catalystPoints || 0,
+      annualizedVolPct: sc?.annualizedVol, rewardRisk: sc?.rewardRisk,
+      laneWinRate: laneHist[s._lane]?.winRate, laneSamples: laneHist[s._lane]?.samples || 0,
+    });
+  }
+
+  // Rank by lane-relevant effective confidence; catalyst lane wins ties over momentum
+  // (verified evidence beats inferred); expected edge breaks remaining ties.
   const ranked = tradeable
-    .map(s => { const sc = scoredBySym.get(s.symbol); return { ...sc, lane: s._lane, effectiveConfidence: s._effConf ?? sc.confidence, trendBonus: trendBonusBySym.get(s.symbol) ?? 0, institutional: s._inst?.score ?? null }; })
-    .sort((a, b) => (b.effectiveConfidence - a.effectiveConfidence) || ((a.lane === 'catalyst' ? -1 : 0) - (b.lane === 'catalyst' ? -1 : 0)) || ((b.composite ?? -1) - (a.composite ?? -1)));
+    .map(s => { const sc = scoredBySym.get(s.symbol); return { ...sc, lane: s._lane, effectiveConfidence: s._effConf ?? sc.confidence, confidenceComponents: s._comps, expectedEdge: s._edge, trendBonus: trendBonusBySym.get(s.symbol) ?? 0, institutional: s._inst?.score ?? null }; })
+    .sort((a, b) => (b.effectiveConfidence - a.effectiveConfidence)
+      || ((a.lane === 'catalyst' ? -1 : 0) - (b.lane === 'catalyst' ? -1 : 0))
+      || ((b.expectedEdge?.edgePct ?? -99) - (a.expectedEdge?.edgePct ?? -99))
+      || ((b.composite ?? -1) - (a.composite ?? -1)));
 
   // De-dup: skip names we already hold or picked in the last DEDUP_DAYS.
   const recentlyPicked = new Set();
@@ -619,7 +686,12 @@ export default async function handler(req, res) {
   } catch (e) { /* if the bouquet can't be read, don't block the pick */ }
   const fresh = (r) => !recentlyPicked.has(String(r.symbol).toUpperCase());
 
-  const winner = ranked.find(fresh) || ranked[0];
+  // V2 CONCENTRATION GUARD: a candidate whose sector/theme already has 2+ open positions is
+  // skipped entirely (next-ranked candidate gets its shot); 1 overlap halves the size later.
+  const concentrationBySym = new Map(ranked.map(r => [r.symbol, concentrationCheck(r.symbol, openPositions)]));
+  const concentrationOk = (r) => concentrationBySym.get(r.symbol)?.action !== 'reject';
+  const winner = ranked.find(r => fresh(r) && concentrationOk(r)) || ranked.find(fresh) || ranked[0];
+  const winnerConc = concentrationBySym.get(winner.symbol) || { action: 'ok', factor: 1, reason: null };
   const winnerSrc = tradeable.find(s => s.symbol === winner.symbol);
   const winnerCatalyst = winnerSrc?._catalyst || null;
 
@@ -636,11 +708,17 @@ export default async function handler(req, res) {
   if (winnerConf < confBar) gateFail.push(`confidence ${+winnerConf.toFixed(1)} < ${confBar}${winnerLane === 'momentum' ? ' (momentum-lane bar)' : ''}`);
   if (rr < gates.minRR) gateFail.push(`reward/risk ${rr} < ${gates.minRR}`);
   if (winnerLane === 'catalyst' && gates.requireVerified && winnerCatalyst?.verification !== 'VERIFIED') gateFail.push(`catalyst ${winnerCatalyst?.verification || 'UNVERIFIED'} (need VERIFIED in ${regime.regime} market)`);
+  // V2: positive-expectancy gate — a trade whose probability-weighted loss outweighs its
+  // probability-weighted gain is a bad bet regardless of how good it looks on any one signal.
+  if ((winner.expectedEdge?.edgePct ?? 0) <= 0) gateFail.push(`expected edge ${winner.expectedEdge?.edgePct ?? 'n/a'}% ≤ 0`);
+  if (winnerConc.action === 'reject') gateFail.push(winnerConc.reason);
   if (gateFail.length) {
     addRejection(winner.symbol, 'regime-gate', gateFail, {
       momentum: winner.factors?.momentum ?? null, catalystScore: winner.factors?.catalyst ?? null,
       confidence: winner.confidence ?? null, effectiveConfidence: +winnerConf.toFixed(1), regime: regime.regime,
       sector: winner.factors?.sector ?? null, techScore: winner.factors?.technicals ?? null,
+      components: winner.confidenceComponents ?? null, expectedEdge: winner.expectedEdge ?? null,
+      discoveryParts: discoveryMeta.get(winner.symbol)?.discoveryParts ?? null,
       rewardRisk: winner.rewardRisk ?? null, institutional: winner.institutional ?? null,
       entryRefPrice: winnerSrc?.price ?? null, yahooSymbol: winnerSrc?._price?.symbol || null,
     });
@@ -761,15 +839,19 @@ Return ONLY valid JSON (no markdown):
       catalyst: winnerCatalyst ? { type: winnerCatalyst.type, confidence: winnerCatalyst.confidence, impact: winnerCatalyst.impact, stars: winnerCatalyst.stars, points: winnerCatalyst.points, verification: winnerCatalyst.verification, sources: winnerCatalyst.sources, summary: winnerCatalyst.summary, impactClass: winnerCatalyst.impactClass ?? null, decay: winnerCatalyst.decay ?? null, influenceDays: winnerCatalyst.influenceDays ?? null, recalled: !!winnerCatalyst.recalled } : null,
       confidence: winner.confidence,
       effectiveConfidence: winner.effectiveConfidence ?? winner.confidence,
+      confidenceComponents: winner.confidenceComponents ?? null, // v2: {technical,flow,catalyst,liquidity}
+      expectedEdge: winner.expectedEdge ?? null,                  // v2: {expectedGainPct,expectedLossPct,probability,edgePct}
       confidenceTrend: intradayStore.candidates[winner.symbol]?.confidenceTrend ?? null,
       trendBonus: winner.trendBonus ?? 0,
       institutional: winner.institutional ?? (winnerSrc?._inst?.score ?? null),
       institutionalFlags: winnerSrc?._inst?.flags ?? [],
       discoveryScore: discoveryMeta.get(winner.symbol)?.discoveryScore ?? null,
       discoveryReasons: discoveryMeta.get(winner.symbol)?.discoveryReasons ?? [],
+      concentration: winnerConc.reason || null,                   // v2: sizing note when overlapped
       llmVetoOverridden: !!narrative.llmVetoOverridden,
       rewardRisk: winner.rewardRisk,
       regime: regime.regime, market: regime.reason,
+      regimeConfidence: regime.regimeConfidence ?? null, regimeFactors: regime.factors ?? null, // v2
       annualizedVol: winner.annualizedVol,
       composite: winner.composite,
       verdict: winner.verdict,
@@ -793,8 +875,10 @@ Return ONLY valid JSON (no markdown):
     // realistic fill. This is the price you could actually transact at right now.
     const entryPrice = priceData ? (priceData.price ?? priceData.prevClose) : null;
     const entryProvisional = false; // entry is locked at pick time — no capture-open needed
-    // Cautious sizing on the momentum lane: less capital on entries without verified news.
-    const investAmt = winnerLane === 'momentum' ? MOMENTUM_LANE.INVEST_AMOUNT : 10000;
+    // V2 DYNAMIC SIZING: conviction ladder (55→₹6k … 80+→₹18k) on the lane-relevant
+    // confidence, ×0.6 on the momentum lane, ±20% from expected edge, halved on sector/theme
+    // overlap. Bounds ₹4k-₹18k; daily caps unchanged.
+    const investAmt = positionSize({ conf: winnerConf, lane: winnerLane, edgePct: winner.expectedEdge?.edgePct, concentrationFactor: winnerConc.factor });
     const shares = entryPrice ? +(investAmt / entryPrice).toFixed(3) : null;
 
     // ENTRY-PRICE SANITY CHECK — guard against a bad price source booking phantom P&L.
@@ -833,9 +917,17 @@ Return ONLY valid JSON (no markdown):
     if (!entryRejected) await ghPutWithRetry('data/project-bouquet.json', (current) => {
       let bouquet = current?.bouquet || [];
       if (bouquet.find(b => b.date === date)) return null; // already added today — skip write
+      // V2 THESIS SEED: every position records WHY it was bought; sell-check keeps the thesis
+      // current from new filings (stronger thesis → longer rope; broken thesis → exit).
+      const thesis = winnerCatalyst?.hasCatalyst
+        ? { type: winnerCatalyst.type, summary: winnerCatalyst.summary || null, points: winnerCatalyst.points || 0 }
+        : { type: 'momentum-technical', summary: 'volume + accumulation momentum entry (no news catalyst)', points: 0 };
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         entryLane: winnerLane, // momentum-lane positions get tighter exits in _sell-engine.js
+        confidenceComponents: pick.confidenceComponents, expectedEdge: pick.expectedEdge, // v2 learning data
+        originalThesis: thesis, currentThesis: thesis,
+        thesisScore: Math.min(90, 50 + (thesis.points || 0)), lastThesisUpdate: pick.pickedAt,
         verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: investAmt,
         entryPrice, currentPrice: priceData?.price ?? entryPrice, shares,
         peakPrice: Math.max(entryPrice || 0, priceData?.price ?? entryPrice ?? 0), // for the trailing stop

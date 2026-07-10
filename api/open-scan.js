@@ -22,6 +22,7 @@
 import { marketStatus } from './_market-calendar.js';
 import { classifyRegime } from './_market-regime.js';
 import { institutionalAccumulationScore } from './_institutional.js';
+import { concentrationCheck } from './_correlation.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 const GAP_MIN_PCT = 0.5, GAP_MAX_PCT = 8;
@@ -150,21 +151,41 @@ export default async function handler(req, res) {
     evaluated.push({ ticker: sym, gapPct, relVol, inst: inst.score, yConf: w.yBestConf ?? null, catalyst: w.catalyst?.type ?? null, lane, _live: live, _w: w });
   }
 
-  // Best qualifier: catalyst lane outranks momentum; then opening relVol.
+  // Best qualifier: catalyst lane outranks momentum; then opening relVol. V2: a candidate
+  // whose sector/theme already carries 2+ open positions is skipped (concentration guard).
+  const openRows = bouquetRows.filter(b => !b.status || b.status === 'OPEN');
   const qualifiers = evaluated.filter(e => e.lane).sort((a, b) =>
     ((a.lane === 'catalyst' ? 0 : 1) - (b.lane === 'catalyst' ? 0 : 1)) || (b.relVol - a.relVol));
   const clean = (e) => ({ ticker: e.ticker, gapPct: e.gapPct, relVol: e.relVol, inst: e.inst, yConf: e.yConf, catalyst: e.catalyst, lane: e.lane, skip: e.skip });
-  if (!qualifiers.length) {
+  const eligible = qualifiers.filter(e => {
+    const c = concentrationCheck(e.ticker, openRows);
+    e._conc = c;
+    return c.action !== 'reject';
+  });
+  if (!eligible.length) {
     return res.status(200).json({ status: 'no_open_entry', regime: regime.regime, evaluated: evaluated.map(clean) });
   }
 
-  const pick = qualifiers[0];
+  const pick = eligible[0];
   const live = pick._live, w = pick._w;
-  const investAmt = pick.lane === 'momentum' ? 6000 : 10000;
+  // V2 dynamic sizing-lite: conviction ladder on yesterday's confidence (verified-filing
+  // entries without a carryover confidence default to the 10k rung), momentum ×0.6,
+  // halved on sector/theme overlap. Bounds ₹4k-₹18k.
+  const ladder = (c) => c >= 80 ? 18000 : c >= 75 ? 15000 : c >= 70 ? 12000 : c >= 65 ? 10000 : c >= 60 ? 8000 : 6000;
+  let investAmt = ladder(pick.yConf ?? 65);
+  if (pick.lane === 'momentum') investAmt *= 0.6;
+  investAmt *= (pick._conc?.factor ?? 1);
+  investAmt = Math.max(4000, Math.min(18000, Math.round(investAmt / 500) * 500));
   const nowIso = new Date().toISOString();
+  const thesis = pick.lane === 'catalyst'
+    ? { type: w.catalyst?.type || 'overnight-filing', summary: w.catalyst?.summary || null, points: w.catalyst?.points || 0 }
+    : { type: 'momentum-technical', summary: 'open-window continuation of a strong prior-day setup', points: 0 };
   const row = {
     ticker: pick.ticker, fullName: pick.ticker, sector: null,
     entryLane: pick.lane, openEntry: true,
+    originalThesis: thesis, currentThesis: thesis,
+    thesisScore: Math.min(90, 50 + (thesis.points || 0)), lastThesisUpdate: nowIso,
+    concentration: pick._conc?.reason || null,
     verdict: 'BUY', composite: null, date, addedAt: nowIso, investedAmount: investAmt,
     entryPrice: live.price, currentPrice: live.price, shares: +(investAmt / live.price).toFixed(3),
     peakPrice: live.price,
