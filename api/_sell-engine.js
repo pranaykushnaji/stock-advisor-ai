@@ -96,12 +96,26 @@ export function rulesGate(item, recentCloses = null) {
   if (isSuspiciousMove(pnlPct, held)) return null;
 
   const R = laneRules(item.entryLane);
-  const { stopPct, trailPct } = exitBands(recentCloses, item.entryLane);
+  const bands = exitBands(recentCloses, item.entryLane);
+  const stopPct = bands.stopPct; // STOP IS ABSOLUTE — the thesis engine may never widen it
+  let trailPct = bands.trailPct;
+  let maxHold = R.MAX_HOLD_DAYS;
   const laneTag = item.entryLane === 'momentum' ? ' [mom-lane]' : '';
+
+  // V2 THESIS-AWARE EXITS: a position whose thesis has STRENGTHENED since entry (follow-on
+  // orders, results beat, more filings — maintained by sell-check) earns more rope: a wider
+  // trail band (winners with reinforcing news shouldn't be shaken out by normal noise) and a
+  // longer max hold. A WEAKENED thesis tightens the trail. The initial stop-loss is never
+  // touched in either direction — capital protection is not negotiable.
+  const ts = item.thesisScore;
+  if (ts != null && isFinite(ts)) {
+    if (ts >= 70) { trailPct = Math.min(trailPct * 1.15, bands.trailPct + 2); maxHold += (item.entryLane === 'momentum' ? 2 : 3); }
+    else if (ts < 40) { trailPct = Math.max(trailPct * 0.85, 2.5); }
+  }
 
   // 1. Failsafe target — a genuine moonshot still books.
   if (pnlPct >= R.HARD_TARGET_PCT) return { verdict: 'SELL', source: 'rule', reason: `failsafe target (+${pnlPct.toFixed(1)}%)` };
-  // 2. Initial volatility stop, measured from entry.
+  // 2. Initial volatility stop, measured from entry. ABSOLUTE — no thesis adjustment.
   if (pnlPct <= -stopPct) return { verdict: 'SELL', source: 'rule', reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)${laneTag}` };
   // 3. Trailing stop — once the peak is up more than a trail band, protect gains from the peak.
   const peak = Math.max(item.peakPrice ?? entry, cur);
@@ -109,8 +123,8 @@ export function rulesGate(item, recentCloses = null) {
     const dropFromPeak = (peak - cur) / peak * 100;
     if (dropFromPeak >= trailPct) return { verdict: 'SELL', source: 'rule', reason: `trailing stop (-${dropFromPeak.toFixed(1)}% from peak, +${pnlPct.toFixed(1)}% locked)${laneTag}` };
   }
-  // 4. Max hold (shorter on the momentum lane — no-news moves decay faster).
-  if (held >= R.MAX_HOLD_DAYS) return { verdict: 'SELL', source: 'rule', reason: `max hold ${held}d reached${laneTag}` };
+  // 4. Max hold (shorter on the momentum lane; a strengthened thesis extends it).
+  if (held >= maxHold) return { verdict: 'SELL', source: 'rule', reason: `max hold ${held}d reached${laneTag}${ts >= 70 ? ' (thesis-extended)' : ''}` };
   // 5. Momentum-fade: the short-term trend that justified the buy has reversed.
   if (Array.isArray(recentCloses) && recentCloses.length >= 6) {
     const last = recentCloses[recentCloses.length - 1];
@@ -200,6 +214,12 @@ export function bookExit(item, realExit) {
   return {
     ticker: item.ticker, fullName: item.fullName, sector: item.sector,
     entryLane: item.entryLane || 'catalyst', // lane-level P&L lets analytics judge the momentum lane
+    // v2 learning payload: what the engine believed at entry/exit, for calibration analytics.
+    expectedEdge: item.expectedEdge ?? null,
+    confidenceComponents: item.confidenceComponents ?? null,
+    thesisScore: item.thesisScore ?? null,
+    thesisType: item.currentThesis?.type || item.originalThesis?.type || null,
+    regime: item.regime ?? null,
     entryPrice: entry, entryDate: item.date,
     exitPrice: +Number(exit).toFixed(2),
     exitDate: new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10),
