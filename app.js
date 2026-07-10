@@ -861,6 +861,7 @@ function featuredPickCard(p){
   const catHtml=(cat&&cat.type)?`<div class="valuation-box"><span>Catalyst: </span>${esc(cat.type)}${cat.verification?` · <strong style="color:${cat.verification==='VERIFIED'?'var(--green)':'var(--amber)'};">${esc(cat.verification)}</strong>`:''}${cat.summary?` — ${esc(cat.summary)}`:''}</div>`:'';
   const priceHtml=p.entryPrice?`<div class="stock-price-row"><span class="stock-price">₹${cur}</span>${gain!=null?`<span class="stock-change ${gain>=0?'up':'down'}">${gain>=0?'+':''}${gain.toFixed(2)}%</span>`:''}<span style="font-size:12px;color:var(--text3);">entry ₹${p.entryPrice}</span></div>`:'';
   const pills=[
+    p.entryLane==='momentum'?`<span class="pill pill-medium">⚡ Momentum entry · tighter stops</span>`:'',
     p.regime?`<span class="pill">🌐 ${esc(p.regime)} market</span>`:'',
     (p.rewardRisk&&p.rewardRisk.rr)?`<span class="pill pill-green">⚖ R/R ${p.rewardRisk.rr}</span>`:'',
     p.riskLevel?`<span class="pill pill-${String(p.riskLevel).toLowerCase()}">⚡ ${esc(p.riskLevel)} Risk</span>`:'',

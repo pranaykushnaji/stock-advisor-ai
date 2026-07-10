@@ -32,6 +32,19 @@ export const SELL_RULES = {
   DEFAULT_DAILY_VOL_PCT: 2.2,   // used when we can't measure vol from a price series
 };
 
+// Lane-specific exit overrides. Momentum-lane entries (bought WITHOUT a verified catalyst —
+// see MOMENTUM_LANE in stock-of-the-day.js) run on tighter risk: narrower stop/trail bands and
+// a shorter max hold, because a move with no news behind it decays faster and deserves less
+// rope. Positions carry entryLane on the bouquet row; absent/unknown lanes get the defaults.
+export const LANE_EXITS = {
+  momentum: {
+    MAX_HOLD_DAYS: 7,
+    STOP_VOL_MULT: 2.0, STOP_MIN_PCT: 3.5, STOP_MAX_PCT: 9,
+    TRAIL_VOL_MULT: 1.8, TRAIL_MIN_PCT: 3.5, TRAIL_MAX_PCT: 8,
+  },
+};
+function laneRules(lane) { return { ...SELL_RULES, ...(LANE_EXITS[lane] || {}) }; }
+
 // True when a P&L% is too large to be believable for how long we've held — i.e. it looks
 // like a data glitch, not a real market move. Shared by the rules gate and the LLM path.
 export function isSuspiciousMove(pnlPct, heldDays) {
@@ -59,11 +72,13 @@ export function dailyVolPct(closes) {
 }
 
 // The volatility-adaptive stop/trail band widths (%) for a stock, given its recent closes.
-export function exitBands(recentCloses) {
-  const dv = dailyVolPct(recentCloses) ?? SELL_RULES.DEFAULT_DAILY_VOL_PCT;
+// `lane` (optional) selects the LANE_EXITS overrides — momentum-lane positions get tighter bands.
+export function exitBands(recentCloses, lane = null) {
+  const R = laneRules(lane);
+  const dv = dailyVolPct(recentCloses) ?? R.DEFAULT_DAILY_VOL_PCT;
   return {
-    stopPct: clamp(SELL_RULES.STOP_VOL_MULT * dv, SELL_RULES.STOP_MIN_PCT, SELL_RULES.STOP_MAX_PCT),
-    trailPct: clamp(SELL_RULES.TRAIL_VOL_MULT * dv, SELL_RULES.TRAIL_MIN_PCT, SELL_RULES.TRAIL_MAX_PCT),
+    stopPct: clamp(R.STOP_VOL_MULT * dv, R.STOP_MIN_PCT, R.STOP_MAX_PCT),
+    trailPct: clamp(R.TRAIL_VOL_MULT * dv, R.TRAIL_MIN_PCT, R.TRAIL_MAX_PCT),
   };
 }
 
@@ -80,20 +95,22 @@ export function rulesGate(item, recentCloses = null) {
   // bad price and defer (return null) instead of booking a phantom exit.
   if (isSuspiciousMove(pnlPct, held)) return null;
 
-  const { stopPct, trailPct } = exitBands(recentCloses);
+  const R = laneRules(item.entryLane);
+  const { stopPct, trailPct } = exitBands(recentCloses, item.entryLane);
+  const laneTag = item.entryLane === 'momentum' ? ' [mom-lane]' : '';
 
   // 1. Failsafe target — a genuine moonshot still books.
-  if (pnlPct >= SELL_RULES.HARD_TARGET_PCT) return { verdict: 'SELL', source: 'rule', reason: `failsafe target (+${pnlPct.toFixed(1)}%)` };
+  if (pnlPct >= R.HARD_TARGET_PCT) return { verdict: 'SELL', source: 'rule', reason: `failsafe target (+${pnlPct.toFixed(1)}%)` };
   // 2. Initial volatility stop, measured from entry.
-  if (pnlPct <= -stopPct) return { verdict: 'SELL', source: 'rule', reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)` };
+  if (pnlPct <= -stopPct) return { verdict: 'SELL', source: 'rule', reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)${laneTag}` };
   // 3. Trailing stop — once the peak is up more than a trail band, protect gains from the peak.
   const peak = Math.max(item.peakPrice ?? entry, cur);
   if ((peak - entry) / entry * 100 >= trailPct) {
     const dropFromPeak = (peak - cur) / peak * 100;
-    if (dropFromPeak >= trailPct) return { verdict: 'SELL', source: 'rule', reason: `trailing stop (-${dropFromPeak.toFixed(1)}% from peak, +${pnlPct.toFixed(1)}% locked)` };
+    if (dropFromPeak >= trailPct) return { verdict: 'SELL', source: 'rule', reason: `trailing stop (-${dropFromPeak.toFixed(1)}% from peak, +${pnlPct.toFixed(1)}% locked)${laneTag}` };
   }
-  // 4. Max hold.
-  if (held >= SELL_RULES.MAX_HOLD_DAYS) return { verdict: 'SELL', source: 'rule', reason: `max hold ${held}d reached` };
+  // 4. Max hold (shorter on the momentum lane — no-news moves decay faster).
+  if (held >= R.MAX_HOLD_DAYS) return { verdict: 'SELL', source: 'rule', reason: `max hold ${held}d reached${laneTag}` };
   // 5. Momentum-fade: the short-term trend that justified the buy has reversed.
   if (Array.isArray(recentCloses) && recentCloses.length >= 6) {
     const last = recentCloses[recentCloses.length - 1];
@@ -182,6 +199,7 @@ export function bookExit(item, realExit) {
   const realizedPnlPct = entry ? ((exit - entry) / entry) * 100 : 0;
   return {
     ticker: item.ticker, fullName: item.fullName, sector: item.sector,
+    entryLane: item.entryLane || 'catalyst', // lane-level P&L lets analytics judge the momentum lane
     entryPrice: entry, entryDate: item.date,
     exitPrice: +Number(exit).toFixed(2),
     exitDate: new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10),

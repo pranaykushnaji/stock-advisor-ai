@@ -62,14 +62,17 @@ jobs:
           fi
 
           # ---- 2. Decide by IST clock what should have run recently ----
-          # Market window (jobs every <=35 min): stale means >75 min old.
-          # After-close window: the 15:40 refresh / 16:10 analytics should exist by 16:30.
+          # Scheduled jobs land every <=35 min in the market window, so >45 min of silence
+          # means the primary scheduler is dead. Kept tight (was 75) because on 2026-07-10
+          # even a wrangler redeploy did NOT revive the CF trigger — while that's true, this
+          # watchdog IS the effective scheduler, and a tighter threshold keeps the fallback
+          # cadence close to hourly instead of losing an extra half hour per cycle.
           STALE=0
           if [ "$ist_hhmm" -ge 0930 ] && [ "$ist_hhmm" -le 1530 ]; then
-            [ "$age_min" -gt 75 ] && STALE=1
+            [ "$age_min" -gt 45 ] && STALE=1
             MODE=market
           elif [ "$ist_hhmm" -gt 1530 ] && [ "$ist_hhmm" -le 1700 ]; then
-            [ "$age_min" -gt 75 ] && STALE=1
+            [ "$age_min" -gt 45 ] && STALE=1
             MODE=eod
           else
             echo "Outside watch window — done."; exit 0

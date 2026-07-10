@@ -33,6 +33,29 @@ const DEDUP_DAYS = 5;
 // portfolio should carry — this bounds that without blocking genuinely separate opportunities.
 const MAX_NEW_BUYS_PER_DAY = 3;
 
+// ---- MOMENTUM LANE (second entry path, no verified catalyst required) ----
+// Motivation: strong movers (e.g. PAYTM 2026-07-10: effConf 72, institutional 90, relVol 2.7x)
+// were being refused SOLELY for lacking a news-verified catalyst, even in supportive markets.
+// This lane lets the engine cautiously buy pure momentum — but the bar is HIGHER everywhere
+// else, so it is a substitution of evidence (volume + smart-money accumulation + multi-signal
+// agreement), not a loosening:
+//   • relVol >= 2.5 (vs 2.1)               • effective confidence >= regime bar + 6
+//   • institutional accumulation >= 65      • bullish/neutral regimes ONLY (weak/volatile still
+//   • never on a negative catalyst            require VERIFIED — regimeGates now truly bind)
+//   • max 1 momentum-lane buy per day        • smaller size (₹6,000 vs ₹10,000)
+//   • tighter exits via entryLane tag (see _sell-engine.js LANE_EXITS)
+// Every momentum-lane trade is tagged entryLane:'momentum' end-to-end (bouquet → realized
+// ledger) so analytics can measure whether this lane actually earns its keep — if it doesn't,
+// we turn it off with data instead of debate.
+const MOMENTUM_LANE = {
+  MIN_RELVOL: 2.5,
+  CONF_EXTRA: 6,            // added to the regime's minConfidence
+  MIN_INSTITUTIONAL: 65,
+  REGIMES: ['bullish', 'neutral'],
+  MAX_PER_DAY: 1,
+  INVEST_AMOUNT: 6000,      // catalyst lane stays at 10000
+};
+
 function todayIST() {
   const now = new Date();
   const ist = new Date(now.getTime() + 5.5 * 3600 * 1000);
@@ -270,12 +293,15 @@ export default async function handler(req, res) {
   // Daily buy cap — cheap check before any of the expensive discovery/pricing/catalyst work.
   // Buy-scans run hourly now, so this is what actually bounds how many positions can open in
   // one day (replaces the old "one pick per day" gate, which no longer fits an hourly cadence).
+  // Also counts today's momentum-lane buys so that lane's own 1/day cap can bind below.
+  let momLaneUsedToday = 0;
   try {
     const bqCap = await ghGetFile('data/project-bouquet.json', ghToken);
     const bqCapList = bqCap.content ? (JSON.parse(bqCap.content).bouquet || []) : [];
-    const boughtToday = bqCapList.filter(b => b.date === date).length;
-    if (boughtToday >= MAX_NEW_BUYS_PER_DAY && req.query.force !== 'true') {
-      return res.status(200).json({ status: 'daily_cap_reached', boughtToday, cap: MAX_NEW_BUYS_PER_DAY });
+    const todayRows = bqCapList.filter(b => b.date === date);
+    momLaneUsedToday = todayRows.filter(b => b.entryLane === 'momentum').length;
+    if (todayRows.length >= MAX_NEW_BUYS_PER_DAY && req.query.force !== 'true') {
+      return res.status(200).json({ status: 'daily_cap_reached', boughtToday: todayRows.length, cap: MAX_NEW_BUYS_PER_DAY });
     }
   } catch (e) { /* if the bouquet can't be read, don't block the scan */ }
 
@@ -534,8 +560,23 @@ export default async function handler(req, res) {
     s._instAdj = instAdj; s._effConf = effConf.get(s.symbol);
   }
 
-  const tradeable = catalystPool.filter(s =>
-    (s._qm?.relVol != null && s._qm.relVol >= RELVOL_INTRADAY_MIN) && s._catalyst?.hasCatalyst && !s._catalyst?.negative);
+  // TWO ENTRY LANES. Lane A (catalyst): verified catalyst + volume — unchanged. Lane B
+  // (momentum): no catalyst needed, but every other requirement is HIGHER (see MOMENTUM_LANE),
+  // only in bullish/neutral regimes, and at most one per day. A candidate qualifying on both
+  // lanes is treated as catalyst-lane (full size, standard exits).
+  const momLaneOpen = momLaneUsedToday < MOMENTUM_LANE.MAX_PER_DAY && MOMENTUM_LANE.REGIMES.includes(regime.regime);
+  const laneOf = (s) => {
+    const relVol = s._qm?.relVol;
+    if (s._catalyst?.negative) return null;                       // red flag blocks BOTH lanes
+    if (relVol != null && relVol >= RELVOL_INTRADAY_MIN && s._catalyst?.hasCatalyst) return 'catalyst';
+    if (momLaneOpen
+      && relVol != null && relVol >= MOMENTUM_LANE.MIN_RELVOL
+      && (s._effConf ?? 0) >= gates.minConfidence + MOMENTUM_LANE.CONF_EXTRA
+      && (s._inst?.score ?? 0) >= MOMENTUM_LANE.MIN_INSTITUTIONAL) return 'momentum';
+    return null;
+  };
+  for (const s of catalystPool) s._lane = laneOf(s);
+  const tradeable = catalystPool.filter(s => s._lane);
 
   if (!tradeable.length) {
     // Record the near-misses as rejections so analytics can learn whether the volume/catalyst
@@ -550,17 +591,18 @@ export default async function handler(req, res) {
           sector: s.sectorScore ?? null, techScore: scored?.factors?.technicals ?? null,
           institutional: s._inst?.score ?? null, entryRefPrice: s.price ?? null, yahooSymbol: s._price?.symbol || null });
     }
-    return noTrade('no stock had BOTH volume confirmation and a high-confidence catalyst', {
-      regime: regime.regime, market: regime.reason,
+    return noTrade('no stock qualified on either lane (verified catalyst, or high-bar momentum)', {
+      regime: regime.regime, market: regime.reason, momLaneOpen,
       considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, confidence: scoredBySym.get(s.symbol)?.confidence, effectiveConfidence: s._effConf, institutional: s._inst?.score, catalyst: s._catalyst?.type, verification: s._catalyst?.verification, filing: s._catalyst?.hasFiling, recalled: s._catalyst?.recalled, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative })),
     });
   }
 
   // Rank the tradeable set by EFFECTIVE confidence (multi-signal agreement + intraday trend bonus
   // + institutional adjustment), then composite as the tiebreak — regime-aware throughout.
+  // Catalyst-lane candidates win ties over momentum-lane (verified evidence beats inferred).
   const ranked = tradeable
-    .map(s => { const sc = scoredBySym.get(s.symbol); return { ...sc, effectiveConfidence: s._effConf ?? sc.confidence, trendBonus: trendBonusBySym.get(s.symbol) ?? 0, institutional: s._inst?.score ?? null }; })
-    .sort((a, b) => (b.effectiveConfidence - a.effectiveConfidence) || ((b.composite ?? -1) - (a.composite ?? -1)));
+    .map(s => { const sc = scoredBySym.get(s.symbol); return { ...sc, lane: s._lane, effectiveConfidence: s._effConf ?? sc.confidence, trendBonus: trendBonusBySym.get(s.symbol) ?? 0, institutional: s._inst?.score ?? null }; })
+    .sort((a, b) => (b.effectiveConfidence - a.effectiveConfidence) || ((a.lane === 'catalyst' ? -1 : 0) - (b.lane === 'catalyst' ? -1 : 0)) || ((b.composite ?? -1) - (a.composite ?? -1)));
 
   // De-dup: skip names we already hold or picked in the last DEDUP_DAYS.
   const recentlyPicked = new Set();
@@ -586,10 +628,14 @@ export default async function handler(req, res) {
   // volatile markets) a VERIFIED catalyst. Fail any → NO TRADE (capital preservation first).
   const rr = winner.rewardRisk?.rr ?? 0;
   const winnerConf = winner.effectiveConfidence ?? winner.confidence ?? 0;
+  const winnerLane = winner.lane || 'catalyst';
+  // Momentum-lane entries face a HIGHER confidence bar (regime bar + CONF_EXTRA) — the extra
+  // conviction is the price of entering without a verified catalyst.
+  const confBar = winnerLane === 'momentum' ? gates.minConfidence + MOMENTUM_LANE.CONF_EXTRA : gates.minConfidence;
   const gateFail = [];
-  if (winnerConf < gates.minConfidence) gateFail.push(`confidence ${+winnerConf.toFixed(1)} < ${gates.minConfidence}`);
+  if (winnerConf < confBar) gateFail.push(`confidence ${+winnerConf.toFixed(1)} < ${confBar}${winnerLane === 'momentum' ? ' (momentum-lane bar)' : ''}`);
   if (rr < gates.minRR) gateFail.push(`reward/risk ${rr} < ${gates.minRR}`);
-  if (gates.requireVerified && winnerCatalyst?.verification !== 'VERIFIED') gateFail.push(`catalyst ${winnerCatalyst?.verification || 'UNVERIFIED'} (need VERIFIED in ${regime.regime} market)`);
+  if (winnerLane === 'catalyst' && gates.requireVerified && winnerCatalyst?.verification !== 'VERIFIED') gateFail.push(`catalyst ${winnerCatalyst?.verification || 'UNVERIFIED'} (need VERIFIED in ${regime.regime} market)`);
   if (gateFail.length) {
     addRejection(winner.symbol, 'regime-gate', gateFail, {
       momentum: winner.factors?.momentum ?? null, catalystScore: winner.factors?.catalyst ?? null,
@@ -608,6 +654,12 @@ export default async function handler(req, res) {
     const priceData = winnerSrc?._price;
 
     // ---- LLM writes the narrative AND gets a final veto on weak picks ----
+    // The veto instruction is LANE-AWARE: a momentum-lane entry has no catalyst by design, so
+    // demanding one would veto every such pick. Its veto question is instead "is this a real
+    // stock-specific move, or just the index / a manipulated spike?"
+    const laneRules = winnerLane === 'momentum'
+      ? `ENTRY TYPE: MOMENTUM LANE — this is a deliberate technical entry with NO news catalyst required. It qualified on exceptional volume (${winnerSrc?._qm?.relVol}x normal pace), institutional accumulation (${winner.institutional}/100), and multi-signal confidence in a supportive market. CRITICAL RULE: set "noPick": true ONLY if the move looks like pure index-following (nothing stock-specific in the price/volume data), or the data suggests a manipulated/blow-off spike. Do NOT veto merely because there is no news catalyst — that is expected on this lane.`
+      : `CRITICAL RULE: If this stock is only moving because of general market momentum, or you cannot point to the specific company catalyst above as a genuine reason to buy, set "noPick": true. Do NOT force a thesis on a weak pick.`;
     const NARRATIVE_PROMPT = `You are a short-term momentum trader writing a quick brief for Indian swing traders. Today is ${date}. This is a SWING TRADE (5-10 days), not buy-and-hold. Use ONLY the real data provided — do not invent numbers.
 
 Selected: ${winner.fullName} (${winner.symbol}), sector ${winner.sector}
@@ -617,7 +669,7 @@ Short-term returns (r1d/r1w/r1m): ${JSON.stringify(winner.shortReturns)}
 Relative volume (today vs 20-day avg): ${winnerSrc?._qm?.relVol}x · Relative strength vs Nifty: ${winner.relStrength}
 Catalyst: ${winnerCatalyst ? `${winnerCatalyst.type} — ${winnerCatalyst.verification} (${winnerCatalyst.sources} src, confidence ${winnerCatalyst.confidence}, impact ${winnerCatalyst.impact}/10) — ${winnerCatalyst.summary}` : 'none identified'}
 
-CRITICAL RULE: If this stock is only moving because of general market momentum, or you cannot point to the specific company catalyst above as a genuine reason to buy, set "noPick": true. Do NOT force a thesis on a weak pick.
+${laneRules}
 
 Return ONLY valid JSON (no markdown):
 {
@@ -693,6 +745,7 @@ Return ONLY valid JSON (no markdown):
     const pick = {
       ticker: winner.symbol, fullName: winner.fullName, sector: winner.sector,
       strategy: 'quality-momentum',
+      entryLane: winnerLane, // 'catalyst' | 'momentum' — drives sizing, exits, and analytics
       factors: {
         momentum: { score: winner.factors.momentum, positives: narrative?.momentumNotes?.positives || [], negatives: narrative?.momentumNotes?.negatives || [] },
         relStrength: { score: winner.factors.relStrength },
@@ -740,7 +793,9 @@ Return ONLY valid JSON (no markdown):
     // realistic fill. This is the price you could actually transact at right now.
     const entryPrice = priceData ? (priceData.price ?? priceData.prevClose) : null;
     const entryProvisional = false; // entry is locked at pick time — no capture-open needed
-    const shares = entryPrice ? +(10000 / entryPrice).toFixed(3) : null;
+    // Cautious sizing on the momentum lane: less capital on entries without verified news.
+    const investAmt = winnerLane === 'momentum' ? MOMENTUM_LANE.INVEST_AMOUNT : 10000;
+    const shares = entryPrice ? +(investAmt / entryPrice).toFixed(3) : null;
 
     // ENTRY-PRICE SANITY CHECK — guard against a bad price source booking phantom P&L.
     // Cross-check the captured entry against the INDEPENDENT NSE snapshot's lastPrice for this
@@ -780,7 +835,8 @@ Return ONLY valid JSON (no markdown):
       if (bouquet.find(b => b.date === date)) return null; // already added today — skip write
       bouquet.unshift({
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
-        verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: 10000,
+        entryLane: winnerLane, // momentum-lane positions get tighter exits in _sell-engine.js
+        verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: investAmt,
         entryPrice, currentPrice: priceData?.price ?? entryPrice, shares,
         peakPrice: Math.max(entryPrice || 0, priceData?.price ?? entryPrice ?? 0), // for the trailing stop
         entryPriceProvisional: entryProvisional,
