@@ -1,0 +1,100 @@
+name: Cron Watchdog
+
+# DEAD-MAN SWITCH for the Cloudflare Worker scheduler.
+#
+# On 2026-07-10 the Worker's cron trigger silently stopped firing (its HTTP handler stayed
+# healthy — likely fallout from Cloudflare's July-8 "Workers Cron Triggers" incident), and the
+# entire trading day ran zero jobs with no alert. The fix was a `wrangler deploy` to re-register
+# the trigger; this workflow exists so that failure mode can never again be silent or costly.
+#
+# How it works: GitHub's own cron (deliberately independent infrastructure) wakes hourly-ish
+# during the market window and reads the Worker's public /log. If the Worker has logged a run
+# recently, everything is healthy → exit quietly. If the log has gone stale during market hours
+# on a trading day, the watchdog runs the due jobs DIRECTLY (snapshot via workflow_dispatch,
+# buy-scan/sell-check/refresh/analytics via the Vercel endpoints) and then FAILS the workflow on
+# purpose — the red X + failure email is the alert that the primary scheduler is down and needs
+# `cd cron-worker && wrangler deploy`.
+#
+# GitHub cron drifts (that's why it isn't the primary scheduler), but for a watchdog late-but-
+# eventual is fine: even firing 40 minutes late it catches an outage within the hour instead of
+# after a full lost day. The Vercel endpoints self-skip on holidays/weekends, so a spurious
+# trigger on a closed day is harmless.
+
+on:
+  schedule:
+    # Hourly at :30 across 04:30–11:30 UTC = 10:00–17:00 IST, Mon–Fri.
+    - cron: '30 4-11 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write   # lets the default GITHUB_TOKEN workflow_dispatch nse-snapshot.yml
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check scheduler heartbeat and recover if dead
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          GH_TOKEN: ${{ github.token }}
+          WORKER: https://stock-advisor-cron.pranaykushnaji.workers.dev
+          VERCEL: https://stock-advisor-ai-omega.vercel.app
+        run: |
+          set -u
+          now_utc=$(date -u +%s)
+          ist_hhmm=$(TZ=Asia/Kolkata date +%H%M)
+          ist_dow=$(TZ=Asia/Kolkata date +%u)   # 1=Mon..7=Sun
+          echo "IST now: $(TZ=Asia/Kolkata date '+%F %H:%M (%a)')"
+
+          if [ "$ist_dow" -gt 5 ]; then echo "Weekend — nothing to watch."; exit 0; fi
+
+          # ---- 1. Read the Worker's run log (public, CORS-open) ----
+          log=$(curl -s --max-time 20 "$WORKER/log" || echo '')
+          latest_ts=$(echo "$log" | jq -r '.[0].ts // empty' 2>/dev/null || echo '')
+          if [ -n "$latest_ts" ]; then
+            latest_epoch=$(date -u -d "$latest_ts" +%s 2>/dev/null || echo 0)
+            age_min=$(( (now_utc - latest_epoch) / 60 ))
+            echo "Latest worker run: $latest_ts (${age_min} min ago)"
+          else
+            age_min=99999
+            echo "Worker /log unreachable or empty — treating scheduler as DOWN."
+          fi
+
+          # ---- 2. Decide by IST clock what should have run recently ----
+          # Market window (jobs every <=35 min): stale means >75 min old.
+          # After-close window: the 15:40 refresh / 16:10 analytics should exist by 16:30.
+          STALE=0
+          if [ "$ist_hhmm" -ge 0930 ] && [ "$ist_hhmm" -le 1530 ]; then
+            [ "$age_min" -gt 75 ] && STALE=1
+            MODE=market
+          elif [ "$ist_hhmm" -gt 1530 ] && [ "$ist_hhmm" -le 1700 ]; then
+            [ "$age_min" -gt 75 ] && STALE=1
+            MODE=eod
+          else
+            echo "Outside watch window — done."; exit 0
+          fi
+
+          if [ "$STALE" -eq 0 ]; then echo "Scheduler healthy — done."; exit 0; fi
+
+          echo "::warning::Cloudflare scheduler is DEAD (no runs for ${age_min} min). Running fallback jobs directly."
+
+          # ---- 3. Fallback: run the due jobs directly ----
+          hit() { # hit <path> — call a Vercel cron endpoint with the shared secret
+            echo "→ POST $1"
+            curl -s --max-time 120 -X POST -H "Authorization: Bearer $CRON_SECRET" "$VERCEL$1" | head -c 400; echo
+          }
+          if [ "$MODE" = "market" ]; then
+            echo "→ dispatch nse-snapshot workflow"
+            gh api "repos/${{ github.repository }}/actions/workflows/nse-snapshot.yml/dispatches" -f ref=main || true
+            sleep 100   # let the snapshot fetch + commit before the scan reads it
+            hit /api/stock-of-the-day
+            hit /api/sell-check
+          else
+            hit /api/refresh-prices
+            hit /api/analytics
+          fi
+
+          # ---- 4. Fail loudly: the red X / failure email IS the alert ----
+          echo "::error::Primary scheduler (Cloudflare Worker cron) is not firing. Jobs were run by the watchdog. Fix: cd cron-worker && wrangler deploy (re-registers the cron trigger)."
+          exit 1
