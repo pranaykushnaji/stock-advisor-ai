@@ -156,11 +156,13 @@ export default async function handler(req, res) {
   // laptop was off — it runs locally in the Claude app), a stale file is IGNORED and the
   // pipeline behaves exactly as before. Enrichment, never load-bearing.
   let newsIntelUsed = 0;
+  let marketContext = null; // Claude's morning market analysis — advisory context, never a gate
   const intelWatch = [];
   try {
     const f = await ghGetFile('data/news-intel.json', ghToken);
     const ni = f.content ? JSON.parse(f.content) : null;
     const ageH = ni?.generatedAt ? (Date.now() - Date.parse(ni.generatedAt)) / 3600000 : Infinity;
+    if (ageH <= 20 && ni.marketContext) marketContext = ni.marketContext;
     if (ageH <= 20 && Array.isArray(ni.items)) {
       for (const it of ni.items.slice(0, 25)) {
         const sym = String(it.ticker || '').toUpperCase();
@@ -195,8 +197,8 @@ export default async function handler(req, res) {
   }
   const watch = [...bySym.values()].slice(0, MAX_WATCHLIST);
 
-  // ---- Persist: watchlist + catalyst-memory pre-warm ----
-  await ghPutWithRetry('data/premarket-watchlist.json', () => ({ date, builtAt: new Date().toISOString(), watch }), ghToken, `Premarket watchlist (${date}): ${watch.length} names`);
+  // ---- Persist: watchlist (+ morning market context for downstream advisors) + memory ----
+  await ghPutWithRetry('data/premarket-watchlist.json', () => ({ date, builtAt: new Date().toISOString(), marketContext, watch }), ghToken, `Premarket watchlist (${date}): ${watch.length} names`);
   if (Object.keys(catalystMemoryUpdates).length) {
     await ghPutWithRetry('data/catalyst-memory.json', (existing) => {
       const mem = existing && existing.catalysts ? existing : { catalysts: {} };
@@ -210,6 +212,7 @@ export default async function handler(req, res) {
 
   return res.status(200).json({
     status: 'ok', date,
+    marketTone: marketContext?.tone ?? null,
     overnightFilers: filersBySym.size, classified: filers.length,
     verifiedOvernightCatalysts: overnight.map(o => ({ ticker: o.ticker, type: o.catalyst.type })),
     newsIntel: intelWatch.map(w => ({ ticker: w.ticker, type: w.catalyst.type, verification: w.catalyst.verification })),

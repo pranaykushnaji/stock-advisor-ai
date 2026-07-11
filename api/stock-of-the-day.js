@@ -363,6 +363,17 @@ export default async function handler(req, res) {
   try { const f = await ghGetFile('data/discovery-weights.json', ghToken); discoveryWeights = f.content ? JSON.parse(f.content)?.weights : null; } catch (e) {}
   try { const f = await ghGetFile('data/realized.json', ghToken); realizedTrades = f.content ? (JSON.parse(f.content).trades || []) : []; } catch (e) {}
 
+  // V3: this morning's Claude market analysis (news-intel.json) — ADVISORY ONLY. It is injected
+  // into the Groq narrative/veto prompt so the LLM judges with the day's context in mind; it
+  // never touches the deterministic gates (regime/confidence/edge decide as always).
+  let morningContext = null;
+  try {
+    const f = await ghGetFile('data/news-intel.json', ghToken);
+    const ni = f.content ? JSON.parse(f.content) : null;
+    const ageH = ni?.generatedAt ? (Date.now() - Date.parse(ni.generatedAt)) / 3600000 : Infinity;
+    if (ageH <= 20 && ni.marketContext) morningContext = ni.marketContext;
+  } catch (e) {}
+
   // PRIORITY 4: rejected candidates are accumulated here and flushed by persistLearning() so the
   // analytics endpoint can forward-evaluate them (did we reject a future winner?). persistLearning
   // also writes the intraday store; it runs on EVERY exit path (no-trade and buy) so the day's
@@ -743,6 +754,7 @@ export default async function handler(req, res) {
 Selected: ${winner.fullName} (${winner.symbol}), sector ${winner.sector}
 Scores (0-100): Momentum ${winner.factors.momentum}, Relative-strength ${winner.factors.relStrength}, Volume ${winner.factors.volume}, Catalyst ${winner.factors.catalyst}, Technicals ${winner.factors.technicals}, Sector ${winner.factors.sector}. Multi-signal confidence ${winner.confidence}, composite ${winner.composite} (${winner.verdict}).
 Market regime: ${regime.reason}. Reward/risk ≈ ${winner.rewardRisk?.rr} (upside ~${winner.rewardRisk?.upsidePct}% vs downside ~${winner.rewardRisk?.downsidePct}%).
+${morningContext ? `Morning market analysis (pre-open research): tone ${morningContext.tone}. ${morningContext.summary || ''} Global cues: ${morningContext.globalCues || 'n/a'}${Array.isArray(morningContext.sectorsInFocus) && morningContext.sectorsInFocus.length ? ' Sectors in focus: ' + morningContext.sectorsInFocus.map(s => `${s.sector} (${s.direction})`).join(', ') + '.' : ''}` : ''}
 Short-term returns (r1d/r1w/r1m): ${JSON.stringify(winner.shortReturns)}
 Relative volume (today vs 20-day avg): ${winnerSrc?._qm?.relVol}x · Relative strength vs Nifty: ${winner.relStrength}
 Catalyst: ${winnerCatalyst ? `${winnerCatalyst.type} — ${winnerCatalyst.verification} (${winnerCatalyst.sources} src, confidence ${winnerCatalyst.confidence}, impact ${winnerCatalyst.impact}/10) — ${winnerCatalyst.summary}` : 'none identified'}

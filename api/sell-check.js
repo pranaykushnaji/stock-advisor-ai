@@ -171,12 +171,13 @@ export default async function handler(req, res) {
   // negative item on a HELD name damages its thesis without spending an LLM call here.
   // Freshness-gated like premarket; items older than the position's last thesis update are
   // skipped, so a damage hit applies at most once.
-  let intelItems = [], intelGeneratedMs = 0;
+  let intelItems = [], intelGeneratedMs = 0, morningContext = null;
   try {
     const f = await ghGetFile('data/news-intel.json', ghToken);
     const ni = f.content ? JSON.parse(f.content) : null;
     const ageH = ni?.generatedAt ? (Date.now() - Date.parse(ni.generatedAt)) / 3600000 : Infinity;
     if (ageH <= 20 && Array.isArray(ni.items)) { intelItems = ni.items; intelGeneratedMs = Date.parse(ni.generatedAt); }
+    if (ageH <= 20 && ni.marketContext) morningContext = ni.marketContext; // advisory for llmDecide
   } catch (e) {}
   function applyIntelNegatives(item) {
     const lastMs = Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0;
@@ -229,7 +230,7 @@ export default async function handler(req, res) {
       // Skip the LLM (and any exit) on an implausibly large move for a fresh position — it's
       // almost certainly a bad price, not a real signal. Never book a phantom loss on it.
       if (!isSuspiciousMove(pnl, heldDays) && apiKey) {
-        const d = await llmDecide(item, apiKey, []);
+        const d = await llmDecide(item, apiKey, [], morningContext);
         if (d.verdict === 'SELL') decision = d;
       }
     }

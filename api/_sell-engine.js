@@ -139,7 +139,9 @@ export function rulesGate(item, recentCloses = null) {
 
 // LLM confirmation for the ambiguous middle. Uses the same Groq model/endpoint
 // as the pick cron. `headlines` is optional (pass [] if news lookup is skipped).
-export async function llmDecide(item, apiKey, headlines = []) {
+// `marketContext` (optional) = the morning Claude market analysis — advisory background so the
+// risk manager judges the position against the day's actual tape, not in a vacuum.
+export async function llmDecide(item, apiKey, headlines = [], marketContext = null) {
   const entry = item.entryPrice, cur = item.currentPrice;
   const pnlPct = entry && cur ? (((cur - entry) / entry) * 100).toFixed(1) : 'n/a';
   const held = daysHeld(item.date);
@@ -148,7 +150,9 @@ export async function llmDecide(item, apiKey, headlines = []) {
     ticker: item.ticker, fullName: item.fullName, sector: item.sector,
     entryPrice: entry, currentPrice: cur, unrealizedPnlPct: Number(pnlPct),
     daysHeld: held, compositeAtEntry: item.composite,
+    positionThesis: item.currentThesis?.summary || item.originalThesis?.summary || null,
     recentHeadlines: (headlines || []).slice(0, 8),
+    morningMarketContext: marketContext ? { tone: marketContext.tone, summary: marketContext.summary, sectorsInFocus: marketContext.sectorsInFocus } : null,
   };
   try {
     const r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
