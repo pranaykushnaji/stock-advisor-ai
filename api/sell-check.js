@@ -167,6 +167,32 @@ export default async function handler(req, res) {
   const thesisBudget = { used: 0 };
   const thesisChangedKeys = new Set();
 
+  // V3 NEWS-INTEL negatives (pre-classified by the daily Claude research routine): a material
+  // negative item on a HELD name damages its thesis without spending an LLM call here.
+  // Freshness-gated like premarket; items older than the position's last thesis update are
+  // skipped, so a damage hit applies at most once.
+  let intelItems = [], intelGeneratedMs = 0;
+  try {
+    const f = await ghGetFile('data/news-intel.json', ghToken);
+    const ni = f.content ? JSON.parse(f.content) : null;
+    const ageH = ni?.generatedAt ? (Date.now() - Date.parse(ni.generatedAt)) / 3600000 : Infinity;
+    if (ageH <= 20 && Array.isArray(ni.items)) { intelItems = ni.items; intelGeneratedMs = Date.parse(ni.generatedAt); }
+  } catch (e) {}
+  function applyIntelNegatives(item) {
+    const lastMs = Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0;
+    const hit = intelItems.find(it => String(it.ticker || '').toUpperCase() === String(item.ticker).toUpperCase()
+      && String(it.direction) === 'negative' && (it.materiality ?? 0) >= 6
+      && ((it.publishedAt ? Date.parse(it.publishedAt) : intelGeneratedMs) > lastMs));
+    if (!hit) return { changed: false, breakSell: null };
+    item.lastThesisUpdate = new Date().toISOString();
+    item.thesisScore = Math.max(0, (item.thesisScore ?? 50) - 30);
+    item.currentThesis = { type: hit.eventType || 'negative news', summary: hit.summary || 'material negative news', points: 0 };
+    const breakSell = item.thesisScore < 35
+      ? { verdict: 'SELL', source: 'thesis', reason: `thesis broken — negative news (${hit.eventType || 'intel'})` }
+      : null;
+    return { changed: true, breakSell };
+  }
+
   const closedTrades = [];
   const checked = [];
 
@@ -177,12 +203,18 @@ export default async function handler(req, res) {
     item.currentPrice = live.price;
     item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? live.price, live.price);
 
-    // Thesis update from new filings (may force a thesis-break exit).
+    // Thesis update from pre-classified news intel, then from new filings (either may force
+    // a thesis-break exit).
     let thesisSell = null;
     try {
-      const tu = await updateThesis(item, filingsBySym.get(String(item.ticker).toUpperCase()), apiKey, thesisBudget);
-      if (tu.changed) thesisChangedKeys.add(`${item.ticker}|${item.date}`);
-      thesisSell = tu.breakSell;
+      const ni = applyIntelNegatives(item);
+      if (ni.changed) thesisChangedKeys.add(`${item.ticker}|${item.date}`);
+      thesisSell = ni.breakSell;
+      if (!thesisSell) {
+        const tu = await updateThesis(item, filingsBySym.get(String(item.ticker).toUpperCase()), apiKey, thesisBudget);
+        if (tu.changed) thesisChangedKeys.add(`${item.ticker}|${item.date}`);
+        thesisSell = tu.breakSell;
+      }
     } catch (e) {}
 
     // Thesis break first, then rules gate (thesis-aware trail/max-hold; stop absolute),

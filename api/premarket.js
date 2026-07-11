@@ -16,7 +16,7 @@
 // No LLM narrative here; classification only. Nothing here places trades.
 
 import { marketStatus } from './_market-calendar.js';
-import { classifyCatalyst, scoreCatalyst, rememberCatalyst } from './_catalyst.js';
+import { classifyCatalyst, scoreCatalyst, rememberCatalyst, CATALYST_STARS, eventImpact } from './_catalyst.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 const MAX_LLM_CLASSIFY = 8;   // cap the 08:00 LLM budget
@@ -148,9 +148,47 @@ export default async function handler(req, res) {
     warm.sort((a, b) => (b.yBestConf ?? 0) - (a.yBestConf ?? 0));
   }
 
-  // Merge (a name can be both — filing wins as the stronger evidence), cap the list.
+  // ---- 3. NEWS INTELLIGENCE (Claude scheduled routine, data/news-intel.json) ----
+  // A daily Claude agent researches the open web overnight (coverage the 5 news APIs lack —
+  // this is what was blind to PAYTM/BANDHANBNK-style moves) and writes pre-classified items.
+  // Trust model: an item citing 2+ independent reputable sources = VERIFIED (same bar as
+  // cross-source news); 1 source = PARTIAL. Freshness-gated: if the routine didn't run (the
+  // laptop was off — it runs locally in the Claude app), a stale file is IGNORED and the
+  // pipeline behaves exactly as before. Enrichment, never load-bearing.
+  let newsIntelUsed = 0;
+  const intelWatch = [];
+  try {
+    const f = await ghGetFile('data/news-intel.json', ghToken);
+    const ni = f.content ? JSON.parse(f.content) : null;
+    const ageH = ni?.generatedAt ? (Date.now() - Date.parse(ni.generatedAt)) / 3600000 : Infinity;
+    if (ageH <= 20 && Array.isArray(ni.items)) {
+      for (const it of ni.items.slice(0, 25)) {
+        const sym = String(it.ticker || '').toUpperCase();
+        if (!sym || !uniBySym.has(sym) || surveillance.has(sym) || held.has(sym)) continue;
+        if (String(it.direction) !== 'positive' || (it.materiality ?? 0) < 6) continue;
+        const type = String(it.eventType || 'general news').toLowerCase();
+        const verified = (Array.isArray(it.sources) ? it.sources.length : 0) >= 2;
+        const stars = CATALYST_STARS[type] ?? 3;
+        if (stars <= 1) continue; // fluff never drives a watchlist slot
+        newsIntelUsed++;
+        intelWatch.push({
+          ticker: sym, source: 'news-intel',
+          catalyst: { type, verification: verified ? 'VERIFIED' : 'PARTIAL', impactClass: eventImpact(type).class, points: verified ? Math.round((stars / 5) * 34) : Math.round((stars / 5) * 18), summary: it.summary || null },
+          prevClose: uniBySym.get(sym)?.lastPrice ?? null,
+        });
+        // VERIFIED web-researched catalysts also pre-warm the day's catalyst memory so every
+        // hourly scan sees them — same treatment as an official filing.
+        if (verified && !catalystMemoryUpdates[sym]) {
+          catalystMemoryUpdates[sym] = { type, stars, verification: 'VERIFIED', impactClass: eventImpact(type).class, summary: it.summary || null, firstSeenMs: Date.now(), lastConfirmedMs: Date.now() };
+        }
+      }
+    }
+  } catch (e) { /* malformed/missing intel file → ignore, filings-only as before */ }
+
+  // Merge (a name can appear in several — filing wins as the strongest evidence, then intel,
+  // then warm carryover), cap the list.
   const bySym = new Map();
-  for (const w of [...overnight, ...warm]) {
+  for (const w of [...overnight, ...intelWatch, ...warm]) {
     const prev = bySym.get(w.ticker);
     if (!prev) bySym.set(w.ticker, w);
     else bySym.set(w.ticker, { ...w, ...prev, source: 'both', yBestConf: prev.yBestConf ?? w.yBestConf, catalyst: prev.catalyst || w.catalyst });
@@ -174,6 +212,7 @@ export default async function handler(req, res) {
     status: 'ok', date,
     overnightFilers: filersBySym.size, classified: filers.length,
     verifiedOvernightCatalysts: overnight.map(o => ({ ticker: o.ticker, type: o.catalyst.type })),
+    newsIntel: intelWatch.map(w => ({ ticker: w.ticker, type: w.catalyst.type, verification: w.catalyst.verification })),
     warmCarryovers: warm.map(w => ({ ticker: w.ticker, yBestConf: w.yBestConf })),
     watchlist: watch.map(w => w.ticker),
   });
