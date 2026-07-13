@@ -1,51 +1,148 @@
 {
   "pick": {
-    "date": "2026-07-10",
-    "noTrade": true,
-    "reason": "no stock had BOTH volume confirmation and a high-confidence catalyst",
-    "pickedAt": "2026-07-10T09:55:43.525Z",
-    "regime": "neutral",
-    "market": "neutral — Nifty +4.5% 20d, above 50EMA, vol 13%",
-    "considered": [
-      {
-        "ticker": "PAYTM",
-        "relVol": 2.66,
-        "confidence": 66.2,
-        "effectiveConfidence": 72.245,
-        "institutional": 90.3,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
+    "ticker": "OFSS",
+    "fullName": "Oracle Financial Services Software Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 83.3,
+        "positives": [
+          "Momentum score 83.3 (high)",
+          "Relative‑strength score 83.3 (high)",
+          "Technicals score 85 (strong)",
+          "Relative volume today 2.95× 20‑day average",
+          "Short‑term returns: +1.47% (1d), +6.78% (1w), +26.74% (1m)"
+        ],
+        "negatives": [
+          "No identifiable news catalyst (catalyst score 0)",
+          "Multi‑signal confidence modest at 49.1",
+          "Sector rating 58 (unknown sector context)",
+          "Market breadth low (27) in a neutral regime"
+        ]
       },
-      {
-        "ticker": "TORNTPHARM",
-        "relVol": 1.92,
-        "confidence": 15.8,
-        "effectiveConfidence": 22.145,
-        "institutional": 92.3,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 11,
-        "negative": false
+      "relStrength": {
+        "score": 83.3
       },
-      {
-        "ticker": "BANDHANBNK",
-        "relVol": 2.09,
-        "confidence": 31.5,
-        "effectiveConfidence": 34.095,
-        "institutional": 67.3,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 3,
-        "negative": false
+      "volume": {
+        "score": 50
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 85
+      },
+      "sector": {
+        "score": 58
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.014676851772380053,
+      "r1w": 0.06783488393099088,
+      "r1m": 0.26743500402036985
+    },
+    "volumeRatio": 0.84,
+    "relVol": 2.95,
+    "relStrength": 22.58,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 49.1,
+    "effectiveConfidence": 75.7,
+    "confidenceComponents": {
+      "technical": 86,
+      "flow": 83,
+      "catalyst": 5,
+      "liquidity": 66
+    },
+    "expectedEdge": {
+      "expectedGainPct": 15.7,
+      "expectedLossPct": 5,
+      "probability": 0.638,
+      "edgePct": 8.21
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 90.5,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 71.2,
+    "discoveryReasons": [
+      "closing near highs"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 3.12,
+      "upsidePct": 15.7,
+      "downsidePct": 5
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 47, conf 51) — trend 61, breadth 27, vol-factor 78",
+    "regimeConfidence": 51,
+    "regimeFactors": {
+      "indexTrend": 61,
+      "volatility": 78,
+      "breadth": 27,
+      "momentumBreadth": 15,
+      "largeCap": 50,
+      "gapEnv": 61,
+      "riskAppetite": 47,
+      "sectorPart": 11
+    },
+    "annualizedVol": 32,
+    "composite": 60.5,
+    "verdict": "WATCH",
+    "estimatedUpside": "15-16%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the move is driven purely by technical momentum and volume dynamics.",
+    "summary": "OFSS is showing strong short‑term momentum with a near‑3× volume spike and solid technical scores, suggesting the stock can sustain a 15%+ swing over the next week. While the lack of a news catalyst adds uncertainty, the risk‑reward profile (≈3.1) and institutional accumulation support a 5‑10‑day swing trade.",
+    "whyToday": "The standout 2.95× relative volume surge today signals fresh institutional buying, making it the key trigger for entry.",
+    "date": "2026-07-13",
+    "pickedAt": "2026-07-13T04:30:59.249Z",
+    "discovery": {
+      "news": 0,
+      "movers": 34,
+      "nseSnapshot": 175,
+      "nseUniverse": 175,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-13T04:16:07.582Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 3,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 3,
+      "catalystChecked": 3,
+      "tradeable": 2
+    },
+    "runnerUp": {
+      "ticker": "LTF",
+      "composite": 49
+    },
+    "entryPrice": 11822,
+    "entryRejected": null
   }
 }
