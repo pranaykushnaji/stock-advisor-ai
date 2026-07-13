@@ -6,13 +6,20 @@
 // Field names match the REAL bouquet shape: fullName, yahooSymbol, ticker,
 // entryPrice, currentPrice, date, composite, sector.
 
+import { ema } from './_indicators.js';
+import { rewardRisk, computeShortReturns } from './_scoring.js';
+
 // Tunable thresholds. currentPrice on each holding is already kept fresh by the
 // refresh cron, so the rules gate reads it directly (no extra fetch needed here).
 // Tightened for swing-trade (momentum) horizon: quicker profit-taking, tighter stop,
 // short max-hold. The whole point of the shorter horizon is faster exits — this is
 // the risk control that makes momentum-trading survivable.
 export const SELL_RULES = {
-  MAX_HOLD_DAYS: 10,   // give winners a little more room than the old 7d
+  // V2.1: MAX_HOLD_DAYS is now the REVIEW date, not an automatic exit. On reaching it, the
+  // position must pass a health review at every subsequent sell-check (thesis intact, trend
+  // healthy, above 20-EMA, reward/risk still there) — pass and it keeps compounding, fail and
+  // it exits. Exceptional winners are no longer sold purely because a clock ran out.
+  MAX_HOLD_DAYS: 10,   // review date for catalyst-lane positions
 
   // Data-sanity guard: a move this large on a position only a day (or less) old is almost
   // always a bad price (wrong symbol / stale fallback source), NOT a real target/stop.
@@ -28,7 +35,10 @@ export const SELL_RULES = {
   // accepts swings": moderate multipliers, floored/capped so bands stay sane.
   STOP_VOL_MULT: 2.5, STOP_MIN_PCT: 4, STOP_MAX_PCT: 12,   // initial stop = clamp(2.5×dailyVol%)
   TRAIL_VOL_MULT: 2.2, TRAIL_MIN_PCT: 4, TRAIL_MAX_PCT: 11, // trail band once in profit
-  HARD_TARGET_PCT: 25,          // rare failsafe so a moonshot still books
+  // V2.1: HARD_TARGET_PCT is no longer a live exit rule (fixed profit targets cut compounding
+  // winners; the trailing stop is the profit protection). Kept exported for the backtest's
+  // legacy A/B simulation only.
+  HARD_TARGET_PCT: 25,
   DEFAULT_DAILY_VOL_PCT: 2.2,   // used when we can't measure vol from a price series
 };
 
@@ -113,18 +123,45 @@ export function rulesGate(item, recentCloses = null) {
     else if (ts < 40) { trailPct = Math.max(trailPct * 0.85, 2.5); }
   }
 
-  // 1. Failsafe target — a genuine moonshot still books.
-  if (pnlPct >= R.HARD_TARGET_PCT) return { verdict: 'SELL', source: 'rule', reason: `failsafe target (+${pnlPct.toFixed(1)}%)` };
-  // 2. Initial volatility stop, measured from entry. ABSOLUTE — no thesis adjustment.
+  // 1. Initial volatility stop, measured from entry. ABSOLUTE — no thesis adjustment.
+  //    (V2.1: the old fixed +25% "failsafe target" was removed — a fixed profit level is just a
+  //    cap on compounding; the trailing stop below is the profit protection.)
   if (pnlPct <= -stopPct) return { verdict: 'SELL', source: 'rule', reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)${laneTag}` };
-  // 3. Trailing stop — once the peak is up more than a trail band, protect gains from the peak.
+  // 2. Trailing stop — once the peak is up more than a trail band, protect gains from the peak.
   const peak = Math.max(item.peakPrice ?? entry, cur);
   if ((peak - entry) / entry * 100 >= trailPct) {
     const dropFromPeak = (peak - cur) / peak * 100;
     if (dropFromPeak >= trailPct) return { verdict: 'SELL', source: 'rule', reason: `trailing stop (-${dropFromPeak.toFixed(1)}% from peak, +${pnlPct.toFixed(1)}% locked)${laneTag}` };
   }
-  // 4. Max hold (shorter on the momentum lane; a strengthened thesis extends it).
-  if (held >= maxHold) return { verdict: 'SELL', source: 'rule', reason: `max hold ${held}d reached${laneTag}${ts >= 70 ? ' (thesis-extended)' : ''}` };
+  // 3. REVIEW DATE (V2.1, replaces the automatic max-hold exit): once a position reaches its
+  //    review age (10d catalyst / 7d momentum, +3/+2 when the thesis strengthened), it must
+  //    RE-EARN its slot at every check — "would this still be worth holding as a fresh
+  //    decision today?" Health checks (all deterministic, from data already in hand):
+  //      • thesis intact         (thesisScore >= 45; damaged theses don't get patience)
+  //      • trend healthy         (1-week return > -2%)
+  //      • structure holding     (price above its 20-EMA, when computable)
+  //      • reward/risk remains   (forward RR from current prices >= 1.2)
+  //    Pass all → keep holding and compounding. Fail any → exit with the specific reason.
+  //    A stagnant sideways position fails the RR check; a runner passes everything.
+  if (held >= maxHold) {
+    if (!Array.isArray(recentCloses) || recentCloses.length < 10) {
+      // No usable price series to review with — give a small grace window, then exit rather
+      // than holding an unreviewable position forever.
+      if (held >= maxHold + 5) return { verdict: 'SELL', source: 'rule', reason: `review overdue ${held}d, no price data${laneTag}` };
+    } else {
+      const failed = [];
+      if ((ts ?? 50) < 45) failed.push(`thesis ${ts ?? 50}<45`);
+      const last = recentCloses[recentCloses.length - 1];
+      const wkAgoP = recentCloses.length >= 6 ? recentCloses[recentCloses.length - 6] : null;
+      if (wkAgoP > 0 && ((last - wkAgoP) / wkAgoP * 100) <= -2) failed.push('1wk trend weak');
+      const e20 = recentCloses.length >= 20 ? ema(recentCloses, 20) : null;
+      if (e20 != null && cur < e20) failed.push('below 20-EMA');
+      const rr = rewardRisk(recentCloses, computeShortReturns(recentCloses), null);
+      if ((rr?.rr ?? 0) < 1.2) failed.push(`RR ${rr?.rr ?? 'n/a'}<1.2`);
+      if (failed.length) return { verdict: 'SELL', source: 'rule', reason: `review day ${held}: ${failed.join(', ')}${laneTag}` };
+      // Healthy — hold on. It will be re-reviewed at the next sell-check.
+    }
+  }
   // 5. Momentum-fade: the short-term trend that justified the buy has reversed.
   if (Array.isArray(recentCloses) && recentCloses.length >= 6) {
     const last = recentCloses[recentCloses.length - 1];
@@ -221,6 +258,7 @@ export function bookExit(item, realExit) {
     // v2 learning payload: what the engine believed at entry/exit, for calibration analytics.
     expectedEdge: item.expectedEdge ?? null,
     confidenceComponents: item.confidenceComponents ?? null,
+    effectiveConfidence: item.effectiveConfidence ?? null, // similarity dimension for calibration
     thesisScore: item.thesisScore ?? null,
     thesisType: item.currentThesis?.type || item.originalThesis?.type || null,
     regime: item.regime ?? null,

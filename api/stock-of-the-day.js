@@ -11,8 +11,8 @@ import { assessCatalyst, rememberCatalyst, recallCatalyst, pruneCatalystMemory }
 import { classifyRegimeV2, regimeGates } from './_market-regime.js';
 import { sectorStrength, sectorScoreFor } from './_sector.js';
 import { institutionalAccumulationScore } from './_institutional.js';
-import { confidenceComponents, effectiveConfidence as combineConfidence } from './_confidence.js';
-import { expectedEdge, laneStats } from './_edge.js';
+import { confidenceComponents, explainConfidence } from './_confidence.js';
+import { expectedEdge, similarSetupStats } from './_edge.js';
 import { concentrationCheck } from './_correlation.js';
 import { freshStore, recordObservation, prevVolumeMap, markBought, hhmmIST } from './_intraday-store.js';
 import { qualityMomentumChecks, scoreQualityMomentum,
@@ -27,9 +27,12 @@ const REPO = 'pranaykushnaji/stock-advisor-ai';
 // we distrust it and refuse to trade the pick (prevents phantom P&L from a bad price source).
 const ENTRY_SANITY_TOLERANCE_PCT = 20;
 
-// Don't re-pick a name we already hold or picked within this many days — stops the model
-// chasing the same stock on consecutive days (the backtest showed POLYCAB picked 3x running).
-const DEDUP_DAYS = 5;
+// V2.1 (intelligent re-entry): de-duplication is now SESSION-scoped, not a multi-day ban.
+// Blocked from buying: currently-open positions and tickers already traded TODAY (bought
+// today, or exited today — no same-day revenge re-entry). A stock that exited yesterday and
+// produces a completely fresh qualifying setup today is evaluated on its own merits — every
+// setup is independent. (The old 5-day DEDUP_DAYS window is gone; the anti-chasing job is
+// done by the gates themselves, which a stale, extended move fails.)
 
 // Cap on NEW positions opened per calendar day. With buy-scans now running hourly instead of
 // once, an uncapped strong trending day could open far more positions than a sane paper
@@ -427,6 +430,13 @@ export default async function handler(req, res) {
     sources.usedFallback = true;
   }
 
+  // V2.1: HELD positions never re-enter the buy pipeline — no price fetch, no quality filter,
+  // no catalyst/LLM spend on something we already own. They belong to the sell engine only.
+  // (Symbol-form candidates are caught here; the few name-form entries that slip past are
+  // dropped again after symbol resolution below.)
+  const heldSet = new Set(openPositions.map(p => String(p.ticker || '').toUpperCase()));
+  candidates = candidates.filter(c => !heldSet.has(String(c).toUpperCase().trim()));
+
   // ---- QUALITY-MOMENTUM SELECTION (only high-quality momentum WITH a real catalyst) ----
   // 1) fetch prices; 2) apply the quality-momentum ALL-filter + hard rejects using real NSE
   // today-data; 3) run a news/catalyst LLM pass on the momentum leaders; 4) require BOTH
@@ -491,7 +501,9 @@ export default async function handler(req, res) {
       const volumes = (pd.volumes || []).filter(v => v != null && !isNaN(v));
       return { symbol: ticker, fullName: pd.name || name, closes, volumes, price: pd.price, _price: pd };
     } catch (e) { return null; }
-  }))).filter(Boolean);
+  }))).filter(Boolean)
+    // Second held-skip pass, now on RESOLVED symbols (catches name-form discovery entries).
+    .filter(s => !heldSet.has(s.symbol));
 
   // Quality-momentum ALL-filter + hard rejects. (sessionFrac was computed above, before discovery.)
   const passed = [], rejectedNames = [];
@@ -612,8 +624,12 @@ export default async function handler(req, res) {
     });
     const trendBonus = entry?.trendBonus ?? 0;
     trendBonusBySym.set(s.symbol, trendBonus);
-    s._effConfMom = combineConfidence(s._comps, 'momentum', { regimeScore: regime.score, extras: trendBonus });
-    s._effConfCat = combineConfidence(s._comps, 'catalyst', { regimeScore: regime.score, extras: trendBonus });
+    // V2.1: explainable confidence — the full working (per-component contributions, regime
+    // adjustment, trend bonus) is kept per lane and stored with the eventual pick/position.
+    const exMom = explainConfidence(s._comps, 'momentum', { regimeScore: regime.score, extras: trendBonus });
+    const exCat = explainConfidence(s._comps, 'catalyst', { regimeScore: regime.score, extras: trendBonus });
+    s._effConfMom = exMom.final; s._explainMom = exMom.breakdown;
+    s._effConfCat = exCat.final; s._explainCat = exCat.breakdown;
     s._effConf = Math.max(s._effConfMom, s._effConfCat); // provisional (lane not yet assigned)
   }
 
@@ -634,8 +650,11 @@ export default async function handler(req, res) {
   };
   for (const s of catalystPool) {
     s._lane = laneOf(s);
-    // Lock the lane-relevant confidence once the lane is known.
-    if (s._lane) s._effConf = s._lane === 'momentum' ? s._effConfMom : s._effConfCat;
+    // Lock the lane-relevant confidence (and its explanation) once the lane is known.
+    if (s._lane) {
+      s._effConf = s._lane === 'momentum' ? s._effConfMom : s._effConfCat;
+      s._explain = s._lane === 'momentum' ? s._explainMom : s._explainCat;
+    }
   }
   const tradeable = catalystPool.filter(s => s._lane);
 
@@ -663,36 +682,43 @@ export default async function handler(req, res) {
   // (anchored to the lane's measured win rate), expectancy from the reward/risk model. Used as
   // the ranking tiebreak, a positive-expectancy gate, and a sizing input — and stored on every
   // trade + rejection so the edge model itself becomes auditable.
-  const laneHist = { catalyst: laneStats(realizedTrades, 'catalyst'), momentum: laneStats(realizedTrades, 'momentum') };
+  // V2.1: probability anchored to SIMILAR past setups (lane + regime + confidence bucket,
+  // hierarchical fallback as data thins) rather than lane-wide averages.
   for (const s of tradeable) {
     const sc = scoredBySym.get(s.symbol);
+    const hist = similarSetupStats(realizedTrades, { lane: s._lane, regime: regime.regime, confidence: s._effConf });
     s._edge = expectedEdge({
       confidence: s._effConf, regime: regime.regime, catalystPoints: s.catalystPoints || 0,
       annualizedVolPct: sc?.annualizedVol, rewardRisk: sc?.rewardRisk,
-      laneWinRate: laneHist[s._lane]?.winRate, laneSamples: laneHist[s._lane]?.samples || 0,
+      laneWinRate: hist.winRate, laneSamples: hist.samples,
     });
+    s._edge.calibration = hist.tier; // which similarity tier anchored the probability
   }
 
   // Rank by lane-relevant effective confidence; catalyst lane wins ties over momentum
   // (verified evidence beats inferred); expected edge breaks remaining ties.
   const ranked = tradeable
-    .map(s => { const sc = scoredBySym.get(s.symbol); return { ...sc, lane: s._lane, effectiveConfidence: s._effConf ?? sc.confidence, confidenceComponents: s._comps, expectedEdge: s._edge, trendBonus: trendBonusBySym.get(s.symbol) ?? 0, institutional: s._inst?.score ?? null }; })
+    .map(s => { const sc = scoredBySym.get(s.symbol); return { ...sc, lane: s._lane, effectiveConfidence: s._effConf ?? sc.confidence, confidenceComponents: s._comps, confidenceBreakdown: s._explain ?? null, expectedEdge: s._edge, trendBonus: trendBonusBySym.get(s.symbol) ?? 0, institutional: s._inst?.score ?? null }; })
     .sort((a, b) => (b.effectiveConfidence - a.effectiveConfidence)
       || ((a.lane === 'catalyst' ? -1 : 0) - (b.lane === 'catalyst' ? -1 : 0))
       || ((b.expectedEdge?.edgePct ?? -99) - (a.expectedEdge?.edgePct ?? -99))
       || ((b.composite ?? -1) - (a.composite ?? -1)));
 
-  // De-dup: skip names we already hold or picked in the last DEDUP_DAYS.
+  // V2.1 SESSION-SCOPED DE-DUP (intelligent re-entry): block currently-open positions and
+  // anything already traded TODAY (bought today, or exited today — no same-day revenge
+  // re-entry). A ticker that exited on a previous day and now presents a fresh qualifying
+  // setup is evaluated like any other candidate.
   const recentlyPicked = new Set();
   try {
     const bqNow = await ghGetFile('data/project-bouquet.json', ghToken);
     const list = bqNow.content ? (JSON.parse(bqNow.content).bouquet || []) : [];
-    const cutoff = new Date(Date.now() - DEDUP_DAYS * 86400000 + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
     for (const b of list) {
       if (!b.ticker) continue;
       const isOpen = !b.status || b.status === 'OPEN' || b.status === 'SELL_PENDING';
-      const isRecent = b.date && b.date >= cutoff;
-      if (isOpen || isRecent) recentlyPicked.add(String(b.ticker).toUpperCase());
+      if (isOpen || b.date === date) recentlyPicked.add(String(b.ticker).toUpperCase());
+    }
+    for (const t of realizedTrades) {
+      if (t.ticker && t.exitDate === date) recentlyPicked.add(String(t.ticker).toUpperCase());
     }
   } catch (e) { /* if the bouquet can't be read, don't block the pick */ }
   const fresh = (r) => !recentlyPicked.has(String(r.symbol).toUpperCase());
@@ -852,7 +878,8 @@ Return ONLY valid JSON (no markdown):
       confidence: winner.confidence,
       effectiveConfidence: winner.effectiveConfidence ?? winner.confidence,
       confidenceComponents: winner.confidenceComponents ?? null, // v2: {technical,flow,catalyst,liquidity}
-      expectedEdge: winner.expectedEdge ?? null,                  // v2: {expectedGainPct,expectedLossPct,probability,edgePct}
+      confidenceBreakdown: winner.confidenceBreakdown ?? null,   // v2.1: full working (contributions, regime adj, trend bonus)
+      expectedEdge: winner.expectedEdge ?? null,                  // v2: {…, calibration: similarity tier used}
       confidenceTrend: intradayStore.candidates[winner.symbol]?.confidenceTrend ?? null,
       trendBonus: winner.trendBonus ?? 0,
       institutional: winner.institutional ?? (winnerSrc?._inst?.score ?? null),
@@ -942,6 +969,11 @@ Return ONLY valid JSON (no markdown):
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         entryLane: winnerLane, // momentum-lane positions get tighter exits in _sell-engine.js
         confidenceComponents: pick.confidenceComponents, expectedEdge: pick.expectedEdge, // v2 learning data
+        confidenceBreakdown: pick.confidenceBreakdown, // v2.1: auditable confidence working
+        // v2.1: similarity dimensions for historical probability calibration (read back by
+        // bookExit into the realized ledger).
+        confidence: winner.confidence ?? null, effectiveConfidence: winner.effectiveConfidence ?? null,
+        regime: regime.regime,
         originalThesis: thesis, currentThesis: thesis,
         thesisScore: Math.min(90, 50 + (thesis.points || 0)), lastThesisUpdate: pick.pickedAt,
         verdict: pick.verdict, composite: pick.composite, date, addedAt: pick.pickedAt, investedAmount: investAmt,

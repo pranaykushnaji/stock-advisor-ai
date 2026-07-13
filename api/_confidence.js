@@ -91,13 +91,38 @@ export function confidenceComponents(inputs = {}) {
 // Combine components into effective confidence for a lane. `extras` = additive adjustments the
 // engine already earns elsewhere (intraday trend bonus etc.); regimeScore blends 15% like v1.
 export function effectiveConfidence(components, lane = 'catalyst', { regimeScore = null, extras = 0, weights = CONFIDENCE_WEIGHTS } = {}) {
+  return explainConfidence(components, lane, { regimeScore, extras, weights }).final;
+}
+
+// V2.1 EXPLAINABLE CONFIDENCE — same math as effectiveConfidence, but returns the full working:
+// each component's weighted contribution, the regime blend's effect, and the additive extras.
+// Stored on every pick/position so any confidence number can be audited after the fact.
+export function explainConfidence(components, lane = 'catalyst', { regimeScore = null, extras = 0, weights = CONFIDENCE_WEIGHTS } = {}) {
   const use = { ...weights };
   if (lane === 'momentum') delete use.catalyst;   // no-catalyst lane: don't punish the definition
-  let total = 0, wsum = 0;
+  const wsum = Object.entries(use).reduce((a, [k, w]) => a + (components[k] != null ? w : 0), 0);
+  const contributions = {};
+  let base = 0;
   for (const [k, w] of Object.entries(use)) {
-    if (components[k] != null) { total += components[k] * w; wsum += w; }
+    if (components[k] == null) continue;
+    const normW = w / (wsum || 1);
+    contributions[k] = { score: components[k], weight: +normW.toFixed(3), contribution: +(components[k] * normW).toFixed(1) };
+    base += components[k] * normW;
   }
-  let conf = wsum > 0 ? total / wsum : 50;
-  if (regimeScore != null) conf = conf * 0.85 + regimeScore * 0.15;
-  return clamp(+(conf + extras).toFixed(1), 0, 100);
+  if (wsum === 0) base = 50;
+  const afterRegime = regimeScore != null ? base * 0.85 + regimeScore * 0.15 : base;
+  const regimeAdjustment = +(afterRegime - base).toFixed(1);
+  const final = clamp(+(afterRegime + extras).toFixed(1), 0, 100);
+  return {
+    final,
+    breakdown: {
+      lane,
+      contributions,                     // per-component: raw score, normalized weight, points contributed
+      base: +base.toFixed(1),            // weighted component blend
+      regimeScore, regimeAdjustment,     // what the 15% regime blend added/removed
+      trendBonus: +(+extras).toFixed(1), // intraday confidence-evolution bonus (institutional
+                                         // influence lives inside the flow component in v2)
+      final,
+    },
+  };
 }

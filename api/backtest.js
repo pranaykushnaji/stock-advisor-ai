@@ -484,6 +484,7 @@ export default async function handler(req, res) {
         'liveEngine does NOT test the verified-catalyst gate, NSE filings, intraday relVol, sector-breadth, or institutional data — none are stored historically, so they are neutralized (catalyst=0, sector=50), NOT faked.',
         'Fundamentals junk-filter uses CURRENT ratios (not point-in-time).',
         `Sim exits model gap-downs (fill at open through the stop) + ${slippageBps}bps slippage; buy-and-hold return does not.`,
+        'V2.1 divergence: the LIVE engine replaced the fixed max-hold and +25% target with a review-date health check and pure trailing exits; this sim still models the older fixed rules (thesis/review data does not exist historically).',
         'Survivorship bias: the universe is names liquid TODAY, so failed/delisted names are absent (results skew optimistic).',
         'Small samples (few trading days) are noise. Interpret >20 trades cautiously, <10 not at all.',
         'Approximation for learning, not a broker-grade backtest. Past != future.',

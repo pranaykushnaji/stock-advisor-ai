@@ -30,7 +30,6 @@ const OPEN_SESSION_FRAC = 0.15;         // typical share of daily volume done by
 const CAT_RELVOL_MIN = 2.1, MOM_RELVOL_MIN = 2.5;
 const MOM_MIN_YCONF = 68, MOM_MIN_INST = 65;
 const MAX_NEW_BUYS_PER_DAY = 3, MOM_MAX_PER_DAY = 1;
-const DEDUP_DAYS = 5;
 
 async function fetchWithTimeout(url, opts = {}, ms = 7000) {
   const ctrl = new AbortController();
@@ -119,8 +118,9 @@ export default async function handler(req, res) {
   const todayRows = bouquetRows.filter(b => b.date === date);
   if (todayRows.length >= MAX_NEW_BUYS_PER_DAY) return res.status(200).json({ status: 'daily_cap_reached' });
   const momUsed = todayRows.filter(b => b.entryLane === 'momentum').length;
-  const cutoff = new Date(Date.now() - DEDUP_DAYS * 86400000 + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
-  const blocked = new Set(bouquetRows.filter(b => (!b.status || b.status === 'OPEN' || b.status === 'SELL_PENDING') || (b.date && b.date >= cutoff)).map(b => String(b.ticker).toUpperCase()));
+  // V2.1 session-scoped de-dup (intelligent re-entry): block open positions and today's
+  // trades only — a fresh setup on a previously-exited name is a new, independent decision.
+  const blocked = new Set(bouquetRows.filter(b => (!b.status || b.status === 'OPEN' || b.status === 'SELL_PENDING') || b.date === date).map(b => String(b.ticker).toUpperCase()));
 
   // Regime from the Nifty (yesterday's closes are fine at the open).
   let niftyCloses = [];

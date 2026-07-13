@@ -41,3 +41,28 @@ export function laneStats(realizedTrades, lane) {
   if (!t.length) return { winRate: null, samples: 0 };
   return { winRate: +(t.filter(x => x.realizedPnlPct > 0).length / t.length).toFixed(3), samples: t.length };
 }
+
+// V2.1 HISTORICAL PROBABILITY CALIBRATION — win-rate of SIMILAR past setups, matched
+// hierarchically so the estimate degrades gracefully as data thins instead of returning
+// noise from an over-specific empty bucket:
+//   tier 1: lane + regime + confidence bucket   (needs >= 8 matching trades)
+//   tier 2: lane + regime                        (needs >= 8)
+//   tier 3: lane only                            (needs >= 10)
+//   else  : null (the heuristic model runs unanchored — honest when history is thin)
+// Similarity dimensions live on every realized trade (entryLane, regime, effectiveConfidence,
+// entry thesis/catalyst type), written at booking time. Confidence buckets are 10-wide.
+export function similarSetupStats(realizedTrades, { lane, regime, confidence } = {}) {
+  const t = (realizedTrades || []).filter(x => x.realizedPnlPct != null);
+  const confBucket = confidence != null ? Math.floor(confidence / 10) : null;
+  const winRate = (arr) => +(arr.filter(x => x.realizedPnlPct > 0).length / arr.length).toFixed(3);
+  const tiers = [
+    { min: 8,  match: (x) => (x.entryLane || 'catalyst') === lane && x.regime === regime && x.effectiveConfidence != null && Math.floor(x.effectiveConfidence / 10) === confBucket, tier: 'lane+regime+conf' },
+    { min: 8,  match: (x) => (x.entryLane || 'catalyst') === lane && x.regime === regime, tier: 'lane+regime' },
+    { min: 10, match: (x) => (x.entryLane || 'catalyst') === lane, tier: 'lane' },
+  ];
+  for (const { min, match, tier } of tiers) {
+    const m = t.filter(match);
+    if (m.length >= min) return { winRate: winRate(m), samples: m.length, tier };
+  }
+  return { winRate: null, samples: 0, tier: 'none' };
+}
