@@ -1,6 +1,91 @@
 {
   "bouquet": [
     {
+      "ticker": "OFSS",
+      "fullName": "Oracle Financial Services Software Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 86,
+        "flow": 83,
+        "catalyst": 5,
+        "liquidity": 66
+      },
+      "expectedEdge": {
+        "expectedGainPct": 15.7,
+        "expectedLossPct": 5,
+        "probability": 0.638,
+        "edgePct": 8.21
+      },
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-07-13T04:30:59.249Z",
+      "verdict": "WATCH",
+      "composite": 60.5,
+      "date": "2026-07-13",
+      "addedAt": "2026-07-13T04:30:59.249Z",
+      "investedAmount": 11000,
+      "entryPrice": 11822,
+      "currentPrice": 11822,
+      "shares": 0.93,
+      "peakPrice": 11822,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 8636,
+      "todayChangePct": 36.89,
+      "lastPriceUpdate": "2026-07-13T04:30:59.249Z",
+      "yahooSymbol": "OFSS.NS",
+      "niftyAtEntry": 24125.7,
+      "niftyNow": 24125.7,
+      "estimatedUpside": "15-16%",
+      "riskLevel": "Medium",
+      "summary": "OFSS is showing strong short‑term momentum with a near‑3× volume spike and solid technical scores, suggesting the stock can sustain a 15%+ swing over the next week. While the lack of a news catalyst adds uncertainty, the risk‑reward profile (≈3.1) and institutional accumulation support a 5‑10‑day swing trade.",
+      "whyToday": "The standout 2.95× relative volume surge today signals fresh institutional buying, making it the key trigger for entry.",
+      "factors": {
+        "momentum": {
+          "score": 83.3,
+          "positives": [
+            "Momentum score 83.3 (high)",
+            "Relative‑strength score 83.3 (high)",
+            "Technicals score 85 (strong)",
+            "Relative volume today 2.95× 20‑day average",
+            "Short‑term returns: +1.47% (1d), +6.78% (1w), +26.74% (1m)"
+          ],
+          "negatives": [
+            "No identifiable news catalyst (catalyst score 0)",
+            "Multi‑signal confidence modest at 49.1",
+            "Sector rating 58 (unknown sector context)",
+            "Market breadth low (27) in a neutral regime"
+          ]
+        },
+        "relStrength": {
+          "score": 83.3
+        },
+        "volume": {
+          "score": 50
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 85
+        },
+        "sector": {
+          "score": 58
+        }
+      }
+    },
+    {
       "ticker": "PAYTM",
       "fullName": "One 97 Communications Limited",
       "sector": "Financials",
