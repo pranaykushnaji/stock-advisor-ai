@@ -1,5 +1,70 @@
 {
-  "generatedAt": "2026-07-11T23:51:54Z",
-  "note": "Written daily ~07:40 IST by the Claude Code scheduled task 'premarket-news-intel'. Stale (>20h) files are ignored by the engine.",
-  "items": []
+  "generatedAt": "2026-07-13T18:14:14Z",
+  "marketContext": {
+    "tone": "cautious",
+    "globalCues": "US stocks fell Monday (S&P -0.4%, Nasdaq -1%, Dow +0.28%) as US-Iran airstrikes near the Strait of Hormuz escalated and Brent crude jumped ~4% to ~$79/bbl; GIFT Nifty is indicating a flat-to-slightly-negative Nifty open (~24,150-24,160, roughly 8 points below prior close); USD/INR trading near 96.",
+    "sectorsInFocus": [
+      { "sector": "IT", "direction": "positive", "reason": "TCS-ABB multi-year AI network deal lifted the Nifty IT index 3.59% Monday" },
+      { "sector": "Oil Marketing / Energy", "direction": "negative", "reason": "Crude oil surge on Iran conflict pressures OMC margins; Nifty Oil & Gas fell" },
+      { "sector": "Consumer Durables/Retail", "direction": "positive", "reason": "Kalyan Jewellers rally on strong Q1FY27 update lifted the segment" }
+    ],
+    "keyEventsToday": [
+      "India June CPI printed at 4.38% YoY, above RBI's medium-term target for the first time in 17 months (reported 2026-07-13)",
+      "US-Iran conflict near Strait of Hormuz ongoing - crude oil and shipping risk in focus",
+      "US CPI/PPI data and Fed speakers (Waller) due later this week ahead of Fed and RBI policy reads"
+    ],
+    "summary": "Crosscurrents dominate: escalating US-Iran conflict pushed crude oil ~4% higher and dented US equities overnight, while India's June CPI surprised above the RBI's target, denting rate-cut hopes. GIFT Nifty points to a flat-to-slightly-lower Nifty open. IT remains in focus after TCS's large ABB contract; oil marketing companies face margin pressure from costlier crude."
+  },
+  "items": [
+    {
+      "ticker": "TCS",
+      "eventType": "Large contract",
+      "direction": "positive",
+      "materiality": 8,
+      "confidence": 90,
+      "sources": ["Business Standard", "Free Press Journal", "ANI"],
+      "publishedAt": "2026-07-13T00:00:00Z",
+      "summary": "TCS signed a multi-million, multi-year AI-led deal to run ABB's global network operations; shares jumped 5.7%."
+    },
+    {
+      "ticker": "KALYANKJIL",
+      "eventType": "Results beat",
+      "direction": "positive",
+      "materiality": 7,
+      "confidence": 85,
+      "sources": ["Business Standard", "BusinessToday", "HDFC Sky"],
+      "publishedAt": "2026-07-13T00:00:00Z",
+      "summary": "Kalyan Jewellers hit upper circuit (+10%) after Q1FY27 update showed 38% YoY domestic revenue growth and brokerage EPS upgrades."
+    },
+    {
+      "ticker": "IOCL",
+      "eventType": "General news",
+      "direction": "negative",
+      "materiality": 6,
+      "confidence": 75,
+      "sources": ["Indiablooms", "Equitymaster"],
+      "publishedAt": "2026-07-13T00:00:00Z",
+      "summary": "Oil marketing company shares slid as Brent crude jumped ~4% on Iran conflict, squeezing marketing margins."
+    },
+    {
+      "ticker": "BPCL",
+      "eventType": "General news",
+      "direction": "negative",
+      "materiality": 6,
+      "confidence": 75,
+      "sources": ["Indiablooms", "Equitymaster"],
+      "publishedAt": "2026-07-13T00:00:00Z",
+      "summary": "Oil marketing company shares slid as Brent crude jumped ~4% on Iran conflict, squeezing marketing margins."
+    },
+    {
+      "ticker": "HPCL",
+      "eventType": "General news",
+      "direction": "negative",
+      "materiality": 6,
+      "confidence": 75,
+      "sources": ["Indiablooms", "Equitymaster"],
+      "publishedAt": "2026-07-13T00:00:00Z",
+      "summary": "Oil marketing company shares slid as Brent crude jumped ~4% on Iran conflict, squeezing marketing margins."
+    }
+  ]
 }
