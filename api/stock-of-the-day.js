@@ -923,12 +923,16 @@ Return ONLY valid JSON (no markdown):
     // Save daily pick (now complete with factors, composite, verdict) — retry-safe
     await ghPutWithRetry('data/daily-pick.json', () => ({ pick }), ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
 
-    // Append to project bouquet (retry-safe, guards against double-add for same day).
+    // Append to project bouquet (retry-safe, guards against double-add of THIS ticker today).
     // Skip entirely if the entry price failed the sanity check — better no trade than a
     // phantom one. The narrative pick is still saved above for visibility.
+    // BUGFIX 2026-07-13: this used to check `b.date === date` (ANY buy today), which silently
+    // capped the hourly engine at 1 new position/day regardless of MAX_NEW_BUYS_PER_DAY (3) —
+    // e.g. 2026-07-13, OFSS bought at 10:00 blocked LTF (effConf 77.7, a genuine qualifier) at
+    // every later scan for no strategic reason. Now scoped to this ticker, matching open-scan.js.
     if (!entryRejected) await ghPutWithRetry('data/project-bouquet.json', (current) => {
       let bouquet = current?.bouquet || [];
-      if (bouquet.find(b => b.date === date)) return null; // already added today — skip write
+      if (bouquet.find(b => b.ticker === pick.ticker && b.date === date)) return null; // this ticker already added today
       // V2 THESIS SEED: every position records WHY it was bought; sell-check keeps the thesis
       // current from new filings (stronger thesis → longer rope; broken thesis → exit).
       const thesis = winnerCatalyst?.hasCatalyst
