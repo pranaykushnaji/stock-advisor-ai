@@ -3,10 +3,25 @@
     "date": "2026-07-13",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-13T08:31:26.333Z",
+    "pickedAt": "2026-07-13T09:30:53.792Z",
     "rejected": [
       {
         "ticker": "TCS",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "UNIONBANK",
         "reasons": [
           "ema20AboveEma50",
           "near52wHigh"
@@ -19,31 +34,11 @@
         ]
       },
       {
-        "ticker": "PERSISTENT",
+        "ticker": "KOTAKBANK",
         "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UNIONBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KALYANKJIL",
-        "reasons": [
           "near52wHigh"
         ]
       },
@@ -55,18 +50,8 @@
         ]
       },
       {
-        "ticker": "TECHM",
+        "ticker": "KALYANKJIL",
         "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INFY",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -88,28 +73,6 @@
         ]
       },
       {
-        "ticker": "COFORGE",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DIVISLAB",
-        "reasons": [
-          "illiquid (₹68Cr)"
-        ]
-      },
-      {
-        "ticker": "KOTAKBANK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "TATAELXSI",
         "reasons": [
           "priceAboveEma20",
@@ -118,16 +81,53 @@
         ]
       },
       {
-        "ticker": "MPHASIS",
+        "ticker": "INFY",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HEROMOTOCO",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
         "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "OFSS",
+        "ticker": "VOLTAS",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DIVISLAB",
         "reasons": [
           "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PHOENIXLTD",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
         ]
       },
       {
@@ -138,17 +138,17 @@
         ]
       },
       {
-        "ticker": "INDUSINDBK",
-        "reasons": [
-          "illiquid (₹53Cr)"
-        ]
-      },
-      {
-        "ticker": "VOLTAS",
+        "ticker": "TECHM",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PAYTM",
+        "reasons": [
+          "volumeSurge"
         ]
       }
     ]
