@@ -2,135 +2,50 @@
   "pick": {
     "date": "2026-07-14",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-14T04:30:47.913Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-07-14T05:30:54.758Z",
+    "regime": "weak",
+    "market": "weak (v2 score 46, conf 61) — trend 58, breadth 25, vol-factor 78",
+    "momLaneOpen": false,
+    "considered": [
       {
         "ticker": "BIOCON",
-        "reasons": [
-          "near upper circuit"
-        ]
-      },
-      {
-        "ticker": "CIPLA",
-        "reasons": [
-          "illiquid (₹22Cr)"
-        ]
-      },
-      {
-        "ticker": "DRREDDY",
-        "reasons": [
-          "illiquid (₹37Cr)"
-        ]
+        "relVol": 21.2,
+        "confidence": 40.6,
+        "effectiveConfidence": 76.8,
+        "institutional": 74.5,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 12,
+        "negative": false
       },
       {
         "ticker": "DIVISLAB",
-        "reasons": [
-          "illiquid (₹47Cr)"
-        ]
+        "relVol": 3.77,
+        "confidence": 37.7,
+        "effectiveConfidence": 69.1,
+        "institutional": 72.2,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 5,
+        "negative": false
       },
       {
-        "ticker": "HINDALCO",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CONCOR",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KALYANKJIL",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GODREJCP",
-        "reasons": [
-          "illiquid (₹14Cr)"
-        ]
-      },
-      {
-        "ticker": "MCX",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ASTRAL",
-        "reasons": [
-          "illiquid (₹45Cr)"
-        ]
-      },
-      {
-        "ticker": "BHARTIARTL",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PFC",
-        "reasons": [
-          "illiquid (₹20Cr)"
-        ]
-      },
-      {
-        "ticker": "ASIANPAINT",
-        "reasons": [
-          "illiquid (₹42Cr)"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "illiquid (₹72Cr)"
-        ]
-      },
-      {
-        "ticker": "SUNPHARMA",
-        "reasons": [
-          "illiquid (₹26Cr)"
-        ]
-      },
-      {
-        "ticker": "APOLLOHOSP",
-        "reasons": [
-          "illiquid (₹45Cr)"
-        ]
-      },
-      {
-        "ticker": "VBL",
-        "reasons": [
-          "illiquid (₹64Cr)"
-        ]
-      },
-      {
-        "ticker": "GLENMARK",
-        "reasons": [
-          "illiquid (₹44Cr)"
-        ]
-      },
-      {
-        "ticker": "NMDC",
-        "reasons": [
-          "illiquid (₹36Cr)"
-        ]
-      },
-      {
-        "ticker": "AUROPHARMA",
-        "reasons": [
-          "illiquid (₹15Cr)"
-        ]
+        "ticker": "ADANIGREEN",
+        "relVol": 2.25,
+        "confidence": 22.7,
+        "effectiveConfidence": 59.6,
+        "institutional": 59.1,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 9,
+        "negative": false
       }
     ]
   }
