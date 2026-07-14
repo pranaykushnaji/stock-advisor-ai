@@ -2,51 +2,21 @@
   "pick": {
     "date": "2026-07-14",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-14T05:30:54.758Z",
-    "regime": "weak",
-    "market": "weak (v2 score 46, conf 61) — trend 58, breadth 25, vol-factor 78",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "BIOCON",
-        "relVol": 21.2,
-        "confidence": 40.6,
-        "effectiveConfidence": 76.8,
-        "institutional": 74.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 12,
-        "negative": false
+    "reason": "BIOCON failed neutral-market entry gates: reward/risk 1.58 < 1.8",
+    "pickedAt": "2026-07-14T06:30:55.401Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 49, conf 64) — trend 58, breadth 30, vol-factor 78",
+    "candidate": {
+      "ticker": "BIOCON",
+      "confidence": 41.4,
+      "effectiveConfidence": 79.1,
+      "rewardRisk": {
+        "rr": 1.58,
+        "upsidePct": 6.8,
+        "downsidePct": 4.3
       },
-      {
-        "ticker": "DIVISLAB",
-        "relVol": 3.77,
-        "confidence": 37.7,
-        "effectiveConfidence": 69.1,
-        "institutional": 72.2,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 5,
-        "negative": false
-      },
-      {
-        "ticker": "ADANIGREEN",
-        "relVol": 2.25,
-        "confidence": 22.7,
-        "effectiveConfidence": 59.6,
-        "institutional": 59.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 9,
-        "negative": false
-      }
-    ]
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
