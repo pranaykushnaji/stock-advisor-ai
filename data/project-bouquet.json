@@ -1,6 +1,119 @@
 {
   "bouquet": [
     {
+      "ticker": "DIVISLAB",
+      "fullName": "Divi's Laboratories Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 84,
+        "flow": 85,
+        "catalyst": 5,
+        "liquidity": 89
+      },
+      "expectedEdge": {
+        "expectedGainPct": 7.4,
+        "expectedLossPct": 4,
+        "probability": 0.667,
+        "edgePct": 3.6,
+        "calibration": "none"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 84,
+            "weight": 0.4,
+            "contribution": 33.6
+          },
+          "flow": {
+            "score": 85,
+            "weight": 0.4,
+            "contribution": 34
+          },
+          "liquidity": {
+            "score": 89,
+            "weight": 0.2,
+            "contribution": 17.8
+          }
+        },
+        "base": 85.4,
+        "regimeScore": 48,
+        "regimeAdjustment": -5.6,
+        "trendBonus": 2.8,
+        "final": 82.6
+      },
+      "confidence": 56,
+      "effectiveConfidence": 82.6,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-07-14T09:30:53.751Z",
+      "verdict": "WATCH",
+      "composite": 60.5,
+      "date": "2026-07-14",
+      "addedAt": "2026-07-14T09:30:53.751Z",
+      "investedAmount": 11000,
+      "entryPrice": 7162,
+      "currentPrice": 7162,
+      "shares": 1.536,
+      "peakPrice": 7162,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 6778.5,
+      "todayChangePct": 5.66,
+      "lastPriceUpdate": "2026-07-14T09:30:53.751Z",
+      "yahooSymbol": "DIVISLAB.NS",
+      "niftyAtEntry": 24062,
+      "niftyNow": 24062,
+      "estimatedUpside": "7-8%",
+      "riskLevel": "Medium",
+      "summary": "DIVISLAB is showing robust technical momentum with an 83.3 momentum score, strong relative strength (6.52× Nifty) and a 3.04× surge in volume, suggesting institutional buying. With a reward‑to‑risk ratio of ~1.84 and an estimated upside of 7‑8% over the next week, a short‑term swing trade aligns with the current neutral market backdrop. The lack of a catalyst is offset by the clear price‑action signal and high multi‑signal confidence.",
+      "whyToday": "Today's 3.04× relative volume spike indicates fresh institutional accumulation, making it the optimal entry point despite the absence of news.",
+      "factors": {
+        "momentum": {
+          "score": 83.3,
+          "positives": [
+            "Momentum score 83.3 (high)",
+            "Relative‑strength score 83.3 and outperformance vs Nifty of 6.52×",
+            "Relative volume 3.04× the 20‑day average",
+            "Technicals 79.5 and short‑term weekly return ~5.8%",
+            "Reward/Risk ≈1.84 (upside ~7.4% vs downside ~4%)"
+          ],
+          "negatives": [
+            "No identifiable news catalyst (catalyst score 0)",
+            "Volume score only 50 (moderate) despite high relative volume",
+            "Neutral market regime with low breadth (28) could limit upside"
+          ]
+        },
+        "relStrength": {
+          "score": 83.3
+        },
+        "volume": {
+          "score": 50
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 79.5
+        },
+        "sector": {
+          "score": 68
+        }
+      }
+    },
+    {
       "ticker": "OFSS",
       "fullName": "Oracle Financial Services Software Limited",
       "sector": "UNKNOWN",
