@@ -1,22 +1,174 @@
 {
   "pick": {
-    "date": "2026-07-14",
-    "noTrade": true,
-    "reason": "DIVISLAB failed neutral-market entry gates: reward/risk 1.75 < 1.8",
-    "pickedAt": "2026-07-14T08:30:54.344Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 47, conf 62) — trend 58, breadth 26, vol-factor 78",
-    "candidate": {
-      "ticker": "DIVISLAB",
-      "confidence": 47.3,
-      "effectiveConfidence": 77.5,
-      "rewardRisk": {
-        "rr": 1.75,
-        "upsidePct": 7,
-        "downsidePct": 4
+    "ticker": "DIVISLAB",
+    "fullName": "Divi's Laboratories Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 83.3,
+        "positives": [
+          "Momentum score 83.3 (high)",
+          "Relative‑strength score 83.3 and outperformance vs Nifty of 6.52×",
+          "Relative volume 3.04× the 20‑day average",
+          "Technicals 79.5 and short‑term weekly return ~5.8%",
+          "Reward/Risk ≈1.84 (upside ~7.4% vs downside ~4%)"
+        ],
+        "negatives": [
+          "No identifiable news catalyst (catalyst score 0)",
+          "Volume score only 50 (moderate) despite high relative volume",
+          "Neutral market regime with low breadth (28) could limit upside"
+        ]
       },
-      "catalyst": "no catalyst",
-      "verification": "UNVERIFIED"
-    }
+      "relStrength": {
+        "score": 83.3
+      },
+      "volume": {
+        "score": 50
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 79.5
+      },
+      "sector": {
+        "score": 68
+      }
+    },
+    "shortReturns": {
+      "r1d": 0.03221157310657923,
+      "r1w": 0.05766816805729898,
+      "r1m": 0.08375576908526897
+    },
+    "volumeRatio": 1.18,
+    "relVol": 3.04,
+    "relStrength": 6.52,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 56,
+    "effectiveConfidence": 82.6,
+    "confidenceComponents": {
+      "technical": 84,
+      "flow": 85,
+      "catalyst": 5,
+      "liquidity": 89
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 84,
+          "weight": 0.4,
+          "contribution": 33.6
+        },
+        "flow": {
+          "score": 85,
+          "weight": 0.4,
+          "contribution": 34
+        },
+        "liquidity": {
+          "score": 89,
+          "weight": 0.2,
+          "contribution": 17.8
+        }
+      },
+      "base": 85.4,
+      "regimeScore": 48,
+      "regimeAdjustment": -5.6,
+      "trendBonus": 2.8,
+      "final": 82.6
+    },
+    "expectedEdge": {
+      "expectedGainPct": 7.4,
+      "expectedLossPct": 4,
+      "probability": 0.667,
+      "edgePct": 3.6,
+      "calibration": "none"
+    },
+    "confidenceTrend": "rising",
+    "trendBonus": 2.8,
+    "institutional": 93.6,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 79,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 1.84,
+      "upsidePct": 7.4,
+      "downsidePct": 4
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 48, conf 64) — trend 58, breadth 28, vol-factor 78",
+    "regimeConfidence": 64,
+    "regimeFactors": {
+      "indexTrend": 58,
+      "volatility": 78,
+      "breadth": 28,
+      "momentumBreadth": 26,
+      "largeCap": 50,
+      "gapEnv": 41,
+      "riskAppetite": 50,
+      "sectorPart": 33
+    },
+    "annualizedVol": 22.4,
+    "composite": 60.5,
+    "verdict": "WATCH",
+    "estimatedUpside": "7-8%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the trade relies purely on strong price/volume momentum.",
+    "summary": "DIVISLAB is showing robust technical momentum with an 83.3 momentum score, strong relative strength (6.52× Nifty) and a 3.04× surge in volume, suggesting institutional buying. With a reward‑to‑risk ratio of ~1.84 and an estimated upside of 7‑8% over the next week, a short‑term swing trade aligns with the current neutral market backdrop. The lack of a catalyst is offset by the clear price‑action signal and high multi‑signal confidence.",
+    "whyToday": "Today's 3.04× relative volume spike indicates fresh institutional accumulation, making it the optimal entry point despite the absence of news.",
+    "date": "2026-07-14",
+    "pickedAt": "2026-07-14T09:30:53.751Z",
+    "discovery": {
+      "news": 0,
+      "movers": 35,
+      "nseSnapshot": 204,
+      "nseUniverse": 204,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-14T09:16:04.805Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 3,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 3,
+      "catalystChecked": 3,
+      "tradeable": 2
+    },
+    "runnerUp": {
+      "ticker": "BIOCON",
+      "composite": 41.2
+    },
+    "entryPrice": 7162,
+    "entryRejected": null
   }
 }
