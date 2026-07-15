@@ -1,151 +1,149 @@
 {
   "pick": {
-    "ticker": "DIVISLAB",
-    "fullName": "Divi's Laboratories Limited",
+    "ticker": "APOLLOHOSP",
+    "fullName": "Apollo Hospitals Enterprise Limited",
     "sector": "UNKNOWN",
     "strategy": "quality-momentum",
     "entryLane": "momentum",
     "factors": {
       "momentum": {
-        "score": 83.3,
+        "score": 87.5,
         "positives": [
-          "Momentum score 83.3 (high)",
-          "Relative‑strength score 83.3 and outperformance vs Nifty of 6.52×",
-          "Relative volume 3.04× the 20‑day average",
-          "Technicals 79.5 and short‑term weekly return ~5.8%",
-          "Reward/Risk ≈1.84 (upside ~7.4% vs downside ~4%)"
+          "Momentum score 87.5 (very high)",
+          "Volume score 87.5 with today’s volume 2.94× the 20‑day average",
+          "Relative strength vs Nifty = 4.84, indicating outperformance",
+          "Short‑term return: +2.75% over the past week and +7.19% over the month"
         ],
         "negatives": [
-          "No identifiable news catalyst (catalyst score 0)",
-          "Volume score only 50 (moderate) despite high relative volume",
-          "Neutral market regime with low breadth (28) could limit upside"
+          "Composite watch‑list score only 63.1, suggesting some caution",
+          "Catalyst impact modest (5/10) – just a target‑price upgrade",
+          "Sector classification unknown, adding a layer of uncertainty"
         ]
       },
       "relStrength": {
-        "score": 83.3
+        "score": 62.5
       },
       "volume": {
-        "score": 50
+        "score": 87.5
       },
       "catalyst": {
         "score": 0
       },
       "technicals": {
-        "score": 79.5
+        "score": 78.7
       },
       "sector": {
-        "score": 68
+        "score": 67
       }
     },
     "shortReturns": {
-      "r1d": 0.03221157310657923,
-      "r1w": 0.05766816805729898,
-      "r1m": 0.08375576908526897
+      "r1d": 0.01050502780742655,
+      "r1w": 0.027474724395955902,
+      "r1m": 0.07192658363625529
     },
-    "volumeRatio": 1.18,
-    "relVol": 3.04,
-    "relStrength": 6.52,
+    "volumeRatio": 1.12,
+    "relVol": 2.94,
+    "relStrength": 4.84,
     "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
+      "type": "broker upgrade",
+      "confidence": 85,
+      "impact": 5,
+      "stars": 3,
       "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
+      "verification": "PARTIAL",
+      "sources": 1,
+      "summary": "Religare Broking raises target price for Apollo Hospitals to Rs.285, indicating bullish outlook.",
+      "impactClass": "medium+",
+      "decay": 0.462,
+      "influenceDays": 3,
       "recalled": false
     },
-    "confidence": 56,
-    "effectiveConfidence": 82.6,
+    "confidence": 66.8,
+    "effectiveConfidence": 79,
     "confidenceComponents": {
-      "technical": 84,
-      "flow": 85,
+      "technical": 81,
+      "flow": 91,
       "catalyst": 5,
-      "liquidity": 89
+      "liquidity": 61
     },
     "confidenceBreakdown": {
       "lane": "momentum",
       "contributions": {
         "technical": {
-          "score": 84,
+          "score": 81,
           "weight": 0.4,
-          "contribution": 33.6
+          "contribution": 32.4
         },
         "flow": {
-          "score": 85,
+          "score": 91,
           "weight": 0.4,
-          "contribution": 34
+          "contribution": 36.4
         },
         "liquidity": {
-          "score": 89,
+          "score": 61,
           "weight": 0.2,
-          "contribution": 17.8
+          "contribution": 12.2
         }
       },
-      "base": 85.4,
-      "regimeScore": 48,
-      "regimeAdjustment": -5.6,
-      "trendBonus": 2.8,
-      "final": 82.6
+      "base": 81,
+      "regimeScore": 68,
+      "regimeAdjustment": -2,
+      "trendBonus": 0,
+      "final": 79
     },
     "expectedEdge": {
-      "expectedGainPct": 7.4,
+      "expectedGainPct": 6.9,
       "expectedLossPct": 4,
-      "probability": 0.667,
-      "edgePct": 3.6,
+      "probability": 0.702,
+      "edgePct": 3.65,
       "calibration": "none"
     },
-    "confidenceTrend": "rising",
-    "trendBonus": 2.8,
-    "institutional": 93.6,
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 85.9,
     "institutionalFlags": [
       "up-day volume dominant"
     ],
-    "discoveryScore": 79,
+    "discoveryScore": 67.2,
     "discoveryReasons": [
-      "closing near highs",
-      "leading market breadth"
+      "closing near highs"
     ],
-    "concentration": null,
+    "concentration": "concentration: 1 open position in sector:Pharma — size halved",
     "llmVetoOverridden": false,
     "rewardRisk": {
-      "rr": 1.84,
-      "upsidePct": 7.4,
+      "rr": 1.72,
+      "upsidePct": 6.9,
       "downsidePct": 4
     },
-    "regime": "neutral",
-    "market": "neutral (v2 score 48, conf 64) — trend 58, breadth 28, vol-factor 78",
-    "regimeConfidence": 64,
+    "regime": "bullish",
+    "market": "bullish (v2 score 68, conf 74) — trend 59, breadth 80, vol-factor 79",
+    "regimeConfidence": 74,
     "regimeFactors": {
-      "indexTrend": 58,
-      "volatility": 78,
-      "breadth": 28,
-      "momentumBreadth": 26,
+      "indexTrend": 59,
+      "volatility": 79,
+      "breadth": 80,
+      "momentumBreadth": 75,
       "largeCap": 50,
-      "gapEnv": 41,
-      "riskAppetite": 50,
-      "sectorPart": 33
+      "gapEnv": 64,
+      "riskAppetite": 56,
+      "sectorPart": 83
     },
-    "annualizedVol": 22.4,
-    "composite": 60.5,
+    "annualizedVol": 19,
+    "composite": 63.1,
     "verdict": "WATCH",
-    "estimatedUpside": "7-8%",
+    "estimatedUpside": "6-8%",
     "riskLevel": "Medium",
     "horizon": "5-10 days",
-    "newsSummary": "There is no specific news catalyst; the trade relies purely on strong price/volume momentum.",
-    "summary": "DIVISLAB is showing robust technical momentum with an 83.3 momentum score, strong relative strength (6.52× Nifty) and a 3.04× surge in volume, suggesting institutional buying. With a reward‑to‑risk ratio of ~1.84 and an estimated upside of 7‑8% over the next week, a short‑term swing trade aligns with the current neutral market backdrop. The lack of a catalyst is offset by the clear price‑action signal and high multi‑signal confidence.",
-    "whyToday": "Today's 3.04× relative volume spike indicates fresh institutional accumulation, making it the optimal entry point despite the absence of news.",
-    "date": "2026-07-14",
-    "pickedAt": "2026-07-14T09:30:53.751Z",
+    "newsSummary": "Religare Broking upgraded Apollo Hospitals, raising its target price to Rs.285, signalling a bullish outlook.",
+    "summary": "Apollo Hospitals is riding a strong momentum wave (87.5) backed by a near‑tripling of daily volume and solid outperformance versus the Nifty. In a bullish market regime with a favorable reward‑to‑risk profile (~1.7x), the recent broker upgrade adds a modest catalyst to support a 5‑10‑day swing targeting a 6‑8% upside.",
+    "whyToday": "The combination of an exceptionally high momentum score and a 2.94× volume surge in a bullish market makes today the optimal entry point.",
+    "date": "2026-07-15",
+    "pickedAt": "2026-07-15T04:31:09.903Z",
     "discovery": {
       "news": 0,
-      "movers": 35,
-      "nseSnapshot": 204,
-      "nseUniverse": 204,
+      "movers": 40,
+      "nseSnapshot": 177,
+      "nseUniverse": 177,
       "usedFallback": false,
       "diag": {
         "headlinesFetched": 25,
@@ -153,22 +151,22 @@
         "extractError": null,
         "moversError": null,
         "snapshotStale": false,
-        "snapshotAt": "2026-07-14T09:16:04.805Z",
+        "snapshotAt": "2026-07-15T04:16:22.587Z",
         "rankedBy": "discoveryScore"
       }
     },
-    "candidatePool": 3,
+    "candidatePool": 4,
     "pipeline": {
-      "priced": 40,
-      "passedFilter": 3,
-      "catalystChecked": 3,
+      "priced": 39,
+      "passedFilter": 4,
+      "catalystChecked": 4,
       "tradeable": 2
     },
     "runnerUp": {
-      "ticker": "BIOCON",
-      "composite": 41.2
+      "ticker": "SHRIRAMFIN",
+      "composite": 35.3
     },
-    "entryPrice": 7162,
+    "entryPrice": 8994,
     "entryRejected": null
   }
 }
