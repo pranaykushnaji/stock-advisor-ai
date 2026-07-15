@@ -1,6 +1,118 @@
 {
   "bouquet": [
     {
+      "ticker": "APOLLOHOSP",
+      "fullName": "Apollo Hospitals Enterprise Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 81,
+        "flow": 91,
+        "catalyst": 5,
+        "liquidity": 61
+      },
+      "expectedEdge": {
+        "expectedGainPct": 6.9,
+        "expectedLossPct": 4,
+        "probability": 0.702,
+        "edgePct": 3.65,
+        "calibration": "none"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 81,
+            "weight": 0.4,
+            "contribution": 32.4
+          },
+          "flow": {
+            "score": 91,
+            "weight": 0.4,
+            "contribution": 36.4
+          },
+          "liquidity": {
+            "score": 61,
+            "weight": 0.2,
+            "contribution": 12.2
+          }
+        },
+        "base": 81,
+        "regimeScore": 68,
+        "regimeAdjustment": -2,
+        "trendBonus": 0,
+        "final": 79
+      },
+      "confidence": 66.8,
+      "effectiveConfidence": 79,
+      "regime": "bullish",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-07-15T04:31:09.903Z",
+      "verdict": "WATCH",
+      "composite": 63.1,
+      "date": "2026-07-15",
+      "addedAt": "2026-07-15T04:31:09.903Z",
+      "investedAmount": 4500,
+      "entryPrice": 8994,
+      "currentPrice": 8994,
+      "shares": 0.5,
+      "peakPrice": 8994,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 7360.5,
+      "todayChangePct": 22.19,
+      "lastPriceUpdate": "2026-07-15T04:31:09.903Z",
+      "yahooSymbol": "APOLLOHOSP.NS",
+      "niftyAtEntry": 24179.1,
+      "niftyNow": 24179.1,
+      "estimatedUpside": "6-8%",
+      "riskLevel": "Medium",
+      "summary": "Apollo Hospitals is riding a strong momentum wave (87.5) backed by a near‑tripling of daily volume and solid outperformance versus the Nifty. In a bullish market regime with a favorable reward‑to‑risk profile (~1.7x), the recent broker upgrade adds a modest catalyst to support a 5‑10‑day swing targeting a 6‑8% upside.",
+      "whyToday": "The combination of an exceptionally high momentum score and a 2.94× volume surge in a bullish market makes today the optimal entry point.",
+      "factors": {
+        "momentum": {
+          "score": 87.5,
+          "positives": [
+            "Momentum score 87.5 (very high)",
+            "Volume score 87.5 with today’s volume 2.94× the 20‑day average",
+            "Relative strength vs Nifty = 4.84, indicating outperformance",
+            "Short‑term return: +2.75% over the past week and +7.19% over the month"
+          ],
+          "negatives": [
+            "Composite watch‑list score only 63.1, suggesting some caution",
+            "Catalyst impact modest (5/10) – just a target‑price upgrade",
+            "Sector classification unknown, adding a layer of uncertainty"
+          ]
+        },
+        "relStrength": {
+          "score": 62.5
+        },
+        "volume": {
+          "score": 87.5
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 78.7
+        },
+        "sector": {
+          "score": 67
+        }
+      }
+    },
+    {
       "ticker": "DIVISLAB",
       "fullName": "Divi's Laboratories Limited",
       "sector": "UNKNOWN",
