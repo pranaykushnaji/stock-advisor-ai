@@ -2,137 +2,21 @@
   "pick": {
     "date": "2026-07-16",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-16T04:31:02.695Z",
-    "rejected": [
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+    "reason": "ABB failed neutral-market entry gates: reward/risk 1.74 < 1.8",
+    "pickedAt": "2026-07-16T05:31:08.098Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 59, conf 70) — trend 56, breadth 59, vol-factor 78",
+    "candidate": {
+      "ticker": "ABB",
+      "confidence": 57.6,
+      "effectiveConfidence": 79.2,
+      "rewardRisk": {
+        "rr": 1.74,
+        "upsidePct": 8.5,
+        "downsidePct": 4.9
       },
-      {
-        "ticker": "UPL",
-        "reasons": [
-          "illiquid (₹31Cr)"
-        ]
-      },
-      {
-        "ticker": "BAJFINANCE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SRF",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BIOCON",
-        "reasons": [
-          "illiquid (₹51Cr)"
-        ]
-      },
-      {
-        "ticker": "HINDUNILVR",
-        "reasons": [
-          "illiquid (₹29Cr)"
-        ]
-      },
-      {
-        "ticker": "BPCL",
-        "reasons": [
-          "illiquid (₹60Cr)"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDPETRO",
-        "reasons": [
-          "illiquid (₹66Cr)"
-        ]
-      },
-      {
-        "ticker": "WIPRO",
-        "reasons": [
-          "illiquid (₹41Cr)"
-        ]
-      },
-      {
-        "ticker": "DIXON",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SONACOMS",
-        "reasons": [
-          "illiquid (₹7Cr)"
-        ]
-      },
-      {
-        "ticker": "UNITDSPR",
-        "reasons": [
-          "illiquid (₹8Cr)"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "illiquid (₹39Cr)"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "IOC",
-        "reasons": [
-          "illiquid (₹66Cr)"
-        ]
-      },
-      {
-        "ticker": "MARUTI",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "IEX",
-        "reasons": [
-          "illiquid (₹28Cr)"
-        ]
-      },
-      {
-        "ticker": "TECHM",
-        "reasons": [
-          "illiquid (₹43Cr)"
-        ]
-      }
-    ]
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
