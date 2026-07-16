@@ -1,22 +1,175 @@
 {
   "pick": {
-    "date": "2026-07-16",
-    "noTrade": true,
-    "reason": "ABB failed neutral-market entry gates: reward/risk 1.74 < 1.8",
-    "pickedAt": "2026-07-16T05:31:08.098Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 59, conf 70) — trend 56, breadth 59, vol-factor 78",
-    "candidate": {
-      "ticker": "ABB",
-      "confidence": 57.6,
-      "effectiveConfidence": 79.2,
-      "rewardRisk": {
-        "rr": 1.74,
-        "upsidePct": 8.5,
-        "downsidePct": 4.9
+    "ticker": "ABB",
+    "fullName": "ABB India Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 75,
+        "positives": [
+          "Momentum score 75",
+          "Relative‑strength score 75",
+          "Volume score 75 with today’s volume 14.98× the 20‑day average",
+          "Technical score 81.5",
+          "Relative strength vs Nifty 10.46",
+          "Short‑term returns: +13.2% (1‑day), +15.2% (1‑week), +11.1% (1‑month)",
+          "Institutional accumulation rating 94.4/100"
+        ],
+        "negatives": [
+          "No news catalyst (unverified)",
+          "Composite score 60.1 (watch)",
+          "Sector unknown, market regime neutral"
+        ]
       },
-      "catalyst": "no catalyst",
-      "verification": "UNVERIFIED"
-    }
+      "relStrength": {
+        "score": 75
+      },
+      "volume": {
+        "score": 75
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 81.5
+      },
+      "sector": {
+        "score": 65
+      }
+    },
+    "shortReturns": {
+      "r1d": 0.132109692396982,
+      "r1w": 0.15225577789263825,
+      "r1m": 0.11130893035180174
+    },
+    "volumeRatio": 1.57,
+    "relVol": 14.98,
+    "relStrength": 10.46,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 64.7,
+    "effectiveConfidence": 88,
+    "confidenceComponents": {
+      "technical": 81,
+      "flow": 92,
+      "catalyst": 5,
+      "liquidity": 95
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 81,
+          "weight": 0.4,
+          "contribution": 32.4
+        },
+        "flow": {
+          "score": 92,
+          "weight": 0.4,
+          "contribution": 36.8
+        },
+        "liquidity": {
+          "score": 95,
+          "weight": 0.2,
+          "contribution": 19
+        }
+      },
+      "base": 88.2,
+      "regimeScore": 60,
+      "regimeAdjustment": -4.2,
+      "trendBonus": 4,
+      "final": 88
+    },
+    "expectedEdge": {
+      "expectedGainPct": 9.4,
+      "expectedLossPct": 5,
+      "probability": 0.69,
+      "edgePct": 4.94,
+      "calibration": "none"
+    },
+    "confidenceTrend": "rising",
+    "trendBonus": 4,
+    "institutional": 94.4,
+    "institutionalFlags": [
+      "up-day volume dominant",
+      "volume expanding"
+    ],
+    "discoveryScore": 85.4,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "volume accelerating"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 1.9,
+      "upsidePct": 9.4,
+      "downsidePct": 5
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 60, conf 76) — trend 56, breadth 61, vol-factor 78",
+    "regimeConfidence": 76,
+    "regimeFactors": {
+      "indexTrend": 56,
+      "volatility": 78,
+      "breadth": 61,
+      "momentumBreadth": 54,
+      "largeCap": 50,
+      "gapEnv": 50,
+      "riskAppetite": 52,
+      "sectorPart": 78
+    },
+    "annualizedVol": 31.5,
+    "composite": 60.1,
+    "verdict": "WATCH",
+    "estimatedUpside": "8-10%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the move is driven purely by technical momentum and volume dynamics.",
+    "summary": "ABB India is showing a strong short‑term momentum breakout, backed by a 14.98× volume surge and solid institutional buying. With a favorable risk‑reward profile (~9% upside vs ~5% downside) and a neutral market backdrop, the stock is positioned for a 5‑10 day swing gain despite the lack of a news catalyst.",
+    "whyToday": "Today's exceptional volume spike (≈15× the 20‑day average) signals decisive buying pressure and makes the entry compelling.",
+    "date": "2026-07-16",
+    "pickedAt": "2026-07-16T06:31:05.843Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 201,
+      "nseUniverse": 201,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-16T06:16:19.722Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 2,
+    "pipeline": {
+      "priced": 39,
+      "passedFilter": 2,
+      "catalystChecked": 2,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 7802.5,
+    "entryRejected": null
   }
 }
