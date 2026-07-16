@@ -3,10 +3,38 @@
     "date": "2026-07-16",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-16T07:31:04.003Z",
+    "pickedAt": "2026-07-16T08:31:03.951Z",
     "rejected": [
       {
         "ticker": "UPL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "AMBER",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SWIGGY",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "IEX",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "WIPRO",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -22,10 +50,8 @@
         ]
       },
       {
-        "ticker": "HCLTECH",
+        "ticker": "DIXON",
         "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -36,42 +62,9 @@
         ]
       },
       {
-        "ticker": "IEX",
-        "reasons": [
-          "illiquid (₹60Cr)"
-        ]
-      },
-      {
-        "ticker": "WIPRO",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AMBER",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ULTRACEMCO",
+        "ticker": "HYUNDAI",
         "reasons": [
           "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DIXON",
-        "reasons": [
           "near52wHigh"
         ]
       },
@@ -82,9 +75,11 @@
         ]
       },
       {
-        "ticker": "GMRAIRPORT",
+        "ticker": "HCLTECH",
         "reasons": [
-          "volumeSurge"
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -94,49 +89,57 @@
         ]
       },
       {
-        "ticker": "NAUKRI",
-        "reasons": [
-          "illiquid (₹40Cr)"
-        ]
-      },
-      {
-        "ticker": "HYUNDAI",
+        "ticker": "INDIGO",
         "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "BHARTIARTL",
+        "ticker": "UNITDSPR",
+        "reasons": [
+          "illiquid (₹25Cr)"
+        ]
+      },
+      {
+        "ticker": "MARUTI",
         "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "INFY",
+        "ticker": "SONACOMS",
         "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "GMRAIRPORT",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "ULTRACEMCO",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SUPREMEIND",
+        "reasons": [
+          "illiquid (₹58Cr)"
+        ]
+      },
+      {
+        "ticker": "DMART",
+        "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GODREJCP",
-        "reasons": [
-          "illiquid (₹12Cr)"
-        ]
-      },
-      {
-        "ticker": "CUMMINSIND",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "SOLARINDS",
-        "reasons": [
-          "volumeSurge"
         ]
       }
     ]
