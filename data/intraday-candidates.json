@@ -6,7 +6,7 @@
       "fullName": "ABB India Limited",
       "sector": "UNKNOWN",
       "firstSeen": "11:01",
-      "status": "watching",
+      "status": "bought",
       "scans": [
         {
           "hhmm": "11:01",
@@ -29,13 +29,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-07-16T06:31:03.541Z",
+          "relVol": 14.98,
+          "confidence": 64.7,
+          "components": {
+            "technical": 81,
+            "flow": 92,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 85.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1707343,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 57.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "12:01",
+      "bestConfidence": 64.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 7.1,
+      "trendBonus": 4
     },
     "BIOCON": {
       "ticker": "BIOCON",
@@ -102,13 +124,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-07-16T06:31:03.542Z",
+          "relVol": 6.1,
+          "confidence": 9.9,
+          "components": {
+            "technical": 49,
+            "flow": 60,
+            "catalyst": 5,
+            "liquidity": 86
+          },
+          "discoveryScore": 65.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 16456206,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 7.8,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "12:01",
+      "bestConfidence": 9.9,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 2.1,
+      "trendBonus": 1.3
     }
   }
 }
