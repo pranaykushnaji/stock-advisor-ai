@@ -1,4 +1,114 @@
 {
   "date": "2026-07-16",
-  "candidates": {}
+  "candidates": {
+    "ABB": {
+      "ticker": "ABB",
+      "fullName": "ABB India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-07-16T05:31:05.224Z",
+          "relVol": 5.41,
+          "confidence": 57.6,
+          "components": {
+            "technical": 86,
+            "flow": 83,
+            "catalyst": 5,
+            "liquidity": 76
+          },
+          "discoveryScore": 78.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 392275,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 57.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "BIOCON": {
+      "ticker": "BIOCON",
+      "fullName": "Biocon Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-07-16T05:31:05.224Z",
+          "relVol": 1.97,
+          "confidence": 41.4,
+          "components": {
+            "technical": 71,
+            "flow": 90,
+            "catalyst": 5,
+            "liquidity": 65
+          },
+          "discoveryScore": 82.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3540768,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.97<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 41.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "ANGELONE": {
+      "ticker": "ANGELONE",
+      "fullName": "Angel One Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-07-16T05:31:05.224Z",
+          "relVol": 5.45,
+          "confidence": 7.8,
+          "components": {
+            "technical": 45,
+            "flow": 60,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 66.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 9366440,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 7.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
