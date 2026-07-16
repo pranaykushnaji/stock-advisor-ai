@@ -2,145 +2,24 @@
   "pick": {
     "date": "2026-07-16",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-16T08:31:03.951Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-07-16T09:31:05.591Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 50, conf 69) — trend 55, breadth 38, vol-factor 78",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "UPL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AMBER",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "IEX",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "WIPRO",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DIXON",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BIOCON",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "HYUNDAI",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SRF",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BAJFINANCE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "INDIGO",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UNITDSPR",
-        "reasons": [
-          "illiquid (₹25Cr)"
-        ]
-      },
-      {
-        "ticker": "MARUTI",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SONACOMS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "GMRAIRPORT",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "ULTRACEMCO",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SUPREMEIND",
-        "reasons": [
-          "illiquid (₹58Cr)"
-        ]
-      },
-      {
-        "ticker": "DMART",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+        "ticker": "BHEL",
+        "relVol": 2.08,
+        "confidence": 31.5,
+        "effectiveConfidence": 73.6,
+        "institutional": 96.5,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
       }
     ]
   }
