@@ -52,12 +52,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-07-17T06:31:10.584Z",
+          "relVol": 1.83,
+          "confidence": 43.9,
+          "components": {
+            "technical": 88,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 79
+          },
+          "discoveryScore": 67.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2008220,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "relVol 1.83<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
+      "lastSeen": "12:01",
       "bestConfidence": 43.9,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 1.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0.9,
       "trendBonus": 1.1
     },
     "BHEL": {
@@ -146,13 +169,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-07-17T06:31:10.585Z",
+          "relVol": 3.99,
+          "confidence": 55.7,
+          "components": {
+            "technical": 77,
+            "flow": 89,
+            "catalyst": 5,
+            "liquidity": 76
+          },
+          "discoveryScore": 67.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 7220940,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 40,
-      "confidenceTrend": "flat",
-      "confidenceSlope": -0.2,
-      "trendBonus": 0
+      "lastSeen": "12:01",
+      "bestConfidence": 55.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 7.85,
+      "trendBonus": 8
     },
     "BAJFINANCE": {
       "ticker": "BAJFINANCE",
@@ -206,13 +251,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-07-17T06:31:10.585Z",
+          "relVol": 1.92,
+          "confidence": 26.8,
+          "components": {
+            "technical": 62,
+            "flow": 73,
+            "catalyst": 5,
+            "liquidity": 92
+          },
+          "discoveryScore": 66.4,
+          "catalystType": "broker upgrade",
+          "verification": "PARTIAL",
+          "volume": 7342676,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "relVol 1.92<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 18.5,
+      "lastSeen": "12:01",
+      "bestConfidence": 26.8,
       "confidenceTrend": "rising",
-      "confidenceSlope": 9.6,
-      "trendBonus": 4
+      "confidenceSlope": 8.95,
+      "trendBonus": 8
     },
     "SONACOMS": {
       "ticker": "SONACOMS",
@@ -278,13 +346,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-07-17T06:31:10.585Z",
+          "relVol": 1.95,
+          "confidence": 6.6,
+          "components": {
+            "technical": 50,
+            "flow": 60,
+            "catalyst": 5,
+            "liquidity": 67
+          },
+          "discoveryScore": 66.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5194775,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "relVol 1.95<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 6.5,
+      "lastSeen": "12:01",
+      "bestConfidence": 6.6,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.1,
+      "trendBonus": 0.1
     }
   }
 }
