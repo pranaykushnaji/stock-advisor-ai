@@ -3,22 +3,35 @@
     "date": "2026-07-17",
     "noTrade": true,
     "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-17T07:31:08.463Z",
+    "pickedAt": "2026-07-17T08:31:13.457Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 54, conf 76) — trend 57, breadth 43, vol-factor 78",
+    "market": "neutral (v2 score 54, conf 75) — trend 56, breadth 42, vol-factor 78",
     "momLaneOpen": false,
     "considered": [
       {
         "ticker": "EXIDEIND",
-        "relVol": 3.85,
-        "confidence": 31.4,
-        "effectiveConfidence": 73.2,
-        "institutional": 84.9,
+        "relVol": 3.34,
+        "confidence": 41,
+        "effectiveConfidence": 75.2,
+        "institutional": 85.2,
         "catalyst": "no catalyst",
         "verification": "UNVERIFIED",
         "filing": false,
         "sources": 0,
         "articles": 4,
+        "negative": false
+      },
+      {
+        "ticker": "FEDERALBNK",
+        "relVol": 2.99,
+        "confidence": 32.7,
+        "effectiveConfidence": 80.4,
+        "institutional": 99.2,
+        "catalyst": "earnings beat",
+        "verification": "PARTIAL",
+        "filing": false,
+        "sources": 1,
+        "articles": 6,
         "negative": false
       }
     ]
