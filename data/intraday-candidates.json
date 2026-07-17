@@ -213,12 +213,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:01",
+          "ts": "2026-07-17T08:31:10.601Z",
+          "relVol": 3.34,
+          "confidence": 41,
+          "components": {
+            "technical": 81,
+            "flow": 75,
+            "catalyst": 5,
+            "liquidity": 83
+          },
+          "discoveryScore": 79.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 10381570,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:01",
+      "lastSeen": "14:01",
       "bestConfidence": 55.7,
       "confidenceTrend": "flat",
-      "confidenceSlope": -0.99,
+      "confidenceSlope": -0.64,
       "trendBonus": 0
     },
     "BAJFINANCE": {
@@ -391,13 +413,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:01",
+          "ts": "2026-07-17T08:31:10.602Z",
+          "relVol": 2.99,
+          "confidence": 32.7,
+          "components": {
+            "technical": 54,
+            "flow": 93,
+            "catalyst": 35,
+            "liquidity": 84
+          },
+          "discoveryScore": 80.8,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 14356175,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
-      "bestConfidence": 6.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.1,
-      "trendBonus": 0.1
+      "lastSeen": "14:01",
+      "bestConfidence": 32.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 13.1,
+      "trendBonus": 8
     }
   }
 }
