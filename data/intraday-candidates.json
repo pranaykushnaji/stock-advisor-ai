@@ -235,12 +235,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:01",
+          "ts": "2026-07-17T09:31:10.761Z",
+          "relVol": 2.91,
+          "confidence": 26,
+          "components": {
+            "technical": 69,
+            "flow": 74,
+            "catalyst": 5,
+            "liquidity": 84
+          },
+          "discoveryScore": 79.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 10964978,
+          "sessionFrac": 0.9226666666666666,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:01",
+      "lastSeen": "15:01",
       "bestConfidence": 55.7,
-      "confidenceTrend": "flat",
-      "confidenceSlope": -0.64,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -2.59,
       "trendBonus": 0
     },
     "BAJFINANCE": {
@@ -435,12 +457,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:01",
+          "ts": "2026-07-17T09:31:10.760Z",
+          "relVol": 6.26,
+          "confidence": 55.6,
+          "components": {
+            "technical": 67,
+            "flow": 93,
+            "catalyst": 35,
+            "liquidity": 95
+          },
+          "discoveryScore": 97.2,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 36516072,
+          "sessionFrac": 0.9226666666666666,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:01",
-      "bestConfidence": 32.7,
+      "lastSeen": "15:01",
+      "bestConfidence": 55.6,
       "confidenceTrend": "rising",
-      "confidenceSlope": 13.1,
+      "confidenceSlope": 17.34,
       "trendBonus": 8
     }
   }
