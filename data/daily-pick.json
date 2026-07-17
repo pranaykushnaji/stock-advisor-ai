@@ -1,22 +1,173 @@
 {
   "pick": {
-    "date": "2026-07-17",
-    "noTrade": true,
-    "reason": "BHEL failed neutral-market entry gates: reward/risk 1.63 < 1.8",
-    "pickedAt": "2026-07-17T04:31:11.640Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 54, conf 74) — trend 56, breadth 44, vol-factor 78",
-    "candidate": {
-      "ticker": "BHEL",
-      "confidence": 44.6,
-      "effectiveConfidence": 80.3,
-      "rewardRisk": {
-        "rr": 1.63,
-        "upsidePct": 9.4,
-        "downsidePct": 5.8
+    "ticker": "SONACOMS",
+    "fullName": "Sona BLW Precision Forgings Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 70,
+        "positives": [
+          "Volume score 90 and today’s relative volume 3.34x vs 20‑day average",
+          "Technical score 83.6 with strong short‑term returns (2.15% d1, 4.42% w1)",
+          "Institutional accumulation rating 89.8/100",
+          "Relative strength vs Nifty 14.65"
+        ],
+        "negatives": [
+          "No identifiable news catalyst (catalyst score 0)",
+          "Sector unknown and market breadth modest (46)",
+          "Potential downside risk ~4.8% if broader market turns"
+        ]
       },
-      "catalyst": "earnings beat",
-      "verification": "PARTIAL"
-    }
+      "relStrength": {
+        "score": 70
+      },
+      "volume": {
+        "score": 90
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 83.6
+      },
+      "sector": {
+        "score": 50
+      }
+    },
+    "shortReturns": {
+      "r1d": 0.021510024358688793,
+      "r1w": 0.04420011716778246,
+      "r1m": 0.1537889259900421
+    },
+    "volumeRatio": 0.99,
+    "relVol": 3.34,
+    "relStrength": 14.65,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 56.8,
+    "effectiveConfidence": 77.8,
+    "confidenceComponents": {
+      "technical": 80,
+      "flow": 93,
+      "catalyst": 5,
+      "liquidity": 64
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 80,
+          "weight": 0.4,
+          "contribution": 32
+        },
+        "flow": {
+          "score": 93,
+          "weight": 0.4,
+          "contribution": 37.2
+        },
+        "liquidity": {
+          "score": 64,
+          "weight": 0.2,
+          "contribution": 12.8
+        }
+      },
+      "base": 82,
+      "regimeScore": 54,
+      "regimeAdjustment": -4.2,
+      "trendBonus": 0,
+      "final": 77.8
+    },
+    "expectedEdge": {
+      "expectedGainPct": 11,
+      "expectedLossPct": 4.8,
+      "probability": 0.647,
+      "edgePct": 5.42,
+      "calibration": "none"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 89.8,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 75.6,
+    "discoveryReasons": [
+      "closing near highs",
+      "fresh filing"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 2.27,
+      "upsidePct": 11,
+      "downsidePct": 4.8
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 54, conf 77) — trend 56, breadth 46, vol-factor 78",
+    "regimeConfidence": 77,
+    "regimeFactors": {
+      "indexTrend": 56,
+      "volatility": 78,
+      "breadth": 46,
+      "momentumBreadth": 40,
+      "largeCap": 50,
+      "gapEnv": 47,
+      "riskAppetite": 51,
+      "sectorPart": 50
+    },
+    "annualizedVol": 30.7,
+    "composite": 59.4,
+    "verdict": "WATCH",
+    "estimatedUpside": "10-12%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no identifiable news catalyst; the move is driven purely by technical momentum and volume.",
+    "summary": "SONACOMS is showing a strong price breakout supported by a 3.34x relative volume spike, high institutional accumulation (89.8/100), and a technical score of 83.6. With a relative strength of 14.65 versus Nifty and a reward‑to‑risk profile of ~2.3, the stock is poised for an ~11% upside over the next 5‑10 days. The neutral market regime further supports a short‑term swing trade.",
+    "whyToday": "Today's 3.34x relative volume surge indicating strong institutional buying.",
+    "date": "2026-07-17",
+    "pickedAt": "2026-07-17T05:31:10.929Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 195,
+      "nseUniverse": 195,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-17T05:16:20.584Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 5,
+    "pipeline": {
+      "priced": 39,
+      "passedFilter": 5,
+      "catalystChecked": 5,
+      "tradeable": 2
+    },
+    "runnerUp": {
+      "ticker": "EXIDEIND",
+      "composite": 46.8
+    },
+    "entryPrice": 698.1,
+    "entryRejected": null
   }
 }
