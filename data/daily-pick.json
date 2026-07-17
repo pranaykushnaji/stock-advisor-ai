@@ -1,26 +1,22 @@
 {
   "pick": {
-    "date": "2026-07-16",
+    "date": "2026-07-17",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-16T09:31:05.591Z",
+    "reason": "BHEL failed neutral-market entry gates: reward/risk 1.63 < 1.8",
+    "pickedAt": "2026-07-17T04:31:11.640Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 50, conf 69) — trend 55, breadth 38, vol-factor 78",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "BHEL",
-        "relVol": 2.08,
-        "confidence": 31.5,
-        "effectiveConfidence": 73.6,
-        "institutional": 96.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 4,
-        "negative": false
-      }
-    ]
+    "market": "neutral (v2 score 54, conf 74) — trend 56, breadth 44, vol-factor 78",
+    "candidate": {
+      "ticker": "BHEL",
+      "confidence": 44.6,
+      "effectiveConfidence": 80.3,
+      "rewardRisk": {
+        "rr": 1.63,
+        "upsidePct": 9.4,
+        "downsidePct": 5.8
+      },
+      "catalyst": "earnings beat",
+      "verification": "PARTIAL"
+    }
   }
 }
