@@ -286,6 +286,42 @@
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
+    },
+    "GMRAIRPORT": {
+      "ticker": "GMRAIRPORT",
+      "fullName": "GMR Airports Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "bought",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-20T05:30:16.153Z",
+          "relVol": 3.33,
+          "confidence": 38.6,
+          "components": {
+            "technical": 60,
+            "flow": 82,
+            "catalyst": 5,
+            "liquidity": 72
+          },
+          "discoveryScore": 66.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 21725434,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 38.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
