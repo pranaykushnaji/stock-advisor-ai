@@ -1,169 +1,26 @@
 {
   "pick": {
-    "ticker": "GMRAIRPORT",
-    "fullName": "GMR Airports Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 50,
-        "positives": [
-          "Relative volume today 3.33x the 20‑day average",
-          "Relative strength vs Nifty = 1.96",
-          "Institutional accumulation score 85.3/100",
-          "Technical score 66 and sector score 64"
-        ],
-        "negatives": [
-          "Composite score 42.3 (AVOID) and multi‑signal confidence 38.6",
-          "No identifiable news catalyst",
-          "Weekly return -3.0% indicating recent pull‑back"
-        ]
-      },
-      "relStrength": {
-        "score": 50
-      },
-      "volume": {
-        "score": 50
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 66
-      },
-      "sector": {
-        "score": 64
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.0063325216432476095,
-      "r1w": -0.02999653324251861,
-      "r1m": 0.022144592411714455
-    },
-    "volumeRatio": 0.8,
-    "relVol": 3.33,
-    "relStrength": 1.96,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 38.6,
-    "effectiveConfidence": 69.7,
-    "confidenceComponents": {
-      "technical": 60,
-      "flow": 82,
-      "catalyst": 5,
-      "liquidity": 72
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 60,
-          "weight": 0.4,
-          "contribution": 24
-        },
-        "flow": {
-          "score": 82,
-          "weight": 0.4,
-          "contribution": 32.8
-        },
-        "liquidity": {
-          "score": 72,
-          "weight": 0.2,
-          "contribution": 14.4
-        }
-      },
-      "base": 71.2,
-      "regimeScore": 61,
-      "regimeAdjustment": -1.5,
-      "trendBonus": 0,
-      "final": 69.7
-    },
-    "expectedEdge": {
-      "expectedGainPct": 8.9,
-      "expectedLossPct": 4.7,
-      "probability": 0.613,
-      "edgePct": 3.64,
-      "calibration": "none"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 85.3,
-    "institutionalFlags": [
-      "up-day volume dominant"
-    ],
-    "discoveryScore": 66.8,
-    "discoveryReasons": [
-      "closing near highs"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 1.9,
-      "upsidePct": 8.9,
-      "downsidePct": 4.7
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 61, conf 80) — trend 58, breadth 59, vol-factor 77",
-    "regimeConfidence": 80,
-    "regimeFactors": {
-      "indexTrend": 58,
-      "volatility": 77,
-      "breadth": 59,
-      "momentumBreadth": 50,
-      "largeCap": 50,
-      "gapEnv": 64,
-      "riskAppetite": 54,
-      "sectorPart": 72
-    },
-    "annualizedVol": 29.8,
-    "composite": 42.3,
-    "verdict": "AVOID",
-    "estimatedUpside": "8-10%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "No specific news catalyst is identified; the move appears driven by pure price/volume dynamics.",
-    "summary": "GMRAIRPORT is showing a strong short‑term momentum setup despite the absence of news. Exceptional volume (3.33x) and solid institutional buying have pushed the stock to a relative strength of nearly 2x the Nifty, offering an estimated 8‑10% upside over the next 5‑10 days in a neutral market regime. Technicals remain supportive, making a swing trade viable.",
-    "whyToday": "The 3.33x volume spike today signals fresh buying pressure and a potential breakout entry point.",
     "date": "2026-07-20",
-    "pickedAt": "2026-07-20T05:30:18.206Z",
-    "discovery": {
-      "news": 9,
-      "movers": 40,
-      "nseSnapshot": 191,
-      "nseUniverse": 191,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-07-20T04:31:04.083Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-07-20T06:30:19.538Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 53, conf 69) — trend 57, breadth 40, vol-factor 77",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "TITAN",
+        "relVol": 12.06,
+        "confidence": 30.9,
+        "effectiveConfidence": 76.1,
+        "institutional": 86.3,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
       }
-    },
-    "candidatePool": 1,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 1,
-      "catalystChecked": 1,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 111.24,
-    "entryRejected": null
+    ]
   }
 }
