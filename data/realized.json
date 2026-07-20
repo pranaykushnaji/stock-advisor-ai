@@ -93,6 +93,71 @@
       "exitSource": "rule",
       "realizedPnl": 35.44,
       "realizedPnlPct": 0.59
+    },
+    {
+      "ticker": "ABB",
+      "fullName": "ABB India Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 9.4,
+        "expectedLossPct": 5,
+        "probability": 0.69,
+        "edgePct": 4.94,
+        "calibration": "none"
+      },
+      "confidenceComponents": {
+        "technical": 81,
+        "flow": 92,
+        "catalyst": 5,
+        "liquidity": 95
+      },
+      "effectiveConfidence": 88,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 7802.5,
+      "entryDate": "2026-07-16",
+      "exitPrice": 7483,
+      "exitDate": "2026-07-20",
+      "shares": 1.41,
+      "investedAmount": 11000,
+      "exitReason": "Price down 4%; momentum fading, no supporting catalyst",
+      "exitSource": "llm",
+      "realizedPnl": -450.49,
+      "realizedPnlPct": -4.09
+    },
+    {
+      "ticker": "OFSS",
+      "fullName": "Oracle Financial Services Software Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 15.7,
+        "expectedLossPct": 5,
+        "probability": 0.638,
+        "edgePct": 8.21
+      },
+      "confidenceComponents": {
+        "technical": 86,
+        "flow": 83,
+        "catalyst": 5,
+        "liquidity": 66
+      },
+      "effectiveConfidence": null,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": null,
+      "entryPrice": 11822,
+      "entryDate": "2026-07-13",
+      "exitPrice": 11656,
+      "exitDate": "2026-07-20",
+      "shares": 0.93,
+      "investedAmount": 11000,
+      "exitReason": "review day 7: RR 1<1.2 [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -154.38,
+      "realizedPnlPct": -1.4
     }
   ]
 }
