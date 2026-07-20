@@ -388,13 +388,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-20T08:30:17.694Z",
+          "relVol": 8.96,
+          "confidence": 44.9,
+          "components": {
+            "technical": 86,
+            "flow": 77,
+            "catalyst": 24,
+            "liquidity": 95
+          },
+          "discoveryScore": 72.3,
+          "catalystType": "institution buying",
+          "verification": "PARTIAL",
+          "volume": 34149512,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
-      "bestConfidence": 41.7,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "14:00",
+      "bestConfidence": 44.9,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 3.2,
+      "trendBonus": 1.9
     },
     "JSWENERGY": {
       "ticker": "JSWENERGY",
@@ -425,10 +447,69 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-20T08:30:17.695Z",
+          "relVol": 1.83,
+          "confidence": 32.7,
+          "components": {
+            "technical": 49,
+            "flow": 56,
+            "catalyst": 5,
+            "liquidity": 70
+          },
+          "discoveryScore": 74.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3748185,
+          "sessionFrac": 0.76,
+          "missing": [
+            "relVol 1.83<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
-      "bestConfidence": 25.2,
+      "lastSeen": "14:00",
+      "bestConfidence": 32.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 7.5,
+      "trendBonus": 4
+    },
+    "TATATECH": {
+      "ticker": "TATATECH",
+      "fullName": "Tata Technologies Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "14:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-20T08:30:17.695Z",
+          "relVol": 2.26,
+          "confidence": 24.6,
+          "components": {
+            "technical": 59,
+            "flow": 79,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 71.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2103852,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "14:00",
+      "bestConfidence": 24.6,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
