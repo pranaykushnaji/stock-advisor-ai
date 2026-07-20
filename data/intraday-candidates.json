@@ -358,6 +358,80 @@
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
+    },
+    "LENSKART": {
+      "ticker": "LENSKART",
+      "fullName": "LENSKART SOLUTIONS LTD",
+      "sector": "UNKNOWN",
+      "firstSeen": "13:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "13:00",
+          "ts": "2026-07-20T07:30:17.134Z",
+          "relVol": 1.86,
+          "confidence": 41.7,
+          "components": {
+            "technical": 82,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 71.7,
+          "catalystType": "institution buying",
+          "verification": "PARTIAL",
+          "volume": 5607966,
+          "sessionFrac": 0.6,
+          "missing": [
+            "relVol 1.86<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "13:00",
+      "bestConfidence": 41.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "JSWENERGY": {
+      "ticker": "JSWENERGY",
+      "fullName": "JSW Energy Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "13:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "13:00",
+          "ts": "2026-07-20T07:30:17.135Z",
+          "relVol": 1.91,
+          "confidence": 25.2,
+          "components": {
+            "technical": 44,
+            "flow": 54,
+            "catalyst": 5,
+            "liquidity": 67
+          },
+          "discoveryScore": 76,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3087362,
+          "sessionFrac": 0.6,
+          "missing": [
+            "relVol 1.91<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "13:00",
+      "bestConfidence": 25.2,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
