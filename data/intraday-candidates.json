@@ -322,6 +322,42 @@
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
+    },
+    "TITAN": {
+      "ticker": "TITAN",
+      "fullName": "Titan Company Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-20T06:30:16.789Z",
+          "relVol": 12.06,
+          "confidence": 30.9,
+          "components": {
+            "technical": 71,
+            "flow": 82,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 74,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4777990,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 30.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
