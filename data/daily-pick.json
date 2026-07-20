@@ -1,39 +1,22 @@
 {
   "pick": {
-    "date": "2026-07-17",
+    "date": "2026-07-20",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-17T09:31:13.435Z",
+    "reason": "BIOCON failed neutral-market entry gates: reward/risk 1.68 < 1.8",
+    "pickedAt": "2026-07-20T04:30:23.275Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 57, conf 80) — trend 57, breadth 48, vol-factor 78",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "FEDERALBNK",
-        "relVol": 6.26,
-        "confidence": 55.6,
-        "effectiveConfidence": 87.1,
-        "institutional": 96.9,
-        "catalyst": "earnings beat",
-        "verification": "PARTIAL",
-        "filing": false,
-        "sources": 1,
-        "articles": 9,
-        "negative": false
+    "market": "neutral (v2 score 53, conf 73) — trend 57, breadth 41, vol-factor 77",
+    "candidate": {
+      "ticker": "BIOCON",
+      "confidence": 42.5,
+      "effectiveConfidence": 79.9,
+      "rewardRisk": {
+        "rr": 1.68,
+        "upsidePct": 7.1,
+        "downsidePct": 4.2
       },
-      {
-        "ticker": "EXIDEIND",
-        "relVol": 2.91,
-        "confidence": 26,
-        "effectiveConfidence": 71.5,
-        "institutional": 85.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 4,
-        "negative": false
-      }
-    ]
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
