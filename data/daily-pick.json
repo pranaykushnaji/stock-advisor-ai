@@ -1,176 +1,52 @@
 {
   "pick": {
-    "ticker": "ULTRACEMCO",
-    "fullName": "UltraTech Cement Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "catalyst",
-    "factors": {
-      "momentum": {
-        "score": 25,
-        "positives": [
-          "Relative volume 3.48x (20‑day avg)",
-          "Technical score 80.1 (strong bullish pattern)",
-          "Sector strength 75 and catalyst score 67.5",
-          "Short‑term returns: +1.3% d1, +4.9% w1, +5.8% m1"
-        ],
-        "negatives": [
-          "Momentum score only 25 (weak price acceleration)",
-          "Relative‑strength score 25 (underperforming broader market)",
-          "Composite rating 49 (watch) and multi‑signal confidence 50.8"
-        ]
-      },
-      "relStrength": {
-        "score": 25
-      },
-      "volume": {
-        "score": 75
-      },
-      "catalyst": {
-        "score": 67.5
-      },
-      "technicals": {
-        "score": 80.1
-      },
-      "sector": {
-        "score": 75
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.013021927245232294,
-      "r1w": 0.048886569241475296,
-      "r1m": 0.05753376600596387
-    },
-    "volumeRatio": 1.5,
-    "relVol": 3.48,
-    "relStrength": 5.11,
-    "catalyst": {
-      "type": "earnings beat",
-      "confidence": 95,
-      "impact": 8,
-      "stars": 4,
-      "points": 27,
-      "verification": "VERIFIED",
-      "sources": 2,
-      "summary": "Q1 profit up 17% YoY, beating expectations, driving 2% share rise.",
-      "impactClass": "high+",
-      "decay": 0.979,
-      "influenceDays": 6,
-      "recalled": false
-    },
-    "confidence": 50.8,
-    "effectiveConfidence": 67.2,
-    "confidenceComponents": {
-      "technical": 53,
-      "flow": 82,
-      "catalyst": 60,
-      "liquidity": 91
-    },
-    "confidenceBreakdown": {
-      "lane": "catalyst",
-      "contributions": {
-        "technical": {
-          "score": 53,
-          "weight": 0.3,
-          "contribution": 15.9
-        },
-        "flow": {
-          "score": 82,
-          "weight": 0.3,
-          "contribution": 24.6
-        },
-        "catalyst": {
-          "score": 60,
-          "weight": 0.25,
-          "contribution": 15
-        },
-        "liquidity": {
-          "score": 91,
-          "weight": 0.15,
-          "contribution": 13.7
-        }
-      },
-      "base": 69.2,
-      "regimeScore": 56,
-      "regimeAdjustment": -2,
-      "trendBonus": 0,
-      "final": 67.2
-    },
-    "expectedEdge": {
-      "expectedGainPct": 14.5,
-      "expectedLossPct": 4,
-      "probability": 0.643,
-      "edgePct": 7.9,
-      "calibration": "none"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 70.1,
-    "institutionalFlags": [
-      "up-day volume dominant",
-      "volume expanding"
-    ],
-    "discoveryScore": 80.7,
-    "discoveryReasons": [
-      "closing near highs",
-      "fresh filing"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 3.64,
-      "upsidePct": 14.5,
-      "downsidePct": 4
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 56, conf 77) — trend 56, breadth 53, vol-factor 78",
-    "regimeConfidence": 77,
-    "regimeFactors": {
-      "indexTrend": 56,
-      "volatility": 78,
-      "breadth": 53,
-      "momentumBreadth": 39,
-      "largeCap": 50,
-      "gapEnv": 51,
-      "riskAppetite": 50,
-      "sectorPart": 61
-    },
-    "annualizedVol": 22.8,
-    "composite": 49,
-    "verdict": "WATCH",
-    "estimatedUpside": "≈14-15%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "Q1 earnings beat expectations with profit up 17% YoY, prompting a 2% share price rise.",
-    "summary": "The earnings beat provides a concrete catalyst, backed by a 3.5x surge in volume and strong technicals, suggesting a short‑term rally. With a reward‑to‑risk profile of ~3.6 (≈14.5% upside vs 4% downside), the stock is positioned for a 5‑10 day swing gain.",
-    "whyToday": "The confirmed earnings beat and immediate 2% price jump create a timely buying opportunity.",
     "date": "2026-07-21",
-    "pickedAt": "2026-07-21T08:30:35.870Z",
-    "discovery": {
-      "news": 0,
-      "movers": 40,
-      "nseSnapshot": 205,
-      "nseUniverse": 205,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-07-21T08:15:48.712Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-07-21T09:30:37.834Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 57, conf 74) — trend 56, breadth 53, vol-factor 79",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "INDUSINDBK",
+        "relVol": 2.11,
+        "confidence": 42.4,
+        "effectiveConfidence": 78,
+        "institutional": 91,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
+      },
+      {
+        "ticker": "TVSMOTOR",
+        "relVol": 1.92,
+        "confidence": 47.2,
+        "effectiveConfidence": 69.9,
+        "institutional": 86.4,
+        "catalyst": "earnings beat",
+        "verification": "PARTIAL",
+        "filing": false,
+        "sources": 1,
+        "articles": 12,
+        "negative": false
+      },
+      {
+        "ticker": "MANAPPURAM",
+        "relVol": 3.46,
+        "confidence": 25.7,
+        "effectiveConfidence": 77.9,
+        "institutional": 90.4,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
       }
-    },
-    "candidatePool": 2,
-    "pipeline": {
-      "priced": 39,
-      "passedFilter": 2,
-      "catalystChecked": 2,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 12058,
-    "entryRejected": null
+    ]
   }
 }
