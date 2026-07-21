@@ -1,6 +1,123 @@
 {
   "bouquet": [
     {
+      "ticker": "ULTRACEMCO",
+      "fullName": "UltraTech Cement Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "catalyst",
+      "confidenceComponents": {
+        "technical": 53,
+        "flow": 82,
+        "catalyst": 60,
+        "liquidity": 91
+      },
+      "expectedEdge": {
+        "expectedGainPct": 14.5,
+        "expectedLossPct": 4,
+        "probability": 0.643,
+        "edgePct": 7.9,
+        "calibration": "none"
+      },
+      "confidenceBreakdown": {
+        "lane": "catalyst",
+        "contributions": {
+          "technical": {
+            "score": 53,
+            "weight": 0.3,
+            "contribution": 15.9
+          },
+          "flow": {
+            "score": 82,
+            "weight": 0.3,
+            "contribution": 24.6
+          },
+          "catalyst": {
+            "score": 60,
+            "weight": 0.25,
+            "contribution": 15
+          },
+          "liquidity": {
+            "score": 91,
+            "weight": 0.15,
+            "contribution": 13.7
+          }
+        },
+        "base": 69.2,
+        "regimeScore": 56,
+        "regimeAdjustment": -2,
+        "trendBonus": 0,
+        "final": 67.2
+      },
+      "confidence": 50.8,
+      "effectiveConfidence": 67.2,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "earnings beat",
+        "summary": "Q1 profit up 17% YoY, beating expectations, driving 2% share rise.",
+        "points": 27
+      },
+      "currentThesis": {
+        "type": "earnings beat",
+        "summary": "Q1 profit up 17% YoY, beating expectations, driving 2% share rise.",
+        "points": 27
+      },
+      "thesisScore": 77,
+      "lastThesisUpdate": "2026-07-21T08:30:35.870Z",
+      "verdict": "WATCH",
+      "composite": 49,
+      "date": "2026-07-21",
+      "addedAt": "2026-07-21T08:30:35.870Z",
+      "investedAmount": 10000,
+      "entryPrice": 12058,
+      "currentPrice": 12058,
+      "shares": 0.829,
+      "peakPrice": 12058,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 12577,
+      "todayChangePct": -4.13,
+      "lastPriceUpdate": "2026-07-21T08:30:35.870Z",
+      "yahooSymbol": "ULTRACEMCO.NS",
+      "niftyAtEntry": 24169.05,
+      "niftyNow": 24169.05,
+      "estimatedUpside": "≈14-15%",
+      "riskLevel": "Medium",
+      "summary": "The earnings beat provides a concrete catalyst, backed by a 3.5x surge in volume and strong technicals, suggesting a short‑term rally. With a reward‑to‑risk profile of ~3.6 (≈14.5% upside vs 4% downside), the stock is positioned for a 5‑10 day swing gain.",
+      "whyToday": "The confirmed earnings beat and immediate 2% price jump create a timely buying opportunity.",
+      "factors": {
+        "momentum": {
+          "score": 25,
+          "positives": [
+            "Relative volume 3.48x (20‑day avg)",
+            "Technical score 80.1 (strong bullish pattern)",
+            "Sector strength 75 and catalyst score 67.5",
+            "Short‑term returns: +1.3% d1, +4.9% w1, +5.8% m1"
+          ],
+          "negatives": [
+            "Momentum score only 25 (weak price acceleration)",
+            "Relative‑strength score 25 (underperforming broader market)",
+            "Composite rating 49 (watch) and multi‑signal confidence 50.8"
+          ]
+        },
+        "relStrength": {
+          "score": 25
+        },
+        "volume": {
+          "score": 75
+        },
+        "catalyst": {
+          "score": 67.5
+        },
+        "technicals": {
+          "score": 80.1
+        },
+        "sector": {
+          "score": 75
+        }
+      }
+    },
+    {
       "ticker": "EXIDEIND",
       "fullName": "Exide Industries Limited",
       "sector": "UNKNOWN",
