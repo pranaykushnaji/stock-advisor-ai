@@ -1,72 +1,182 @@
 {
-  "date": "2026-07-20",
+  "date": "2026-07-21",
   "candidates": {
-    "ICICIBANK": {
-      "ticker": "ICICIBANK",
-      "fullName": "ICICI Bank Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "qualified",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.644Z",
-          "relVol": 8.31,
-          "confidence": 67.4,
-          "components": {
-            "technical": 85,
-            "flow": 89,
-            "catalyst": 60,
-            "liquidity": 95
-          },
-          "discoveryScore": 71.8,
-          "catalystType": "earnings beat",
-          "verification": "VERIFIED",
-          "volume": 14953103,
-          "sessionFrac": 0.15,
-          "missing": [],
-          "passedFilter": true,
-          "tradeable": true
-        }
-      ],
-      "lastSeen": "10:00",
-      "bestConfidence": 67.4,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "FEDERALBNK": {
-      "ticker": "FEDERALBNK",
-      "fullName": "The Federal Bank Limited",
+    "J&KBANK": {
+      "ticker": "J&KBANK",
+      "fullName": "Jammu and Kashmir Bank Limited",
       "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.645Z",
-          "relVol": 5.45,
-          "confidence": 59.1,
+          "ts": "2026-07-21T04:30:33.840Z",
+          "relVol": 7.82,
+          "confidence": 53,
           "components": {
-            "technical": 83,
-            "flow": 92,
-            "catalyst": 31,
-            "liquidity": 69
+            "technical": 91,
+            "flow": 89,
+            "catalyst": 5,
+            "liquidity": 57
           },
-          "discoveryScore": 74.3,
-          "catalystType": "earnings beat",
-          "verification": "PARTIAL",
-          "volume": 6657728,
+          "discoveryScore": 70.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 6759325,
           "sessionFrac": 0.15,
           "missing": [
-            "catalyst PARTIAL (need VERIFIED)"
+            "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
         }
       ],
       "lastSeen": "10:00",
-      "bestConfidence": 59.1,
+      "bestConfidence": 53,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "MANKIND": {
+      "ticker": "MANKIND",
+      "fullName": "Mankind Pharma Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-07-21T04:30:33.841Z",
+          "relVol": 58.78,
+          "confidence": 48.8,
+          "components": {
+            "technical": 76,
+            "flow": 81,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 69,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4089986,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 48.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "LLOYDSME": {
+      "ticker": "LLOYDSME",
+      "fullName": "Lloyds Metals and Energy Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-07-21T04:30:33.841Z",
+          "relVol": 7.74,
+          "confidence": 58.2,
+          "components": {
+            "technical": 80,
+            "flow": 98,
+            "catalyst": 5,
+            "liquidity": 57
+          },
+          "discoveryScore": 72.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 567204,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 58.2,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "SHRIRAMFIN": {
+      "ticker": "SHRIRAMFIN",
+      "fullName": "Shriram Finance Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-07-21T04:30:33.841Z",
+          "relVol": 7.07,
+          "confidence": 23.4,
+          "components": {
+            "technical": 67,
+            "flow": 77,
+            "catalyst": 5,
+            "liquidity": 85
+          },
+          "discoveryScore": 73.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5414742,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 23.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "PHOENIXLTD": {
+      "ticker": "PHOENIXLTD",
+      "fullName": "The Phoenix Mills Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-07-21T04:30:33.842Z",
+          "relVol": 3.71,
+          "confidence": 40.9,
+          "components": {
+            "technical": 69,
+            "flow": 80,
+            "catalyst": 5,
+            "liquidity": 56
+          },
+          "discoveryScore": 70,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 497062,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 40.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
@@ -80,19 +190,19 @@
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.645Z",
-          "relVol": 7.7,
-          "confidence": 42.5,
+          "ts": "2026-07-21T04:30:33.842Z",
+          "relVol": 7.62,
+          "confidence": 28.3,
           "components": {
-            "technical": 72,
-            "flow": 100,
+            "technical": 62,
+            "flow": 96,
             "catalyst": 5,
             "liquidity": 79
           },
-          "discoveryScore": 76.8,
+          "discoveryScore": 74.7,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 8177038,
+          "volume": 8126113,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -102,105 +212,33 @@
         }
       ],
       "lastSeen": "10:00",
-      "bestConfidence": 42.5,
+      "bestConfidence": 28.3,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
     },
-    "ABB": {
-      "ticker": "ABB",
-      "fullName": "ABB India Limited",
+    "GAIL": {
+      "ticker": "GAIL",
+      "fullName": "GAIL (India) Limited",
       "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.645Z",
-          "relVol": 8.98,
-          "confidence": 32.5,
+          "ts": "2026-07-21T04:30:33.842Z",
+          "relVol": 20.59,
+          "confidence": 8.4,
           "components": {
-            "technical": 63,
-            "flow": 95,
-            "catalyst": 5,
-            "liquidity": 79
-          },
-          "discoveryScore": 77.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 546490,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "10:00",
-      "bestConfidence": 32.5,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "BHARATFORG": {
-      "ticker": "BHARATFORG",
-      "fullName": "Bharat Forge Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.645Z",
-          "relVol": 4.81,
-          "confidence": 30.6,
-          "components": {
-            "technical": 65,
-            "flow": 77,
-            "catalyst": 5,
-            "liquidity": 68
-          },
-          "discoveryScore": 80.4,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 953954,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "10:00",
-      "bestConfidence": 30.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "SOLARINDS": {
-      "ticker": "SOLARINDS",
-      "fullName": "Solar Industries India Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.645Z",
-          "relVol": 25.25,
-          "confidence": 9.8,
-          "components": {
-            "technical": 60,
+            "technical": 42,
             "flow": 66,
             "catalyst": 5,
-            "liquidity": 95
+            "liquidity": 77
           },
-          "discoveryScore": 77.3,
+          "discoveryScore": 75,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 562697,
+          "volume": 19157978,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -210,356 +248,34 @@
         }
       ],
       "lastSeen": "10:00",
-      "bestConfidence": 9.8,
+      "bestConfidence": 8.4,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
     },
-    "KARURVYSYA": {
-      "ticker": "KARURVYSYA",
-      "fullName": "The Karur Vysya Bank Limited",
+    "GRASIM": {
+      "ticker": "GRASIM",
+      "fullName": "Grasim Industries Limited",
       "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.645Z",
-          "relVol": 8.04,
-          "confidence": 15.9,
-          "components": {
-            "technical": 61,
-            "flow": 72,
-            "catalyst": 5,
-            "liquidity": 56
-          },
-          "discoveryScore": 81.8,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2934490,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "10:00",
-      "bestConfidence": 15.9,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "ABCAPITAL": {
-      "ticker": "ABCAPITAL",
-      "fullName": "Aditya Birla Capital Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-07-20T04:30:20.645Z",
-          "relVol": 16.58,
-          "confidence": 28.7,
-          "components": {
-            "technical": 57,
-            "flow": 86,
-            "catalyst": 5,
-            "liquidity": 80
-          },
-          "discoveryScore": 72.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 10862203,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "10:00",
-      "bestConfidence": 28.7,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "GMRAIRPORT": {
-      "ticker": "GMRAIRPORT",
-      "fullName": "GMR Airports Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "11:00",
-      "status": "bought",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-07-20T05:30:16.153Z",
-          "relVol": 3.33,
-          "confidence": 38.6,
-          "components": {
-            "technical": 60,
-            "flow": 82,
-            "catalyst": 5,
-            "liquidity": 72
-          },
-          "discoveryScore": 66.8,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 21725434,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "11:00",
-      "bestConfidence": 38.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "TITAN": {
-      "ticker": "TITAN",
-      "fullName": "Titan Company Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "12:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "12:00",
-          "ts": "2026-07-20T06:30:16.789Z",
-          "relVol": 12.06,
-          "confidence": 30.9,
-          "components": {
-            "technical": 71,
-            "flow": 82,
-            "catalyst": 5,
-            "liquidity": 95
-          },
-          "discoveryScore": 74,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 4777990,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "12:00",
-      "bestConfidence": 30.9,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "LENSKART": {
-      "ticker": "LENSKART",
-      "fullName": "LENSKART SOLUTIONS LTD",
-      "sector": "UNKNOWN",
-      "firstSeen": "13:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "13:00",
-          "ts": "2026-07-20T07:30:17.134Z",
-          "relVol": 1.86,
-          "confidence": 41.7,
-          "components": {
-            "technical": 82,
-            "flow": 68,
-            "catalyst": 5,
-            "liquidity": 75
-          },
-          "discoveryScore": 71.7,
-          "catalystType": "institution buying",
-          "verification": "PARTIAL",
-          "volume": 5607966,
-          "sessionFrac": 0.6,
-          "missing": [
-            "relVol 1.86<2.1",
-            "catalyst PARTIAL (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-07-20T08:30:17.694Z",
-          "relVol": 8.96,
-          "confidence": 44.9,
-          "components": {
-            "technical": 86,
-            "flow": 77,
-            "catalyst": 24,
-            "liquidity": 95
-          },
-          "discoveryScore": 72.3,
-          "catalystType": "institution buying",
-          "verification": "PARTIAL",
-          "volume": 34149512,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst PARTIAL (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "14:00",
-      "bestConfidence": 44.9,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 3.2,
-      "trendBonus": 1.9
-    },
-    "JSWENERGY": {
-      "ticker": "JSWENERGY",
-      "fullName": "JSW Energy Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "13:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "13:00",
-          "ts": "2026-07-20T07:30:17.135Z",
-          "relVol": 1.91,
-          "confidence": 25.2,
-          "components": {
-            "technical": 44,
-            "flow": 54,
-            "catalyst": 5,
-            "liquidity": 67
-          },
-          "discoveryScore": 76,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 3087362,
-          "sessionFrac": 0.6,
-          "missing": [
-            "relVol 1.91<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-07-20T08:30:17.695Z",
-          "relVol": 1.83,
-          "confidence": 32.7,
-          "components": {
-            "technical": 49,
-            "flow": 56,
-            "catalyst": 5,
-            "liquidity": 70
-          },
-          "discoveryScore": 74.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 3748185,
-          "sessionFrac": 0.76,
-          "missing": [
-            "relVol 1.83<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "14:00",
-      "bestConfidence": 32.7,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 7.5,
-      "trendBonus": 4
-    },
-    "TATATECH": {
-      "ticker": "TATATECH",
-      "fullName": "Tata Technologies Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "14:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "14:00",
-          "ts": "2026-07-20T08:30:17.695Z",
-          "relVol": 2.26,
-          "confidence": 24.6,
-          "components": {
-            "technical": 59,
-            "flow": 79,
-            "catalyst": 5,
-            "liquidity": 64
-          },
-          "discoveryScore": 71.5,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2103852,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-07-20T09:30:20.539Z",
-          "relVol": 1.87,
-          "confidence": 56.2,
-          "components": {
-            "technical": 78,
-            "flow": 81,
-            "catalyst": 5,
-            "liquidity": 64
-          },
-          "discoveryScore": 70.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2103852,
-          "sessionFrac": 0.92,
-          "missing": [
-            "relVol 1.87<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 56.2,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 31.6,
-      "trendBonus": 4
-    },
-    "WELSPUNLIV": {
-      "ticker": "WELSPUNLIV",
-      "fullName": "Welspun Living Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "15:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "15:00",
-          "ts": "2026-07-20T09:30:20.539Z",
-          "relVol": 3.87,
-          "confidence": 8.8,
+          "ts": "2026-07-21T04:30:33.842Z",
+          "relVol": 46.84,
+          "confidence": 23.4,
           "components": {
             "technical": 48,
-            "flow": 76,
+            "flow": 69,
             "catalyst": 5,
-            "liquidity": 66
+            "liquidity": 95
           },
-          "discoveryScore": 73.2,
+          "discoveryScore": 82,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 11377086,
-          "sessionFrac": 0.92,
+          "volume": 4417489,
+          "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
@@ -567,8 +283,8 @@
           "tradeable": false
         }
       ],
-      "lastSeen": "15:00",
-      "bestConfidence": 8.8,
+      "lastSeen": "10:00",
+      "bestConfidence": 23.4,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
