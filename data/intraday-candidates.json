@@ -431,13 +431,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-07-21T09:30:35.221Z",
+          "relVol": 2.11,
+          "confidence": 42.4,
+          "components": {
+            "technical": 86,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 83
+          },
+          "discoveryScore": 73.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4185573,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
-      "bestConfidence": 40.9,
+      "lastSeen": "15:00",
+      "bestConfidence": 42.4,
       "confidenceTrend": "rising",
-      "confidenceSlope": 4.75,
-      "trendBonus": 5.7
+      "confidenceSlope": 3.31,
+      "trendBonus": 4
     },
     "MANAPPURAM": {
       "ticker": "MANAPPURAM",
@@ -533,13 +555,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-07-21T09:30:35.222Z",
+          "relVol": 3.46,
+          "confidence": 25.7,
+          "components": {
+            "technical": 56,
+            "flow": 92,
+            "catalyst": 5,
+            "liquidity": 80
+          },
+          "discoveryScore": 83.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 10880541,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 41.6,
       "confidenceTrend": "rising",
-      "confidenceSlope": 9.13,
-      "trendBonus": 8
+      "confidenceSlope": 4.51,
+      "trendBonus": 5.4
     },
     "ULTRACEMCO": {
       "ticker": "ULTRACEMCO",
@@ -571,6 +615,43 @@
       ],
       "lastSeen": "14:00",
       "bestConfidence": 50.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "TVSMOTOR": {
+      "ticker": "TVSMOTOR",
+      "fullName": "TVS Motor Company Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "15:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:00",
+          "ts": "2026-07-21T09:30:35.222Z",
+          "relVol": 1.92,
+          "confidence": 47.2,
+          "components": {
+            "technical": 67,
+            "flow": 69,
+            "catalyst": 35,
+            "liquidity": 89
+          },
+          "discoveryScore": 90.6,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1783909,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.92<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:00",
+      "bestConfidence": 47.2,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
