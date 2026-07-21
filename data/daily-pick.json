@@ -1,39 +1,171 @@
 {
   "pick": {
-    "date": "2026-07-20",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-20T09:30:23.662Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 53, conf 68) — trend 58, breadth 45, vol-factor 77",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "TATATECH",
-        "relVol": 1.87,
-        "confidence": 56.2,
-        "effectiveConfidence": 76.9,
-        "institutional": 100,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 5,
-        "negative": false
+    "ticker": "J&KBANK",
+    "fullName": "Jammu and Kashmir Bank Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 93.8,
+        "positives": [
+          "Momentum score 93.8 and Relative‑strength score 93.8 indicate very strong price acceleration",
+          "Relative volume 7.82× the 20‑day average shows a sharp influx of buying activity",
+          "Technicals score 89 and composite BUY signal (66.7) support a bullish setup"
+        ],
+        "negatives": [
+          "Catalyst score 0 – no fundamental news to sustain the move",
+          "Volume score 56.3 is only moderate, suggesting the spike may be short‑lived"
+        ]
       },
-      {
-        "ticker": "WELSPUNLIV",
-        "relVol": 3.87,
-        "confidence": 8.8,
-        "effectiveConfidence": 61.3,
-        "institutional": 88,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 0,
-        "negative": false
+      "relStrength": {
+        "score": 93.8
+      },
+      "volume": {
+        "score": 56.3
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 89
+      },
+      "sector": {
+        "score": 50
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.015582970303926611,
+      "r1w": 0.043348380529784486,
+      "r1m": 0.14006768943313624
+    },
+    "volumeRatio": 1.07,
+    "relVol": 7.82,
+    "relStrength": 13.09,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 53,
+    "effectiveConfidence": 80,
+    "confidenceComponents": {
+      "technical": 91,
+      "flow": 89,
+      "catalyst": 5,
+      "liquidity": 57
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 91,
+          "weight": 0.4,
+          "contribution": 36.4
+        },
+        "flow": {
+          "score": 89,
+          "weight": 0.4,
+          "contribution": 35.6
+        },
+        "liquidity": {
+          "score": 57,
+          "weight": 0.2,
+          "contribution": 11.4
+        }
+      },
+      "base": 83.4,
+      "regimeScore": 61,
+      "regimeAdjustment": -3.4,
+      "trendBonus": 0,
+      "final": 80
+    },
+    "expectedEdge": {
+      "expectedGainPct": 15.6,
+      "expectedLossPct": 5.9,
+      "probability": 0.656,
+      "edgePct": 8.2,
+      "calibration": "none"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 100,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 70.3,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 2.63,
+      "upsidePct": 15.6,
+      "downsidePct": 5.9
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 61, conf 76) — trend 57, breadth 61, vol-factor 79",
+    "regimeConfidence": 76,
+    "regimeFactors": {
+      "indexTrend": 57,
+      "volatility": 79,
+      "breadth": 61,
+      "momentumBreadth": 72,
+      "largeCap": 50,
+      "gapEnv": 42,
+      "riskAppetite": 57,
+      "sectorPart": 61
+    },
+    "annualizedVol": 37.6,
+    "composite": 66.7,
+    "verdict": "BUY",
+    "estimatedUpside": "12-16%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no identifiable news catalyst; the trade is driven purely by technical momentum and an abnormal volume surge.",
+    "summary": "J&KBANK is exhibiting a high‑momentum breakout with a 7.8× volume spike and a relative strength 13.09 points above Nifty, placing it in a strong technical lane. In a neutral market regime, the reward‑to‑risk ratio of ~2.6 suggests upside of around 15% versus limited downside, making it a viable 5‑10 day swing despite the lack of news.",
+    "whyToday": "The extraordinary 7.82× volume surge combined with top‑quartile momentum and relative‑strength metrics makes today the optimal entry point.",
+    "date": "2026-07-21",
+    "pickedAt": "2026-07-21T04:30:35.570Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 474,
+      "nseUniverse": 474,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-21T03:15:48.494Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 8,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 8,
+      "catalystChecked": 8,
+      "tradeable": 6
+    },
+    "runnerUp": {
+      "ticker": "LLOYDSME",
+      "composite": 59.6
+    },
+    "entryPrice": 185.09,
+    "entryRejected": "entry ₹185.09 is >20% off the NSE snapshot price ₹140.3 — likely a bad price source; not trading this pick today"
   }
 }
