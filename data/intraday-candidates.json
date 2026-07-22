@@ -29,10 +29,69 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-22T05:30:34.123Z",
+          "relVol": 6.86,
+          "confidence": 61.9,
+          "components": {
+            "technical": 78,
+            "flow": 90,
+            "catalyst": 35,
+            "liquidity": 93
+          },
+          "discoveryScore": 77.1,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 2089954,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 37.8,
+      "lastSeen": "11:00",
+      "bestConfidence": 61.9,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 24.1,
+      "trendBonus": 4
+    },
+    "ABCAPITAL": {
+      "ticker": "ABCAPITAL",
+      "fullName": "Aditya Birla Capital Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-22T05:30:34.124Z",
+          "relVol": 1.86,
+          "confidence": 0.8,
+          "components": {
+            "technical": 56,
+            "flow": 47,
+            "catalyst": 5,
+            "liquidity": 55
+          },
+          "discoveryScore": 54.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2025953,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.86<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 0.8,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
