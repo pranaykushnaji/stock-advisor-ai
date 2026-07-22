@@ -117,13 +117,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:01",
+          "ts": "2026-07-22T09:31:08.091Z",
+          "relVol": 2.97,
+          "confidence": 44.5,
+          "components": {
+            "technical": 67,
+            "flow": 91,
+            "catalyst": 35,
+            "liquidity": 95
+          },
+          "discoveryScore": 73.7,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 2970799,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:01",
       "bestConfidence": 63.4,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 4.53,
-      "trendBonus": 5.4
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0.79,
+      "trendBonus": 0.9
     },
     "ABCAPITAL": {
       "ticker": "ABCAPITAL",
@@ -234,13 +256,72 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:01",
+          "ts": "2026-07-22T09:31:08.091Z",
+          "relVol": 3.72,
+          "confidence": 21.6,
+          "components": {
+            "technical": 56,
+            "flow": 76,
+            "catalyst": 35,
+            "liquidity": 94
+          },
+          "discoveryScore": 79,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 5993166,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:01",
       "bestConfidence": 23.1,
       "confidenceTrend": "rising",
-      "confidenceSlope": 3.35,
-      "trendBonus": 4
+      "confidenceSlope": 2.98,
+      "trendBonus": 3.6
+    },
+    "INDUSINDBK": {
+      "ticker": "INDUSINDBK",
+      "fullName": "IndusInd Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "15:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:01",
+          "ts": "2026-07-22T09:31:08.090Z",
+          "relVol": 1.8,
+          "confidence": 31.9,
+          "components": {
+            "technical": 86,
+            "flow": 62,
+            "catalyst": 5,
+            "liquidity": 81
+          },
+          "discoveryScore": 68.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3903770,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.8<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:01",
+      "bestConfidence": 31.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
