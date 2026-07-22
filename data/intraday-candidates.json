@@ -51,13 +51,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-22T06:30:34.477Z",
+          "relVol": 4.99,
+          "confidence": 63.4,
+          "components": {
+            "technical": 78,
+            "flow": 90,
+            "catalyst": 35,
+            "liquidity": 95
+          },
+          "discoveryScore": 83.5,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 2389528,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 61.9,
+      "lastSeen": "12:00",
+      "bestConfidence": 63.4,
       "confidenceTrend": "rising",
-      "confidenceSlope": 24.1,
-      "trendBonus": 4
+      "confidenceSlope": 12.8,
+      "trendBonus": 8
     },
     "ABCAPITAL": {
       "ticker": "ABCAPITAL",
@@ -92,6 +114,42 @@
       ],
       "lastSeen": "11:00",
       "bestConfidence": 0.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "NESTLEIND": {
+      "ticker": "NESTLEIND",
+      "fullName": "Nestlé India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-22T06:30:34.477Z",
+          "relVol": 4.41,
+          "confidence": 16.4,
+          "components": {
+            "technical": 60,
+            "flow": 66,
+            "catalyst": 5,
+            "liquidity": 85
+          },
+          "discoveryScore": 83.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3400993,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 16.4,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
