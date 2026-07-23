@@ -2,133 +2,37 @@
   "pick": {
     "date": "2026-07-23",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-23T04:31:03.827Z",
-    "rejected": [
-      {
-        "ticker": "NHPC",
-        "reasons": [
-          "illiquid (₹54Cr)"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "illiquid (₹38Cr)"
-        ]
-      },
-      {
-        "ticker": "BPCL",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-07-23T05:31:10.542Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 47, conf 65) — trend 24, breadth 49, vol-factor 78",
+    "momLaneOpen": true,
+    "considered": [
       {
         "ticker": "TVSMOTOR",
-        "reasons": [
-          "volumeSurge"
-        ]
+        "relVol": 1.81,
+        "confidence": 66.3,
+        "effectiveConfidence": 72,
+        "institutional": 93.7,
+        "catalyst": "earnings beat",
+        "verification": "PARTIAL",
+        "filing": false,
+        "sources": 1,
+        "articles": 12,
+        "negative": false
       },
       {
-        "ticker": "WIPRO",
-        "reasons": [
-          "illiquid (₹29Cr)"
-        ]
-      },
-      {
-        "ticker": "ETERNAL",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INDIANB",
-        "reasons": [
-          "illiquid (₹13Cr)"
-        ]
-      },
-      {
-        "ticker": "VEDL",
-        "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "illiquid (₹34Cr)"
-        ]
-      },
-      {
-        "ticker": "DMART",
-        "reasons": [
-          "illiquid (₹44Cr)"
-        ]
-      },
-      {
-        "ticker": "WAAREEENER",
-        "reasons": [
-          "illiquid (₹59Cr)"
-        ]
-      },
-      {
-        "ticker": "DRREDDY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDZINC",
-        "reasons": [
-          "illiquid (₹21Cr)"
-        ]
-      },
-      {
-        "ticker": "NUVAMA",
-        "reasons": [
-          "illiquid (₹19Cr)"
-        ]
-      },
-      {
-        "ticker": "JSWENERGY",
-        "reasons": [
-          "illiquid (₹24Cr)"
-        ]
-      },
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "illiquid (₹45Cr)"
-        ]
-      },
-      {
-        "ticker": "KAYNES",
-        "reasons": [
-          "illiquid (₹46Cr)"
-        ]
-      },
-      {
-        "ticker": "HINDALCO",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JIOFIN",
-        "reasons": [
-          "illiquid (₹40Cr)"
-        ]
-      },
-      {
-        "ticker": "INOXWIND",
-        "reasons": [
-          "illiquid (₹11Cr)"
-        ]
+        "ticker": "UNITDSPR",
+        "relVol": 3.69,
+        "confidence": 8,
+        "effectiveConfidence": 56.5,
+        "institutional": 54.9,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 6,
+        "negative": false
       }
     ]
   }
