@@ -1,51 +1,134 @@
 {
   "pick": {
-    "date": "2026-07-22",
+    "date": "2026-07-23",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-22T09:31:10.869Z",
-    "regime": "weak",
-    "market": "weak (v2 score 34, conf 53) — trend 27, breadth 16, vol-factor 78",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-07-23T04:31:03.827Z",
+    "rejected": [
       {
-        "ticker": "INDUSINDBK",
-        "relVol": 1.8,
-        "confidence": 31.9,
-        "effectiveConfidence": 69.2,
-        "institutional": 91.3,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 6,
-        "negative": false
+        "ticker": "NHPC",
+        "reasons": [
+          "illiquid (₹54Cr)"
+        ]
+      },
+      {
+        "ticker": "M&M",
+        "reasons": [
+          "illiquid (₹38Cr)"
+        ]
+      },
+      {
+        "ticker": "BPCL",
+        "reasons": [
+          "near52wHigh"
+        ]
       },
       {
         "ticker": "TVSMOTOR",
-        "relVol": 2.97,
-        "confidence": 44.5,
-        "effectiveConfidence": 75.9,
-        "institutional": 88.7,
-        "catalyst": "earnings beat",
-        "verification": "PARTIAL",
-        "filing": false,
-        "sources": 1,
-        "articles": 12,
-        "negative": false
+        "reasons": [
+          "volumeSurge"
+        ]
       },
       {
-        "ticker": "NESTLEIND",
-        "relVol": 3.72,
-        "confidence": 21.6,
-        "effectiveConfidence": 69.6,
-        "institutional": 70.7,
-        "catalyst": "earnings beat",
-        "verification": "PARTIAL",
-        "filing": false,
-        "sources": 1,
-        "articles": 12,
-        "negative": false
+        "ticker": "WIPRO",
+        "reasons": [
+          "illiquid (₹29Cr)"
+        ]
+      },
+      {
+        "ticker": "ETERNAL",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INDIANB",
+        "reasons": [
+          "illiquid (₹13Cr)"
+        ]
+      },
+      {
+        "ticker": "VEDL",
+        "reasons": [
+          "illiquid (₹67Cr)"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "illiquid (₹34Cr)"
+        ]
+      },
+      {
+        "ticker": "DMART",
+        "reasons": [
+          "illiquid (₹44Cr)"
+        ]
+      },
+      {
+        "ticker": "WAAREEENER",
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "illiquid (₹21Cr)"
+        ]
+      },
+      {
+        "ticker": "NUVAMA",
+        "reasons": [
+          "illiquid (₹19Cr)"
+        ]
+      },
+      {
+        "ticker": "JSWENERGY",
+        "reasons": [
+          "illiquid (₹24Cr)"
+        ]
+      },
+      {
+        "ticker": "TCS",
+        "reasons": [
+          "illiquid (₹45Cr)"
+        ]
+      },
+      {
+        "ticker": "KAYNES",
+        "reasons": [
+          "illiquid (₹46Cr)"
+        ]
+      },
+      {
+        "ticker": "HINDALCO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JIOFIN",
+        "reasons": [
+          "illiquid (₹40Cr)"
+        ]
+      },
+      {
+        "ticker": "INOXWIND",
+        "reasons": [
+          "illiquid (₹11Cr)"
+        ]
       }
     ]
   }
