@@ -1,4 +1,78 @@
 {
   "date": "2026-07-23",
-  "candidates": {}
+  "candidates": {
+    "TVSMOTOR": {
+      "ticker": "TVSMOTOR",
+      "fullName": "TVS Motor Company Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-07-23T05:31:07.762Z",
+          "relVol": 1.81,
+          "confidence": 66.3,
+          "components": {
+            "technical": 78,
+            "flow": 77,
+            "catalyst": 33,
+            "liquidity": 72
+          },
+          "discoveryScore": 80.3,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 608706,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.81<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 66.3,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "UNITDSPR": {
+      "ticker": "UNITDSPR",
+      "fullName": "UNITED SPIRITS LIMITED",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-07-23T05:31:07.762Z",
+          "relVol": 3.69,
+          "confidence": 8,
+          "components": {
+            "technical": 52,
+            "flow": 63,
+            "catalyst": 5,
+            "liquidity": 61
+          },
+          "discoveryScore": 76.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 863693,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
