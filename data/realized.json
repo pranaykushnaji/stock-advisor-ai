@@ -191,6 +191,39 @@
       "exitSource": "rule",
       "realizedPnl": -196.33,
       "realizedPnlPct": -3.27
+    },
+    {
+      "ticker": "APOLLOHOSP",
+      "fullName": "Apollo Hospitals Enterprise Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 6.9,
+        "expectedLossPct": 4,
+        "probability": 0.702,
+        "edgePct": 3.65,
+        "calibration": "none"
+      },
+      "confidenceComponents": {
+        "technical": 81,
+        "flow": 91,
+        "catalyst": 5,
+        "liquidity": 61
+      },
+      "effectiveConfidence": 79,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "bullish",
+      "entryPrice": 8994,
+      "entryDate": "2026-07-15",
+      "exitPrice": 8800.5,
+      "exitDate": "2026-07-24",
+      "shares": 0.5,
+      "investedAmount": 4500,
+      "exitReason": "review day 9: below 20-EMA [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -96.75,
+      "realizedPnlPct": -2.15
     }
   ]
 }
