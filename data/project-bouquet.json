@@ -1,6 +1,119 @@
 {
   "bouquet": [
     {
+      "ticker": "UNITDSPR",
+      "fullName": "UNITED SPIRITS LIMITED",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 66,
+        "flow": 77,
+        "catalyst": 5,
+        "liquidity": 82
+      },
+      "expectedEdge": {
+        "expectedGainPct": 7.5,
+        "expectedLossPct": 4,
+        "probability": 0.638,
+        "edgePct": 3.34,
+        "calibration": "none"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 66,
+            "weight": 0.4,
+            "contribution": 26.4
+          },
+          "flow": {
+            "score": 77,
+            "weight": 0.4,
+            "contribution": 30.8
+          },
+          "liquidity": {
+            "score": 82,
+            "weight": 0.2,
+            "contribution": 16.4
+          }
+        },
+        "base": 73.6,
+        "regimeScore": 47,
+        "regimeAdjustment": -4,
+        "trendBonus": 6,
+        "final": 75.6
+      },
+      "confidence": 29.8,
+      "effectiveConfidence": 75.6,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-07-24T07:31:04.887Z",
+      "verdict": "AVOID",
+      "composite": 42.6,
+      "date": "2026-07-24",
+      "addedAt": "2026-07-24T07:31:04.887Z",
+      "investedAmount": 9000,
+      "entryPrice": 1478.7,
+      "currentPrice": 1478.7,
+      "shares": 6.086,
+      "peakPrice": 1478.7,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 1335.2,
+      "todayChangePct": 10.75,
+      "lastPriceUpdate": "2026-07-24T07:31:04.887Z",
+      "yahooSymbol": "UNITDSPR.NS",
+      "niftyAtEntry": 23795.35,
+      "niftyNow": 23795.35,
+      "estimatedUpside": "7-8%",
+      "riskLevel": "Medium",
+      "summary": "UNITDSPR is exhibiting a strong momentum lane breakout with a 5.73x volume spike and solid institutional buying, backed by bullish technicals and recent short‑term price gains. Despite the absence of a news catalyst and a modest composite score, the reward‑to‑risk profile (~7.5% upside vs ~4% downside) makes it a viable 5‑10 day swing in a neutral market.",
+      "whyToday": "The extraordinary 5.73x relative volume surge signals fresh buying pressure that can sustain a short‑term rally.",
+      "factors": {
+        "momentum": {
+          "score": 50,
+          "positives": [
+            "Relative volume 5.73x today's average (exceptional buying pressure)",
+            "Institutional accumulation score 72.8/100",
+            "Technical score 76.1",
+            "Short‑term returns: r1d 5.3%, r1w 7.0%, r1m 8.8%"
+          ],
+          "negatives": [
+            "Composite score 42.6 (AVOID) and multi‑signal confidence 29.8",
+            "No verified news catalyst",
+            "Neutral market regime (trend 22, breadth 49)",
+            "Potential downside ~4% on reward/risk 1.88"
+          ]
+        },
+        "relStrength": {
+          "score": 50
+        },
+        "volume": {
+          "score": 50
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 76.1
+        },
+        "sector": {
+          "score": 50
+        }
+      }
+    },
+    {
       "ticker": "ULTRACEMCO",
       "fullName": "UltraTech Cement Limited",
       "sector": "UNKNOWN",
