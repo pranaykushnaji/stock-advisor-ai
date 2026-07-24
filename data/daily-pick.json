@@ -1,24 +1,37 @@
 {
   "pick": {
-    "date": "2026-07-23",
+    "date": "2026-07-24",
     "noTrade": true,
     "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-23T09:31:06.159Z",
+    "pickedAt": "2026-07-24T04:31:07.513Z",
     "regime": "weak",
-    "market": "weak (v2 score 34, conf 54) — trend 23, breadth 24, vol-factor 77",
+    "market": "weak (v2 score 35, conf 55) — trend 20, breadth 18, vol-factor 76",
     "momLaneOpen": false,
     "considered": [
       {
-        "ticker": "UNITDSPR",
-        "relVol": 1.87,
-        "confidence": 27.2,
-        "effectiveConfidence": 62.3,
-        "institutional": 56.6,
+        "ticker": "NUVAMA",
+        "relVol": 11.23,
+        "confidence": 53.2,
+        "effectiveConfidence": 73.9,
+        "institutional": 88.4,
         "catalyst": "no catalyst",
         "verification": "UNVERIFIED",
         "filing": false,
         "sources": 0,
-        "articles": 9,
+        "articles": 4,
+        "negative": false
+      },
+      {
+        "ticker": "UNITDSPR",
+        "relVol": 5.5,
+        "confidence": 15.6,
+        "effectiveConfidence": 56.6,
+        "institutional": 58.4,
+        "catalyst": "earnings beat",
+        "verification": "PARTIAL",
+        "filing": false,
+        "sources": 1,
+        "articles": 12,
         "negative": false
       }
     ]
