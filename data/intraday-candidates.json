@@ -64,7 +64,7 @@
       "fullName": "UNITED SPIRITS LIMITED",
       "sector": "UNKNOWN",
       "firstSeen": "10:01",
-      "status": "watching",
+      "status": "bought",
       "scans": [
         {
           "hhmm": "10:01",
@@ -131,13 +131,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-07-24T07:31:02.596Z",
+          "relVol": 5.73,
+          "confidence": 29.8,
+          "components": {
+            "technical": 66,
+            "flow": 77,
+            "catalyst": 5,
+            "liquidity": 82
+          },
+          "discoveryScore": 84.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2876546,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
-      "bestConfidence": 29,
+      "lastSeen": "13:01",
+      "bestConfidence": 29.8,
       "confidenceTrend": "rising",
-      "confidenceSlope": 6.7,
-      "trendBonus": 8
+      "confidenceSlope": 4.96,
+      "trendBonus": 6
     }
   }
 }
