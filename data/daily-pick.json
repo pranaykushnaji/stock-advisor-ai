@@ -1,26 +1,172 @@
 {
   "pick": {
-    "date": "2026-07-24",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-24T06:31:11.314Z",
-    "regime": "weak",
-    "market": "weak (v2 score 38, conf 50) — trend 21, breadth 26, vol-factor 77",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "UNITDSPR",
-        "relVol": 7.11,
-        "confidence": 29,
-        "effectiveConfidence": 75.9,
-        "institutional": 68.4,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 12,
-        "negative": false
+    "ticker": "UNITDSPR",
+    "fullName": "UNITED SPIRITS LIMITED",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 50,
+        "positives": [
+          "Relative volume 5.73x today's average (exceptional buying pressure)",
+          "Institutional accumulation score 72.8/100",
+          "Technical score 76.1",
+          "Short‑term returns: r1d 5.3%, r1w 7.0%, r1m 8.8%"
+        ],
+        "negatives": [
+          "Composite score 42.6 (AVOID) and multi‑signal confidence 29.8",
+          "No verified news catalyst",
+          "Neutral market regime (trend 22, breadth 49)",
+          "Potential downside ~4% on reward/risk 1.88"
+        ]
+      },
+      "relStrength": {
+        "score": 50
+      },
+      "volume": {
+        "score": 50
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 76.1
+      },
+      "sector": {
+        "score": 50
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.05305512219810721,
+      "r1w": 0.07028081738692658,
+      "r1m": 0.08799939499253935
+    },
+    "volumeRatio": 1.14,
+    "relVol": 5.73,
+    "relStrength": 9.74,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 29.8,
+    "effectiveConfidence": 75.6,
+    "confidenceComponents": {
+      "technical": 66,
+      "flow": 77,
+      "catalyst": 5,
+      "liquidity": 82
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 66,
+          "weight": 0.4,
+          "contribution": 26.4
+        },
+        "flow": {
+          "score": 77,
+          "weight": 0.4,
+          "contribution": 30.8
+        },
+        "liquidity": {
+          "score": 82,
+          "weight": 0.2,
+          "contribution": 16.4
+        }
+      },
+      "base": 73.6,
+      "regimeScore": 47,
+      "regimeAdjustment": -4,
+      "trendBonus": 6,
+      "final": 75.6
+    },
+    "expectedEdge": {
+      "expectedGainPct": 7.5,
+      "expectedLossPct": 4,
+      "probability": 0.638,
+      "edgePct": 3.34,
+      "calibration": "none"
+    },
+    "confidenceTrend": "rising",
+    "trendBonus": 6,
+    "institutional": 72.8,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 84.3,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "fresh filing"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 1.88,
+      "upsidePct": 7.5,
+      "downsidePct": 4
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 47, conf 59) — trend 22, breadth 49, vol-factor 78",
+    "regimeConfidence": 59,
+    "regimeFactors": {
+      "indexTrend": 22,
+      "volatility": 78,
+      "breadth": 49,
+      "momentumBreadth": 35,
+      "largeCap": 50,
+      "gapEnv": 76,
+      "riskAppetite": 50,
+      "sectorPart": 33
+    },
+    "annualizedVol": 23.9,
+    "composite": 42.6,
+    "verdict": "AVOID",
+    "estimatedUpside": "7-8%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "No specific news catalyst; the move is driven by a sharp volume surge and technical momentum.",
+    "summary": "UNITDSPR is exhibiting a strong momentum lane breakout with a 5.73x volume spike and solid institutional buying, backed by bullish technicals and recent short‑term price gains. Despite the absence of a news catalyst and a modest composite score, the reward‑to‑risk profile (~7.5% upside vs ~4% downside) makes it a viable 5‑10 day swing in a neutral market.",
+    "whyToday": "The extraordinary 5.73x relative volume surge signals fresh buying pressure that can sustain a short‑term rally.",
+    "date": "2026-07-24",
+    "pickedAt": "2026-07-24T07:31:04.887Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 204,
+      "nseUniverse": 204,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-24T07:16:18.487Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 1,
+    "pipeline": {
+      "priced": 39,
+      "passedFilter": 1,
+      "catalystChecked": 1,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 1478.7,
+    "entryRejected": null
   }
 }
