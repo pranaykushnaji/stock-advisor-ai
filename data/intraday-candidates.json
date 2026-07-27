@@ -101,13 +101,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-27T05:30:48.144Z",
+          "relVol": 24.5,
+          "confidence": 50.8,
+          "components": {
+            "technical": 70,
+            "flow": 88,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 69.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 131636118,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 10.3,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "11:00",
+      "bestConfidence": 50.8,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 40.5,
+      "trendBonus": 4
     },
     "RATNAVEER": {
       "ticker": "RATNAVEER",
@@ -141,6 +163,115 @@
       ],
       "lastSeen": "10:00",
       "bestConfidence": 8.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "LAURUSLABS": {
+      "ticker": "LAURUSLABS",
+      "fullName": "Laurus Labs Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-27T05:30:48.144Z",
+          "relVol": 3.88,
+          "confidence": 53.6,
+          "components": {
+            "technical": 88,
+            "flow": 78,
+            "catalyst": 35,
+            "liquidity": 82
+          },
+          "discoveryScore": 86.3,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 2641916,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 53.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "RADICO": {
+      "ticker": "RADICO",
+      "fullName": "Radico Khaitan Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-27T05:30:48.145Z",
+          "relVol": 1.82,
+          "confidence": 25.4,
+          "components": {
+            "technical": 67,
+            "flow": 49,
+            "catalyst": 5,
+            "liquidity": 54
+          },
+          "discoveryScore": 67.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 193806,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.82<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 25.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "AUBANK": {
+      "ticker": "AUBANK",
+      "fullName": "AU Small Finance Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-27T05:30:48.145Z",
+          "relVol": 4.18,
+          "confidence": 39,
+          "components": {
+            "technical": 49,
+            "flow": 69,
+            "catalyst": 35,
+            "liquidity": 73
+          },
+          "discoveryScore": 77.3,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 2378921,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 39,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
