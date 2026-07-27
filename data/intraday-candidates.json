@@ -1,51 +1,29 @@
 {
-  "date": "2026-07-24",
+  "date": "2026-07-27",
   "candidates": {
-    "NUVAMA": {
-      "ticker": "NUVAMA",
-      "fullName": "Nuvama Wealth Management Limited",
+    "UJJIVANSFB": {
+      "ticker": "UJJIVANSFB",
+      "fullName": "Ujjivan Small Finance Bank Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "10:01",
-      "status": "watching",
+      "firstSeen": "10:00",
+      "status": "bought",
       "scans": [
         {
-          "hhmm": "10:01",
-          "ts": "2026-07-24T04:31:05.029Z",
-          "relVol": 11.23,
-          "confidence": 53.2,
+          "hhmm": "10:00",
+          "ts": "2026-07-27T04:30:48.340Z",
+          "relVol": 4.22,
+          "confidence": 58.7,
           "components": {
-            "technical": 80,
-            "flow": 89,
+            "technical": 88,
+            "flow": 95,
             "catalyst": 5,
-            "liquidity": 66
+            "liquidity": 50
           },
-          "discoveryScore": 77.5,
+          "discoveryScore": null,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 779511,
+          "volume": null,
           "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "11:01",
-          "ts": "2026-07-24T05:31:08.148Z",
-          "relVol": 14.74,
-          "confidence": 37.4,
-          "components": {
-            "technical": 67,
-            "flow": 71,
-            "catalyst": 5,
-            "liquidity": 80
-          },
-          "discoveryScore": 61.3,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1909216,
-          "sessionFrac": 0.28,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
@@ -53,101 +31,71 @@
           "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 53.2,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -15.8,
+      "lastSeen": "10:00",
+      "bestConfidence": 58.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
       "trendBonus": 0
     },
-    "UNITDSPR": {
-      "ticker": "UNITDSPR",
-      "fullName": "UNITED SPIRITS LIMITED",
+    "TFCILTD": {
+      "ticker": "TFCILTD",
+      "fullName": "Tourism Finance Corporation of India Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "10:01",
-      "status": "bought",
+      "firstSeen": "10:00",
+      "status": "watching",
       "scans": [
         {
-          "hhmm": "10:01",
-          "ts": "2026-07-24T04:31:05.030Z",
-          "relVol": 5.5,
-          "confidence": 15.6,
+          "hhmm": "10:00",
+          "ts": "2026-07-27T04:30:48.340Z",
+          "relVol": 11.8,
+          "confidence": 54.4,
           "components": {
-            "technical": 57,
-            "flow": 65,
-            "catalyst": 35,
-            "liquidity": 58
+            "technical": 77,
+            "flow": 80,
+            "catalyst": 18,
+            "liquidity": 50
           },
-          "discoveryScore": 84.6,
+          "discoveryScore": null,
           "catalystType": "earnings beat",
           "verification": "PARTIAL",
-          "volume": 690807,
+          "volume": null,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst PARTIAL (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
-        },
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 54.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "IDFCFIRSTB": {
+      "ticker": "IDFCFIRSTB",
+      "fullName": "IDFC First Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
         {
-          "hhmm": "11:01",
-          "ts": "2026-07-24T05:31:08.147Z",
-          "relVol": 7.33,
-          "confidence": 22,
+          "hhmm": "10:00",
+          "ts": "2026-07-27T04:30:48.341Z",
+          "relVol": 35.93,
+          "confidence": 10.3,
           "components": {
-            "technical": 68,
-            "flow": 67,
+            "technical": 59,
+            "flow": 74,
             "catalyst": 5,
-            "liquidity": 73
+            "liquidity": 50
           },
-          "discoveryScore": 91.6,
+          "discoveryScore": null,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 1717913,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:01",
-          "ts": "2026-07-24T06:31:08.539Z",
-          "relVol": 7.11,
-          "confidence": 29,
-          "components": {
-            "technical": 68,
-            "flow": 75,
-            "catalyst": 5,
-            "liquidity": 80
-          },
-          "discoveryScore": 80,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2618930,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:01",
-          "ts": "2026-07-24T07:31:02.596Z",
-          "relVol": 5.73,
-          "confidence": 29.8,
-          "components": {
-            "technical": 66,
-            "flow": 77,
-            "catalyst": 5,
-            "liquidity": 82
-          },
-          "discoveryScore": 84.3,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2876546,
-          "sessionFrac": 0.6,
+          "volume": null,
+          "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
@@ -155,11 +103,47 @@
           "tradeable": false
         }
       ],
-      "lastSeen": "13:01",
-      "bestConfidence": 29.8,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 4.96,
-      "trendBonus": 6
+      "lastSeen": "10:00",
+      "bestConfidence": 10.3,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "RATNAVEER": {
+      "ticker": "RATNAVEER",
+      "fullName": "Ratnaveer Precision Engineering Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-07-27T04:30:48.341Z",
+          "relVol": 61.06,
+          "confidence": 8.4,
+          "components": {
+            "technical": 58,
+            "flow": 75,
+            "catalyst": 5,
+            "liquidity": 50
+          },
+          "discoveryScore": null,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": null,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 8.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
