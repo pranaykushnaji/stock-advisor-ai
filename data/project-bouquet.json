@@ -1,6 +1,117 @@
 {
   "bouquet": [
     {
+      "ticker": "UJJIVANSFB",
+      "fullName": "Ujjivan Small Finance Bank Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 88,
+        "flow": 95,
+        "catalyst": 5,
+        "liquidity": 50
+      },
+      "expectedEdge": {
+        "expectedGainPct": 17.4,
+        "expectedLossPct": 6.1,
+        "probability": 0.648,
+        "edgePct": 9.13,
+        "calibration": "none"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 88,
+            "weight": 0.4,
+            "contribution": 35.2
+          },
+          "flow": {
+            "score": 95,
+            "weight": 0.4,
+            "contribution": 38
+          },
+          "liquidity": {
+            "score": 50,
+            "weight": 0.2,
+            "contribution": 10
+          }
+        },
+        "base": 83.2,
+        "regimeScore": 49,
+        "regimeAdjustment": -5.1,
+        "trendBonus": 0,
+        "final": 78.1
+      },
+      "confidence": 58.7,
+      "effectiveConfidence": 78.1,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-07-27T04:30:50.384Z",
+      "verdict": "BUY",
+      "composite": 67.9,
+      "date": "2026-07-27",
+      "addedAt": "2026-07-27T04:30:50.384Z",
+      "investedAmount": 11000,
+      "entryPrice": 71.99,
+      "currentPrice": 71.99,
+      "shares": 152.799,
+      "peakPrice": 71.99,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 43.32,
+      "todayChangePct": 66.18,
+      "lastPriceUpdate": "2026-07-27T04:30:50.384Z",
+      "yahooSymbol": "UJJIVANSFB.NS",
+      "niftyAtEntry": 23929.8,
+      "niftyNow": 23929.8,
+      "estimatedUpside": "15-20%",
+      "riskLevel": "Medium",
+      "summary": "UJJIVANSFB is exhibiting a strong short‑term momentum breakout with exceptional volume (4.22× average) and outperformance versus the Nifty (+28.75 relative strength). Technicals are supportive (Technical score 85) and the reward‑to‑risk profile (~2.9) suggests upside of ~17% against limited downside. The trade is justified on pure price‑action strength despite the absence of news.",
+      "whyToday": "Today's 4.22× volume surge signals fresh institutional buying and a momentum‑driven breakout, making it the optimal entry point.",
+      "factors": {
+        "momentum": {
+          "score": 87.5,
+          "positives": [
+            "Momentum score 87.5",
+            "Relative‑strength score 87.5",
+            "Volume score 87.5 with today’s volume 4.22× the 20‑day average",
+            "Short‑term return: +9.7% over the past week"
+          ],
+          "negatives": [
+            "No identifiable news catalyst (Catalyst score 0)",
+            "Sector classification unknown, multi‑signal confidence only 58.7%"
+          ]
+        },
+        "relStrength": {
+          "score": 87.5
+        },
+        "volume": {
+          "score": 87.5
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 85
+        },
+        "sector": {
+          "score": 50
+        }
+      }
+    },
+    {
       "ticker": "UNITDSPR",
       "fullName": "UNITED SPIRITS LIMITED",
       "sector": "UNKNOWN",
