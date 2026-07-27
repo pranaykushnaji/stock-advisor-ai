@@ -290,6 +290,39 @@
       "exitSource": "rule",
       "realizedPnl": 258.05,
       "realizedPnlPct": 2.35
+    },
+    {
+      "ticker": "EXIDEIND",
+      "fullName": "Exide Industries Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 11,
+        "expectedLossPct": 4.5,
+        "probability": 0.646,
+        "edgePct": 5.51,
+        "calibration": "none"
+      },
+      "confidenceComponents": {
+        "technical": 88,
+        "flow": 85,
+        "catalyst": 5,
+        "liquidity": 65
+      },
+      "effectiveConfidence": 77.7,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 443.1,
+      "entryDate": "2026-07-21",
+      "exitPrice": 425.3,
+      "exitDate": "2026-07-27",
+      "shares": 10.156,
+      "investedAmount": 4500,
+      "exitReason": "Price down 4%, momentum fading, no catalyst; bullish thesis losing support",
+      "exitSource": "llm",
+      "realizedPnl": -180.78,
+      "realizedPnlPct": -4.02
     }
   ]
 }
