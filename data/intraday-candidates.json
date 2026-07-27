@@ -195,12 +195,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-27T06:30:48.357Z",
+          "relVol": 3.3,
+          "confidence": 43.5,
+          "components": {
+            "technical": 86,
+            "flow": 74,
+            "catalyst": 5,
+            "liquidity": 87
+          },
+          "discoveryScore": 86.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3534046,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 53.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -10.1,
       "trendBonus": 0
     },
     "RADICO": {
@@ -268,10 +290,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-27T06:30:48.358Z",
+          "relVol": 3.45,
+          "confidence": 32.1,
+          "components": {
+            "technical": 60,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 86.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3085038,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 39,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -6.9,
+      "trendBonus": 0
+    },
+    "SUNPHARMA": {
+      "ticker": "SUNPHARMA",
+      "fullName": "Sun Pharmaceutical Industries Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-27T06:30:48.358Z",
+          "relVol": 3.56,
+          "confidence": 34,
+          "components": {
+            "technical": 59,
+            "flow": 81,
+            "catalyst": 5,
+            "liquidity": 88
+          },
+          "discoveryScore": 69,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3126707,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 34,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
