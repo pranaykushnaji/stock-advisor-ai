@@ -1,162 +1,170 @@
 {
   "pick": {
-    "date": "2026-07-24",
-    "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-24T09:31:06.819Z",
-    "rejected": [
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
+    "ticker": "UJJIVANSFB",
+    "fullName": "Ujjivan Small Finance Bank Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 87.5,
+        "positives": [
+          "Momentum score 87.5",
+          "Relative‑strength score 87.5",
+          "Volume score 87.5 with today’s volume 4.22× the 20‑day average",
+          "Short‑term return: +9.7% over the past week"
+        ],
+        "negatives": [
+          "No identifiable news catalyst (Catalyst score 0)",
+          "Sector classification unknown, multi‑signal confidence only 58.7%"
         ]
       },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
+      "relStrength": {
+        "score": 87.5
       },
-      {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
+      "volume": {
+        "score": 87.5
       },
-      {
-        "ticker": "ICICIBANK",
-        "reasons": [
-          "volumeSurge"
-        ]
+      "catalyst": {
+        "score": 0
       },
-      {
-        "ticker": "ITC",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+      "technicals": {
+        "score": 85
       },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ASTRAL",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PETRONET",
-        "reasons": [
-          "illiquid (₹50Cr)"
-        ]
-      },
-      {
-        "ticker": "IEX",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JUBLFOOD",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
-        "ticker": "HAVELLS",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "VEDL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LT",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CROMPTON",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDZINC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "IRFC",
-        "reasons": [
-          "illiquid (₹45Cr)"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INFY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
+      "sector": {
+        "score": 50
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.017958097018451656,
+      "r1w": 0.09724123142915152,
+      "r1m": 0.2823298654513995
+    },
+    "volumeRatio": 2.38,
+    "relVol": 4.22,
+    "relStrength": 28.75,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 58.7,
+    "effectiveConfidence": 78.1,
+    "confidenceComponents": {
+      "technical": 88,
+      "flow": 95,
+      "catalyst": 5,
+      "liquidity": 50
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 88,
+          "weight": 0.4,
+          "contribution": 35.2
+        },
+        "flow": {
+          "score": 95,
+          "weight": 0.4,
+          "contribution": 38
+        },
+        "liquidity": {
+          "score": 50,
+          "weight": 0.2,
+          "contribution": 10
+        }
+      },
+      "base": 83.2,
+      "regimeScore": 49,
+      "regimeAdjustment": -5.1,
+      "trendBonus": 0,
+      "final": 78.1
+    },
+    "expectedEdge": {
+      "expectedGainPct": 17.4,
+      "expectedLossPct": 6.1,
+      "probability": 0.648,
+      "edgePct": 9.13,
+      "calibration": "none"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 94.5,
+    "institutionalFlags": [
+      "up-day volume dominant",
+      "volume expanding"
+    ],
+    "discoveryScore": null,
+    "discoveryReasons": [],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 2.86,
+      "upsidePct": 17.4,
+      "downsidePct": 6.1
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 49, conf 69) — trend 25, breadth 50, vol-factor 81",
+    "regimeConfidence": 69,
+    "regimeFactors": {
+      "indexTrend": 25,
+      "volatility": 81,
+      "breadth": 50,
+      "momentumBreadth": 50,
+      "largeCap": 50,
+      "gapEnv": 50,
+      "riskAppetite": 50,
+      "sectorPart": 50
+    },
+    "annualizedVol": 38.5,
+    "composite": 67.9,
+    "verdict": "BUY",
+    "estimatedUpside": "15-20%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the move is driven purely by technical momentum and volume dynamics.",
+    "summary": "UJJIVANSFB is exhibiting a strong short‑term momentum breakout with exceptional volume (4.22× average) and outperformance versus the Nifty (+28.75 relative strength). Technicals are supportive (Technical score 85) and the reward‑to‑risk profile (~2.9) suggests upside of ~17% against limited downside. The trade is justified on pure price‑action strength despite the absence of news.",
+    "whyToday": "Today's 4.22× volume surge signals fresh institutional buying and a momentum‑driven breakout, making it the optimal entry point.",
+    "date": "2026-07-27",
+    "pickedAt": "2026-07-27T04:30:50.384Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 0,
+      "nseUniverse": 0,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-27T04:16:02.842Z",
+        "rankedBy": "pChange"
+      }
+    },
+    "candidatePool": 4,
+    "pipeline": {
+      "priced": 39,
+      "passedFilter": 4,
+      "catalystChecked": 4,
+      "tradeable": 2
+    },
+    "runnerUp": {
+      "ticker": "TFCILTD",
+      "composite": 55.6
+    },
+    "entryPrice": 71.99,
+    "entryRejected": null
   }
 }
