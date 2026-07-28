@@ -131,13 +131,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-28T08:30:26.388Z",
+          "relVol": 1.93,
+          "confidence": 49.1,
+          "components": {
+            "technical": 80,
+            "flow": 67,
+            "catalyst": 35,
+            "liquidity": 87
+          },
+          "discoveryScore": 80,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 3259666,
+          "sessionFrac": 0.76,
+          "missing": [
+            "relVol 1.93<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
+      "lastSeen": "14:00",
       "bestConfidence": 50.6,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.34,
-      "trendBonus": 0.4
+      "confidenceSlope": 0.13,
+      "trendBonus": 0.2
     },
     "IDFCFIRSTB": {
       "ticker": "IDFCFIRSTB",
@@ -449,12 +472,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-28T08:30:26.389Z",
+          "relVol": 1.94,
+          "confidence": 26,
+          "components": {
+            "technical": 60,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 84
+          },
+          "discoveryScore": 70.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3223120,
+          "sessionFrac": 0.76,
+          "missing": [
+            "relVol 1.94<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
+      "lastSeen": "14:00",
       "bestConfidence": 32.3,
       "confidenceTrend": "falling",
-      "confidenceSlope": -3.15,
+      "confidenceSlope": -1.88,
       "trendBonus": 0
     }
   }
