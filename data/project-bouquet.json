@@ -1,6 +1,116 @@
 {
   "bouquet": [
     {
+      "ticker": "LODHA",
+      "fullName": "Lodha Developers Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 82,
+        "flow": 77,
+        "catalyst": 5,
+        "liquidity": 84
+      },
+      "expectedEdge": {
+        "expectedGainPct": 21.7,
+        "expectedLossPct": 5.6,
+        "probability": 0.642,
+        "edgePct": 11.93,
+        "calibration": "none"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 82,
+            "weight": 0.4,
+            "contribution": 32.8
+          },
+          "flow": {
+            "score": 77,
+            "weight": 0.4,
+            "contribution": 30.8
+          },
+          "liquidity": {
+            "score": 84,
+            "weight": 0.2,
+            "contribution": 16.8
+          }
+        },
+        "base": 80.4,
+        "regimeScore": 56,
+        "regimeAdjustment": -3.7,
+        "trendBonus": 0,
+        "final": 76.7
+      },
+      "confidence": 51.8,
+      "effectiveConfidence": 76.7,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-07-28T04:30:28.747Z",
+      "verdict": "WATCH",
+      "composite": 60.4,
+      "date": "2026-07-28",
+      "addedAt": "2026-07-28T04:30:28.747Z",
+      "investedAmount": 11000,
+      "entryPrice": 1279.55,
+      "currentPrice": 1279.55,
+      "shares": 8.597,
+      "peakPrice": 1279.55,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 1203.2,
+      "todayChangePct": 6.35,
+      "lastPriceUpdate": "2026-07-28T04:30:28.747Z",
+      "yahooSymbol": "LODHA.NS",
+      "niftyAtEntry": 24010.9,
+      "niftyNow": 24010.9,
+      "estimatedUpside": "20-22%",
+      "riskLevel": "Medium",
+      "summary": "LODHA is exhibiting exceptional short‑term momentum with a 6.7% daily gain and a 36% one‑month gain, backed by a 6.89× relative volume spike and strong institutional buying. In a neutral market regime, the reward‑to‑risk ratio of ~3.9 (≈21.7% upside vs 5.6% downside) makes it a compelling 5‑10‑day swing opportunity despite the lack of news.",
+      "whyToday": "Today's relative volume of 6.89× the 20‑day average signals a fresh, stock‑specific buying surge that can fuel further upside over the next week.",
+      "factors": {
+        "momentum": {
+          "score": 90,
+          "positives": [
+            "Momentum score 90 and relative‑strength score 90 indicate strong price acceleration",
+            "Relative volume today is 6.89x the 20‑day average, showing heavy buying activity",
+            "Institutional accumulation rating 87.1/100 supports the move"
+          ],
+          "negatives": [
+            "Catalyst score 0 – no fundamental news driver",
+            "Volume score only 30, suggesting the surge may be short‑lived"
+          ]
+        },
+        "relStrength": {
+          "score": 90
+        },
+        "volume": {
+          "score": 30
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 67.5
+        },
+        "sector": {
+          "score": 83
+        }
+      }
+    },
+    {
       "ticker": "UJJIVANSFB",
       "fullName": "Ujjivan Small Finance Bank Limited",
       "sector": "UNKNOWN",
