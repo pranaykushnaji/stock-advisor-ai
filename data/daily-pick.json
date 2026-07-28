@@ -1,52 +1,172 @@
 {
   "pick": {
-    "date": "2026-07-27",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-27T09:30:51.562Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 71, conf 63) — trend 56, breadth 79, vol-factor 81",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "LAURUSLABS",
-        "relVol": 2.91,
-        "confidence": 44.4,
-        "effectiveConfidence": 81.5,
-        "institutional": 93.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 12,
-        "negative": false
+    "ticker": "LODHA",
+    "fullName": "Lodha Developers Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 90,
+        "positives": [
+          "Momentum score 90 and relative‑strength score 90 indicate strong price acceleration",
+          "Relative volume today is 6.89x the 20‑day average, showing heavy buying activity",
+          "Institutional accumulation rating 87.1/100 supports the move"
+        ],
+        "negatives": [
+          "Catalyst score 0 – no fundamental news driver",
+          "Volume score only 30, suggesting the surge may be short‑lived"
+        ]
       },
-      {
-        "ticker": "SUNPHARMA",
-        "relVol": 2.75,
-        "confidence": 49.5,
-        "effectiveConfidence": 80.8,
-        "institutional": 67,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
+      "relStrength": {
+        "score": 90
       },
-      {
-        "ticker": "AUBANK",
-        "relVol": 2.47,
-        "confidence": 25.3,
-        "effectiveConfidence": 64,
-        "institutional": 53.4,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 12,
-        "negative": false
+      "volume": {
+        "score": 30
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 67.5
+      },
+      "sector": {
+        "score": 83
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.06744815295705084,
+      "r1w": 0.06722557315880452,
+      "r1m": 0.36187543553039325
+    },
+    "volumeRatio": 0.93,
+    "relVol": 6.89,
+    "relStrength": 35.92,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 51.8,
+    "effectiveConfidence": 76.7,
+    "confidenceComponents": {
+      "technical": 82,
+      "flow": 77,
+      "catalyst": 5,
+      "liquidity": 84
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 82,
+          "weight": 0.4,
+          "contribution": 32.8
+        },
+        "flow": {
+          "score": 77,
+          "weight": 0.4,
+          "contribution": 30.8
+        },
+        "liquidity": {
+          "score": 84,
+          "weight": 0.2,
+          "contribution": 16.8
+        }
+      },
+      "base": 80.4,
+      "regimeScore": 56,
+      "regimeAdjustment": -3.7,
+      "trendBonus": 0,
+      "final": 76.7
+    },
+    "expectedEdge": {
+      "expectedGainPct": 21.7,
+      "expectedLossPct": 5.6,
+      "probability": 0.642,
+      "edgePct": 11.93,
+      "calibration": "none"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 87.1,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 91.1,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "fresh filing"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 3.86,
+      "upsidePct": 21.7,
+      "downsidePct": 5.6
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 56, conf 76) — trend 57, breadth 47, vol-factor 81",
+    "regimeConfidence": 76,
+    "regimeFactors": {
+      "indexTrend": 57,
+      "volatility": 81,
+      "breadth": 47,
+      "momentumBreadth": 45,
+      "largeCap": 50,
+      "gapEnv": 46,
+      "riskAppetite": 52,
+      "sectorPart": 56
+    },
+    "annualizedVol": 35.7,
+    "composite": 60.4,
+    "verdict": "WATCH",
+    "estimatedUpside": "20-22%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the trade relies on pure technical momentum and elevated volume.",
+    "summary": "LODHA is exhibiting exceptional short‑term momentum with a 6.7% daily gain and a 36% one‑month gain, backed by a 6.89× relative volume spike and strong institutional buying. In a neutral market regime, the reward‑to‑risk ratio of ~3.9 (≈21.7% upside vs 5.6% downside) makes it a compelling 5‑10‑day swing opportunity despite the lack of news.",
+    "whyToday": "Today's relative volume of 6.89× the 20‑day average signals a fresh, stock‑specific buying surge that can fuel further upside over the next week.",
+    "date": "2026-07-28",
+    "pickedAt": "2026-07-28T04:30:28.747Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 170,
+      "nseUniverse": 170,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-28T04:15:39.268Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 5,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 5,
+      "catalystChecked": 5,
+      "tradeable": 3
+    },
+    "runnerUp": {
+      "ticker": "LAURUSLABS",
+      "composite": 53.4
+    },
+    "entryPrice": 1279.55,
+    "entryRejected": null
   }
 }
