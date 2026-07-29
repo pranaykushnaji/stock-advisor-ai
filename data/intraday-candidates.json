@@ -103,13 +103,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-07-29T07:30:25.669Z",
+          "relVol": 2.12,
+          "confidence": 50.9,
+          "components": {
+            "technical": 82,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 82
+          },
+          "discoveryScore": 80.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 555465,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
-      "bestConfidence": 50.6,
+      "lastSeen": "13:00",
+      "bestConfidence": 50.9,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.3,
+      "trendBonus": 0.2
     },
     "CHOLAFIN": {
       "ticker": "CHOLAFIN",
@@ -139,13 +161,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-07-29T07:30:25.670Z",
+          "relVol": 2.38,
+          "confidence": 35.1,
+          "components": {
+            "technical": 54,
+            "flow": 68,
+            "catalyst": 35,
+            "liquidity": 79
+          },
+          "discoveryScore": 68.9,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 2043426,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
-      "bestConfidence": 34.8,
+      "lastSeen": "13:00",
+      "bestConfidence": 35.1,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.3,
+      "trendBonus": 0.2
     }
   }
 }
