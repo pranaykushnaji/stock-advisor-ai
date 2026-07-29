@@ -73,6 +73,79 @@
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
+    },
+    "DIVISLAB": {
+      "ticker": "DIVISLAB",
+      "fullName": "Divi's Laboratories Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-29T06:30:26.174Z",
+          "relVol": 2.07,
+          "confidence": 50.6,
+          "components": {
+            "technical": 82,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 76
+          },
+          "discoveryScore": 76,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 398706,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.07<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 50.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "CHOLAFIN": {
+      "ticker": "CHOLAFIN",
+      "fullName": "Cholamandalam Investment and Finance Company Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-29T06:30:26.175Z",
+          "relVol": 2.83,
+          "confidence": 34.8,
+          "components": {
+            "technical": 54,
+            "flow": 73,
+            "catalyst": 35,
+            "liquidity": 77
+          },
+          "discoveryScore": 69.5,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1788315,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 34.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
