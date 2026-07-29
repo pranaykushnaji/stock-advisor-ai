@@ -2,142 +2,37 @@
   "pick": {
     "date": "2026-07-29",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-07-29T05:30:21.907Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-07-29T06:30:28.780Z",
+    "regime": "bullish",
+    "market": "bullish (v2 score 65, conf 77) — trend 58, breadth 67, vol-factor 81",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "INFY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
+        "ticker": "DIVISLAB",
+        "relVol": 2.07,
+        "confidence": 50.6,
+        "effectiveConfidence": 73.3,
+        "institutional": 91.3,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
       },
       {
-        "ticker": "HINDUNILVR",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SAIL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "illiquid (₹74Cr)"
-        ]
-      },
-      {
-        "ticker": "AMBUJACEM",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "VBL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JSWSTEEL",
-        "reasons": [
-          "illiquid (₹56Cr)"
-        ]
-      },
-      {
-        "ticker": "LT",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TATACONSUM",
-        "reasons": [
-          "illiquid (₹29Cr)"
-        ]
-      },
-      {
-        "ticker": "BANKBARODA",
-        "reasons": [
-          "illiquid (₹63Cr)"
-        ]
-      },
-      {
-        "ticker": "JINDALSTEL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PAYTM",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "TATASTEEL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDZINC",
-        "reasons": [
-          "illiquid (₹30Cr)"
-        ]
-      },
-      {
-        "ticker": "ETERNAL",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "FEDERALBNK",
-        "reasons": [
-          "illiquid (₹46Cr)"
-        ]
-      },
-      {
-        "ticker": "KAYNES",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KALYANKJIL",
-        "reasons": [
-          "surveillance (ASM/GSM)"
-        ]
+        "ticker": "CHOLAFIN",
+        "relVol": 2.83,
+        "confidence": 34.8,
+        "effectiveConfidence": 66,
+        "institutional": 54.3,
+        "catalyst": "earnings beat",
+        "verification": "PARTIAL",
+        "filing": false,
+        "sources": 1,
+        "articles": 12,
+        "negative": false
       }
     ]
   }
