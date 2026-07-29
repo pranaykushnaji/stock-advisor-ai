@@ -1,26 +1,176 @@
 {
   "pick": {
-    "date": "2026-07-28",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-28T09:30:29.050Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 49, conf 67) — trend 26, breadth 47, vol-factor 81",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "NESTLEIND",
-        "relVol": 2.01,
-        "confidence": 31,
-        "effectiveConfidence": 69.7,
-        "institutional": 80.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
+    "ticker": "RADICO",
+    "fullName": "Radico Khaitan Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 75,
+        "positives": [
+          "Momentum score 75",
+          "Relative‑strength score 75",
+          "Technical score 81",
+          "Relative volume today 9.76x 20‑day average",
+          "Institutional accumulation 93.1/100",
+          "Short‑term returns: +2.0% d1, +5.5% w1, +10.9% m1"
+        ],
+        "negatives": [
+          "Volume score low (25) despite spike",
+          "No news catalyst (unverified)",
+          "Multi‑signal confidence modest (42.7)",
+          "Composite rating only 51.9 (watch)",
+          "Potential downside ~5.2% if market pulls back"
+        ]
+      },
+      "relStrength": {
+        "score": 75
+      },
+      "volume": {
+        "score": 25
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 81
+      },
+      "sector": {
+        "score": 50
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.020187799946865825,
+      "r1w": 0.055165715415913204,
+      "r1m": 0.10918763266696237
+    },
+    "volumeRatio": 1.49,
+    "relVol": 9.76,
+    "relStrength": 9.55,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 42.7,
+    "effectiveConfidence": 76.5,
+    "confidenceComponents": {
+      "technical": 81,
+      "flow": 78,
+      "catalyst": 5,
+      "liquidity": 74
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 81,
+          "weight": 0.4,
+          "contribution": 32.4
+        },
+        "flow": {
+          "score": 78,
+          "weight": 0.4,
+          "contribution": 31.2
+        },
+        "liquidity": {
+          "score": 74,
+          "weight": 0.2,
+          "contribution": 14.8
+        }
+      },
+      "base": 78.4,
+      "regimeScore": 66,
+      "regimeAdjustment": -1.9,
+      "trendBonus": 0,
+      "final": 76.5
+    },
+    "expectedEdge": {
+      "expectedGainPct": 9.5,
+      "expectedLossPct": 5.2,
+      "probability": 0.691,
+      "edgePct": 4.96,
+      "calibration": "none"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 93.1,
+    "institutionalFlags": [
+      "up-day volume dominant",
+      "volume expanding"
+    ],
+    "discoveryScore": 80.3,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "fresh filing"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 1.84,
+      "upsidePct": 9.5,
+      "downsidePct": 5.2
+    },
+    "regime": "bullish",
+    "market": "bullish (v2 score 66, conf 77) — trend 57, breadth 74, vol-factor 81",
+    "regimeConfidence": 77,
+    "regimeFactors": {
+      "indexTrend": 57,
+      "volatility": 81,
+      "breadth": 74,
+      "momentumBreadth": 68,
+      "largeCap": 50,
+      "gapEnv": 57,
+      "riskAppetite": 61,
+      "sectorPart": 78
+    },
+    "annualizedVol": 32.9,
+    "composite": 51.9,
+    "verdict": "WATCH",
+    "estimatedUpside": "8-10%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "No specific catalyst; the price move is driven by pure momentum and a sharp volume surge.",
+    "summary": "RADICO is posting a near‑10x relative volume spike and strong institutional buying in a bullish market regime, delivering a relative‑strength advantage of 9.55 versus Nifty. Technicals are robust (81) and recent returns are positive, supporting a swing target of roughly 9‑10% upside over the next 5‑10 days. While the lack of a news catalyst adds some uncertainty, the momentum metrics justify a short‑term trade.",
+    "whyToday": "The ~9.8x relative volume surge today signals strong buying pressure and institutional accumulation, making it the primary trigger for entry.",
+    "date": "2026-07-29",
+    "pickedAt": "2026-07-29T04:30:28.067Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 175,
+      "nseUniverse": 175,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-29T04:15:41.536Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 2,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 2,
+      "catalystChecked": 2,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 4376.3,
+    "entryRejected": null
   }
 }
