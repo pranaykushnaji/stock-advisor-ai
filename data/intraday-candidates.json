@@ -131,13 +131,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-30T08:30:52.298Z",
+          "relVol": 2.74,
+          "confidence": 55.1,
+          "components": {
+            "technical": 76,
+            "flow": 76,
+            "catalyst": 35,
+            "liquidity": 93
+          },
+          "discoveryScore": 77.1,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1092316,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
-      "bestConfidence": 54.5,
+      "lastSeen": "14:00",
+      "bestConfidence": 55.1,
       "confidenceTrend": "rising",
-      "confidenceSlope": 2.58,
-      "trendBonus": 3.1
+      "confidenceSlope": 4.39,
+      "trendBonus": 5.3
     },
     "SONACOMS": {
       "ticker": "SONACOMS",
@@ -212,13 +234,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-30T08:30:52.298Z",
+          "relVol": 2.34,
+          "confidence": 58.3,
+          "components": {
+            "technical": 86,
+            "flow": 79,
+            "catalyst": 5,
+            "liquidity": 81
+          },
+          "discoveryScore": 76.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5305040,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
+      "lastSeen": "14:00",
       "bestConfidence": 58.3,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.08,
+      "trendBonus": 0.1
     },
     "ALKEM": {
       "ticker": "ALKEM",
@@ -292,12 +336,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-30T08:30:52.298Z",
+          "relVol": 2.27,
+          "confidence": 10.4,
+          "components": {
+            "technical": 62,
+            "flow": 64,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 77.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 254029,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
+      "lastSeen": "14:00",
       "bestConfidence": 17.3,
       "confidenceTrend": "falling",
-      "confidenceSlope": -4.6,
+      "confidenceSlope": -2.05,
       "trendBonus": 0
     },
     "NESTLEIND": {
@@ -370,6 +436,43 @@
       ],
       "lastSeen": "11:00",
       "bestConfidence": 13.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "ASIANPAINT": {
+      "ticker": "ASIANPAINT",
+      "fullName": "Asian Paints Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "14:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "14:00",
+          "ts": "2026-07-30T08:30:52.298Z",
+          "relVol": 2.05,
+          "confidence": 30.1,
+          "components": {
+            "technical": 49,
+            "flow": 78,
+            "catalyst": 35,
+            "liquidity": 81
+          },
+          "discoveryScore": 67.6,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1509845,
+          "sessionFrac": 0.76,
+          "missing": [
+            "relVol 2.05<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "14:00",
+      "bestConfidence": 30.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
