@@ -153,13 +153,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-07-30T09:30:51.716Z",
+          "relVol": 2.53,
+          "confidence": 46.6,
+          "components": {
+            "technical": 71,
+            "flow": 79,
+            "catalyst": 35,
+            "liquidity": 95
+          },
+          "discoveryScore": 82,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1221983,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 55.1,
       "confidenceTrend": "rising",
-      "confidenceSlope": 4.39,
-      "trendBonus": 5.3
+      "confidenceSlope": 3.07,
+      "trendBonus": 3.7
     },
     "SONACOMS": {
       "ticker": "SONACOMS",
@@ -256,13 +278,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-07-30T09:30:51.715Z",
+          "relVol": 2.19,
+          "confidence": 57,
+          "components": {
+            "technical": 84,
+            "flow": 77,
+            "catalyst": 5,
+            "liquidity": 83
+          },
+          "discoveryScore": 88.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5999106,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 58.3,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.08,
-      "trendBonus": 0.1
+      "confidenceSlope": -0.18,
+      "trendBonus": 0
     },
     "ALKEM": {
       "ticker": "ALKEM",
@@ -358,12 +402,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-07-30T09:30:51.716Z",
+          "relVol": 2,
+          "confidence": 7.1,
+          "components": {
+            "technical": 52,
+            "flow": 62,
+            "catalyst": 5,
+            "liquidity": 65
+          },
+          "discoveryScore": 72.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 271596,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 2<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 17.3,
       "confidenceTrend": "falling",
-      "confidenceSlope": -2.05,
+      "confidenceSlope": -1.79,
       "trendBonus": 0
     },
     "NESTLEIND": {
