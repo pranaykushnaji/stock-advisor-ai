@@ -1,6 +1,120 @@
 {
   "bouquet": [
     {
+      "ticker": "TVSMOTOR",
+      "fullName": "TVS Motor Company Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 79,
+        "flow": 92,
+        "catalyst": 5,
+        "liquidity": 75
+      },
+      "expectedEdge": {
+        "expectedGainPct": 12.1,
+        "expectedLossPct": 4.3,
+        "probability": 0.648,
+        "edgePct": 6.33,
+        "calibration": "none"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 79,
+            "weight": 0.4,
+            "contribution": 31.6
+          },
+          "flow": {
+            "score": 92,
+            "weight": 0.4,
+            "contribution": 36.8
+          },
+          "liquidity": {
+            "score": 75,
+            "weight": 0.2,
+            "contribution": 15
+          }
+        },
+        "base": 83.4,
+        "regimeScore": 49,
+        "regimeAdjustment": -5.2,
+        "trendBonus": 0,
+        "final": 78.2
+      },
+      "confidence": 62.8,
+      "effectiveConfidence": 78.2,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-07-30T04:30:53.735Z",
+      "verdict": "WATCH",
+      "composite": 59.9,
+      "date": "2026-07-30",
+      "addedAt": "2026-07-30T04:30:53.735Z",
+      "investedAmount": 9000,
+      "entryPrice": 4168.5,
+      "currentPrice": 4168.5,
+      "shares": 2.159,
+      "peakPrice": 4168.5,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 2793.6,
+      "todayChangePct": 49.22,
+      "lastPriceUpdate": "2026-07-30T04:30:53.735Z",
+      "yahooSymbol": "TVSMOTOR.NS",
+      "niftyAtEntry": 24274.25,
+      "niftyNow": 24274.25,
+      "estimatedUpside": "10-12%",
+      "riskLevel": "Medium",
+      "summary": "TVSMOTOR is showing strong short‑term momentum with a 3.81× volume spike, solid technical positioning and outperformance versus the Nifty. The reward‑to‑risk profile (~2.8) suggests a potential 10‑12% upside over the next 5‑10 days, making it a viable swing trade despite the lack of news. Institutional buying further supports the upward bias.",
+      "whyToday": "The exceptional volume surge (3.81× the 20‑day average) signals fresh buying pressure and validates a momentum‑based entry today.",
+      "factors": {
+        "momentum": {
+          "score": 75,
+          "positives": [
+            "Momentum score 75 and Relative‑strength score 75",
+            "Technical score 80 with price above short‑term moving averages",
+            "Relative volume today 3.81× the 20‑day average",
+            "Relative strength vs Nifty 18.19, indicating outperformance",
+            "Institutional accumulation rating 94.6/100"
+          ],
+          "negatives": [
+            "No identifiable news catalyst (unverified)",
+            "Neutral market regime (v2 score 49, confidence 65)",
+            "Sector rating modest at 63, composite signal only 59.9 (watch)",
+            "Potential downside risk ~4.3% if broader index pulls back"
+          ]
+        },
+        "relStrength": {
+          "score": 75
+        },
+        "volume": {
+          "score": 75
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 80
+        },
+        "sector": {
+          "score": 63
+        }
+      }
+    },
+    {
       "ticker": "RADICO",
       "fullName": "Radico Khaitan Limited",
       "sector": "UNKNOWN",
