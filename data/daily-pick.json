@@ -1,26 +1,171 @@
 {
   "pick": {
-    "date": "2026-07-29",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-29T09:30:29.005Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 69, conf 71) — trend 58, breadth 75, vol-factor 80",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "DIVISLAB",
-        "relVol": 2.58,
-        "confidence": 42.1,
-        "effectiveConfidence": 77.3,
-        "institutional": 93,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
+    "ticker": "TVSMOTOR",
+    "fullName": "TVS Motor Company Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 75,
+        "positives": [
+          "Momentum score 75 and Relative‑strength score 75",
+          "Technical score 80 with price above short‑term moving averages",
+          "Relative volume today 3.81× the 20‑day average",
+          "Relative strength vs Nifty 18.19, indicating outperformance",
+          "Institutional accumulation rating 94.6/100"
+        ],
+        "negatives": [
+          "No identifiable news catalyst (unverified)",
+          "Neutral market regime (v2 score 49, confidence 65)",
+          "Sector rating modest at 63, composite signal only 59.9 (watch)",
+          "Potential downside risk ~4.3% if broader index pulls back"
+        ]
+      },
+      "relStrength": {
+        "score": 75
+      },
+      "volume": {
+        "score": 75
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 80
+      },
+      "sector": {
+        "score": 63
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.02279416530517158,
+      "r1w": 0.06344710140156946,
+      "r1m": 0.1930452203777905
+    },
+    "volumeRatio": 1.09,
+    "relVol": 3.81,
+    "relStrength": 18.19,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 62.8,
+    "effectiveConfidence": 78.2,
+    "confidenceComponents": {
+      "technical": 79,
+      "flow": 92,
+      "catalyst": 5,
+      "liquidity": 75
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 79,
+          "weight": 0.4,
+          "contribution": 31.6
+        },
+        "flow": {
+          "score": 92,
+          "weight": 0.4,
+          "contribution": 36.8
+        },
+        "liquidity": {
+          "score": 75,
+          "weight": 0.2,
+          "contribution": 15
+        }
+      },
+      "base": 83.4,
+      "regimeScore": 49,
+      "regimeAdjustment": -5.2,
+      "trendBonus": 0,
+      "final": 78.2
+    },
+    "expectedEdge": {
+      "expectedGainPct": 12.1,
+      "expectedLossPct": 4.3,
+      "probability": 0.648,
+      "edgePct": 6.33,
+      "calibration": "none"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 94.6,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 68.4,
+    "discoveryReasons": [
+      "closing near highs"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 2.78,
+      "upsidePct": 12.1,
+      "downsidePct": 4.3
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 49, conf 65) — trend 56, breadth 39, vol-factor 81",
+    "regimeConfidence": 65,
+    "regimeFactors": {
+      "indexTrend": 56,
+      "volatility": 81,
+      "breadth": 39,
+      "momentumBreadth": 27,
+      "largeCap": 50,
+      "gapEnv": 39,
+      "riskAppetite": 44,
+      "sectorPart": 33
+    },
+    "annualizedVol": 27.6,
+    "composite": 59.9,
+    "verdict": "WATCH",
+    "estimatedUpside": "10-12%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the move is driven by technical momentum and a sharp volume surge.",
+    "summary": "TVSMOTOR is showing strong short‑term momentum with a 3.81× volume spike, solid technical positioning and outperformance versus the Nifty. The reward‑to‑risk profile (~2.8) suggests a potential 10‑12% upside over the next 5‑10 days, making it a viable swing trade despite the lack of news. Institutional buying further supports the upward bias.",
+    "whyToday": "The exceptional volume surge (3.81× the 20‑day average) signals fresh buying pressure and validates a momentum‑based entry today.",
+    "date": "2026-07-30",
+    "pickedAt": "2026-07-30T04:30:53.735Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 170,
+      "nseUniverse": 170,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-07-30T04:16:11.206Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 2,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 2,
+      "catalystChecked": 2,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 4168.5,
+    "entryRejected": null
   }
 }
