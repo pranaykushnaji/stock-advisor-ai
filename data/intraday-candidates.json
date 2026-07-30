@@ -1,28 +1,28 @@
 {
-  "date": "2026-07-29",
+  "date": "2026-07-30",
   "candidates": {
-    "RADICO": {
-      "ticker": "RADICO",
-      "fullName": "Radico Khaitan Limited",
+    "TVSMOTOR": {
+      "ticker": "TVSMOTOR",
+      "fullName": "TVS Motor Company Limited",
       "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "bought",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-07-29T04:30:25.374Z",
-          "relVol": 9.76,
-          "confidence": 42.7,
+          "ts": "2026-07-30T04:30:51.730Z",
+          "relVol": 3.81,
+          "confidence": 62.8,
           "components": {
-            "technical": 81,
-            "flow": 78,
+            "technical": 79,
+            "flow": 92,
             "catalyst": 5,
-            "liquidity": 74
+            "liquidity": 75
           },
-          "discoveryScore": 80.3,
+          "discoveryScore": 68.4,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 600884,
+          "volume": 672461,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -32,208 +32,46 @@
         }
       ],
       "lastSeen": "10:00",
-      "bestConfidence": 42.7,
+      "bestConfidence": 62.8,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
     },
-    "OFSS": {
-      "ticker": "OFSS",
-      "fullName": "Oracle Financial Services Software Limited",
+    "EICHERMOT": {
+      "ticker": "EICHERMOT",
+      "fullName": "Eicher Motors Limited",
       "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-07-29T04:30:25.375Z",
-          "relVol": 1.84,
-          "confidence": 35.4,
+          "ts": "2026-07-30T04:30:51.731Z",
+          "relVol": 5.1,
+          "confidence": 25.5,
           "components": {
-            "technical": 54,
-            "flow": 58,
-            "catalyst": 5,
-            "liquidity": 64
+            "technical": 60,
+            "flow": 65,
+            "catalyst": 35,
+            "liquidity": 77
           },
-          "discoveryScore": 66.4,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 127078,
+          "discoveryScore": 62.9,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 403799,
           "sessionFrac": 0.15,
           "missing": [
-            "relVol 1.84<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
+            "catalyst PARTIAL (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
         }
       ],
       "lastSeen": "10:00",
-      "bestConfidence": 35.4,
+      "bestConfidence": 25.5,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
-    },
-    "DIVISLAB": {
-      "ticker": "DIVISLAB",
-      "fullName": "Divi's Laboratories Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "12:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "12:00",
-          "ts": "2026-07-29T06:30:26.174Z",
-          "relVol": 2.07,
-          "confidence": 50.6,
-          "components": {
-            "technical": 82,
-            "flow": 67,
-            "catalyst": 5,
-            "liquidity": 76
-          },
-          "discoveryScore": 76,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 398706,
-          "sessionFrac": 0.44,
-          "missing": [
-            "relVol 2.07<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-07-29T07:30:25.669Z",
-          "relVol": 2.12,
-          "confidence": 50.9,
-          "components": {
-            "technical": 82,
-            "flow": 68,
-            "catalyst": 5,
-            "liquidity": 82
-          },
-          "discoveryScore": 80.3,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 555465,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-07-29T08:30:22.041Z",
-          "relVol": 2.67,
-          "confidence": 41.9,
-          "components": {
-            "technical": 71,
-            "flow": 81,
-            "catalyst": 5,
-            "liquidity": 89
-          },
-          "discoveryScore": 83.3,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 871041,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-07-29T09:30:25.643Z",
-          "relVol": 2.58,
-          "confidence": 42.1,
-          "components": {
-            "technical": 71,
-            "flow": 80,
-            "catalyst": 5,
-            "liquidity": 92
-          },
-          "discoveryScore": 78.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1018786,
-          "sessionFrac": 0.92,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 50.9,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -3.45,
-      "trendBonus": 0
-    },
-    "CHOLAFIN": {
-      "ticker": "CHOLAFIN",
-      "fullName": "Cholamandalam Investment and Finance Company Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "12:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "12:00",
-          "ts": "2026-07-29T06:30:26.175Z",
-          "relVol": 2.83,
-          "confidence": 34.8,
-          "components": {
-            "technical": 54,
-            "flow": 73,
-            "catalyst": 35,
-            "liquidity": 77
-          },
-          "discoveryScore": 69.5,
-          "catalystType": "earnings beat",
-          "verification": "PARTIAL",
-          "volume": 1788315,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst PARTIAL (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-07-29T07:30:25.670Z",
-          "relVol": 2.38,
-          "confidence": 35.1,
-          "components": {
-            "technical": 54,
-            "flow": 68,
-            "catalyst": 35,
-            "liquidity": 79
-          },
-          "discoveryScore": 68.9,
-          "catalystType": "earnings beat",
-          "verification": "PARTIAL",
-          "volume": 2043426,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst PARTIAL (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "13:00",
-      "bestConfidence": 35.1,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.3,
-      "trendBonus": 0.2
     }
   }
 }
