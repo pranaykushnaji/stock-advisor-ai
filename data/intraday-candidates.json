@@ -65,13 +65,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-31T05:30:51.097Z",
+          "relVol": 3.71,
+          "confidence": 24.6,
+          "components": {
+            "technical": 58,
+            "flow": 58,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 75,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3507455,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 24.2,
+      "lastSeen": "11:00",
+      "bestConfidence": 24.6,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.4,
+      "trendBonus": 0.2
     },
     "HAL": {
       "ticker": "HAL",
@@ -106,6 +128,78 @@
       ],
       "lastSeen": "10:00",
       "bestConfidence": 33.1,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "SIEMENS": {
+      "ticker": "SIEMENS",
+      "fullName": "Siemens Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-31T05:30:51.097Z",
+          "relVol": 2.2,
+          "confidence": 58.1,
+          "components": {
+            "technical": 82,
+            "flow": 74,
+            "catalyst": 5,
+            "liquidity": 54
+          },
+          "discoveryScore": 73.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 210989,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 58.1,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "CHOLAFIN": {
+      "ticker": "CHOLAFIN",
+      "fullName": "Cholamandalam Investment and Finance Company Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-07-31T05:30:51.097Z",
+          "relVol": 2.19,
+          "confidence": 43.6,
+          "components": {
+            "technical": 60,
+            "flow": 71,
+            "catalyst": 26,
+            "liquidity": 67
+          },
+          "discoveryScore": 69.2,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 944123,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 43.6,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
