@@ -1,169 +1,52 @@
 {
   "pick": {
-    "ticker": "DIVISLAB",
-    "fullName": "Divi's Laboratories Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 83.3,
-        "positives": [
-          "Momentum score 83.3",
-          "Relative‑strength score 83.3",
-          "Relative volume 2.57× today vs 20‑day average",
-          "Weekly return ~9.9% and monthly return ~22.7%"
-        ],
-        "negatives": [
-          "No identifiable news catalyst",
-          "Sector score 58 (only moderate strength)",
-          "Multi‑signal confidence 59.6 (below strong‑signal threshold)"
-        ]
-      },
-      "relStrength": {
-        "score": 83.3
-      },
-      "volume": {
-        "score": 83.3
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 77.5
-      },
-      "sector": {
-        "score": 58
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.03134433810777828,
-      "r1w": 0.09904175222450376,
-      "r1m": 0.226567871056451
-    },
-    "volumeRatio": 1.3,
-    "relVol": 2.57,
-    "relStrength": 21.92,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 59.6,
-    "effectiveConfidence": 78.2,
-    "confidenceComponents": {
-      "technical": 84,
-      "flow": 87,
-      "catalyst": 5,
-      "liquidity": 64
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 84,
-          "weight": 0.4,
-          "contribution": 33.6
-        },
-        "flow": {
-          "score": 87,
-          "weight": 0.4,
-          "contribution": 34.8
-        },
-        "liquidity": {
-          "score": 64,
-          "weight": 0.2,
-          "contribution": 12.8
-        }
-      },
-      "base": 81.2,
-      "regimeScore": 61,
-      "regimeAdjustment": -3,
-      "trendBonus": 0,
-      "final": 78.2
-    },
-    "expectedEdge": {
-      "expectedGainPct": 13.1,
-      "expectedLossPct": 4,
-      "probability": 0.648,
-      "edgePct": 7.08,
-      "calibration": "none"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 91.4,
-    "institutionalFlags": [
-      "up-day volume dominant"
-    ],
-    "discoveryScore": 74.6,
-    "discoveryReasons": [
-      "fresh filing"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 3.27,
-      "upsidePct": 13.1,
-      "downsidePct": 4
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 61, conf 81) — trend 56, breadth 63, vol-factor 81",
-    "regimeConfidence": 81,
-    "regimeFactors": {
-      "indexTrend": 56,
-      "volatility": 81,
-      "breadth": 63,
-      "momentumBreadth": 59,
-      "largeCap": 50,
-      "gapEnv": 53,
-      "riskAppetite": 59,
-      "sectorPart": 61
-    },
-    "annualizedVol": 23.3,
-    "composite": 64.8,
-    "verdict": "WATCH",
-    "estimatedUpside": "12-14%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "No identifiable catalyst; the move is driven by pure price/volume momentum.",
-    "summary": "DIVISLAB is exhibiting strong short‑term momentum with a 2.57× volume surge and outperformance of ~22% versus Nifty over the past month. In a neutral market regime, the stock’s technicals and institutional accumulation suggest a 5‑10‑day swing could capture ~13% upside, though the absence of a fundamental catalyst adds risk.",
-    "whyToday": "Today's 2.57× relative volume spike indicating fresh institutional buying pressure.",
     "date": "2026-07-31",
-    "pickedAt": "2026-07-31T04:30:53.593Z",
-    "discovery": {
-      "news": 0,
-      "movers": 40,
-      "nseSnapshot": 179,
-      "nseUniverse": 179,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-07-31T04:16:04.333Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-07-31T05:30:53.618Z",
+    "regime": "bullish",
+    "market": "bullish (v2 score 63, conf 76) — trend 56, breadth 66, vol-factor 81",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "SIEMENS",
+        "relVol": 2.2,
+        "confidence": 58.1,
+        "effectiveConfidence": 71.7,
+        "institutional": 89.7,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 0,
+        "negative": false
+      },
+      {
+        "ticker": "CHOLAFIN",
+        "relVol": 2.19,
+        "confidence": 43.6,
+        "effectiveConfidence": 65.4,
+        "institutional": 61.3,
+        "catalyst": "earnings beat",
+        "verification": "PARTIAL",
+        "filing": false,
+        "sources": 1,
+        "articles": 11,
+        "negative": false
+      },
+      {
+        "ticker": "ABCAPITAL",
+        "relVol": 3.71,
+        "confidence": 24.6,
+        "effectiveConfidence": 60,
+        "institutional": 46.5,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
       }
-    },
-    "candidatePool": 3,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 3,
-      "catalystChecked": 3,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 8028.5,
-    "entryRejected": null
+    ]
   }
 }
