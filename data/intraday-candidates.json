@@ -87,13 +87,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-31T06:30:51.849Z",
+          "relVol": 2.91,
+          "confidence": 16.1,
+          "components": {
+            "technical": 52,
+            "flow": 56,
+            "catalyst": 5,
+            "liquidity": 67
+          },
+          "discoveryScore": 77.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4322957,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 24.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.4,
-      "trendBonus": 0.2
+      "confidenceTrend": "falling",
+      "confidenceSlope": -4.05,
+      "trendBonus": 0
     },
     "HAL": {
       "ticker": "HAL",
@@ -160,12 +182,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-31T06:30:51.849Z",
+          "relVol": 2.06,
+          "confidence": 38.4,
+          "components": {
+            "technical": 63,
+            "flow": 70,
+            "catalyst": 5,
+            "liquidity": 61
+          },
+          "discoveryScore": 72.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 310089,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.06<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 58.1,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -19.7,
       "trendBonus": 0
     },
     "CHOLAFIN": {
@@ -196,10 +241,141 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-31T06:30:51.849Z",
+          "relVol": 2.04,
+          "confidence": 34,
+          "components": {
+            "technical": 52,
+            "flow": 73,
+            "catalyst": 5,
+            "liquidity": 73
+          },
+          "discoveryScore": 73.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1376973,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.04<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 43.6,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -9.6,
+      "trendBonus": 0
+    },
+    "BAJAJFINSV": {
+      "ticker": "BAJAJFINSV",
+      "fullName": "Bajaj Finserv Ltd.",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-31T06:30:51.849Z",
+          "relVol": 2.69,
+          "confidence": 68.3,
+          "components": {
+            "technical": 82,
+            "flow": 71,
+            "catalyst": 35,
+            "liquidity": 76
+          },
+          "discoveryScore": 74.7,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1534258,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 68.3,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "BAJFINANCE": {
+      "ticker": "BAJFINANCE",
+      "fullName": "Bajaj Finance Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-31T06:30:51.849Z",
+          "relVol": 6.59,
+          "confidence": 73.8,
+          "components": {
+            "technical": 81,
+            "flow": 88,
+            "catalyst": 35,
+            "liquidity": 95
+          },
+          "discoveryScore": 90.8,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 24261864,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 73.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "TORNTPHARM": {
+      "ticker": "TORNTPHARM",
+      "fullName": "Torrent Pharmaceuticals Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-07-31T06:30:51.849Z",
+          "relVol": 2.1,
+          "confidence": 26.5,
+          "components": {
+            "technical": 72,
+            "flow": 49,
+            "catalyst": 5,
+            "liquidity": 80
+          },
+          "discoveryScore": 85,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 760259,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 26.5,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
