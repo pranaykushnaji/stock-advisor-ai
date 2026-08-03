@@ -1,22 +1,172 @@
 {
   "pick": {
-    "date": "2026-08-03",
-    "noTrade": true,
-    "reason": "ABCAPITAL failed bullish-market entry gates: reward/risk 1.47 < 1.5",
-    "pickedAt": "2026-08-03T04:30:53.262Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 70, conf 57) — trend 57, breadth 82, vol-factor 81",
-    "candidate": {
-      "ticker": "ABCAPITAL",
-      "confidence": 52.5,
-      "effectiveConfidence": 75.1,
-      "rewardRisk": {
-        "rr": 1.47,
-        "upsidePct": 7.3,
-        "downsidePct": 5
+    "ticker": "ABCAPITAL",
+    "fullName": "Aditya Birla Capital Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 16.7,
+        "positives": [
+          "Technical score 85.1 (strong chart support)",
+          "Volume score 83.3 with today’s volume 6.41x 20‑day average",
+          "Relative strength vs Nifty 5.19 (outperforming the index)",
+          "Short‑term returns: +5.7% d1, +6.7% w1, +6.5% m1"
+        ],
+        "negatives": [
+          "Low momentum and relative‑strength scores (16.7 each)",
+          "Composite score 40.7 (AVOID) and multi‑signal confidence 43.8",
+          "Potential pull‑back if earnings beat does not sustain price"
+        ]
       },
-      "catalyst": "earnings beat",
-      "verification": "PARTIAL"
-    }
+      "relStrength": {
+        "score": 16.7
+      },
+      "volume": {
+        "score": 83.3
+      },
+      "catalyst": {
+        "score": 40
+      },
+      "technicals": {
+        "score": 85.1
+      },
+      "sector": {
+        "score": 67
+      }
+    },
+    "shortReturns": {
+      "r1d": 0.05701216672395789,
+      "r1w": 0.0671744114782975,
+      "r1m": 0.06504674418321651
+    },
+    "volumeRatio": 1.21,
+    "relVol": 6.41,
+    "relStrength": 5.19,
+    "catalyst": {
+      "type": "earnings beat",
+      "confidence": 92,
+      "impact": 8,
+      "stars": 4,
+      "points": 16,
+      "verification": "PARTIAL",
+      "sources": 1,
+      "summary": "Q1 profit up 40% YoY, surpassing market expectations.",
+      "impactClass": "high+",
+      "decay": 0.998,
+      "influenceDays": 6,
+      "recalled": false
+    },
+    "confidence": 43.8,
+    "effectiveConfidence": 72.2,
+    "confidenceComponents": {
+      "technical": 56,
+      "flow": 87,
+      "catalyst": 35,
+      "liquidity": 75
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 56,
+          "weight": 0.4,
+          "contribution": 22.4
+        },
+        "flow": {
+          "score": 87,
+          "weight": 0.4,
+          "contribution": 34.8
+        },
+        "liquidity": {
+          "score": 75,
+          "weight": 0.2,
+          "contribution": 15
+        }
+      },
+      "base": 72.2,
+      "regimeScore": 72,
+      "regimeAdjustment": 0,
+      "trendBonus": 0,
+      "final": 72.2
+    },
+    "expectedEdge": {
+      "expectedGainPct": 7.6,
+      "expectedLossPct": 5,
+      "probability": 0.697,
+      "edgePct": 3.78,
+      "calibration": "none"
+    },
+    "confidenceTrend": "falling",
+    "trendBonus": 0,
+    "institutional": 78.9,
+    "institutionalFlags": [
+      "up-day volume dominant",
+      "volume expanding"
+    ],
+    "discoveryScore": 86.3,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "fresh filing"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 1.52,
+      "upsidePct": 7.6,
+      "downsidePct": 5
+    },
+    "regime": "bullish",
+    "market": "bullish (v2 score 72, conf 61) — trend 57, breadth 84, vol-factor 80",
+    "regimeConfidence": 61,
+    "regimeFactors": {
+      "indexTrend": 57,
+      "volatility": 80,
+      "breadth": 84,
+      "momentumBreadth": 100,
+      "largeCap": 50,
+      "gapEnv": 58,
+      "riskAppetite": 59,
+      "sectorPart": 94
+    },
+    "annualizedVol": 31.9,
+    "composite": 40.7,
+    "verdict": "AVOID",
+    "estimatedUpside": "7-9%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "Q1 profit jumped 40% YoY, beating market expectations in a partial earnings‑beat.",
+    "summary": "ABCAPITAL posted a strong earnings beat, confirming underlying fundamentals, while a surge in volume (6.41x average) and robust technicals have created a short‑term bullish setup. In a bullish market regime, the stock can target ~7‑9% upside over the next 5‑10 days with limited downside risk. The trade leans on momentum and volume rather than the earnings news alone.",
+    "whyToday": "Today's exceptional volume spike (6.41x normal) signals decisive buying pressure and institutional accumulation, making it the optimal entry point.",
+    "date": "2026-08-03",
+    "pickedAt": "2026-08-03T05:30:52.910Z",
+    "discovery": {
+      "news": 8,
+      "movers": 40,
+      "nseSnapshot": 195,
+      "nseUniverse": 195,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-08-03T05:16:11.806Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 3,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 3,
+      "catalystChecked": 3,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 427.35,
+    "entryRejected": null
   }
 }
