@@ -1,65 +1,22 @@
 {
   "pick": {
-    "date": "2026-07-31",
+    "date": "2026-08-03",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-07-31T09:30:53.108Z",
+    "reason": "ABCAPITAL failed bullish-market entry gates: reward/risk 1.47 < 1.5",
+    "pickedAt": "2026-08-03T04:30:53.262Z",
     "regime": "bullish",
-    "market": "bullish (v2 score 63, conf 80) — trend 56, breadth 66, vol-factor 81",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "BAJFINANCE",
-        "relVol": 4.55,
-        "confidence": 74.9,
-        "effectiveConfidence": 85.8,
-        "institutional": 92.7,
-        "catalyst": "earnings beat",
-        "verification": "PARTIAL",
-        "filing": false,
-        "sources": 1,
-        "articles": 12,
-        "negative": false
+    "market": "bullish (v2 score 70, conf 57) — trend 57, breadth 82, vol-factor 81",
+    "candidate": {
+      "ticker": "ABCAPITAL",
+      "confidence": 52.5,
+      "effectiveConfidence": 75.1,
+      "rewardRisk": {
+        "rr": 1.47,
+        "upsidePct": 7.3,
+        "downsidePct": 5
       },
-      {
-        "ticker": "BAJAJFINSV",
-        "relVol": 2.71,
-        "confidence": 48.9,
-        "effectiveConfidence": 70.3,
-        "institutional": 60.7,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 9,
-        "negative": false
-      },
-      {
-        "ticker": "GAIL",
-        "relVol": 4.21,
-        "confidence": 38.2,
-        "effectiveConfidence": 74,
-        "institutional": 68.8,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 7,
-        "negative": false
-      },
-      {
-        "ticker": "ABCAPITAL",
-        "relVol": 3.18,
-        "confidence": 15.9,
-        "effectiveConfidence": 61,
-        "institutional": 56.4,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
-      }
-    ]
+      "catalyst": "earnings beat",
+      "verification": "PARTIAL"
+    }
   }
 }
