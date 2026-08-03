@@ -51,12 +51,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-03T06:30:54.960Z",
+          "relVol": 1.89,
+          "confidence": 50.1,
+          "components": {
+            "technical": 78,
+            "flow": 46,
+            "catalyst": 5,
+            "liquidity": 82
+          },
+          "discoveryScore": 83.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3010788,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.89<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 58.2,
       "confidenceTrend": "falling",
-      "confidenceSlope": -6.5,
+      "confidenceSlope": -4.05,
       "trendBonus": 0
     },
     "ABCAPITAL": {
@@ -181,10 +204,106 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-03T06:30:54.961Z",
+          "relVol": 1.95,
+          "confidence": 23.4,
+          "components": {
+            "technical": 66,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 81
+          },
+          "discoveryScore": 82.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 495914,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.95<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 41.6,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -18.2,
+      "trendBonus": 0
+    },
+    "BAJAJFINSV": {
+      "ticker": "BAJAJFINSV",
+      "fullName": "Bajaj Finserv Ltd.",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-03T06:30:54.960Z",
+          "relVol": 1.93,
+          "confidence": 75.4,
+          "components": {
+            "technical": 77,
+            "flow": 73,
+            "catalyst": 35,
+            "liquidity": 72
+          },
+          "discoveryScore": 73.5,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1128033,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.93<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 75.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "ABB": {
+      "ticker": "ABB",
+      "fullName": "ABB India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-03T06:30:54.961Z",
+          "relVol": 3.47,
+          "confidence": 32.1,
+          "components": {
+            "technical": 51,
+            "flow": 88,
+            "catalyst": 5,
+            "liquidity": 84
+          },
+          "discoveryScore": 70.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 643720,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 32.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
