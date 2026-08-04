@@ -455,6 +455,39 @@
       "exitSource": "rule",
       "realizedPnl": 363.33,
       "realizedPnlPct": 4.04
+    },
+    {
+      "ticker": "DIVISLAB",
+      "fullName": "Divi's Laboratories Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 13.1,
+        "expectedLossPct": 4,
+        "probability": 0.648,
+        "edgePct": 7.08,
+        "calibration": "none"
+      },
+      "confidenceComponents": {
+        "technical": 84,
+        "flow": 87,
+        "catalyst": 5,
+        "liquidity": 64
+      },
+      "effectiveConfidence": 78.2,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 8028.5,
+      "entryDate": "2026-07-31",
+      "exitPrice": 8269,
+      "exitDate": "2026-08-04",
+      "shares": 1.121,
+      "investedAmount": 9000,
+      "exitReason": "trailing stop (-3.7% from peak, +3.0% locked) [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": 269.6,
+      "realizedPnlPct": 3
     }
   ]
 }
