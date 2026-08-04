@@ -1,212 +1,28 @@
 {
-  "date": "2026-08-03",
+  "date": "2026-08-04",
   "candidates": {
-    "PAYTM": {
-      "ticker": "PAYTM",
-      "fullName": "One97 Communications Limited",
+    "SIEMENS": {
+      "ticker": "SIEMENS",
+      "fullName": "Siemens Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-08-03T04:30:50.660Z",
-          "relVol": 2.1,
-          "confidence": 58.2,
-          "components": {
-            "technical": 78,
-            "flow": 55,
-            "catalyst": 5,
-            "liquidity": 66
-          },
-          "discoveryScore": 83.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1138597,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "11:00",
-          "ts": "2026-08-03T05:30:50.741Z",
-          "relVol": 2.27,
-          "confidence": 51.7,
-          "components": {
-            "technical": 82,
-            "flow": 49,
-            "catalyst": 5,
-            "liquidity": 77
-          },
-          "discoveryScore": 88.8,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2302393,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-08-03T06:30:54.960Z",
-          "relVol": 1.89,
-          "confidence": 50.1,
-          "components": {
-            "technical": 78,
-            "flow": 46,
-            "catalyst": 5,
-            "liquidity": 82
-          },
-          "discoveryScore": 83.5,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 3010788,
-          "sessionFrac": 0.44,
-          "missing": [
-            "relVol 1.89<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-08-03T07:30:50.977Z",
-          "relVol": 2.11,
-          "confidence": 51.5,
-          "components": {
-            "technical": 82,
-            "flow": 48,
-            "catalyst": 5,
-            "liquidity": 89
-          },
-          "discoveryScore": 87.9,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 4585322,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-08-03T08:30:50.869Z",
-          "relVol": 1.86,
-          "confidence": 42.4,
-          "components": {
-            "technical": 74,
-            "flow": 45,
-            "catalyst": 5,
-            "liquidity": 91
-          },
-          "discoveryScore": 85.9,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 5099408,
-          "sessionFrac": 0.76,
-          "missing": [
-            "relVol 1.86<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "14:00",
-      "bestConfidence": 58.2,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -3.18,
-      "trendBonus": 0
-    },
-    "ABCAPITAL": {
-      "ticker": "ABCAPITAL",
-      "fullName": "Aditya Birla Capital Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "10:00",
+      "firstSeen": "10:01",
       "status": "bought",
       "scans": [
         {
-          "hhmm": "10:00",
-          "ts": "2026-08-03T04:30:50.661Z",
-          "relVol": 7.18,
-          "confidence": 52.5,
+          "hhmm": "10:01",
+          "ts": "2026-08-04T04:31:08.382Z",
+          "relVol": 4.5,
+          "confidence": 64.1,
           "components": {
-            "technical": 71,
-            "flow": 86,
-            "catalyst": 20,
-            "liquidity": 66
-          },
-          "discoveryScore": 86.4,
-          "catalystType": "earnings beat",
-          "verification": "PARTIAL",
-          "volume": 3876459,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst PARTIAL (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "11:00",
-          "ts": "2026-08-03T05:30:50.742Z",
-          "relVol": 6.41,
-          "confidence": 43.8,
-          "components": {
-            "technical": 56,
-            "flow": 87,
-            "catalyst": 35,
-            "liquidity": 75
-          },
-          "discoveryScore": 86.3,
-          "catalystType": "earnings beat",
-          "verification": "PARTIAL",
-          "volume": 6457234,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst PARTIAL (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "11:00",
-      "bestConfidence": 52.5,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -8.7,
-      "trendBonus": 0
-    },
-    "LTF": {
-      "ticker": "LTF",
-      "fullName": "L&T Finance Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-08-03T04:30:50.661Z",
-          "relVol": 2.5,
-          "confidence": 9.4,
-          "components": {
-            "technical": 45,
-            "flow": 45,
+            "technical": 78,
+            "flow": 90,
             "catalyst": 5,
-            "liquidity": 55
+            "liquidity": 57
           },
-          "discoveryScore": 64.9,
+          "discoveryScore": 73,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 2560458,
+          "volume": 234918,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -215,243 +31,35 @@
           "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 9.4,
+      "lastSeen": "10:01",
+      "bestConfidence": 64.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "EICHERMOT": {
-      "ticker": "EICHERMOT",
-      "fullName": "Eicher Motors Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-08-03T05:30:50.742Z",
-          "relVol": 2.12,
-          "confidence": 41.6,
-          "components": {
-            "technical": 71,
-            "flow": 75,
-            "catalyst": 5,
-            "liquidity": 75
-          },
-          "discoveryScore": 82.5,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 343691,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-08-03T06:30:54.961Z",
-          "relVol": 1.95,
-          "confidence": 23.4,
-          "components": {
-            "technical": 66,
-            "flow": 69,
-            "catalyst": 5,
-            "liquidity": 81
-          },
-          "discoveryScore": 82.4,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 495914,
-          "sessionFrac": 0.44,
-          "missing": [
-            "relVol 1.95<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-08-03T07:30:50.978Z",
-          "relVol": 1.8,
-          "confidence": 42,
-          "components": {
-            "technical": 71,
-            "flow": 71,
-            "catalyst": 5,
-            "liquidity": 84
-          },
-          "discoveryScore": 77.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 624802,
-          "sessionFrac": 0.6,
-          "missing": [
-            "relVol 1.8<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "13:00",
-      "bestConfidence": 42,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.2,
-      "trendBonus": 0.2
-    },
-    "BAJAJFINSV": {
-      "ticker": "BAJAJFINSV",
-      "fullName": "Bajaj Finserv Ltd.",
-      "sector": "UNKNOWN",
-      "firstSeen": "12:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "12:00",
-          "ts": "2026-08-03T06:30:54.960Z",
-          "relVol": 1.93,
-          "confidence": 75.4,
-          "components": {
-            "technical": 77,
-            "flow": 73,
-            "catalyst": 35,
-            "liquidity": 72
-          },
-          "discoveryScore": 73.5,
-          "catalystType": "earnings beat",
-          "verification": "PARTIAL",
-          "volume": 1128033,
-          "sessionFrac": 0.44,
-          "missing": [
-            "relVol 1.93<2.1",
-            "catalyst PARTIAL (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-08-03T08:30:50.868Z",
-          "relVol": 1.83,
-          "confidence": 58.8,
-          "components": {
-            "technical": 74,
-            "flow": 72,
-            "catalyst": 5,
-            "liquidity": 80
-          },
-          "discoveryScore": 74,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1843111,
-          "sessionFrac": 0.76,
-          "missing": [
-            "relVol 1.83<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "14:00",
-      "bestConfidence": 75.4,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -16.6,
       "trendBonus": 0
     },
     "ABB": {
       "ticker": "ABB",
       "fullName": "ABB India Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "12:00",
+      "firstSeen": "10:01",
       "status": "watching",
       "scans": [
         {
-          "hhmm": "12:00",
-          "ts": "2026-08-03T06:30:54.961Z",
-          "relVol": 3.47,
-          "confidence": 32.1,
+          "hhmm": "10:01",
+          "ts": "2026-08-04T04:31:08.383Z",
+          "relVol": 2.54,
+          "confidence": 18.8,
           "components": {
-            "technical": 51,
-            "flow": 88,
+            "technical": 61,
+            "flow": 70,
             "catalyst": 5,
-            "liquidity": 84
+            "liquidity": 62
           },
-          "discoveryScore": 70.1,
+          "discoveryScore": 74.1,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 643720,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-08-03T07:30:50.978Z",
-          "relVol": 3.4,
-          "confidence": 34.7,
-          "components": {
-            "technical": 52,
-            "flow": 90,
-            "catalyst": 5,
-            "liquidity": 89
-          },
-          "discoveryScore": 85.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 862348,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-08-03T08:30:50.869Z",
-          "relVol": 2.94,
-          "confidence": 25.2,
-          "components": {
-            "technical": 53,
-            "flow": 82,
-            "catalyst": 5,
-            "liquidity": 90
-          },
-          "discoveryScore": 80.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 942060,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-08-03T09:30:45.691Z",
-          "relVol": 2.82,
-          "confidence": 41.7,
-          "components": {
-            "technical": 71,
-            "flow": 81,
-            "catalyst": 5,
-            "liquidity": 93
-          },
-          "discoveryScore": 89.9,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1096620,
-          "sessionFrac": 0.92,
+          "volume": 160935,
+          "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
@@ -459,11 +67,11 @@
           "tradeable": false
         }
       ],
-      "lastSeen": "15:00",
-      "bestConfidence": 41.7,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 1.93,
-      "trendBonus": 2.3
+      "lastSeen": "10:01",
+      "bestConfidence": 18.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
