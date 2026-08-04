@@ -131,13 +131,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-08-04T08:30:52.852Z",
+          "relVol": 1.88,
+          "confidence": 42.5,
+          "components": {
+            "technical": 89,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 83
+          },
+          "discoveryScore": 62.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 603444,
+          "sessionFrac": 0.76,
+          "missing": [
+            "relVol 1.88<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
+      "lastSeen": "14:00",
       "bestConfidence": 55.4,
       "confidenceTrend": "rising",
-      "confidenceSlope": 4.99,
-      "trendBonus": 6
+      "confidenceSlope": 3.23,
+      "trendBonus": 3.9
     },
     "CAMS": {
       "ticker": "CAMS",
@@ -211,13 +234,108 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-08-04T08:30:52.852Z",
+          "relVol": 5.23,
+          "confidence": 51.7,
+          "components": {
+            "technical": 72,
+            "flow": 86,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 68,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4060798,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
-      "bestConfidence": 24.2,
+      "lastSeen": "14:00",
+      "bestConfidence": 51.7,
       "confidenceTrend": "rising",
-      "confidenceSlope": 3.75,
-      "trendBonus": 4.5
+      "confidenceSlope": 10.56,
+      "trendBonus": 8
+    },
+    "GAIL": {
+      "ticker": "GAIL",
+      "fullName": "GAIL (India) Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "14:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "14:00",
+          "ts": "2026-08-04T08:30:52.852Z",
+          "relVol": 1.91,
+          "confidence": 20.6,
+          "components": {
+            "technical": 63,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 71
+          },
+          "discoveryScore": 58.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 12845513,
+          "sessionFrac": 0.76,
+          "missing": [
+            "relVol 1.91<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "14:00",
+      "bestConfidence": 20.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "AUROPHARMA": {
+      "ticker": "AUROPHARMA",
+      "fullName": "Aurobindo Pharma Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "14:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "14:00",
+          "ts": "2026-08-04T08:30:52.853Z",
+          "relVol": 2.67,
+          "confidence": 4.7,
+          "components": {
+            "technical": 43,
+            "flow": 53,
+            "catalyst": 5,
+            "liquidity": 73
+          },
+          "discoveryScore": 62.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1632428,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "14:00",
+      "bestConfidence": 4.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
