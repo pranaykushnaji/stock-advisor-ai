@@ -65,10 +65,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-04T05:30:53.556Z",
+          "relVol": 3.01,
+          "confidence": 55.4,
+          "components": {
+            "technical": 83,
+            "flow": 81,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 70.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 356058,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
-      "bestConfidence": 18.8,
+      "lastSeen": "11:00",
+      "bestConfidence": 55.4,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 36.6,
+      "trendBonus": 4
+    },
+    "CAMS": {
+      "ticker": "CAMS",
+      "fullName": "Computer Age Management Services Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-04T05:30:53.557Z",
+          "relVol": 8.08,
+          "confidence": 16.4,
+          "components": {
+            "technical": 56,
+            "flow": 80,
+            "catalyst": 5,
+            "liquidity": 69
+          },
+          "discoveryScore": 85.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2313469,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 16.4,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
