@@ -1,26 +1,173 @@
 {
   "pick": {
-    "date": "2026-08-03",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-03T09:30:48.767Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 71, conf 61) — trend 57, breadth 77, vol-factor 80",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "ABB",
-        "relVol": 2.82,
-        "confidence": 41.7,
-        "effectiveConfidence": 80.4,
-        "institutional": 88.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 6,
-        "negative": false
+    "ticker": "SIEMENS",
+    "fullName": "Siemens Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 75,
+        "positives": [
+          "Momentum score 75",
+          "Relative‑strength score 75",
+          "Volume score 75 with today’s volume 4.5× 20‑day average",
+          "Technical score 77.4",
+          "Short‑term returns: +7.1% (1d), +8.3% (1w), +13.9% (1m)",
+          "Reward/risk ≈2.15 (upside ~10.4% vs downside ~4.8%)"
+        ],
+        "negatives": [
+          "No identifiable news catalyst",
+          "Composite score 59.8 (watch)",
+          "Neutral market regime (trend 77, breadth 47)",
+          "Sector unknown"
+        ]
+      },
+      "relStrength": {
+        "score": 75
+      },
+      "volume": {
+        "score": 75
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 77.4
+      },
+      "sector": {
+        "score": 67
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.07101063829787234,
+      "r1w": 0.08310919849381387,
+      "r1m": 0.13876083601403827
+    },
+    "volumeRatio": 0.99,
+    "relVol": 4.5,
+    "relStrength": 12.39,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 64.1,
+    "effectiveConfidence": 75.4,
+    "confidenceComponents": {
+      "technical": 78,
+      "flow": 90,
+      "catalyst": 5,
+      "liquidity": 57
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 78,
+          "weight": 0.4,
+          "contribution": 31.2
+        },
+        "flow": {
+          "score": 90,
+          "weight": 0.4,
+          "contribution": 36
+        },
+        "liquidity": {
+          "score": 57,
+          "weight": 0.2,
+          "contribution": 11.4
+        }
+      },
+      "base": 78.6,
+      "regimeScore": 57,
+      "regimeAdjustment": -3.2,
+      "trendBonus": 0,
+      "final": 75.4
+    },
+    "expectedEdge": {
+      "expectedGainPct": 10.4,
+      "expectedLossPct": 4.8,
+      "probability": 0.637,
+      "edgePct": 4.88,
+      "calibration": "lane+regime"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 90.8,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 73,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 2.15,
+      "upsidePct": 10.4,
+      "downsidePct": 4.8
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 57, conf 61) — trend 77, breadth 47, vol-factor 80",
+    "regimeConfidence": 61,
+    "regimeFactors": {
+      "indexTrend": 77,
+      "volatility": 80,
+      "breadth": 47,
+      "momentumBreadth": 32,
+      "largeCap": 50,
+      "gapEnv": 57,
+      "riskAppetite": 48,
+      "sectorPart": 28
+    },
+    "annualizedVol": 30.7,
+    "composite": 59.8,
+    "verdict": "WATCH",
+    "estimatedUpside": "9-11%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the trade relies on pure technical momentum and volume dynamics.",
+    "summary": "SIEMENS is displaying strong short‑term momentum, out‑performing the Nifty with a relative strength of 12.39 and a 4.5× volume surge. The technical and momentum scores are solid, and the reward‑to‑risk ratio (~2.15) supports a target upside of roughly 10% over the next 5‑10 days. While the lack of news adds a pure‑play risk, the price action suggests continued institutional buying.",
+    "whyToday": "Today's exceptional volume spike (4.5× the 20‑day average) confirms strong institutional accumulation and validates entering the momentum lane now.",
+    "date": "2026-08-04",
+    "pickedAt": "2026-08-04T04:31:10.509Z",
+    "discovery": {
+      "news": 11,
+      "movers": 34,
+      "nseSnapshot": 180,
+      "nseUniverse": 180,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-08-04T04:16:23.820Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 2,
+    "pipeline": {
+      "priced": 39,
+      "passedFilter": 2,
+      "catalystChecked": 2,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 4027,
+    "entryRejected": null
   }
 }
