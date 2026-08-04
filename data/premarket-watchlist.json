@@ -1,25 +1,28 @@
 {
-  "date": "2026-08-03",
-  "builtAt": "2026-08-03T02:35:42.671Z",
+  "date": "2026-08-04",
+  "builtAt": "2026-08-04T02:35:46.019Z",
   "marketContext": null,
   "watch": [
     {
-      "ticker": "BAJFINANCE",
-      "source": "warm-carryover",
-      "yBestConf": 74.9,
-      "yLastRelVol": 4.55,
-      "yTrend": "flat",
-      "catalyst": null,
-      "prevClose": 1141.2
+      "ticker": "POWERGRID",
+      "source": "overnight-filing",
+      "catalyst": {
+        "type": "acquisition",
+        "verification": "VERIFIED",
+        "impactClass": "high+",
+        "points": 26,
+        "summary": "Official filing announces acquisition, indicating expansion of assets and market presence."
+      },
+      "prevClose": 287
     },
     {
       "ticker": "BAJAJFINSV",
       "source": "warm-carryover",
-      "yBestConf": 68.3,
-      "yLastRelVol": 2.71,
+      "yBestConf": 75.4,
+      "yLastRelVol": 1.83,
       "yTrend": "falling",
       "catalyst": null,
-      "prevClose": 2031
+      "prevClose": 2096
     }
   ]
 }
