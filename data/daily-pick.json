@@ -1,39 +1,22 @@
 {
   "pick": {
-    "date": "2026-08-04",
+    "date": "2026-08-05",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-04T09:30:54.122Z",
-    "regime": "weak",
-    "market": "weak (v2 score 45, conf 53) — trend 56, breadth 26, vol-factor 81",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "AUROPHARMA",
-        "relVol": 2.66,
-        "confidence": 23,
-        "effectiveConfidence": 65,
-        "institutional": 56.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 4,
-        "negative": false
+    "reason": "PIDILITIND failed bullish-market entry gates: reward/risk 1.18 < 1.5",
+    "pickedAt": "2026-08-05T04:30:27.597Z",
+    "regime": "bullish",
+    "market": "bullish (v2 score 67, conf 76) — trend 64, breadth 69, vol-factor 80",
+    "candidate": {
+      "ticker": "PIDILITIND",
+      "confidence": 28.4,
+      "effectiveConfidence": 68.4,
+      "rewardRisk": {
+        "rr": 1.18,
+        "upsidePct": 4.7,
+        "downsidePct": 4
       },
-      {
-        "ticker": "PIDILITIND",
-        "relVol": 2.42,
-        "confidence": 38.9,
-        "effectiveConfidence": 67.3,
-        "institutional": 69.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
-      }
-    ]
+      "catalyst": "earnings beat",
+      "verification": "PARTIAL"
+    }
   }
 }
