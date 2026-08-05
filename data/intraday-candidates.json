@@ -117,12 +117,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-05T09:30:26.064Z",
+          "relVol": 6.31,
+          "confidence": 56.7,
+          "components": {
+            "technical": 72,
+            "flow": 80,
+            "catalyst": 35,
+            "liquidity": 86
+          },
+          "discoveryScore": 81.3,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 4736536,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 59.3,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -1.93,
+      "confidenceTrend": "flat",
+      "confidenceSlope": -0.06,
       "trendBonus": 0
     },
     "PIDILITIND": {
@@ -314,12 +336,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-05T09:30:26.064Z",
+          "relVol": 4.69,
+          "confidence": 25,
+          "components": {
+            "technical": 65,
+            "flow": 71,
+            "catalyst": 5,
+            "liquidity": 83
+          },
+          "discoveryScore": 78.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 104383,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 41.5,
       "confidenceTrend": "falling",
-      "confidenceSlope": -8.4,
+      "confidenceSlope": -5.69,
       "trendBonus": 0
     }
   }
