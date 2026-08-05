@@ -51,12 +51,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-05T06:30:27.532Z",
+          "relVol": 10.41,
+          "confidence": 48.5,
+          "components": {
+            "technical": 70,
+            "flow": 80,
+            "catalyst": 5,
+            "liquidity": 82
+          },
+          "discoveryScore": 78.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3735076,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 59.3,
       "confidenceTrend": "falling",
-      "confidenceSlope": -18.5,
+      "confidenceSlope": -5.4,
       "trendBonus": 0
     },
     "PIDILITIND": {
@@ -87,12 +109,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-05T06:30:27.532Z",
+          "relVol": 2.16,
+          "confidence": 25,
+          "components": {
+            "technical": 55,
+            "flow": 69,
+            "catalyst": 35,
+            "liquidity": 67
+          },
+          "discoveryScore": 63.7,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1081736,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
+      "lastSeen": "12:00",
       "bestConfidence": 28.4,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -3.4,
       "trendBonus": 0
     },
     "GODREJPROP": {
@@ -127,6 +171,42 @@
       ],
       "lastSeen": "10:00",
       "bestConfidence": 34.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "BOSCHLTD": {
+      "ticker": "BOSCHLTD",
+      "fullName": "Bosch Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-05T06:30:27.531Z",
+          "relVol": 6.81,
+          "confidence": 41.5,
+          "components": {
+            "technical": 82,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 74.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 72495,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 41.5,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
