@@ -2,38 +2,21 @@
   "pick": {
     "date": "2026-08-05",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-05T08:30:27.107Z",
+    "reason": "PNBHOUSING failed neutral-market entry gates: reward/risk 1.09 < 1.8",
+    "pickedAt": "2026-08-05T09:30:29.480Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 54, conf 69) — trend 63, breadth 49, vol-factor 79",
-    "momLaneOpen": true,
-    "considered": [
-      {
-        "ticker": "PNBHOUSING",
-        "relVol": 7,
-        "confidence": 41.6,
-        "effectiveConfidence": 74.1,
-        "institutional": 64.8,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 10,
-        "negative": false
+    "market": "neutral (v2 score 56, conf 73) — trend 63, breadth 52, vol-factor 79",
+    "candidate": {
+      "ticker": "PNBHOUSING",
+      "confidence": 56.7,
+      "effectiveConfidence": 74.7,
+      "rewardRisk": {
+        "rr": 1.09,
+        "upsidePct": 5.6,
+        "downsidePct": 5.1
       },
-      {
-        "ticker": "BOSCHLTD",
-        "relVol": 4.88,
-        "confidence": 24.7,
-        "effectiveConfidence": 67.9,
-        "institutional": 72.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 0,
-        "negative": false
-      }
-    ]
+      "catalyst": "earnings beat",
+      "verification": "PARTIAL"
+    }
   }
 }
