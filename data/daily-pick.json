@@ -1,176 +1,65 @@
 {
   "pick": {
-    "ticker": "HAL",
-    "fullName": "Hindustan Aeronautics Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 75,
-        "positives": [
-          "Momentum score 75",
-          "Technical score 80.8",
-          "Relative volume 13.84x vs 20‑day average",
-          "Institutional accumulation 76.6/100",
-          "Reward/Risk ≈ 2.24 (upside ~9.6% vs downside ~4.3%)"
-        ],
-        "negatives": [
-          "Relative‑strength score only 25",
-          "No news catalyst",
-          "Composite confidence 50.8 (watch)",
-          "Neutral market regime (trend 63, breadth 49)"
-        ]
-      },
-      "relStrength": {
-        "score": 25
-      },
-      "volume": {
-        "score": 75
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 80.8
-      },
-      "sector": {
-        "score": 79
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.0535199349098493,
-      "r1w": 0.06814515256631162,
-      "r1m": 0.12117668537962029
-    },
-    "volumeRatio": 1.38,
-    "relVol": 13.84,
-    "relStrength": 9,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 49.6,
-    "effectiveConfidence": 76.1,
-    "confidenceComponents": {
-      "technical": 71,
-      "flow": 84,
-      "catalyst": 5,
-      "liquidity": 89
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 71,
-          "weight": 0.4,
-          "contribution": 28.4
-        },
-        "flow": {
-          "score": 84,
-          "weight": 0.4,
-          "contribution": 33.6
-        },
-        "liquidity": {
-          "score": 89,
-          "weight": 0.2,
-          "contribution": 17.8
-        }
-      },
-      "base": 79.8,
-      "regimeScore": 55,
-      "regimeAdjustment": -3.7,
-      "trendBonus": 0,
-      "final": 76.1
-    },
-    "expectedEdge": {
-      "expectedGainPct": 9.6,
-      "expectedLossPct": 4.3,
-      "probability": 0.612,
-      "edgePct": 4.21,
-      "calibration": "lane+regime"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 76.6,
-    "institutionalFlags": [
-      "up-day volume dominant",
-      "volume expanding"
-    ],
-    "discoveryScore": 81.6,
-    "discoveryReasons": [
-      "closing near highs",
-      "leading market breadth"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 2.24,
-      "upsidePct": 9.6,
-      "downsidePct": 4.3
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 55, conf 68) — trend 63, breadth 49, vol-factor 80",
-    "regimeConfidence": 68,
-    "regimeFactors": {
-      "indexTrend": 63,
-      "volatility": 80,
-      "breadth": 49,
-      "momentumBreadth": 24,
-      "largeCap": 50,
-      "gapEnv": 52,
-      "riskAppetite": 51,
-      "sectorPart": 56
-    },
-    "annualizedVol": 27.2,
-    "composite": 50.8,
-    "verdict": "WATCH",
-    "estimatedUpside": "9-10%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "No specific catalyst; the price action is driven purely by technical momentum and unusually high trading volume.",
-    "summary": "HAL is exhibiting strong short‑term momentum with a near‑14x surge in volume and solid institutional buying, backed by bullish technicals. The reward‑to‑risk profile (~2.2) suggests a potential 9‑10% upside over the next 5‑10 days, despite the absence of a news catalyst. Caution is warranted given the low relative‑strength and neutral market backdrop.",
-    "whyToday": "The spike in relative volume to 13.84× the 20‑day average indicates a decisive shift in buying pressure, making today the optimal entry point.",
     "date": "2026-08-06",
-    "pickedAt": "2026-08-06T04:30:54.692Z",
-    "discovery": {
-      "news": 7,
-      "movers": 40,
-      "nseSnapshot": 168,
-      "nseUniverse": 168,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-06T04:16:16.122Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-06T05:30:55.764Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 61, conf 66) — trend 83, breadth 47, vol-factor 80",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "SHRIRAMFIN",
+        "relVol": 4.24,
+        "confidence": 58.1,
+        "effectiveConfidence": 87.8,
+        "institutional": 90.2,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 0,
+        "negative": false
+      },
+      {
+        "ticker": "PNBHOUSING",
+        "relVol": 3.27,
+        "confidence": 41.1,
+        "effectiveConfidence": 71.5,
+        "institutional": 76.3,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 12,
+        "negative": false
+      },
+      {
+        "ticker": "TITAN",
+        "relVol": 2.16,
+        "confidence": 14.3,
+        "effectiveConfidence": 66.6,
+        "institutional": 87.3,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
+      },
+      {
+        "ticker": "BIOCON",
+        "relVol": 2.52,
+        "confidence": 23,
+        "effectiveConfidence": 57.1,
+        "institutional": 32.4,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
       }
-    },
-    "candidatePool": 2,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 2,
-      "catalystChecked": 2,
-      "tradeable": 2
-    },
-    "runnerUp": {
-      "ticker": "SHRIRAMFIN",
-      "composite": 37.6
-    },
-    "entryPrice": 4893.6,
-    "entryRejected": null
+    ]
   }
 }
