@@ -87,13 +87,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-06T06:30:52.781Z",
+          "relVol": 3.38,
+          "confidence": 51.1,
+          "components": {
+            "technical": 88,
+            "flow": 84,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 66.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 8316188,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 58.1,
       "confidenceTrend": "rising",
-      "confidenceSlope": 31.8,
-      "trendBonus": 4
+      "confidenceSlope": 12.4,
+      "trendBonus": 8
     },
     "PNBHOUSING": {
       "ticker": "PNBHOUSING",
@@ -123,13 +145,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-06T06:30:52.781Z",
+          "relVol": 2.73,
+          "confidence": 45.7,
+          "components": {
+            "technical": 72,
+            "flow": 86,
+            "catalyst": 29,
+            "liquidity": 63
+          },
+          "discoveryScore": 68.4,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 1194409,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 41.1,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "12:00",
+      "bestConfidence": 45.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 4.6,
+      "trendBonus": 2.8
     },
     "TITAN": {
       "ticker": "TITAN",
@@ -195,10 +239,106 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-06T06:30:52.782Z",
+          "relVol": 1.95,
+          "confidence": 33.9,
+          "components": {
+            "technical": 71,
+            "flow": 40,
+            "catalyst": 31,
+            "liquidity": 73
+          },
+          "discoveryScore": 72.6,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 5701413,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.95<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 23,
+      "lastSeen": "12:00",
+      "bestConfidence": 33.9,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 10.9,
+      "trendBonus": 4
+    },
+    "MOTHERSON": {
+      "ticker": "MOTHERSON",
+      "fullName": "Samvardhana Motherson International Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-06T06:30:52.782Z",
+          "relVol": 2.26,
+          "confidence": 33,
+          "components": {
+            "technical": 66,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 72
+          },
+          "discoveryScore": 74.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 15189941,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 33,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "AUBANK": {
+      "ticker": "AUBANK",
+      "fullName": "AU Small Finance Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-06T06:30:52.782Z",
+          "relVol": 1.85,
+          "confidence": 9.4,
+          "components": {
+            "technical": 51,
+            "flow": 51,
+            "catalyst": 5,
+            "liquidity": 63
+          },
+          "discoveryScore": 72.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1291609,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.85<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 9.4,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
