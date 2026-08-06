@@ -107,7 +107,11 @@ async function fetchLive(ticker, yahooSymbol) {
   for (const sym of [`${base}.NS`, `${base}.BO`]) {
     try {
       const r = await fetchWithTimeout(
-        `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1mo&interval=1d`,
+        // 1y (not 1mo): the review gate needs real history — a 1-month window cannot compute a
+        // 52-week high (so room-to-high was forced to null) and often has <22 bars, which makes
+        // computeShortReturns return a null r1m. Both defects pinned the review reward/risk to
+        // EXACTLY 1.00, force-exiting healthy positions. See rulesGate's review block.
+        `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1y&interval=1d`,
         { headers: { 'User-Agent': 'Mozilla/5.0' } }, 7000);
       if (!r.ok) continue;
       const result = (await r.json())?.chart?.result?.[0];

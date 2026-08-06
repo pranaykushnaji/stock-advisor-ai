@@ -156,7 +156,14 @@ export function rulesGate(item, recentCloses = null) {
       if (wkAgoP > 0 && ((last - wkAgoP) / wkAgoP * 100) <= -2) failed.push('1wk trend weak');
       const e20 = recentCloses.length >= 20 ? ema(recentCloses, 20) : null;
       if (e20 != null && cur < e20) failed.push('below 20-EMA');
-      const rr = rewardRisk(recentCloses, computeShortReturns(recentCloses), null);
+      // Room to the 52-week high is a REAL component of remaining upside — passing null here
+      // (the old behaviour, forced by sell-check's 1-month fetch) made this reward/risk
+      // systematically lower than the entry-gate's, and pinned it to exactly 1.00 whenever
+      // 1-month momentum was flat/negative or uncomputable. Entry and review must measure the
+      // same thing, or every position eventually fails a comparison it never could have passed.
+      const hi52 = Math.max(...recentCloses.slice(-252));
+      const room = (hi52 > 0 && cur > 0) ? +(((hi52 - cur) / cur) * 100).toFixed(1) : null;
+      const rr = rewardRisk(recentCloses, computeShortReturns(recentCloses), room);
       if ((rr?.rr ?? 0) < 1.2) failed.push(`RR ${rr?.rr ?? 'n/a'}<1.2`);
       if (failed.length) return { verdict: 'SELL', source: 'rule', reason: `review day ${held}: ${failed.join(', ')}${laneTag}` };
       // Healthy — hold on. It will be re-reviewed at the next sell-check.

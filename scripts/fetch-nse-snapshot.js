@@ -74,11 +74,20 @@ function toNum(v) {
     'NIFTY 500',
     'SECURITIES IN F&O',
   ];
-  const THROTTLE_MS = 1200; // polite gap between index calls
+  // 2026-08-06: only 1 of 8 indices was actually landing (universe = 203 F&O names instead of
+  // the intended 500-800 incl. midcaps/smallcaps), and `universeIndicesScanned: 8` hid it by
+  // counting ATTEMPTS, not successes. NSE needs a warm session (cookies) before the heavier
+  // index endpoints answer, so: warm up first, retry harder, throttle wider, and record the
+  // per-index outcome in diag so a silent partial fetch can never look healthy again.
+  const THROTTLE_MS = 2500; // wider gap — NSE rate-limits the broad index endpoints
   const movers = [];
+  const indexDiag = {};
+  await tryFetch('session warm-up', () => n.getEquityStockIndices('NIFTY 50'), { retries: 3, backoffMs: 2000 });
+  await sleep(THROTTLE_MS);
   for (let i = 0; i < UNIVERSE_INDICES.length; i++) {
     const idxName = UNIVERSE_INDICES[i];
-    const r = await tryFetch(`stockIndices ${idxName}`, () => n.getEquityStockIndices(idxName));
+    const r = await tryFetch(`stockIndices ${idxName}`, () => n.getEquityStockIndices(idxName), { retries: 4, backoffMs: 2000 });
+    indexDiag[idxName] = (r.ok && Array.isArray(r.data?.data)) ? r.data.data.length : 0;
     if (r.ok && Array.isArray(r.data?.data)) {
       for (const s of r.data.data) {
         if (s.symbol && s.symbol !== idxName && typeof s.pChange === 'number') {
@@ -134,6 +143,10 @@ function toNum(v) {
   snapshot.data.universe = universe;
   snapshot.diag.universeCount = universe.length;
   snapshot.diag.universeIndicesScanned = UNIVERSE_INDICES.length;
+  // Per-index row counts + how many actually returned data. `indicesOk` is the number that
+  // matters — `universeIndicesScanned` only ever counted attempts and masked a 1-of-8 fetch.
+  snapshot.diag.indexRows = indexDiag;
+  snapshot.diag.indicesOk = Object.values(indexDiag).filter(n => n > 0).length;
 
   // 3. Bulk & block deals (institutional activity — alt-data spec section)
   const bulk = await tryFetch('bulk deals', () => n.getDataByEndpoint('/api/snapshot-capital-market-largedeal'));
