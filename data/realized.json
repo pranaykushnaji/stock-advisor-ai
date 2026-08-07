@@ -488,6 +488,39 @@
       "exitSource": "rule",
       "realizedPnl": 269.6,
       "realizedPnlPct": 3
+    },
+    {
+      "ticker": "ABCAPITAL",
+      "fullName": "Aditya Birla Capital Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 7.6,
+        "expectedLossPct": 5,
+        "probability": 0.697,
+        "edgePct": 3.78,
+        "calibration": "none"
+      },
+      "confidenceComponents": {
+        "technical": 56,
+        "flow": 87,
+        "catalyst": 35,
+        "liquidity": 75
+      },
+      "effectiveConfidence": 72.2,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "bullish",
+      "entryPrice": 427.35,
+      "entryDate": "2026-08-03",
+      "exitPrice": 408.55,
+      "exitDate": "2026-08-07",
+      "shares": 16.38,
+      "investedAmount": 7000,
+      "exitReason": "vol-stop (-4.4%, 4.0% band) [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -307.94,
+      "realizedPnlPct": -4.4
     }
   ]
 }
