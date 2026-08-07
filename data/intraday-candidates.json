@@ -131,12 +131,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-07T09:30:53.900Z",
+          "relVol": 1.98,
+          "confidence": 8.8,
+          "components": {
+            "technical": 42,
+            "flow": 57,
+            "catalyst": 5,
+            "liquidity": 71
+          },
+          "discoveryScore": 65.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2100273,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.98<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 30.3,
       "confidenceTrend": "falling",
-      "confidenceSlope": -9.3,
+      "confidenceSlope": -5,
       "trendBonus": 0
     },
     "MOTHERSON": {
@@ -225,13 +248,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-07T09:30:53.899Z",
+          "relVol": 1.98,
+          "confidence": 56.6,
+          "components": {
+            "technical": 82,
+            "flow": 73,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 85.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1747017,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.98<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
-      "bestConfidence": 56.3,
+      "lastSeen": "15:00",
+      "bestConfidence": 56.6,
       "confidenceTrend": "flat",
-      "confidenceSlope": -0.2,
-      "trendBonus": 0
+      "confidenceSlope": 0.15,
+      "trendBonus": 0.2
     }
   }
 }
