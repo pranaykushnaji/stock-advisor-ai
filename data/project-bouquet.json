@@ -1,6 +1,122 @@
 {
   "bouquet": [
     {
+      "ticker": "TECHM",
+      "fullName": "Tech Mahindra Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 66,
+        "flow": 83,
+        "catalyst": 5,
+        "liquidity": 74
+      },
+      "expectedEdge": {
+        "expectedGainPct": 17,
+        "expectedLossPct": 4.3,
+        "probability": 0.597,
+        "edgePct": 8.42,
+        "calibration": "lane+regime"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 66,
+            "weight": 0.4,
+            "contribution": 26.4
+          },
+          "flow": {
+            "score": 83,
+            "weight": 0.4,
+            "contribution": 33.2
+          },
+          "liquidity": {
+            "score": 74,
+            "weight": 0.2,
+            "contribution": 14.8
+          }
+        },
+        "base": 74.4,
+        "regimeScore": 56,
+        "regimeAdjustment": -2.8,
+        "trendBonus": 0,
+        "final": 71.6
+      },
+      "confidence": 40,
+      "effectiveConfidence": 71.6,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-08-07T04:30:55.472Z",
+      "verdict": "AVOID",
+      "composite": 44.5,
+      "date": "2026-08-07",
+      "addedAt": "2026-08-07T04:30:55.472Z",
+      "investedAmount": 8500,
+      "entryPrice": 1669,
+      "currentPrice": 1669,
+      "shares": 5.093,
+      "peakPrice": 1669,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 1482,
+      "todayChangePct": 12.62,
+      "lastPriceUpdate": "2026-08-07T04:30:55.472Z",
+      "yahooSymbol": "TECHM.NS",
+      "niftyAtEntry": 24621.3,
+      "niftyNow": 24621.3,
+      "estimatedUpside": "15-20%",
+      "riskLevel": "Medium",
+      "summary": "TECHM is showing a technical breakout supported by a 3.79x volume surge and strong institutional buying, despite the absence of news. Its relative strength of 14.06 versus Nifty and a favorable reward‑to‑risk ratio suggest a potential 15‑20% upside over the next week. The swing trade targets the continuation of this momentum in a neutral market regime.",
+      "whyToday": "The exceptional volume spike (3.79x average) indicating strong buying pressure and institutional accumulation.",
+      "factors": {
+        "momentum": {
+          "score": 50,
+          "positives": [
+            "Relative volume today 3.79x the 20‑day average",
+            "Institutional accumulation score 87.5/100",
+            "Technical score 83.3",
+            "Sector strength 74",
+            "Relative strength vs Nifty 14.06",
+            "1‑month return +16.8%",
+            "Reward‑to‑risk ≈3.9 (upside ~17% vs downside ~4.3%)"
+          ],
+          "negatives": [
+            "Composite score 44.5 (AVOID flag)",
+            "Momentum and relative‑strength scores only 50 each",
+            "No verified news catalyst",
+            "Multi‑signal confidence low at 40"
+          ]
+        },
+        "relStrength": {
+          "score": 50
+        },
+        "volume": {
+          "score": 50
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 83.3
+        },
+        "sector": {
+          "score": 74
+        }
+      }
+    },
+    {
       "ticker": "HAL",
       "fullName": "Hindustan Aeronautics Limited",
       "sector": "UNKNOWN",
