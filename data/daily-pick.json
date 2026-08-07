@@ -1,26 +1,175 @@
 {
   "pick": {
-    "date": "2026-08-06",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-06T09:30:50.226Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 56, conf 54) — trend 83, breadth 34, vol-factor 80",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "AUBANK",
-        "relVol": 3.06,
-        "confidence": 32.2,
-        "effectiveConfidence": 78.4,
-        "institutional": 57.6,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 0,
-        "negative": false
+    "ticker": "TECHM",
+    "fullName": "Tech Mahindra Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 50,
+        "positives": [
+          "Relative volume today 3.79x the 20‑day average",
+          "Institutional accumulation score 87.5/100",
+          "Technical score 83.3",
+          "Sector strength 74",
+          "Relative strength vs Nifty 14.06",
+          "1‑month return +16.8%",
+          "Reward‑to‑risk ≈3.9 (upside ~17% vs downside ~4.3%)"
+        ],
+        "negatives": [
+          "Composite score 44.5 (AVOID flag)",
+          "Momentum and relative‑strength scores only 50 each",
+          "No verified news catalyst",
+          "Multi‑signal confidence low at 40"
+        ]
+      },
+      "relStrength": {
+        "score": 50
+      },
+      "volume": {
+        "score": 50
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 83.3
+      },
+      "sector": {
+        "score": 74
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.011515151515151515,
+      "r1w": 0,
+      "r1m": 0.1681130619843431
+    },
+    "volumeRatio": 1.04,
+    "relVol": 3.79,
+    "relStrength": 14.06,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 40,
+    "effectiveConfidence": 71.6,
+    "confidenceComponents": {
+      "technical": 66,
+      "flow": 83,
+      "catalyst": 5,
+      "liquidity": 74
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 66,
+          "weight": 0.4,
+          "contribution": 26.4
+        },
+        "flow": {
+          "score": 83,
+          "weight": 0.4,
+          "contribution": 33.2
+        },
+        "liquidity": {
+          "score": 74,
+          "weight": 0.2,
+          "contribution": 14.8
+        }
+      },
+      "base": 74.4,
+      "regimeScore": 56,
+      "regimeAdjustment": -2.8,
+      "trendBonus": 0,
+      "final": 71.6
+    },
+    "expectedEdge": {
+      "expectedGainPct": 17,
+      "expectedLossPct": 4.3,
+      "probability": 0.597,
+      "edgePct": 8.42,
+      "calibration": "lane+regime"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 87.5,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 85.9,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "fresh filing"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 3.92,
+      "upsidePct": 17,
+      "downsidePct": 4.3
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 56, conf 72) — trend 60, breadth 48, vol-factor 80",
+    "regimeConfidence": 72,
+    "regimeFactors": {
+      "indexTrend": 60,
+      "volatility": 80,
+      "breadth": 48,
+      "momentumBreadth": 37,
+      "largeCap": 50,
+      "gapEnv": 58,
+      "riskAppetite": 57,
+      "sectorPart": 39
+    },
+    "annualizedVol": 27.6,
+    "composite": 44.5,
+    "verdict": "AVOID",
+    "estimatedUpside": "15-20%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no specific news catalyst; the trade is driven purely by technical momentum and volume dynamics.",
+    "summary": "TECHM is showing a technical breakout supported by a 3.79x volume surge and strong institutional buying, despite the absence of news. Its relative strength of 14.06 versus Nifty and a favorable reward‑to‑risk ratio suggest a potential 15‑20% upside over the next week. The swing trade targets the continuation of this momentum in a neutral market regime.",
+    "whyToday": "The exceptional volume spike (3.79x average) indicating strong buying pressure and institutional accumulation.",
+    "date": "2026-08-07",
+    "pickedAt": "2026-08-07T04:30:55.472Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 163,
+      "nseUniverse": 163,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-08-07T04:16:13.153Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 1,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 1,
+      "catalystChecked": 1,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 1669,
+    "entryRejected": null
   }
 }
