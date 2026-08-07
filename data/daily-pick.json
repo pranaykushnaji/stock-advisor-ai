@@ -1,26 +1,178 @@
 {
   "pick": {
-    "date": "2026-08-07",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-07T05:30:57.293Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 55, conf 73) — trend 60, breadth 45, vol-factor 80",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "PREMIERENE",
-        "relVol": 4.39,
-        "confidence": 30.3,
-        "effectiveConfidence": 63.5,
-        "institutional": 64.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 10,
-        "negative": false
+    "ticker": "MOTHERSON",
+    "fullName": "Samvardhana Motherson International Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "catalyst",
+    "factors": {
+      "momentum": {
+        "score": 75,
+        "positives": [
+          "Momentum score 75",
+          "Relative volume 9.95x vs 20‑day average",
+          "Relative strength vs Nifty 15.11",
+          "Technicals score 83.8",
+          "Short‑term returns: +8.3% d1, +11.4% w1"
+        ],
+        "negatives": [
+          "Neutral market regime may limit broader tailwinds",
+          "Sector unknown adds uncertainty",
+          "Potential pull‑back after earnings‑driven rally"
+        ]
+      },
+      "relStrength": {
+        "score": 75
+      },
+      "volume": {
+        "score": 75
+      },
+      "catalyst": {
+        "score": 67.5
+      },
+      "technicals": {
+        "score": 83.8
+      },
+      "sector": {
+        "score": 68
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.08348388671875,
+      "r1w": 0.11402986694133499,
+      "r1m": 0.17605041213154915
+    },
+    "volumeRatio": 1.69,
+    "relVol": 9.95,
+    "relStrength": 15.11,
+    "catalyst": {
+      "type": "earnings beat",
+      "confidence": 95,
+      "impact": 9,
+      "stars": 4,
+      "points": 27,
+      "verification": "VERIFIED",
+      "sources": 2,
+      "summary": "Q1 profit doubles, beating estimates, driving 6‑7% share surge.",
+      "impactClass": "high+",
+      "decay": 0.989,
+      "influenceDays": 6,
+      "recalled": false
+    },
+    "confidence": 81,
+    "effectiveConfidence": 77.8,
+    "confidenceComponents": {
+      "technical": 82,
+      "flow": 94,
+      "catalyst": 60,
+      "liquidity": 95
+    },
+    "confidenceBreakdown": {
+      "lane": "catalyst",
+      "contributions": {
+        "technical": {
+          "score": 82,
+          "weight": 0.3,
+          "contribution": 24.6
+        },
+        "flow": {
+          "score": 94,
+          "weight": 0.3,
+          "contribution": 28.2
+        },
+        "catalyst": {
+          "score": 60,
+          "weight": 0.25,
+          "contribution": 15
+        },
+        "liquidity": {
+          "score": 95,
+          "weight": 0.15,
+          "contribution": 14.3
+        }
+      },
+      "base": 82,
+      "regimeScore": 54,
+      "regimeAdjustment": -4.2,
+      "trendBonus": 0,
+      "final": 77.8
+    },
+    "expectedEdge": {
+      "expectedGainPct": 12.5,
+      "expectedLossPct": 5.5,
+      "probability": 0.687,
+      "edgePct": 6.87,
+      "calibration": "none"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 99.8,
+    "institutionalFlags": [
+      "up-day volume dominant",
+      "volume expanding"
+    ],
+    "discoveryScore": 90,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "fresh filing"
+    ],
+    "concentration": "concentration: 1 open position in sector:Auto — size halved",
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 2.29,
+      "upsidePct": 12.5,
+      "downsidePct": 5.5
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 54, conf 71) — trend 60, breadth 48, vol-factor 80",
+    "regimeConfidence": 71,
+    "regimeFactors": {
+      "indexTrend": 60,
+      "volatility": 80,
+      "breadth": 48,
+      "momentumBreadth": 33,
+      "largeCap": 50,
+      "gapEnv": 47,
+      "riskAppetite": 51,
+      "sectorPart": 39
+    },
+    "annualizedVol": 34.8,
+    "composite": 74,
+    "verdict": "BUY",
+    "estimatedUpside": "12-13%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "Q1 earnings beat expectations with profit doubling, sending the stock up 6‑7% on strong volume.",
+    "summary": "The earnings surprise provides a solid catalyst, and the stock is showing strong momentum with high relative volume and bullish technicals. Over the next 5‑10 days the upside potential is ~12% versus ~5.5% downside, making it a compelling swing trade.",
+    "whyToday": "The earnings beat just released, driving a 6‑7% price jump and near‑10x relative volume, creating an optimal entry point today.",
+    "date": "2026-08-07",
+    "pickedAt": "2026-08-07T06:30:55.277Z",
+    "discovery": {
+      "news": 0,
+      "movers": 40,
+      "nseSnapshot": 195,
+      "nseUniverse": 195,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-08-07T06:16:06.217Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 2,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 2,
+      "catalystChecked": 2,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 167.94,
+    "entryRejected": null
   }
 }
