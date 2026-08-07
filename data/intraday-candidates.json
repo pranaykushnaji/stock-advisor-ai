@@ -65,10 +65,66 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-07T06:30:52.894Z",
+          "relVol": 3.61,
+          "confidence": 8.6,
+          "components": {
+            "technical": 42,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 69
+          },
+          "discoveryScore": 70.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1833784,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 30.3,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -21.7,
+      "trendBonus": 0
+    },
+    "MOTHERSON": {
+      "ticker": "MOTHERSON",
+      "fullName": "Samvardhana Motherson International Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "bought",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-07T06:30:52.894Z",
+          "relVol": 9.95,
+          "confidence": 81,
+          "components": {
+            "technical": 82,
+            "flow": 94,
+            "catalyst": 60,
+            "liquidity": 95
+          },
+          "discoveryScore": 90,
+          "catalystType": "earnings beat",
+          "verification": "VERIFIED",
+          "volume": 73442613,
+          "sessionFrac": 0.44,
+          "missing": [],
+          "passedFilter": true,
+          "tradeable": true
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 81,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
