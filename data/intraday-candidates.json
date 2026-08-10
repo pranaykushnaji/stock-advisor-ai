@@ -1,28 +1,64 @@
 {
-  "date": "2026-08-07",
+  "date": "2026-08-10",
   "candidates": {
-    "TECHM": {
-      "ticker": "TECHM",
-      "fullName": "Tech Mahindra Limited",
+    "HEROMOTOCO": {
+      "ticker": "HEROMOTOCO",
+      "fullName": "Hero MotoCorp Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "bought",
+      "firstSeen": "10:01",
+      "status": "watching",
       "scans": [
         {
-          "hhmm": "10:00",
-          "ts": "2026-08-07T04:30:52.981Z",
-          "relVol": 3.79,
-          "confidence": 40,
+          "hhmm": "10:01",
+          "ts": "2026-08-10T04:31:05.266Z",
+          "relVol": 3.44,
+          "confidence": 58.9,
           "components": {
-            "technical": 66,
-            "flow": 83,
+            "technical": 81,
+            "flow": 93,
+            "catalyst": 20,
+            "liquidity": 72
+          },
+          "discoveryScore": 68,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 401799,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:01",
+      "bestConfidence": 58.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "PAYTM": {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:01",
+          "ts": "2026-08-10T04:31:05.267Z",
+          "relVol": 3,
+          "confidence": 21.9,
+          "components": {
+            "technical": 68,
+            "flow": 68,
             "catalyst": 5,
             "liquidity": 74
           },
-          "discoveryScore": 85.9,
+          "discoveryScore": 73.6,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 1616910,
+          "volume": 1747365,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -31,253 +67,47 @@
           "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 40,
+      "lastSeen": "10:01",
+      "bestConfidence": 21.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
     },
-    "PREMIERENE": {
-      "ticker": "PREMIERENE",
-      "fullName": "PREMIER ENERGIES LIMITED",
+    "TITAN": {
+      "ticker": "TITAN",
+      "fullName": "Titan Company Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "11:00",
+      "firstSeen": "10:01",
       "status": "watching",
       "scans": [
         {
-          "hhmm": "11:00",
-          "ts": "2026-08-07T05:30:54.746Z",
-          "relVol": 4.39,
-          "confidence": 30.3,
+          "hhmm": "10:01",
+          "ts": "2026-08-10T04:31:05.267Z",
+          "relVol": 7.15,
+          "confidence": 15.5,
           "components": {
-            "technical": 57,
-            "flow": 73,
+            "technical": 55,
+            "flow": 81,
             "catalyst": 5,
-            "liquidity": 65
+            "liquidity": 82
           },
-          "discoveryScore": 78.9,
+          "discoveryScore": 76.7,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 1417136,
-          "sessionFrac": 0.28,
+          "volume": 841427,
+          "sessionFrac": 0.15,
           "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-08-07T06:30:52.894Z",
-          "relVol": 3.61,
-          "confidence": 8.6,
-          "components": {
-            "technical": 42,
-            "flow": 67,
-            "catalyst": 5,
-            "liquidity": 69
-          },
-          "discoveryScore": 70.9,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1833784,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-08-07T07:30:52.897Z",
-          "relVol": 2.82,
-          "confidence": 1.7,
-          "components": {
-            "technical": 39,
-            "flow": 65,
-            "catalyst": 5,
-            "liquidity": 70
-          },
-          "discoveryScore": 68.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1949863,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-08-07T08:30:52.841Z",
-          "relVol": 2.27,
-          "confidence": 1.6,
-          "components": {
-            "technical": 39,
-            "flow": 59,
-            "catalyst": 5,
-            "liquidity": 70
-          },
-          "discoveryScore": 69,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1994929,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-08-07T09:30:53.900Z",
-          "relVol": 1.98,
-          "confidence": 8.8,
-          "components": {
-            "technical": 42,
-            "flow": 57,
-            "catalyst": 5,
-            "liquidity": 71
-          },
-          "discoveryScore": 65.6,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2100273,
-          "sessionFrac": 0.92,
-          "missing": [
-            "relVol 1.98<2.1",
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
         }
       ],
-      "lastSeen": "15:00",
-      "bestConfidence": 30.3,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -5,
-      "trendBonus": 0
-    },
-    "MOTHERSON": {
-      "ticker": "MOTHERSON",
-      "fullName": "Samvardhana Motherson International Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "12:00",
-      "status": "bought",
-      "scans": [
-        {
-          "hhmm": "12:00",
-          "ts": "2026-08-07T06:30:52.894Z",
-          "relVol": 9.95,
-          "confidence": 81,
-          "components": {
-            "technical": 82,
-            "flow": 94,
-            "catalyst": 60,
-            "liquidity": 95
-          },
-          "discoveryScore": 90,
-          "catalystType": "earnings beat",
-          "verification": "VERIFIED",
-          "volume": 73442613,
-          "sessionFrac": 0.44,
-          "missing": [],
-          "passedFilter": true,
-          "tradeable": true
-        }
-      ],
-      "lastSeen": "12:00",
-      "bestConfidence": 81,
+      "lastSeen": "10:01",
+      "bestConfidence": 15.5,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
-    },
-    "AUROPHARMA": {
-      "ticker": "AUROPHARMA",
-      "fullName": "Aurobindo Pharma Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "13:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "13:00",
-          "ts": "2026-08-07T07:30:52.897Z",
-          "relVol": 1.8,
-          "confidence": 56.3,
-          "components": {
-            "technical": 82,
-            "flow": 69,
-            "catalyst": 5,
-            "liquidity": 67
-          },
-          "discoveryScore": 84.8,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1038562,
-          "sessionFrac": 0.6,
-          "missing": [
-            "relVol 1.8<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-08-07T08:30:52.840Z",
-          "relVol": 1.89,
-          "confidence": 56.1,
-          "components": {
-            "technical": 82,
-            "flow": 71,
-            "catalyst": 5,
-            "liquidity": 71
-          },
-          "discoveryScore": 87.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1377293,
-          "sessionFrac": 0.76,
-          "missing": [
-            "relVol 1.89<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-08-07T09:30:53.899Z",
-          "relVol": 1.98,
-          "confidence": 56.6,
-          "components": {
-            "technical": 82,
-            "flow": 73,
-            "catalyst": 5,
-            "liquidity": 75
-          },
-          "discoveryScore": 85.5,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1747017,
-          "sessionFrac": 0.92,
-          "missing": [
-            "relVol 1.98<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 56.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.15,
-      "trendBonus": 0.2
     }
   }
 }
