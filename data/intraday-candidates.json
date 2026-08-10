@@ -109,13 +109,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-10T06:31:06.717Z",
+          "relVol": 5.39,
+          "confidence": 53,
+          "components": {
+            "technical": 85,
+            "flow": 78,
+            "catalyst": 20,
+            "liquidity": 95
+          },
+          "discoveryScore": 84.5,
+          "catalystType": "broker upgrade",
+          "verification": "PARTIAL",
+          "volume": 9199556,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 25,
+      "lastSeen": "12:01",
+      "bestConfidence": 53,
       "confidenceTrend": "rising",
-      "confidenceSlope": 3.1,
-      "trendBonus": 1.9
+      "confidenceSlope": 15.55,
+      "trendBonus": 8
     },
     "TITAN": {
       "ticker": "TITAN",
@@ -203,10 +225,105 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-10T06:31:06.718Z",
+          "relVol": 4.08,
+          "confidence": 54.3,
+          "components": {
+            "technical": 76,
+            "flow": 80,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 72.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 946308,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 24.1,
+      "lastSeen": "12:01",
+      "bestConfidence": 54.3,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 30.2,
+      "trendBonus": 4
+    },
+    "CAMS": {
+      "ticker": "CAMS",
+      "fullName": "Computer Age Management Services Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-10T06:31:06.718Z",
+          "relVol": 1.99,
+          "confidence": 28.5,
+          "components": {
+            "technical": 60,
+            "flow": 82,
+            "catalyst": 5,
+            "liquidity": 55
+          },
+          "discoveryScore": 64.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1066612,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.99<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:01",
+      "bestConfidence": 28.5,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "DELHIVERY": {
+      "ticker": "DELHIVERY",
+      "fullName": "Delhivery Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-10T06:31:06.718Z",
+          "relVol": 6.91,
+          "confidence": 6.4,
+          "components": {
+            "technical": 39,
+            "flow": 64,
+            "catalyst": 5,
+            "liquidity": 86
+          },
+          "discoveryScore": 81.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 11485047,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:01",
+      "bestConfidence": 6.4,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
