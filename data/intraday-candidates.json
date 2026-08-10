@@ -29,13 +29,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:01",
+          "ts": "2026-08-10T05:31:04.874Z",
+          "relVol": 2.59,
+          "confidence": 75.6,
+          "components": {
+            "technical": 83,
+            "flow": 90,
+            "catalyst": 35,
+            "liquidity": 78
+          },
+          "discoveryScore": 67.5,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 564137,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
-      "bestConfidence": 58.9,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "11:01",
+      "bestConfidence": 75.6,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 16.7,
+      "trendBonus": 4
     },
     "PAYTM": {
       "ticker": "PAYTM",
@@ -65,20 +87,42 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:01",
+          "ts": "2026-08-10T05:31:04.875Z",
+          "relVol": 3.44,
+          "confidence": 25,
+          "components": {
+            "technical": 67,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 86
+          },
+          "discoveryScore": 80.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3736124,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
-      "bestConfidence": 21.9,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "11:01",
+      "bestConfidence": 25,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 3.1,
+      "trendBonus": 1.9
     },
     "TITAN": {
       "ticker": "TITAN",
       "fullName": "Titan Company Limited",
       "sector": "UNKNOWN",
       "firstSeen": "10:01",
-      "status": "watching",
+      "status": "bought",
       "scans": [
         {
           "hhmm": "10:01",
@@ -101,10 +145,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:01",
+          "ts": "2026-08-10T05:31:04.875Z",
+          "relVol": 7.75,
+          "confidence": 34.7,
+          "components": {
+            "technical": 70,
+            "flow": 80,
+            "catalyst": 5,
+            "liquidity": 94
+          },
+          "discoveryScore": 90.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1701518,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
-      "bestConfidence": 15.5,
+      "lastSeen": "11:01",
+      "bestConfidence": 34.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 19.2,
+      "trendBonus": 4
+    },
+    "GRASIM": {
+      "ticker": "GRASIM",
+      "fullName": "Grasim Industries Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-08-10T05:31:04.875Z",
+          "relVol": 3.19,
+          "confidence": 24.1,
+          "components": {
+            "technical": 54,
+            "flow": 77,
+            "catalyst": 5,
+            "liquidity": 66
+          },
+          "discoveryScore": 68.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 471029,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 24.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
