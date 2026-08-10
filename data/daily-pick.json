@@ -1,22 +1,176 @@
 {
   "pick": {
-    "date": "2026-08-10",
-    "noTrade": true,
-    "reason": "HEROMOTOCO failed neutral-market entry gates: concentration: already 2 open positions in sector:Auto",
-    "pickedAt": "2026-08-10T04:31:07.651Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 49, conf 62) — trend 59, breadth 37, vol-factor 81",
-    "candidate": {
-      "ticker": "HEROMOTOCO",
-      "confidence": 58.9,
-      "effectiveConfidence": 78.7,
-      "rewardRisk": {
-        "rr": 4.65,
-        "upsidePct": 19.6,
-        "downsidePct": 4.2
+    "ticker": "TITAN",
+    "fullName": "Titan Company Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 62.5,
+        "positives": [
+          "Momentum score 62.5",
+          "Technical score 81.1",
+          "Relative volume 7.75x the 20‑day average",
+          "Institutional accumulation 89.6/100"
+        ],
+        "negatives": [
+          "Composite score 43.3 (AVOID)",
+          "Relative‑strength score 37.5",
+          "No identifiable catalyst",
+          "Multi‑signal confidence 34.7"
+        ]
       },
-      "catalyst": "earnings beat",
-      "verification": "PARTIAL"
-    }
+      "relStrength": {
+        "score": 37.5
+      },
+      "volume": {
+        "score": 37.5
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 81.1
+      },
+      "sector": {
+        "score": 66
+      }
+    },
+    "shortReturns": {
+      "r1d": 0.03274636808085408,
+      "r1w": 0.0205599609375,
+      "r1m": 0.11307911905301299
+    },
+    "volumeRatio": 1.26,
+    "relVol": 7.75,
+    "relStrength": 9.71,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 34.7,
+    "effectiveConfidence": 79.7,
+    "confidenceComponents": {
+      "technical": 70,
+      "flow": 80,
+      "catalyst": 5,
+      "liquidity": 94
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 70,
+          "weight": 0.4,
+          "contribution": 28
+        },
+        "flow": {
+          "score": 80,
+          "weight": 0.4,
+          "contribution": 32
+        },
+        "liquidity": {
+          "score": 94,
+          "weight": 0.2,
+          "contribution": 18.8
+        }
+      },
+      "base": 78.8,
+      "regimeScore": 58,
+      "regimeAdjustment": -3.1,
+      "trendBonus": 4,
+      "final": 79.7
+    },
+    "expectedEdge": {
+      "expectedGainPct": 8.5,
+      "expectedLossPct": 4,
+      "probability": 0.624,
+      "edgePct": 3.8,
+      "calibration": "lane+regime"
+    },
+    "confidenceTrend": "rising",
+    "trendBonus": 4,
+    "institutional": 89.6,
+    "institutionalFlags": [
+      "up-day volume dominant",
+      "volume expanding"
+    ],
+    "discoveryScore": 90.3,
+    "discoveryReasons": [
+      "closing near highs",
+      "leading market breadth",
+      "fresh filing"
+    ],
+    "concentration": null,
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 2.13,
+      "upsidePct": 8.5,
+      "downsidePct": 4
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 58, conf 76) — trend 60, breadth 54, vol-factor 81",
+    "regimeConfidence": 76,
+    "regimeFactors": {
+      "indexTrend": 60,
+      "volatility": 81,
+      "breadth": 54,
+      "momentumBreadth": 39,
+      "largeCap": 50,
+      "gapEnv": 58,
+      "riskAppetite": 55,
+      "sectorPart": 56
+    },
+    "annualizedVol": 23.3,
+    "composite": 43.3,
+    "verdict": "AVOID",
+    "estimatedUpside": "8-9%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "No catalyst; the trade is driven purely by momentum and a sharp volume surge.",
+    "summary": "Titan shows strong short‑term momentum with an 81.1 technical rating and a 7.75× volume spike, while the broader market remains neutral. Despite a low composite score, the high institutional accumulation and solid momentum score suggest a favorable 5‑10‑day swing, targeting an ~8‑9% upside against a ~4% downside. The trade is justified by pure price‑action strength rather than news.",
+    "whyToday": "Today's volume is 7.75 times the 20‑day average, signaling a decisive institutional buying surge and a clear breakout entry point.",
+    "date": "2026-08-10",
+    "pickedAt": "2026-08-10T05:31:06.467Z",
+    "discovery": {
+      "news": 10,
+      "movers": 40,
+      "nseSnapshot": 190,
+      "nseUniverse": 190,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-08-10T05:16:18.627Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 4,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 4,
+      "catalystChecked": 4,
+      "tradeable": 3
+    },
+    "runnerUp": {
+      "ticker": "TITAN",
+      "composite": 43.3
+    },
+    "entryPrice": 5102.8,
+    "entryRejected": null
   }
 }
