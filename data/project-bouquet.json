@@ -1,6 +1,119 @@
 {
   "bouquet": [
     {
+      "ticker": "TITAN",
+      "fullName": "Titan Company Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 70,
+        "flow": 80,
+        "catalyst": 5,
+        "liquidity": 94
+      },
+      "expectedEdge": {
+        "expectedGainPct": 8.5,
+        "expectedLossPct": 4,
+        "probability": 0.624,
+        "edgePct": 3.8,
+        "calibration": "lane+regime"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 70,
+            "weight": 0.4,
+            "contribution": 28
+          },
+          "flow": {
+            "score": 80,
+            "weight": 0.4,
+            "contribution": 32
+          },
+          "liquidity": {
+            "score": 94,
+            "weight": 0.2,
+            "contribution": 18.8
+          }
+        },
+        "base": 78.8,
+        "regimeScore": 58,
+        "regimeAdjustment": -3.1,
+        "trendBonus": 4,
+        "final": 79.7
+      },
+      "confidence": 34.7,
+      "effectiveConfidence": 79.7,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-08-10T05:31:06.467Z",
+      "verdict": "AVOID",
+      "composite": 43.3,
+      "date": "2026-08-10",
+      "addedAt": "2026-08-10T05:31:06.467Z",
+      "investedAmount": 9000,
+      "entryPrice": 5102.8,
+      "currentPrice": 5102.8,
+      "shares": 1.764,
+      "peakPrice": 5102.8,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 3460.2,
+      "todayChangePct": 47.47,
+      "lastPriceUpdate": "2026-08-10T05:31:06.467Z",
+      "yahooSymbol": "TITAN.NS",
+      "niftyAtEntry": 24594.9,
+      "niftyNow": 24594.9,
+      "estimatedUpside": "8-9%",
+      "riskLevel": "Medium",
+      "summary": "Titan shows strong short‑term momentum with an 81.1 technical rating and a 7.75× volume spike, while the broader market remains neutral. Despite a low composite score, the high institutional accumulation and solid momentum score suggest a favorable 5‑10‑day swing, targeting an ~8‑9% upside against a ~4% downside. The trade is justified by pure price‑action strength rather than news.",
+      "whyToday": "Today's volume is 7.75 times the 20‑day average, signaling a decisive institutional buying surge and a clear breakout entry point.",
+      "factors": {
+        "momentum": {
+          "score": 62.5,
+          "positives": [
+            "Momentum score 62.5",
+            "Technical score 81.1",
+            "Relative volume 7.75x the 20‑day average",
+            "Institutional accumulation 89.6/100"
+          ],
+          "negatives": [
+            "Composite score 43.3 (AVOID)",
+            "Relative‑strength score 37.5",
+            "No identifiable catalyst",
+            "Multi‑signal confidence 34.7"
+          ]
+        },
+        "relStrength": {
+          "score": 37.5
+        },
+        "volume": {
+          "score": 37.5
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 81.1
+        },
+        "sector": {
+          "score": 66
+        }
+      }
+    },
+    {
       "ticker": "MOTHERSON",
       "fullName": "Samvardhana Motherson International Limited",
       "sector": "UNKNOWN",
