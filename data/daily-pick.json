@@ -1,39 +1,22 @@
 {
   "pick": {
-    "date": "2026-08-07",
+    "date": "2026-08-10",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-07T09:30:56.212Z",
+    "reason": "HEROMOTOCO failed neutral-market entry gates: concentration: already 2 open positions in sector:Auto",
+    "pickedAt": "2026-08-10T04:31:07.651Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 55, conf 75) — trend 59, breadth 45, vol-factor 80",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "AUROPHARMA",
-        "relVol": 1.98,
-        "confidence": 56.6,
-        "effectiveConfidence": 73.9,
-        "institutional": 77.8,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 8,
-        "negative": false
+    "market": "neutral (v2 score 49, conf 62) — trend 59, breadth 37, vol-factor 81",
+    "candidate": {
+      "ticker": "HEROMOTOCO",
+      "confidence": 58.9,
+      "effectiveConfidence": 78.7,
+      "rewardRisk": {
+        "rr": 4.65,
+        "upsidePct": 19.6,
+        "downsidePct": 4.2
       },
-      {
-        "ticker": "PREMIERENE",
-        "relVol": 1.98,
-        "confidence": 8.8,
-        "effectiveConfidence": 54,
-        "institutional": 68.8,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 11,
-        "negative": false
-      }
-    ]
+      "catalyst": "earnings beat",
+      "verification": "PARTIAL"
+    }
   }
 }
