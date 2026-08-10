@@ -131,12 +131,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-10T09:30:22.929Z",
+          "relVol": 5.12,
+          "confidence": 51.4,
+          "components": {
+            "technical": 84,
+            "flow": 86,
+            "catalyst": 18,
+            "liquidity": 95
+          },
+          "discoveryScore": 76.1,
+          "catalystType": "broker upgrade",
+          "verification": "PARTIAL",
+          "volume": 18259157,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
+      "lastSeen": "15:00",
       "bestConfidence": 53,
       "confidenceTrend": "rising",
-      "confidenceSlope": 15.55,
+      "confidenceSlope": 11.65,
       "trendBonus": 8
     },
     "TITAN": {
@@ -291,13 +313,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-10T09:30:22.929Z",
+          "relVol": 4.95,
+          "confidence": 41,
+          "components": {
+            "technical": 71,
+            "flow": 91,
+            "catalyst": 5,
+            "liquidity": 92
+          },
+          "discoveryScore": 74.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2399424,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 64.4,
       "confidenceTrend": "rising",
-      "confidenceSlope": 10.97,
-      "trendBonus": 8
+      "confidenceSlope": 3.68,
+      "trendBonus": 4.4
     },
     "CAMS": {
       "ticker": "CAMS",
@@ -408,13 +452,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-10T09:30:22.929Z",
+          "relVol": 3.97,
+          "confidence": 7.1,
+          "components": {
+            "technical": 41,
+            "flow": 66,
+            "catalyst": 5,
+            "liquidity": 89
+          },
+          "discoveryScore": 79.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 13777652,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 9.3,
       "confidenceTrend": "flat",
-      "confidenceSlope": 1.45,
-      "trendBonus": 1.7
+      "confidenceSlope": 0.21,
+      "trendBonus": 0.3
     }
   }
 }
