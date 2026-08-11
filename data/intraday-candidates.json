@@ -109,12 +109,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-08-11T07:30:20.119Z",
+          "relVol": 6.13,
+          "confidence": 63.8,
+          "components": {
+            "technical": 81,
+            "flow": 83,
+            "catalyst": 35,
+            "liquidity": 95
+          },
+          "discoveryScore": 90.6,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 6999220,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
-      "bestConfidence": 48.6,
+      "lastSeen": "13:00",
+      "bestConfidence": 63.8,
       "confidenceTrend": "rising",
-      "confidenceSlope": 9.15,
+      "confidenceSlope": 10.07,
       "trendBonus": 8
     },
     "OIL": {
@@ -203,13 +225,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-08-11T07:30:20.119Z",
+          "relVol": 6.69,
+          "confidence": 39.3,
+          "components": {
+            "technical": 70,
+            "flow": 95,
+            "catalyst": 5,
+            "liquidity": 85
+          },
+          "discoveryScore": 86.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 112730,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
-      "bestConfidence": 39,
+      "lastSeen": "13:00",
+      "bestConfidence": 39.3,
       "confidenceTrend": "rising",
-      "confidenceSlope": 14.2,
-      "trendBonus": 4
+      "confidenceSlope": 7.25,
+      "trendBonus": 8
     },
     "ZYDUSLIFE": {
       "ticker": "ZYDUSLIFE",
@@ -239,13 +283,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-08-11T07:30:20.119Z",
+          "relVol": 2.88,
+          "confidence": 7.4,
+          "components": {
+            "technical": 55,
+            "flow": 56,
+            "catalyst": 5,
+            "liquidity": 69
+          },
+          "discoveryScore": 74.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1728343,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
-      "bestConfidence": 6.2,
+      "lastSeen": "13:00",
+      "bestConfidence": 7.4,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 1.2,
+      "trendBonus": 0.7
     }
   }
 }
