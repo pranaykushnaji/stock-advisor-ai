@@ -87,13 +87,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-11T06:30:20.243Z",
+          "relVol": 6.49,
+          "confidence": 48.5,
+          "components": {
+            "technical": 81,
+            "flow": 81,
+            "catalyst": 5,
+            "liquidity": 91
+          },
+          "discoveryScore": 87.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5429629,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 48.6,
       "confidenceTrend": "rising",
-      "confidenceSlope": 18.4,
-      "trendBonus": 4
+      "confidenceSlope": 9.15,
+      "trendBonus": 8
     },
     "OIL": {
       "ticker": "OIL",
@@ -159,10 +181,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-11T06:30:20.243Z",
+          "relVol": 6.78,
+          "confidence": 39,
+          "components": {
+            "technical": 69,
+            "flow": 95,
+            "catalyst": 5,
+            "liquidity": 80
+          },
+          "discoveryScore": 75,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 83696,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 24.8,
+      "lastSeen": "12:00",
+      "bestConfidence": 39,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 14.2,
+      "trendBonus": 4
+    },
+    "ZYDUSLIFE": {
+      "ticker": "ZYDUSLIFE",
+      "fullName": "Zydus Lifesciences Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-11T06:30:20.243Z",
+          "relVol": 2.23,
+          "confidence": 6.2,
+          "components": {
+            "technical": 52,
+            "flow": 49,
+            "catalyst": 5,
+            "liquidity": 60
+          },
+          "discoveryScore": 69.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 980918,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 6.2,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
