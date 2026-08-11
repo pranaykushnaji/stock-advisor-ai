@@ -1,169 +1,39 @@
 {
   "pick": {
-    "ticker": "PAYTM",
-    "fullName": "One97 Communications Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 83.3,
-        "positives": [
-          "Momentum score 83.3 (high)",
-          "Relative‑strength score 83.3 (high)",
-          "Volume 2.9x 20‑day average",
-          "Institutional accumulation 92.4/100",
-          "1‑week return +13.6% and 1‑month return +14.7%"
-        ],
-        "negatives": [
-          "No identifiable news catalyst",
-          "Sector classification unknown",
-          "Market regime neutral; downside risk ~6%"
-        ]
-      },
-      "relStrength": {
-        "score": 83.3
-      },
-      "volume": {
-        "score": 83.3
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 75.6
-      },
-      "sector": {
-        "score": 43
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.00435580109867136,
-      "r1w": 0.13642857142857143,
-      "r1m": 0.14749368914532995
-    },
-    "volumeRatio": 1.5,
-    "relVol": 2.9,
-    "relStrength": 13.62,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 56.3,
-    "effectiveConfidence": 79.8,
-    "confidenceComponents": {
-      "technical": 83,
-      "flow": 92,
-      "catalyst": 5,
-      "liquidity": 77
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 83,
-          "weight": 0.4,
-          "contribution": 33.2
-        },
-        "flow": {
-          "score": 92,
-          "weight": 0.4,
-          "contribution": 36.8
-        },
-        "liquidity": {
-          "score": 77,
-          "weight": 0.2,
-          "contribution": 15.4
-        }
-      },
-      "base": 85.4,
-      "regimeScore": 48,
-      "regimeAdjustment": -5.6,
-      "trendBonus": 0,
-      "final": 79.8
-    },
-    "expectedEdge": {
-      "expectedGainPct": 11.9,
-      "expectedLossPct": 6,
-      "probability": 0.655,
-      "edgePct": 5.72,
-      "calibration": "lane+regime+conf"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 92.4,
-    "institutionalFlags": [
-      "up-day volume dominant",
-      "volume expanding"
-    ],
-    "discoveryScore": 58.8,
-    "discoveryReasons": [],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 1.99,
-      "upsidePct": 11.9,
-      "downsidePct": 6
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 48, conf 59) — trend 60, breadth 28, vol-factor 81",
-    "regimeConfidence": 59,
-    "regimeFactors": {
-      "indexTrend": 60,
-      "volatility": 81,
-      "breadth": 28,
-      "momentumBreadth": 25,
-      "largeCap": 50,
-      "gapEnv": 32,
-      "riskAppetite": 55,
-      "sectorPart": 28
-    },
-    "annualizedVol": 37.8,
-    "composite": 63.9,
-    "verdict": "WATCH",
-    "estimatedUpside": "10-12%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "There is no confirmed catalyst for PAYTM today; the move is driven purely by technical momentum and volume.",
-    "summary": "PAYTM is exhibiting a strong short‑term uptrend supported by high momentum, outsized volume (2.9x average) and solid institutional buying. Relative strength of 13.6 points above Nifty and recent weekly gains of ~13% suggest the stock can capture further upside over the next 5‑10 days, despite the absence of news. The reward‑to‑risk profile (~2:1) makes it a watchable swing trade.",
-    "whyToday": "Exceptional volume surge (2.9x normal) indicating fresh buying pressure and institutional accumulation.",
     "date": "2026-08-11",
-    "pickedAt": "2026-08-11T04:30:36.641Z",
-    "discovery": {
-      "news": 0,
-      "movers": 37,
-      "nseSnapshot": 180,
-      "nseUniverse": 180,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 0,
-        "newsQueryUsed": null,
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-11T04:15:31.802Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-11T05:30:26.251Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 50, conf 62) — trend 60, breadth 33, vol-factor 80",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "NAUKRI",
+        "relVol": 6.69,
+        "confidence": 48.6,
+        "effectiveConfidence": 76.8,
+        "institutional": 78.3,
+        "catalyst": "earnings beat",
+        "verification": "PARTIAL",
+        "filing": false,
+        "sources": 1,
+        "articles": 9,
+        "negative": false
+      },
+      {
+        "ticker": "BOSCHLTD",
+        "relVol": 9.26,
+        "confidence": 24.8,
+        "effectiveConfidence": 71.6,
+        "institutional": 96.8,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
       }
-    },
-    "candidatePool": 3,
-    "pipeline": {
-      "priced": 39,
-      "passedFilter": 3,
-      "catalystChecked": 3,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 1591,
-    "entryRejected": null
+    ]
   }
 }
