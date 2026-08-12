@@ -1,172 +1,65 @@
 {
   "pick": {
-    "ticker": "NATIONALUM",
-    "fullName": "National Aluminium Company Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 83.3,
-        "positives": [
-          "Momentum score 83.3 indicates strong price acceleration",
-          "Relative volume today is 15.51× the 20‑day average, showing heavy buying pressure",
-          "Technical score 77.5 supports a bullish chart pattern"
-        ],
-        "negatives": [
-          "Catalyst score 0 – no fundamental news driver",
-          "Multi‑signal confidence only 38.9, suggesting mixed indicator alignment",
-          "Relative‑strength score 50 is only modest versus peers"
-        ]
-      },
-      "relStrength": {
-        "score": 50
-      },
-      "volume": {
-        "score": 16.7
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 77.5
-      },
-      "sector": {
-        "score": 63
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.06984537655545264,
-      "r1w": 0.08950132835568406,
-      "r1m": 0.137571973271318
-    },
-    "volumeRatio": 1.12,
-    "relVol": 15.51,
-    "relStrength": 12.41,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 38.9,
-    "effectiveConfidence": 73.1,
-    "confidenceComponents": {
-      "technical": 73,
-      "flow": 76,
-      "catalyst": 5,
-      "liquidity": 89
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 73,
-          "weight": 0.4,
-          "contribution": 29.2
-        },
-        "flow": {
-          "score": 76,
-          "weight": 0.4,
-          "contribution": 30.4
-        },
-        "liquidity": {
-          "score": 89,
-          "weight": 0.2,
-          "contribution": 17.8
-        }
-      },
-      "base": 77.4,
-      "regimeScore": 49,
-      "regimeAdjustment": -4.3,
-      "trendBonus": 0,
-      "final": 73.1
-    },
-    "expectedEdge": {
-      "expectedGainPct": 18.3,
-      "expectedLossPct": 6.4,
-      "probability": 0.627,
-      "edgePct": 9.09,
-      "calibration": "lane+regime+conf"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 92.6,
-    "institutionalFlags": [
-      "up-day volume dominant"
-    ],
-    "discoveryScore": 77.9,
-    "discoveryReasons": [
-      "closing near highs",
-      "leading market breadth"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 2.86,
-      "upsidePct": 18.3,
-      "downsidePct": 6.4
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 49, conf 60) — trend 59, breadth 34, vol-factor 81",
-    "regimeConfidence": 60,
-    "regimeFactors": {
-      "indexTrend": 59,
-      "volatility": 81,
-      "breadth": 34,
-      "momentumBreadth": 22,
-      "largeCap": 50,
-      "gapEnv": 34,
-      "riskAppetite": 52,
-      "sectorPart": 28
-    },
-    "annualizedVol": 40.6,
-    "composite": 48.4,
-    "verdict": "WATCH",
-    "estimatedUpside": "15-20%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "There is no specific news catalyst; the trade is driven purely by price‑volume momentum.",
-    "summary": "National Aluminium is exhibiting a strong momentum breakout with a 15.5× volume surge and solid technical backing, offering an estimated 18% upside against a ~6% downside risk (RR≈2.9). Despite the lack of a news catalyst, the high momentum and volume metrics justify a short‑term swing play in a neutral market regime.",
-    "whyToday": "The exceptional volume spike (15.5× the 20‑day average) confirms the breakout and makes today the optimal entry point.",
     "date": "2026-08-12",
-    "pickedAt": "2026-08-12T04:30:22.760Z",
-    "discovery": {
-      "news": 0,
-      "movers": 31,
-      "nseSnapshot": 176,
-      "nseUniverse": 176,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-12T04:15:34.829Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-12T05:30:22.829Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 50, conf 63) — trend 58, breadth 37, vol-factor 80",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "HINDALCO",
+        "relVol": 3.17,
+        "confidence": 50.9,
+        "effectiveConfidence": 80.2,
+        "institutional": 86.6,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 6,
+        "negative": false
+      },
+      {
+        "ticker": "UNIONBANK",
+        "relVol": 1.93,
+        "confidence": 37.8,
+        "effectiveConfidence": 65.3,
+        "institutional": 92.4,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
+      },
+      {
+        "ticker": "GRASIM",
+        "relVol": 2.09,
+        "confidence": 25.6,
+        "effectiveConfidence": 66,
+        "institutional": 91,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
+      },
+      {
+        "ticker": "ZYDUSLIFE",
+        "relVol": 3.15,
+        "confidence": 24.1,
+        "effectiveConfidence": 69.7,
+        "institutional": 100,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 12,
+        "negative": false
       }
-    },
-    "candidatePool": 3,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 3,
-      "catalystChecked": 3,
-      "tradeable": 2
-    },
-    "runnerUp": {
-      "ticker": "SIEMENS",
-      "composite": 49.8
-    },
-    "entryPrice": 415.1,
-    "entryRejected": null
+    ]
   }
 }
