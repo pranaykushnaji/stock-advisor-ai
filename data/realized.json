@@ -554,6 +554,39 @@
       "exitSource": "rule",
       "realizedPnl": -299.49,
       "realizedPnlPct": -3.33
+    },
+    {
+      "ticker": "TVSMOTOR",
+      "fullName": "TVS Motor Company Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 12.1,
+        "expectedLossPct": 4.3,
+        "probability": 0.648,
+        "edgePct": 6.33,
+        "calibration": "none"
+      },
+      "confidenceComponents": {
+        "technical": 79,
+        "flow": 92,
+        "catalyst": 5,
+        "liquidity": 75
+      },
+      "effectiveConfidence": 78.2,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 4168.5,
+      "entryDate": "2026-07-30",
+      "exitPrice": 4359.3,
+      "exitDate": "2026-08-12",
+      "shares": 2.159,
+      "investedAmount": 9000,
+      "exitReason": "review day 13: 1wk trend weak [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": 411.94,
+      "realizedPnlPct": 4.58
     }
   ]
 }
