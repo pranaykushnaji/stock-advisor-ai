@@ -123,13 +123,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-12T06:31:07.330Z",
+          "relVol": 2.38,
+          "confidence": 44.9,
+          "components": {
+            "technical": 70,
+            "flow": 66,
+            "catalyst": 35,
+            "liquidity": 86
+          },
+          "discoveryScore": 65.6,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 5219301,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:01",
       "bestConfidence": 50.9,
       "confidenceTrend": "rising",
-      "confidenceSlope": 11.6,
-      "trendBonus": 4
+      "confidenceSlope": 2.8,
+      "trendBonus": 3.4
     },
     "UNIONBANK": {
       "ticker": "UNIONBANK",
@@ -197,12 +219,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-12T06:31:07.330Z",
+          "relVol": 1.97,
+          "confidence": 9.7,
+          "components": {
+            "technical": 59,
+            "flow": 63,
+            "catalyst": 5,
+            "liquidity": 67
+          },
+          "discoveryScore": 57.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 527041,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.97<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:01",
       "bestConfidence": 25.6,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -15.9,
       "trendBonus": 0
     },
     "ZYDUSLIFE": {
@@ -233,10 +278,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-12T06:31:07.330Z",
+          "relVol": 4.54,
+          "confidence": 25.6,
+          "components": {
+            "technical": 60,
+            "flow": 96,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 80.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2705471,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 24.1,
+      "lastSeen": "12:01",
+      "bestConfidence": 25.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 1.5,
+      "trendBonus": 0.9
+    },
+    "BOSCHLTD": {
+      "ticker": "BOSCHLTD",
+      "fullName": "Bosch Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-12T06:31:07.329Z",
+          "relVol": 3.72,
+          "confidence": 56.1,
+          "components": {
+            "technical": 87,
+            "flow": 90,
+            "catalyst": 5,
+            "liquidity": 74
+          },
+          "discoveryScore": 83.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 57320,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:01",
+      "bestConfidence": 56.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
