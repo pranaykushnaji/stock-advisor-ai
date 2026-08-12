@@ -101,10 +101,142 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-12T05:30:20.479Z",
+          "relVol": 3.17,
+          "confidence": 50.9,
+          "components": {
+            "technical": 81,
+            "flow": 79,
+            "catalyst": 5,
+            "liquidity": 84
+          },
+          "discoveryScore": 70.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4419299,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 39.3,
+      "lastSeen": "11:00",
+      "bestConfidence": 50.9,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 11.6,
+      "trendBonus": 4
+    },
+    "UNIONBANK": {
+      "ticker": "UNIONBANK",
+      "fullName": "Union Bank of India",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-12T05:30:20.479Z",
+          "relVol": 1.93,
+          "confidence": 37.8,
+          "components": {
+            "technical": 74,
+            "flow": 63,
+            "catalyst": 5,
+            "liquidity": 66
+          },
+          "discoveryScore": 70.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 8988816,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.93<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 37.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "GRASIM": {
+      "ticker": "GRASIM",
+      "fullName": "Grasim Industries Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-12T05:30:20.480Z",
+          "relVol": 2.09,
+          "confidence": 25.6,
+          "components": {
+            "technical": 65,
+            "flow": 76,
+            "catalyst": 5,
+            "liquidity": 62
+          },
+          "discoveryScore": 62.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 389348,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2.09<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 25.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "ZYDUSLIFE": {
+      "ticker": "ZYDUSLIFE",
+      "fullName": "Zydus Lifesciences Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-12T05:30:20.480Z",
+          "relVol": 3.15,
+          "confidence": 24.1,
+          "components": {
+            "technical": 54,
+            "flow": 97,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 69.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1206479,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 24.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
