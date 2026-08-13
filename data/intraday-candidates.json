@@ -1,4 +1,41 @@
 {
   "date": "2026-08-13",
-  "candidates": {}
+  "candidates": {
+    "SOLARINDS": {
+      "ticker": "SOLARINDS",
+      "fullName": "Solar Industries India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-08-13T05:31:09.322Z",
+          "relVol": 5.12,
+          "confidence": 30.6,
+          "components": {
+            "technical": 71,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 72
+          },
+          "discoveryScore": 69.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 122087,
+          "sessionFrac": 0.2826666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 30.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
