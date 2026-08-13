@@ -2,24 +2,144 @@
   "pick": {
     "date": "2026-08-13",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-13T07:31:06.320Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 53, conf 72) — trend 57, breadth 47, vol-factor 78",
-    "momLaneOpen": true,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-08-13T08:31:08.084Z",
+    "rejected": [
       {
-        "ticker": "OBEROIRLTY",
-        "relVol": 3.48,
-        "confidence": 30.7,
-        "effectiveConfidence": 66.7,
-        "institutional": 71.6,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 0,
-        "negative": false
+        "ticker": "TCS",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ASTRAL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHARATFORG",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "CONCOR",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "GODREJPROP",
+        "reasons": [
+          "illiquid (₹49Cr)"
+        ]
+      },
+      {
+        "ticker": "GODREJCP",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATACONSUM",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "illiquid (₹67Cr)"
+        ]
+      },
+      {
+        "ticker": "MAXHEALTH",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CHOLAFIN",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "INDUSINDBK",
+        "reasons": [
+          "illiquid (₹48Cr)"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "illiquid (₹33Cr)"
+        ]
+      },
+      {
+        "ticker": "LODHA",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "BEL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HINDUNILVR",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KPITTECH",
+        "reasons": [
+          "illiquid (₹47Cr)"
+        ]
+      },
+      {
+        "ticker": "NYKAA",
+        "reasons": [
+          "illiquid (₹64Cr)"
+        ]
       }
     ]
   }
