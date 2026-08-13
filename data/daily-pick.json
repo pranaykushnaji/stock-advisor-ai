@@ -2,134 +2,24 @@
   "pick": {
     "date": "2026-08-13",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-08-13T04:31:10.966Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-13T05:31:11.895Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 48, conf 58) — trend 58, breadth 36, vol-factor 81",
+    "momLaneOpen": true,
+    "considered": [
       {
-        "ticker": "ASTRAL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ASHOKLEY",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UNOMINDA",
-        "reasons": [
-          "illiquid (₹17Cr)"
-        ]
-      },
-      {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "illiquid (₹14Cr)"
-        ]
-      },
-      {
-        "ticker": "NYKAA",
-        "reasons": [
-          "illiquid (₹12Cr)"
-        ]
-      },
-      {
-        "ticker": "JIOFIN",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TMPV",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KEI",
-        "reasons": [
-          "illiquid (₹49Cr)"
-        ]
-      },
-      {
-        "ticker": "CONCOR",
-        "reasons": [
-          "illiquid (₹32Cr)"
-        ]
-      },
-      {
-        "ticker": "GODREJCP",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SHRIRAMFIN",
-        "reasons": [
-          "illiquid (₹60Cr)"
-        ]
-      },
-      {
-        "ticker": "BDL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AXISBANK",
-        "reasons": [
-          "illiquid (₹59Cr)"
-        ]
-      },
-      {
-        "ticker": "ETERNAL",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HYUNDAI",
-        "reasons": [
-          "illiquid (₹32Cr)"
-        ]
-      },
-      {
-        "ticker": "OIL",
-        "reasons": [
-          "illiquid (₹9Cr)"
-        ]
-      },
-      {
-        "ticker": "ICICIPRULI",
-        "reasons": [
-          "illiquid (₹6Cr)"
-        ]
-      },
-      {
-        "ticker": "LODHA",
-        "reasons": [
-          "illiquid (₹14Cr)"
-        ]
-      },
-      {
-        "ticker": "INDUSTOWER",
-        "reasons": [
-          "illiquid (₹33Cr)"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "illiquid (₹46Cr)"
-        ]
+        "ticker": "SOLARINDS",
+        "relVol": 5.12,
+        "confidence": 30.6,
+        "effectiveConfidence": 67,
+        "institutional": 53.1,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 7,
+        "negative": false
       }
     ]
   }
