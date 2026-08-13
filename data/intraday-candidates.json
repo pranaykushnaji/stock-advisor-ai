@@ -64,7 +64,7 @@
       "fullName": "Oberoi Realty Limited",
       "sector": "UNKNOWN",
       "firstSeen": "12:01",
-      "status": "watching",
+      "status": "bought",
       "scans": [
         {
           "hhmm": "12:01",
@@ -109,13 +109,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:01",
+          "ts": "2026-08-13T09:31:04.166Z",
+          "relVol": 2.71,
+          "confidence": 37.7,
+          "components": {
+            "technical": 59,
+            "flow": 79,
+            "catalyst": 5,
+            "liquidity": 63
+          },
+          "discoveryScore": 66.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 725087,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:01",
-      "bestConfidence": 30.7,
+      "lastSeen": "15:01",
+      "bestConfidence": 37.7,
       "confidenceTrend": "rising",
-      "confidenceSlope": 29.5,
-      "trendBonus": 4
+      "confidenceSlope": 18.25,
+      "trendBonus": 8
     }
   }
 }
