@@ -65,10 +65,104 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-14T06:30:19.033Z",
+          "relVol": 5.47,
+          "confidence": 30.5,
+          "components": {
+            "technical": 42,
+            "flow": 80,
+            "catalyst": 35,
+            "liquidity": 89
+          },
+          "discoveryScore": 72.8,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 754870,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 29,
+      "lastSeen": "12:00",
+      "bestConfidence": 30.5,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 1.5,
+      "trendBonus": 0.9
+    },
+    "SOLARINDS": {
+      "ticker": "SOLARINDS",
+      "fullName": "Solar Industries India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "bought",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-14T06:30:19.033Z",
+          "relVol": 6.91,
+          "confidence": 57,
+          "components": {
+            "technical": 86,
+            "flow": 76,
+            "catalyst": 35,
+            "liquidity": 90
+          },
+          "discoveryScore": 60.4,
+          "catalystType": "earnings beat",
+          "verification": "PARTIAL",
+          "volume": 347155,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 57,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "BHARTIARTL": {
+      "ticker": "BHARTIARTL",
+      "fullName": "Bharti Airtel Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-14T06:30:19.033Z",
+          "relVol": 1.84,
+          "confidence": 23.9,
+          "components": {
+            "technical": 60,
+            "flow": 52,
+            "catalyst": 54,
+            "liquidity": 95
+          },
+          "discoveryScore": 77.1,
+          "catalystType": "acquisition",
+          "verification": "VERIFIED",
+          "volume": 5233475,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.84<2.1"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 23.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
