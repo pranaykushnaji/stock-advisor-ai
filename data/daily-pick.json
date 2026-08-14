@@ -1,168 +1,26 @@
 {
   "pick": {
-    "ticker": "OBEROIRLTY",
-    "fullName": "Oberoi Realty Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 50,
-        "positives": [
-          "Relative volume today 2.71x the 20‑day average",
-          "Institutional accumulation score 86.5/100",
-          "Short‑term returns: +2.36% (1‑day) and +3.68% (1‑week)"
-        ],
-        "negatives": [
-          "Composite score 42.5 (AVOID) and multi‑signal confidence 37.7",
-          "Relative strength vs Nifty -2.98 (under‑performance)",
-          "No identifiable news catalyst"
-        ]
-      },
-      "relStrength": {
-        "score": 50
-      },
-      "volume": {
-        "score": 50
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 66
-      },
-      "sector": {
-        "score": 67
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.02361242259210225,
-      "r1w": 0.0368036153146103,
-      "r1m": -0.023997419044107366
-    },
-    "volumeRatio": 0.6,
-    "relVol": 2.71,
-    "relStrength": -2.98,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 37.7,
-    "effectiveConfidence": 73.6,
-    "confidenceComponents": {
-      "technical": 59,
-      "flow": 79,
-      "catalyst": 5,
-      "liquidity": 63
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 59,
-          "weight": 0.4,
-          "contribution": 23.6
-        },
-        "flow": {
-          "score": 79,
-          "weight": 0.4,
-          "contribution": 31.6
-        },
-        "liquidity": {
-          "score": 63,
-          "weight": 0.2,
-          "contribution": 12.6
-        }
-      },
-      "base": 67.8,
-      "regimeScore": 53,
-      "regimeAdjustment": -2.2,
-      "trendBonus": 8,
-      "final": 73.6
-    },
-    "expectedEdge": {
-      "expectedGainPct": 10.2,
-      "expectedLossPct": 4.1,
-      "probability": 0.629,
-      "edgePct": 4.89,
-      "calibration": "lane+regime+conf"
-    },
-    "confidenceTrend": "rising",
-    "trendBonus": 8,
-    "institutional": 86.5,
-    "institutionalFlags": [
-      "up-day volume dominant"
-    ],
-    "discoveryScore": 66.5,
-    "discoveryReasons": [
-      "closing near highs"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 2.45,
-      "upsidePct": 10.2,
-      "downsidePct": 4.1
-    },
+    "date": "2026-08-14",
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-14T04:30:20.271Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 53, conf 73) — trend 57, breadth 40, vol-factor 78",
-    "regimeConfidence": 73,
-    "regimeFactors": {
-      "indexTrend": 57,
-      "volatility": 78,
-      "breadth": 40,
-      "momentumBreadth": 36,
-      "largeCap": 50,
-      "gapEnv": 51,
-      "riskAppetite": 55,
-      "sectorPart": 44
-    },
-    "annualizedVol": 26.3,
-    "composite": 42.5,
-    "verdict": "AVOID",
-    "estimatedUpside": "8-12%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "No specific news catalyst; the price action is driven by unusually high volume and institutional buying.",
-    "summary": "OBEROIRLTY is showing a clear momentum burst with volume 2.71x normal and strong institutional accumulation, delivering short‑term gains despite a lack of news. The risk‑reward profile (~10% upside vs ~4% downside) and neutral market regime support a 5‑10 day swing trade targeting the upside. Caution remains due to low composite and relative‑strength scores.",
-    "whyToday": "Today's volume surge to 2.71× the 20‑day average signals fresh buying pressure and makes the entry compelling.",
-    "date": "2026-08-13",
-    "pickedAt": "2026-08-13T09:31:06.271Z",
-    "discovery": {
-      "news": 0,
-      "movers": 38,
-      "nseSnapshot": 201,
-      "nseUniverse": 201,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-13T09:16:19.484Z",
-        "rankedBy": "discoveryScore"
+    "market": "neutral (v2 score 47, conf 60) — trend 59, breadth 29, vol-factor 78",
+    "momLaneOpen": true,
+    "considered": [
+      {
+        "ticker": "BHEL",
+        "relVol": 2.58,
+        "confidence": 29.8,
+        "effectiveConfidence": 60.8,
+        "institutional": 47.6,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
       }
-    },
-    "candidatePool": 1,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 1,
-      "catalystChecked": 1,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 1842.4,
-    "entryRejected": null
+    ]
   }
 }
