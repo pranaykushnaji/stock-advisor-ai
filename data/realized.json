@@ -587,6 +587,39 @@
       "exitSource": "rule",
       "realizedPnl": 411.94,
       "realizedPnlPct": 4.58
+    },
+    {
+      "ticker": "NATIONALUM",
+      "fullName": "National Aluminium Company Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 18.3,
+        "expectedLossPct": 6.4,
+        "probability": 0.627,
+        "edgePct": 9.09,
+        "calibration": "lane+regime+conf"
+      },
+      "confidenceComponents": {
+        "technical": 73,
+        "flow": 76,
+        "catalyst": 5,
+        "liquidity": 89
+      },
+      "effectiveConfidence": 73.1,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 415.1,
+      "entryDate": "2026-08-12",
+      "exitPrice": 380.4,
+      "exitDate": "2026-08-14",
+      "shares": 20.477,
+      "investedAmount": 8500,
+      "exitReason": "vol-stop (-8.4%, 5.2% band) [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -710.55,
+      "realizedPnlPct": -8.36
     }
   ]
 }
