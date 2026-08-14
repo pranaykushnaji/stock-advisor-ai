@@ -1,170 +1,26 @@
 {
   "pick": {
-    "ticker": "SOLARINDS",
-    "fullName": "Solar Industries India Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 83.3,
-        "positives": [
-          "Momentum score 83.3 and Technicals 86.7 indicate strong price thrust",
-          "Relative volume 6.91x the 20‑day average shows aggressive buying",
-          "Relative strength vs Nifty 8.38 suggests outperformance",
-          "Weekly (+7.97%) and monthly (+9.44%) returns are positive",
-          "Earnings beat with ~90% profit jump (confidence 95%) fuels rally"
-        ],
-        "negatives": [
-          "1‑day return down 0.92% hints at short‑term pullback risk",
-          "Market breadth low (27) and neutral regime may limit upside",
-          "Volume score only 50 (mid) despite high relative volume"
-        ]
-      },
-      "relStrength": {
-        "score": 83.3
-      },
-      "volume": {
-        "score": 50
-      },
-      "catalyst": {
-        "score": 40
-      },
-      "technicals": {
-        "score": 86.7
-      },
-      "sector": {
-        "score": 50
-      }
-    },
-    "shortReturns": {
-      "r1d": -0.009200944695925998,
-      "r1w": 0.07973190348525469,
-      "r1m": 0.09440217391304348
-    },
-    "volumeRatio": 1.93,
-    "relVol": 6.91,
-    "relStrength": 8.38,
-    "catalyst": {
-      "type": "earnings beat",
-      "confidence": 95,
-      "impact": 8,
-      "stars": 4,
-      "points": 16,
-      "verification": "PARTIAL",
-      "sources": 1,
-      "summary": "Q1 FY26 profit jumped ~90% beating expectations, spurring strong share rally.",
-      "impactClass": "high+",
-      "decay": 0.993,
-      "influenceDays": 6,
-      "recalled": false
-    },
-    "confidence": 57,
-    "effectiveConfidence": 77.6,
-    "confidenceComponents": {
-      "technical": 86,
-      "flow": 76,
-      "catalyst": 35,
-      "liquidity": 90
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 86,
-          "weight": 0.4,
-          "contribution": 34.4
-        },
-        "flow": {
-          "score": 76,
-          "weight": 0.4,
-          "contribution": 30.4
-        },
-        "liquidity": {
-          "score": 90,
-          "weight": 0.2,
-          "contribution": 18
-        }
-      },
-      "base": 82.8,
-      "regimeScore": 48,
-      "regimeAdjustment": -5.2,
-      "trendBonus": 0,
-      "final": 77.6
-    },
-    "expectedEdge": {
-      "expectedGainPct": 9.8,
-      "expectedLossPct": 5.1,
-      "probability": 0.636,
-      "edgePct": 4.38,
-      "calibration": "lane+regime+conf"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 72.3,
-    "institutionalFlags": [
-      "volume expanding"
-    ],
-    "discoveryScore": 60.4,
-    "discoveryReasons": [
-      "closing near highs"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 1.93,
-      "upsidePct": 9.8,
-      "downsidePct": 5.1
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 48, conf 62) — trend 55, breadth 27, vol-factor 81",
-    "regimeConfidence": 62,
-    "regimeFactors": {
-      "indexTrend": 55,
-      "volatility": 81,
-      "breadth": 27,
-      "momentumBreadth": 22,
-      "largeCap": 50,
-      "gapEnv": 39,
-      "riskAppetite": 51,
-      "sectorPart": 44
-    },
-    "annualizedVol": 32.3,
-    "composite": 68.3,
-    "verdict": "BUY",
-    "estimatedUpside": "9-10%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "Q1 FY26 profit jumped ~90% beating expectations, delivering an earnings beat that sparked a strong share rally.",
-    "summary": "The earnings beat provides a solid fundamental catalyst while the stock exhibits high momentum, strong technicals, and exceptional volume. With a reward‑to‑risk ratio near 2:1 and upside potential around 10%, a 5‑10‑day swing could capture the rally. Institutional accumulation and relative strength further support the trade.",
-    "whyToday": "Today's earnings surprise triggered a 6.91x volume surge and institutional buying, aligning with the high momentum and technical scores for an optimal entry.",
     "date": "2026-08-14",
-    "pickedAt": "2026-08-14T06:30:21.459Z",
-    "discovery": {
-      "news": 7,
-      "movers": 34,
-      "nseSnapshot": 199,
-      "nseUniverse": 199,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-14T06:15:33.132Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-14T07:30:26.594Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 49, conf 64) — trend 55, breadth 28, vol-factor 81",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "APOLLOHOSP",
+        "relVol": 4.68,
+        "confidence": 28.9,
+        "effectiveConfidence": 67.2,
+        "institutional": 63.2,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 10,
+        "negative": false
       }
-    },
-    "candidatePool": 3,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 3,
-      "catalystChecked": 3,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 20137,
-    "entryRejected": null
+    ]
   }
 }
