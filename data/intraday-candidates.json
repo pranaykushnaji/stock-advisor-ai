@@ -1,4 +1,41 @@
 {
   "date": "2026-08-17",
-  "candidates": {}
+  "candidates": {
+    "UNOMINDA": {
+      "ticker": "UNOMINDA",
+      "fullName": "Uno Minda Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:01",
+          "ts": "2026-08-17T06:31:06.538Z",
+          "relVol": 1.9,
+          "confidence": 31.4,
+          "components": {
+            "technical": 62,
+            "flow": 70,
+            "catalyst": 54,
+            "liquidity": 56
+          },
+          "discoveryScore": 63.6,
+          "catalystType": "acquisition",
+          "verification": "VERIFIED",
+          "volume": 702555,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "relVol 1.9<2.1"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:01",
+      "bestConfidence": 31.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
