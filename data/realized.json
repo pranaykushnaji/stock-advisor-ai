@@ -620,6 +620,39 @@
       "exitSource": "rule",
       "realizedPnl": -710.55,
       "realizedPnlPct": -8.36
+    },
+    {
+      "ticker": "TECHM",
+      "fullName": "Tech Mahindra Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 17,
+        "expectedLossPct": 4.3,
+        "probability": 0.597,
+        "edgePct": 8.42,
+        "calibration": "lane+regime"
+      },
+      "confidenceComponents": {
+        "technical": 66,
+        "flow": 83,
+        "catalyst": 5,
+        "liquidity": 74
+      },
+      "effectiveConfidence": 71.6,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 1669,
+      "entryDate": "2026-08-07",
+      "exitPrice": 1607.4,
+      "exitDate": "2026-08-17",
+      "shares": 5.093,
+      "investedAmount": 8500,
+      "exitReason": "vol-stop (-3.7%, 3.5% band) [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -313.73,
+      "realizedPnlPct": -3.69
     }
   ]
 }
