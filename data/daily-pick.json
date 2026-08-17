@@ -3,8 +3,15 @@
     "date": "2026-08-17",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-08-17T08:31:08.010Z",
+    "pickedAt": "2026-08-17T09:31:08.781Z",
     "rejected": [
+      {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "SUZLON",
         "reasons": [
@@ -15,65 +22,9 @@
         ]
       },
       {
-        "ticker": "MOTILALOFS",
+        "ticker": "MFSL",
         "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "YESBANK",
-        "reasons": [
-          "priceAboveEma20",
           "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BHEL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "HDFCBANK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LT",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NBCC",
-        "reasons": [
-          "illiquid (₹49Cr)"
-        ]
-      },
-      {
-        "ticker": "KOTAKBANK",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDALCO",
-        "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
@@ -86,7 +37,20 @@
         ]
       },
       {
-        "ticker": "LUPIN",
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "YESBANK",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -101,22 +65,70 @@
         ]
       },
       {
-        "ticker": "MFSL",
+        "ticker": "PHOENIXLTD",
         "reasons": [
-          "illiquid (₹64Cr)"
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "ASHOKLEY",
+        "ticker": "LUPIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HINDALCO",
         "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "ALKEM",
+        "ticker": "GODREJPROP",
         "reasons": [
-          "illiquid (₹59Cr)"
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHEL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "KFINTECH",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JSWSTEEL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PATANJALI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -127,13 +139,7 @@
         ]
       },
       {
-        "ticker": "LODHA",
-        "reasons": [
-          "illiquid (₹72Cr)"
-        ]
-      },
-      {
-        "ticker": "TATASTEEL",
+        "ticker": "AXISBANK",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -142,12 +148,9 @@
         ]
       },
       {
-        "ticker": "MUTHOOTFIN",
+        "ticker": "NBCC",
         "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
+          "illiquid (₹54Cr)"
         ]
       }
     ]
