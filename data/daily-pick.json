@@ -1,25 +1,133 @@
 {
   "pick": {
-    "date": "2026-08-14",
+    "date": "2026-08-17",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-14T09:30:22.205Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 50, conf 65) — trend 56, breadth 33, vol-factor 81",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-08-17T04:31:07.309Z",
+    "rejected": [
       {
-        "ticker": "APOLLOHOSP",
-        "relVol": 3.95,
-        "confidence": 29,
-        "effectiveConfidence": 70.6,
-        "institutional": 68,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 10,
-        "negative": false
+        "ticker": "MAXHEALTH",
+        "reasons": [
+          "illiquid (₹39Cr)"
+        ]
+      },
+      {
+        "ticker": "PATANJALI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "AMBER",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "illiquid (₹61Cr)"
+        ]
+      },
+      {
+        "ticker": "ALKEM",
+        "reasons": [
+          "illiquid (₹30Cr)"
+        ]
+      },
+      {
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "illiquid (₹63Cr)"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "illiquid (₹37Cr)"
+        ]
+      },
+      {
+        "ticker": "AUROPHARMA",
+        "reasons": [
+          "illiquid (₹41Cr)"
+        ]
+      },
+      {
+        "ticker": "MFSL",
+        "reasons": [
+          "illiquid (₹13Cr)"
+        ]
+      },
+      {
+        "ticker": "IOC",
+        "reasons": [
+          "illiquid (₹12Cr)"
+        ]
+      },
+      {
+        "ticker": "BHEL",
+        "reasons": [
+          "illiquid (₹63Cr)"
+        ]
+      },
+      {
+        "ticker": "SUZLON",
+        "reasons": [
+          "illiquid (₹25Cr)"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
+        "reasons": [
+          "illiquid (₹15Cr)"
+        ]
+      },
+      {
+        "ticker": "YESBANK",
+        "reasons": [
+          "illiquid (₹21Cr)"
+        ]
+      },
+      {
+        "ticker": "BHARATFORG",
+        "reasons": [
+          "illiquid (₹26Cr)"
+        ]
+      },
+      {
+        "ticker": "BLUESTARCO",
+        "reasons": [
+          "illiquid (₹26Cr)"
+        ]
+      },
+      {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "illiquid (₹74Cr)"
+        ]
+      },
+      {
+        "ticker": "HDFCLIFE",
+        "reasons": [
+          "illiquid (₹35Cr)"
+        ]
+      },
+      {
+        "ticker": "OIL",
+        "reasons": [
+          "illiquid (₹15Cr)"
+        ]
       }
     ]
   }
