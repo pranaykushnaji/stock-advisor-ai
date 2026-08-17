@@ -2,25 +2,153 @@
   "pick": {
     "date": "2026-08-17",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-17T07:31:10.185Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 55, conf 73) — trend 56, breadth 49, vol-factor 82",
-    "momLaneOpen": true,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-08-17T08:31:08.010Z",
+    "rejected": [
       {
-        "ticker": "UNOMINDA",
-        "relVol": 1.98,
-        "confidence": 32.3,
-        "effectiveConfidence": 65.2,
-        "institutional": 89.4,
-        "catalyst": "acquisition",
-        "verification": "VERIFIED",
-        "filing": false,
-        "recalled": true,
-        "sources": 1,
-        "articles": 0,
-        "negative": false
+        "ticker": "SUZLON",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "YESBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHEL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NBCC",
+        "reasons": [
+          "illiquid (₹49Cr)"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HINDALCO",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INOXWIND",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LUPIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "FEDERALBNK",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "MFSL",
+        "reasons": [
+          "illiquid (₹64Cr)"
+        ]
+      },
+      {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ALKEM",
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LODHA",
+        "reasons": [
+          "illiquid (₹72Cr)"
+        ]
+      },
+      {
+        "ticker": "TATASTEEL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MUTHOOTFIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
