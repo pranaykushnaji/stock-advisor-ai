@@ -2,139 +2,25 @@
   "pick": {
     "date": "2026-08-17",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-08-17T05:31:06.849Z",
-    "rejected": [
-      {
-        "ticker": "HINDZINC",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AUROPHARMA",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MFSL",
-        "reasons": [
-          "illiquid (₹24Cr)"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BHEL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "ALKEM",
-        "reasons": [
-          "illiquid (₹40Cr)"
-        ]
-      },
-      {
-        "ticker": "KFINTECH",
-        "reasons": [
-          "illiquid (₹29Cr)"
-        ]
-      },
-      {
-        "ticker": "SUZLON",
-        "reasons": [
-          "illiquid (₹59Cr)"
-        ]
-      },
-      {
-        "ticker": "TVSMOTOR",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "KEI",
-        "reasons": [
-          "illiquid (₹57Cr)"
-        ]
-      },
-      {
-        "ticker": "AMBER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KALYANKJIL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "BLUESTARCO",
-        "reasons": [
-          "illiquid (₹45Cr)"
-        ]
-      },
-      {
-        "ticker": "SUPREMEIND",
-        "reasons": [
-          "illiquid (₹74Cr)"
-        ]
-      },
-      {
-        "ticker": "MCX",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CUMMINSIND",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UPL",
-        "reasons": [
-          "illiquid (₹19Cr)"
-        ]
-      },
-      {
-        "ticker": "PATANJALI",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTILALOFS",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-17T06:31:10.673Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 49, conf 64) — trend 55, breadth 38, vol-factor 81",
+    "momLaneOpen": true,
+    "considered": [
       {
         "ticker": "UNOMINDA",
-        "reasons": [
-          "illiquid (₹61Cr)"
-        ]
+        "relVol": 1.9,
+        "confidence": 31.4,
+        "effectiveConfidence": 61.8,
+        "institutional": 87.2,
+        "catalyst": "acquisition",
+        "verification": "VERIFIED",
+        "filing": false,
+        "recalled": true,
+        "sources": 1,
+        "articles": 0,
+        "negative": false
       }
     ]
   }
