@@ -653,6 +653,39 @@
       "exitSource": "rule",
       "realizedPnl": -313.73,
       "realizedPnlPct": -3.69
+    },
+    {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 11.9,
+        "expectedLossPct": 6,
+        "probability": 0.655,
+        "edgePct": 5.72,
+        "calibration": "lane+regime+conf"
+      },
+      "confidenceComponents": {
+        "technical": 83,
+        "flow": 92,
+        "catalyst": 5,
+        "liquidity": 77
+      },
+      "effectiveConfidence": 79.8,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 1591,
+      "entryDate": "2026-08-11",
+      "exitPrice": 1560.9,
+      "exitDate": "2026-08-18",
+      "shares": 5.657,
+      "investedAmount": 9000,
+      "exitReason": "review day 7: 1wk trend weak [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -170.28,
+      "realizedPnlPct": -1.89
     }
   ]
 }
