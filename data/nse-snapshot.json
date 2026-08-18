@@ -1,9 +1,9 @@
 {
-  "fetchedAt": "2026-08-18T03:16:35.372Z",
+  "fetchedAt": "2026-08-18T04:16:27.410Z",
   "diag": {
-    "marketStatus": true,
+    "marketStatus": false,
     "moversCount": 208,
-    "universeCount": 205,
+    "universeCount": 171,
     "universeIndicesScanned": 8,
     "indexRows": {
       "NIFTY 50": 0,
@@ -23,2367 +23,1953 @@
     "deliveryData": true
   },
   "data": {
-    "marketStatus": {
-      "marketState": [
-        {
-          "market": "Capital Market",
-          "marketStatus": "Open",
-          "tradeDate": "17-Aug-2026 15:30",
-          "index": "NIFTY 50",
-          "last": 24287.65,
-          "variation": -78.34999999999854,
-          "percentChange": -0.32,
-          "marketStatusMessage": "Normal Market has Closed"
-        },
-        {
-          "market": "Currency",
-          "marketStatus": "Open",
-          "tradeDate": "18-Aug-2026",
-          "index": "",
-          "last": "",
-          "variation": "",
-          "percentChange": "",
-          "marketStatusMessage": "Market is Closed"
-        },
-        {
-          "market": "Commodity",
-          "marketStatus": "Open",
-          "tradeDate": "18-Aug-2026",
-          "index": "",
-          "last": "",
-          "variation": "",
-          "percentChange": "",
-          "marketStatusMessage": "Market is Closed"
-        },
-        {
-          "market": "Debt",
-          "marketStatus": "Open",
-          "tradeDate": "18-Aug-2026",
-          "index": "",
-          "last": "",
-          "variation": "",
-          "percentChange": "",
-          "marketStatusMessage": "Market is Closed"
-        },
-        {
-          "index": "NIFTY50 USD",
-          "last": 8802.6,
-          "change": -44.29999999999927,
-          "percentChange": -0.5,
-          "timestamp": "17-Aug-2026 15:39"
-        },
-        {
-          "market": "currencyfuture",
-          "marketStatus": "Open",
-          "tradeDate": "18-Aug-2026",
-          "index": "",
-          "last": "95.6225",
-          "variation": "",
-          "percentChange": "",
-          "marketStatusMessage": "Market is Closed",
-          "expiryDate": "27-Aug-2026",
-          "underlying": "USDINR",
-          "updated_time": "17-Aug-2026 17:00",
-          "tradeDateFormatted": "17-Aug-2026 17:00",
-          "slickclass": "slick-item"
-        }
-      ],
-      "marketcap": {
-        "timeStamp": "17-Aug-2026",
-        "marketCapinTRDollars": 5.14,
-        "marketCapinLACCRRupees": 491.2026208662612,
-        "marketCapinCRRupees": 49120262.09,
-        "marketCapinCRRupeesFormatted": "49,120,262.09",
-        "marketCapinLACCRRupeesFormatted": "491.20",
-        "underlying": "Market Cap"
-      },
-      "indicativenifty50": {
-        "change": -78.35,
-        "closingValue": 24287.65,
-        "dateTime": "17-Aug-2026 15:30",
-        "finalClosingValue": 24287.65,
-        "indexLast": null,
-        "indexName": "NIFTY 50",
-        "indexPercChange": null,
-        "indexTimeVal": null,
-        "indicativeTime": null,
-        "perChange": -0.32,
-        "status": "CLOSE"
-      },
-      "giftnifty": {
-        "CONTRACTSTRADED": 2101,
-        "DAYCHANGE": -11.5,
-        "EXPIRYDATE": "25-Aug-2026",
-        "INSTRUMENTTYPE": "FUTIDX",
-        "LASTPRICE": 24286,
-        "OPTIONTYPE": "-",
-        "PERCHANGE": -0.05,
-        "STRIKEPRICE": 0,
-        "SYMBOL": "NIFTY",
-        "TIMESTMP": "18-Aug-2026 08:46",
-        "id": "0/NIFTYFUTIDX25-Aug-2026--"
-      },
-      "niftyusd": {
-        "index": "NIFTY50 USD",
-        "last": 8802.6,
-        "change": -44.29999999999927,
-        "percentChange": -0.5,
-        "timestamp": "17-Aug-2026 15:39"
-      }
-    },
     "topGainers": [
       {
-        "symbol": "INOXWIND",
-        "pChange": 6.05,
-        "lastPrice": "78.13",
-        "dayHigh": "78.59",
-        "dayLow": "73.32",
-        "totalTradedVolume": 34043653,
+        "symbol": "TIINDIA",
+        "pChange": 5.56,
+        "lastPrice": "2893.9",
+        "dayHigh": "2895",
+        "dayLow": "2755.8",
+        "totalTradedVolume": 588370,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "MOTILALOFS",
-        "pChange": 5.68,
-        "lastPrice": "955",
-        "dayHigh": "964",
-        "dayLow": "897.1",
-        "totalTradedVolume": 5976448,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "OBEROIRLTY",
-        "pChange": 4.6,
-        "lastPrice": "1931",
-        "dayHigh": "1946",
-        "dayLow": "1832.9",
-        "totalTradedVolume": 1781893,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SUZLON",
-        "pChange": 4.03,
-        "lastPrice": "49",
-        "dayHigh": "49.32",
-        "dayLow": "46.9",
-        "totalTradedVolume": 80470340,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KFINTECH",
-        "pChange": 3.51,
-        "lastPrice": "973",
-        "dayHigh": "981.05",
-        "dayLow": "925.7",
-        "totalTradedVolume": 2105146,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BHEL",
-        "pChange": 3.38,
-        "lastPrice": "435.95",
-        "dayHigh": "435.95",
-        "dayLow": "421.8",
-        "totalTradedVolume": 15351093,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GODREJPROP",
-        "pChange": 3.22,
-        "lastPrice": "2054",
-        "dayHigh": "2057",
-        "dayLow": "1970.9",
-        "totalTradedVolume": 765350,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ASHOKLEY",
-        "pChange": 3.18,
-        "lastPrice": "177.1",
-        "dayHigh": "179.1",
-        "dayLow": "171.98",
-        "totalTradedVolume": 38086255,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NATIONALUM",
-        "pChange": 3.07,
-        "lastPrice": "387.55",
-        "dayHigh": "391.5",
-        "dayLow": "376.5",
-        "totalTradedVolume": 9724992,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KEI",
-        "pChange": 3.04,
-        "lastPrice": "5873",
-        "dayHigh": "5880",
-        "dayLow": "5680",
-        "totalTradedVolume": 343807,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NAM-INDIA",
-        "pChange": 2.98,
-        "lastPrice": "1202.7",
-        "dayHigh": "1203.3",
-        "dayLow": "1155.1",
-        "totalTradedVolume": 1013133,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "LTF",
-        "pChange": 2.84,
-        "lastPrice": "315",
-        "dayHigh": "315",
-        "dayLow": "304.5",
-        "totalTradedVolume": 3074384,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SAIL",
-        "pChange": 2.41,
-        "lastPrice": "173.6",
-        "dayHigh": "174.3",
-        "dayLow": "168.11",
-        "totalTradedVolume": 10850564,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "UNOMINDA",
-        "pChange": 2.41,
-        "lastPrice": "1269.9",
-        "dayHigh": "1272",
-        "dayLow": "1235.9",
-        "totalTradedVolume": 1414213,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "JINDALSTEL",
-        "pChange": 2.25,
-        "lastPrice": "1116.1",
-        "dayHigh": "1118.7",
-        "dayLow": "1090",
-        "totalTradedVolume": 644163,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MFSL",
-        "pChange": 2.18,
-        "lastPrice": "1571.7",
-        "dayHigh": "1571.7",
-        "dayLow": "1522.2",
-        "totalTradedVolume": 698850,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ANGELONE",
-        "pChange": 2.16,
-        "lastPrice": "293.5",
-        "dayHigh": "295.65",
-        "dayLow": "282.15",
-        "totalTradedVolume": 4087024,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PGEL",
-        "pChange": 2.16,
-        "lastPrice": "614",
-        "dayHigh": "614",
-        "dayLow": "594.25",
-        "totalTradedVolume": 1055830,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PHOENIXLTD",
-        "pChange": 2.11,
-        "lastPrice": "1929.8",
-        "dayHigh": "1949.9",
-        "dayLow": "1876",
-        "totalTradedVolume": 718310,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HINDALCO",
-        "pChange": 1.98,
-        "lastPrice": "1049.9",
-        "dayHigh": "1060",
-        "dayLow": "1032.7",
-        "totalTradedVolume": 3062996,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CAMS",
+        "symbol": "VBL",
         "pChange": 1.84,
-        "lastPrice": "776.25",
-        "dayHigh": "776.25",
-        "dayLow": "755.55",
-        "totalTradedVolume": 1314547,
+        "lastPrice": "441.85",
+        "dayHigh": "443.3",
+        "dayLow": "434.6",
+        "totalTradedVolume": 844505,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "TVSMOTOR",
-        "pChange": 1.83,
-        "lastPrice": "4385.9",
-        "dayHigh": "4386",
-        "dayLow": "4305.5",
-        "totalTradedVolume": 604301,
+        "symbol": "OIL",
+        "pChange": 1.81,
+        "lastPrice": "483.25",
+        "dayHigh": "485.8",
+        "dayLow": "479",
+        "totalTradedVolume": 1018300,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "PAGEIND",
-        "pChange": 1.66,
-        "lastPrice": "37360",
-        "dayHigh": "37690",
-        "dayLow": "36505",
-        "totalTradedVolume": 54629,
+        "symbol": "ALKEM",
+        "pChange": 1.65,
+        "lastPrice": "5462.5",
+        "dayHigh": "5465",
+        "dayLow": "5374",
+        "totalTradedVolume": 25625,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "DIXON",
+        "pChange": 1.6,
+        "lastPrice": "14250",
+        "dayHigh": "14420",
+        "dayLow": "14067",
+        "totalTradedVolume": 141930,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "DIVISLAB",
+        "pChange": 1.53,
+        "lastPrice": "8611.5",
+        "dayHigh": "8630",
+        "dayLow": "8504",
+        "totalTradedVolume": 118680,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "COCHINSHIP",
+        "pChange": 1.27,
+        "lastPrice": "1476.3",
+        "dayHigh": "1489.9",
+        "dayLow": "1457",
+        "totalTradedVolume": 252414,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BIOCON",
+        "pChange": 1.27,
+        "lastPrice": "417.25",
+        "dayHigh": "417.45",
+        "dayLow": "412.2",
+        "totalTradedVolume": 300353,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "SONACOMS",
-        "pChange": 1.65,
-        "lastPrice": "805.1",
-        "dayHigh": "814.3",
-        "dayLow": "795.75",
-        "totalTradedVolume": 2346950,
+        "pChange": 1.26,
+        "lastPrice": "815.25",
+        "dayHigh": "821",
+        "dayLow": "806",
+        "totalTradedVolume": 404779,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "MUTHOOTFIN",
-        "pChange": 1.64,
-        "lastPrice": "2888.5",
-        "dayHigh": "2919",
-        "dayLow": "2829.1",
-        "totalTradedVolume": 825843,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HDFCAMC",
-        "pChange": 1.53,
-        "lastPrice": "2523",
-        "dayHigh": "2539.4",
-        "dayLow": "2471",
-        "totalTradedVolume": 588681,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "RECLTD",
-        "pChange": 1.49,
-        "lastPrice": "340",
-        "dayHigh": "340.2",
-        "dayLow": "333.2",
-        "totalTradedVolume": 5176231,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "JUBLFOOD",
-        "pChange": 1.47,
-        "lastPrice": "511.5",
-        "dayHigh": "512.6",
-        "dayLow": "501.8",
-        "totalTradedVolume": 2025328,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "POLYCAB",
-        "pChange": 1.41,
-        "lastPrice": "9370",
-        "dayHigh": "9395",
-        "dayLow": "9231",
-        "totalTradedVolume": 239095,
+        "symbol": "SOLARINDS",
+        "pChange": 1.2,
+        "lastPrice": "20240",
+        "dayHigh": "20422",
+        "dayLow": "20030",
+        "totalTradedVolume": 62339,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "TORNTPHARM",
-        "pChange": 1.39,
-        "lastPrice": "4900",
-        "dayHigh": "4939",
-        "dayLow": "4814",
-        "totalTradedVolume": 293772,
+        "pChange": 1.11,
+        "lastPrice": "4954.5",
+        "dayHigh": "4961",
+        "dayLow": "4876",
+        "totalTradedVolume": 29298,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MOTHERSON",
+        "pChange": 1.06,
+        "lastPrice": "169.84",
+        "dayHigh": "170.56",
+        "dayLow": "168.1",
+        "totalTradedVolume": 2925037,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "AMBER",
+        "pChange": 0.99,
+        "lastPrice": "7331",
+        "dayHigh": "7408",
+        "dayLow": "7252",
+        "totalTradedVolume": 98828,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "AUROPHARMA",
+        "pChange": 0.91,
+        "lastPrice": "1642",
+        "dayHigh": "1644.3",
+        "dayLow": "1629",
+        "totalTradedVolume": 90307,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HYUNDAI",
+        "pChange": 0.89,
+        "lastPrice": "2209.6",
+        "dayHigh": "2221.9",
+        "dayLow": "2179",
+        "totalTradedVolume": 96872,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KAYNES",
+        "pChange": 0.88,
+        "lastPrice": "3683.3",
+        "dayHigh": "3714.2",
+        "dayLow": "3660",
+        "totalTradedVolume": 147085,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "POLICYBZR",
+        "pChange": 0.77,
+        "lastPrice": "1741.4",
+        "dayHigh": "1749.8",
+        "dayLow": "1722.4",
+        "totalTradedVolume": 90966,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "COALINDIA",
+        "pChange": 0.76,
+        "lastPrice": "411.55",
+        "dayHigh": "412.7",
+        "dayLow": "407.6",
+        "totalTradedVolume": 2837524,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "GRASIM",
+        "pChange": 0.75,
+        "lastPrice": "3274.9",
+        "dayHigh": "3276",
+        "dayLow": "3250.5",
+        "totalTradedVolume": 145893,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BOSCHLTD",
+        "pChange": 0.75,
+        "lastPrice": "47320",
+        "dayHigh": "47450",
+        "dayLow": "46775",
+        "totalTradedVolume": 5106,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PREMIERENE",
+        "pChange": 0.68,
+        "lastPrice": "1022.4",
+        "dayHigh": "1029.9",
+        "dayLow": "1019.1",
+        "totalTradedVolume": 117634,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ONGC",
+        "pChange": 0.67,
+        "lastPrice": "240.09",
+        "dayHigh": "241.3",
+        "dayLow": "239.08",
+        "totalTradedVolume": 3700296,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BAJAJ-AUTO",
+        "pChange": 0.67,
+        "lastPrice": "11741",
+        "dayHigh": "11763",
+        "dayLow": "11699",
+        "totalTradedVolume": 21893,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "M&M",
+        "pChange": 0.65,
+        "lastPrice": "3412.5",
+        "dayHigh": "3423.6",
+        "dayLow": "3390.2",
+        "totalTradedVolume": 161859,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ADANIPOWER",
+        "pChange": 0.65,
+        "lastPrice": "204.89",
+        "dayHigh": "206.17",
+        "dayLow": "203.57",
+        "totalTradedVolume": 2295853,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SUNPHARMA",
+        "pChange": 0.64,
+        "lastPrice": "1894",
+        "dayHigh": "1895.9",
+        "dayLow": "1882.8",
+        "totalTradedVolume": 139858,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "FORTIS",
+        "pChange": 0.63,
+        "lastPrice": "914.45",
+        "dayHigh": "917.85",
+        "dayLow": "908.35",
+        "totalTradedVolume": 347405,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PETRONET",
+        "pChange": 0.62,
+        "lastPrice": "283.55",
+        "dayHigh": "285.25",
+        "dayLow": "281.8",
+        "totalTradedVolume": 274737,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "RELIANCE",
+        "pChange": 0.59,
+        "lastPrice": "1323.7",
+        "dayHigh": "1328.6",
+        "dayLow": "1311.2",
+        "totalTradedVolume": 1750132,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INDUSINDBK",
+        "pChange": 0.59,
+        "lastPrice": "1016.6",
+        "dayHigh": "1019.5",
+        "dayLow": "1007",
+        "totalTradedVolume": 155299,
         "index": "SECURITIES IN F&O"
       }
     ],
     "topLosers": [
       {
-        "symbol": "VOLTAS",
-        "pChange": -4.05,
-        "lastPrice": "1267",
-        "dayHigh": "1350",
-        "dayLow": "1256.1",
-        "totalTradedVolume": 4378295,
+        "symbol": "NAM-INDIA",
+        "pChange": -3.06,
+        "lastPrice": "1165.9",
+        "dayHigh": "1205",
+        "dayLow": "1164.8",
+        "totalTradedVolume": 242425,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "COLPAL",
+        "pChange": -2.9,
+        "lastPrice": "1907",
+        "dayHigh": "1958.9",
+        "dayLow": "1901.7",
+        "totalTradedVolume": 340366,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ANGELONE",
+        "pChange": -2.83,
+        "lastPrice": "285.2",
+        "dayHigh": "293.4",
+        "dayLow": "281.6",
+        "totalTradedVolume": 2493486,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INOXWIND",
+        "pChange": -2.66,
+        "lastPrice": "76.05",
+        "dayHigh": "78.19",
+        "dayLow": "76",
+        "totalTradedVolume": 3791449,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KFINTECH",
+        "pChange": -2.64,
+        "lastPrice": "947.3",
+        "dayHigh": "979",
+        "dayLow": "946",
+        "totalTradedVolume": 440193,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "GODREJPROP",
+        "pChange": -2.63,
+        "lastPrice": "2000",
+        "dayHigh": "2055.2",
+        "dayLow": "1995.2",
+        "totalTradedVolume": 139895,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "OBEROIRLTY",
+        "pChange": -2.3,
+        "lastPrice": "1886.6",
+        "dayHigh": "1960.7",
+        "dayLow": "1877.1",
+        "totalTradedVolume": 617301,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LODHA",
+        "pChange": -2.29,
+        "lastPrice": "1225.3",
+        "dayHigh": "1260",
+        "dayLow": "1224.1",
+        "totalTradedVolume": 218600,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SBICARD",
+        "pChange": -2.28,
+        "lastPrice": "627.15",
+        "dayHigh": "643.15",
+        "dayLow": "626.5",
+        "totalTradedVolume": 228724,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "BSE",
-        "pChange": -3.34,
-        "lastPrice": "3332",
-        "dayHigh": "3390.4",
-        "dayLow": "3282.9",
-        "totalTradedVolume": 7709125,
+        "pChange": -2.06,
+        "lastPrice": "3263.4",
+        "dayHigh": "3315.4",
+        "dayLow": "3235",
+        "totalTradedVolume": 1786351,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "IDEA",
-        "pChange": -2.83,
-        "lastPrice": "13.71",
-        "dayHigh": "14.14",
-        "dayLow": "13.66",
-        "totalTradedVolume": 310430357,
+        "symbol": "LTF",
+        "pChange": -2.05,
+        "lastPrice": "308.55",
+        "dayHigh": "314.85",
+        "dayLow": "308.15",
+        "totalTradedVolume": 686803,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "COCHINSHIP",
-        "pChange": -2.59,
-        "lastPrice": "1457.8",
-        "dayHigh": "1494.7",
-        "dayLow": "1435",
-        "totalTradedVolume": 1954085,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HCLTECH",
-        "pChange": -2.57,
-        "lastPrice": "1325",
-        "dayHigh": "1362.8",
-        "dayLow": "1325",
-        "totalTradedVolume": 970745,
+        "symbol": "CAMS",
+        "pChange": -1.94,
+        "lastPrice": "761.2",
+        "dayHigh": "773.9",
+        "dayLow": "760.15",
+        "totalTradedVolume": 302082,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "INFY",
-        "pChange": -2.51,
-        "lastPrice": "1139.9",
-        "dayHigh": "1166.5",
-        "dayLow": "1129.7",
-        "totalTradedVolume": 5817153,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SUNPHARMA",
-        "pChange": -2.49,
-        "lastPrice": "1882",
-        "dayHigh": "1949.8",
-        "dayLow": "1880.4",
-        "totalTradedVolume": 1893086,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "FORTIS",
-        "pChange": -2.18,
-        "lastPrice": "908.75",
-        "dayHigh": "927.8",
-        "dayLow": "906.3",
-        "totalTradedVolume": 1263131,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TCS",
-        "pChange": -2.02,
-        "lastPrice": "2313.2",
-        "dayHigh": "2361.1",
-        "dayLow": "2310.6",
-        "totalTradedVolume": 2237636,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NESTLEIND",
         "pChange": -1.94,
-        "lastPrice": "1470",
-        "dayHigh": "1503.7",
-        "dayLow": "1468.5",
-        "totalTradedVolume": 1721057,
+        "lastPrice": "1117.8",
+        "dayHigh": "1131.9",
+        "dayLow": "1117.5",
+        "totalTradedVolume": 1241122,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "ITC",
-        "pChange": -1.85,
-        "lastPrice": "273.05",
-        "dayHigh": "278.2",
-        "dayLow": "273",
-        "totalTradedVolume": 12795275,
+        "symbol": "MPHASIS",
+        "pChange": -1.77,
+        "lastPrice": "2465.5",
+        "dayHigh": "2504.4",
+        "dayLow": "2464.9",
+        "totalTradedVolume": 44045,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "MANKIND",
-        "pChange": -1.83,
-        "lastPrice": "2380.9",
-        "dayHigh": "2423",
-        "dayLow": "2369.5",
-        "totalTradedVolume": 810528,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ADANIENSOL",
-        "pChange": -1.66,
-        "lastPrice": "1589.1",
-        "dayHigh": "1627.9",
-        "dayLow": "1585.4",
-        "totalTradedVolume": 2016844,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GAIL",
-        "pChange": -1.6,
-        "lastPrice": "172.1",
-        "dayHigh": "173.79",
-        "dayLow": "171.85",
-        "totalTradedVolume": 4132699,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DMART",
-        "pChange": -1.6,
-        "lastPrice": "3995",
-        "dayHigh": "4050",
-        "dayLow": "3995",
-        "totalTradedVolume": 263000,
+        "symbol": "MOTILALOFS",
+        "pChange": -1.76,
+        "lastPrice": "938.2",
+        "dayHigh": "961.35",
+        "dayLow": "936.1",
+        "totalTradedVolume": 216384,
         "index": "SECURITIES IN F&O"
       }
     ],
     "universe": [
       {
-        "symbol": "INOXWIND",
-        "pChange": 6.05,
-        "lastPrice": 78.13,
-        "dayHigh": 78.59,
-        "dayLow": 73.32,
-        "totalTradedVolume": 34043653,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MOTILALOFS",
-        "pChange": 5.68,
-        "lastPrice": 955,
-        "dayHigh": 964,
-        "dayLow": 897.1,
-        "totalTradedVolume": 5976448,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "OBEROIRLTY",
-        "pChange": 4.6,
-        "lastPrice": 1931,
-        "dayHigh": 1946,
-        "dayLow": 1832.9,
-        "totalTradedVolume": 1781893,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SUZLON",
-        "pChange": 4.03,
-        "lastPrice": 49,
-        "dayHigh": 49.32,
-        "dayLow": 46.9,
-        "totalTradedVolume": 80470340,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KFINTECH",
-        "pChange": 3.51,
-        "lastPrice": 973,
-        "dayHigh": 981.05,
-        "dayLow": 925.7,
-        "totalTradedVolume": 2105146,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BHEL",
-        "pChange": 3.38,
-        "lastPrice": 435.95,
-        "dayHigh": 435.95,
-        "dayLow": 421.8,
-        "totalTradedVolume": 15351093,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GODREJPROP",
-        "pChange": 3.22,
-        "lastPrice": 2054,
-        "dayHigh": 2057,
-        "dayLow": 1970.9,
-        "totalTradedVolume": 765350,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ASHOKLEY",
-        "pChange": 3.18,
-        "lastPrice": 177.1,
-        "dayHigh": 179.1,
-        "dayLow": 171.98,
-        "totalTradedVolume": 38086255,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NATIONALUM",
-        "pChange": 3.07,
-        "lastPrice": 387.55,
-        "dayHigh": 391.5,
-        "dayLow": 376.5,
-        "totalTradedVolume": 9724992,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KEI",
-        "pChange": 3.04,
-        "lastPrice": 5873,
-        "dayHigh": 5880,
-        "dayLow": 5680,
-        "totalTradedVolume": 343807,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NAM-INDIA",
-        "pChange": 2.98,
-        "lastPrice": 1202.7,
-        "dayHigh": 1203.3,
-        "dayLow": 1155.1,
-        "totalTradedVolume": 1013133,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "LTF",
-        "pChange": 2.84,
-        "lastPrice": 315,
-        "dayHigh": 315,
-        "dayLow": 304.5,
-        "totalTradedVolume": 3074384,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SAIL",
-        "pChange": 2.41,
-        "lastPrice": 173.6,
-        "dayHigh": 174.3,
-        "dayLow": 168.11,
-        "totalTradedVolume": 10850564,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "UNOMINDA",
-        "pChange": 2.41,
-        "lastPrice": 1269.9,
-        "dayHigh": 1272,
-        "dayLow": 1235.9,
-        "totalTradedVolume": 1414213,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "JINDALSTEL",
-        "pChange": 2.25,
-        "lastPrice": 1116.1,
-        "dayHigh": 1118.7,
-        "dayLow": 1090,
-        "totalTradedVolume": 644163,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MFSL",
-        "pChange": 2.18,
-        "lastPrice": 1571.7,
-        "dayHigh": 1571.7,
-        "dayLow": 1522.2,
-        "totalTradedVolume": 698850,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ANGELONE",
-        "pChange": 2.16,
-        "lastPrice": 293.5,
-        "dayHigh": 295.65,
-        "dayLow": 282.15,
-        "totalTradedVolume": 4087024,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PGEL",
-        "pChange": 2.16,
-        "lastPrice": 614,
-        "dayHigh": 614,
-        "dayLow": 594.25,
-        "totalTradedVolume": 1055830,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PHOENIXLTD",
-        "pChange": 2.11,
-        "lastPrice": 1929.8,
-        "dayHigh": 1949.9,
-        "dayLow": 1876,
-        "totalTradedVolume": 718310,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HINDALCO",
-        "pChange": 1.98,
-        "lastPrice": 1049.9,
-        "dayHigh": 1060,
-        "dayLow": 1032.7,
-        "totalTradedVolume": 3062996,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CAMS",
-        "pChange": 1.84,
-        "lastPrice": 776.25,
-        "dayHigh": 776.25,
-        "dayLow": 755.55,
-        "totalTradedVolume": 1314547,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TVSMOTOR",
-        "pChange": 1.83,
-        "lastPrice": 4385.9,
-        "dayHigh": 4386,
-        "dayLow": 4305.5,
-        "totalTradedVolume": 604301,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PAGEIND",
-        "pChange": 1.66,
-        "lastPrice": 37360,
-        "dayHigh": 37690,
-        "dayLow": 36505,
-        "totalTradedVolume": 54629,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SONACOMS",
-        "pChange": 1.65,
-        "lastPrice": 805.1,
-        "dayHigh": 814.3,
-        "dayLow": 795.75,
-        "totalTradedVolume": 2346950,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MUTHOOTFIN",
-        "pChange": 1.64,
-        "lastPrice": 2888.5,
-        "dayHigh": 2919,
-        "dayLow": 2829.1,
-        "totalTradedVolume": 825843,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HDFCAMC",
-        "pChange": 1.53,
-        "lastPrice": 2523,
-        "dayHigh": 2539.4,
-        "dayLow": 2471,
-        "totalTradedVolume": 588681,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "RECLTD",
-        "pChange": 1.49,
-        "lastPrice": 340,
-        "dayHigh": 340.2,
-        "dayLow": 333.2,
-        "totalTradedVolume": 5176231,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "JUBLFOOD",
-        "pChange": 1.47,
-        "lastPrice": 511.5,
-        "dayHigh": 512.6,
-        "dayLow": 501.8,
-        "totalTradedVolume": 2025328,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "POLYCAB",
-        "pChange": 1.41,
-        "lastPrice": 9370,
-        "dayHigh": 9395,
-        "dayLow": 9231,
-        "totalTradedVolume": 239095,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TORNTPHARM",
-        "pChange": 1.39,
-        "lastPrice": 4900,
-        "dayHigh": 4939,
-        "dayLow": 4814,
-        "totalTradedVolume": 293772,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SBICARD",
-        "pChange": 1.38,
-        "lastPrice": 641.75,
-        "dayHigh": 641.75,
-        "dayLow": 626,
-        "totalTradedVolume": 606536,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TATASTEEL",
-        "pChange": 1.36,
-        "lastPrice": 186,
-        "dayHigh": 186.35,
-        "dayLow": 182.06,
-        "totalTradedVolume": 16278106,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BHARATFORG",
-        "pChange": 1.36,
-        "lastPrice": 2093,
-        "dayHigh": 2099.6,
-        "dayLow": 2055.6,
-        "totalTradedVolume": 1157779,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HDFCLIFE",
-        "pChange": 1.33,
-        "lastPrice": 543,
-        "dayHigh": 544.3,
-        "dayLow": 534.9,
-        "totalTradedVolume": 3104159,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "FORCEMOT",
-        "pChange": 1.33,
-        "lastPrice": 18605,
-        "dayHigh": 18740,
-        "dayLow": 18261,
-        "totalTradedVolume": 52072,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "OIL",
-        "pChange": 1.31,
-        "lastPrice": 474.65,
-        "dayHigh": 479.5,
-        "dayLow": 469,
-        "totalTradedVolume": 2654359,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NMDC",
-        "pChange": 1.3,
-        "lastPrice": 85.5,
-        "dayHigh": 85.5,
-        "dayLow": 81.05,
-        "totalTradedVolume": 40748162,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "LAURUSLABS",
-        "pChange": 1.25,
-        "lastPrice": 1809.7,
-        "dayHigh": 1824,
-        "dayLow": 1769.4,
-        "totalTradedVolume": 1631767,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "YESBANK",
-        "pChange": 1.1,
-        "lastPrice": 22.92,
-        "dayHigh": 23.02,
-        "dayLow": 22.45,
-        "totalTradedVolume": 58204418,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "LUPIN",
-        "pChange": 1.07,
-        "lastPrice": 2259,
-        "dayHigh": 2266,
-        "dayLow": 2220.3,
-        "totalTradedVolume": 730234,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HINDZINC",
-        "pChange": 1,
-        "lastPrice": 567.5,
-        "dayHigh": 576,
-        "dayLow": 564.4,
-        "totalTradedVolume": 4705651,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CGPOWER",
-        "pChange": 0.97,
-        "lastPrice": 898.8,
-        "dayHigh": 899.4,
-        "dayLow": 887,
-        "totalTradedVolume": 2066513,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NAUKRI",
-        "pChange": 0.95,
-        "lastPrice": 1355.8,
-        "dayHigh": 1374,
-        "dayLow": 1340.7,
-        "totalTradedVolume": 3063291,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CUMMINSIND",
-        "pChange": 0.93,
-        "lastPrice": 5450,
-        "dayHigh": 5475,
-        "dayLow": 5338.5,
-        "totalTradedVolume": 481671,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "WAAREEENER",
-        "pChange": 0.93,
-        "lastPrice": 2707,
-        "dayHigh": 2719,
-        "dayLow": 2660.8,
-        "totalTradedVolume": 405982,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "RADICO",
-        "pChange": 0.93,
-        "lastPrice": 4693.4,
-        "dayHigh": 4693.4,
-        "dayLow": 4612.5,
-        "totalTradedVolume": 212499,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CDSL",
-        "pChange": 0.92,
-        "lastPrice": 1356.8,
-        "dayHigh": 1359.8,
-        "dayLow": 1323.3,
-        "totalTradedVolume": 1012698,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DLF",
-        "pChange": 0.9,
-        "lastPrice": 671,
-        "dayHigh": 674.9,
-        "dayLow": 659.5,
-        "totalTradedVolume": 3046267,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SWIGGY",
-        "pChange": 0.9,
-        "lastPrice": 278.8,
-        "dayHigh": 278.8,
-        "dayLow": 273.65,
-        "totalTradedVolume": 4192680,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ONGC",
-        "pChange": 0.88,
-        "lastPrice": 238.49,
-        "dayHigh": 239.5,
-        "dayLow": 236.15,
-        "totalTradedVolume": 25342938,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SUPREMEIND",
-        "pChange": 0.87,
-        "lastPrice": 3590,
-        "dayHigh": 3649,
-        "dayLow": 3565,
-        "totalTradedVolume": 329696,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NBCC",
-        "pChange": 0.84,
-        "lastPrice": 89.75,
-        "dayHigh": 90.26,
-        "dayLow": 88.54,
-        "totalTradedVolume": 6941578,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "VEDL",
-        "pChange": 0.82,
-        "lastPrice": 269.7,
-        "dayHigh": 270.65,
-        "dayLow": 267.05,
-        "totalTradedVolume": 6638615,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "AXISBANK",
-        "pChange": 0.81,
-        "lastPrice": 1227.3,
-        "dayHigh": 1235,
-        "dayLow": 1213.6,
-        "totalTradedVolume": 6068014,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "UNIONBANK",
-        "pChange": 0.81,
-        "lastPrice": 188.9,
-        "dayHigh": 190.15,
-        "dayLow": 184.27,
-        "totalTradedVolume": 14697760,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "LODHA",
-        "pChange": 0.81,
-        "lastPrice": 1254,
-        "dayHigh": 1254,
-        "dayLow": 1220.6,
-        "totalTradedVolume": 856360,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "FEDERALBNK",
-        "pChange": 0.8,
-        "lastPrice": 354.1,
-        "dayHigh": 356.45,
-        "dayLow": 349.65,
-        "totalTradedVolume": 3616352,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MCX",
-        "pChange": 0.74,
-        "lastPrice": 2933.1,
-        "dayHigh": 2981,
-        "dayLow": 2892.1,
-        "totalTradedVolume": 1222769,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "LT",
-        "pChange": 0.73,
-        "lastPrice": 4086.7,
-        "dayHigh": 4086.7,
-        "dayLow": 4026,
-        "totalTradedVolume": 1066164,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "UPL",
-        "pChange": 0.73,
-        "lastPrice": 567.1,
-        "dayHigh": 568.7,
-        "dayLow": 561.5,
-        "totalTradedVolume": 1106329,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "JSWSTEEL",
-        "pChange": 0.61,
-        "lastPrice": 1277.8,
-        "dayHigh": 1297,
-        "dayLow": 1250.4,
-        "totalTradedVolume": 1404965,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "UNITDSPR",
-        "pChange": 0.59,
-        "lastPrice": 1545,
-        "dayHigh": 1546.3,
-        "dayLow": 1523.5,
-        "totalTradedVolume": 363526,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HAL",
-        "pChange": 0.58,
-        "lastPrice": 5059,
-        "dayHigh": 5149.9,
-        "dayLow": 5045,
-        "totalTradedVolume": 1719795,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PATANJALI",
-        "pChange": 0.54,
-        "lastPrice": 353.9,
-        "dayHigh": 358.6,
-        "dayLow": 347,
-        "totalTradedVolume": 7402930,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ULTRACEMCO",
-        "pChange": 0.53,
-        "lastPrice": 11681,
-        "dayHigh": 11709,
-        "dayLow": 11541,
-        "totalTradedVolume": 194270,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "IREDA",
-        "pChange": 0.52,
-        "lastPrice": 116.85,
-        "dayHigh": 116.94,
-        "dayLow": 115,
-        "totalTradedVolume": 3235182,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "AMBER",
-        "pChange": 0.51,
-        "lastPrice": 7259,
-        "dayHigh": 7394,
-        "dayLow": 7246.5,
-        "totalTradedVolume": 535613,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "RVNL",
-        "pChange": 0.51,
-        "lastPrice": 228.5,
-        "dayHigh": 229.4,
-        "dayLow": 224.84,
-        "totalTradedVolume": 2320005,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "RELIANCE",
-        "pChange": 0.46,
-        "lastPrice": 1316,
-        "dayHigh": 1320.8,
-        "dayLow": 1298.1,
-        "totalTradedVolume": 13383867,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GLENMARK",
-        "pChange": 0.46,
-        "lastPrice": 2329,
-        "dayHigh": 2337,
-        "dayLow": 2300,
-        "totalTradedVolume": 305189,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "IEX",
-        "pChange": 0.44,
-        "lastPrice": 125.3,
-        "dayHigh": 125.49,
-        "dayLow": 123.78,
-        "totalTradedVolume": 1388624,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BEL",
-        "pChange": 0.4,
-        "lastPrice": 412.45,
-        "dayHigh": 413.95,
-        "dayLow": 409.1,
-        "totalTradedVolume": 7410599,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KOTAKBANK",
-        "pChange": 0.4,
-        "lastPrice": 392.7,
-        "dayHigh": 396.35,
-        "dayLow": 389,
-        "totalTradedVolume": 5105327,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DABUR",
-        "pChange": 0.38,
-        "lastPrice": 406.8,
-        "dayHigh": 408,
-        "dayLow": 402.45,
-        "totalTradedVolume": 1337661,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SRF",
-        "pChange": 0.38,
-        "lastPrice": 2616,
-        "dayHigh": 2636.6,
-        "dayLow": 2595.1,
-        "totalTradedVolume": 164908,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "COALINDIA",
-        "pChange": 0.33,
-        "lastPrice": 408.45,
-        "dayHigh": 408.45,
-        "dayLow": 405.3,
-        "totalTradedVolume": 4866733,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "AUROPHARMA",
-        "pChange": 0.31,
-        "lastPrice": 1627.2,
-        "dayHigh": 1652,
-        "dayLow": 1617.9,
-        "totalTradedVolume": 998350,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KALYANKJIL",
-        "pChange": 0.29,
-        "lastPrice": 610,
-        "dayHigh": 621.8,
-        "dayLow": 603.25,
-        "totalTradedVolume": 10038788,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "VMM",
-        "pChange": 0.29,
-        "lastPrice": 105.5,
-        "dayHigh": 106.99,
-        "dayLow": 104.61,
-        "totalTradedVolume": 9434670,
-        "index": "SECURITIES IN F&O"
-      },
-      {
         "symbol": "TIINDIA",
-        "pChange": 0.29,
-        "lastPrice": 2741.4,
-        "dayHigh": 2769.3,
-        "dayLow": 2685,
-        "totalTradedVolume": 338004,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HDFCBANK",
-        "pChange": 0.28,
-        "lastPrice": 729,
-        "dayHigh": 732.1,
-        "dayLow": 724.5,
-        "totalTradedVolume": 14823722,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "JIOFIN",
-        "pChange": 0.28,
-        "lastPrice": 249.75,
-        "dayHigh": 249.9,
-        "dayLow": 245.75,
-        "totalTradedVolume": 11490495,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TITAN",
-        "pChange": 0.24,
-        "lastPrice": 5068.5,
-        "dayHigh": 5111,
-        "dayLow": 5037.2,
-        "totalTradedVolume": 565258,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BAJFINANCE",
-        "pChange": 0.21,
-        "lastPrice": 1089.3,
-        "dayHigh": 1100.4,
-        "dayLow": 1078.8,
-        "totalTradedVolume": 2295675,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MANAPPURAM",
-        "pChange": 0.17,
-        "lastPrice": 348.6,
-        "dayHigh": 350.35,
-        "dayLow": 344.2,
-        "totalTradedVolume": 2734419,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SOLARINDS",
-        "pChange": 0.16,
-        "lastPrice": 20000,
-        "dayHigh": 20389,
-        "dayLow": 19885,
-        "totalTradedVolume": 153646,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ABB",
-        "pChange": 0.14,
-        "lastPrice": 7660,
-        "dayHigh": 7760,
-        "dayLow": 7627,
-        "totalTradedVolume": 93962,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BANDHANBNK",
-        "pChange": 0.12,
-        "lastPrice": 173.25,
-        "dayHigh": 174.2,
-        "dayLow": 172.15,
-        "totalTradedVolume": 2639964,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ALKEM",
-        "pChange": 0.11,
-        "lastPrice": 5374,
-        "dayHigh": 5483,
-        "dayLow": 5312,
-        "totalTradedVolume": 153275,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DALBHARAT",
-        "pChange": 0.11,
-        "lastPrice": 1844,
-        "dayHigh": 1856.6,
-        "dayLow": 1832.1,
-        "totalTradedVolume": 139548,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HAVELLS",
-        "pChange": 0.08,
-        "lastPrice": 1299,
-        "dayHigh": 1315,
-        "dayLow": 1281.7,
-        "totalTradedVolume": 857855,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SIEMENS",
-        "pChange": 0.08,
-        "lastPrice": 3943,
-        "dayHigh": 3966.2,
-        "dayLow": 3910.3,
-        "totalTradedVolume": 201072,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GRASIM",
-        "pChange": 0.06,
-        "lastPrice": 3250.5,
-        "dayHigh": 3272.2,
-        "dayLow": 3223.5,
-        "totalTradedVolume": 1324345,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DIVISLAB",
-        "pChange": 0.05,
-        "lastPrice": 8481.5,
-        "dayHigh": 8550,
-        "dayLow": 8463.5,
-        "totalTradedVolume": 252029,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "POWERGRID",
-        "pChange": 0.04,
-        "lastPrice": 266.15,
-        "dayHigh": 268,
-        "dayLow": 265.25,
-        "totalTradedVolume": 6631423,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PNBHOUSING",
-        "pChange": 0.03,
-        "lastPrice": 1150.8,
-        "dayHigh": 1154,
-        "dayLow": 1135.2,
-        "totalTradedVolume": 264061,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BLUESTARCO",
-        "pChange": 0.01,
-        "lastPrice": 1508.1,
-        "dayHigh": 1517.7,
-        "dayLow": 1476.2,
-        "totalTradedVolume": 599656,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SHRIRAMFIN",
-        "pChange": 0,
-        "lastPrice": 1122,
-        "dayHigh": 1129.7,
-        "dayLow": 1112.2,
-        "totalTradedVolume": 2105094,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "INDHOTEL",
-        "pChange": 0,
-        "lastPrice": 720,
-        "dayHigh": 723.65,
-        "dayLow": 714.5,
-        "totalTradedVolume": 692444,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PRESTIGE",
-        "pChange": -0.04,
-        "lastPrice": 1591.9,
-        "dayHigh": 1598.2,
-        "dayLow": 1561.3,
-        "totalTradedVolume": 1050412,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "APLAPOLLO",
-        "pChange": -0.1,
-        "lastPrice": 2081.3,
-        "dayHigh": 2110.9,
-        "dayLow": 2072.4,
-        "totalTradedVolume": 439122,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CANBK",
-        "pChange": -0.11,
-        "lastPrice": 131.1,
-        "dayHigh": 132.02,
-        "dayLow": 129.1,
-        "totalTradedVolume": 11137827,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ICICIBANK",
-        "pChange": -0.12,
-        "lastPrice": 1415.3,
-        "dayHigh": 1423.6,
-        "dayLow": 1407,
-        "totalTradedVolume": 5605603,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MOTHERSON",
-        "pChange": -0.14,
-        "lastPrice": 168.06,
-        "dayHigh": 169.34,
-        "dayLow": 167.58,
-        "totalTradedVolume": 7660435,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TATAPOWER",
-        "pChange": -0.14,
-        "lastPrice": 381.5,
-        "dayHigh": 383.05,
-        "dayLow": 378.05,
-        "totalTradedVolume": 2658590,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ETERNAL",
-        "pChange": -0.16,
-        "lastPrice": 318,
-        "dayHigh": 321.9,
-        "dayLow": 316.2,
-        "totalTradedVolume": 18972081,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BAJAJFINSV",
-        "pChange": -0.16,
-        "lastPrice": 2005,
-        "dayHigh": 2028.2,
-        "dayLow": 1997.2,
-        "totalTradedVolume": 1026623,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PERSISTENT",
-        "pChange": -0.18,
-        "lastPrice": 5570,
-        "dayHigh": 5613,
-        "dayLow": 5520,
-        "totalTradedVolume": 398938,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PREMIERENE",
-        "pChange": -0.18,
-        "lastPrice": 1015.5,
-        "dayHigh": 1027.8,
-        "dayLow": 1013,
-        "totalTradedVolume": 430713,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "EICHERMOT",
-        "pChange": -0.2,
-        "lastPrice": 8050,
-        "dayHigh": 8165,
-        "dayLow": 8050,
-        "totalTradedVolume": 397488,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GMRAIRPORT",
-        "pChange": -0.2,
-        "lastPrice": 101.31,
-        "dayHigh": 102.72,
-        "dayLow": 100.84,
-        "totalTradedVolume": 8980717,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ICICIGI",
-        "pChange": -0.23,
-        "lastPrice": 1626.3,
-        "dayHigh": 1637.3,
-        "dayLow": 1620,
-        "totalTradedVolume": 299654,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BANKINDIA",
-        "pChange": -0.24,
-        "lastPrice": 143.75,
-        "dayHigh": 144.09,
-        "dayLow": 141,
-        "totalTradedVolume": 4897422,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KAYNES",
-        "pChange": -0.25,
-        "lastPrice": 3651,
-        "dayHigh": 3730,
-        "dayLow": 3630.1,
-        "totalTradedVolume": 641033,
+        "pChange": 5.56,
+        "lastPrice": 2893.9,
+        "dayHigh": 2895,
+        "dayLow": 2755.8,
+        "totalTradedVolume": 588370,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "VBL",
-        "pChange": -0.26,
-        "lastPrice": 433.85,
-        "dayHigh": 438.8,
-        "dayLow": 432.25,
-        "totalTradedVolume": 2004001,
+        "pChange": 1.84,
+        "lastPrice": 441.85,
+        "dayHigh": 443.3,
+        "dayLow": 434.6,
+        "totalTradedVolume": 844505,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "SBILIFE",
-        "pChange": -0.26,
-        "lastPrice": 1790.4,
-        "dayHigh": 1799,
-        "dayLow": 1781,
-        "totalTradedVolume": 251360,
+        "symbol": "OIL",
+        "pChange": 1.81,
+        "lastPrice": 483.25,
+        "dayHigh": 485.8,
+        "dayLow": 479,
+        "totalTradedVolume": 1018300,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "PETRONET",
-        "pChange": -0.28,
-        "lastPrice": 281.8,
-        "dayHigh": 286.4,
-        "dayLow": 281.65,
-        "totalTradedVolume": 1036006,
+        "symbol": "DIXON",
+        "pChange": 1.6,
+        "lastPrice": 14250,
+        "dayHigh": 14420,
+        "dayLow": 14067,
+        "totalTradedVolume": 141930,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "BAJAJ-AUTO",
-        "pChange": -0.32,
-        "lastPrice": 11663,
-        "dayHigh": 11808,
-        "dayLow": 11663,
-        "totalTradedVolume": 181692,
+        "symbol": "DIVISLAB",
+        "pChange": 1.53,
+        "lastPrice": 8611.5,
+        "dayHigh": 8630,
+        "dayLow": 8504,
+        "totalTradedVolume": 118680,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "LTM",
-        "pChange": -0.32,
-        "lastPrice": 4700,
-        "dayHigh": 4715,
-        "dayLow": 4602,
-        "totalTradedVolume": 291825,
+        "symbol": "COCHINSHIP",
+        "pChange": 1.27,
+        "lastPrice": 1476.3,
+        "dayHigh": 1489.9,
+        "dayLow": 1457,
+        "totalTradedVolume": 252414,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "ZYDUSLIFE",
-        "pChange": -0.33,
-        "lastPrice": 1131.5,
-        "dayHigh": 1154.5,
-        "dayLow": 1127.1,
-        "totalTradedVolume": 1927424,
+        "symbol": "BIOCON",
+        "pChange": 1.27,
+        "lastPrice": 417.25,
+        "dayHigh": 417.45,
+        "dayLow": 412.2,
+        "totalTradedVolume": 300353,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "COFORGE",
-        "pChange": -0.33,
-        "lastPrice": 1806,
-        "dayHigh": 1821,
-        "dayLow": 1799.6,
-        "totalTradedVolume": 1054940,
+        "symbol": "SONACOMS",
+        "pChange": 1.26,
+        "lastPrice": 815.25,
+        "dayHigh": 821,
+        "dayLow": 806,
+        "totalTradedVolume": 404779,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "OFSS",
-        "pChange": -0.33,
-        "lastPrice": 11789,
-        "dayHigh": 11920,
-        "dayLow": 11742,
-        "totalTradedVolume": 128403,
+        "symbol": "SOLARINDS",
+        "pChange": 1.2,
+        "lastPrice": 20240,
+        "dayHigh": 20422,
+        "dayLow": 20030,
+        "totalTradedVolume": 62339,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "ASIANPAINT",
-        "pChange": -0.33,
-        "lastPrice": 2687.5,
-        "dayHigh": 2714.6,
-        "dayLow": 2687.5,
-        "totalTradedVolume": 312900,
+        "symbol": "MOTHERSON",
+        "pChange": 1.06,
+        "lastPrice": 169.84,
+        "dayHigh": 170.56,
+        "dayLow": 168.1,
+        "totalTradedVolume": 2925037,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "TATAELXSI",
-        "pChange": -0.34,
-        "lastPrice": 3760,
-        "dayHigh": 3775,
-        "dayLow": 3700,
-        "totalTradedVolume": 151262,
+        "symbol": "AMBER",
+        "pChange": 0.99,
+        "lastPrice": 7331,
+        "dayHigh": 7408,
+        "dayLow": 7252,
+        "totalTradedVolume": 98828,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "LICHSGFIN",
-        "pChange": -0.35,
-        "lastPrice": 498.25,
-        "dayHigh": 500.05,
-        "dayLow": 496.25,
-        "totalTradedVolume": 2838836,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NHPC",
-        "pChange": -0.39,
-        "lastPrice": 76.6,
-        "dayHigh": 76.89,
-        "dayLow": 76.01,
-        "totalTradedVolume": 3613311,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MAZDOCK",
-        "pChange": -0.4,
-        "lastPrice": 2569.7,
-        "dayHigh": 2619.5,
-        "dayLow": 2551,
-        "totalTradedVolume": 595816,
+        "symbol": "AUROPHARMA",
+        "pChange": 0.91,
+        "lastPrice": 1642,
+        "dayHigh": 1644.3,
+        "dayLow": 1629,
+        "totalTradedVolume": 90307,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "HYUNDAI",
-        "pChange": -0.41,
-        "lastPrice": 2190,
-        "dayHigh": 2209.6,
-        "dayLow": 2172.4,
-        "totalTradedVolume": 636057,
+        "pChange": 0.89,
+        "lastPrice": 2209.6,
+        "dayHigh": 2221.9,
+        "dayLow": 2179,
+        "totalTradedVolume": 96872,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "ICICIPRULI",
-        "pChange": -0.42,
-        "lastPrice": 507,
-        "dayHigh": 511.4,
-        "dayLow": 503.6,
-        "totalTradedVolume": 1522773,
+        "symbol": "KAYNES",
+        "pChange": 0.88,
+        "lastPrice": 3683.3,
+        "dayHigh": 3714.2,
+        "dayLow": 3660,
+        "totalTradedVolume": 147085,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "PFC",
-        "pChange": -0.43,
-        "lastPrice": 374.4,
-        "dayHigh": 377,
-        "dayLow": 372.15,
-        "totalTradedVolume": 7164194,
+        "symbol": "POLICYBZR",
+        "pChange": 0.77,
+        "lastPrice": 1741.4,
+        "dayHigh": 1749.8,
+        "dayLow": 1722.4,
+        "totalTradedVolume": 90966,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "CONCOR",
-        "pChange": -0.47,
-        "lastPrice": 524.5,
-        "dayHigh": 530,
-        "dayLow": 518.3,
-        "totalTradedVolume": 583809,
+        "symbol": "COALINDIA",
+        "pChange": 0.76,
+        "lastPrice": 411.55,
+        "dayHigh": 412.7,
+        "dayLow": 407.6,
+        "totalTradedVolume": 2837524,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "MAXHEALTH",
-        "pChange": -0.49,
-        "lastPrice": 1003.7,
-        "dayHigh": 1022.6,
-        "dayLow": 994.5,
-        "totalTradedVolume": 2340277,
+        "symbol": "GRASIM",
+        "pChange": 0.75,
+        "lastPrice": 3274.9,
+        "dayHigh": 3276,
+        "dayLow": 3250.5,
+        "totalTradedVolume": 145893,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "CHOLAFIN",
-        "pChange": -0.51,
-        "lastPrice": 1884.7,
-        "dayHigh": 1895,
-        "dayLow": 1870.1,
-        "totalTradedVolume": 790573,
+        "symbol": "PREMIERENE",
+        "pChange": 0.68,
+        "lastPrice": 1022.4,
+        "dayHigh": 1029.9,
+        "dayLow": 1019.1,
+        "totalTradedVolume": 117634,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "ADANIPORTS",
-        "pChange": -0.53,
-        "lastPrice": 1691,
-        "dayHigh": 1704,
-        "dayLow": 1678.1,
-        "totalTradedVolume": 1594217,
+        "symbol": "ONGC",
+        "pChange": 0.67,
+        "lastPrice": 240.09,
+        "dayHigh": 241.3,
+        "dayLow": 239.08,
+        "totalTradedVolume": 3700296,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "MARUTI",
-        "pChange": -0.53,
-        "lastPrice": 13760,
-        "dayHigh": 13920,
-        "dayLow": 13760,
-        "totalTradedVolume": 177071,
+        "symbol": "M&M",
+        "pChange": 0.65,
+        "lastPrice": 3412.5,
+        "dayHigh": 3423.6,
+        "dayLow": 3390.2,
+        "totalTradedVolume": 161859,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "AMBUJACEM",
-        "pChange": -0.54,
-        "lastPrice": 415.25,
-        "dayHigh": 417.6,
-        "dayLow": 409.5,
-        "totalTradedVolume": 3967404,
+        "symbol": "ADANIPOWER",
+        "pChange": 0.65,
+        "lastPrice": 204.89,
+        "dayHigh": 206.17,
+        "dayLow": 203.57,
+        "totalTradedVolume": 2295853,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SUNPHARMA",
+        "pChange": 0.64,
+        "lastPrice": 1894,
+        "dayHigh": 1895.9,
+        "dayLow": 1882.8,
+        "totalTradedVolume": 139858,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "FORTIS",
+        "pChange": 0.63,
+        "lastPrice": 914.45,
+        "dayHigh": 917.85,
+        "dayLow": 908.35,
+        "totalTradedVolume": 347405,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PETRONET",
+        "pChange": 0.62,
+        "lastPrice": 283.55,
+        "dayHigh": 285.25,
+        "dayLow": 281.8,
+        "totalTradedVolume": 274737,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "RELIANCE",
+        "pChange": 0.59,
+        "lastPrice": 1323.7,
+        "dayHigh": 1328.6,
+        "dayLow": 1311.2,
+        "totalTradedVolume": 1750132,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INDUSINDBK",
+        "pChange": 0.59,
+        "lastPrice": 1016.6,
+        "dayHigh": 1019.5,
+        "dayLow": 1007,
+        "totalTradedVolume": 155299,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "AXISBANK",
+        "pChange": 0.56,
+        "lastPrice": 1234.2,
+        "dayHigh": 1236.9,
+        "dayLow": 1223.4,
+        "totalTradedVolume": 418102,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ADANIENSOL",
+        "pChange": 0.53,
+        "lastPrice": 1597.5,
+        "dayHigh": 1602.3,
+        "dayLow": 1583.1,
+        "totalTradedVolume": 383559,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LICI",
+        "pChange": 0.5,
+        "lastPrice": 412.05,
+        "dayHigh": 413.9,
+        "dayLow": 410.1,
+        "totalTradedVolume": 900837,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SRF",
+        "pChange": 0.5,
+        "lastPrice": 2629,
+        "dayHigh": 2633.5,
+        "dayLow": 2603.4,
+        "totalTradedVolume": 72308,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ZYDUSLIFE",
+        "pChange": 0.44,
+        "lastPrice": 1136.5,
+        "dayHigh": 1144.1,
+        "dayLow": 1126.2,
+        "totalTradedVolume": 110001,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NTPC",
+        "pChange": 0.4,
+        "lastPrice": 338.35,
+        "dayHigh": 338.9,
+        "dayLow": 337,
+        "totalTradedVolume": 720880,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ADANIENT",
+        "pChange": 0.36,
+        "lastPrice": 3018,
+        "dayHigh": 3027,
+        "dayLow": 3010,
+        "totalTradedVolume": 107009,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TATASTEEL",
+        "pChange": 0.33,
+        "lastPrice": 186.61,
+        "dayHigh": 187.11,
+        "dayLow": 185.67,
+        "totalTradedVolume": 2726055,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "WAAREEENER",
+        "pChange": 0.31,
+        "lastPrice": 2715.4,
+        "dayHigh": 2719.5,
+        "dayLow": 2693,
+        "totalTradedVolume": 71057,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NESTLEIND",
+        "pChange": 0.29,
+        "lastPrice": 1474.3,
+        "dayHigh": 1479.8,
+        "dayLow": 1470.1,
+        "totalTradedVolume": 268482,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "JSWSTEEL",
+        "pChange": 0.27,
+        "lastPrice": 1281.2,
+        "dayHigh": 1285.8,
+        "dayLow": 1275,
+        "totalTradedVolume": 80698,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "IOC",
-        "pChange": -0.57,
-        "lastPrice": 138.61,
-        "dayHigh": 139.8,
-        "dayLow": 138.12,
-        "totalTradedVolume": 8148346,
+        "pChange": 0.26,
+        "lastPrice": 138.97,
+        "dayHigh": 139.2,
+        "dayLow": 138.04,
+        "totalTradedVolume": 1089531,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "ABCAPITAL",
-        "pChange": -0.57,
-        "lastPrice": 398.7,
-        "dayHigh": 400.2,
-        "dayLow": 394.5,
-        "totalTradedVolume": 1969174,
+        "symbol": "HAL",
+        "pChange": 0.22,
+        "lastPrice": 5070.1,
+        "dayHigh": 5110,
+        "dayLow": 5039,
+        "totalTradedVolume": 315619,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "PNB",
-        "pChange": -0.58,
-        "lastPrice": 117.32,
-        "dayHigh": 118.06,
-        "dayLow": 115.32,
-        "totalTradedVolume": 12881843,
+        "symbol": "BAJFINANCE",
+        "pChange": 0.2,
+        "lastPrice": 1091.5,
+        "dayHigh": 1095,
+        "dayLow": 1087.6,
+        "totalTradedVolume": 292319,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "360ONE",
-        "pChange": -0.59,
-        "lastPrice": 1173,
-        "dayHigh": 1174.7,
-        "dayLow": 1150.5,
-        "totalTradedVolume": 1274400,
+        "symbol": "GMRAIRPORT",
+        "pChange": 0.19,
+        "lastPrice": 101.5,
+        "dayHigh": 102.14,
+        "dayLow": 101.32,
+        "totalTradedVolume": 568330,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "IRFC",
-        "pChange": -0.59,
-        "lastPrice": 87.05,
-        "dayHigh": 87.53,
-        "dayLow": 86.2,
-        "totalTradedVolume": 7575722,
+        "symbol": "NATIONALUM",
+        "pChange": 0.17,
+        "lastPrice": 388.2,
+        "dayHigh": 389.9,
+        "dayLow": 385.8,
+        "totalTradedVolume": 676388,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HINDPETRO",
+        "pChange": 0.15,
+        "lastPrice": 371.55,
+        "dayHigh": 372,
+        "dayLow": 367.1,
+        "totalTradedVolume": 873209,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PFC",
+        "pChange": 0.15,
+        "lastPrice": 374.95,
+        "dayHigh": 376.55,
+        "dayLow": 374.4,
+        "totalTradedVolume": 570118,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "UNOMINDA",
+        "pChange": 0.12,
+        "lastPrice": 1271.4,
+        "dayHigh": 1281.2,
+        "dayLow": 1263,
+        "totalTradedVolume": 106854,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "APOLLOHOSP",
+        "pChange": 0.11,
+        "lastPrice": 8835.5,
+        "dayHigh": 8872,
+        "dayLow": 8790,
+        "totalTradedVolume": 60953,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "GAIL",
+        "pChange": 0.1,
+        "lastPrice": 172.27,
+        "dayHigh": 173.29,
+        "dayLow": 171.89,
+        "totalTradedVolume": 867688,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "POWERGRID",
+        "pChange": 0.08,
+        "lastPrice": 266.35,
+        "dayHigh": 267.7,
+        "dayLow": 266.2,
+        "totalTradedVolume": 336132,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ETERNAL",
+        "pChange": 0.06,
+        "lastPrice": 318.2,
+        "dayHigh": 321.2,
+        "dayLow": 317.3,
+        "totalTradedVolume": 3400062,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KALYANKJIL",
+        "pChange": 0.04,
+        "lastPrice": 610.25,
+        "dayHigh": 612.4,
+        "dayLow": 608.2,
+        "totalTradedVolume": 964775,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MAZDOCK",
+        "pChange": 0.03,
+        "lastPrice": 2570.5,
+        "dayHigh": 2579,
+        "dayLow": 2556.1,
+        "totalTradedVolume": 140660,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HAVELLS",
+        "pChange": 0,
+        "lastPrice": 1299,
+        "dayHigh": 1311.8,
+        "dayLow": 1297.4,
+        "totalTradedVolume": 64705,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MCX",
+        "pChange": -0.03,
+        "lastPrice": 2932.1,
+        "dayHigh": 2962.2,
+        "dayLow": 2916,
+        "totalTradedVolume": 250725,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TITAN",
+        "pChange": -0.03,
+        "lastPrice": 5067.1,
+        "dayHigh": 5094.9,
+        "dayLow": 5052.1,
+        "totalTradedVolume": 60828,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TVSMOTOR",
+        "pChange": -0.08,
+        "lastPrice": 4382.2,
+        "dayHigh": 4407.1,
+        "dayLow": 4355.9,
+        "totalTradedVolume": 61139,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MARICO",
+        "pChange": -0.12,
+        "lastPrice": 851.05,
+        "dayHigh": 855.6,
+        "dayLow": 849.2,
+        "totalTradedVolume": 61290,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BPCL",
+        "pChange": -0.13,
+        "lastPrice": 316.25,
+        "dayHigh": 316.8,
+        "dayLow": 313.45,
+        "totalTradedVolume": 355902,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "UPL",
+        "pChange": -0.14,
+        "lastPrice": 566.3,
+        "dayHigh": 570.05,
+        "dayLow": 566.25,
+        "totalTradedVolume": 265113,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "DELHIVERY",
+        "pChange": -0.16,
+        "lastPrice": 455.25,
+        "dayHigh": 456.95,
+        "dayLow": 451.65,
+        "totalTradedVolume": 212628,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "VMM",
+        "pChange": -0.16,
+        "lastPrice": 105.33,
+        "dayHigh": 106.17,
+        "dayLow": 105.26,
+        "totalTradedVolume": 503597,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MAXHEALTH",
+        "pChange": -0.17,
+        "lastPrice": 1002,
+        "dayHigh": 1005.5,
+        "dayLow": 982.1,
+        "totalTradedVolume": 572324,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BEL",
+        "pChange": -0.19,
+        "lastPrice": 411.65,
+        "dayHigh": 414.65,
+        "dayLow": 411.15,
+        "totalTradedVolume": 1639972,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "RECLTD",
+        "pChange": -0.19,
+        "lastPrice": 339.35,
+        "dayHigh": 341.5,
+        "dayLow": 339.15,
+        "totalTradedVolume": 455380,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ICICIBANK",
+        "pChange": -0.2,
+        "lastPrice": 1412.5,
+        "dayHigh": 1416.2,
+        "dayLow": 1408.5,
+        "totalTradedVolume": 888682,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "IDFCFIRSTB",
+        "pChange": -0.21,
+        "lastPrice": 84.87,
+        "dayHigh": 85.47,
+        "dayLow": 84.72,
+        "totalTradedVolume": 932475,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NHPC",
+        "pChange": -0.22,
+        "lastPrice": 76.43,
+        "dayHigh": 76.99,
+        "dayLow": 76.2,
+        "totalTradedVolume": 797779,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "SBIN",
-        "pChange": -0.61,
-        "lastPrice": 1061.2,
-        "dayHigh": 1068.8,
-        "dayLow": 1052.4,
-        "totalTradedVolume": 7039473,
+        "pChange": -0.25,
+        "lastPrice": 1058.5,
+        "dayHigh": 1067.7,
+        "dayLow": 1057.7,
+        "totalTradedVolume": 594967,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "TATACONSUM",
+        "symbol": "ITC",
+        "pChange": -0.29,
+        "lastPrice": 272.25,
+        "dayHigh": 273.65,
+        "dayLow": 272,
+        "totalTradedVolume": 2028920,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MUTHOOTFIN",
+        "pChange": -0.29,
+        "lastPrice": 2880,
+        "dayHigh": 2906.7,
+        "dayLow": 2876.5,
+        "totalTradedVolume": 54132,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "JINDALSTEL",
+        "pChange": -0.3,
+        "lastPrice": 1112.8,
+        "dayHigh": 1119.7,
+        "dayLow": 1110.2,
+        "totalTradedVolume": 77605,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LAURUSLABS",
+        "pChange": -0.31,
+        "lastPrice": 1804,
+        "dayHigh": 1815,
+        "dayLow": 1803.5,
+        "totalTradedVolume": 186695,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TRENT",
+        "pChange": -0.31,
+        "lastPrice": 2937,
+        "dayHigh": 2955.9,
+        "dayLow": 2932.1,
+        "totalTradedVolume": 94589,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LICHSGFIN",
+        "pChange": -0.34,
+        "lastPrice": 496.55,
+        "dayHigh": 500.4,
+        "dayLow": 496.2,
+        "totalTradedVolume": 219644,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ICICIPRULI",
+        "pChange": -0.37,
+        "lastPrice": 505.1,
+        "dayHigh": 506.25,
+        "dayLow": 503.65,
+        "totalTradedVolume": 270913,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PNB",
+        "pChange": -0.37,
+        "lastPrice": 116.89,
+        "dayHigh": 117.99,
+        "dayLow": 116.72,
+        "totalTradedVolume": 1121978,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BANDHANBNK",
+        "pChange": -0.38,
+        "lastPrice": 172.59,
+        "dayHigh": 174,
+        "dayLow": 172,
+        "totalTradedVolume": 547964,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INDIANB",
+        "pChange": -0.38,
+        "lastPrice": 877.85,
+        "dayHigh": 887,
+        "dayLow": 874,
+        "totalTradedVolume": 64319,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BANKBARODA",
+        "pChange": -0.39,
+        "lastPrice": 245.6,
+        "dayHigh": 247.28,
+        "dayLow": 245.1,
+        "totalTradedVolume": 491654,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HEROMOTOCO",
+        "pChange": -0.4,
+        "lastPrice": 5722,
+        "dayHigh": 5778,
+        "dayLow": 5711,
+        "totalTradedVolume": 74220,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ADANIGREEN",
+        "pChange": -0.4,
+        "lastPrice": 1322.3,
+        "dayHigh": 1331.3,
+        "dayLow": 1316,
+        "totalTradedVolume": 233308,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BLUESTARCO",
+        "pChange": -0.4,
+        "lastPrice": 1502,
+        "dayHigh": 1535.4,
+        "dayLow": 1500.3,
+        "totalTradedVolume": 130691,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "FEDERALBNK",
+        "pChange": -0.4,
+        "lastPrice": 352.7,
+        "dayHigh": 357.25,
+        "dayLow": 352.5,
+        "totalTradedVolume": 239314,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HDFCAMC",
+        "pChange": -0.41,
+        "lastPrice": 2512.7,
+        "dayHigh": 2536.9,
+        "dayLow": 2507.3,
+        "totalTradedVolume": 98414,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HDFCBANK",
+        "pChange": -0.45,
+        "lastPrice": 725.7,
+        "dayHigh": 729,
+        "dayLow": 725.5,
+        "totalTradedVolume": 2191615,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BDL",
+        "pChange": -0.46,
+        "lastPrice": 1373.7,
+        "dayHigh": 1391.3,
+        "dayLow": 1363.5,
+        "totalTradedVolume": 447177,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NYKAA",
+        "pChange": -0.47,
+        "lastPrice": 325.5,
+        "dayHigh": 328.45,
+        "dayLow": 325.35,
+        "totalTradedVolume": 165115,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KOTAKBANK",
+        "pChange": -0.48,
+        "lastPrice": 390.8,
+        "dayHigh": 392.9,
+        "dayLow": 390.25,
+        "totalTradedVolume": 587024,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HINDUNILVR",
+        "pChange": -0.51,
+        "lastPrice": 2044.6,
+        "dayHigh": 2060,
+        "dayLow": 2044,
+        "totalTradedVolume": 106904,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TATAPOWER",
+        "pChange": -0.52,
+        "lastPrice": 379.5,
+        "dayHigh": 381.85,
+        "dayLow": 378.4,
+        "totalTradedVolume": 266847,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "AMBUJACEM",
+        "pChange": -0.52,
+        "lastPrice": 413.1,
+        "dayHigh": 416.3,
+        "dayLow": 412.75,
+        "totalTradedVolume": 143520,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HDFCLIFE",
+        "pChange": -0.53,
+        "lastPrice": 540.1,
+        "dayHigh": 542.9,
+        "dayLow": 537.55,
+        "totalTradedVolume": 187546,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SAIL",
+        "pChange": -0.55,
+        "lastPrice": 172.64,
+        "dayHigh": 174.67,
+        "dayLow": 172.49,
+        "totalTradedVolume": 1798452,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "DABUR",
+        "pChange": -0.55,
+        "lastPrice": 404.55,
+        "dayHigh": 406.8,
+        "dayLow": 403.4,
+        "totalTradedVolume": 580026,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PERSISTENT",
+        "pChange": -0.59,
+        "lastPrice": 5537,
+        "dayHigh": 5571.5,
+        "dayLow": 5512,
+        "totalTradedVolume": 69131,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ADANIPORTS",
+        "pChange": -0.59,
+        "lastPrice": 1681,
+        "dayHigh": 1693.7,
+        "dayLow": 1678.4,
+        "totalTradedVolume": 162192,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "JSWENERGY",
+        "pChange": -0.62,
+        "lastPrice": 552.05,
+        "dayHigh": 556.6,
+        "dayLow": 552,
+        "totalTradedVolume": 121203,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NAUKRI",
+        "pChange": -0.63,
+        "lastPrice": 1347.3,
+        "dayHigh": 1355.5,
+        "dayLow": 1331.1,
+        "totalTradedVolume": 91575,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "IRFC",
+        "pChange": -0.63,
+        "lastPrice": 86.5,
+        "dayHigh": 87.56,
+        "dayLow": 86.48,
+        "totalTradedVolume": 1151599,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "AUBANK",
+        "pChange": -0.63,
+        "lastPrice": 1065.4,
+        "dayHigh": 1079.6,
+        "dayLow": 1064.5,
+        "totalTradedVolume": 62113,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CHOLAFIN",
         "pChange": -0.64,
-        "lastPrice": 1072.6,
-        "dayHigh": 1084.5,
-        "dayLow": 1070.9,
-        "totalTradedVolume": 881078,
+        "lastPrice": 1872.7,
+        "dayHigh": 1885.9,
+        "dayLow": 1866.6,
+        "totalTradedVolume": 82760,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "INDIGO",
+        "symbol": "GODREJCP",
         "pChange": -0.65,
-        "lastPrice": 5275.5,
-        "dayHigh": 5332.5,
-        "dayLow": 5262.5,
-        "totalTradedVolume": 321441,
+        "lastPrice": 922,
+        "dayHigh": 935,
+        "dayLow": 920,
+        "totalTradedVolume": 158919,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "DRREDDY",
         "pChange": -0.67,
-        "lastPrice": 1192,
-        "dayHigh": 1204.4,
-        "dayLow": 1178.2,
-        "totalTradedVolume": 2183094,
+        "lastPrice": 1184,
+        "dayHigh": 1188.9,
+        "dayLow": 1181.3,
+        "totalTradedVolume": 105873,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "BANKBARODA",
-        "pChange": -0.67,
-        "lastPrice": 246.55,
-        "dayHigh": 248.11,
-        "dayLow": 243.11,
-        "totalTradedVolume": 7061942,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HINDPETRO",
-        "pChange": -0.67,
-        "lastPrice": 371,
-        "dayHigh": 373.65,
-        "dayLow": 367,
-        "totalTradedVolume": 3669991,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BRITANNIA",
-        "pChange": -0.67,
-        "lastPrice": 5521,
-        "dayHigh": 5588.5,
-        "dayLow": 5495.5,
-        "totalTradedVolume": 189361,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GODREJCP",
-        "pChange": -0.67,
-        "lastPrice": 928,
-        "dayHigh": 937.8,
-        "dayLow": 925.6,
-        "totalTradedVolume": 971952,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "POWERINDIA",
-        "pChange": -0.7,
-        "lastPrice": 35450,
-        "dayHigh": 35850,
-        "dayLow": 35390,
-        "totalTradedVolume": 53456,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CROMPTON",
-        "pChange": -0.72,
-        "lastPrice": 246.5,
-        "dayHigh": 249.4,
-        "dayLow": 245.1,
-        "totalTradedVolume": 848001,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "PIIND",
-        "pChange": -0.73,
-        "lastPrice": 2472,
-        "dayHigh": 2490.2,
-        "dayLow": 2461.1,
-        "totalTradedVolume": 128211,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DIXON",
-        "pChange": -0.74,
-        "lastPrice": 14025,
-        "dayHigh": 14287,
-        "dayLow": 14025,
-        "totalTradedVolume": 183631,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "POLICYBZR",
-        "pChange": -0.74,
-        "lastPrice": 1728.1,
-        "dayHigh": 1764.8,
-        "dayLow": 1723,
-        "totalTradedVolume": 930324,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "IDFCFIRSTB",
-        "pChange": -0.75,
-        "lastPrice": 85.05,
-        "dayHigh": 85.59,
-        "dayLow": 84.51,
-        "totalTradedVolume": 7298246,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HEROMOTOCO",
-        "pChange": -0.78,
-        "lastPrice": 5745,
-        "dayHigh": 5811.5,
-        "dayLow": 5740,
-        "totalTradedVolume": 377125,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "JSWENERGY",
-        "pChange": -0.8,
-        "lastPrice": 555.5,
-        "dayHigh": 559.9,
-        "dayLow": 549.3,
-        "totalTradedVolume": 1221619,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DELHIVERY",
-        "pChange": -0.8,
-        "lastPrice": 456,
-        "dayHigh": 459.55,
-        "dayLow": 453.2,
-        "totalTradedVolume": 1432534,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "KPITTECH",
-        "pChange": -0.81,
-        "lastPrice": 609,
-        "dayHigh": 617,
-        "dayLow": 603.25,
-        "totalTradedVolume": 941451,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ADANIPOWER",
-        "pChange": -0.82,
-        "lastPrice": 203.56,
-        "dayHigh": 205.75,
-        "dayLow": 201.77,
-        "totalTradedVolume": 17130158,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BAJAJHLDNG",
-        "pChange": -0.84,
-        "lastPrice": 11379,
-        "dayHigh": 11574,
-        "dayLow": 11306,
-        "totalTradedVolume": 147900,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GODFRYPHLP",
-        "pChange": -0.84,
-        "lastPrice": 2131,
-        "dayHigh": 2148.9,
-        "dayLow": 2121.1,
-        "totalTradedVolume": 98713,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "LICI",
-        "pChange": -0.85,
-        "lastPrice": 410,
-        "dayHigh": 414.85,
-        "dayLow": 410,
-        "totalTradedVolume": 4621227,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "COLPAL",
-        "pChange": -0.86,
-        "lastPrice": 1964,
-        "dayHigh": 1981,
-        "dayLow": 1962,
-        "totalTradedVolume": 126002,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NTPC",
-        "pChange": -0.88,
-        "lastPrice": 337,
-        "dayHigh": 340.3,
-        "dayLow": 335.7,
-        "totalTradedVolume": 7839848,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BPCL",
-        "pChange": -0.88,
-        "lastPrice": 316.65,
-        "dayHigh": 319.75,
-        "dayLow": 314.15,
-        "totalTradedVolume": 4738730,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "AUBANK",
-        "pChange": -0.9,
-        "lastPrice": 1072.2,
-        "dayHigh": 1092.5,
-        "dayLow": 1072.2,
-        "totalTradedVolume": 922463,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "RBLBANK",
-        "pChange": -0.91,
-        "lastPrice": 381.5,
-        "dayHigh": 386.05,
-        "dayLow": 381.5,
-        "totalTradedVolume": 1376951,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ADANIENT",
-        "pChange": -0.92,
-        "lastPrice": 3007.3,
-        "dayHigh": 3058.6,
-        "dayLow": 3005.5,
-        "totalTradedVolume": 941404,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "INDUSINDBK",
-        "pChange": -1,
-        "lastPrice": 1010.6,
-        "dayHigh": 1020,
-        "dayLow": 1002.5,
-        "totalTradedVolume": 1108193,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "APOLLOHOSP",
-        "pChange": -1.06,
-        "lastPrice": 8825.5,
-        "dayHigh": 8984,
-        "dayLow": 8825.5,
-        "totalTradedVolume": 358418,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HINDUNILVR",
-        "pChange": -1.06,
-        "lastPrice": 2055,
-        "dayHigh": 2076,
-        "dayLow": 2055,
-        "totalTradedVolume": 1024288,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TRENT",
-        "pChange": -1.07,
-        "lastPrice": 2946,
-        "dayHigh": 2989.9,
-        "dayLow": 2945,
-        "totalTradedVolume": 689113,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "M&M",
-        "pChange": -1.11,
-        "lastPrice": 3390.4,
-        "dayHigh": 3451.9,
-        "dayLow": 3388.3,
-        "totalTradedVolume": 1756791,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "INDUSTOWER",
-        "pChange": -1.13,
-        "lastPrice": 380,
-        "dayHigh": 385,
-        "dayLow": 378.85,
-        "totalTradedVolume": 1415620,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BHARTIARTL",
-        "pChange": -1.14,
-        "lastPrice": 1969.3,
-        "dayHigh": 1993.2,
-        "dayLow": 1969.3,
-        "totalTradedVolume": 5537411,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "WIPRO",
-        "pChange": -1.14,
-        "lastPrice": 181.9,
-        "dayHigh": 183.71,
-        "dayLow": 181,
-        "totalTradedVolume": 4436515,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ASTRAL",
-        "pChange": -1.16,
-        "lastPrice": 1538.3,
-        "dayHigh": 1559,
-        "dayLow": 1536.2,
-        "totalTradedVolume": 353029,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NYKAA",
-        "pChange": -1.19,
-        "lastPrice": 327.05,
-        "dayHigh": 330.8,
-        "dayLow": 326.5,
-        "totalTradedVolume": 2941021,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BIOCON",
-        "pChange": -1.2,
-        "lastPrice": 412,
-        "dayHigh": 416.65,
-        "dayLow": 408.65,
-        "totalTradedVolume": 3190219,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "CIPLA",
-        "pChange": -1.28,
-        "lastPrice": 1431.5,
-        "dayHigh": 1449,
-        "dayLow": 1423.7,
-        "totalTradedVolume": 756514,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BDL",
-        "pChange": -1.29,
-        "lastPrice": 1380,
-        "dayHigh": 1427.7,
-        "dayLow": 1370,
-        "totalTradedVolume": 3151086,
+        "symbol": "MANAPPURAM",
+        "pChange": -0.69,
+        "lastPrice": 346.2,
+        "dayHigh": 351.95,
+        "dayLow": 345.55,
+        "totalTradedVolume": 358637,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "TMPV",
-        "pChange": -1.29,
-        "lastPrice": 330.2,
-        "dayHigh": 334.2,
-        "dayLow": 329.05,
-        "totalTradedVolume": 7337847,
+        "pChange": -0.7,
+        "lastPrice": 327.9,
+        "dayHigh": 331.7,
+        "dayLow": 327.65,
+        "totalTradedVolume": 1577081,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PATANJALI",
+        "pChange": -0.75,
+        "lastPrice": 351.25,
+        "dayHigh": 353.9,
+        "dayLow": 349.75,
+        "totalTradedVolume": 1232035,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HINDZINC",
+        "pChange": -0.76,
+        "lastPrice": 563.2,
+        "dayHigh": 569.1,
+        "dayLow": 563,
+        "totalTradedVolume": 472798,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HINDALCO",
+        "pChange": -0.77,
+        "lastPrice": 1041.85,
+        "dayHigh": 1050.6,
+        "dayLow": 1041.05,
+        "totalTradedVolume": 367121,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "RVNL",
+        "pChange": -0.79,
+        "lastPrice": 226,
+        "dayHigh": 227.88,
+        "dayLow": 225.54,
+        "totalTradedVolume": 559179,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "IEX",
+        "pChange": -0.79,
+        "lastPrice": 124.31,
+        "dayHigh": 125.35,
+        "dayLow": 123.91,
+        "totalTradedVolume": 280106,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "GVT&D",
-        "pChange": -1.38,
-        "lastPrice": 4290,
-        "dayHigh": 4375,
-        "dayLow": 4278,
-        "totalTradedVolume": 421939,
+        "pChange": -0.8,
+        "lastPrice": 4255.6,
+        "dayHigh": 4306,
+        "dayLow": 4250.7,
+        "totalTradedVolume": 59651,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "MPHASIS",
-        "pChange": -1.38,
-        "lastPrice": 2510,
-        "dayHigh": 2546,
-        "dayLow": 2482,
-        "totalTradedVolume": 383371,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TECHM",
-        "pChange": -1.4,
-        "lastPrice": 1610,
-        "dayHigh": 1638.9,
-        "dayLow": 1604.2,
-        "totalTradedVolume": 1506025,
+        "symbol": "CGPOWER",
+        "pChange": -0.8,
+        "lastPrice": 891.6,
+        "dayHigh": 900,
+        "dayLow": 889,
+        "totalTradedVolume": 277364,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "PAYTM",
-        "pChange": -1.42,
-        "lastPrice": 1580.2,
-        "dayHigh": 1619,
-        "dayLow": 1577.8,
-        "totalTradedVolume": 2137873,
+        "pChange": -0.82,
+        "lastPrice": 1567.3,
+        "dayHigh": 1599,
+        "dayLow": 1553.3,
+        "totalTradedVolume": 1626871,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "PIDILITIND",
-        "pChange": -1.42,
-        "lastPrice": 1669,
-        "dayHigh": 1700,
-        "dayLow": 1667.3,
-        "totalTradedVolume": 701061,
+        "symbol": "ASHOKLEY",
+        "pChange": -0.82,
+        "lastPrice": 175.64,
+        "dayHigh": 177,
+        "dayLow": 175.26,
+        "totalTradedVolume": 1916457,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "ADANIGREEN",
-        "pChange": -1.51,
-        "lastPrice": 1327.6,
-        "dayHigh": 1346.9,
-        "dayLow": 1322.5,
-        "totalTradedVolume": 745035,
+        "symbol": "BANKINDIA",
+        "pChange": -0.83,
+        "lastPrice": 142.55,
+        "dayHigh": 144.42,
+        "dayLow": 142.45,
+        "totalTradedVolume": 528716,
         "index": "SECURITIES IN F&O"
       },
       {
-        "symbol": "MARICO",
-        "pChange": -1.52,
-        "lastPrice": 852.05,
-        "dayHigh": 867.35,
-        "dayLow": 852.05,
-        "totalTradedVolume": 970523,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "INDIANB",
-        "pChange": -1.54,
-        "lastPrice": 881.2,
-        "dayHigh": 891.8,
-        "dayLow": 870.3,
-        "totalTradedVolume": 1061592,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "DMART",
-        "pChange": -1.6,
-        "lastPrice": 3995,
-        "dayHigh": 4050,
-        "dayLow": 3995,
-        "totalTradedVolume": 263000,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "GAIL",
-        "pChange": -1.6,
-        "lastPrice": 172.1,
-        "dayHigh": 173.79,
-        "dayLow": 171.85,
-        "totalTradedVolume": 4132699,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ADANIENSOL",
-        "pChange": -1.66,
-        "lastPrice": 1589.1,
-        "dayHigh": 1627.9,
-        "dayLow": 1585.4,
-        "totalTradedVolume": 2016844,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "MANKIND",
-        "pChange": -1.83,
-        "lastPrice": 2380.9,
-        "dayHigh": 2423,
-        "dayLow": 2369.5,
-        "totalTradedVolume": 810528,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "ITC",
-        "pChange": -1.85,
-        "lastPrice": 273.05,
-        "dayHigh": 278.2,
-        "dayLow": 273,
-        "totalTradedVolume": 12795275,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "NESTLEIND",
-        "pChange": -1.94,
-        "lastPrice": 1470,
-        "dayHigh": 1503.7,
-        "dayLow": 1468.5,
-        "totalTradedVolume": 1721057,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "TCS",
-        "pChange": -2.02,
-        "lastPrice": 2313.2,
-        "dayHigh": 2361.1,
-        "dayLow": 2310.6,
-        "totalTradedVolume": 2237636,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "FORTIS",
-        "pChange": -2.18,
-        "lastPrice": 908.75,
-        "dayHigh": 927.8,
-        "dayLow": 906.3,
-        "totalTradedVolume": 1263131,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "SUNPHARMA",
-        "pChange": -2.49,
-        "lastPrice": 1882,
-        "dayHigh": 1949.8,
-        "dayLow": 1880.4,
-        "totalTradedVolume": 1893086,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "INFY",
-        "pChange": -2.51,
-        "lastPrice": 1139.9,
-        "dayHigh": 1166.5,
-        "dayLow": 1129.7,
-        "totalTradedVolume": 5817153,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "HCLTECH",
-        "pChange": -2.57,
-        "lastPrice": 1325,
-        "dayHigh": 1362.8,
-        "dayLow": 1325,
-        "totalTradedVolume": 970745,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "COCHINSHIP",
-        "pChange": -2.59,
-        "lastPrice": 1457.8,
-        "dayHigh": 1494.7,
-        "dayLow": 1435,
-        "totalTradedVolume": 1954085,
-        "index": "SECURITIES IN F&O"
-      },
-      {
-        "symbol": "BSE",
-        "pChange": -3.34,
-        "lastPrice": 3332,
-        "dayHigh": 3390.4,
-        "dayLow": 3282.9,
-        "totalTradedVolume": 7709125,
+        "symbol": "LT",
+        "pChange": -0.84,
+        "lastPrice": 4052.5,
+        "dayHigh": 4068,
+        "dayLow": 4050,
+        "totalTradedVolume": 118646,
         "index": "SECURITIES IN F&O"
       },
       {
         "symbol": "VOLTAS",
-        "pChange": -4.05,
-        "lastPrice": 1267,
-        "dayHigh": 1350,
-        "dayLow": 1256.1,
-        "totalTradedVolume": 4378295,
+        "pChange": -0.84,
+        "lastPrice": 1256.3,
+        "dayHigh": 1272,
+        "dayLow": 1255,
+        "totalTradedVolume": 295114,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "UNIONBANK",
+        "pChange": -0.88,
+        "lastPrice": 187.23,
+        "dayHigh": 190.58,
+        "dayLow": 187.08,
+        "totalTradedVolume": 1713446,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SHRIRAMFIN",
+        "pChange": -0.89,
+        "lastPrice": 1112,
+        "dayHigh": 1124.9,
+        "dayLow": 1111,
+        "totalTradedVolume": 374297,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PNBHOUSING",
+        "pChange": -0.91,
+        "lastPrice": 1140.3,
+        "dayHigh": 1153.9,
+        "dayLow": 1128.9,
+        "totalTradedVolume": 88695,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LUPIN",
+        "pChange": -0.92,
+        "lastPrice": 2238.3,
+        "dayHigh": 2255,
+        "dayLow": 2231.5,
+        "totalTradedVolume": 65118,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CANBK",
+        "pChange": -0.93,
+        "lastPrice": 129.88,
+        "dayHigh": 131,
+        "dayLow": 129.71,
+        "totalTradedVolume": 1665181,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PHOENIXLTD",
+        "pChange": -0.94,
+        "lastPrice": 1911.7,
+        "dayHigh": 1939.8,
+        "dayLow": 1905.1,
+        "totalTradedVolume": 55808,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "VEDL",
+        "pChange": -0.95,
+        "lastPrice": 267.15,
+        "dayHigh": 270.5,
+        "dayLow": 267.05,
+        "totalTradedVolume": 1130390,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SUZLON",
+        "pChange": -0.96,
+        "lastPrice": 48.53,
+        "dayHigh": 48.95,
+        "dayLow": 48.46,
+        "totalTradedVolume": 6565157,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INDHOTEL",
+        "pChange": -0.99,
+        "lastPrice": 712.85,
+        "dayHigh": 721.8,
+        "dayLow": 712.5,
+        "totalTradedVolume": 83068,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "IREDA",
+        "pChange": -1.03,
+        "lastPrice": 115.65,
+        "dayHigh": 117.11,
+        "dayLow": 115.55,
+        "totalTradedVolume": 670092,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "RADICO",
+        "pChange": -1.06,
+        "lastPrice": 4643.7,
+        "dayHigh": 4718.4,
+        "dayLow": 4636,
+        "totalTradedVolume": 78844,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "RBLBANK",
+        "pChange": -1.06,
+        "lastPrice": 377.45,
+        "dayHigh": 382.85,
+        "dayLow": 376.75,
+        "totalTradedVolume": 829382,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MFSL",
+        "pChange": -1.06,
+        "lastPrice": 1555,
+        "dayHigh": 1570,
+        "dayLow": 1547,
+        "totalTradedVolume": 55447,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KEI",
+        "pChange": -1.07,
+        "lastPrice": 5810,
+        "dayHigh": 5899,
+        "dayLow": 5794.8,
+        "totalTradedVolume": 64065,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NBCC",
+        "pChange": -1.08,
+        "lastPrice": 88.78,
+        "dayHigh": 89.93,
+        "dayLow": 88.65,
+        "totalTradedVolume": 1135855,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ABCAPITAL",
+        "pChange": -1.09,
+        "lastPrice": 394.35,
+        "dayHigh": 399.85,
+        "dayLow": 394.3,
+        "totalTradedVolume": 501654,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BHARATFORG",
+        "pChange": -1.11,
+        "lastPrice": 2069.7,
+        "dayHigh": 2098.8,
+        "dayLow": 2068,
+        "totalTradedVolume": 81817,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CROMPTON",
+        "pChange": -1.12,
+        "lastPrice": 243.75,
+        "dayHigh": 245.75,
+        "dayLow": 243.4,
+        "totalTradedVolume": 185845,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SWIGGY",
+        "pChange": -1.13,
+        "lastPrice": 275.65,
+        "dayHigh": 277.8,
+        "dayLow": 274.75,
+        "totalTradedVolume": 1063094,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LTM",
+        "pChange": -1.15,
+        "lastPrice": 4646,
+        "dayHigh": 4670,
+        "dayLow": 4588.9,
+        "totalTradedVolume": 63104,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CONCOR",
+        "pChange": -1.16,
+        "lastPrice": 518.4,
+        "dayHigh": 524.85,
+        "dayLow": 517.55,
+        "totalTradedVolume": 68294,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "HCLTECH",
+        "pChange": -1.19,
+        "lastPrice": 1309.2,
+        "dayHigh": 1320,
+        "dayLow": 1308.2,
+        "totalTradedVolume": 225433,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CDSL",
+        "pChange": -1.19,
+        "lastPrice": 1340.6,
+        "dayHigh": 1361.5,
+        "dayLow": 1338.8,
+        "totalTradedVolume": 193665,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TCS",
+        "pChange": -1.22,
+        "lastPrice": 2285,
+        "dayHigh": 2307,
+        "dayLow": 2284.6,
+        "totalTradedVolume": 363360,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "YESBANK",
+        "pChange": -1.22,
+        "lastPrice": 22.64,
+        "dayHigh": 22.97,
+        "dayLow": 22.63,
+        "totalTradedVolume": 13399598,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "JIOFIN",
+        "pChange": -1.24,
+        "lastPrice": 246.65,
+        "dayHigh": 248.9,
+        "dayLow": 246.35,
+        "totalTradedVolume": 2166468,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PRESTIGE",
+        "pChange": -1.28,
+        "lastPrice": 1571.6,
+        "dayHigh": 1589.9,
+        "dayLow": 1563.1,
+        "totalTradedVolume": 118108,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "360ONE",
+        "pChange": -1.31,
+        "lastPrice": 1157.6,
+        "dayHigh": 1174.7,
+        "dayLow": 1154,
+        "totalTradedVolume": 54224,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ASIANPAINT",
+        "pChange": -1.32,
+        "lastPrice": 2651.9,
+        "dayHigh": 2670.1,
+        "dayLow": 2643.6,
+        "totalTradedVolume": 168902,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "JUBLFOOD",
+        "pChange": -1.35,
+        "lastPrice": 504.6,
+        "dayHigh": 510.6,
+        "dayLow": 504.05,
+        "totalTradedVolume": 420071,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "TECHM",
+        "pChange": -1.37,
+        "lastPrice": 1587.9,
+        "dayHigh": 1608,
+        "dayLow": 1587,
+        "totalTradedVolume": 133034,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INDIGO",
+        "pChange": -1.39,
+        "lastPrice": 5202,
+        "dayHigh": 5234,
+        "dayLow": 5138,
+        "totalTradedVolume": 96407,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INDUSTOWER",
+        "pChange": -1.42,
+        "lastPrice": 374.6,
+        "dayHigh": 379.8,
+        "dayLow": 373.8,
+        "totalTradedVolume": 661756,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KPITTECH",
+        "pChange": -1.43,
+        "lastPrice": 600.3,
+        "dayHigh": 609.05,
+        "dayLow": 600.2,
+        "totalTradedVolume": 571787,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BHARTIARTL",
+        "pChange": -1.52,
+        "lastPrice": 1939.4,
+        "dayHigh": 1959.7,
+        "dayLow": 1923.2,
+        "totalTradedVolume": 1278324,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "WIPRO",
+        "pChange": -1.54,
+        "lastPrice": 179.1,
+        "dayHigh": 181.99,
+        "dayLow": 178.91,
+        "totalTradedVolume": 1988503,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BHEL",
+        "pChange": -1.55,
+        "lastPrice": 429.2,
+        "dayHigh": 434.15,
+        "dayLow": 428.6,
+        "totalTradedVolume": 2127773,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "COFORGE",
+        "pChange": -1.55,
+        "lastPrice": 1778,
+        "dayHigh": 1795,
+        "dayLow": 1776.7,
+        "totalTradedVolume": 247775,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "DLF",
+        "pChange": -1.58,
+        "lastPrice": 660.4,
+        "dayHigh": 672.25,
+        "dayLow": 658.25,
+        "totalTradedVolume": 705878,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NMDC",
+        "pChange": -1.61,
+        "lastPrice": 84.12,
+        "dayHigh": 85.41,
+        "dayLow": 84.04,
+        "totalTradedVolume": 1866150,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "PGEL",
+        "pChange": -1.75,
+        "lastPrice": 603.25,
+        "dayHigh": 614.3,
+        "dayLow": 602.4,
+        "totalTradedVolume": 430424,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "MOTILALOFS",
+        "pChange": -1.76,
+        "lastPrice": 938.2,
+        "dayHigh": 961.35,
+        "dayLow": 936.1,
+        "totalTradedVolume": 216384,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INFY",
+        "pChange": -1.94,
+        "lastPrice": 1117.8,
+        "dayHigh": 1131.9,
+        "dayLow": 1117.5,
+        "totalTradedVolume": 1241122,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "CAMS",
+        "pChange": -1.94,
+        "lastPrice": 761.2,
+        "dayHigh": 773.9,
+        "dayLow": 760.15,
+        "totalTradedVolume": 302082,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LTF",
+        "pChange": -2.05,
+        "lastPrice": 308.55,
+        "dayHigh": 314.85,
+        "dayLow": 308.15,
+        "totalTradedVolume": 686803,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "BSE",
+        "pChange": -2.06,
+        "lastPrice": 3263.4,
+        "dayHigh": 3315.4,
+        "dayLow": 3235,
+        "totalTradedVolume": 1786351,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "SBICARD",
+        "pChange": -2.28,
+        "lastPrice": 627.15,
+        "dayHigh": 643.15,
+        "dayLow": 626.5,
+        "totalTradedVolume": 228724,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "LODHA",
+        "pChange": -2.29,
+        "lastPrice": 1225.3,
+        "dayHigh": 1260,
+        "dayLow": 1224.1,
+        "totalTradedVolume": 218600,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "OBEROIRLTY",
+        "pChange": -2.3,
+        "lastPrice": 1886.6,
+        "dayHigh": 1960.7,
+        "dayLow": 1877.1,
+        "totalTradedVolume": 617301,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "GODREJPROP",
+        "pChange": -2.63,
+        "lastPrice": 2000,
+        "dayHigh": 2055.2,
+        "dayLow": 1995.2,
+        "totalTradedVolume": 139895,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "KFINTECH",
+        "pChange": -2.64,
+        "lastPrice": 947.3,
+        "dayHigh": 979,
+        "dayLow": 946,
+        "totalTradedVolume": 440193,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "INOXWIND",
+        "pChange": -2.66,
+        "lastPrice": 76.05,
+        "dayHigh": 78.19,
+        "dayLow": 76,
+        "totalTradedVolume": 3791449,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "ANGELONE",
+        "pChange": -2.83,
+        "lastPrice": 285.2,
+        "dayHigh": 293.4,
+        "dayLow": 281.6,
+        "totalTradedVolume": 2493486,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "COLPAL",
+        "pChange": -2.9,
+        "lastPrice": 1907,
+        "dayHigh": 1958.9,
+        "dayLow": 1901.7,
+        "totalTradedVolume": 340366,
+        "index": "SECURITIES IN F&O"
+      },
+      {
+        "symbol": "NAM-INDIA",
+        "pChange": -3.06,
+        "lastPrice": 1165.9,
+        "dayHigh": 1205,
+        "dayLow": 1164.8,
+        "totalTradedVolume": 242425,
         "index": "SECURITIES IN F&O"
       }
     ],
@@ -3137,6 +2723,41 @@
       "ZEEMEDIA"
     ],
     "announcements": [
+      {
+        "symbol": "MCLOUD",
+        "subject": "Press Release",
+        "date": "18-Aug-2026 09:41:34"
+      },
+      {
+        "symbol": "DENTA",
+        "subject": "Press Release",
+        "date": "18-Aug-2026 09:35:42"
+      },
+      {
+        "symbol": "MCLOUD",
+        "subject": "General Updates",
+        "date": "18-Aug-2026 09:19:33"
+      },
+      {
+        "symbol": "ADANIPOWER",
+        "subject": "Credit Rating",
+        "date": "18-Aug-2026 09:19:11"
+      },
+      {
+        "symbol": "PRAJIND",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "18-Aug-2026 09:16:44"
+      },
+      {
+        "symbol": "JSWDULUX",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "18-Aug-2026 09:13:25"
+      },
+      {
+        "symbol": "SKFINDIA",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "18-Aug-2026 09:10:43"
+      },
       {
         "symbol": "BIOCON",
         "subject": "Updates",
@@ -5601,41 +5222,6 @@
         "symbol": "RAMAPHO",
         "subject": "Demise",
         "date": "17-Aug-2026 13:12:29"
-      },
-      {
-        "symbol": "THOMASCOOK",
-        "subject": "Press Release",
-        "date": "17-Aug-2026 13:11:38"
-      },
-      {
-        "symbol": "ALLCARGO",
-        "subject": "Resignation",
-        "date": "17-Aug-2026 13:09:11"
-      },
-      {
-        "symbol": "PARKHOTELS",
-        "subject": "Copy of Newspaper Publication",
-        "date": "17-Aug-2026 13:09:08"
-      },
-      {
-        "symbol": "DCAL",
-        "subject": "Allotment of Securities",
-        "date": "17-Aug-2026 13:07:13"
-      },
-      {
-        "symbol": "MBLINFRA",
-        "subject": "Copy of Newspaper Publication",
-        "date": "17-Aug-2026 13:07:07"
-      },
-      {
-        "symbol": "AIAENG",
-        "subject": "Copy of Newspaper Publication",
-        "date": "17-Aug-2026 13:06:57"
-      },
-      {
-        "symbol": "CPL",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "17-Aug-2026 13:05:41"
       }
     ],
     "deliverySample": {
