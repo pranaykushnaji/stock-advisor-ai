@@ -124,13 +124,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:01",
+          "ts": "2026-08-18T09:31:06.528Z",
+          "relVol": 2.03,
+          "confidence": 55.1,
+          "components": {
+            "technical": 80,
+            "flow": 81,
+            "catalyst": 5,
+            "liquidity": 80
+          },
+          "discoveryScore": 77.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 77608,
+          "sessionFrac": 0.9226666666666666,
+          "missing": [
+            "relVol 2.03<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:01",
+      "lastSeen": "15:01",
       "bestConfidence": 55.2,
       "confidenceTrend": "rising",
-      "confidenceSlope": 25.1,
-      "trendBonus": 4
+      "confidenceSlope": 12.5,
+      "trendBonus": 8
     },
     "LTF": {
       "ticker": "LTF",
@@ -161,12 +184,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:01",
+          "ts": "2026-08-18T09:31:06.529Z",
+          "relVol": 1.94,
+          "confidence": 12.1,
+          "components": {
+            "technical": 59,
+            "flow": 54,
+            "catalyst": 29,
+            "liquidity": 74
+          },
+          "discoveryScore": 73.7,
+          "catalystType": "institution buying",
+          "verification": "PARTIAL",
+          "volume": 8358045,
+          "sessionFrac": 0.9226666666666666,
+          "missing": [
+            "relVol 1.94<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:01",
+      "lastSeen": "15:01",
       "bestConfidence": 12.2,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceSlope": -0.1,
       "trendBonus": 0
     }
   }
