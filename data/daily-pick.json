@@ -2,150 +2,24 @@
   "pick": {
     "date": "2026-08-18",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-08-18T06:31:08.565Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-18T07:31:12.849Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 48, conf 62) — trend 54, breadth 34, vol-factor 81",
+    "momLaneOpen": true,
+    "considered": [
       {
-        "ticker": "TIINDIA",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIPOWER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COCHINSHIP",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AXISBANK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "RELIANCE",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MCX",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ALKEM",
-        "reasons": [
-          "illiquid (₹49Cr)"
-        ]
-      },
-      {
-        "ticker": "TORNTPHARM",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "BIOCON",
-        "reasons": [
-          "illiquid (₹57Cr)"
-        ]
-      },
-      {
-        "ticker": "GRASIM",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MAXHEALTH",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDPETRO",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PETRONET",
-        "reasons": [
-          "illiquid (₹32Cr)"
-        ]
-      },
-      {
-        "ticker": "APOLLOHOSP",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "BHARTIARTL",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "VBL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GMRAIRPORT",
-        "reasons": [
-          "illiquid (₹23Cr)"
-        ]
-      },
-      {
-        "ticker": "BAJFINANCE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "illiquid (₹51Cr)"
-        ]
+        "ticker": "BOSCHLTD",
+        "relVol": 2.15,
+        "confidence": 30.1,
+        "effectiveConfidence": 69.8,
+        "institutional": 100,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
       }
     ]
   }
