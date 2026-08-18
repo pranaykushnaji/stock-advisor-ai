@@ -1,63 +1,41 @@
 {
-  "date": "2026-08-17",
+  "date": "2026-08-18",
   "candidates": {
-    "UNOMINDA": {
-      "ticker": "UNOMINDA",
-      "fullName": "Uno Minda Limited",
+    "PAYTM": {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "12:01",
+      "firstSeen": "10:01",
       "status": "watching",
       "scans": [
         {
-          "hhmm": "12:01",
-          "ts": "2026-08-17T06:31:06.538Z",
-          "relVol": 1.9,
-          "confidence": 31.4,
+          "hhmm": "10:01",
+          "ts": "2026-08-18T04:31:12.034Z",
+          "relVol": 2.22,
+          "confidence": 24.7,
           "components": {
-            "technical": 62,
+            "technical": 68,
             "flow": 70,
-            "catalyst": 54,
-            "liquidity": 56
+            "catalyst": 5,
+            "liquidity": 73
           },
-          "discoveryScore": 63.6,
-          "catalystType": "acquisition",
-          "verification": "VERIFIED",
-          "volume": 702555,
-          "sessionFrac": 0.44266666666666665,
+          "discoveryScore": 55,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1626871,
+          "sessionFrac": 0.15,
           "missing": [
-            "relVol 1.9<2.1"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:01",
-          "ts": "2026-08-17T07:31:07.042Z",
-          "relVol": 1.98,
-          "confidence": 32.3,
-          "components": {
-            "technical": 64,
-            "flow": 71,
-            "catalyst": 54,
-            "liquidity": 62
-          },
-          "discoveryScore": 70.2,
-          "catalystType": "acquisition",
-          "verification": "VERIFIED",
-          "volume": 999754,
-          "sessionFrac": 0.6026666666666667,
-          "missing": [
-            "relVol 1.98<2.1"
+            "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
         }
       ],
-      "lastSeen": "13:01",
-      "bestConfidence": 32.3,
+      "lastSeen": "10:01",
+      "bestConfidence": 24.7,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.9,
-      "trendBonus": 0.5
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
