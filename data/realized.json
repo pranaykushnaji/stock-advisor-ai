@@ -686,6 +686,39 @@
       "exitSource": "rule",
       "realizedPnl": -170.28,
       "realizedPnlPct": -1.89
+    },
+    {
+      "ticker": "SOLARINDS",
+      "fullName": "Solar Industries India Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 9.8,
+        "expectedLossPct": 5.1,
+        "probability": 0.636,
+        "edgePct": 4.38,
+        "calibration": "lane+regime+conf"
+      },
+      "confidenceComponents": {
+        "technical": 86,
+        "flow": 76,
+        "catalyst": 35,
+        "liquidity": 90
+      },
+      "effectiveConfidence": 77.6,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 20137,
+      "entryDate": "2026-08-14",
+      "exitPrice": 19669,
+      "exitDate": "2026-08-19",
+      "shares": 0.447,
+      "investedAmount": 9000,
+      "exitReason": "Price down 2.3%; momentum fading, no catalyst to sustain bullish thesis",
+      "exitSource": "llm",
+      "realizedPnl": -209.2,
+      "realizedPnlPct": -2.32
     }
   ]
 }
