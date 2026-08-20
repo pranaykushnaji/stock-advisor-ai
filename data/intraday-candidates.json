@@ -197,10 +197,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-20T06:30:50.330Z",
+          "relVol": 2.28,
+          "confidence": 34.7,
+          "components": {
+            "technical": 55,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 80.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3501138,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 24.9,
+      "lastSeen": "12:00",
+      "bestConfidence": 34.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 9.8,
+      "trendBonus": 4
+    },
+    "360ONE": {
+      "ticker": "360ONE",
+      "fullName": "360 One Wam Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-20T06:30:50.330Z",
+          "relVol": 2.99,
+          "confidence": 51.3,
+          "components": {
+            "technical": 83,
+            "flow": 59,
+            "catalyst": 5,
+            "liquidity": 65
+          },
+          "discoveryScore": 66.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1237087,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 51.3,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
