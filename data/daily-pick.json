@@ -2,24 +2,143 @@
   "pick": {
     "date": "2026-08-20",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-20T07:30:47.548Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 69, conf 68) — trend 55, breadth 81, vol-factor 78",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-08-20T08:30:46.302Z",
+    "rejected": [
+      {
+        "ticker": "DIXON",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PAYTM",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "CROMPTON",
+        "reasons": [
+          "illiquid (₹58Cr)"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SBICARD",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "ABCAPITAL",
-        "relVol": 1.84,
-        "confidence": 42.2,
-        "effectiveConfidence": 70.2,
-        "institutional": 49.8,
-        "catalyst": "new product",
-        "verification": "PARTIAL",
-        "filing": false,
-        "sources": 1,
-        "articles": 12,
-        "negative": false
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HYUNDAI",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LT",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "GLENMARK",
+        "reasons": [
+          "illiquid (₹73Cr)"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PETRONET",
+        "reasons": [
+          "illiquid (₹69Cr)"
+        ]
+      },
+      {
+        "ticker": "M&M",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MCX",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "RVNL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "ICICIGI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CIPLA",
+        "reasons": [
+          "illiquid (₹33Cr)"
+        ]
+      },
+      {
+        "ticker": "MUTHOOTFIN",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "GODREJPROP",
+        "reasons": [
+          "illiquid (₹42Cr)"
+        ]
+      },
+      {
+        "ticker": "CGPOWER",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
