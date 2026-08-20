@@ -1,173 +1,52 @@
 {
   "pick": {
-    "ticker": "PNBHOUSING",
-    "fullName": "PNB Housing Finance Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 50,
-        "positives": [
-          "Technical score 87.3",
-          "Relative volume 4.17x vs 20‑day average",
-          "Institutional accumulation 83.3/100",
-          "Relative strength vs Nifty 9.57",
-          "Positive short‑term returns: r1d 4.7%, r1w 3.6%, r1m 9.0%"
-        ],
-        "negatives": [
-          "Composite score 39.6 (AVOID)",
-          "Multi‑signal confidence 33.5 (low)",
-          "No news catalyst"
-        ]
-      },
-      "relStrength": {
-        "score": 50
-      },
-      "volume": {
-        "score": 16.7
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 87.3
-      },
-      "sector": {
-        "score": 68
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.0466922654216305,
-      "r1w": 0.036022869835566775,
-      "r1m": 0.09047099070964826
-    },
-    "volumeRatio": 0.5,
-    "relVol": 4.17,
-    "relStrength": 9.57,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 33.5,
-    "effectiveConfidence": 67.9,
-    "confidenceComponents": {
-      "technical": 72,
-      "flow": 72,
-      "catalyst": 5,
-      "liquidity": 54
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 72,
-          "weight": 0.4,
-          "contribution": 28.8
-        },
-        "flow": {
-          "score": 72,
-          "weight": 0.4,
-          "contribution": 28.8
-        },
-        "liquidity": {
-          "score": 54,
-          "weight": 0.2,
-          "contribution": 10.8
-        }
-      },
-      "base": 68.4,
-      "regimeScore": 65,
-      "regimeAdjustment": -0.5,
-      "trendBonus": 0,
-      "final": 67.9
-    },
-    "expectedEdge": {
-      "expectedGainPct": 8.7,
-      "expectedLossPct": 5.1,
-      "probability": 0.526,
-      "edgePct": 2.16,
-      "calibration": "lane"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 83.3,
-    "institutionalFlags": [
-      "up-day volume dominant"
-    ],
-    "discoveryScore": 68.7,
-    "discoveryReasons": [
-      "fresh filing"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 1.71,
-      "upsidePct": 8.7,
-      "downsidePct": 5.1
-    },
-    "regime": "bullish",
-    "market": "bullish (v2 score 65, conf 70) — trend 55, breadth 81, vol-factor 78",
-    "regimeConfidence": 70,
-    "regimeFactors": {
-      "indexTrend": 55,
-      "volatility": 78,
-      "breadth": 81,
-      "momentumBreadth": 62,
-      "largeCap": 50,
-      "gapEnv": 52,
-      "riskAppetite": 59,
-      "sectorPart": 88
-    },
-    "annualizedVol": 32.6,
-    "composite": 39.6,
-    "verdict": "AVOID",
-    "estimatedUpside": "8-9%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "There is no identifiable news catalyst; the trade is driven purely by technical momentum and volume dynamics.",
-    "summary": "In a bullish market regime, PNBHOUSING is exhibiting a strong technical setup with a 4.17x volume surge and high institutional buying, out‑performing the Nifty on a relative‑strength basis. The swing trade targets the ~8‑9% upside over the next 5‑10 days while the downside is limited to ~5%, offering a favorable reward‑to‑risk profile despite the lack of fundamental news.",
-    "whyToday": "Today's 4.17x relative volume spike signals a decisive institutional buying pressure, making it the optimal entry point.",
     "date": "2026-08-20",
-    "pickedAt": "2026-08-20T04:30:53.166Z",
-    "discovery": {
-      "news": 0,
-      "movers": 40,
-      "nseSnapshot": 164,
-      "nseUniverse": 164,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-20T04:16:03.990Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-20T05:30:52.946Z",
+    "regime": "bullish",
+    "market": "bullish (v2 score 67, conf 73) — trend 55, breadth 77, vol-factor 78",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "ETERNAL",
+        "relVol": 2.02,
+        "confidence": 43.8,
+        "effectiveConfidence": 70.7,
+        "institutional": 67.1,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
+      },
+      {
+        "ticker": "JSWSTEEL",
+        "relVol": 3.57,
+        "confidence": 49.6,
+        "effectiveConfidence": 73.3,
+        "institutional": 70.9,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 3,
+        "negative": false
+      },
+      {
+        "ticker": "ABCAPITAL",
+        "relVol": 2.11,
+        "confidence": 24.9,
+        "effectiveConfidence": 57.1,
+        "institutional": 60,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 8,
+        "negative": false
       }
-    },
-    "candidatePool": 3,
-    "pipeline": {
-      "priced": 39,
-      "passedFilter": 3,
-      "catalystChecked": 3,
-      "tradeable": 2
-    },
-    "runnerUp": {
-      "ticker": "AUBANK",
-      "composite": 28.1
-    },
-    "entryPrice": 1199.3,
-    "entryRejected": null
+    ]
   }
 }
