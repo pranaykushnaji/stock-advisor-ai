@@ -30,12 +30,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-20T05:30:50.303Z",
+          "relVol": 2.02,
+          "confidence": 43.8,
+          "components": {
+            "technical": 80,
+            "flow": 55,
+            "catalyst": 5,
+            "liquidity": 87
+          },
+          "discoveryScore": 72.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 17459951,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2.02<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
+      "lastSeen": "11:00",
       "bestConfidence": 67.2,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -23.4,
       "trendBonus": 0
     },
     "PNBHOUSING": {
@@ -106,6 +129,78 @@
       ],
       "lastSeen": "10:00",
       "bestConfidence": 26,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "JSWSTEEL": {
+      "ticker": "JSWSTEEL",
+      "fullName": "JSW STEEL LIMITED",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-20T05:30:50.303Z",
+          "relVol": 3.57,
+          "confidence": 49.6,
+          "components": {
+            "technical": 67,
+            "flow": 84,
+            "catalyst": 5,
+            "liquidity": 70
+          },
+          "discoveryScore": 69.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1613052,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 49.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "ABCAPITAL": {
+      "ticker": "ABCAPITAL",
+      "fullName": "Aditya Birla Capital Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-20T05:30:50.303Z",
+          "relVol": 2.11,
+          "confidence": 24.9,
+          "components": {
+            "technical": 49,
+            "flow": 61,
+            "catalyst": 5,
+            "liquidity": 57
+          },
+          "discoveryScore": 79.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2289163,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 24.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
