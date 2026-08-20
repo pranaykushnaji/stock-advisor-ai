@@ -1,4 +1,114 @@
 {
-  "date": "2026-08-19",
-  "candidates": {}
+  "date": "2026-08-20",
+  "candidates": {
+    "ETERNAL": {
+      "ticker": "ETERNAL",
+      "fullName": "Eternal Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-08-20T04:30:50.940Z",
+          "relVol": 1.92,
+          "confidence": 67.2,
+          "components": {
+            "technical": 80,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 69.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 8851965,
+          "sessionFrac": 0.15,
+          "missing": [
+            "relVol 1.92<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 67.2,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "PNBHOUSING": {
+      "ticker": "PNBHOUSING",
+      "fullName": "PNB Housing Finance Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "bought",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-08-20T04:30:50.941Z",
+          "relVol": 4.17,
+          "confidence": 33.5,
+          "components": {
+            "technical": 72,
+            "flow": 72,
+            "catalyst": 5,
+            "liquidity": 54
+          },
+          "discoveryScore": 68.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 646476,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 33.5,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "AUBANK": {
+      "ticker": "AUBANK",
+      "fullName": "AU SMALL FINANCE BANK LTD",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-08-20T04:30:50.941Z",
+          "relVol": 2.88,
+          "confidence": 26,
+          "components": {
+            "technical": 54,
+            "flow": 80,
+            "catalyst": 5,
+            "liquidity": 54
+          },
+          "discoveryScore": 66.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 728085,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 26,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
