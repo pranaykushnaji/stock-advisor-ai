@@ -1,144 +1,25 @@
 {
   "pick": {
-    "date": "2026-08-20",
+    "date": "2026-08-21",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-08-20T09:30:46.508Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-21T04:30:47.229Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 56, conf 74) — trend 60, breadth 53, vol-factor 78",
+    "momLaneOpen": true,
+    "considered": [
       {
-        "ticker": "DIXON",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GLENMARK",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "SBICARD",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ABCAPITAL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MCX",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HYUNDAI",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GODREJPROP",
-        "reasons": [
-          "illiquid (₹48Cr)"
-        ]
-      },
-      {
-        "ticker": "POWERGRID",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "RBLBANK",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "CGPOWER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DALBHARAT",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CROMPTON",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JUBLFOOD",
-        "reasons": [
-          "illiquid (₹70Cr)"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PAYTM",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "LT",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "OIL",
-        "reasons": [
-          "illiquid (₹49Cr)"
-        ]
-      },
-      {
-        "ticker": "PREMIERENE",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
+        "ticker": "MANAPPURAM",
+        "relVol": 3.23,
+        "confidence": 30.4,
+        "effectiveConfidence": 60.9,
+        "institutional": 32.6,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 7,
+        "negative": false
       }
     ]
   }
