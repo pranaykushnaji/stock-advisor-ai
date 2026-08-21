@@ -2,24 +2,143 @@
   "pick": {
     "date": "2026-08-21",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-21T07:30:51.048Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 56, conf 67) — trend 61, breadth 46, vol-factor 88",
-    "momLaneOpen": true,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-08-21T08:30:46.799Z",
+    "rejected": [
       {
-        "ticker": "MANAPPURAM",
-        "relVol": 1.82,
-        "confidence": 30.1,
-        "effectiveConfidence": 57.9,
-        "institutional": 33.7,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 8,
-        "negative": false
+        "ticker": "PRESTIGE",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KAYNES",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "POWERGRID",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ICICIPRULI",
+        "reasons": [
+          "illiquid (₹56Cr)"
+        ]
+      },
+      {
+        "ticker": "ICICIBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "VEDL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KFINTECH",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BPCL",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "FEDERALBNK",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "LTF",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "BDL",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JSWENERGY",
+        "reasons": [
+          "illiquid (₹40Cr)"
+        ]
+      },
+      {
+        "ticker": "UNITDSPR",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PAYTM",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KALYANKJIL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "POWERINDIA",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
