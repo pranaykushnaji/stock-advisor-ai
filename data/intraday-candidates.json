@@ -51,12 +51,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-21T06:30:50.344Z",
+          "relVol": 2.17,
+          "confidence": 9.3,
+          "components": {
+            "technical": 51,
+            "flow": 46,
+            "catalyst": 5,
+            "liquidity": 73
+          },
+          "discoveryScore": 64.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 6844006,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 30.4,
       "confidenceTrend": "falling",
-      "confidenceSlope": -20.9,
+      "confidenceSlope": -10.55,
       "trendBonus": 0
     },
     "MCX": {
@@ -87,13 +109,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-21T06:30:50.343Z",
+          "relVol": 1.92,
+          "confidence": 57.4,
+          "components": {
+            "technical": 80,
+            "flow": 72,
+            "catalyst": 5,
+            "liquidity": 89
+          },
+          "discoveryScore": 66.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2116513,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.92<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 57.1,
+      "lastSeen": "12:00",
+      "bestConfidence": 57.4,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.3,
+      "trendBonus": 0.2
     }
   }
 }
