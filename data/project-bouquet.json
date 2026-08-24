@@ -1,6 +1,120 @@
 {
   "bouquet": [
     {
+      "ticker": "SIEMENS",
+      "fullName": "Siemens Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 79,
+        "flow": 76,
+        "catalyst": 5,
+        "liquidity": 70
+      },
+      "expectedEdge": {
+        "expectedGainPct": 8.9,
+        "expectedLossPct": 4.7,
+        "probability": 0.579,
+        "edgePct": 3.17,
+        "calibration": "lane+regime+conf"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 79,
+            "weight": 0.4,
+            "contribution": 31.6
+          },
+          "flow": {
+            "score": 76,
+            "weight": 0.4,
+            "contribution": 30.4
+          },
+          "liquidity": {
+            "score": 70,
+            "weight": 0.2,
+            "contribution": 14
+          }
+        },
+        "base": 76,
+        "regimeScore": 57,
+        "regimeAdjustment": -2.9,
+        "trendBonus": 0,
+        "final": 73.1
+      },
+      "confidence": 40.9,
+      "effectiveConfidence": 73.1,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-08-24T05:30:14.394Z",
+      "verdict": "WATCH",
+      "composite": 51.2,
+      "date": "2026-08-24",
+      "addedAt": "2026-08-24T05:30:14.394Z",
+      "investedAmount": 7000,
+      "entryPrice": 4072.9,
+      "currentPrice": 4072.9,
+      "shares": 1.719,
+      "peakPrice": 4072.9,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 3173.2,
+      "todayChangePct": 28.35,
+      "lastPriceUpdate": "2026-08-24T05:30:14.394Z",
+      "yahooSymbol": "SIEMENS.NS",
+      "niftyAtEntry": 24245.6,
+      "niftyNow": 24245.6,
+      "estimatedUpside": "8-10%",
+      "riskLevel": "Medium",
+      "summary": "SIEMENS is showing a strong short‑term breakout with a 4.66× relative volume surge and solid momentum and technical scores (~75). In a neutral market regime, the reward‑to‑risk ratio (~1.9) suggests an upside of roughly 9% over the next 5‑10 days, despite the absence of a fundamental catalyst. The trade hinges on the continuation of this volume‑driven price momentum.",
+      "whyToday": "Today's 4.66× relative volume indicates aggressive institutional accumulation, signaling a breakout that is likely to sustain over the next week.",
+      "factors": {
+        "momentum": {
+          "score": 75,
+          "positives": [
+            "Momentum score 75",
+            "Relative‑strength score 75",
+            "Technical score 74.2",
+            "Relative volume 4.66× today vs 20‑day average",
+            "Relative strength vs Nifty 8.38"
+          ],
+          "negatives": [
+            "No identifiable news catalyst",
+            "Volume score only 25 (low on the volume metric)",
+            "Multi‑signal confidence modest at 40.9",
+            "Sector classification unknown"
+          ]
+        },
+        "relStrength": {
+          "score": 75
+        },
+        "volume": {
+          "score": 25
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 74.2
+        },
+        "sector": {
+          "score": 51
+        }
+      }
+    },
+    {
       "ticker": "PNBHOUSING",
       "fullName": "PNB Housing Finance Limited",
       "sector": "UNKNOWN",
