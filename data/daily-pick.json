@@ -2,24 +2,153 @@
   "pick": {
     "date": "2026-08-24",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-24T07:30:15.551Z",
-    "regime": "weak",
-    "market": "weak (v2 score 44, conf 56) — trend 27, breadth 40, vol-factor 88",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-08-24T08:30:09.444Z",
+    "rejected": [
       {
-        "ticker": "MANAPPURAM",
-        "relVol": 1.82,
-        "confidence": 29,
-        "effectiveConfidence": 60,
-        "institutional": 44.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 3,
-        "negative": false
+        "ticker": "VMM",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BSE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MUTHOOTFIN",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COCHINSHIP",
+        "reasons": [
+          "illiquid (₹64Cr)"
+        ]
+      },
+      {
+        "ticker": "SAIL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NMDC",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JSWSTEEL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "GLENMARK",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MCX",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HINDPETRO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "AUROPHARMA",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "DLF",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ADANIENSOL",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "IOC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CUMMINSIND",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATASTEEL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INDUSTOWER",
+        "reasons": [
+          "illiquid (₹58Cr)"
+        ]
+      },
+      {
+        "ticker": "HINDALCO",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
