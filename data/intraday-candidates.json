@@ -1,5 +1,5 @@
 {
-  "date": "2026-08-21",
+  "date": "2026-08-24",
   "candidates": {
     "MANAPPURAM": {
       "ticker": "MANAPPURAM",
@@ -10,158 +10,33 @@
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-08-21T04:30:44.762Z",
-          "relVol": 3.23,
-          "confidence": 30.4,
+          "ts": "2026-08-24T04:30:13.223Z",
+          "relVol": 1.93,
+          "confidence": 31.2,
           "components": {
-            "technical": 63,
-            "flow": 61,
+            "technical": 67,
+            "flow": 59,
             "catalyst": 5,
-            "liquidity": 61
+            "liquidity": 54
           },
-          "discoveryScore": 69.9,
+          "discoveryScore": 61.4,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 3412836,
+          "volume": 2172460,
           "sessionFrac": 0.15,
           "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "11:00",
-          "ts": "2026-08-21T05:30:50.740Z",
-          "relVol": 2.9,
-          "confidence": 9.5,
-          "components": {
-            "technical": 55,
-            "flow": 54,
-            "catalyst": 5,
-            "liquidity": 70
-          },
-          "discoveryScore": 71.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 5732948,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-08-21T06:30:50.344Z",
-          "relVol": 2.17,
-          "confidence": 9.3,
-          "components": {
-            "technical": 51,
-            "flow": 46,
-            "catalyst": 5,
-            "liquidity": 73
-          },
-          "discoveryScore": 64.9,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 6844006,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-08-21T07:30:47.880Z",
-          "relVol": 1.82,
-          "confidence": 30.1,
-          "components": {
-            "technical": 61,
-            "flow": 47,
-            "catalyst": 5,
-            "liquidity": 75
-          },
-          "discoveryScore": 64.8,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 7839827,
-          "sessionFrac": 0.6,
-          "missing": [
-            "relVol 1.82<2.1",
+            "relVol 1.93<2.1",
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
-      "bestConfidence": 30.4,
+      "lastSeen": "10:00",
+      "bestConfidence": 31.2,
       "confidenceTrend": "flat",
-      "confidenceSlope": -0.11,
+      "confidenceSlope": 0,
       "trendBonus": 0
-    },
-    "MCX": {
-      "ticker": "MCX",
-      "fullName": "MULTI COMMODITY EXCHANGE",
-      "sector": "UNKNOWN",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-08-21T05:30:50.740Z",
-          "relVol": 2.42,
-          "confidence": 57.1,
-          "components": {
-            "technical": 82,
-            "flow": 79,
-            "catalyst": 5,
-            "liquidity": 86
-          },
-          "discoveryScore": 69.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1699198,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-08-21T06:30:50.343Z",
-          "relVol": 1.92,
-          "confidence": 57.4,
-          "components": {
-            "technical": 80,
-            "flow": 72,
-            "catalyst": 5,
-            "liquidity": 89
-          },
-          "discoveryScore": 66.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2116513,
-          "sessionFrac": 0.44,
-          "missing": [
-            "relVol 1.92<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "12:00",
-      "bestConfidence": 57.4,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.3,
-      "trendBonus": 0.2
     }
   }
 }
