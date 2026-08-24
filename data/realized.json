@@ -752,6 +752,39 @@
       "exitSource": "rule",
       "realizedPnl": 85.33,
       "realizedPnlPct": 0.95
+    },
+    {
+      "ticker": "OBEROIRLTY",
+      "fullName": "Oberoi Realty Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 10.2,
+        "expectedLossPct": 4.1,
+        "probability": 0.629,
+        "edgePct": 4.89,
+        "calibration": "lane+regime+conf"
+      },
+      "confidenceComponents": {
+        "technical": 59,
+        "flow": 79,
+        "catalyst": 5,
+        "liquidity": 63
+      },
+      "effectiveConfidence": 73.6,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 1842.4,
+      "entryDate": "2026-08-13",
+      "exitPrice": 1887.4,
+      "exitDate": "2026-08-24",
+      "shares": 3.799,
+      "investedAmount": 7000,
+      "exitReason": "review day 11: 1wk trend weak [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": 170.95,
+      "realizedPnlPct": 2.44
     }
   ]
 }
