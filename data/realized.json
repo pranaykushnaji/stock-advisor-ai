@@ -719,6 +719,39 @@
       "exitSource": "llm",
       "realizedPnl": -209.2,
       "realizedPnlPct": -2.32
+    },
+    {
+      "ticker": "HAL",
+      "fullName": "Hindustan Aeronautics Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 9.6,
+        "expectedLossPct": 4.3,
+        "probability": 0.612,
+        "edgePct": 4.21,
+        "calibration": "lane+regime"
+      },
+      "confidenceComponents": {
+        "technical": 71,
+        "flow": 84,
+        "catalyst": 5,
+        "liquidity": 89
+      },
+      "effectiveConfidence": 76.1,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 4893.6,
+      "entryDate": "2026-08-06",
+      "exitPrice": 4940,
+      "exitDate": "2026-08-24",
+      "shares": 1.839,
+      "investedAmount": 9000,
+      "exitReason": "review day 18: 1wk trend weak [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": 85.33,
+      "realizedPnlPct": 0.95
     }
   ]
 }
