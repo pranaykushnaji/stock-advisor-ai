@@ -30,10 +30,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-24T05:30:12.679Z",
+          "relVol": 3.22,
+          "confidence": 25.1,
+          "components": {
+            "technical": 55,
+            "flow": 71,
+            "catalyst": 5,
+            "liquidity": 73
+          },
+          "discoveryScore": 69.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 6754127,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
+      "lastSeen": "11:00",
       "bestConfidence": 31.2,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -6.1,
+      "trendBonus": 0
+    },
+    "SIEMENS": {
+      "ticker": "SIEMENS",
+      "fullName": "Siemens Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "bought",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-24T05:30:12.678Z",
+          "relVol": 4.66,
+          "confidence": 40.9,
+          "components": {
+            "technical": 79,
+            "flow": 76,
+            "catalyst": 5,
+            "liquidity": 70
+          },
+          "discoveryScore": 71.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 518297,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 40.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
