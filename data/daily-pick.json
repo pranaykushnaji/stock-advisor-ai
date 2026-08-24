@@ -1,172 +1,26 @@
 {
   "pick": {
-    "ticker": "SIEMENS",
-    "fullName": "Siemens Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 75,
-        "positives": [
-          "Momentum score 75",
-          "Relative‑strength score 75",
-          "Technical score 74.2",
-          "Relative volume 4.66× today vs 20‑day average",
-          "Relative strength vs Nifty 8.38"
-        ],
-        "negatives": [
-          "No identifiable news catalyst",
-          "Volume score only 25 (low on the volume metric)",
-          "Multi‑signal confidence modest at 40.9",
-          "Sector classification unknown"
-        ]
-      },
-      "relStrength": {
-        "score": 75
-      },
-      "volume": {
-        "score": 25
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 74.2
-      },
-      "sector": {
-        "score": 51
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.039005077128507655,
-      "r1w": 0.03294443376711895,
-      "r1m": 0.10382672460457497
-    },
-    "volumeRatio": 0.7,
-    "relVol": 4.66,
-    "relStrength": 8.38,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 40.9,
-    "effectiveConfidence": 73.1,
-    "confidenceComponents": {
-      "technical": 79,
-      "flow": 76,
-      "catalyst": 5,
-      "liquidity": 70
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 79,
-          "weight": 0.4,
-          "contribution": 31.6
-        },
-        "flow": {
-          "score": 76,
-          "weight": 0.4,
-          "contribution": 30.4
-        },
-        "liquidity": {
-          "score": 70,
-          "weight": 0.2,
-          "contribution": 14
-        }
-      },
-      "base": 76,
-      "regimeScore": 57,
-      "regimeAdjustment": -2.9,
-      "trendBonus": 0,
-      "final": 73.1
-    },
-    "expectedEdge": {
-      "expectedGainPct": 8.9,
-      "expectedLossPct": 4.7,
-      "probability": 0.579,
-      "edgePct": 3.17,
-      "calibration": "lane+regime+conf"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 86.5,
-    "institutionalFlags": [
-      "up-day volume dominant"
-    ],
-    "discoveryScore": 71.6,
-    "discoveryReasons": [
-      "closing near highs",
-      "leading market breadth"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 1.87,
-      "upsidePct": 8.9,
-      "downsidePct": 4.7
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 57, conf 68) — trend 58, breadth 55, vol-factor 88",
-    "regimeConfidence": 68,
-    "regimeFactors": {
-      "indexTrend": 58,
-      "volatility": 88,
-      "breadth": 55,
-      "momentumBreadth": 33,
-      "largeCap": 50,
-      "gapEnv": 48,
-      "riskAppetite": 59,
-      "sectorPart": 50
-    },
-    "annualizedVol": 30.1,
-    "composite": 51.2,
-    "verdict": "WATCH",
-    "estimatedUpside": "8-10%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "No specific news catalyst; the trade is driven by pure price‑action momentum and a sharp volume spike.",
-    "summary": "SIEMENS is showing a strong short‑term breakout with a 4.66× relative volume surge and solid momentum and technical scores (~75). In a neutral market regime, the reward‑to‑risk ratio (~1.9) suggests an upside of roughly 9% over the next 5‑10 days, despite the absence of a fundamental catalyst. The trade hinges on the continuation of this volume‑driven price momentum.",
-    "whyToday": "Today's 4.66× relative volume indicates aggressive institutional accumulation, signaling a breakout that is likely to sustain over the next week.",
     "date": "2026-08-24",
-    "pickedAt": "2026-08-24T05:30:14.394Z",
-    "discovery": {
-      "news": 0,
-      "movers": 40,
-      "nseSnapshot": 185,
-      "nseUniverse": 185,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-24T05:15:25.324Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-24T06:30:15.274Z",
+    "regime": "weak",
+    "market": "weak (v2 score 42, conf 53) — trend 27, breadth 38, vol-factor 88",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "MANAPPURAM",
+        "relVol": 2.3,
+        "confidence": 28.7,
+        "effectiveConfidence": 60.9,
+        "institutional": 42.8,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
       }
-    },
-    "candidatePool": 2,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 2,
-      "catalystChecked": 2,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 4072.9,
-    "entryRejected": null
+    ]
   }
 }
