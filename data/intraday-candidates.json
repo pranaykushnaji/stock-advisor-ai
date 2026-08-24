@@ -140,6 +140,43 @@
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
+    },
+    "JSWSTEEL": {
+      "ticker": "JSWSTEEL",
+      "fullName": "JSW STEEL LIMITED",
+      "sector": "UNKNOWN",
+      "firstSeen": "15:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-24T09:30:13.036Z",
+          "relVol": 1.87,
+          "confidence": 40.4,
+          "components": {
+            "technical": 71,
+            "flow": 66,
+            "catalyst": 26,
+            "liquidity": 79
+          },
+          "discoveryScore": 82.1,
+          "catalystType": "acquisition",
+          "verification": "PARTIAL",
+          "volume": 2655291,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.87<2.1",
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:00",
+      "bestConfidence": 40.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
