@@ -2,25 +2,21 @@
   "pick": {
     "date": "2026-08-25",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-25T08:30:15.984Z",
-    "regime": "weak",
-    "market": "weak (v2 score 43, conf 56) — trend 27, breadth 34, vol-factor 88",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "AUBANK",
-        "relVol": 3.71,
-        "confidence": 29.2,
-        "effectiveConfidence": 74.4,
-        "institutional": 95,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
-      }
-    ]
+    "reason": "AUBANK failed neutral-market entry gates: reward/risk 1.69 < 1.8",
+    "pickedAt": "2026-08-25T09:30:31.420Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 57, conf 68) — trend 58, breadth 48, vol-factor 89",
+    "candidate": {
+      "ticker": "AUBANK",
+      "confidence": 25.8,
+      "effectiveConfidence": 75,
+      "rewardRisk": {
+        "rr": 1.69,
+        "upsidePct": 7.8,
+        "downsidePct": 4.6
+      },
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
