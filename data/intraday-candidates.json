@@ -29,10 +29,142 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-25T05:30:12.491Z",
+          "relVol": 5.04,
+          "confidence": 26.6,
+          "components": {
+            "technical": 66,
+            "flow": 95,
+            "catalyst": 5,
+            "liquidity": 73
+          },
+          "discoveryScore": 63.5,
+          "catalystType": "broker upgrade",
+          "verification": "PARTIAL",
+          "volume": 2242500,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
+      "lastSeen": "11:00",
       "bestConfidence": 30.3,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -3.7,
+      "trendBonus": 0
+    },
+    "MOTILALOFS": {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-25T05:30:12.491Z",
+          "relVol": 3.57,
+          "confidence": 55.1,
+          "components": {
+            "technical": 81,
+            "flow": 86,
+            "catalyst": 5,
+            "liquidity": 61
+          },
+          "discoveryScore": 58.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1172265,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 55.1,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "LAURUSLABS": {
+      "ticker": "LAURUSLABS",
+      "fullName": "Laurus Labs Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-25T05:30:12.491Z",
+          "relVol": 2.09,
+          "confidence": 35.2,
+          "components": {
+            "technical": 70,
+            "flow": 53,
+            "catalyst": 5,
+            "liquidity": 72
+          },
+          "discoveryScore": 62.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1265961,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2.09<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 35.2,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "ADANIENT": {
+      "ticker": "ADANIENT",
+      "fullName": "Adani Enterprises Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-25T05:30:12.492Z",
+          "relVol": 2.01,
+          "confidence": 0,
+          "components": {
+            "technical": 37,
+            "flow": 50,
+            "catalyst": 5,
+            "liquidity": 67
+          },
+          "discoveryScore": 62.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 573325,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2.01<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 0,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
