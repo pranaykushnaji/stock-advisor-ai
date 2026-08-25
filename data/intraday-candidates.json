@@ -117,13 +117,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-25T09:30:27.995Z",
+          "relVol": 3.46,
+          "confidence": 25.8,
+          "components": {
+            "technical": 60,
+            "flow": 92,
+            "catalyst": 5,
+            "liquidity": 87
+          },
+          "discoveryScore": 66.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5067240,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 38.1,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.06,
-      "trendBonus": 0.1
+      "confidenceSlope": -0.67,
+      "trendBonus": 0
     },
     "MOTILALOFS": {
       "ticker": "MOTILALOFS",
@@ -280,6 +302,43 @@
       "confidenceTrend": "rising",
       "confidenceSlope": 6.6,
       "trendBonus": 4
+    },
+    "PAYTM": {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "15:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-25T09:30:27.994Z",
+          "relVol": 1.88,
+          "confidence": 42.1,
+          "components": {
+            "technical": 82,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 76.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 8487713,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.88<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:00",
+      "bestConfidence": 42.1,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
