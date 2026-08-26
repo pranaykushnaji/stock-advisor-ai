@@ -240,13 +240,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-08-26T07:30:24.411Z",
+          "relVol": 2.06,
+          "confidence": 38,
+          "components": {
+            "technical": 64,
+            "flow": 63,
+            "catalyst": 5,
+            "liquidity": 84
+          },
+          "discoveryScore": 76.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 11803645,
+          "sessionFrac": 0.6,
+          "missing": [
+            "relVol 2.06<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
+      "lastSeen": "13:00",
       "bestConfidence": 48.3,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.8,
-      "trendBonus": 0.5
+      "confidenceTrend": "falling",
+      "confidenceSlope": -4.75,
+      "trendBonus": 0
     },
     "LAURUSLABS": {
       "ticker": "LAURUSLABS",
