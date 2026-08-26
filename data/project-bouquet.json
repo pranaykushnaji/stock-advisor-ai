@@ -1,6 +1,121 @@
 {
   "bouquet": [
     {
+      "ticker": "POLICYBZR",
+      "fullName": "PB Fintech Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 74,
+        "flow": 69,
+        "catalyst": 5,
+        "liquidity": 67
+      },
+      "expectedEdge": {
+        "expectedGainPct": 17.6,
+        "expectedLossPct": 5.2,
+        "probability": 0.55,
+        "edgePct": 7.34,
+        "calibration": "lane+regime"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 74,
+            "weight": 0.4,
+            "contribution": 29.6
+          },
+          "flow": {
+            "score": 69,
+            "weight": 0.4,
+            "contribution": 27.6
+          },
+          "liquidity": {
+            "score": 67,
+            "weight": 0.2,
+            "contribution": 13.4
+          }
+        },
+        "base": 70.6,
+        "regimeScore": 60,
+        "regimeAdjustment": -1.6,
+        "trendBonus": 0,
+        "final": 69
+      },
+      "confidence": 48.8,
+      "effectiveConfidence": 69,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-08-26T05:30:30.238Z",
+      "verdict": "WATCH",
+      "composite": 50.7,
+      "date": "2026-08-26",
+      "addedAt": "2026-08-26T05:30:30.238Z",
+      "investedAmount": 4000,
+      "entryPrice": 1855.2,
+      "currentPrice": 1855.2,
+      "shares": 2.156,
+      "peakPrice": 1855.2,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 1835.1,
+      "todayChangePct": 1.1,
+      "lastPriceUpdate": "2026-08-26T05:30:30.238Z",
+      "yahooSymbol": "POLICYBZR.NS",
+      "niftyAtEntry": 24316.7,
+      "niftyNow": 24316.7,
+      "estimatedUpside": "15-20%",
+      "riskLevel": "Medium",
+      "summary": "PB Fintech (POLICYBZR) is showing strong short‑term price acceleration with a 2.77× volume surge and solid relative strength versus the Nifty. The technical score (79.1) and reward‑to‑risk profile (~3.4×) suggest a potential 15‑20% upside over the next week, despite the lack of a fundamental catalyst. In a neutral market, the stock’s own price‑action is the primary driver.",
+      "whyToday": "Today's 2.77× relative volume surge indicates fresh institutional accumulation and a breakout from recent range, making it the optimal entry point.",
+      "factors": {
+        "momentum": {
+          "score": 70,
+          "positives": [
+            "Momentum score 70",
+            "Relative‑strength score 70",
+            "Technical score 79.1",
+            "Relative volume 2.77× today vs 20‑day average",
+            "Short‑term returns: +3.2% d1, +4.1% w1, +17.2% m1"
+          ],
+          "negatives": [
+            "Volume score modest at 30",
+            "Catalyst score 0 (no news driver)",
+            "Multi‑signal confidence only 48.8",
+            "Composite rating 50.7 (watch)",
+            "Market regime neutral, not strongly bullish"
+          ]
+        },
+        "relStrength": {
+          "score": 70
+        },
+        "volume": {
+          "score": 30
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 79.1
+        },
+        "sector": {
+          "score": 65
+        }
+      }
+    },
+    {
       "ticker": "SIEMENS",
       "fullName": "Siemens Limited",
       "sector": "UNKNOWN",
