@@ -1,39 +1,172 @@
 {
   "pick": {
-    "date": "2026-08-26",
-    "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-08-26T04:30:30.428Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 64, conf 77) — trend 57, breadth 65, vol-factor 88",
-    "momLaneOpen": true,
-    "considered": [
-      {
-        "ticker": "ADANIENT",
-        "relVol": 2.41,
-        "confidence": 57.5,
-        "effectiveConfidence": 68.6,
-        "institutional": 46,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 7,
-        "negative": false
+    "ticker": "POLICYBZR",
+    "fullName": "PB Fintech Limited",
+    "sector": "UNKNOWN",
+    "strategy": "quality-momentum",
+    "entryLane": "momentum",
+    "factors": {
+      "momentum": {
+        "score": 70,
+        "positives": [
+          "Momentum score 70",
+          "Relative‑strength score 70",
+          "Technical score 79.1",
+          "Relative volume 2.77× today vs 20‑day average",
+          "Short‑term returns: +3.2% d1, +4.1% w1, +17.2% m1"
+        ],
+        "negatives": [
+          "Volume score modest at 30",
+          "Catalyst score 0 (no news driver)",
+          "Multi‑signal confidence only 48.8",
+          "Composite rating 50.7 (watch)",
+          "Market regime neutral, not strongly bullish"
+        ]
       },
-      {
-        "ticker": "ADANIENSOL",
-        "relVol": 2.2,
-        "confidence": 10.1,
-        "effectiveConfidence": 53.8,
-        "institutional": 59.7,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 4,
-        "negative": false
+      "relStrength": {
+        "score": 70
+      },
+      "volume": {
+        "score": 30
+      },
+      "catalyst": {
+        "score": 0
+      },
+      "technicals": {
+        "score": 79.1
+      },
+      "sector": {
+        "score": 65
       }
-    ]
+    },
+    "shortReturns": {
+      "r1d": 0.031640939108481494,
+      "r1w": 0.04101900936388427,
+      "r1m": 0.17172986418145816
+    },
+    "volumeRatio": 0.77,
+    "relVol": 2.77,
+    "relStrength": 15.79,
+    "catalyst": {
+      "type": "no catalyst",
+      "confidence": 0,
+      "impact": 0,
+      "stars": 0,
+      "points": 0,
+      "verification": "UNVERIFIED",
+      "sources": 0,
+      "summary": null,
+      "impactClass": "neutral",
+      "decay": 0,
+      "influenceDays": 0,
+      "recalled": false
+    },
+    "confidence": 48.8,
+    "effectiveConfidence": 69,
+    "confidenceComponents": {
+      "technical": 74,
+      "flow": 69,
+      "catalyst": 5,
+      "liquidity": 67
+    },
+    "confidenceBreakdown": {
+      "lane": "momentum",
+      "contributions": {
+        "technical": {
+          "score": 74,
+          "weight": 0.4,
+          "contribution": 29.6
+        },
+        "flow": {
+          "score": 69,
+          "weight": 0.4,
+          "contribution": 27.6
+        },
+        "liquidity": {
+          "score": 67,
+          "weight": 0.2,
+          "contribution": 13.4
+        }
+      },
+      "base": 70.6,
+      "regimeScore": 60,
+      "regimeAdjustment": -1.6,
+      "trendBonus": 0,
+      "final": 69
+    },
+    "expectedEdge": {
+      "expectedGainPct": 17.6,
+      "expectedLossPct": 5.2,
+      "probability": 0.55,
+      "edgePct": 7.34,
+      "calibration": "lane+regime"
+    },
+    "confidenceTrend": "flat",
+    "trendBonus": 0,
+    "institutional": 73.2,
+    "institutionalFlags": [
+      "up-day volume dominant"
+    ],
+    "discoveryScore": 67.7,
+    "discoveryReasons": [
+      "leading market breadth"
+    ],
+    "concentration": "concentration: 1 open position in sector:Financials — size halved",
+    "llmVetoOverridden": false,
+    "rewardRisk": {
+      "rr": 3.37,
+      "upsidePct": 17.6,
+      "downsidePct": 5.2
+    },
+    "regime": "neutral",
+    "market": "neutral (v2 score 60, conf 73) — trend 56, breadth 56, vol-factor 88",
+    "regimeConfidence": 73,
+    "regimeFactors": {
+      "indexTrend": 56,
+      "volatility": 88,
+      "breadth": 56,
+      "momentumBreadth": 52,
+      "largeCap": 50,
+      "gapEnv": 44,
+      "riskAppetite": 58,
+      "sectorPart": 61
+    },
+    "annualizedVol": 33.1,
+    "composite": 50.7,
+    "verdict": "WATCH",
+    "estimatedUpside": "15-20%",
+    "riskLevel": "Medium",
+    "horizon": "5-10 days",
+    "newsSummary": "There is no identifiable news catalyst; the trade is driven purely by technical momentum and a sharp volume spike.",
+    "summary": "PB Fintech (POLICYBZR) is showing strong short‑term price acceleration with a 2.77× volume surge and solid relative strength versus the Nifty. The technical score (79.1) and reward‑to‑risk profile (~3.4×) suggest a potential 15‑20% upside over the next week, despite the lack of a fundamental catalyst. In a neutral market, the stock’s own price‑action is the primary driver.",
+    "whyToday": "Today's 2.77× relative volume surge indicates fresh institutional accumulation and a breakout from recent range, making it the optimal entry point.",
+    "date": "2026-08-26",
+    "pickedAt": "2026-08-26T05:30:30.238Z",
+    "discovery": {
+      "news": 10,
+      "movers": 40,
+      "nseSnapshot": 195,
+      "nseUniverse": 195,
+      "usedFallback": false,
+      "diag": {
+        "headlinesFetched": 25,
+        "newsQueryUsed": "NSE stocks surge rally today",
+        "extractError": null,
+        "moversError": null,
+        "snapshotStale": false,
+        "snapshotAt": "2026-08-26T05:15:45.030Z",
+        "rankedBy": "discoveryScore"
+      }
+    },
+    "candidatePool": 5,
+    "pipeline": {
+      "priced": 40,
+      "passedFilter": 5,
+      "catalystChecked": 5,
+      "tradeable": 1
+    },
+    "runnerUp": null,
+    "entryPrice": 1855.2,
+    "entryRejected": null
   }
 }
