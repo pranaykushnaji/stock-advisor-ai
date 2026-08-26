@@ -1,22 +1,39 @@
 {
   "pick": {
-    "date": "2026-08-25",
+    "date": "2026-08-26",
     "noTrade": true,
-    "reason": "AUBANK failed neutral-market entry gates: reward/risk 1.69 < 1.8",
-    "pickedAt": "2026-08-25T09:30:31.420Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 57, conf 68) — trend 58, breadth 48, vol-factor 89",
-    "candidate": {
-      "ticker": "AUBANK",
-      "confidence": 25.8,
-      "effectiveConfidence": 75,
-      "rewardRisk": {
-        "rr": 1.69,
-        "upsidePct": 7.8,
-        "downsidePct": 4.6
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-26T04:30:30.428Z",
+    "regime": "bullish",
+    "market": "bullish (v2 score 64, conf 77) — trend 57, breadth 65, vol-factor 88",
+    "momLaneOpen": true,
+    "considered": [
+      {
+        "ticker": "ADANIENT",
+        "relVol": 2.41,
+        "confidence": 57.5,
+        "effectiveConfidence": 68.6,
+        "institutional": 46,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 7,
+        "negative": false
       },
-      "catalyst": "no catalyst",
-      "verification": "UNVERIFIED"
-    }
+      {
+        "ticker": "ADANIENSOL",
+        "relVol": 2.2,
+        "confidence": 10.1,
+        "effectiveConfidence": 53.8,
+        "institutional": 59.7,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
+      }
+    ]
   }
 }
