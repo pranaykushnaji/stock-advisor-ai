@@ -1,170 +1,52 @@
 {
   "pick": {
-    "ticker": "KOTAKBANK",
-    "fullName": "Kotak Mahindra Bank Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 62.5,
-        "positives": [
-          "Volume 5.74x 20‑day average",
-          "Technical score 76",
-          "Momentum score 62.5",
-          "Reward‑to‑risk ≈3.0 (upside ~12% vs downside ~4%)"
-        ],
-        "negatives": [
-          "Relative‑strength score 37.5 (weak vs peers)",
-          "No news catalyst",
-          "Composite watch rating (49.5) and low multi‑signal confidence (40.6)"
-        ]
-      },
-      "relStrength": {
-        "score": 37.5
-      },
-      "volume": {
-        "score": 87.5
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 76
-      },
-      "sector": {
-        "score": 50
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.022438145697226672,
-      "r1w": 0.07222846671349076,
-      "r1m": 0.09187589560329465
-    },
-    "volumeRatio": 1.19,
-    "relVol": 5.74,
-    "relStrength": 9.43,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 40.6,
-    "effectiveConfidence": 73.7,
-    "confidenceComponents": {
-      "technical": 66,
-      "flow": 90,
-      "catalyst": 5,
-      "liquidity": 79
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 66,
-          "weight": 0.4,
-          "contribution": 26.4
-        },
-        "flow": {
-          "score": 90,
-          "weight": 0.4,
-          "contribution": 36
-        },
-        "liquidity": {
-          "score": 79,
-          "weight": 0.2,
-          "contribution": 15.8
-        }
-      },
-      "base": 78.2,
-      "regimeScore": 48,
-      "regimeAdjustment": -4.5,
-      "trendBonus": 0,
-      "final": 73.7
-    },
-    "expectedEdge": {
-      "expectedGainPct": 12.2,
-      "expectedLossPct": 4,
-      "probability": 0.581,
-      "edgePct": 5.41,
-      "calibration": "lane+regime+conf"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 83.8,
-    "institutionalFlags": [
-      "up-day volume dominant",
-      "volume expanding"
-    ],
-    "discoveryScore": 69.9,
-    "discoveryReasons": [
-      "closing near highs"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 3.04,
-      "upsidePct": 12.2,
-      "downsidePct": 4
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 48, conf 62) — trend 24, breadth 53, vol-factor 88",
-    "regimeConfidence": 62,
-    "regimeFactors": {
-      "indexTrend": 24,
-      "volatility": 88,
-      "breadth": 53,
-      "momentumBreadth": 37,
-      "largeCap": 50,
-      "gapEnv": 39,
-      "riskAppetite": 55,
-      "sectorPart": 47
-    },
-    "annualizedVol": 21.1,
-    "composite": 49.5,
-    "verdict": "WATCH",
-    "estimatedUpside": "10-13%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "No immediate catalyst; the trade is driven purely by price and volume momentum.",
-    "summary": "Kotak Mahindra Bank is displaying strong short‑term buying pressure with volume 5.74× its 20‑day average and a solid technical score of 76, indicating a potential upward swing. Despite the absence of a news catalyst, the reward‑to‑risk profile (~3:1) and projected upside of around 12% over the next week make it a compelling swing trade in a neutral market regime. Institutional accumulation supports the momentum lane entry.",
-    "whyToday": "Today's exceptional volume surge (5.74× average) signals fresh institutional buying, confirming the momentum lane entry right now.",
     "date": "2026-08-27",
-    "pickedAt": "2026-08-27T04:30:30.049Z",
-    "discovery": {
-      "news": 0,
-      "movers": 40,
-      "nseSnapshot": 165,
-      "nseUniverse": 165,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-27T04:15:45.663Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-27T05:30:31.077Z",
+    "regime": "weak",
+    "market": "weak (v2 score 43, conf 57) — trend 23, breadth 42, vol-factor 88",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "SOLARINDS",
+        "relVol": 1.82,
+        "confidence": 48.2,
+        "effectiveConfidence": 72.3,
+        "institutional": 72.4,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "relVol": 2.27,
+        "confidence": 29.8,
+        "effectiveConfidence": 68,
+        "institutional": 95.8,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 6,
+        "negative": false
+      },
+      {
+        "ticker": "BHEL",
+        "relVol": 3.31,
+        "confidence": 14.8,
+        "effectiveConfidence": 63.4,
+        "institutional": 65.1,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 3,
+        "negative": false
       }
-    },
-    "candidatePool": 4,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 4,
-      "catalystChecked": 4,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 426.05,
-    "entryRejected": null
+    ]
   }
 }
