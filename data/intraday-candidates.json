@@ -182,13 +182,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-27T06:30:27.899Z",
+          "relVol": 4.12,
+          "confidence": 23.5,
+          "components": {
+            "technical": 71,
+            "flow": 63,
+            "catalyst": 5,
+            "liquidity": 86
+          },
+          "discoveryScore": 84.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 13002013,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 14.8,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 1.2,
-      "trendBonus": 0.7
+      "lastSeen": "12:00",
+      "bestConfidence": 23.5,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 4.95,
+      "trendBonus": 5.9
     },
     "LAURUSLABS": {
       "ticker": "LAURUSLABS",
@@ -218,10 +240,105 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-27T06:30:27.899Z",
+          "relVol": 2.2,
+          "confidence": 55,
+          "components": {
+            "technical": 76,
+            "flow": 85,
+            "catalyst": 5,
+            "liquidity": 78
+          },
+          "discoveryScore": 62.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1825654,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 29.8,
+      "lastSeen": "12:00",
+      "bestConfidence": 55,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 25.2,
+      "trendBonus": 4
+    },
+    "ZYDUSLIFE": {
+      "ticker": "ZYDUSLIFE",
+      "fullName": "Zydus Lifesciences Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-27T06:30:27.898Z",
+          "relVol": 1.86,
+          "confidence": 27.5,
+          "components": {
+            "technical": 77,
+            "flow": 66,
+            "catalyst": 5,
+            "liquidity": 65
+          },
+          "discoveryScore": 66.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1301636,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.86<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 27.5,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "ADANIENSOL": {
+      "ticker": "ADANIENSOL",
+      "fullName": "Adani Energy Solutions Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-08-27T06:30:27.899Z",
+          "relVol": 2.21,
+          "confidence": 13.1,
+          "components": {
+            "technical": 33,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 78
+          },
+          "discoveryScore": 71.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2097607,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 13.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
