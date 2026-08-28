@@ -1,6 +1,117 @@
 {
   "bouquet": [
     {
+      "ticker": "COFORGE",
+      "fullName": "Coforge Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "confidenceComponents": {
+        "technical": 65,
+        "flow": 79,
+        "catalyst": 5,
+        "liquidity": 72
+      },
+      "expectedEdge": {
+        "expectedGainPct": 11.8,
+        "expectedLossPct": 6,
+        "probability": 0.548,
+        "edgePct": 3.75,
+        "calibration": "lane+regime"
+      },
+      "confidenceBreakdown": {
+        "lane": "momentum",
+        "contributions": {
+          "technical": {
+            "score": 65,
+            "weight": 0.4,
+            "contribution": 26
+          },
+          "flow": {
+            "score": 79,
+            "weight": 0.4,
+            "contribution": 31.6
+          },
+          "liquidity": {
+            "score": 72,
+            "weight": 0.2,
+            "contribution": 14.4
+          }
+        },
+        "base": 72,
+        "regimeScore": 48,
+        "regimeAdjustment": -3.6,
+        "trendBonus": 0,
+        "final": 68.4
+      },
+      "confidence": 21.1,
+      "effectiveConfidence": 68.4,
+      "regime": "neutral",
+      "originalThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "currentThesis": {
+        "type": "momentum-technical",
+        "summary": "volume + accumulation momentum entry (no news catalyst)",
+        "points": 0
+      },
+      "thesisScore": 50,
+      "lastThesisUpdate": "2026-08-28T04:30:30.320Z",
+      "verdict": "AVOID",
+      "composite": 36.7,
+      "date": "2026-08-28",
+      "addedAt": "2026-08-28T04:30:30.320Z",
+      "investedAmount": 6000,
+      "entryPrice": 1960.8,
+      "currentPrice": 1960.8,
+      "shares": 3.06,
+      "peakPrice": 1960.8,
+      "entryPriceProvisional": false,
+      "entryFromPrevClose": false,
+      "dayOpen": null,
+      "prevClose": 1737.2,
+      "todayChangePct": 12.87,
+      "lastPriceUpdate": "2026-08-28T04:30:30.320Z",
+      "yahooSymbol": "COFORGE.NS",
+      "niftyAtEntry": 24156.4,
+      "niftyNow": 24156.4,
+      "estimatedUpside": "10-12%",
+      "riskLevel": "Medium",
+      "summary": "COFORGE is trading well above the market with a strong technical profile and a 4x volume spike, delivering ~3% daily and ~12% monthly returns. In a neutral market regime the reward‑to‑risk ratio (~1.96) suggests ~11% upside versus ~6% downside over the next week, making it a viable short‑term swing despite the lack of news. The trade relies on price momentum rather than fundamentals.",
+      "whyToday": "The 4.01× relative volume surge indicates fresh institutional buying, triggering a momentum‑lane entry.",
+      "factors": {
+        "momentum": {
+          "score": 37.5,
+          "positives": [
+            "Technical score 82.7 (strong support)",
+            "Relative strength vs Nifty 12.91 (outperformance)",
+            "Today's volume 4.01x 20‑day average (institutional accumulation)"
+          ],
+          "negatives": [
+            "Composite score 36.7 (overall avoid flag)",
+            "Multi‑signal confidence only 21.1 (low confidence)",
+            "No news catalyst (pure price action)"
+          ]
+        },
+        "relStrength": {
+          "score": 37.5
+        },
+        "volume": {
+          "score": 37.5
+        },
+        "catalyst": {
+          "score": 0
+        },
+        "technicals": {
+          "score": 82.7
+        },
+        "sector": {
+          "score": 81
+        }
+      }
+    },
+    {
       "ticker": "KOTAKBANK",
       "fullName": "Kotak Mahindra Bank Limited",
       "sector": "UNKNOWN",
