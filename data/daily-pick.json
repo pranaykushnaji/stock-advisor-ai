@@ -1,170 +1,52 @@
 {
   "pick": {
-    "ticker": "COFORGE",
-    "fullName": "Coforge Limited",
-    "sector": "UNKNOWN",
-    "strategy": "quality-momentum",
-    "entryLane": "momentum",
-    "factors": {
-      "momentum": {
-        "score": 37.5,
-        "positives": [
-          "Technical score 82.7 (strong support)",
-          "Relative strength vs Nifty 12.91 (outperformance)",
-          "Today's volume 4.01x 20‑day average (institutional accumulation)"
-        ],
-        "negatives": [
-          "Composite score 36.7 (overall avoid flag)",
-          "Multi‑signal confidence only 21.1 (low confidence)",
-          "No news catalyst (pure price action)"
-        ]
-      },
-      "relStrength": {
-        "score": 37.5
-      },
-      "volume": {
-        "score": 37.5
-      },
-      "catalyst": {
-        "score": 0
-      },
-      "technicals": {
-        "score": 82.7
-      },
-      "sector": {
-        "score": 81
-      }
-    },
-    "shortReturns": {
-      "r1d": 0.031023240343460587,
-      "r1w": 0.036528043262592305,
-      "r1m": 0.12244548710554166
-    },
-    "volumeRatio": 0.55,
-    "relVol": 4.01,
-    "relStrength": 12.91,
-    "catalyst": {
-      "type": "no catalyst",
-      "confidence": 0,
-      "impact": 0,
-      "stars": 0,
-      "points": 0,
-      "verification": "UNVERIFIED",
-      "sources": 0,
-      "summary": null,
-      "impactClass": "neutral",
-      "decay": 0,
-      "influenceDays": 0,
-      "recalled": false
-    },
-    "confidence": 21.1,
-    "effectiveConfidence": 68.4,
-    "confidenceComponents": {
-      "technical": 65,
-      "flow": 79,
-      "catalyst": 5,
-      "liquidity": 72
-    },
-    "confidenceBreakdown": {
-      "lane": "momentum",
-      "contributions": {
-        "technical": {
-          "score": 65,
-          "weight": 0.4,
-          "contribution": 26
-        },
-        "flow": {
-          "score": 79,
-          "weight": 0.4,
-          "contribution": 31.6
-        },
-        "liquidity": {
-          "score": 72,
-          "weight": 0.2,
-          "contribution": 14.4
-        }
-      },
-      "base": 72,
-      "regimeScore": 48,
-      "regimeAdjustment": -3.6,
-      "trendBonus": 0,
-      "final": 68.4
-    },
-    "expectedEdge": {
-      "expectedGainPct": 11.8,
-      "expectedLossPct": 6,
-      "probability": 0.548,
-      "edgePct": 3.75,
-      "calibration": "lane+regime"
-    },
-    "confidenceTrend": "flat",
-    "trendBonus": 0,
-    "institutional": 86.7,
-    "institutionalFlags": [
-      "up-day volume dominant"
-    ],
-    "discoveryScore": 83.7,
-    "discoveryReasons": [
-      "closing near highs",
-      "leading market breadth",
-      "fresh filing"
-    ],
-    "concentration": null,
-    "llmVetoOverridden": false,
-    "rewardRisk": {
-      "rr": 1.96,
-      "upsidePct": 11.8,
-      "downsidePct": 6
-    },
-    "regime": "neutral",
-    "market": "neutral (v2 score 48, conf 60) — trend 22, breadth 46, vol-factor 89",
-    "regimeConfidence": 60,
-    "regimeFactors": {
-      "indexTrend": 22,
-      "volatility": 89,
-      "breadth": 46,
-      "momentumBreadth": 36,
-      "largeCap": 50,
-      "gapEnv": 52,
-      "riskAppetite": 62,
-      "sectorPart": 44
-    },
-    "annualizedVol": 38.2,
-    "composite": 36.7,
-    "verdict": "AVOID",
-    "estimatedUpside": "10-12%",
-    "riskLevel": "Medium",
-    "horizon": "5-10 days",
-    "newsSummary": "No identifiable catalyst; the move is driven by a sharp volume surge and technical breakout.",
-    "summary": "COFORGE is trading well above the market with a strong technical profile and a 4x volume spike, delivering ~3% daily and ~12% monthly returns. In a neutral market regime the reward‑to‑risk ratio (~1.96) suggests ~11% upside versus ~6% downside over the next week, making it a viable short‑term swing despite the lack of news. The trade relies on price momentum rather than fundamentals.",
-    "whyToday": "The 4.01× relative volume surge indicates fresh institutional buying, triggering a momentum‑lane entry.",
     "date": "2026-08-28",
-    "pickedAt": "2026-08-28T04:30:30.320Z",
-    "discovery": {
-      "news": 0,
-      "movers": 40,
-      "nseSnapshot": 163,
-      "nseUniverse": 163,
-      "usedFallback": false,
-      "diag": {
-        "headlinesFetched": 25,
-        "newsQueryUsed": "NSE stocks surge rally today",
-        "extractError": null,
-        "moversError": null,
-        "snapshotStale": false,
-        "snapshotAt": "2026-08-28T04:15:41.026Z",
-        "rankedBy": "discoveryScore"
+    "noTrade": true,
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-08-28T05:30:31.232Z",
+    "regime": "weak",
+    "market": "weak (v2 score 46, conf 58) — trend 22, breadth 43, vol-factor 89",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "ATHERENERG",
+        "relVol": 5.75,
+        "confidence": 47.3,
+        "effectiveConfidence": 75.8,
+        "institutional": 62.8,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 12,
+        "negative": false
+      },
+      {
+        "ticker": "SAIL",
+        "relVol": 1.84,
+        "confidence": 46.9,
+        "effectiveConfidence": 70.1,
+        "institutional": 97.4,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 12,
+        "negative": false
+      },
+      {
+        "ticker": "OFSS",
+        "relVol": 4.19,
+        "confidence": 15.1,
+        "effectiveConfidence": 63.6,
+        "institutional": 89.9,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 6,
+        "negative": false
       }
-    },
-    "candidatePool": 4,
-    "pipeline": {
-      "priced": 40,
-      "passedFilter": 4,
-      "catalystChecked": 4,
-      "tradeable": 1
-    },
-    "runnerUp": null,
-    "entryPrice": 1960.8,
-    "entryRejected": null
+    ]
   }
 }
