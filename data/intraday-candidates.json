@@ -132,13 +132,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-08-28T07:30:28.030Z",
+          "relVol": 3.86,
+          "confidence": 53.9,
+          "components": {
+            "technical": 78,
+            "flow": 81,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 76.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 10136411,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
+      "lastSeen": "13:00",
       "bestConfidence": 54.2,
       "confidenceTrend": "flat",
-      "confidenceSlope": -0.2,
-      "trendBonus": 0
+      "confidenceSlope": 0.56,
+      "trendBonus": 0.7
     },
     "COFORGE": {
       "ticker": "COFORGE",
@@ -248,13 +270,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-08-28T07:30:28.030Z",
+          "relVol": 2.45,
+          "confidence": 16.7,
+          "components": {
+            "technical": 56,
+            "flow": 71,
+            "catalyst": 5,
+            "liquidity": 79
+          },
+          "discoveryScore": 67.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 292556,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
-      "bestConfidence": 16.5,
+      "lastSeen": "13:00",
+      "bestConfidence": 16.7,
       "confidenceTrend": "flat",
-      "confidenceSlope": 1,
-      "trendBonus": 1.2
+      "confidenceSlope": 0.8,
+      "trendBonus": 1
     }
   }
 }
