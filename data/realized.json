@@ -884,6 +884,39 @@
       "exitSource": "llm",
       "realizedPnl": -238.64,
       "realizedPnlPct": -3.98
+    },
+    {
+      "ticker": "SIEMENS",
+      "fullName": "Siemens Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 8.9,
+        "expectedLossPct": 4.7,
+        "probability": 0.579,
+        "edgePct": 3.17,
+        "calibration": "lane+regime+conf"
+      },
+      "confidenceComponents": {
+        "technical": 79,
+        "flow": 76,
+        "catalyst": 5,
+        "liquidity": 70
+      },
+      "effectiveConfidence": 73.1,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 4072.9,
+      "entryDate": "2026-08-24",
+      "exitPrice": 4023.8,
+      "exitDate": "2026-08-31",
+      "shares": 1.719,
+      "investedAmount": 7000,
+      "exitReason": "review day 7: 1wk trend weak [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -84.4,
+      "realizedPnlPct": -1.21
     }
   ]
 }
