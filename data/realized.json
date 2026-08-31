@@ -851,6 +851,39 @@
       "exitSource": "rule",
       "realizedPnl": -46.45,
       "realizedPnlPct": -0.62
+    },
+    {
+      "ticker": "PNBHOUSING",
+      "fullName": "PNB Housing Finance Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 8.7,
+        "expectedLossPct": 5.1,
+        "probability": 0.526,
+        "edgePct": 2.16,
+        "calibration": "lane"
+      },
+      "confidenceComponents": {
+        "technical": 72,
+        "flow": 72,
+        "catalyst": 5,
+        "liquidity": 54
+      },
+      "effectiveConfidence": 67.9,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "bullish",
+      "entryPrice": 1199.3,
+      "entryDate": "2026-08-20",
+      "exitPrice": 1151.6,
+      "exitDate": "2026-08-31",
+      "shares": 5.003,
+      "investedAmount": 6000,
+      "exitReason": "Price down 4%; accumulation momentum appears weakening",
+      "exitSource": "llm",
+      "realizedPnl": -238.64,
+      "realizedPnlPct": -3.98
     }
   ]
 }
