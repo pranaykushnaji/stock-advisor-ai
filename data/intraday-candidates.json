@@ -117,13 +117,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-31T09:30:34.829Z",
+          "relVol": 3.14,
+          "confidence": 55.6,
+          "components": {
+            "technical": 82,
+            "flow": 100,
+            "catalyst": 18,
+            "liquidity": 95
+          },
+          "discoveryScore": 96.9,
+          "catalystType": "new product",
+          "verification": "PARTIAL",
+          "volume": 14281070,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
-      "bestConfidence": 53.1,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -1.81,
-      "trendBonus": 0
+      "lastSeen": "15:00",
+      "bestConfidence": 55.6,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 2.01,
+      "trendBonus": 2.4
     },
     "OIL": {
       "ticker": "OIL",
@@ -157,6 +179,43 @@
       ],
       "lastSeen": "11:00",
       "bestConfidence": 5.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "AUROPHARMA": {
+      "ticker": "AUROPHARMA",
+      "fullName": "Aurobindo Pharma Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "15:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:00",
+          "ts": "2026-08-31T09:30:34.830Z",
+          "relVol": 1.87,
+          "confidence": 7,
+          "components": {
+            "technical": 56,
+            "flow": 54,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 76.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1710045,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.87<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:00",
+      "bestConfidence": 7,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
