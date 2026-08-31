@@ -73,13 +73,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-08-31T07:30:31.320Z",
+          "relVol": 3.52,
+          "confidence": 30.4,
+          "components": {
+            "technical": 71,
+            "flow": 94,
+            "catalyst": 18,
+            "liquidity": 95
+          },
+          "discoveryScore": 88.6,
+          "catalystType": "new product",
+          "verification": "PARTIAL",
+          "volume": 10444294,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
+      "lastSeen": "13:00",
       "bestConfidence": 53.1,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.9,
-      "trendBonus": 1.1
+      "confidenceTrend": "falling",
+      "confidenceSlope": -1.61,
+      "trendBonus": 0
     },
     "OIL": {
       "ticker": "OIL",
