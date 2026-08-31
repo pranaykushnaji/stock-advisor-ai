@@ -29,10 +29,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-31T05:30:30.554Z",
+          "relVol": 5.71,
+          "confidence": 53.1,
+          "components": {
+            "technical": 82,
+            "flow": 100,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 93.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 7891995,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 28,
+      "lastSeen": "11:00",
+      "bestConfidence": 53.1,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 25.1,
+      "trendBonus": 4
+    },
+    "OIL": {
+      "ticker": "OIL",
+      "fullName": "Oil India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-08-31T05:30:30.555Z",
+          "relVol": 2.74,
+          "confidence": 5.7,
+          "components": {
+            "technical": 51,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 59
+          },
+          "discoveryScore": 58.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2241515,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 5.7,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
