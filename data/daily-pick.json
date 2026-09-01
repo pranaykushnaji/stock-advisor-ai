@@ -3,7 +3,7 @@
     "date": "2026-09-01",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-01T08:30:27.149Z",
+    "pickedAt": "2026-09-01T09:30:27.021Z",
     "rejected": [
       {
         "ticker": "ITC",
@@ -23,15 +23,16 @@
         ]
       },
       {
-        "ticker": "NAUKRI",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
         "ticker": "PERSISTENT",
         "reasons": [
           "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "FORCEMOT",
+        "reasons": [
+          "ema20AboveEma50",
           "near52wHigh"
         ]
       },
@@ -45,10 +46,32 @@
         ]
       },
       {
+        "ticker": "NAUKRI",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
         "ticker": "ADANIPOWER",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ADANIPORTS",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -60,8 +83,10 @@
         ]
       },
       {
-        "ticker": "MPHASIS",
+        "ticker": "PFC",
         "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
@@ -76,81 +101,54 @@
         ]
       },
       {
-        "ticker": "INFY",
+        "ticker": "MARICO",
         "reasons": [
+          "priceAboveEma20"
+        ]
+      },
+      {
+        "ticker": "RELIANCE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "ADANIPORTS",
+        "ticker": "BLUESTARCO",
         "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
+          "illiquid (₹27Cr)"
         ]
       },
       {
         "ticker": "TATAELXSI",
         "reasons": [
-          "illiquid (₹46Cr)"
-        ]
-      },
-      {
-        "ticker": "JSWENERGY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ZYDUSLIFE",
-        "reasons": [
-          "volumeSurge"
+          "illiquid (₹52Cr)"
         ]
       },
       {
         "ticker": "KPITTECH",
         "reasons": [
-          "illiquid (₹50Cr)"
+          "illiquid (₹54Cr)"
         ]
       },
       {
-        "ticker": "FORCEMOT",
+        "ticker": "ICICIGI",
         "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PNB",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
+          "illiquid (₹57Cr)"
         ]
       },
       {
         "ticker": "OIL",
         "reasons": [
-          "illiquid (₹55Cr)"
+          "illiquid (₹70Cr)"
         ]
       },
       {
-        "ticker": "ADANIGREEN",
+        "ticker": "ATHERENERG",
         "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
+          "volumeSurge"
         ]
       }
     ]
