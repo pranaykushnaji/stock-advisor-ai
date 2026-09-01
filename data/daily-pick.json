@@ -2,24 +2,156 @@
   "pick": {
     "date": "2026-09-01",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-01T07:30:26.731Z",
-    "regime": "weak",
-    "market": "weak (v2 score 44, conf 58) — trend 17, breadth 40, vol-factor 90",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-01T08:30:27.149Z",
+    "rejected": [
       {
-        "ticker": "ATHERENERG",
-        "relVol": 2.02,
-        "confidence": 29.5,
-        "effectiveConfidence": 74.1,
-        "institutional": 100,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 12,
-        "negative": false
+        "ticker": "ITC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHARTIARTL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ONGC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ADANIPOWER",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "FORTIS",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INFY",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ADANIPORTS",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "illiquid (₹46Cr)"
+        ]
+      },
+      {
+        "ticker": "JSWENERGY",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ZYDUSLIFE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "KPITTECH",
+        "reasons": [
+          "illiquid (₹50Cr)"
+        ]
+      },
+      {
+        "ticker": "FORCEMOT",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PNB",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "OIL",
+        "reasons": [
+          "illiquid (₹55Cr)"
+        ]
+      },
+      {
+        "ticker": "ADANIGREEN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
       }
     ]
   }
