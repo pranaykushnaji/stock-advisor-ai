@@ -917,6 +917,39 @@
       "exitSource": "rule",
       "realizedPnl": -84.4,
       "realizedPnlPct": -1.21
+    },
+    {
+      "ticker": "TITAN",
+      "fullName": "Titan Company Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "expectedEdge": {
+        "expectedGainPct": 8.5,
+        "expectedLossPct": 4,
+        "probability": 0.624,
+        "edgePct": 3.8,
+        "calibration": "lane+regime"
+      },
+      "confidenceComponents": {
+        "technical": 70,
+        "flow": 80,
+        "catalyst": 5,
+        "liquidity": 94
+      },
+      "effectiveConfidence": 79.7,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 5102.8,
+      "entryDate": "2026-08-10",
+      "exitPrice": 5025.5,
+      "exitDate": "2026-09-01",
+      "shares": 1.764,
+      "investedAmount": 9000,
+      "exitReason": "review day 22: below 20-EMA [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -136.36,
+      "realizedPnlPct": -1.51
     }
   ]
 }
