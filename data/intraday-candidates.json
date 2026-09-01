@@ -29,13 +29,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-01T05:30:28.179Z",
+          "relVol": 3.07,
+          "confidence": 30.5,
+          "components": {
+            "technical": 69,
+            "flow": 87,
+            "catalyst": 13,
+            "liquidity": 93
+          },
+          "discoveryScore": 75.4,
+          "catalystType": "new product",
+          "verification": "PARTIAL",
+          "volume": 4929149,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst PARTIAL (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 30.1,
+      "lastSeen": "11:00",
+      "bestConfidence": 30.5,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.4,
+      "trendBonus": 0.2
     }
   }
 }
