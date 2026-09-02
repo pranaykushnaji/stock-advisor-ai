@@ -1,4 +1,42 @@
 {
   "date": "2026-09-02",
-  "candidates": {}
+  "candidates": {
+    "RBLBANK": {
+      "ticker": "RBLBANK",
+      "fullName": "RBL Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-09-02T06:30:26.210Z",
+          "relVol": 2.09,
+          "confidence": 27.5,
+          "components": {
+            "technical": 67,
+            "flow": 57,
+            "catalyst": 5,
+            "liquidity": 53
+          },
+          "discoveryScore": 67.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1946606,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.09<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 27.5,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
