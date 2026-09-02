@@ -2,156 +2,24 @@
   "pick": {
     "date": "2026-09-02",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-02T05:30:27.688Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-02T06:30:29.639Z",
+    "regime": "weak",
+    "market": "weak (v2 score 33, conf 43) — trend 15, breadth 12, vol-factor 88",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "COALINDIA",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JSWENERGY",
-        "reasons": [
-          "illiquid (₹71Cr)"
-        ]
-      },
-      {
-        "ticker": "BSE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UNIONBANK",
-        "reasons": [
-          "illiquid (₹63Cr)"
-        ]
-      },
-      {
-        "ticker": "TATAPOWER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIPORTS",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ITC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ATHERENERG",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "CANBK",
-        "reasons": [
-          "illiquid (₹56Cr)"
-        ]
-      },
-      {
-        "ticker": "AXISBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "VMM",
-        "reasons": [
-          "illiquid (₹27Cr)"
-        ]
-      },
-      {
-        "ticker": "MANKIND",
-        "reasons": [
-          "illiquid (₹36Cr)"
-        ]
-      },
-      {
-        "ticker": "POWERGRID",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIGREEN",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CONCOR",
-        "reasons": [
-          "illiquid (₹35Cr)"
-        ]
-      },
-      {
-        "ticker": "IOC",
-        "reasons": [
-          "illiquid (₹41Cr)"
-        ]
-      },
-      {
-        "ticker": "BPCL",
-        "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "NTPC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIENSOL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIPOWER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+        "ticker": "RBLBANK",
+        "relVol": 2.09,
+        "confidence": 27.5,
+        "effectiveConfidence": 56.1,
+        "institutional": 51.5,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 0,
+        "negative": false
       }
     ]
   }
