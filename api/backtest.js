@@ -17,10 +17,12 @@
 //    the composite WEIGHTS differ between variants, so the comparison is apples-to-apples.
 //  - This is an approximation for learning, not a broker-grade backtest.
 
-import { scoreMomentumUniverse, scoreQualityMomentum } from './_scoring.js';
-import { classifyRegime, regimeGates } from './_market-regime.js';
+import { scoreMomentumUniverse, scoreQualityMomentum, rewardRisk, computeShortReturns } from './_scoring.js';
+import { classifyRegimeV2, regimeGates } from './_market-regime.js';
 import { fetchFundamentals } from './_fundamentals.js';
 import { SELL_RULES, exitBands } from './_sell-engine.js';
+import { ema } from './_indicators.js';
+import { sectorStrength } from './_sector.js';
 
 async function fetchWithTimeout(url, opts = {}, ms = 9000) {
   const ctrl = new AbortController();
@@ -123,6 +125,7 @@ async function fetchBenchmark() {
     const q = result.indicators?.quote?.[0] || {};
     return result.timestamp.map((t, i) => ({
       date: new Date(t * 1000).toISOString().slice(0, 10),
+      open: q.open?.[i],
       close: q.close?.[i],
     })).filter(r => r.close != null && !isNaN(r.close));
   } catch (e) { return null; }
@@ -137,17 +140,16 @@ function sliceAsOf(rows, dateStr) {
 // Nifty return over the same forward window (entryDate exclusive -> hold days).
 function benchForwardReturn(bench, entryDate, holdDays) {
   if (!bench) return null;
-  const asOf = bench.filter(r => r.date <= entryDate);
   const fwd = bench.filter(r => r.date > entryDate).slice(0, holdDays);
-  if (!asOf.length || !fwd.length) return null;
-  const entry = asOf[asOf.length - 1].close;
+  if (!fwd.length) return null;
+  const entry = fwd[0].open ?? fwd[0].close;
   const exit = fwd[fwd.length - 1].close;
   return +(((exit - entry) / entry) * 100).toFixed(2);
 }
 
 // Simulate the production sell engine over a forward window, WITH realistic execution.
-// Same rule thresholds as rulesGate() (imported SELL_RULES: target / stop / max-hold /
-// momentum-fade), but modelled against intraday OHLC and net of slippage so the numbers
+// Same deterministic stop/trail/review thresholds as rulesGate(), modelled against daily OHLC
+// and net of slippage so the numbers
 // aren't rosier than real trading would be:
 //   • STOP is checked before TARGET (conservative: if a volatile day touches both, assume
 //     you were stopped — the opposite of production's target-first precedence, on purpose).
@@ -161,7 +163,6 @@ function simSellEngine(entry, fwd, entryCloses = null, opts = {}) {
   const slipFrac = (opts.slippageBps ?? SLIPPAGE_BPS) / 10000;
   const { stopPct, trailPct } = exitBands(entryCloses); // same vol-adaptive bands as production
   const stopPrice = entry * (1 - stopPct / 100);
-  const targetPrice = entry * (1 + SELL_RULES.HARD_TARGET_PCT / 100);
   const trailFrac = trailPct / 100;
   const trail = Array.isArray(entryCloses) ? entryCloses.slice() : [];
   // A sell fills slightly below the trigger price -> slippage always reduces the return.
@@ -182,12 +183,22 @@ function simSellEngine(entry, fwd, entryCloses = null, opts = {}) {
       if (o <= trig) return { date: row.date, retPct: netRet(o), reason: `trailing gap (open ₹${o.toFixed(2)})`, day: held };
       if (lo <= trig) return { date: row.date, retPct: netRet(trig), reason: `trailing stop (-${trailPct.toFixed(1)}% from peak)`, day: held };
     }
-    // 3. Failsafe target (rare).
-    if (o >= targetPrice) return { date: row.date, retPct: netRet(o), reason: `failsafe gap-up (open ₹${o.toFixed(2)})`, day: held };
-    if (hi >= targetPrice) return { date: row.date, retPct: netRet(targetPrice), reason: `failsafe target (+${SELL_RULES.HARD_TARGET_PCT}%)`, day: held };
-    // 4. Max hold.
-    if (held >= SELL_RULES.MAX_HOLD_DAYS) return { date: row.date, retPct: netRet(c), reason: `max hold ${held}d`, day: held };
-    // 5. Momentum-fade.
+    // 3. Review date, matching production's deterministic health checks. Historical thesis
+    // changes are unavailable, so the thesis component remains neutral/intact.
+    const reviewDate = opts.lane === 'momentum' ? 7 : SELL_RULES.MAX_HOLD_DAYS;
+    if (held >= reviewDate) {
+      const failed = [];
+      const wkAgo = trail.length >= 6 ? trail[trail.length - 6] : null;
+      if (wkAgo > 0 && ((c - wkAgo) / wkAgo * 100) <= -2) failed.push('1wk trend weak');
+      const e20 = trail.length >= 20 ? ema(trail, 20) : null;
+      if (e20 != null && c < e20) failed.push('below 20-EMA');
+      const hi52 = Math.max(...trail.slice(-252));
+      const room = hi52 > 0 ? ((hi52 - c) / c) * 100 : null;
+      const rr = rewardRisk(trail, computeShortReturns(trail), room);
+      if ((rr?.rr ?? 0) < 1.2) failed.push(`RR ${rr?.rr ?? 'n/a'}<1.2`);
+      if (failed.length) return { date: row.date, retPct: netRet(c), reason: `review day ${held}: ${failed.join(', ')}`, day: held };
+    }
+    // 4. Momentum-fade.
     if (trail.length >= 6) {
       const last = trail[trail.length - 1];
       const wkAgo = trail[trail.length - 6];
@@ -245,6 +256,7 @@ function buildScoredUniverse(withData, date) {
       price: asOf[asOf.length - 1].close,
       _entryDate: asOf[asOf.length - 1].date,
       _entryClose: asOf[asOf.length - 1].close,
+      _asOfRow: asOf[asOf.length - 1],
       _forward: forward,
       fundamentals: s._fundamentals || { source: 'estimated', fields: {} },
     });
@@ -270,8 +282,11 @@ function evalVariantForDay(ranked, weights, holdDays, bench, opts = {}) {
   const measure = (row) => {
     const fwd = row._forward.slice(0, holdDays);
     const last = fwd[fwd.length - 1];
-    const holdReturn = last ? +(((last.close - row._entryClose) / row._entryClose) * 100).toFixed(2) : null;
-    const sim = (opts.simFn || simSellEngine)(row._entryClose, fwd, row.closes, opts);
+    // Daily history cannot reproduce a 10:00/14:00 fill. Execute at the NEXT session's open,
+    // which is observable only after the signal and avoids same-day lookahead bias.
+    const execution = fwd[0] ? (fwd[0].open ?? fwd[0].close) : null;
+    const holdReturn = last && execution ? +(((last.close - execution) / execution) * 100).toFixed(2) : null;
+    const sim = execution ? (opts.simFn || simSellEngine)(execution, fwd, row.closes, opts) : null;
     return { holdReturn, simReturn: sim ? sim.retPct : null, simReason: sim ? sim.reason : null, entryDate: row._entryDate };
   };
 
@@ -311,7 +326,15 @@ function benchClosesAsOf(bench, date) {
 // tests the momentum/RS/volume/technicals + regime + RR spine; it does NOT prove the catalyst
 // gate. A NO-TRADE day (gates not met) is recorded as such, mirroring production's core rule.
 function evalQualityMomentumLive(candidates, holdDays, bench, benchCloses, opts = {}) {
-  const regime = classifyRegime(benchCloses || []);
+  const universeRows = candidates.map(c => {
+    const last = c._asOfRow || {};
+    const prev = c.closes.length > 1 ? c.closes[c.closes.length - 2] : null;
+    return {
+      symbol: c.symbol, lastPrice: last.close, dayHigh: last.high, dayLow: last.low,
+      pChange: prev > 0 ? ((last.close - prev) / prev) * 100 : null,
+    };
+  });
+  const regime = classifyRegimeV2(benchCloses || [], universeRows, sectorStrength(universeRows));
   const gates = regimeGates(regime.regime);
   const scored = scoreQualityMomentum(
     candidates.map(c => ({ symbol: c.symbol, fullName: c.fullName, closes: c.closes, volumes: c.volumes, sectorScore: 50, catalystPoints: 0 })),
@@ -326,14 +349,15 @@ function evalQualityMomentumLive(candidates, holdDays, bench, benchCloses, opts 
   if (!src) return { noTrade: true, reason: 'winner missing forward data', regime: regime.regime };
   const fwd = src._forward.slice(0, holdDays);
   const last = fwd[fwd.length - 1];
-  const holdReturn = last ? +(((last.close - src._entryClose) / src._entryClose) * 100).toFixed(2) : null;
-  const sim = (opts.simFn || simSellEngine)(src._entryClose, fwd, src.closes, opts);
+  const execution = fwd[0] ? (fwd[0].open ?? fwd[0].close) : null;
+  const holdReturn = last && execution ? +(((last.close - execution) / execution) * 100).toFixed(2) : null;
+  const sim = execution ? (opts.simFn || simSellEngine)(execution, fwd, src.closes, { ...opts, lane: 'momentum' }) : null;
   const benchRet = benchForwardReturn(bench, src._entryDate, holdDays);
   return {
     noTrade: false, pick: winner.symbol, confidence: winner.confidence, regime: regime.regime,
     rewardRisk: rr, holdReturn, simReturn: sim ? sim.retPct : null,
     benchReturn: benchRet, vsBench: (holdReturn != null && benchRet != null) ? +(holdReturn - benchRet).toFixed(2) : null,
-    entryDate: src._entryDate,
+    signalDate: src._entryDate, entryDate: fwd[0]?.date || null, entryPrice: execution,
   };
 }
 
@@ -484,7 +508,8 @@ export default async function handler(req, res) {
         'liveEngine does NOT test the verified-catalyst gate, NSE filings, intraday relVol, sector-breadth, or institutional data — none are stored historically, so they are neutralized (catalyst=0, sector=50), NOT faked.',
         'Fundamentals junk-filter uses CURRENT ratios (not point-in-time).',
         `Sim exits model gap-downs (fill at open through the stop) + ${slippageBps}bps slippage; buy-and-hold return does not.`,
-        'V2.1 divergence: the LIVE engine replaced the fixed max-hold and +25% target with a review-date health check and pure trailing exits; this sim still models the older fixed rules (thesis/review data does not exist historically).',
+        'Entries execute at the next session open because daily history cannot reproduce the live intraday signal-time fill.',
+        'Exit simulation matches live stop/trail/momentum/review rules; thesis changes remain neutral because point-in-time filing history is not stored.',
         'Survivorship bias: the universe is names liquid TODAY, so failed/delisted names are absent (results skew optimistic).',
         'Small samples (few trading days) are noise. Interpret >20 trades cautiously, <10 not at all.',
         'Approximation for learning, not a broker-grade backtest. Past != future.',
@@ -501,14 +526,14 @@ export default async function handler(req, res) {
   const { ranked, rejected } = built;
   const pick = ranked[0];
   const pickRow = pick._row;
-  const entry = pickRow._entryClose;
   const fwd = pickRow._forward.slice(0, holdDays);
-  const perf = fwd.map(r => ({ date: r.date, close: r.close, retPct: +(((r.close - entry) / entry) * 100).toFixed(2) }));
+  const entry = fwd[0] ? (fwd[0].open ?? fwd[0].close) : null;
+  const perf = entry ? fwd.map(r => ({ date: r.date, close: r.close, retPct: +(((r.close - entry) / entry) * 100).toFixed(2) })) : [];
   const exitRow = fwd[fwd.length - 1];
-  const holdReturn = exitRow ? +(((exitRow.close - entry) / entry) * 100).toFixed(2) : null;
+  const holdReturn = exitRow && entry ? +(((exitRow.close - entry) / entry) * 100).toFixed(2) : null;
   const bestDay = perf.reduce((m, p) => p.retPct > (m?.retPct ?? -999) ? p : m, null);
   const worstDay = perf.reduce((m, p) => p.retPct < (m?.retPct ?? 999) ? p : m, null);
-  const simExit = simFn(entry, fwd, pickRow.closes, { slippageBps });
+  const simExit = entry ? simFn(entry, fwd, pickRow.closes, { slippageBps }) : null;
   const benchRet = benchForwardReturn(bench, pickRow._entryDate, holdDays);
 
   // Production-synchronized live-engine pick for the same day (regime + confidence + RR gates).
@@ -517,10 +542,11 @@ export default async function handler(req, res) {
   const leaderboard = ranked.slice(0, 5).map(r => {
     const ex = r._row._forward.slice(0, holdDays);
     const last = ex[ex.length - 1];
+    const exEntry = ex[0] ? (ex[0].open ?? ex[0].close) : null;
     return {
       symbol: r.symbol, composite: r.composite, verdict: r.verdict,
       momentum: r.factors.momentum, volumeRatio: r.volumeRatio,
-      forwardReturn: last ? +(((last.close - r._row._entryClose) / r._row._entryClose) * 100).toFixed(2) : null,
+      forwardReturn: last && exEntry ? +(((last.close - exEntry) / exEntry) * 100).toFixed(2) : null,
     };
   });
 
@@ -535,15 +561,16 @@ export default async function handler(req, res) {
       symbol: pick.symbol, composite: pick.composite, verdict: pick.verdict,
       momentum: pick.factors.momentum, volume: pick.factors.volume,
       volumeRatio: pick.volumeRatio, annualizedVol: pick.annualizedVol,
-      entryDate: pickRow._entryDate, entryPrice: entry,
+      signalDate: pickRow._entryDate, entryDate: fwd[0]?.date || null, entryPrice: entry,
     },
     performance: { holdReturn, vsNifty: (holdReturn != null && benchRet != null) ? +(holdReturn - benchRet).toFixed(2) : null, niftyReturn: benchRet, bestDay, worstDay, dayByDay: perf },
     simulatedSellEngine: simExit,
     liveEnginePick: livePick,
     leaderboard,
     caveats: [
-      'Candidate pool = Nifty-50 + extras, NOT that day\'s live discovery output.',
+      'Candidate pool = configured universe + extras, NOT that day\'s live discovery output.',
       'Momentum/volume are point-in-time accurate; fundamentals junk-filter uses current ratios.',
+      'Execution is the next session open because intraday signal-time bars are unavailable.',
       'liveEnginePick = production scoreQualityMomentum + regime + RR gates; catalyst/sector/institutional are neutralized (not stored historically), so it tests the deterministic spine only.',
       'Approximation for learning, not a broker-grade backtest. Past results != future results.',
     ],

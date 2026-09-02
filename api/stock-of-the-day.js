@@ -9,11 +9,14 @@ import { discoverCandidates } from './_discover.js';
 import { marketStatus } from './_market-calendar.js';
 import { assessCatalyst, rememberCatalyst, recallCatalyst, pruneCatalystMemory } from './_catalyst.js';
 import { classifyRegimeV2, regimeGates } from './_market-regime.js';
-import { sectorStrength, sectorScoreFor } from './_sector.js';
+import { sectorStrength, sectorScoreFor, sectorOf } from './_sector.js';
 import { institutionalAccumulationScore } from './_institutional.js';
 import { confidenceComponents, explainConfidence } from './_confidence.js';
 import { expectedEdge, similarSetupStats } from './_edge.js';
 import { concentrationCheck } from './_correlation.js';
+import { requireCronAuth } from './_cron-auth.js';
+import { tradeSessionState } from './_trade-session.js';
+import { alignCloseVolume } from './_series.js';
 import { freshStore, recordObservation, prevVolumeMap, markBought, hhmmIST } from './_intraday-store.js';
 import { qualityMomentumChecks, scoreQualityMomentum,
   computeShortReturns, shortMomentum, volScaledMomentum } from './_scoring.js';
@@ -48,7 +51,7 @@ const MAX_NEW_BUYS_PER_DAY = 3;
 //   • relVol >= 2.5 (vs 2.1)               • effective confidence >= regime bar + 6
 //   • institutional accumulation >= 65      • bullish/neutral regimes ONLY (weak/volatile still
 //   • never on a negative catalyst            require VERIFIED — regimeGates now truly bind)
-//   • max 1 momentum-lane buy per day        • smaller size (₹6,000 vs ₹10,000)
+//   • max 1 momentum-lane buy per day        • smaller size than catalyst-lane positions
 //   • tighter exits via entryLane tag (see _sell-engine.js LANE_EXITS)
 // Every momentum-lane trade is tagged entryLane:'momentum' end-to-end (bouquet → realized
 // ledger) so analytics can measure whether this lane actually earns its keep — if it doesn't,
@@ -149,6 +152,8 @@ async function fetchPrice(ticker, fullName) {
         // Prefer INR (NSE/BSE); skip a USD ADR unless it's the last symbol we try
         const isLast = sym === trySymbols[trySymbols.length - 1];
         if (meta.currency && meta.currency !== 'INR' && !isLast) continue;
+        const q = result?.indicators?.quote?.[0] || {};
+        const aligned = alignCloseVolume(q.close || [], q.volume || []);
         return {
           price: +meta.regularMarketPrice.toFixed(2),
           open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
@@ -156,8 +161,8 @@ async function fetchPrice(ticker, fullName) {
           symbol: meta.symbol, currency: meta.currency,
           name: meta.longName || meta.shortName || null, // real company name → better news queries
           marketState: meta.marketState || null,
-          closes: (result?.indicators?.quote?.[0]?.close || []).filter(v => v != null),
-          volumes: (result?.indicators?.quote?.[0]?.volume || []).filter(v => v != null)
+          closes: aligned.closes,
+          volumes: aligned.volumes,
         };
       }
     } catch (e) { continue; }
@@ -282,13 +287,7 @@ async function ghPutWithRetry(path, buildObj, token, message) {
 }
 
 export default async function handler(req, res) {
-  const cronSecret = process.env.CRON_SECRET;
-  const authHeader = req.headers.authorization || '';
-  const isCron = cronSecret && authHeader === `Bearer ${cronSecret}`;
-  const isManual = cronSecret && req.query.key === cronSecret;
-  if (cronSecret && !isCron && !isManual) {
-    return res.status(401).json({ error: 'Unauthorized' });
-  }
+  if (!requireCronAuth(req, res)) return;
 
   // Skip on weekends / NSE holidays. Manual calls with ?force=true bypass (for testing).
   const mkt = marketStatus();
@@ -304,17 +303,10 @@ export default async function handler(req, res) {
 
   const date = todayIST();
 
-  // Reliability: this endpoint may run standalone (manual test) without the Cloudflare
-  // Worker's own snapshot dispatch having just fired, so still nudge a fresh snapshot fetch
-  // here too. Fire-and-forget — never block the scan on it. (The Worker's SCHEDULE is now
-  // the primary driver of snapshot freshness — see cron-worker/worker.js — this is a backstop.)
-  try {
-    fetch('https://api.github.com/repos/pranaykushnaji/stock-advisor-ai/actions/workflows/nse-snapshot.yml/dispatches', {
-      method: 'POST',
-      headers: { 'Authorization': `token ${ghToken}`, 'Accept': 'application/vnd.github+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ref: 'main' }),
-    }).catch(() => {});
-  } catch (e) { /* best-effort */ }
+  // Snapshot dispatch is deliberately NOT triggered here. Cloudflare schedules a completed
+  // snapshot before every buy scan; launching another fire-and-forget workflow from this
+  // endpoint caused overlapping Action runs and unnecessary same-file commit races. Manual
+  // diagnostics should explicitly run the nse-snapshot job first when fresh NSE data is needed.
 
   // Daily buy cap — cheap check before any of the expensive discovery/pricing/catalyst work.
   // Buy-scans run hourly now, so this is what actually bounds how many positions can open in
@@ -322,16 +314,24 @@ export default async function handler(req, res) {
   // Also counts today's momentum-lane buys so that lane's own 1/day cap can bind below.
   let momLaneUsedToday = 0;
   let openPositions = []; // for the concentration guard (sector/theme overlap with holdings)
+  let realizedTrades = [];
   try {
-    const bqCap = await ghGetFile('data/project-bouquet.json', ghToken);
+    const [bqCap, realCap] = await Promise.all([
+      ghGetFile('data/project-bouquet.json', ghToken),
+      ghGetFile('data/realized.json', ghToken),
+    ]);
+    if (!bqCap.content || !realCap.content) throw new Error('portfolio ledger unavailable');
     const bqCapList = bqCap.content ? (JSON.parse(bqCap.content).bouquet || []) : [];
+    realizedTrades = realCap.content ? (JSON.parse(realCap.content).trades || []) : [];
     openPositions = bqCapList.filter(b => !b.status || b.status === 'OPEN');
-    const todayRows = bqCapList.filter(b => b.date === date);
-    momLaneUsedToday = todayRows.filter(b => b.entryLane === 'momentum').length;
-    if (todayRows.length >= MAX_NEW_BUYS_PER_DAY && req.query.force !== 'true') {
-      return res.status(200).json({ status: 'daily_cap_reached', boughtToday: todayRows.length, cap: MAX_NEW_BUYS_PER_DAY });
+    const session = tradeSessionState(bqCapList, realizedTrades, date);
+    momLaneUsedToday = session.momentumBuysToday;
+    if (session.boughtCount >= MAX_NEW_BUYS_PER_DAY && req.query.force !== 'true') {
+      return res.status(200).json({ status: 'daily_cap_reached', boughtToday: session.boughtCount, cap: MAX_NEW_BUYS_PER_DAY });
     }
-  } catch (e) { /* if the bouquet can't be read, don't block the scan */ }
+  } catch (e) {
+    return res.status(503).json({ status: 'blocked', reason: 'portfolio ledger unavailable — refusing to buy without daily-cap/de-dup state' });
+  }
 
   // How far into today's session we are (0-1). Needed early so the discovery score can normalize
   // cross-scan volume acceleration and the quality filter can normalize the volume surge.
@@ -362,9 +362,13 @@ export default async function handler(req, res) {
 
   // V2: adaptive discovery weights (quarterly-optimized, versioned) + realized ledger (edge
   // probability anchoring + lane win rates). Both best-effort with safe defaults.
-  let discoveryWeights = null, realizedTrades = [];
+  let discoveryWeights = null;
   try { const f = await ghGetFile('data/discovery-weights.json', ghToken); discoveryWeights = f.content ? JSON.parse(f.content)?.weights : null; } catch (e) {}
-  try { const f = await ghGetFile('data/realized.json', ghToken); realizedTrades = f.content ? (JSON.parse(f.content).trades || []) : []; } catch (e) {}
+  // realizedTrades was loaded with the early daily-cap check so sold positions count toward the
+  // limit and same-day re-entry block. Retry once if that best-effort read failed.
+  if (!realizedTrades.length) {
+    try { const f = await ghGetFile('data/realized.json', ghToken); realizedTrades = f.content ? (JSON.parse(f.content).trades || []) : []; } catch (e) {}
+  }
 
   // V3: this morning's Claude market analysis (news-intel.json) — ADVISORY ONLY. It is injected
   // into the Groq narrative/veto prompt so the LLM judges with the day's context in mind; it
@@ -399,10 +403,23 @@ export default async function handler(req, res) {
       try {
         await ghPutWithRetry('data/rejected-candidates.json', (existing) => {
           const db = existing && Array.isArray(existing.rejected) ? existing : { rejected: [] };
-          const seen = new Set(db.rejected.map(r => r.id));
-          const toAdd = rejectedForLog.filter(r => !seen.has(r.id));
-          if (!toAdd.length) return null;
-          db.rejected.push(...toAdd);
+          // One learning row per ticker/stage/day. Hourly scans update the same row with the
+          // latest evidence instead of counting one stock six times and overwhelming analytics.
+          const keyOf = r => `${r.date}|${r.ticker}|${r.stage}`;
+          const index = new Map(db.rejected.map((r, i) => [keyOf(r), i]));
+          let changed = false;
+          for (const row of rejectedForLog) {
+            const key = keyOf(row), at = index.get(key);
+            if (at == null) {
+              index.set(key, db.rejected.length);
+              db.rejected.push(row);
+              changed = true;
+            } else if (!db.rejected[at].evaluated) {
+              db.rejected[at] = { ...db.rejected[at], ...row, id: db.rejected[at].id || row.id };
+              changed = true;
+            }
+          }
+          if (!changed) return null;
           if (db.rejected.length > 4000) db.rejected = db.rejected.slice(-4000);
           return db;
         }, ghToken, `Rejected-candidate analytics: +${rejectedForLog.length} (${date})`);
@@ -497,8 +514,9 @@ export default async function handler(req, res) {
       const pd = await fetchPrice(name, name);
       if (!pd || !Array.isArray(pd.closes) || pd.closes.length < 20) return null;
       const ticker = (pd.symbol || name).replace(/\.(NS|BO)$/i, '').toUpperCase();
-      const closes = pd.closes.filter(v => v != null && !isNaN(v));
-      const volumes = (pd.volumes || []).filter(v => v != null && !isNaN(v));
+      const aligned = alignCloseVolume(pd.closes || [], pd.volumes || []);
+      const closes = aligned.closes;
+      const volumes = aligned.volumes;
       return { symbol: ticker, fullName: pd.name || name, closes, volumes, price: pd.price, _price: pd };
     } catch (e) { return null; }
   }))).filter(Boolean)
@@ -570,6 +588,7 @@ export default async function handler(req, res) {
     s._inst = institutionalAccumulationScore(s.closes, s.volumes, {
       bulkBuy: bulkBuySet.has(s.symbol), todayClosingStrength,
     });
+    s.sector = sectorOf(s.symbol);
     s.sectorScore = sectorScoreFor(s.symbol, sectorMap);
   }));
 
@@ -727,7 +746,12 @@ export default async function handler(req, res) {
   // skipped entirely (next-ranked candidate gets its shot); 1 overlap halves the size later.
   const concentrationBySym = new Map(ranked.map(r => [r.symbol, concentrationCheck(r.symbol, openPositions)]));
   const concentrationOk = (r) => concentrationBySym.get(r.symbol)?.action !== 'reject';
-  const winner = ranked.find(r => fresh(r) && concentrationOk(r)) || ranked.find(fresh) || ranked[0];
+  const winner = ranked.find(r => fresh(r) && concentrationOk(r));
+  if (!winner) {
+    return noTrade('all qualifying stocks are already held/traded today or fail concentration limits', {
+      blocked: ranked.map(r => ({ ticker: r.symbol, tradedToday: !fresh(r), concentration: concentrationBySym.get(r.symbol)?.reason || null })),
+    });
+  }
   const winnerConc = concentrationBySym.get(winner.symbol) || { action: 'ok', factor: 1, reason: null };
   const winnerSrc = tradeable.find(s => s.symbol === winner.symbol);
   const winnerCatalyst = winnerSrc?._catalyst || null;
@@ -773,12 +797,12 @@ export default async function handler(req, res) {
     // demanding one would veto every such pick. Its veto question is instead "is this a real
     // stock-specific move, or just the index / a manipulated spike?"
     const laneRules = winnerLane === 'momentum'
-      ? `ENTRY TYPE: MOMENTUM LANE — this is a deliberate technical entry with NO news catalyst required. It qualified on exceptional volume (${winnerSrc?._qm?.relVol}x normal pace), institutional accumulation (${winner.institutional}/100), and multi-signal confidence in a supportive market. CRITICAL RULE: set "noPick": true ONLY if the move looks like pure index-following (nothing stock-specific in the price/volume data), or the data suggests a manipulated/blow-off spike. Do NOT veto merely because there is no news catalyst — that is expected on this lane.`
+      ? `ENTRY TYPE: MOMENTUM LANE — this is a deliberate technical entry with NO news catalyst required. It qualified on exceptional volume (${winnerSrc?._qm?.relVol}x normal pace), an accumulation proxy (${winner.institutional}/100), and multi-signal confidence in a supportive market. Set "noPick": true if the move looks like pure index-following or a manipulated/blow-off spike. Do NOT claim the proxy proves institutional buying, and do NOT veto merely because there is no news catalyst.`
       : `CRITICAL RULE: If this stock is only moving because of general market momentum, or you cannot point to the specific company catalyst above as a genuine reason to buy, set "noPick": true. Do NOT force a thesis on a weak pick.`;
     const NARRATIVE_PROMPT = `You are a short-term momentum trader writing a quick brief for Indian swing traders. Today is ${date}. This is a SWING TRADE (5-10 days), not buy-and-hold. Use ONLY the real data provided — do not invent numbers.
 
 Selected: ${winner.fullName} (${winner.symbol}), sector ${winner.sector}
-Scores (0-100): Momentum ${winner.factors.momentum}, Relative-strength ${winner.factors.relStrength}, Volume ${winner.factors.volume}, Catalyst ${winner.factors.catalyst}, Technicals ${winner.factors.technicals}, Sector ${winner.factors.sector}. Multi-signal confidence ${winner.confidence}, composite ${winner.composite} (${winner.verdict}).
+Scores (0-100): Momentum ${winner.factors.momentum}, Relative-strength ${winner.factors.relStrength}, Volume ${winner.factors.volume}, Catalyst ${winner.factors.catalyst}, Technicals ${winner.factors.technicals}, Sector ${winner.factors.sector}. Effective confidence ${winnerConf}; legacy agreement ${winner.confidence}; composite ${winner.composite} (${winner.verdict}).
 Market regime: ${regime.reason}. Reward/risk ≈ ${winner.rewardRisk?.rr} (upside ~${winner.rewardRisk?.upsidePct}% vs downside ~${winner.rewardRisk?.downsidePct}%).
 ${morningContext ? `Morning market analysis (pre-open research): tone ${morningContext.tone}. ${morningContext.summary || ''} Global cues: ${morningContext.globalCues || 'n/a'}${Array.isArray(morningContext.sectorsInFocus) && morningContext.sectorsInFocus.length ? ' Sectors in focus: ' + morningContext.sectorsInFocus.map(s => `${s.sector} (${s.direction})`).join(', ') + '.' : ''}` : ''}
 Short-term returns (r1d/r1w/r1m): ${JSON.stringify(winner.shortReturns)}
@@ -818,14 +842,12 @@ Return ONLY valid JSON (no markdown):
       }
     } catch (er) { narrative = {}; }
 
-    // PRIORITY 5: the LLM can veto a pick, but its authority is now EARNED. Every veto is logged
-    // with entry-reference price so the analytics endpoint can forward-measure what the vetoed
-    // pick would have done, and the scorecard's recommendedInfluence (built from that history)
-    // decides whether this veto is BINDING or merely ADVISORY. Until ≥5 vetoes have matured the
-    // influence stays 1 (binding); if the LLM is later shown to block winners, its influence
-    // drops and a veto becomes advisory — logged, but the deterministic pick proceeds.
+    // Every LLM objection is logged with an entry-reference price so analytics can measure the
+    // counterfactual. It is advisory only: deterministic gates retain execution authority.
     const vetoInfluence = llmScorecard.recommendedInfluence ?? 1;
-    const vetoBinding = vetoInfluence >= 0.5; // below 0.5 → the LLM has NOT earned a hard veto
+    // Governance rule: deterministic gates decide. The LLM may flag and is measured, but never
+    // blocks a trade by itself. Its influence remains useful metadata for future analysis.
+    const vetoBinding = false;
     if (narrative?.noPick === true) {
       try {
         await ghPutWithRetry('data/llm-veto-log.json', (existing) => {
@@ -845,15 +867,8 @@ Return ONLY valid JSON (no markdown):
           return log;
         }, ghToken, `LLM veto log: ${winner.symbol} (${date})`);
       } catch (e) { /* logging must never block the no-trade response */ }
-      if (vetoBinding) {
-        addRejection(winner.symbol, 'llm-veto', ['llm: no convincing company-specific catalyst'], {
-          confidence: winner.confidence ?? null, effectiveConfidence: winner.effectiveConfidence ?? null,
-          regime: regime.regime, entryRefPrice: winnerSrc?._price?.price ?? null, yahooSymbol: winnerSrc?._price?.symbol || null,
-        });
-        return noTrade(`LLM vetoed ${winner.symbol}: no convincing company-specific catalyst`, { rejectedPick: winner.symbol });
-      }
-      // Advisory-only: the LLM's track record no longer justifies a hard block — proceed, but note it.
-      console.warn(`[llm-veto] ${winner.symbol}: veto overridden (influence ${vetoInfluence} < 0.5, verdict ${llmScorecard.verdict})`);
+      // Advisory-only: log the counterfactual and proceed with the deterministic decision.
+      console.warn(`[llm-veto] ${winner.symbol}: advisory veto recorded (influence ${vetoInfluence}, verdict ${llmScorecard.verdict})`);
       narrative.llmVetoOverridden = true;
     }
 
@@ -893,7 +908,8 @@ Return ONLY valid JSON (no markdown):
       regimeConfidence: regime.regimeConfidence ?? null, regimeFactors: regime.factors ?? null, // v2
       annualizedVol: winner.annualizedVol,
       composite: winner.composite,
-      verdict: winner.verdict,
+      modelVerdict: winner.verdict,
+      verdict: 'BUY',
       estimatedUpside: narrative?.estimatedUpside || null,
       riskLevel: narrative?.riskLevel || null,
       horizon: narrative?.horizon || '5-10 days',
@@ -908,7 +924,7 @@ Return ONLY valid JSON (no markdown):
     pick.pipeline = { priced: priced.length, passedFilter: passed.length, catalystChecked: catalystPool.length, tradeable: tradeable.length };
     pick.runnerUp = ranked[1] ? { ticker: ranked[1].symbol, composite: ranked[1].composite } : null;
 
-    // Entry price = the ACTUAL market price at signal time (14:30 IST), not the day's 9:15
+    // Entry price = the ACTUAL market price at this scan's signal time, not the day's 9:15
     // open. Using the day's open would silently give every pick a "free" head start equal to
     // whatever the stock already moved before the signal fired — that's lookahead bias, not a
     // realistic fill. This is the price you could actually transact at right now.
@@ -919,6 +935,7 @@ Return ONLY valid JSON (no markdown):
     // overlap. Bounds ₹4k-₹18k; daily caps unchanged.
     const investAmt = positionSize({ conf: winnerConf, lane: winnerLane, edgePct: winner.expectedEdge?.edgePct, concentrationFactor: winnerConc.factor });
     const shares = entryPrice ? +(investAmt / entryPrice).toFixed(3) : null;
+    pick.investedAmount = investAmt;
 
     // ENTRY-PRICE SANITY CHECK — guard against a bad price source booking phantom P&L.
     // Cross-check the captured entry against the INDEPENDENT NSE snapshot's lastPrice for this
@@ -947,9 +964,6 @@ Return ONLY valid JSON (no markdown):
       if (nr.ok) { const nm = (await nr.json())?.chart?.result?.[0]?.meta; if (nm?.regularMarketPrice) niftyAtEntry = +nm.regularMarketPrice.toFixed(2); }
     } catch (e) {}
 
-    // Save daily pick (now complete with factors, composite, verdict) — retry-safe
-    await ghPutWithRetry('data/daily-pick.json', () => ({ pick }), ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
-
     // Append to project bouquet (retry-safe, guards against double-add of THIS ticker today).
     // Skip entirely if the entry price failed the sanity check — better no trade than a
     // phantom one. The narrative pick is still saved above for visibility.
@@ -957,9 +971,29 @@ Return ONLY valid JSON (no markdown):
     // capped the hourly engine at 1 new position/day regardless of MAX_NEW_BUYS_PER_DAY (3) —
     // e.g. 2026-07-13, OFSS bought at 10:00 blocked LTF (effConf 77.7, a genuine qualifier) at
     // every later scan for no strategic reason. Now scoped to this ticker, matching open-scan.js.
-    if (!entryRejected) await ghPutWithRetry('data/project-bouquet.json', (current) => {
+    let writeBlocked = null;
+    let bouquetWriteOk = true;
+    if (!entryRejected) {
+      try {
+        const latestReal = await ghGetFile('data/realized.json', ghToken);
+        if (!latestReal.content) throw new Error('realized ledger unavailable');
+        realizedTrades = JSON.parse(latestReal.content).trades || [];
+      } catch (e) {
+        await persistLearning();
+        return res.status(503).json({ status: 'entry_blocked', reason: 'realized ledger unavailable at commit time' });
+      }
+    }
+    if (!entryRejected) bouquetWriteOk = await ghPutWithRetry('data/project-bouquet.json', (current) => {
       let bouquet = current?.bouquet || [];
-      if (bouquet.find(b => b.ticker === pick.ticker && b.date === date)) return null; // this ticker already added today
+      const session = tradeSessionState(bouquet, realizedTrades, date);
+      if (session.blockedTickers.has(String(pick.ticker).toUpperCase())) {
+        writeBlocked = `${pick.ticker} is already held or was traded today`;
+        return null;
+      }
+      if (session.boughtCount >= MAX_NEW_BUYS_PER_DAY) {
+        writeBlocked = `daily buy cap reached (${session.boughtCount}/${MAX_NEW_BUYS_PER_DAY})`;
+        return null;
+      }
       // V2 THESIS SEED: every position records WHY it was bought; sell-check keeps the thesis
       // current from new filings (stronger thesis → longer rope; broken thesis → exit).
       const thesis = winnerCatalyst?.hasCatalyst
@@ -993,6 +1027,19 @@ Return ONLY valid JSON (no markdown):
       if (bouquet.length > 365) bouquet = bouquet.slice(0, 365);
       return { bouquet };
     }, ghToken, `Add ${pick.ticker} to project bouquet`);
+
+    if (writeBlocked) {
+      await persistLearning();
+      return res.status(200).json({ status: 'entry_blocked', reason: writeBlocked, pick: { ticker: pick.ticker, date } });
+    }
+    if (!bouquetWriteOk) {
+      await persistLearning();
+      return res.status(502).json({ status: 'entry_write_failed', reason: 'could not safely commit the position after retries', pick: { ticker: pick.ticker, date } });
+    }
+
+    // Save the public pick only after its position was accepted. Entry-price rejections remain
+    // visible as researched-but-not-traded picks; duplicate/cap races never masquerade as buys.
+    await ghPutWithRetry('data/daily-pick.json', () => ({ pick }), ghToken, `Stock of the Day: ${pick.ticker} (${date})`);
 
     // Mark it bought in the intraday store (so later scans don't re-chase it), then flush the
     // intraday store + rejected log + catalyst memory. Never let persistence failure break the pick.

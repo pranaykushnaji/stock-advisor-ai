@@ -33,15 +33,14 @@ export function nowIST(date = new Date()) {
   return { ymd, dow };
 }
 
-// Core guard. Fails OPEN on an unknown year (no verified table) rather than
-// silently blocking a whole year — logs loudly instead. Mirrors the codebase's
-// "guards default permissive on unexpected state" principle.
+// Core guard. Unknown years fail CLOSED: missing a trading day is safer than placing orders on
+// an exchange holiday. Add the next official NSE calendar before year-end.
 export function marketStatus(date = new Date()) {
   const { ymd, dow } = nowIST(date);
   if (dow === 0) return { open: false, reason: 'weekend:Sunday' };
   if (dow === 6) return { open: false, reason: 'weekend:Saturday' };
   const year = ymd.slice(0, 4);
-  if (year !== '2026') return { open: true, reason: `holiday-table-missing:${year}:failing-open` };
+  if (year !== '2026') return { open: false, reason: `holiday-table-missing:${year}:failing-closed` };
   if (NSE_HOLIDAYS_2026.has(ymd)) return { open: false, reason: `holiday:${ymd}` };
   return { open: true, reason: 'trading-day' };
 }

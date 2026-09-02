@@ -62,7 +62,7 @@ const SCHEDULE = {
   '09:30': BUY,    // 15:00 IST — buy-scan #6 (last — leaves 30 min before close to settle)
   '09:40': SELL,   // 15:10 IST — sell-check #6
 
-  '10:10': { kind: 'vercel', path: '/api/refresh-prices' }, // 15:40 IST — EOD refresh + booking
+  '10:10': { kind: 'vercel', path: '/api/refresh-prices' }, // 15:40 IST — final EOD price refresh
   '10:40': { kind: 'vercel', path: '/api/analytics' },       // 16:10 IST — forward-eval rejected picks + LLM vetoes (Phase 3)
 };
 
@@ -103,13 +103,26 @@ async function runJob(env, entry) {
   return { ok: false, status: 0, body: `unknown job kind: ${entry.kind}` };
 }
 
+// Exact timing is useful only if a one-off network wobble cannot erase the job. Retry boundedly;
+// downstream endpoints are idempotent and daily/session de-duplication prevents duplicate buys.
+async function runJobWithRetry(env, entry, attempts = 3) {
+  let last = { ok: false, status: 0, body: 'not attempted' };
+  for (let i = 1; i <= attempts; i++) {
+    try { last = await runJob(env, entry); }
+    catch (e) { last = { ok: false, status: 0, body: String(e?.message || e) }; }
+    if (last.ok) return { ...last, attempts: i };
+    if (i < attempts) await new Promise(resolve => setTimeout(resolve, i * 1500));
+  }
+  return { ...last, attempts };
+}
+
 function jobName(entry) {
   return entry.kind === 'github' ? 'nse-snapshot' : (entry.path || '').replace('/api/', '');
 }
 
 // Extract a compact, stock-wise outcome from a downstream response for the Tracker.
 function summarize(job, res) {
-  const out = { httpStatus: res.status, ok: res.ok };
+  const out = { httpStatus: res.status, ok: res.ok, attempts: res.attempts || 1 };
   if (job === 'nse-snapshot') { out.dispatched = res.ok; return out; }
   let b = null; try { b = JSON.parse(res.body); } catch (e) {}
   if (!b) { out.raw = (res.body || '').slice(0, 140); return out; }
@@ -160,14 +173,14 @@ export default {
     const key = hhmm(now);
     const entry = SCHEDULE[key];
     if (!entry) return; // a tick with nothing scheduled — do nothing
-    const res = await runJob(env, entry);
+    const res = await runJobWithRetry(env, entry);
     const job = jobName(entry);
     console.log(`[cron ${key}] ${job} -> ${res.status} ${res.ok ? 'OK' : 'FAIL'} ${res.body}`);
     await logRun(env, { ts: new Date().toISOString(), hhmm: key, job, trigger: 'cron', summary: summarize(job, res) });
   },
 
-  // Manual test endpoint (for the "verify before switching off GitHub" step):
-  //   https://<worker-url>/run?job=sell-check&key=<CRON_SECRET>
+  // Manual test endpoint. Prefer an Authorization: Bearer header; query-key compatibility is
+  // retained only for existing diagnostics.
   // Valid jobs: nse-snapshot, stock-of-the-day, refresh-prices, sell-check, capture-open
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -179,9 +192,10 @@ export default {
     }
 
     if (url.pathname !== '/run') {
-      return new Response('StockAdvisor cron worker. /log for the run history; /run?job=<name>&key=<CRON_SECRET> to test.', { status: 200 });
+      return new Response('StockAdvisor cron worker. /log shows run history; POST /run?job=<name> with Authorization: Bearer <secret> to test.', { status: 200 });
     }
-    if (url.searchParams.get('key') !== env.CRON_SECRET) {
+    const bearer = (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
+    if ((bearer || url.searchParams.get('key')) !== env.CRON_SECRET) {
       return new Response('unauthorized', { status: 401 });
     }
     const job = url.searchParams.get('job');
@@ -197,7 +211,7 @@ export default {
     };
     const entry = MAP[job];
     if (!entry) return new Response(`unknown job "${job}". Valid: ${Object.keys(MAP).join(', ')}`, { status: 400 });
-    const res = await runJob(env, entry);
+    const res = await runJobWithRetry(env, entry);
     await logRun(env, { ts: new Date().toISOString(), hhmm: hhmm(new Date()), job, trigger: 'manual', summary: summarize(job, res) });
     return new Response(JSON.stringify({ job, ...res }, null, 2), { status: res.ok ? 200 : 502, headers: CORS });
   },

@@ -6,20 +6,23 @@ at exact times:
 
 - **NSE snapshot** → triggers the GitHub Actions workflow (the GitHub runner still does the
   actual NSE fetch, because NSE blocks Vercel/Cloudflare IPs).
-- **pick / sell-check / refresh** → calls the Vercel endpoints with `CRON_SECRET`.
+- **research / buy / sell / refresh / analytics** → calls the Vercel endpoints with
+  `CRON_SECRET` in an Authorization header.
 
 ## Schedule (all weekdays; IST = UTC + 5:30)
 
 | IST | Job |
 |-----|-----|
-| 08:45 | NSE snapshot (pre-open) |
-| 09:05 | Stock of the Day (pick) |
-| 10:10, 11:10, 12:10, 13:10, 14:10, 15:10 | hourly sell-check |
-| 12:00 | NSE snapshot (midday) |
-| 15:40 | refresh prices + book exits |
-
-`capture-open` (09:20 IST) is present but commented out in `worker.js` — uncomment the one
-line if you want it.
+| 07:45 | NSE snapshot for overnight filings |
+| 08:05 | Pre-market research and watchlist |
+| 08:45 | Pre-open NSE snapshot |
+| 09:25 | Opening-window buy scan |
+| 09:40 | Early sell check |
+| 09:45, 10:45, 11:45, 12:45, 13:45, 14:45 | NSE snapshots before hourly scans |
+| 10:00, 11:00, 12:00, 13:00, 14:00, 15:00 | hourly buy scans |
+| 10:10, 11:10, 12:10, 13:10, 14:10, 15:10 | hourly sell checks |
+| 15:40 | Final price refresh |
+| 16:10 | Rejected-candidate and LLM-advice analytics |
 
 ## One-time deploy
 
@@ -48,30 +51,21 @@ wrangler deploy
 > **Actions: Read and write** permission. Nothing else. Do not reuse a token you have pasted
 > into a chat — generate a fresh one.
 
-## Test each trigger by hand (do this before turning GitHub off)
+## Test each trigger by hand
 
-Using your Worker URL and your `CRON_SECRET`:
+Using your Worker URL and your `CRON_SECRET` (do not put the secret in a saved URL):
 
-```
-https://stock-advisor-cron.<you>.workers.dev/run?job=nse-snapshot&key=<CRON_SECRET>
-https://stock-advisor-cron.<you>.workers.dev/run?job=sell-check&key=<CRON_SECRET>
-https://stock-advisor-cron.<you>.workers.dev/run?job=stock-of-the-day&key=<CRON_SECRET>
-https://stock-advisor-cron.<you>.workers.dev/run?job=refresh-prices&key=<CRON_SECRET>
+```bash
+curl -X POST -H "Authorization: Bearer <CRON_SECRET>" \
+  "https://stock-advisor-cron.<you>.workers.dev/run?job=nse-snapshot"
 ```
 
-Each returns JSON with the HTTP status of the downstream call. `nse-snapshot` success = a new
-run appearing in the repo's **Actions** tab. The others reflect the Vercel endpoint's response.
+Valid jobs are `nse-snapshot`, `premarket`, `open-scan`, `stock-of-the-day`, `sell-check`,
+`refresh-prices`, and `analytics`. Each returns the downstream status. A snapshot success means
+a new run appears in the repository's **Actions** tab.
 
 Watch live logs while testing with: `wrangler tail`
 
-## After it's verified (I'll do this part in the repo)
-
-Once the Worker has driven a full trading day correctly, we turn off the now-duplicate
-schedulers so nothing runs twice:
-
-1. Remove the `schedule:` blocks from `.github/workflows/nse-snapshot.yml` and
-   `.github/workflows/sell-check.yml` (keep `workflow_dispatch` so the Worker can still
-   trigger the snapshot).
-2. Remove the `crons` array from `vercel.json` (the Worker now drives pick + refresh).
-
-Everything stays safe if both run for a bit, because the ledger writes are now idempotent.
+The old duplicate schedules are already removed. GitHub Actions retains `workflow_dispatch`
+for NSE snapshots, and the independent watchdog provides recovery if the Worker stops or a
+downstream job fails after all retries.

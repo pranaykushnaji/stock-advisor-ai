@@ -52,6 +52,9 @@ jobs:
           # ---- 1. Read the Worker's run log (public, CORS-open) ----
           log=$(curl -s --max-time 20 "$WORKER/log" || echo '')
           latest_ts=$(echo "$log" | jq -r '.[0].ts // empty' 2>/dev/null || echo '')
+          latest_ok=$(echo "$log" | jq -r '.[0].summary.ok // false' 2>/dev/null || echo 'false')
+          cutoff_iso=$(date -u -d '90 minutes ago' '+%Y-%m-%dT%H:%M:%S.000Z')
+          recent_failures=$(echo "$log" | jq --arg cutoff "$cutoff_iso" '[.[] | select(.ts >= $cutoff and .summary.ok != true)] | length' 2>/dev/null || echo 0)
           if [ -n "$latest_ts" ]; then
             latest_epoch=$(date -u -d "$latest_ts" +%s 2>/dev/null || echo 0)
             age_min=$(( (now_utc - latest_epoch) / 60 ))
@@ -76,6 +79,13 @@ jobs:
             MODE=eod
           else
             echo "Outside watch window — done."; exit 0
+          fi
+
+          # A failed run cannot be hidden by a later successful job. The Worker records only the
+          # final result after its own retries, so any failure in this 90-minute window is real.
+          if [ "$latest_ok" != "true" ] || [ "$recent_failures" -gt 0 ]; then
+            echo "Worker logged ${recent_failures} failed job(s) in the last 90 minutes — forcing fallback recovery."
+            STALE=1
           fi
 
           if [ "$STALE" -eq 0 ]; then echo "Scheduler healthy — done."; exit 0; fi

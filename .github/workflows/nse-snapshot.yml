@@ -40,7 +40,6 @@ jobs:
 
       - name: Fetch NSE snapshot
         run: node scripts/fetch-nse-snapshot.js
-        continue-on-error: true   # don't fail the whole run on a block; we want the diagnostic
 
       - name: Commit snapshot if changed
         run: |

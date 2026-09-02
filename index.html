@@ -45,7 +45,7 @@
         </button>
       </nav>
       <div class="sidebar-footer">
-        <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+        <button class="theme-toggle" id="theme-toggle" title="Toggle theme" aria-label="Toggle colour theme">
           <svg id="theme-icon-dark" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
           <svg id="theme-icon-light" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="display:none"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <span style="font-size:13px;">Toggle theme</span>
@@ -60,7 +60,7 @@
           <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="6" fill="var(--accent-dim)"/><path d="M6 15.5l3.5-4 3 2.5L18 8" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="8" r="1.7" fill="var(--accent)"/></svg>
           <span class="logo-text">StockAdvisor<span class="logo-ai">AI</span></span>
         </div>
-        <button class="mobile-hdr-btn" onclick="document.getElementById('theme-toggle').click();">
+        <button class="mobile-hdr-btn" onclick="document.getElementById('theme-toggle').click();" aria-label="Toggle colour theme">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
         </button>
       </div>
@@ -76,7 +76,7 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21 8 14 2 9.4h7.6z"/></svg>
             AI Pick
           </button>
-          <button class="top-btn" onclick="document.getElementById('theme-toggle').click();" title="Toggle theme">
+          <button class="top-btn" onclick="document.getElementById('theme-toggle').click();" title="Toggle theme" aria-label="Toggle colour theme">
             <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"/></svg>
           </button>
         </div>
@@ -96,7 +96,7 @@
         <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
           <div>
             <h1>Portfolio</h1>
-            <p>Open positions and booked trades · simulated ₹10,000 per pick</p>
+            <p>Open positions and booked trades · confidence-sized paper positions</p>
           </div>
           <button class="btn btn-ghost" id="export-csv-btn" style="padding:9px 14px;">📥 Export</button>
         </div>
@@ -122,6 +122,7 @@
           <div class="search-row">
             <div class="search-input-wrap">
               <svg class="search-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <label class="sr-only" for="stock-input">Stock name or ticker</label>
               <input type="text" id="stock-input" placeholder="Search any stock — Reliance, TCS, Zomato, AAPL…" />
             </div>
             <button class="btn btn-primary" id="analyze-btn">
@@ -142,8 +143,10 @@
         </div>
         <div class="search-card">
           <div class="compare-row">
+            <label class="sr-only" for="compare-a">First stock</label>
             <input type="text" id="compare-a" placeholder="Stock A (e.g. TCS)" />
             <span class="vs-badge">VS</span>
+            <label class="sr-only" for="compare-b">Second stock</label>
             <input type="text" id="compare-b" placeholder="Stock B (e.g. Infosys)" />
             <button class="btn btn-primary" id="compare-btn">Compare</button>
           </div>
@@ -163,11 +166,11 @@
   </div>
 
   <!-- Portfolio Simulator Modal -->
-  <div class="modal-overlay" id="portfolio-modal">
+  <div class="modal-overlay" id="portfolio-modal" role="dialog" aria-modal="true" aria-labelledby="portfolio-title">
     <div class="modal">
       <div class="modal-header">
-        <h2>💰 Portfolio Simulator</h2>
-        <button class="modal-close" onclick="document.getElementById('portfolio-modal').classList.remove('open')">✕</button>
+        <h2 id="portfolio-title">💰 Portfolio Simulator</h2>
+        <button class="modal-close" aria-label="Close portfolio simulator" onclick="document.getElementById('portfolio-modal').classList.remove('open')">✕</button>
       </div>
       <div class="modal-body" id="portfolio-body">
         <p>See what your bouquet would be worth if you had invested equally in each stock when you added it.</p>
@@ -182,20 +185,20 @@
   </div>
 
   <!-- Stock of the Day Popup -->
-  <div class="modal-overlay" id="sotd-modal">
+  <div class="modal-overlay" id="sotd-modal" role="dialog" aria-modal="true" aria-labelledby="sotd-title">
     <div class="modal" style="width:560px;">
       <div class="modal-header">
-        <h2>⭐ New AI Pick</h2>
-        <button class="modal-close" onclick="dismissSotd()">✕</button>
+        <h2 id="sotd-title">⭐ New AI Pick</h2>
+        <button class="modal-close" aria-label="Close AI pick" onclick="dismissSotd()">✕</button>
       </div>
       <div class="modal-body" id="sotd-body"></div>
     </div>
   </div>
 
   <!-- First-visit disclaimer -->
-  <div class="modal-overlay" id="disclaimer-modal">
+  <div class="modal-overlay" id="disclaimer-modal" role="dialog" aria-modal="true" aria-labelledby="disclaimer-title">
     <div class="modal" style="width:480px;">
-      <div class="modal-header"><h2>⚠️ Before you start</h2></div>
+      <div class="modal-header"><h2 id="disclaimer-title">⚠️ Before you start</h2></div>
       <div class="modal-body">
         <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:14px;">StockAdvisor AI is an <strong>educational tool</strong>, not a financial advisor. The analysis is generated by an AI model reasoning over news and general knowledge — it does not read audited financials and can be confidently wrong.</p>
         <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:14px;">Verdicts, confidence scores, and "returns" are for learning and paper-tracking only. <strong>Do not use them as the basis for real investment decisions.</strong> For real money, consult a SEBI-registered advisor.</p>

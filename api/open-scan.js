@@ -9,6 +9,11 @@
 // deterministic gates only, one buy max per run, and the same daily caps/dedup as the hourly
 // engine. Semantic judgment already happened at 08:05 (filing classification); what's checked
 // here is purely "is the market confirming it right now": gap, opening volume, accumulation.
+
+import { requireCronAuth } from './_cron-auth.js';
+import { tradeSessionState } from './_trade-session.js';
+import { sectorOf, sectorStrength } from './_sector.js';
+import { alignCloseVolume } from './_series.js';
 //
 // Gates per name (all from live data + the watchlist):
 //   gap vs prev close in (0.5%..8%)  — moving, but not already-blown-out (8% mirrors the
@@ -20,7 +25,7 @@
 //                  bullish/neutral regime + momentum-lane daily cap free
 
 import { marketStatus } from './_market-calendar.js';
-import { classifyRegime } from './_market-regime.js';
+import { classifyRegimeV2 } from './_market-regime.js';
 import { institutionalAccumulationScore } from './_institutional.js';
 import { concentrationCheck } from './_correlation.js';
 
@@ -75,8 +80,9 @@ async function fetchLiveDaily(base) {
       if (!meta?.regularMarketPrice) continue;
       if (meta.currency && meta.currency !== 'INR') continue;
       const q = result.indicators?.quote?.[0] || {};
-      const closes = (q.close || []).filter(v => v != null && !isNaN(v));
-      const vols = (q.volume || []).filter(v => v != null && !isNaN(v));
+      const aligned = alignCloseVolume(q.close || [], q.volume || []);
+      const closes = aligned.closes;
+      const vols = aligned.volumes;
       const todayVol = vols.length ? vols[vols.length - 1] : null;         // partial (live) bar
       const avg20 = vols.length >= 21 ? vols.slice(-21, -1).reduce((a, b) => a + b, 0) / 20 : null;
       const prevClose = meta.chartPreviousClose ?? (closes.length > 1 ? closes[closes.length - 2] : null);
@@ -87,9 +93,7 @@ async function fetchLiveDaily(base) {
 }
 
 export default async function handler(req, res) {
-  const cronSecret = process.env.CRON_SECRET;
-  const provided = (req.headers.authorization || '').replace(/^Bearer\s+/i, '') || req.query.key;
-  if (cronSecret && provided !== cronSecret) return res.status(401).json({ error: 'Unauthorized' });
+  if (!requireCronAuth(req, res)) return;
 
   const mkt = marketStatus();
   if (!mkt.open && req.query.force !== 'true') return res.status(200).json({ status: 'skipped', reason: mkt.reason });
@@ -112,15 +116,23 @@ export default async function handler(req, res) {
   } catch (e) {}
   if (!watch.length) return res.status(200).json({ status: 'no_watchlist', note: 'premarket watchlist missing/stale — nothing to act on' });
 
-  // Caps + dedup from the bouquet (shared with the hourly engine).
-  let bouquetRows = [];
-  try { const f = await ghGetFile('data/project-bouquet.json', ghToken); bouquetRows = f.content ? (JSON.parse(f.content).bouquet || []) : []; } catch (e) {}
-  const todayRows = bouquetRows.filter(b => b.date === date);
-  if (todayRows.length >= MAX_NEW_BUYS_PER_DAY) return res.status(200).json({ status: 'daily_cap_reached' });
-  const momUsed = todayRows.filter(b => b.entryLane === 'momentum').length;
+  // Caps + de-dup use BOTH the open bouquet and realized ledger. A position sold earlier today
+  // still consumed a daily slot and must not become a same-day revenge re-entry.
+  let bouquetRows = [], realizedRows = [];
+  try {
+    const [bf, rf] = await Promise.all([ghGetFile('data/project-bouquet.json', ghToken), ghGetFile('data/realized.json', ghToken)]);
+    if (!bf.content || !rf.content) throw new Error('portfolio ledger unavailable');
+    bouquetRows = bf.content ? (JSON.parse(bf.content).bouquet || []) : [];
+    realizedRows = rf.content ? (JSON.parse(rf.content).trades || []) : [];
+  } catch (e) {
+    return res.status(503).json({ status: 'blocked', reason: 'portfolio ledger unavailable — refusing to buy without daily-cap/de-dup state' });
+  }
+  const session = tradeSessionState(bouquetRows, realizedRows, date);
+  if (session.boughtCount >= MAX_NEW_BUYS_PER_DAY) return res.status(200).json({ status: 'daily_cap_reached', boughtToday: session.boughtCount, cap: MAX_NEW_BUYS_PER_DAY });
+  const momUsed = session.momentumBuysToday;
   // V2.1 session-scoped de-dup (intelligent re-entry): block open positions and today's
   // trades only — a fresh setup on a previously-exited name is a new, independent decision.
-  const blocked = new Set(bouquetRows.filter(b => (!b.status || b.status === 'OPEN' || b.status === 'SELL_PENDING') || b.date === date).map(b => String(b.ticker).toUpperCase()));
+  const blocked = session.blockedTickers;
 
   // Regime from the Nifty (yesterday's closes are fine at the open).
   let niftyCloses = [];
@@ -128,7 +140,12 @@ export default async function handler(req, res) {
     const nr = await fetchWithTimeout('https://query1.finance.yahoo.com/v8/finance/chart/%5ENSEI?range=1y&interval=1d', { headers: { 'User-Agent': 'Mozilla/5.0' } }, 6000);
     if (nr.ok) niftyCloses = ((await nr.json())?.chart?.result?.[0]?.indicators?.quote?.[0]?.close || []).filter(v => v != null && !isNaN(v));
   } catch (e) {}
-  const regime = classifyRegime(niftyCloses);
+  let regimeUniverse = [];
+  try {
+    const sf = await ghGetFile('data/nse-snapshot.json', ghToken);
+    regimeUniverse = sf.content ? (JSON.parse(sf.content)?.data?.universe || []) : [];
+  } catch (e) {}
+  const regime = classifyRegimeV2(niftyCloses, regimeUniverse, sectorStrength(regimeUniverse));
   const momLaneOpen = momUsed < MOM_MAX_PER_DAY && ['bullish', 'neutral'].includes(regime.regime);
 
   // Evaluate each watch name live.
@@ -181,7 +198,7 @@ export default async function handler(req, res) {
     ? { type: w.catalyst?.type || 'overnight-filing', summary: w.catalyst?.summary || null, points: w.catalyst?.points || 0 }
     : { type: 'momentum-technical', summary: 'open-window continuation of a strong prior-day setup', points: 0 };
   const row = {
-    ticker: pick.ticker, fullName: pick.ticker, sector: null,
+    ticker: pick.ticker, fullName: w.fullName || pick.ticker, sector: sectorOf(pick.ticker),
     entryLane: pick.lane, openEntry: true,
     originalThesis: thesis, currentThesis: thesis,
     thesisScore: Math.min(90, 50 + (thesis.points || 0)), lastThesisUpdate: nowIso,
@@ -203,14 +220,33 @@ export default async function handler(req, res) {
     whyToday: `Pre-market watchlist name confirmed in the opening window (${hhmmIST()} IST) — entered near the open instead of waiting for the 10:00 scan.`,
   };
 
+  try {
+    const latestReal = await ghGetFile('data/realized.json', ghToken);
+    if (!latestReal.content) throw new Error('realized ledger unavailable');
+    realizedRows = JSON.parse(latestReal.content).trades || [];
+  } catch (e) {
+    return res.status(503).json({ status: 'entry_blocked', reason: 'realized ledger unavailable at commit time' });
+  }
+
+  let writeBlocked = null;
   const wrote = await ghPutWithRetry('data/project-bouquet.json', (current) => {
     let bouquet = current?.bouquet || [];
-    if (bouquet.find(b => b.ticker === row.ticker && b.date === date)) return null; // already added
-    if (bouquet.filter(b => b.date === date).length >= MAX_NEW_BUYS_PER_DAY) return null;
+    const currentSession = tradeSessionState(bouquet, realizedRows, date);
+    if (currentSession.blockedTickers.has(String(row.ticker).toUpperCase())) {
+      writeBlocked = `${row.ticker} is already held or was traded today`;
+      return null;
+    }
+    if (currentSession.boughtCount >= MAX_NEW_BUYS_PER_DAY) {
+      writeBlocked = `daily buy cap reached (${currentSession.boughtCount}/${MAX_NEW_BUYS_PER_DAY})`;
+      return null;
+    }
     bouquet.unshift(row);
     if (bouquet.length > 365) bouquet = bouquet.slice(0, 365);
     return { bouquet };
   }, ghToken, `Open-scan: buy ${row.ticker} (${pick.lane} lane, ${date})`);
+
+  if (writeBlocked) return res.status(200).json({ status: 'entry_blocked', reason: writeBlocked, evaluated: evaluated.map(clean) });
+  if (!wrote) return res.status(502).json({ status: 'entry_write_failed', reason: 'could not safely commit the position after retries', evaluated: evaluated.map(clean) });
 
   await ghPutWithRetry('data/daily-pick.json', () => ({ pick: { ...row, noTrade: false, pickedAt: nowIso, pipeline: { openScan: true, watchlist: watch.length, qualifiers: qualifiers.length } } }), ghToken, `Open-scan pick: ${row.ticker} (${date})`);
 

@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { NseIndia } from 'stock-nse-india';
+import { parseNseDateMs } from '../api/_nse-date.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -191,7 +192,7 @@ function toNum(v) {
       const sym = a?.symbol || a?.SYMBOL;
       if (!sym) continue;
       const rawDt = a?.an_dt || a?.sort_date || a?.exchdisstime || a?.broadcastdate || null;
-      const t = rawDt ? Date.parse(String(rawDt).replace(' ', 'T')) : Date.now();
+      const t = rawDt ? parseNseDateMs(rawDt) : Date.now();
       if (isFinite(t) && t < cutoff) continue;
       const subject = (a?.desc || a?.attchmntText || a?.sub || a?.smIndustry || '').toString().replace(/\s+/g, ' ').trim().slice(0, 240);
       if (!subject) continue;
@@ -214,13 +215,16 @@ function toNum(v) {
     };
   }
 
+  // Never replace the last known-good database snapshot with an empty diagnostic. The buy engine
+  // needs a broad universe; a tiny/empty response means NSE was blocked or its schema changed.
+  if ((snapshot.data.universe || []).length < 50) {
+    throw new Error(`snapshot validation failed: universe has only ${(snapshot.data.universe || []).length} rows`);
+  }
+
   fs.writeFileSync(OUT, JSON.stringify(snapshot, null, 2));
   console.log(`\nWrote ${OUT}`);
   console.log('Diagnostic summary:', JSON.stringify(snapshot.diag));
 
-  // Exit 0 always if we got here and wrote the file — the diagnostic is the deliverable.
-  // A hard NSE block just means all diag flags are false; that's still a successful run
-  // of the DIAGNOSTIC (we learned NSE is blocked), not a script failure.
   const anySuccess = Object.values(snapshot.diag).some(v => v === true || (typeof v === 'number' && v > 0));
   if (!anySuccess) {
     console.log('\n>>> RESULT: NSE appears BLOCKED from this GitHub runner (all fetches failed).');
@@ -228,8 +232,8 @@ function toNum(v) {
     console.log('\n>>> RESULT: NSE is REACHABLE from GitHub. Free NSE data unlocked.');
   }
 })().catch(e => {
-  // Never hard-fail the workflow — write what diagnostic we can and report.
-  console.error('Script error (non-fatal):', e?.message || e);
-  try { fs.writeFileSync(OUT, JSON.stringify({ fetchedAt: new Date().toISOString(), error: String(e?.message || e), diag: {} }, null, 2)); } catch (_) {}
-  process.exit(0);
+  // Preserve the previous committed snapshot and fail loudly. A green workflow with an empty
+  // database is more dangerous than a failed workflow with the last known-good data intact.
+  console.error('Snapshot fetch failed:', e?.message || e);
+  process.exitCode = 1;
 });

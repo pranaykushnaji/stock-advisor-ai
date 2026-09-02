@@ -1,8 +1,9 @@
-// Refreshes current prices for all project-bouquet stocks.
-// Runs daily via cron; updates currentPrice so returns reflect real market moves.
+// Refreshes current prices for all project-portfolio stocks after the market closes.
+// Also completes any legacy SELL_PENDING rows left by an older deployment.
 
 import { marketStatus } from './_market-calendar.js';
 import { bookExit } from './_sell-engine.js';
+import { requireCronAuth } from './_cron-auth.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
@@ -108,13 +109,16 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
         const q = result?.indicators?.quote?.[0] || {};
         const opens = (q.open || []).filter(v => v != null);
         const closes = (q.close || []).filter(v => v != null);
+        const highs = (q.high || []).filter(v => v != null);
         const candleOpen = opens.length ? +opens[opens.length - 1].toFixed(2) : null;
         const candleClose = closes.length ? +closes[closes.length - 1].toFixed(2) : null;
+        const dayHigh = highs.length ? +highs[highs.length - 1].toFixed(2) : null;
         return {
           price: +meta.regularMarketPrice.toFixed(2),
           open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
           candleOpen,   // today's real opening price from the completed daily bar
           candleClose,  // today's real closing price from the completed daily bar
+          dayHigh,
           prevClose: (meta.chartPreviousClose ?? meta.previousClose) ? +(meta.chartPreviousClose ?? meta.previousClose).toFixed(2) : null,
           symbol: meta.symbol,
           marketState: meta.marketState || null  // PRE/PREPRE, REGULAR, POST, CLOSED
@@ -144,10 +148,11 @@ async function fetchPriceAV(base) {
       const bar = series[lastDt];
       const close = parseFloat(bar['4. close']);
       const open = parseFloat(bar['1. open']);
+      const high = parseFloat(bar['2. high']);
       const prevClose = prevDt ? parseFloat(series[prevDt]['4. close']) : close;
       return {
         price: +close.toFixed(2), open: +open.toFixed(2),
-        candleOpen: +open.toFixed(2), candleClose: +close.toFixed(2),
+        candleOpen: +open.toFixed(2), candleClose: +close.toFixed(2), dayHigh: Number.isFinite(high) ? +high.toFixed(2) : null,
         prevClose: +prevClose.toFixed(2), symbol: sym,
         marketState: 'CLOSED'  // AV daily is end-of-day data
       };
@@ -168,11 +173,7 @@ function isTradingDataReliable(marketState) {
 }
 
 export default async function handler(req, res) {
-  const cronSecret = process.env.CRON_SECRET;
-  const authHeader = req.headers.authorization || '';
-  const isCron = cronSecret && authHeader === `Bearer ${cronSecret}`;
-  const isManual = cronSecret && req.query.key === cronSecret;
-  if (cronSecret && !isCron && !isManual) return res.status(401).json({ error: 'Unauthorized' });
+  if (!requireCronAuth(req, res)) return;
 
   // Skip on weekends / NSE holidays. Manual calls with ?force=true bypass (for testing).
   const mkt = marketStatus();
@@ -234,9 +235,9 @@ export default async function handler(req, res) {
           // Prefer the completed candle close for "current" after market close; else live price
           item.currentPrice = pd.candleClose || pd.price;
           // Track the peak since entry for the trailing stop (use the day's HIGH when available).
-          const dayHigh = pd.candleClose && pd.open ? Math.max(pd.candleClose, pd.open) : item.currentPrice;
+          const dayHigh = pd.dayHigh ?? (pd.candleClose && pd.open ? Math.max(pd.candleClose, pd.open) : item.currentPrice);
           item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? item.currentPrice, item.currentPrice, dayHigh);
-          // For a SELL_PENDING position, this fresh price is the real exit to book at 5:30.
+          // Backward compatibility: finalize any legacy SELL_PENDING position at this price.
           if (item.status === 'SELL_PENDING') item._realExit = pd.candleClose || pd.price;
           item.lastPriceUpdate = now;
           const invested = item.investedAmount || 10000;
@@ -255,7 +256,7 @@ export default async function handler(req, res) {
     }));
   }
 
-  // ---- PHASE 2: finalize SELL_PENDING positions ----
+  // ---- Legacy compatibility: finalize SELL_PENDING positions ----
   // Book the real exit (fresh price captured above; fall back to provisional if the
   // fetch failed), append to data/realized.json, and remove from the bouquet.
   // A pending position with no fresh price stays pending and retries next cycle.
@@ -279,9 +280,10 @@ export default async function handler(req, res) {
   }
 
   let realizedWritten = 0;
+  let realizedOk = true;
   if (closedTrades.length) {
     // Append to the realized ledger — retry-safe AND de-duped (idempotent).
-    const ok = await ghPutWithRetry('data/realized.json', (existing) => {
+    realizedOk = await ghPutWithRetry('data/realized.json', (existing) => {
       const ledger = existing && Array.isArray(existing.trades) ? existing : { trades: [] };
       const seen = new Set(ledger.trades.map(tradeKey));
       const toAdd = closedTrades.filter(t => !seen.has(tradeKey(t)));
@@ -289,14 +291,24 @@ export default async function handler(req, res) {
       ledger.trades.push(...toAdd);
       return ledger;
     }, ghToken, `Book ${closedTrades.length} realized sell(s)`);
-    if (ok) realizedWritten = closedTrades.length;
+    if (realizedOk) realizedWritten = closedTrades.length;
+  }
+
+  // A failed ledger append must not make the position disappear from the portfolio. Keep it
+  // pending for the next idempotent refresh and report failure loudly to the scheduler.
+  if (closedTrades.length && !realizedOk) {
+    return res.status(502).json({
+      status: 'exit_write_failed', updated, total: bouquet.length,
+      reason: 'realized ledger write failed; pending positions retained for retry',
+      pending: closedTrades.map(t => t.ticker),
+    });
   }
 
   // Write the bouquet if prices changed OR positions were closed out. On conflict, re-read
   // the freshest bouquet and overlay ONLY our price fields per position (and drop closed
   // ones), so a concurrent add/removal/status-change by another cron is never clobbered.
   if (updated > 0 || closedTrades.length) {
-    await ghPutWithRetry('data/project-bouquet.json', (existing) => {
+    const bouquetOk = await ghPutWithRetry('data/project-bouquet.json', (existing) => {
       const fresh = existing?.bouquet || [];
       const out = [];
       for (const fb of fresh) {
@@ -314,6 +326,15 @@ export default async function handler(req, res) {
       }
       return { bouquet: out };
     }, ghToken, closedTrades.length ? `Refresh prices + close ${closedTrades.length} position(s)` : `Refresh prices (${updated} stocks)`);
+    if (!bouquetOk) {
+      return res.status(502).json({
+        status: 'portfolio_write_failed', updated, total: bouquet.length,
+        reason: closedTrades.length
+          ? 'exits were booked, but portfolio cleanup will retry on the next run'
+          : 'price updates could not be committed after retries',
+        closed: realizedWritten,
+      });
+    }
   }
   const out = { status: 'refreshed', updated, total: bouquet.length, nifty: niftyNow };
   if (skippedPremarket) out.skippedPremarket = skippedPremarket;

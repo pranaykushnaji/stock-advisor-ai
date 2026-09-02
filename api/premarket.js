@@ -17,6 +17,8 @@
 
 import { marketStatus } from './_market-calendar.js';
 import { classifyCatalyst, scoreCatalyst, rememberCatalyst, CATALYST_STARS, eventImpact } from './_catalyst.js';
+import { requireCronAuth } from './_cron-auth.js';
+import { parseNseDateMs, istDateTimeToUtcMs } from './_nse-date.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 const MAX_LLM_CLASSIFY = 8;   // cap the 08:00 LLM budget
@@ -54,15 +56,8 @@ function todayIST() { return new Date(Date.now() + 5.5 * 3600 * 1000).toISOStrin
 
 // Parse NSE's "10-Jul-2026 15:25:44" (IST wall clock) into a comparable ms value. Both sides of
 // every comparison here use this same parse, so the absolute timezone doesn't matter.
-function parseAnnMs(s) {
-  const t = Date.parse(String(s || '').replace(/-/g, ' '));
-  return isFinite(t) ? t : null;
-}
-
 export default async function handler(req, res) {
-  const cronSecret = process.env.CRON_SECRET;
-  const provided = (req.headers.authorization || '').replace(/^Bearer\s+/i, '') || req.query.key;
-  if (cronSecret && provided !== cronSecret) return res.status(401).json({ error: 'Unauthorized' });
+  if (!requireCronAuth(req, res)) return;
 
   // Trading-day guard only — this deliberately runs pre-open, so no hours check.
   const mkt = marketStatus();
@@ -95,14 +90,14 @@ export default async function handler(req, res) {
   } catch (e) {}
 
   // ---- 1. Overnight filings: filed after yesterday's 15:30 close, non-routine, liquid ----
-  // Cutoff in the same as-parsed frame as parseAnnMs (IST wall clock).
+  // Yesterday's 15:30 IST close expressed as an absolute UTC timestamp.
   const yesterday = new Date(Date.now() + 5.5 * 3600 * 1000 - 86400000).toISOString().slice(0, 10);
-  const cutoffMs = Date.parse(yesterday.replace(/-/g, '/') + ' 15:30:00');
+  const cutoffMs = istDateTimeToUtcMs(yesterday, '15:30:00');
   const filersBySym = new Map();
   for (const a of (sd.announcements || [])) {
     const sym = String(a.symbol || '').toUpperCase();
     if (!sym || !uniBySym.has(sym) || surveillance.has(sym) || held.has(sym)) continue;
-    const t = parseAnnMs(a.date);
+    const t = parseNseDateMs(a.date);
     if (t == null || t < cutoffMs) continue;
     if (ROUTINE_RE.test(a.subject || '')) continue;
     if (!filersBySym.has(sym)) filersBySym.set(sym, []);
@@ -157,11 +152,13 @@ export default async function handler(req, res) {
   // pipeline behaves exactly as before. Enrichment, never load-bearing.
   let newsIntelUsed = 0;
   let marketContext = null; // Claude's morning market analysis — advisory context, never a gate
+  let newsIntelStatus = 'missing';
   const intelWatch = [];
   try {
     const f = await ghGetFile('data/news-intel.json', ghToken);
     const ni = f.content ? JSON.parse(f.content) : null;
     const ageH = ni?.generatedAt ? (Date.now() - Date.parse(ni.generatedAt)) / 3600000 : Infinity;
+    newsIntelStatus = ageH <= 20 ? 'fresh' : (isFinite(ageH) ? `stale:${Math.round(ageH)}h` : 'missing');
     if (ageH <= 20 && ni.marketContext) marketContext = ni.marketContext;
     if (ageH <= 20 && Array.isArray(ni.items)) {
       for (const it of ni.items.slice(0, 25)) {
@@ -186,6 +183,21 @@ export default async function handler(req, res) {
       }
     }
   } catch (e) { /* malformed/missing intel file → ignore, filings-only as before */ }
+
+  // The optional laptop routine must never leave the morning context blank. When it is stale,
+  // derive a modest, fully deterministic tape summary from the fresh NSE snapshot.
+  if (!marketContext) {
+    const rows = [...uniBySym.values()].filter(r => typeof r.pChange === 'number');
+    const breadth = rows.length ? rows.filter(r => r.pChange > 0).length / rows.length : 0.5;
+    const avgMove = rows.length ? rows.reduce((a, r) => a + r.pChange, 0) / rows.length : 0;
+    const tone = breadth >= 0.62 && avgMove > 0 ? 'bullish' : breadth <= 0.38 || avgMove < -0.5 ? 'weak' : 'neutral';
+    marketContext = {
+      tone,
+      summary: `Deterministic NSE breadth fallback: ${Math.round(breadth * 100)}% advancers, average move ${avgMove >= 0 ? '+' : ''}${avgMove.toFixed(2)}%.`,
+      sectorsInFocus: [],
+      source: 'nse-snapshot-fallback',
+    };
+  }
 
   // Merge (a name can appear in several — filing wins as the strongest evidence, then intel,
   // then warm carryover), cap the list.
@@ -212,7 +224,7 @@ export default async function handler(req, res) {
 
   return res.status(200).json({
     status: 'ok', date,
-    marketTone: marketContext?.tone ?? null,
+    marketTone: marketContext?.tone ?? null, newsIntelStatus,
     overnightFilers: filersBySym.size, classified: filers.length,
     verifiedOvernightCatalysts: overnight.map(o => ({ ticker: o.ticker, type: o.catalyst.type })),
     newsIntel: intelWatch.map(w => ({ ticker: w.ticker, type: w.catalyst.type, verification: w.catalyst.verification })),

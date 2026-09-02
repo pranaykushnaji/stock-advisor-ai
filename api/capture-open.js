@@ -4,6 +4,8 @@
 // This is what makes the "buy at the open" logic accurate: the 9 AM pick cron selects
 // the stock pre-open, and this locks the genuine opening price as the entry.
 
+import { requireCronAuth } from './_cron-auth.js';
+
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
 async function fetchWithTimeout(url, opts = {}, ms = 5000) {
@@ -73,11 +75,7 @@ async function ghPutFile(path, contentObj, sha, token, message) {
 }
 
 export default async function handler(req, res) {
-  const cronSecret = process.env.CRON_SECRET;
-  const authHeader = req.headers.authorization || '';
-  const isCron = cronSecret && authHeader === `Bearer ${cronSecret}`;
-  const isManual = cronSecret && req.query.key === cronSecret;
-  if (cronSecret && !isCron && !isManual) return res.status(401).json({ error: 'Unauthorized' });
+  if (!requireCronAuth(req, res)) return;
 
   const ghToken = process.env.GITHUB_TOKEN;
   if (!ghToken) return res.status(500).json({ error: 'GITHUB_TOKEN not configured' });

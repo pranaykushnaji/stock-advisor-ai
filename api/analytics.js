@@ -14,6 +14,8 @@
 // be hit once daily after close (the Cloudflare Worker can call it), or manually with ?key=.
 // GET-only + idempotent: safe to call repeatedly; already-evaluated rows are skipped.
 
+import { requireCronAuth } from './_cron-auth.js';
+
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 const EVAL_TRADING_DAYS = 5;         // forward window per the spec
 const WINNER_CLOSE_PCT = 4;          // close-return above this = "would have been a winner"
@@ -61,9 +63,11 @@ const aliasBase = (s) => { const u = (s || '').replace(/\.(NS|BO)$/i, '').toUppe
 // Daily OHLC rows (oldest→newest) for a symbol, so we can measure the forward window.
 async function fetchSeries(tickerOrSymbol) {
   const base = aliasBase(tickerOrSymbol);
-  for (const sym of [tickerOrSymbol, `${base}.NS`, `${base}.BO`].filter(Boolean)) {
+  const supplied = String(tickerOrSymbol || '');
+  const symbols = /\.(NS|BO)$/i.test(supplied) ? [supplied] : [`${base}.NS`, `${base}.BO`];
+  for (const sym of symbols) {
     try {
-      const r = await fetchWithTimeout(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=3mo&interval=1d`, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 8000);
+      const r = await fetchWithTimeout(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=1y&interval=1d`, { headers: { 'User-Agent': 'Mozilla/5.0' } }, 5000);
       if (!r.ok) continue;
       const result = (await r.json())?.chart?.result?.[0];
       if (!result?.timestamp) continue;
@@ -102,25 +106,40 @@ function forwardOutcome(rows, entryDate, entryRef) {
 
 // Evaluate every un-evaluated, matured entry in a list of {ticker, date, entryRef, yahooSymbol}.
 // Mutates each entry with .outcome and .evaluated. Returns count newly evaluated.
-async function evaluateEntries(entries) {
-  const pending = entries.filter(e => !e.evaluated && (e.entryRefPrice != null || e.entryRef != null));
-  if (!pending.length) return 0;
-  // Fetch each unique symbol once.
+async function evaluateEntries(entries, maxSymbols = 40) {
+  // Five trading sessions need at least seven calendar days. Do not spend hundreds of Yahoo
+  // calls on today's immature rows; process the oldest matured backlog first in bounded batches.
+  const matureBefore = Date.now() - 7 * 86400000;
+  const pending = entries.filter(e => !e.evaluated
+    && (e.entryRefPrice != null || e.entryRef != null)
+    && Date.parse(`${e.date}T00:00:00Z`) <= matureBefore)
+    .sort((a, b) => String(a.date).localeCompare(String(b.date)));
+  if (!pending.length) return { evaluated: 0, maturePending: 0, symbolsAttempted: 0, symbolsFailed: 0, symbolsRemaining: 0 };
+
+  const allKeys = [...new Set(pending.map(e => (e.yahooSymbol || e.ticker || '').toUpperCase()).filter(Boolean))];
+  const keys = allKeys.slice(0, maxSymbols);
+  const selected = new Set(keys);
   const bySym = new Map();
-  for (const e of pending) {
-    const key = (e.yahooSymbol || e.ticker || '').toUpperCase();
-    if (key && !bySym.has(key)) bySym.set(key, null);
+  const batchSize = 10;
+  for (let i = 0; i < keys.length; i += batchSize) {
+    await Promise.all(keys.slice(i, i + batchSize).map(async (k) => { bySym.set(k, await fetchSeries(k)); }));
   }
-  await Promise.all([...bySym.keys()].map(async (k) => { bySym.set(k, await fetchSeries(k)); }));
   let evaluated = 0;
   for (const e of pending) {
     const key = (e.yahooSymbol || e.ticker || '').toUpperCase();
+    if (!selected.has(key)) continue;
     const rows = bySym.get(key);
     const ref = e.entryRefPrice ?? e.entryRef;
     const out = forwardOutcome(rows, e.date, ref);
     if (out) { e.outcome = out; e.evaluated = true; evaluated++; }
   }
-  return evaluated;
+  return {
+    evaluated,
+    maturePending: pending.length,
+    symbolsAttempted: keys.length,
+    symbolsFailed: keys.filter(k => !bySym.get(k)).length,
+    symbolsRemaining: Math.max(0, allKeys.length - keys.length),
+  };
 }
 
 // ---- aggregation ----
@@ -204,9 +223,7 @@ function reasonBreakdown(rejected) {
 }
 
 export default async function handler(req, res) {
-  const cronSecret = process.env.CRON_SECRET;
-  const auth = (req.headers.authorization || '').replace(/^Bearer\s+/i, '') || req.query.key;
-  if (cronSecret && auth !== cronSecret) return res.status(401).json({ error: 'Unauthorized' });
+  if (!requireCronAuth(req, res)) return;
   const ghToken = process.env.GITHUB_TOKEN;
   if (!ghToken) return res.status(500).json({ error: 'GITHUB_TOKEN not configured' });
 
@@ -219,8 +236,8 @@ export default async function handler(req, res) {
   // ---- Forward-evaluate matured entries (once), then persist outcomes ----
   const newRej = await evaluateEntries(rejected);
   const newVeto = await evaluateEntries(vetoes);
-  if (newRej > 0) await ghPutWithRetry('data/rejected-candidates.json', () => ({ rejected }), ghToken, `Analytics: evaluate ${newRej} rejected candidate(s)`);
-  if (newVeto > 0) await ghPutWithRetry('data/llm-veto-log.json', (ex) => ({ ...(ex || {}), vetoes }), ghToken, `Analytics: evaluate ${newVeto} LLM veto(es)`);
+  if (newRej.evaluated > 0) await ghPutWithRetry('data/rejected-candidates.json', () => ({ rejected }), ghToken, `Analytics: evaluate ${newRej.evaluated} rejected candidate(s)`);
+  if (newVeto.evaluated > 0) await ghPutWithRetry('data/llm-veto-log.json', (ex) => ({ ...(ex || {}), vetoes }), ghToken, `Analytics: evaluate ${newVeto.evaluated} LLM veto(es)`);
 
   // ---- P4: rejected-candidate analytics ----
   const evaluatedRej = rejected.filter(e => e.evaluated && e.outcome);
@@ -265,7 +282,8 @@ export default async function handler(req, res) {
     llmStats.recommendedInfluence = 1;
   }
 
-  // Persist a compact LLM scorecard the buy-scan can read to modulate veto influence (P5).
+  // Persist a compact scorecard for observability. The LLM remains advisory-only; this value
+  // measures whether its objections add value and does not grant execution authority.
   await ghPutWithRetry('data/llm-scorecard.json', () => ({
     updatedAt: new Date().toISOString(),
     recommendedInfluence: llmStats.recommendedInfluence,

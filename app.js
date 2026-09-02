@@ -790,7 +790,7 @@ async function checkSotd(){
   const pick=await fetchDailyPick();
   sotdPick=pick||null;
   // Only a real, actionable buy is "NEW" — a no-trade scan has nothing to pop up.
-  const isRealPick=pick&&pick.ticker&&!pick.noTrade;
+  const isRealPick=pick&&pick.ticker&&!pick.noTrade&&!pick.entryRejected;
   const badge=document.getElementById('daily-badge');
   if(badge)badge.textContent=isRealPick?'NEW':'';
   if(isRealPick){
@@ -824,7 +824,7 @@ function showSotdPopup(pick){
       <span class="pill">📅 ${esc(pick.horizon||'')}</span>
     </div>
     <div style="background:var(--accent-dim);border:1px solid var(--border-glow);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--text2);text-align:center;margin-bottom:18px;">
-      ✓ Auto-added to the project bouquet with ₹10,000 virtual investment
+      ✓ Auto-added to the project portfolio with ₹${Number(pick.investedAmount||10000).toLocaleString('en-IN')} paper investment
     </div>
     <button class="btn btn-primary" style="width:100%;" onclick="dismissSotd();switchTab('daily');">View Full Analysis →</button>`;
   document.getElementById('sotd-modal').classList.add('open');
@@ -845,7 +845,7 @@ const QM_FACTOR_LABELS=[['momentum','Momentum'],['relStrength','Rel. Strength'],
 // catalyst, regime, reward/risk, live return). Works for both a bouquet entry and a raw pick.
 function featuredPickCard(p){
   const conf=Math.round(p.effectiveConfidence??p.confidence??p.composite??universalScore(p));
-  const verdict=p.verdict||computeVerdict(conf);
+  const verdict=p.entryRejected?'NOT TRADED':(p.entryPrice?'ACTIVE':(p.verdict||computeVerdict(conf)));
   const vBadge=verdict==='BUY'?'verdict-buy':verdict==='AVOID'?'verdict-avoid':'verdict-hold';
   const vClass=verdict==='BUY'?'buy':verdict==='AVOID'?'avoid':'hold';
   const cur=p.currentPrice||p.entryPrice;
@@ -882,6 +882,7 @@ function featuredPickCard(p){
     </div>
     ${priceHtml}
     ${pills?`<div class="meta-pills">${pills}</div>`:''}
+    ${p.entryRejected?`<div class="valuation-box"><span>Not entered: </span>${esc(p.entryRejected)}</div>`:''}
     ${p.whyToday?`<div class="valuation-box"><span>Why: </span>${esc(p.whyToday)}</div>`:''}
     ${p.summary?`<p class="summary">${esc(p.summary)}</p>`:''}
     ${catHtml}
@@ -976,7 +977,7 @@ function buildPotdHistory(picks){
   const totalClass=totalG>=0?'pf-up':'pf-down';
 
   return `<div class="result-card" style="margin-top:20px;">
-    <div class="section-title">📜 AI Pick — History</div>
+    <div class="section-title">📜 Active AI Positions</div>
     <div class="potd-table-wrap">
       <table class="potd-table">
         <thead><tr>
@@ -990,8 +991,8 @@ function buildPotdHistory(picks){
       <div class="pt-item"><div class="pt-lbl">Current Value</div><div class="pt-val ${totalClass}">₹${Math.round(totalCurrent).toLocaleString('en-IN')}</div></div>
       <div class="pt-item"><div class="pt-lbl">Total Return</div><div class="pt-val ${totalClass}">${totalG>=0?'+':''}${totalG.toFixed(2)}%</div></div>
     </div>
-    ${pricedCount<sorted.length?`<div style="font-size:11px;color:var(--text3);margin-top:10px;">${sorted.length-pricedCount} pick(s) awaiting price — totals update after the next market close (5:30 PM IST).</div>`:''}
-    <div class="disclaimer-box" style="margin-top:14px;">📌 ₹10,000 virtual per pick · real NSE prices · educational tracking only, not investment advice.</div>
+    ${pricedCount<sorted.length?`<div style="font-size:11px;color:var(--text3);margin-top:10px;">${sorted.length-pricedCount} pick(s) awaiting price — totals update after the 3:40 PM IST refresh.</div>`:''}
+    <div class="disclaimer-box" style="margin-top:14px;">📌 Confidence-sized paper positions · real NSE prices · educational tracking only, not investment advice.</div>
   </div>`;
 }
 
@@ -1003,15 +1004,33 @@ checkSotd();
   const seen=localStorage.getItem('disclaimer_ack');
   const modal=document.getElementById('disclaimer-modal');
   const ok=document.getElementById('disclaimer-ok');
-  if(modal&&ok&&!seen){modal.classList.add('open');ok.addEventListener('click',()=>{localStorage.setItem('disclaimer_ack','1');modal.classList.remove('open');});}
+  if(modal&&ok&&!seen){modal.classList.add('open');ok.focus();ok.addEventListener('click',()=>{localStorage.setItem('disclaimer_ack','1');modal.classList.remove('open');});}
 })();
+
+// Keyboard-safe dialogs: keep Tab focus inside the active modal and allow Escape on dismissible
+// dialogs. The first-visit disclaimer still requires explicit acknowledgement.
+document.addEventListener('keydown',e=>{
+  const overlay=document.querySelector('.modal-overlay.open');
+  if(!overlay)return;
+  if(e.key==='Escape'&&overlay.id!=='disclaimer-modal'){
+    e.preventDefault();
+    if(overlay.id==='sotd-modal')dismissSotd();else overlay.classList.remove('open');
+    return;
+  }
+  if(e.key!=='Tab')return;
+  const focusable=[...overlay.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),a[href]')];
+  if(!focusable.length)return;
+  const first=focusable[0],last=focusable[focusable.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
 // ---- Cron Tracker tab: did every scheduled job run, and what did it decide (stock-wise) ----
 const CRON_LOG_URL='https://stock-advisor-cron.pranaykushnaji.workers.dev/log';
 async function renderTracker(){
   const el=document.getElementById('tracker-content');if(!el)return;
   el.innerHTML='<div class="empty-state"><p>Loading run history…</p></div>';
   const j=async(u)=>{try{const r=await fetch(u,{cache:'no-store'});return r.ok?await r.json():null;}catch{return null;}};
-  const [log,snap,bouq,real]=await Promise.all([j(CRON_LOG_URL),j('/data/nse-snapshot.json?t='+Date.now()),j('/data/project-bouquet.json?t='+Date.now()),j('/data/realized.json?t='+Date.now())]);
+  const [log,snap,bouq,real,intel]=await Promise.all([j(CRON_LOG_URL),j('/data/nse-snapshot.json?t='+Date.now()),j('/data/project-bouquet.json?t='+Date.now()),j('/data/realized.json?t='+Date.now()),j('/data/news-intel.json?t='+Date.now())]);
   const runs=Array.isArray(log)?log:[];
   const IST={timeZone:'Asia/Kolkata'};
   const istDate=d=>new Date(d).toLocaleDateString('en-CA',IST);
@@ -1077,7 +1096,8 @@ async function renderTracker(){
     <div class="trk-kv"><span>Last fetched</span><b>${snap?.fetchedAt?istTime(snap.fetchedAt)+' IST · '+timeAgo(snap.fetchedAt):'never'}</b></div>
     <div class="trk-kv"><span>Universe</span><b>${diag.universeCount||diag.moversCount||0} stocks</b></div>
     <div class="trk-kv"><span>Sources OK</span><b>${['marketStatus','largeDeals','deliveryData'].filter(k=>diag[k]).length}/3</b></div>
-    <div class="trk-kv"><span>Surveillance list</span><b>${(snap?.data?.surveillance||[]).length} names</b></div></div>`;
+    <div class="trk-kv"><span>Surveillance list</span><b>${(snap?.data?.surveillance||[]).length} names</b></div>
+    <div class="trk-kv"><span>Claude web research</span><b class="${intel?.generatedAt&&(Date.now()-Date.parse(intel.generatedAt))<=20*3600000?'trk-up':'trk-down'}">${intel?.generatedAt?timeAgo(intel.generatedAt):'missing'}${intel?.generatedAt&&(Date.now()-Date.parse(intel.generatedAt))>20*3600000?' · stale':''}</b></div></div>`;
   const logRows=runs.slice(0,25).map(r=>`<tr><td style="white-space:nowrap;color:var(--text2);font-size:12px;">${istDate(r.ts)===today?'':istDate(r.ts).slice(5)+' '}${istTime(r.ts)}</td><td><b>${r.job}</b>${r.trigger==='manual'?' <span class="trk-pill trk-muted">manual</span>':''}</td><td style="font-size:12px;">${outcome(r)}</td></tr>`).join('')||'<tr><td colspan="3" style="color:var(--text2);">No runs logged yet.</td></tr>';
   const posRows=(bouq?.bouquet||[]).map(p=>{const pnl=p.entryPrice&&p.currentPrice?((p.currentPrice-p.entryPrice)/p.entryPrice*100):null;const cls=pnl==null?'':pnl>=0?'up':'down';return `<tr><td><b>${p.ticker}</b></td><td>${p.status||'OPEN'}</td><td style="font-variant-numeric:tabular-nums;">₹${p.entryPrice??'—'}</td><td style="font-variant-numeric:tabular-nums;">₹${p.currentPrice??'—'}</td><td style="font-variant-numeric:tabular-nums;">₹${p.peakPrice??'—'}</td><td class="trk-${cls}" style="font-variant-numeric:tabular-nums;">${pnl==null?'—':(pnl>=0?'+':'')+pnl.toFixed(1)+'%'}</td><td style="color:var(--text2);font-size:12px;">${p.lastPriceUpdate?timeAgo(p.lastPriceUpdate):'—'}</td></tr>`;}).join('')||'<tr><td colspan="7" style="color:var(--text2);">No open positions.</td></tr>';
   const exitRows=(real?.trades||[]).slice(-8).reverse().map(t=>`<tr><td><b>${t.ticker}</b></td><td style="color:var(--text2);font-size:12px;">${t.entryDate} → ${t.exitDate}</td><td class="trk-${t.realizedPnlPct>=0?'up':'down'}" style="font-variant-numeric:tabular-nums;">${t.realizedPnlPct>=0?'+':''}${t.realizedPnlPct}%</td><td style="color:var(--text2);font-size:12px;">${t.exitReason||''}</td></tr>`).join('')||'<tr><td colspan="4" style="color:var(--text2);">No closed trades yet.</td></tr>';

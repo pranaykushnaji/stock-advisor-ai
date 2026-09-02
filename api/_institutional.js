@@ -17,6 +17,8 @@
 //   • Today's closing strength from the live snapshot day-range (boost)
 // Pure + deterministic. Returns 50 (neutral) with low confidence when history is too thin.
 
+import { alignCloseVolume } from './_series.js';
+
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
 
 // Up-day vs down-day volume over the last `lb` sessions → money-flow proxy score (0-100).
@@ -70,8 +72,9 @@ function closingStrengthScore(highs, lows, closes, lb = 10) {
 // Combine into a 0-100 accumulation score. opts: { highs, lows, bulkBuy, todayClosingStrength }.
 //   todayClosingStrength: 0-1 position of the live price in today's snapshot day-range.
 export function institutionalAccumulationScore(closes, volumes, opts = {}) {
-  const c = (closes || []).filter(v => v != null && isFinite(v));
-  const vol = (volumes || []).filter(v => v != null && isFinite(v));
+  const aligned = alignCloseVolume(closes || [], volumes || []);
+  const c = aligned.closes;
+  const vol = aligned.volumes;
   if (c.length < 22 || vol.length < 22) {
     return { score: 50, confidence: 'low', components: {}, note: 'insufficient history' };
   }

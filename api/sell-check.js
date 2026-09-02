@@ -1,14 +1,15 @@
 // api/sell-check.js
-// LIGHTWEIGHT hourly sell check — intended to be called ~hourly by GitHub Actions.
-// Unlike the two-phase daily flow, this books exits IMMEDIATELY at the current price
-// when a downside/exit signal fires — the whole point of hourly checks is fast exits
-// for the momentum swing strategy (don't wait until 5:30 to cut a loser).
+// LIGHTWEIGHT hourly sell check — called by the Cloudflare scheduler.
+// It books deterministic exits IMMEDIATELY at the current price; there is no delayed EOD
+// approval phase. LLM output is recorded as advisory context and never sells by itself.
 //
 // Idempotent: safe to run many times a day. If nothing triggers, it writes nothing.
 
 import { marketStatus } from './_market-calendar.js';
 import { rulesGate, llmDecide, bookExit, isSuspiciousMove } from './_sell-engine.js';
 import { classifyCatalyst, scoreCatalyst } from './_catalyst.js';
+import { requireCronAuth } from './_cron-auth.js';
+import { parseNseDateMs } from './_nse-date.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
@@ -16,28 +17,31 @@ const REPO = 'pranaykushnaji/stock-advisor-ai';
 const ROUTINE_RE = /certificate|loss of share|duplicate|trading window|book closure|record date|newspaper|publication|shareholders meeting|shareholder meeting|agm|egm|postal ballot|investor meet|analyst meet|esop|allotment of equity|listing obligation|regulation 74|regulation 39|spurt in volume|clarification|compliance certificate|reconciliation of share/i;
 const MAX_THESIS_LLM = 3; // cap classification calls per hourly run
 
-// NSE announcement timestamps are IST wall clock ("10-Jul-2026 15:25:44"); parse into a
-// consistent frame and shift ISO (UTC) timestamps into the same frame for comparison.
-const parseAnnMs = (s) => { const t = Date.parse(String(s || '').replace(/-/g, ' ')); return isFinite(t) ? t : null; };
-const isoToAnnFrame = (iso) => { const t = Date.parse(iso || ''); return isFinite(t) ? t + 5.5 * 3600 * 1000 : null; };
-
+// NSE announcement timestamps are IST wall clock ("10-Jul-2026 15:25:44"); parse them
+// explicitly as IST before comparing with stored UTC timestamps.
 // Update one position's thesis from filings newer than its last update. Returns
 // { changed, breakSell } — breakSell is a forced-exit decision on a confident negative filing.
 // Mutates item.thesisScore / currentThesis / lastThesisUpdate.
 async function updateThesis(item, filings, apiKey, budget) {
-  const lastMs = isoToAnnFrame(item.lastThesisUpdate || item.addedAt) ?? 0;
-  const fresh = (filings || []).filter(f => { const t = parseAnnMs(f.date); return t != null && t > lastMs; });
+  const lastMs = Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0;
+  const fresh = (filings || []).filter(f => { const t = parseNseDateMs(f.date); return t != null && t > lastMs; });
   if (!fresh.length) return { changed: false, breakSell: null };
-  item.lastThesisUpdate = new Date().toISOString();
   const material = fresh.filter(f => !ROUTINE_RE.test(f.subject || ''));
-  if (!material.length || !apiKey || budget.used >= MAX_THESIS_LLM) return { changed: true, breakSell: null };
+  if (!material.length) {
+    item.lastThesisUpdate = new Date().toISOString();
+    return { changed: true, breakSell: null };
+  }
+  // Never advance past an unclassified material filing. It remains pending for the next hourly
+  // run if the LLM is unavailable or this run's small classification budget is exhausted.
+  if (!apiKey || budget.used >= MAX_THESIS_LLM) return { changed: false, breakSell: null };
   budget.used++;
   let scored = null;
   try {
-    const articles = material.map(f => ({ title: '[OFFICIAL NSE FILING] ' + f.subject, url: '', publishedAt: parseAnnMs(f.date) || Date.now(), source: 'nse-filing' }));
+    const articles = material.map(f => ({ title: '[OFFICIAL NSE FILING] ' + f.subject, url: '', publishedAt: parseNseDateMs(f.date) || Date.now(), source: 'nse-filing' }));
     scored = scoreCatalyst(await classifyCatalyst(item.fullName || item.ticker, articles, apiKey), articles);
-  } catch (e) { return { changed: true, breakSell: null }; }
-  if (!scored) return { changed: true, breakSell: null };
+  } catch (e) { return { changed: false, breakSell: null }; }
+  if (!scored) return { changed: false, breakSell: null };
+  item.lastThesisUpdate = new Date().toISOString();
   const prev = item.thesisScore ?? 50;
   if (scored.negative) {
     // Thesis damage: order cancellations, investigations, fraud, regulatory action…
@@ -118,10 +122,13 @@ async function fetchLive(ticker, yahooSymbol) {
       if (!result?.meta?.regularMarketPrice) continue;
       const meta = result.meta;
       if (meta.currency && meta.currency !== 'INR') continue;
+      const q = result.indicators?.quote?.[0] || {};
+      const highs = (q.high || []).filter(v => v != null && !isNaN(v));
       return {
         price: +meta.regularMarketPrice.toFixed(2),
+        dayHigh: highs.length ? +Number(highs[highs.length - 1]).toFixed(2) : null,
         marketState: meta.marketState || null,
-        closes: (result.indicators?.quote?.[0]?.close || []).filter(v => v != null && !isNaN(v)),
+        closes: (q.close || []).filter(v => v != null && !isNaN(v)),
       };
     } catch (e) { continue; }
   }
@@ -129,12 +136,7 @@ async function fetchLive(ticker, yahooSymbol) {
 }
 
 export default async function handler(req, res) {
-  // Auth — same CRON_SECRET pattern as the other crons.
-  const cronSecret = process.env.CRON_SECRET;
-  const auth = req.headers.authorization || '';
-  const provided = auth.replace(/^Bearer\s+/i, '') || req.query.key;
-  const isAuthed = !cronSecret || provided === cronSecret;
-  if (!isAuthed) return res.status(401).json({ error: 'Unauthorized' });
+  if (!requireCronAuth(req, res)) return;
 
   // Only act during/after market hours on trading days (unless forced).
   const mkt = marketStatus();
@@ -206,7 +208,7 @@ export default async function handler(req, res) {
     if (!live) { checked.push({ ticker: item.ticker, result: 'no_price' }); continue; }
     // Freshen current price + peak (for the trailing stop) for the rules gate.
     item.currentPrice = live.price;
-    item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? live.price, live.price);
+    item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? live.price, live.price, live.dayHigh ?? live.price);
 
     // Thesis update from pre-classified news intel, then from new filings (either may force
     // a thesis-break exit).
@@ -225,6 +227,7 @@ export default async function handler(req, res) {
     // Thesis break first, then rules gate (thesis-aware trail/max-hold; stop absolute),
     // then LLM for the ambiguous middle.
     let decision = thesisSell || rulesGate(item, live.closes);
+    let llmAdvisory = null;
     if (!decision) {
       // Ask the LLM regardless of whether the position is up or down — a winning position can
       // have its thesis reverse (earnings miss, bad news) just as easily as a losing one, and
@@ -235,7 +238,9 @@ export default async function handler(req, res) {
       // almost certainly a bad price, not a real signal. Never book a phantom loss on it.
       if (!isSuspiciousMove(pnl, heldDays) && apiKey) {
         const d = await llmDecide(item, apiKey, [], morningContext);
-        if (d.verdict === 'SELL') decision = d;
+        // The LLM is an advisor only. It may highlight deterioration, but an official negative
+        // catalyst or deterministic exit rule must be the actual execution trigger.
+        if (d.verdict === 'SELL') llmAdvisory = d.reason || 'LLM flagged thesis risk';
       }
     }
 
@@ -245,7 +250,7 @@ export default async function handler(req, res) {
       closedTrades.push(closed);
       checked.push({ ticker: item.ticker, result: 'SOLD', reason: decision.reason, price: live.price });
     } else {
-      checked.push({ ticker: item.ticker, result: 'hold', price: live.price });
+      checked.push({ ticker: item.ticker, result: 'hold', price: live.price, ...(llmAdvisory ? { llmAdvisory } : {}) });
     }
   }
 
@@ -291,6 +296,19 @@ export default async function handler(req, res) {
     return ledger;
   }, ghToken, `Hourly sell-check: book ${closedTrades.length} exit(s)`);
 
+  // Never remove a position unless its realized trade is safely present. If GitHub rejects the
+  // ledger write, leave the position open so the next idempotent run can retry instead of
+  // silently losing the trade from both views.
+  if (!realizedOk) {
+    await writeThesisUpdates();
+    return res.status(502).json({
+      status: 'exit_write_failed', sold: 0,
+      reason: 'realized ledger write failed; positions retained for a safe retry',
+      pending: closedTrades.map(c => ({ ticker: c.ticker, reason: c.exitReason })),
+      positions: checked,
+    });
+  }
+
   const bouquetOk = await ghPutWithRetry('data/project-bouquet.json', (existing) => {
     const list = existing?.bouquet || [];
     // Drop only the positions we just sold that are still OPEN in the freshest bouquet.
@@ -300,5 +318,13 @@ export default async function handler(req, res) {
   }, ghToken, `Hourly sell-check: close ${closedTrades.length} position(s)`);
   await writeThesisUpdates(); // surviving positions keep their refreshed thesis
 
+  if (!bouquetOk) {
+    return res.status(502).json({
+      status: 'exit_cleanup_failed', sold: closedTrades.length, realizedOk, bouquetOk,
+      reason: 'exit was booked, but the open-position cleanup will retry on the next run',
+      closed: closedTrades.map(c => ({ ticker: c.ticker, pnlPct: c.realizedPnlPct, reason: c.exitReason })),
+      positions: checked,
+    });
+  }
   return res.status(200).json({ status: 'checked', sold: closedTrades.length, realizedOk, bouquetOk, closed: closedTrades.map(c => ({ ticker: c.ticker, pnlPct: c.realizedPnlPct, reason: c.exitReason })), positions: checked });
 }

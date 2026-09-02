@@ -11,6 +11,8 @@
 // Vantage News, Marketaux, Google News RSS. Whatever keys are present get used; results are
 // merged and de-duped. Nothing here throws — a dead source just contributes nothing.
 
+import { parseNseDateMs } from './_nse-date.js';
+
 const MAX_AGE_H = 72;      // hard limit on how old a NEWS article we'll even fetch (source cutoff)
 const FRESH_H = 48;        // <48h = full weight (legacy bucket constant, retained for reference)
 
@@ -273,7 +275,7 @@ export function scoreCatalyst(classification, articles) {
 export async function assessCatalyst(company, base, apiKey, keys = {}, filings = []) {
   const news = await fetchArticles(company, base, keys);
   const filingArticles = (filings || [])
-    .map(f => ({ title: '[OFFICIAL NSE FILING] ' + (f.subject || ''), url: '', publishedAt: f.date ? Date.parse(String(f.date).replace(' ', 'T')) : Date.now(), source: 'nse-filing' }))
+    .map(f => ({ title: '[OFFICIAL NSE FILING] ' + (f.subject || ''), url: '', publishedAt: f.date ? parseNseDateMs(f.date) : Date.now(), source: 'nse-filing' }))
     .filter(a => a.title && isFinite(a.publishedAt) && hoursAgo(a.publishedAt) <= MAX_AGE_H);
   const articles = [...filingArticles, ...news]; // filings first (highest priority)
   const classification = await classifyCatalyst(company, articles, apiKey);

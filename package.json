@@ -3,5 +3,9 @@
   "version": "2.0.0",
   "description": "AI-powered multi-agent stock analysis with daily Stock of the Day",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check app.js && node --check api/stock-of-the-day.js && node --check api/open-scan.js && node --check api/sell-check.js && node --check api/analytics.js && node --check cron-worker/worker.js"
+  }
 }

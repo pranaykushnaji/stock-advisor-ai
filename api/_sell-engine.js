@@ -1,7 +1,6 @@
 // api/_sell-engine.js
-// AI-based sell logic, two-phase to mirror the entry design:
-//   decideSell()   -> 9 AM cron  : rules gate -> LLM -> mark SELL_PENDING (provisional exit)
-//   finalizeSell() -> 5:30 PM cron: book real exit price -> realized ledger -> drop from bouquet
+// Shared sell rules for the hourly exit engine. Deterministic stops, trailing exits, thesis
+// breaks and review-date health checks own execution; the LLM supplies advisory context only.
 //
 // Field names match the REAL bouquet shape: fullName, yahooSymbol, ticker,
 // entryPrice, currentPrice, date, composite, sector.
@@ -92,7 +91,8 @@ export function exitBands(recentCloses, lane = null) {
   };
 }
 
-// Deterministic gate. Returns a forced SELL decision, or null to defer to the LLM.
+// Deterministic gate. Returns a forced SELL decision, or null to keep holding. The caller may
+// still ask the LLM for advisory context, but a model opinion alone cannot execute an exit.
 // `recentCloses` (optional) enables vol-adaptive stops, a trailing exit, and momentum-fade.
 // Trailing uses item.peakPrice (highest price seen since entry, kept fresh by the refresh /
 // sell-check crons); if it's missing we fall back to the current price.
@@ -220,9 +220,8 @@ export async function llmDecide(item, apiKey, headlines = [], marketContext = nu
   }
 }
 
-// PHASE 1 decision for one holding. Returns a decision object or null (keep).
-// `apiKey` = GROQ_API_KEY; `headlines` optional news for the LLM.
-// `recentCloses` optional — enables the momentum-fade exit for swing trades.
+// Legacy compatibility helper, retained for callers outside this repository. The live
+// sell-check does not execute its LLM result; it calls rulesGate and llmDecide separately.
 export async function decideSell(item, apiKey, headlines = [], recentCloses = null) {
   if (item.status && item.status !== 'OPEN') return null; // already pending/closed
   const forced = rulesGate(item, recentCloses);
@@ -238,9 +237,8 @@ export async function decideSell(item, apiKey, headlines = [], recentCloses = nu
   return decision; // { verdict:'SELL', source, reason }
 }
 
-// Apply a SELL decision to a holding in place -> SELL_PENDING with provisional exit.
-// Provisional exit = current price known at 9 AM (== prevClose pre-open), mirroring
-// how entries lock at prevClose then upgrade at 5:30.
+// Legacy compatibility helper for historical SELL_PENDING rows. New exits are booked
+// immediately by sell-check and do not enter this state.
 export function markPending(item, decision) {
   return {
     ...item,
@@ -252,8 +250,7 @@ export function markPending(item, decision) {
   };
 }
 
-// PHASE 2: book the real exit for a SELL_PENDING holding. `realExit` is the real
-// session price from the refresh fetch. Returns the closed-trade record.
+// Build a closed-trade record from an immediate or legacy pending exit.
 export function bookExit(item, realExit) {
   const entry = item.entryPrice;
   const exit = realExit ?? item.provisionalExitPrice ?? entry;
