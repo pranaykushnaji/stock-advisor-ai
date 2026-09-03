@@ -7,6 +7,7 @@ import { alignCloseVolume } from '../api/_series.js';
 import { requireCronAuth } from '../api/_cron-auth.js';
 import { marketStatus } from '../api/_market-calendar.js';
 import { scoreCatalyst } from '../api/_catalyst.js';
+import { enforceRateLimit } from '../api/_public-api.js';
 
 test('NSE wall-clock timestamps parse as IST, not an invalid local date', () => {
   const ms = parseNseDateMs('06-Aug-2026 14:59:48');
@@ -69,4 +70,18 @@ test('market calendar blocks weekends, listed holidays, and unconfigured years',
   assert.equal(marketStatus(new Date('2026-09-06T06:00:00Z')).open, false); // Sunday IST
   assert.equal(marketStatus(new Date('2026-09-14T06:00:00Z')).open, false); // Ganesh Chaturthi
   assert.equal(marketStatus(new Date('2027-01-04T06:00:00Z')).open, false); // calendar not configured
+});
+
+test('public endpoint limiter rejects requests above its per-client budget', () => {
+  const req = { headers: { 'x-forwarded-for': '192.0.2.42' }, socket: {} };
+  let status = null;
+  const res = {
+    setHeader() {},
+    status(v) { status = v; return this; },
+    json() { return this; },
+  };
+  assert.equal(enforceRateLimit(req, res, { scope: 'unit-test', limit: 2, windowMs: 60000 }), true);
+  assert.equal(enforceRateLimit(req, res, { scope: 'unit-test', limit: 2, windowMs: 60000 }), true);
+  assert.equal(enforceRateLimit(req, res, { scope: 'unit-test', limit: 2, windowMs: 60000 }), false);
+  assert.equal(status, 429);
 });

@@ -1,9 +1,14 @@
+import { enforceRateLimit, setPublicCache } from './_public-api.js';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
-  const { q } = req.query;
+  if (req.method !== 'GET') return res.status(405).json({ error: 'GET only' });
+  if (!enforceRateLimit(req, res, { scope: 'news', limit: 60, windowMs: 10 * 60 * 1000 })) return;
+  const q = String(req.query.q || '').trim().slice(0, 120);
   if (!q) return res.status(400).json({ error: 'query required' });
+  setPublicCache(res, 300, 900);
 
   try {
     const url = `https://news.google.com/rss/search?q=${encodeURIComponent(q + ' stock')}&hl=en-IN&gl=IN&ceid=IN:en`;

@@ -1,12 +1,14 @@
 // api/news-test.js
 // Diagnostic: check what each news source returns for a given NSE stock.
-// Usage: /api/news-test?ticker=RELIANCE&company=Reliance%20Industries
+// Protected diagnostic; call with the cron Authorization header and ticker/company query fields.
 // Lets you see real Finnhub/NewsData/Google coverage before wiring news into
 // the buy/sell engines. Shows which sources returned data and the merged sentiment.
 
 import { fetchNews } from './_news.js';
+import { requireCronAuth } from './_cron-auth.js';
 
 export default async function handler(req, res) {
+  if (!requireCronAuth(req, res)) return;
   const ticker = (req.query.ticker || '').replace(/\.(NS|BO)$/i, '').toUpperCase();
   const company = req.query.company || ticker;
   if (!ticker) return res.status(400).json({ error: 'provide ?ticker=SYMBOL[&company=Full Name]' });

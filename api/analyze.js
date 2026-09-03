@@ -5,6 +5,7 @@
 // an answer. The LLM writes only the qualitative narrative, never the numbers.
 
 import { fetchFundamentals } from './_fundamentals.js';
+import { enforceRateLimit } from './_public-api.js';
 import {
   computeReturns, annualizedVol, rawMomentum, volScaledMomentum,
   qualityInputs, valueInputs, composite, verdict,
@@ -69,6 +70,8 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST');
   if (req.method !== 'POST') return res.status(405).json({ error: 'POST only' });
+  if (!enforceRateLimit(req, res, { scope: 'analyze', limit: 12, windowMs: 10 * 60 * 1000 })) return;
+  res.setHeader('Cache-Control', 'private, no-store');
 
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return res.status(500).json({ error: 'GROQ_API_KEY not configured' });

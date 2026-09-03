@@ -1078,13 +1078,14 @@ async function renderTracker(){
     {t:'14:45',job:'nse-snapshot',label:'Snapshot'},
     {t:'15:00',job:'stock-of-the-day',label:'Buy scan'},
     {t:'15:10',job:'sell-check',label:'Sell-check'},
-    {t:'15:40',job:'refresh-prices',label:'Refresh + book exits'},
+    {t:'15:40',job:'refresh-prices',label:'Final price refresh'},
     {t:'16:10',job:'analytics',label:'Analytics · learn from rejects'}
   ];
   const schedRows=EXPECTED.slice().sort((a,b)=>toMin(a.t)-toMin(b.t)).map(e=>{
     const em=toMin(e.t);const hit=todayRuns.find(r=>r.job===e.job&&Math.abs(toMin(istTime(r.ts))-em)<=12&&!r._used);if(hit)hit._used=true;
     let st,cls,detail='';
-    if(hit){st='✓ ran';cls='ok';detail=outcome(hit)+' · '+istTime(hit.ts);}
+    if(hit&&hit.summary?.ok!==false){st='✓ ran';cls='ok';detail=outcome(hit)+' · '+istTime(hit.ts);}
+    else if(hit){st='✗ failed';cls='bad';detail=outcome(hit)+' · '+istTime(hit.ts);}
     else if(isWeekend){st='— closed';cls='muted';}
     else if(em>nowMin+5){st='⏳ upcoming';cls='muted';}
     else if(em<firstLoggedMin){st='— pre-logging';cls='muted';}

@@ -3,6 +3,8 @@
 // Fallback: Alpha Vantage (free key via ALPHAVANTAGE_KEY env var) when Yahoo 403s/fails.
 // Both normalized to the same response shape so nothing downstream changes.
 
+import { enforceRateLimit, setPublicCache } from './_public-api.js';
+
 async function fetchWithTimeout(url, opts = {}, ms = 6000) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), ms);
@@ -25,9 +27,12 @@ function resolveAlias(sym) {
 
 async function fromYahoo(symbol, range, interval) {
   symbol = resolveAlias(symbol);
-  // NSE/BSE FIRST — a bare Indian ticker (INFY, WIT) otherwise resolves to the US ADR in USD.
-  const suffixes = ['.NS', '.BO', ''];
-  const trySymbols = symbol.includes('.') ? [symbol] : suffixes.map(s => symbol.toUpperCase() + s);
+  // NSE/BSE only. A bare fallback can resolve Indian names such as INFY to a US ADR and was a
+  // source of wrong-currency/phantom-price risk in this India-only application.
+  const raw = String(symbol).toUpperCase();
+  const base = raw.replace(/\.(NS|BO)$/i, '');
+  const preferred = /\.(NS|BO)$/i.test(raw) ? raw : null;
+  const trySymbols = [...new Set([preferred, `${base}.NS`, `${base}.BO`].filter(Boolean))];
   for (const sym of trySymbols) {
     try {
       const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?range=${range}&interval=${interval}&includePrePost=false`;
@@ -37,10 +42,7 @@ async function fromYahoo(symbol, range, interval) {
       const result = data?.chart?.result?.[0];
       if (!result || !result.timestamp) continue;
       const meta = result.meta;
-      // Prefer INR listings for this Indian-market app. If a bare ticker resolved to a
-      // USD ADR (e.g. INFY on NYSE), skip it UNLESS it's the final fallback symbol.
-      const isLast = sym === trySymbols[trySymbols.length - 1];
-      if (meta.currency && meta.currency !== 'INR' && !isLast) continue;
+      if (meta.currency && meta.currency !== 'INR') continue;
       const quotes = result.indicators?.quote?.[0];
       return {
         source: 'yahoo',
@@ -66,7 +68,7 @@ async function fromAlphaVantage(symbol, apiKey) {
   if (!apiKey) return null;
   symbol = resolveAlias(symbol);
   const base = symbol.toUpperCase().replace(/\.(NS|BO|BSE)$/, '');
-  const trySymbols = symbol.includes('.') ? [symbol.toUpperCase()] : [`${base}.BSE`, base];
+  const trySymbols = [`${base}.BSE`];
   for (const sym of trySymbols) {
     try {
       const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${encodeURIComponent(sym)}&outputsize=full&apikey=${apiKey}`;
@@ -104,8 +106,17 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
 
-  const { symbol, range = '3mo', interval = '1d' } = req.query;
+  if (req.method !== 'GET') return res.status(405).json({ error: 'GET only' });
+  if (!enforceRateLimit(req, res, { scope: 'stock', limit: 120, windowMs: 10 * 60 * 1000 })) return;
+
+  const symbol = String(req.query.symbol || '').trim().slice(0, 32);
+  const requestedRange = String(req.query.range || '3mo');
+  const requestedInterval = String(req.query.interval || '1d');
+  const range = new Set(['1d', '5d', '1mo', '3mo', '6mo', '1y', '2y']).has(requestedRange) ? requestedRange : '3mo';
+  const interval = new Set(['1m', '5m', '15m', '30m', '1h', '1d']).has(requestedInterval) ? requestedInterval : '1d';
   if (!symbol) return res.status(400).json({ error: 'symbol required' });
+  if (!/^[A-Za-z0-9&.\- ]+$/.test(symbol)) return res.status(400).json({ error: 'invalid symbol' });
+  setPublicCache(res, 60, 180);
 
   let data = await fromYahoo(symbol, range, interval);
   if (!data) data = await fromAlphaVantage(symbol, process.env.ALPHAVANTAGE_KEY);
