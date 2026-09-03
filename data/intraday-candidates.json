@@ -1,111 +1,77 @@
 {
-  "date": "2026-09-02",
+  "date": "2026-09-03",
   "candidates": {
-    "RBLBANK": {
-      "ticker": "RBLBANK",
-      "fullName": "RBL Bank Limited",
+    "SOLARINDS": {
+      "ticker": "SOLARINDS",
+      "fullName": "Solar Industries India Limited",
       "sector": "UNKNOWN",
-      "firstSeen": "12:00",
+      "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
-          "hhmm": "12:00",
-          "ts": "2026-09-02T06:30:26.210Z",
-          "relVol": 2.09,
-          "confidence": 27.5,
+          "hhmm": "10:00",
+          "ts": "2026-09-03T04:30:31.402Z",
+          "relVol": 6.07,
+          "confidence": 41.2,
           "components": {
-            "technical": 67,
-            "flow": 57,
+            "technical": 82,
+            "flow": 64,
             "catalyst": 5,
-            "liquidity": 53
+            "liquidity": 76
           },
-          "discoveryScore": 67.4,
+          "discoveryScore": 71.5,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 1946606,
-          "sessionFrac": 0.44,
+          "volume": 141757,
+          "sessionFrac": 0.15,
           "missing": [
-            "relVol 2.09<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-09-02T07:30:30.462Z",
-          "relVol": 1.9,
-          "confidence": 28.2,
-          "components": {
-            "technical": 67,
-            "flow": 56,
-            "catalyst": 5,
-            "liquidity": 57
-          },
-          "discoveryScore": 69.6,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2407713,
-          "sessionFrac": 0.6,
-          "missing": [
-            "relVol 1.9<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-09-02T08:30:35.265Z",
-          "relVol": 1.88,
-          "confidence": 28.4,
-          "components": {
-            "technical": 67,
-            "flow": 57,
-            "catalyst": 5,
-            "liquidity": 61
-          },
-          "discoveryScore": 72.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 3016912,
-          "sessionFrac": 0.76,
-          "missing": [
-            "relVol 1.88<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-09-02T09:30:33.760Z",
-          "relVol": 1.84,
-          "confidence": 28.8,
-          "components": {
-            "technical": 67,
-            "flow": 56,
-            "catalyst": 5,
-            "liquidity": 63
-          },
-          "discoveryScore": 66.6,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 3579345,
-          "sessionFrac": 0.92,
-          "missing": [
-            "relVol 1.84<2.1",
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
         }
       ],
-      "lastSeen": "15:00",
-      "bestConfidence": 28.8,
+      "lastSeen": "10:00",
+      "bestConfidence": 41.2,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.41,
-      "trendBonus": 0.5
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "RBLBANK": {
+      "ticker": "RBLBANK",
+      "fullName": "RBL Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-09-03T04:30:31.403Z",
+          "relVol": 18.39,
+          "confidence": 25.9,
+          "components": {
+            "technical": 60,
+            "flow": 88,
+            "catalyst": 5,
+            "liquidity": 71
+          },
+          "discoveryScore": 82.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5421596,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 25.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
