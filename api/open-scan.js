@@ -14,6 +14,8 @@ import { requireCronAuth } from './_cron-auth.js';
 import { tradeSessionState } from './_trade-session.js';
 import { sectorOf, sectorStrength, sectorScoreFor } from './_sector.js';
 import { alignCloseVolume } from './_series.js';
+import { seedRisk } from './_position-risk.js';
+import { exitBands } from './_sell-engine.js';
 //
 // Gates per name (all from live data + the watchlist):
 //   gap vs prev close in (0.5%..8%)  — moving, but not already-blown-out (8% mirrors the
@@ -165,7 +167,7 @@ export default async function handler(req, res) {
     const gapPct = +(((live.price - live.prevClose) / live.prevClose) * 100).toFixed(2);
     const relVol = live.todayVol ? +(live.todayVol / (live.avg20 * OPEN_SESSION_FRAC)).toFixed(2) : null;
     const inst = institutionalAccumulationScore(live.closes, live.vols, {});
-    const hasVerified = w.catalyst && w.catalyst.verification === 'VERIFIED';
+    const hasVerified = w.catalyst && w.catalyst.verification === 'VERIFIED' && w.catalyst.evidenceVersion === 2;
     const gapOk = gapPct >= GAP_MIN_PCT && gapPct <= GAP_MAX_PCT;
     const short = computeShortReturns(live.closes);
     const indicators = computeIndicators(live.closes, { benchCloses: niftyCloses });
@@ -204,17 +206,19 @@ export default async function handler(req, res) {
       const hist = similarSetupStats(realizedRows, { lane, regime: regime.regime, confidence });
       const annVol = annualizedVol(live.closes);
       edge = expectedEdge({
+        history: hist,
         confidence, regime: regime.regime, catalystPoints: w.catalyst?.points || 0,
         annualizedVolPct: annVol != null ? annVol * 100 : null,
         rewardRisk: rr, laneWinRate: hist.winRate, laneSamples: hist.samples,
       });
       edge.calibration = hist.tier;
-      if (edge.edgePct <= 0) lane = null;
+      if (edge.edgePct == null || edge.edgePct <= 0) lane = null;
     }
     evaluated.push({
       ticker: sym, gapPct, relVol, inst: inst.score, yConf: w.yBestConf ?? null,
       catalyst: w.catalyst?.type ?? null, lane, confidence, confidenceBreakdown,
       components, rewardRisk: rr, expectedEdge: edge, sectorScore: sectorScoreFor(sym, sectorMap),
+      skip: edge && (edge.edgePct == null || edge.edgePct <= 0) ? (edge.edgePct == null ? edge.reason : `historical net edge ${edge.edgePct}% ≤ 0`) : null,
       _live: live, _w: w,
     });
   }
@@ -256,7 +260,8 @@ export default async function handler(req, res) {
   const thesis = pick.lane === 'catalyst'
     ? { type: w.catalyst?.type || 'overnight-filing', summary: w.catalyst?.summary || null, points: w.catalyst?.points || 0 }
     : { type: 'momentum-technical', summary: 'open-window continuation of a strong prior-day setup', points: 0 };
-  const row = {
+  const row = seedRisk({
+    strategyVersion: 'risk-evidence-v1',
     ticker: pick.ticker, fullName: w.fullName || pick.ticker, sector: sectorOf(pick.ticker),
     entryLane: pick.lane, openEntry: true,
     originalThesis: thesis, currentThesis: thesis,
@@ -279,7 +284,7 @@ export default async function handler(req, res) {
       ? `Open-scan entry on a VERIFIED overnight filing (${w.catalyst?.type}): ${w.catalyst?.summary || ''} Opening volume ${pick.relVol}x normal pace, confidence ${pick.confidence}, R/R ${pick.rewardRisk?.rr}.`
       : `Cautious open-scan momentum entry — yesterday's strong finisher confirming at the open: volume ${pick.relVol}x pace, confidence ${pick.confidence}, R/R ${pick.rewardRisk?.rr}. Reduced size, tighter stops.`,
     whyToday: `Pre-market watchlist name confirmed in the opening window (${hhmmIST()} IST) — entered near the open instead of waiting for the 10:00 scan.`,
-  };
+  }, exitBands(live.closes, pick.lane));
 
   try {
     const latestReal = await ghGetFile('data/realized.json', ghToken);

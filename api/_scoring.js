@@ -347,9 +347,8 @@ export function agreementConfidence(signals, regimeScore = null) {
   return Math.max(0, Math.min(100, +conf.toFixed(1)));
 }
 
-// Deterministic reward/risk estimate for a momentum swing. Downside = a vol-based stop;
-// upside = a continuation estimate (part of last month's move) plus room to the prior high,
-// floored above the stop. Transparent, not a black box.
+// Technical scenario, NOT an expected-return forecast. Downside = a vol-based band;
+// upside = a continuation scenario plus room to the prior high, independent of risk allowed.
 export function rewardRisk(closes, shortRet, roomTo52wHighPct) {
   const c = (closes || []).filter(v => v != null && isFinite(v));
   let dv = 2.2;
@@ -361,8 +360,11 @@ export function rewardRisk(closes, shortRet, roomTo52wHighPct) {
   }
   const downsidePct = Math.max(4, Math.min(12, 2.5 * dv));
   const r1m = shortRet?.r1m != null ? shortRet.r1m * 100 : 0;
-  const upsidePct = Math.max(4, Math.min(25, Math.max(0, r1m) * 0.4 + Math.max(0, roomTo52wHighPct || 0) + downsidePct));
-  return { rr: +(upsidePct / downsidePct).toFixed(2), upsidePct: +upsidePct.toFixed(1), downsidePct: +downsidePct.toFixed(1) };
+  // Technical scenario only: neither the risk allowance nor a minimum target creates
+  // upside. Historical realized payoffs in _edge.js own the expected-return estimate.
+  const upsidePct = Math.min(25, Math.max(0, r1m) * 0.4 + Math.max(0, roomTo52wHighPct || 0));
+  return { model: 'technical-scenario-v2', isForecast: false,
+    rr: +(upsidePct / downsidePct).toFixed(2), upsidePct: +upsidePct.toFixed(1), downsidePct: +downsidePct.toFixed(1) };
 }
 
 // Generic weighted composite over present factors (renormalized over what's available).

@@ -19,6 +19,7 @@ test('official NSE filing is treated as VERIFIED catalyst', () => {
   const scored = scoreCatalyst({
     catalyst_type: 'government order', direction: 'bullish', confidence: 92,
     impact_score: 9, summary: 'official order',
+    evidence_article_ids: [1],
   }, [{ title: '[OFFICIAL NSE FILING] Order', source: 'nse-filing', publishedAt: Date.now() }]);
   assert.equal(scored.verification, 'VERIFIED');
   assert.equal(scored.hasCatalyst, true);

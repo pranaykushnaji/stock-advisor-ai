@@ -3,10 +3,11 @@
 // It books deterministic exits IMMEDIATELY at the current price; there is no delayed EOD
 // approval phase. LLM output is recorded as advisory context and never sells by itself.
 //
-// Idempotent: safe to run many times a day. If nothing triggers, it writes nothing.
+// Idempotent ledger writes; each priced check persists peak/stop state for open holdings.
 
 import { marketStatus } from './_market-calendar.js';
-import { rulesGate, llmDecide, bookExit, isSuspiciousMove } from './_sell-engine.js';
+import { rulesGate, llmDecide, bookExit, isSuspiciousMove, exitBands } from './_sell-engine.js';
+import { observePrice, mergeRiskState, seedRisk, tradingSessionsHeld } from './_position-risk.js';
 import { classifyCatalyst, scoreCatalyst } from './_catalyst.js';
 import { requireCronAuth } from './_cron-auth.js';
 import { parseNseDateMs } from './_nse-date.js';
@@ -123,10 +124,10 @@ async function fetchLive(ticker, yahooSymbol) {
       const meta = result.meta;
       if (meta.currency && meta.currency !== 'INR') continue;
       const q = result.indicators?.quote?.[0] || {};
-      const highs = (q.high || []).filter(v => v != null && !isNaN(v));
       return {
         price: +meta.regularMarketPrice.toFixed(2),
-        dayHigh: highs.length ? +Number(highs[highs.length - 1]).toFixed(2) : null,
+        dayHigh: Number.isFinite(q.high?.at(-1)) ? q.high.at(-1) : null,
+        highDate: result.timestamp?.length ? new Date(result.timestamp.at(-1) * 1000 + 19800000).toISOString().slice(0, 10) : null,
         marketState: meta.marketState || null,
         closes: (q.close || []).filter(v => v != null && !isNaN(v)),
       };
@@ -172,6 +173,7 @@ export default async function handler(req, res) {
   } catch (e) { /* no snapshot → thesis simply not updated this run */ }
   const thesisBudget = { used: 0 };
   const thesisChangedKeys = new Set();
+  const riskChangedKeys = new Set();
 
   // V3 NEWS-INTEL negatives (pre-classified by the daily Claude research routine): a material
   // negative item on a HELD name damages its thesis without spending an LLM call here.
@@ -206,9 +208,18 @@ export default async function handler(req, res) {
   for (const item of open) {
     const live = await fetchLive(item.ticker, item.yahooSymbol);
     if (!live) { checked.push({ ticker: item.ticker, result: 'no_price' }); continue; }
+    const move = item.entryPrice > 0 ? (live.price / item.entryPrice - 1) * 100 : 0;
+    if (isSuspiciousMove(move, tradingSessionsHeld(item.date))) {
+      // Do not silently call an unverified crash a HOLD or let a bad quote poison the peak.
+      // Independent quote/corporate-action verification is required before booking it.
+      checked.push({ ticker: item.ticker, result: 'price_unverified', price: live.price,
+        reason: 'extreme move requires independent verification; automatic execution blocked' });
+      continue;
+    }
     // Freshen current price + peak (for the trailing stop) for the rules gate.
-    item.currentPrice = live.price;
-    item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? live.price, live.price, live.dayHigh ?? live.price);
+    observePrice(item, live.price, { dayHigh: live.dayHigh, highDate: live.highDate });
+    seedRisk(item, exitBands(live.closes, item.entryLane), new Date(), 'legacy-first-observation');
+    riskChangedKeys.add(`${item.ticker}|${item.date}`); // persist risk state on every priced check
 
     // Thesis update from pre-classified news intel, then from new filings (either may force
     // a thesis-break exit).
@@ -224,9 +235,8 @@ export default async function handler(req, res) {
       }
     } catch (e) {}
 
-    // Thesis break first, then rules gate (thesis-aware trail/max-hold; stop absolute),
-    // then LLM for the ambiguous middle.
-    let decision = thesisSell || rulesGate(item, live.closes);
+    // Deterministic risk exits take precedence; then thesis break, then advisory review.
+    let decision = rulesGate(item, live.closes) || thesisSell;
     let llmAdvisory = null;
     if (!decision) {
       // Ask the LLM regardless of whether the position is up or down — a winning position can
@@ -246,7 +256,7 @@ export default async function handler(req, res) {
 
     if (decision) {
       // Book the exit IMMEDIATELY at the live price (fast momentum exit).
-      const closed = bookExit({ ...item, exitReason: decision.reason, exitSource: decision.source }, live.price);
+      const closed = bookExit({ ...item, triggerPrice: decision.triggerPrice, exitReason: decision.reason, exitSource: decision.source }, live.price);
       closedTrades.push(closed);
       checked.push({ ticker: item.ticker, result: 'SOLD', reason: decision.reason, price: live.price });
     } else {
@@ -257,27 +267,33 @@ export default async function handler(req, res) {
   // Persist thesis-field changes (merge-only overlay — never clobbers concurrent writes).
   const thesisByKey = new Map(open.map(it => [`${it.ticker}|${it.date}`, it]));
   const writeThesisUpdates = async () => {
-    if (!thesisChangedKeys.size) return;
+    if (!riskChangedKeys.size && !thesisChangedKeys.size) return;
     await ghPutWithRetry('data/project-bouquet.json', (existing) => {
       const list = existing?.bouquet || [];
       let touched = false;
       for (const b of list) {
         const k = `${b.ticker}|${b.date}`;
-        const src = thesisChangedKeys.has(k) ? thesisByKey.get(k) : null;
+        const src = riskChangedKeys.has(k) || thesisChangedKeys.has(k) ? thesisByKey.get(k) : null;
         if (src) {
-          b.thesisScore = src.thesisScore ?? b.thesisScore;
-          b.currentThesis = src.currentThesis ?? b.currentThesis;
-          b.lastThesisUpdate = src.lastThesisUpdate ?? b.lastThesisUpdate;
+          Object.assign(b, mergeRiskState(b, src));
+          if (thesisChangedKeys.has(k) && Date.parse(src.lastThesisUpdate || '') >= (Date.parse(b.lastThesisUpdate || '') || 0)) {
+            b.thesisScore = src.thesisScore ?? b.thesisScore;
+            b.currentThesis = src.currentThesis ?? b.currentThesis;
+            b.lastThesisUpdate = src.lastThesisUpdate ?? b.lastThesisUpdate;
+          }
           touched = true;
         }
       }
       return touched ? { bouquet: list } : null;
-    }, ghToken, `Sell-check: thesis update (${thesisChangedKeys.size})`);
+    }, ghToken, `Sell-check: risk and thesis update (${riskChangedKeys.size})`).then(ok => {
+      if (!ok) throw new Error('risk state persistence failed; retry required');
+    });
   };
 
   if (!closedTrades.length) {
     await writeThesisUpdates();
-    return res.status(200).json({ status: 'checked', sold: 0, positions: checked });
+    const incomplete = checked.some(p => ['no_price', 'price_unverified'].includes(p.result));
+    return res.status(incomplete ? 502 : 200).json({ status: incomplete ? 'price_check_incomplete' : 'checked', sold: 0, positions: checked });
   }
 
   // Persist (concurrency-safe): append to the realized ledger, then remove sold from the
@@ -326,5 +342,6 @@ export default async function handler(req, res) {
       positions: checked,
     });
   }
-  return res.status(200).json({ status: 'checked', sold: closedTrades.length, realizedOk, bouquetOk, closed: closedTrades.map(c => ({ ticker: c.ticker, pnlPct: c.realizedPnlPct, reason: c.exitReason })), positions: checked });
+  const incomplete = checked.some(p => ['no_price', 'price_unverified'].includes(p.result));
+  return res.status(incomplete ? 502 : 200).json({ status: incomplete ? 'price_check_incomplete' : 'checked', sold: closedTrades.length, realizedOk, bouquetOk, closed: closedTrades.map(c => ({ ticker: c.ticker, pnlPct: c.realizedPnlPct, reason: c.exitReason })), positions: checked });
 }

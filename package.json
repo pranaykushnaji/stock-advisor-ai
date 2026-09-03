@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/*.test.js",
+    "audit:trades": "node scripts/audit-trades.js",
     "check": "node --check app.js && node --check api/stock-of-the-day.js && node --check api/open-scan.js && node --check api/sell-check.js && node --check api/analytics.js && node --check cron-worker/worker.js"
   }
 }

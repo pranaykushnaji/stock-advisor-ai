@@ -3,6 +3,7 @@
 
 import { marketStatus } from './_market-calendar.js';
 import { bookExit } from './_sell-engine.js';
+import { observePrice, mergeRiskState } from './_position-risk.js';
 import { requireCronAuth } from './_cron-auth.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
@@ -235,8 +236,9 @@ export default async function handler(req, res) {
           // Prefer the completed candle close for "current" after market close; else live price
           item.currentPrice = pd.candleClose || pd.price;
           // Track the peak since entry for the trailing stop (use the day's HIGH when available).
-          const dayHigh = pd.dayHigh ?? (pd.candleClose && pd.open ? Math.max(pd.candleClose, pd.open) : item.currentPrice);
-          item.peakPrice = Math.max(item.peakPrice ?? item.entryPrice ?? item.currentPrice, item.currentPrice, dayHigh);
+          // No timestamped high is available here. Only the observed quote is safe;
+          // sell-check can use a dated daily high on sessions after entry.
+          observePrice(item, item.currentPrice, { observedAt: now });
           // Backward compatibility: finalize any legacy SELL_PENDING position at this price.
           if (item.status === 'SELL_PENDING') item._realExit = pd.candleClose || pd.price;
           item.lastPriceUpdate = now;
@@ -318,6 +320,7 @@ export default async function handler(req, res) {
         if (upd) {
           const merged = { ...fb };
           for (const f of REFRESH_PRICE_FIELDS) if (upd[f] !== undefined) merged[f] = upd[f];
+          Object.assign(merged, mergeRiskState(fb, upd));
           delete merged._realExit;
           out.push(merged);
         } else {

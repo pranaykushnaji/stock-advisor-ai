@@ -17,6 +17,8 @@ import { concentrationCheck } from './_correlation.js';
 import { requireCronAuth } from './_cron-auth.js';
 import { tradeSessionState } from './_trade-session.js';
 import { alignCloseVolume } from './_series.js';
+import { seedRisk } from './_position-risk.js';
+import { exitBands } from './_sell-engine.js';
 import { freshStore, recordObservation, prevVolumeMap, markBought, hhmmIST } from './_intraday-store.js';
 import { qualityMomentumChecks, scoreQualityMomentum,
   computeShortReturns, shortMomentum, volScaledMomentum } from './_scoring.js';
@@ -707,6 +709,7 @@ export default async function handler(req, res) {
     const sc = scoredBySym.get(s.symbol);
     const hist = similarSetupStats(realizedTrades, { lane: s._lane, regime: regime.regime, confidence: s._effConf });
     s._edge = expectedEdge({
+      history: hist,
       confidence: s._effConf, regime: regime.regime, catalystPoints: s.catalystPoints || 0,
       annualizedVolPct: sc?.annualizedVol, rewardRisk: sc?.rewardRisk,
       laneWinRate: hist.winRate, laneSamples: hist.samples,
@@ -771,7 +774,8 @@ export default async function handler(req, res) {
   if (winnerLane === 'catalyst' && gates.requireVerified && winnerCatalyst?.verification !== 'VERIFIED') gateFail.push(`catalyst ${winnerCatalyst?.verification || 'UNVERIFIED'} (need VERIFIED in ${regime.regime} market)`);
   // V2: positive-expectancy gate — a trade whose probability-weighted loss outweighs its
   // probability-weighted gain is a bad bet regardless of how good it looks on any one signal.
-  if ((winner.expectedEdge?.edgePct ?? 0) <= 0) gateFail.push(`expected edge ${winner.expectedEdge?.edgePct ?? 'n/a'}% ≤ 0`);
+  if (winner.expectedEdge?.edgePct == null) gateFail.push(winner.expectedEdge?.reason || 'insufficient payoff evidence');
+  else if (winner.expectedEdge.edgePct <= 0) gateFail.push(`historical net edge ${winner.expectedEdge.edgePct}% ≤ 0`);
   if (winnerConc.action === 'reject') gateFail.push(winnerConc.reason);
   if (gateFail.length) {
     addRejection(winner.symbol, 'regime-gate', gateFail, {
@@ -999,7 +1003,8 @@ Return ONLY valid JSON (no markdown):
       const thesis = winnerCatalyst?.hasCatalyst
         ? { type: winnerCatalyst.type, summary: winnerCatalyst.summary || null, points: winnerCatalyst.points || 0 }
         : { type: 'momentum-technical', summary: 'volume + accumulation momentum entry (no news catalyst)', points: 0 };
-      bouquet.unshift({
+      bouquet.unshift(seedRisk({
+        strategyVersion: 'risk-evidence-v1',
         ticker: pick.ticker, fullName: pick.fullName, sector: pick.sector,
         entryLane: winnerLane, // momentum-lane positions get tighter exits in _sell-engine.js
         confidenceComponents: pick.confidenceComponents, expectedEdge: pick.expectedEdge, // v2 learning data
@@ -1023,7 +1028,7 @@ Return ONLY valid JSON (no markdown):
         niftyAtEntry, niftyNow: niftyAtEntry,
         estimatedUpside: pick.estimatedUpside, riskLevel: pick.riskLevel,
         summary: pick.summary, whyToday: pick.whyToday, factors: pick.factors
-      });
+      }, exitBands(winnerSrc?.closes, winnerLane)));
       if (bouquet.length > 365) bouquet = bouquet.slice(0, 365);
       return { bouquet };
     }, ghToken, `Add ${pick.ticker} to project bouquet`);

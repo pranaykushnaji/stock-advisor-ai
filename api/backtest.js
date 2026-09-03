@@ -20,8 +20,7 @@
 import { scoreMomentumUniverse, scoreQualityMomentum, rewardRisk, computeShortReturns } from './_scoring.js';
 import { classifyRegimeV2, regimeGates } from './_market-regime.js';
 import { fetchFundamentals } from './_fundamentals.js';
-import { SELL_RULES, exitBands } from './_sell-engine.js';
-import { ema } from './_indicators.js';
+import { simSellEngine } from './_exit-simulation.js';
 import { sectorStrength } from './_sector.js';
 
 async function fetchWithTimeout(url, opts = {}, ms = 9000) {
@@ -147,70 +146,7 @@ function benchForwardReturn(bench, entryDate, holdDays) {
   return +(((exit - entry) / entry) * 100).toFixed(2);
 }
 
-// Simulate the production sell engine over a forward window, WITH realistic execution.
-// Same deterministic stop/trail/review thresholds as rulesGate(), modelled against daily OHLC
-// and net of slippage so the numbers
-// aren't rosier than real trading would be:
-//   • STOP is checked before TARGET (conservative: if a volatile day touches both, assume
-//     you were stopped — the opposite of production's target-first precedence, on purpose).
-//   • Gap risk: if the day OPENS beyond the stop/target, you fill at the OPEN (a gap-down
-//     through the stop fills WORSE than -5%), not at the trigger price.
-//   • Slippage: every exit fills `slippageBps` worse than its trigger price.
-// "held" is measured along the simulated timeline (i+1 rows). The momentum-fade 1-week
-// window uses the trailing close series reconstructed as-of each forward day.
-// entryCloses = point-in-time close series up to and including entry day (oldest->newest).
-function simSellEngine(entry, fwd, entryCloses = null, opts = {}) {
-  const slipFrac = (opts.slippageBps ?? SLIPPAGE_BPS) / 10000;
-  const { stopPct, trailPct } = exitBands(entryCloses); // same vol-adaptive bands as production
-  const stopPrice = entry * (1 - stopPct / 100);
-  const trailFrac = trailPct / 100;
-  const trail = Array.isArray(entryCloses) ? entryCloses.slice() : [];
-  // A sell fills slightly below the trigger price -> slippage always reduces the return.
-  const netRet = (fillPrice) => +((((fillPrice * (1 - slipFrac)) - entry) / entry) * 100).toFixed(2);
-  let peak = entry;
-  for (let i = 0; i < fwd.length; i++) {
-    const row = fwd[i];
-    const o = row.open ?? row.close, hi = row.high ?? row.close, lo = row.low ?? row.close, c = row.close;
-    trail.push(c);
-    const held = i + 1;
-    // 1. Initial vol-stop (checked first, conservative). Gap-down through it fills at the open.
-    if (o <= stopPrice) return { date: row.date, retPct: netRet(o), reason: `stop gap-down (open ₹${o.toFixed(2)})`, day: held };
-    if (lo <= stopPrice) return { date: row.date, retPct: netRet(stopPrice), reason: `vol-stop (-${stopPct.toFixed(1)}%)`, day: held };
-    // 2. Trailing stop — arm once the peak (incl. today's high) is up more than a trail band.
-    peak = Math.max(peak, hi);
-    if ((peak - entry) / entry * 100 >= trailPct) {
-      const trig = peak * (1 - trailFrac);
-      if (o <= trig) return { date: row.date, retPct: netRet(o), reason: `trailing gap (open ₹${o.toFixed(2)})`, day: held };
-      if (lo <= trig) return { date: row.date, retPct: netRet(trig), reason: `trailing stop (-${trailPct.toFixed(1)}% from peak)`, day: held };
-    }
-    // 3. Review date, matching production's deterministic health checks. Historical thesis
-    // changes are unavailable, so the thesis component remains neutral/intact.
-    const reviewDate = opts.lane === 'momentum' ? 7 : SELL_RULES.MAX_HOLD_DAYS;
-    if (held >= reviewDate) {
-      const failed = [];
-      const wkAgo = trail.length >= 6 ? trail[trail.length - 6] : null;
-      if (wkAgo > 0 && ((c - wkAgo) / wkAgo * 100) <= -2) failed.push('1wk trend weak');
-      const e20 = trail.length >= 20 ? ema(trail, 20) : null;
-      if (e20 != null && c < e20) failed.push('below 20-EMA');
-      const hi52 = Math.max(...trail.slice(-252));
-      const room = hi52 > 0 ? ((hi52 - c) / c) * 100 : null;
-      const rr = rewardRisk(trail, computeShortReturns(trail), room);
-      if ((rr?.rr ?? 0) < 1.2) failed.push(`RR ${rr?.rr ?? 'n/a'}<1.2`);
-      if (failed.length) return { date: row.date, retPct: netRet(c), reason: `review day ${held}: ${failed.join(', ')}`, day: held };
-    }
-    // 4. Momentum-fade.
-    if (trail.length >= 6) {
-      const last = trail[trail.length - 1];
-      const wkAgo = trail[trail.length - 6];
-      if (wkAgo > 0) {
-        const wkTrend = ((last - wkAgo) / wkAgo) * 100;
-        if (held >= 2 && wkTrend <= -3) return { date: row.date, retPct: netRet(c), reason: `momentum faded (1wk ${wkTrend.toFixed(1)}%)`, day: held };
-      }
-    }
-  }
-  const last = fwd[fwd.length - 1];
-  return last ? { date: last.date, retPct: netRet(last.close), reason: `held ${fwd.length}d (window end)`, day: fwd.length } : null;
-}
+// Exit mechanics live in _exit-simulation.js and share rulesGate with production.
 
 // LEGACY fixed-rule exit (+8% target / -5% stop / 7d max-hold + momentum-fade), with the
 // same gap + slippage modelling — kept ONLY so the backtest can A/B the old rules against the
@@ -509,7 +445,7 @@ export default async function handler(req, res) {
         'Fundamentals junk-filter uses CURRENT ratios (not point-in-time).',
         `Sim exits model gap-downs (fill at open through the stop) + ${slippageBps}bps slippage; buy-and-hold return does not.`,
         'Entries execute at the next session open because daily history cannot reproduce the live intraday signal-time fill.',
-        'Exit simulation matches live stop/trail/momentum/review rules; thesis changes remain neutral because point-in-time filing history is not stored.',
+        'Shared exit rules, but NOT a full production replay: daily open-low-high-close paths approximate intraday execution; thesis changes and empirical entry-edge calibration are not reconstructed.',
         'Survivorship bias: the universe is names liquid TODAY, so failed/delisted names are absent (results skew optimistic).',
         'Small samples (few trading days) are noise. Interpret >20 trades cautiously, <10 not at all.',
         'Approximation for learning, not a broker-grade backtest. Past != future.',
@@ -568,6 +504,7 @@ export default async function handler(req, res) {
     liveEnginePick: livePick,
     leaderboard,
     caveats: [
+      'Daily OHLC assumes open-low-high-close; closing reviews approximate a close fill. Hourly quote timing, thesis updates and empirical entry-edge gates are NOT replayed.',
       'Candidate pool = configured universe + extras, NOT that day\'s live discovery output.',
       'Momentum/volume are point-in-time accurate; fundamentals junk-filter uses current ratios.',
       'Execution is the next session open because intraday signal-time bars are unavailable.',

@@ -6,7 +6,8 @@
 // entryPrice, currentPrice, date, composite, sector.
 
 import { ema } from './_indicators.js';
-import { rewardRisk, computeShortReturns } from './_scoring.js';
+import { seedRisk, tradingSessionsHeld } from './_position-risk.js';
+import { EDGE_COST_BPS } from './_edge.js';
 
 // Tunable thresholds. currentPrice on each holding is already kept fresh by the
 // refresh cron, so the rules gate reads it directly (no extra fetch needed here).
@@ -16,7 +17,7 @@ import { rewardRisk, computeShortReturns } from './_scoring.js';
 export const SELL_RULES = {
   // V2.1: MAX_HOLD_DAYS is now the REVIEW date, not an automatic exit. On reaching it, the
   // position must pass a health review at every subsequent sell-check (thesis intact, trend
-  // healthy, above 20-EMA, reward/risk still there) — pass and it keeps compounding, fail and
+  // healthy, above 20-EMA) — pass and it keeps compounding, fail and
   // it exits. Exceptional winners are no longer sold purely because a clock ran out.
   MAX_HOLD_DAYS: 10,   // review date for catalyst-lane positions
 
@@ -62,9 +63,7 @@ export function isSuspiciousMove(pnlPct, heldDays) {
 }
 
 function daysHeld(dateStr) {
-  if (!dateStr) return 0;
-  const from = new Date(dateStr + 'T00:00:00Z');
-  return Math.floor((Date.now() - from.getTime()) / 86400000);
+  return tradingSessionsHeld(dateStr);
 }
 
 const clamp = (x, lo, hi) => Math.max(lo, Math.min(hi, x));
@@ -96,19 +95,20 @@ export function exitBands(recentCloses, lane = null) {
 // `recentCloses` (optional) enables vol-adaptive stops, a trailing exit, and momentum-fade.
 // Trailing uses item.peakPrice (highest price seen since entry, kept fresh by the refresh /
 // sell-check crons); if it's missing we fall back to the current price.
-export function rulesGate(item, recentCloses = null) {
+export function rulesGate(item, recentCloses = null, { heldSessions = null } = {}) {
   const entry = item.entryPrice, cur = item.currentPrice;
   if (!entry || !cur) return null;
   const pnlPct = ((cur - entry) / entry) * 100;
-  const held = daysHeld(item.date);
+  const held = heldSessions ?? daysHeld(item.date);
   // Never auto-sell on an implausibly large move for a brand-new position — treat it as a
   // bad price and defer (return null) instead of booking a phantom exit.
   if (isSuspiciousMove(pnlPct, held)) return null;
 
   const R = laneRules(item.entryLane);
   const bands = exitBands(recentCloses, item.entryLane);
-  const stopPct = bands.stopPct; // STOP IS ABSOLUTE — the thesis engine may never widen it
-  let trailPct = bands.trailPct;
+  seedRisk(item, bands, new Date(), 'legacy-first-observation');
+  const stopPct = item.initialStopPct;
+  let trailPct = item.initialTrailPct ?? bands.trailPct;
   let maxHold = R.MAX_HOLD_DAYS;
   const laneTag = item.entryLane === 'momentum' ? ' [mom-lane]' : '';
 
@@ -126,13 +126,13 @@ export function rulesGate(item, recentCloses = null) {
   // 1. Initial volatility stop, measured from entry. ABSOLUTE — no thesis adjustment.
   //    (V2.1: the old fixed +25% "failsafe target" was removed — a fixed profit level is just a
   //    cap on compounding; the trailing stop below is the profit protection.)
-  if (pnlPct <= -stopPct) return { verdict: 'SELL', source: 'rule', reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)${laneTag}` };
+  if (cur <= item.initialStopPrice) return { verdict: 'SELL', source: 'rule', triggerPrice: item.initialStopPrice, reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)${laneTag}` };
   // 2. Trailing stop — once the peak is up more than a trail band, protect gains from the peak.
   const peak = Math.max(item.peakPrice ?? entry, cur);
   if ((peak - entry) / entry * 100 >= trailPct) {
-    const dropFromPeak = (peak - cur) / peak * 100;
-    if (dropFromPeak >= trailPct) return { verdict: 'SELL', source: 'rule', reason: `trailing stop (-${dropFromPeak.toFixed(1)}% from peak, +${pnlPct.toFixed(1)}% locked)${laneTag}` };
+    item.trailingStopPrice = Math.max(item.trailingStopPrice || 0, peak * (1 - trailPct / 100));
   }
+  if (item.trailingStopPrice > 0 && cur <= item.trailingStopPrice) return { verdict: 'SELL', source: 'rule', triggerPrice: item.trailingStopPrice, reason: `trailing stop (+${pnlPct.toFixed(1)}% at observed price)${laneTag}` };
   // 3. REVIEW DATE (V2.1, replaces the automatic max-hold exit): once a position reaches its
   //    review age (10d catalyst / 7d momentum, +3/+2 when the thesis strengthened), it must
   //    RE-EARN its slot at every check — "would this still be worth holding as a fresh
@@ -140,9 +140,7 @@ export function rulesGate(item, recentCloses = null) {
   //      • thesis intact         (thesisScore >= 45; damaged theses don't get patience)
   //      • trend healthy         (1-week return > -2%)
   //      • structure holding     (price above its 20-EMA, when computable)
-  //      • reward/risk remains   (forward RR from current prices >= 1.2)
   //    Pass all → keep holding and compounding. Fail any → exit with the specific reason.
-  //    A stagnant sideways position fails the RR check; a runner passes everything.
   if (held >= maxHold) {
     if (!Array.isArray(recentCloses) || recentCloses.length < 10) {
       // No usable price series to review with — give a small grace window, then exit rather
@@ -156,15 +154,8 @@ export function rulesGate(item, recentCloses = null) {
       if (wkAgoP > 0 && ((last - wkAgoP) / wkAgoP * 100) <= -2) failed.push('1wk trend weak');
       const e20 = recentCloses.length >= 20 ? ema(recentCloses, 20) : null;
       if (e20 != null && cur < e20) failed.push('below 20-EMA');
-      // Room to the 52-week high is a REAL component of remaining upside — passing null here
-      // (the old behaviour, forced by sell-check's 1-month fetch) made this reward/risk
-      // systematically lower than the entry-gate's, and pinned it to exactly 1.00 whenever
-      // 1-month momentum was flat/negative or uncomputable. Entry and review must measure the
-      // same thing, or every position eventually fails a comparison it never could have passed.
-      const hi52 = Math.max(...recentCloses.slice(-252));
-      const room = (hi52 > 0 && cur > 0) ? +(((hi52 - cur) / cur) * 100).toFixed(1) : null;
-      const rr = rewardRisk(recentCloses, computeShortReturns(recentCloses), room);
-      if ((rr?.rr ?? 0) < 1.2) failed.push(`RR ${rr?.rr ?? 'n/a'}<1.2`);
+      // The technical upside scenario is not a forecast. It must not force a healthy
+      // winner out merely because it is at a new high. Review thesis/trend/EMA instead.
       if (failed.length) return { verdict: 'SELL', source: 'rule', reason: `review day ${held}: ${failed.join(', ')}${laneTag}` };
       // Healthy — hold on. It will be re-reviewed at the next sell-check.
     }
@@ -259,6 +250,7 @@ export function bookExit(item, realExit) {
   return {
     ticker: item.ticker, fullName: item.fullName, sector: item.sector,
     entryLane: item.entryLane || 'catalyst', // lane-level P&L lets analytics judge the momentum lane
+    strategyVersion: item.strategyVersion ?? 'legacy-unknown',
     // v2 learning payload: what the engine believed at entry/exit, for calibration analytics.
     expectedEdge: item.expectedEdge ?? null,
     confidenceComponents: item.confidenceComponents ?? null,
@@ -267,11 +259,19 @@ export function bookExit(item, realExit) {
     thesisType: item.currentThesis?.type || item.originalThesis?.type || null,
     regime: item.regime ?? null,
     entryPrice: entry, entryDate: item.date,
+    entryAt: item.addedAt ?? null, exitAt: new Date().toISOString(),
+    initialStopPrice: item.initialStopPrice ?? null, initialStopPct: item.initialStopPct ?? null,
+    riskSource: item.riskSource ?? null, peakPrice: item.peakPrice ?? null,
+    trailingStopPrice: item.trailingStopPrice ?? null, triggerPrice: item.triggerPrice ?? null,
+    executionModel: 'observed-quote-paper-fill',
     exitPrice: +Number(exit).toFixed(2),
     exitDate: new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10),
     shares: item.shares || 0, investedAmount: item.investedAmount || 10000,
     exitReason: item.exitReason, exitSource: item.exitSource,
     realizedPnl: +realizedPnl.toFixed(2),
     realizedPnlPct: +realizedPnlPct.toFixed(2),
+    estimatedFrictionBps: EDGE_COST_BPS,
+    estimatedNetPnlPct: +(realizedPnlPct - EDGE_COST_BPS / 100).toFixed(2),
+    estimatedNetPnl: +(realizedPnl - entry * (item.shares || 0) * EDGE_COST_BPS / 10000).toFixed(2),
   };
 }

@@ -119,7 +119,7 @@ export default async function handler(req, res) {
       scored = scoreCatalyst(cls, articles);
     } catch (e) { scored = null; }
     if (scored?.hasCatalyst && !scored.negative) {
-      overnight.push({ ticker: sym, source: 'overnight-filing', catalyst: { type: scored.type, verification: scored.verification, impactClass: scored.impactClass, points: scored.points, summary: scored.summary }, prevClose: uniBySym.get(sym)?.lastPrice ?? null });
+      overnight.push({ ticker: sym, source: 'overnight-filing', catalyst: { ...scored }, prevClose: uniBySym.get(sym)?.lastPrice ?? null });
       const mem = rememberCatalyst(scored);
       if (mem) catalystMemoryUpdates[sym] = mem; // pre-warm the whole day's scans
     }
