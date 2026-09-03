@@ -1,26 +1,22 @@
 {
   "pick": {
-    "date": "2026-09-02",
+    "date": "2026-09-03",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-02T09:30:37.175Z",
-    "regime": "weak",
-    "market": "weak (v2 score 42, conf 49) — trend 16, breadth 28, vol-factor 89",
-    "momLaneOpen": false,
-    "considered": [
-      {
-        "ticker": "RBLBANK",
-        "relVol": 1.84,
-        "confidence": 28.8,
-        "effectiveConfidence": 59.3,
-        "institutional": 55.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 0,
-        "negative": false
-      }
-    ]
+    "reason": "RBLBANK failed neutral-market entry gates: reward/risk 1.33 < 1.8",
+    "pickedAt": "2026-09-03T04:30:34.589Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 54, conf 57) — trend 18, breadth 69, vol-factor 90",
+    "candidate": {
+      "ticker": "RBLBANK",
+      "confidence": 25.9,
+      "effectiveConfidence": 70.5,
+      "rewardRisk": {
+        "rr": 1.33,
+        "upsidePct": 6.3,
+        "downsidePct": 4.7
+      },
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
