@@ -29,10 +29,105 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-04T05:30:39.807Z",
+          "relVol": 2.34,
+          "confidence": 16.5,
+          "components": {
+            "technical": 43,
+            "flow": 55,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 69.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 584273,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
+      "lastSeen": "11:00",
       "bestConfidence": 37.6,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -21.1,
+      "trendBonus": 0
+    },
+    "PAYTM": {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
+      "sector": "Financials",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-04T05:30:39.806Z",
+          "relVol": 1.92,
+          "confidence": 49.6,
+          "components": {
+            "technical": 84,
+            "flow": 54,
+            "catalyst": 5,
+            "liquidity": 82
+          },
+          "discoveryScore": 74.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2559891,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.92<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 49.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "RBLBANK": {
+      "ticker": "RBLBANK",
+      "fullName": "RBL Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-04T05:30:39.807Z",
+          "relVol": 3.52,
+          "confidence": 39.9,
+          "components": {
+            "technical": 70,
+            "flow": 95,
+            "catalyst": 5,
+            "liquidity": 60
+          },
+          "discoveryScore": 66.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2769331,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 39.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
