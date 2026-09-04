@@ -51,12 +51,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-09-04T06:30:31.743Z",
+          "relVol": 2.04,
+          "confidence": 17.2,
+          "components": {
+            "technical": 47,
+            "flow": 50,
+            "catalyst": 5,
+            "liquidity": 80
+          },
+          "discoveryScore": 75.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 801402,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.04<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 37.6,
       "confidenceTrend": "falling",
-      "confidenceSlope": -21.1,
+      "confidenceSlope": -10.2,
       "trendBonus": 0
     },
     "PAYTM": {
@@ -124,13 +147,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-09-04T06:30:31.743Z",
+          "relVol": 2.83,
+          "confidence": 55.9,
+          "components": {
+            "technical": 81,
+            "flow": 92,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 64.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3506211,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 39.9,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "12:00",
+      "bestConfidence": 55.9,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 16,
+      "trendBonus": 4
     }
   }
 }
