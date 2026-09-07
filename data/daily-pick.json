@@ -3,10 +3,58 @@
     "date": "2026-09-07",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-07T06:30:19.206Z",
+    "pickedAt": "2026-09-07T07:30:19.001Z",
     "rejected": [
       {
+        "ticker": "MARUTI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
         "ticker": "ZYDUSLIFE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "ANGELONE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MOTHERSON",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "SUPREMEIND",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MCX",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "BLUESTARCO",
+        "reasons": [
+          "illiquid (₹33Cr)"
+        ]
+      },
+      {
+        "ticker": "MOTILALOFS",
         "reasons": [
           "volumeSurge"
         ]
@@ -19,93 +67,21 @@
         ]
       },
       {
-        "ticker": "MARUTI",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SUPREMEIND",
-        "reasons": [
-          "illiquid (₹70Cr)"
-        ]
-      },
-      {
-        "ticker": "BLUESTARCO",
-        "reasons": [
-          "illiquid (₹23Cr)"
-        ]
-      },
-      {
-        "ticker": "CDSL",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ANGELONE",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTILALOFS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MCX",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "JSWENERGY",
-        "reasons": [
-          "illiquid (₹42Cr)"
-        ]
-      },
-      {
-        "ticker": "DIVISLAB",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MOTHERSON",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
         "ticker": "SOLARINDS",
         "reasons": [
           "volumeSurge"
         ]
       },
       {
-        "ticker": "LAURUSLABS",
+        "ticker": "COCHINSHIP",
         "reasons": [
-          "volumeSurge"
+          "illiquid (₹65Cr)"
         ]
       },
       {
-        "ticker": "GLENMARK",
+        "ticker": "PNBHOUSING",
         "reasons": [
-          "illiquid (₹33Cr)"
-        ]
-      },
-      {
-        "ticker": "GRASIM",
-        "reasons": [
-          "illiquid (₹52Cr)"
+          "illiquid (₹42Cr)"
         ]
       },
       {
@@ -118,21 +94,50 @@
         ]
       },
       {
-        "ticker": "PATANJALI",
-        "reasons": [
-          "illiquid (₹39Cr)"
-        ]
-      },
-      {
-        "ticker": "NYKAA",
+        "ticker": "RBLBANK",
         "reasons": [
           "volumeSurge"
         ]
       },
       {
-        "ticker": "POWERGRID",
+        "ticker": "MAXHEALTH",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "FEDERALBNK",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CDSL",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "GLENMARK",
+        "reasons": [
+          "illiquid (₹43Cr)"
+        ]
+      },
+      {
+        "ticker": "HYUNDAI",
         "reasons": [
           "illiquid (₹57Cr)"
+        ]
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "volumeSurge"
         ]
       }
     ]
