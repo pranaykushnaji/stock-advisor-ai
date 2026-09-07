@@ -2,37 +2,138 @@
   "pick": {
     "date": "2026-09-07",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-07T05:30:25.458Z",
-    "regime": "weak",
-    "market": "weak (v2 score 41, conf 53) — trend 15, breadth 33, vol-factor 91",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-07T06:30:19.206Z",
+    "rejected": [
       {
-        "ticker": "SOLARINDS",
-        "relVol": 2.35,
-        "confidence": 54.6,
-        "effectiveConfidence": 74.1,
-        "institutional": 87.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 6,
-        "negative": false
+        "ticker": "ZYDUSLIFE",
+        "reasons": [
+          "volumeSurge"
+        ]
       },
       {
-        "ticker": "GAIL",
-        "relVol": 2.11,
-        "confidence": 2.5,
-        "effectiveConfidence": 52.2,
-        "institutional": 53,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
+        "ticker": "SBICARD",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MARUTI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SUPREMEIND",
+        "reasons": [
+          "illiquid (₹70Cr)"
+        ]
+      },
+      {
+        "ticker": "BLUESTARCO",
+        "reasons": [
+          "illiquid (₹23Cr)"
+        ]
+      },
+      {
+        "ticker": "CDSL",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ANGELONE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "MCX",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "JSWENERGY",
+        "reasons": [
+          "illiquid (₹42Cr)"
+        ]
+      },
+      {
+        "ticker": "DIVISLAB",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "MOTHERSON",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "SOLARINDS",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "GLENMARK",
+        "reasons": [
+          "illiquid (₹33Cr)"
+        ]
+      },
+      {
+        "ticker": "GRASIM",
+        "reasons": [
+          "illiquid (₹52Cr)"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PATANJALI",
+        "reasons": [
+          "illiquid (₹39Cr)"
+        ]
+      },
+      {
+        "ticker": "NYKAA",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "POWERGRID",
+        "reasons": [
+          "illiquid (₹57Cr)"
+        ]
       }
     ]
   }
