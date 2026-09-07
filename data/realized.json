@@ -950,6 +950,52 @@
       "exitSource": "rule",
       "realizedPnl": -136.36,
       "realizedPnlPct": -1.51
+    },
+    {
+      "ticker": "POLICYBZR",
+      "fullName": "PB Fintech Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "strategyVersion": "legacy-unknown",
+      "expectedEdge": {
+        "expectedGainPct": 17.6,
+        "expectedLossPct": 5.2,
+        "probability": 0.55,
+        "edgePct": 7.34,
+        "calibration": "lane+regime"
+      },
+      "confidenceComponents": {
+        "technical": 74,
+        "flow": 69,
+        "catalyst": 5,
+        "liquidity": 67
+      },
+      "effectiveConfidence": 69,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 1855.2,
+      "entryDate": "2026-08-26",
+      "entryAt": "2026-08-26T05:30:30.238Z",
+      "exitAt": "2026-09-07T05:40:13.727Z",
+      "initialStopPrice": 1777.7093957478253,
+      "initialStopPct": 4.176940720794247,
+      "riskSource": "legacy-first-observation",
+      "peakPrice": 1875,
+      "trailingStopPrice": null,
+      "triggerPrice": null,
+      "executionModel": "observed-quote-paper-fill",
+      "exitPrice": 1818.7,
+      "exitDate": "2026-09-07",
+      "shares": 2.156,
+      "investedAmount": 4000,
+      "exitReason": "review day 8: 1wk trend weak [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -78.69,
+      "realizedPnlPct": -1.97,
+      "estimatedFrictionBps": 30,
+      "estimatedNetPnlPct": -2.27,
+      "estimatedNetPnl": -90.69
     }
   ]
 }
