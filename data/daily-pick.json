@@ -3,8 +3,20 @@
     "date": "2026-09-07",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-07T07:30:19.001Z",
+    "pickedAt": "2026-09-07T08:30:19.349Z",
     "rejected": [
+      {
+        "ticker": "ZYDUSLIFE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "BLUESTARCO",
+        "reasons": [
+          "illiquid (₹45Cr)"
+        ]
+      },
       {
         "ticker": "MARUTI",
         "reasons": [
@@ -15,9 +27,10 @@
         ]
       },
       {
-        "ticker": "ZYDUSLIFE",
+        "ticker": "SBICARD",
         "reasons": [
-          "volumeSurge"
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -29,16 +42,16 @@
         ]
       },
       {
-        "ticker": "MOTHERSON",
+        "ticker": "RBLBANK",
         "reasons": [
-          "priceAboveEma20",
           "volumeSurge"
         ]
       },
       {
-        "ticker": "SUPREMEIND",
+        "ticker": "MOTHERSON",
         "reasons": [
-          "near52wHigh"
+          "priceAboveEma20",
+          "volumeSurge"
         ]
       },
       {
@@ -48,53 +61,21 @@
         ]
       },
       {
-        "ticker": "BLUESTARCO",
-        "reasons": [
-          "illiquid (₹33Cr)"
-        ]
-      },
-      {
-        "ticker": "MOTILALOFS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "SBICARD",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SOLARINDS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "COCHINSHIP",
-        "reasons": [
-          "illiquid (₹65Cr)"
-        ]
-      },
-      {
-        "ticker": "PNBHOUSING",
-        "reasons": [
-          "illiquid (₹42Cr)"
-        ]
-      },
-      {
-        "ticker": "HDFCBANK",
+        "ticker": "EICHERMOT",
         "reasons": [
           "priceAboveEma20",
-          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "SUPREMEIND",
+        "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "RBLBANK",
+        "ticker": "APOLLOHOSP",
         "reasons": [
           "volumeSurge"
         ]
@@ -109,9 +90,37 @@
         ]
       },
       {
-        "ticker": "FEDERALBNK",
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "INDIGO",
         "reasons": [
           "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COALINDIA",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BSE",
+        "reasons": [
+          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
@@ -123,21 +132,19 @@
         ]
       },
       {
-        "ticker": "GLENMARK",
+        "ticker": "INOXWIND",
         "reasons": [
-          "illiquid (₹43Cr)"
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "HYUNDAI",
+        "ticker": "FEDERALBNK",
         "reasons": [
-          "illiquid (₹57Cr)"
-        ]
-      },
-      {
-        "ticker": "LAURUSLABS",
-        "reasons": [
-          "volumeSurge"
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
         ]
       }
     ]
