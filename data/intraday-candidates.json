@@ -1,246 +1,40 @@
 {
-  "date": "2026-09-04",
+  "date": "2026-09-07",
   "candidates": {
-    "HAL": {
-      "ticker": "HAL",
-      "fullName": "Hindustan Aeronautics Limited",
-      "sector": "Defence",
+    "CGPOWER": {
+      "ticker": "CGPOWER",
+      "fullName": "CG Power and Industrial Solutions Limited",
+      "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-09-04T04:30:27.482Z",
-          "relVol": 2.4,
-          "confidence": 37.6,
+          "ts": "2026-09-07T04:30:18.912Z",
+          "relVol": 4.31,
+          "confidence": 29.3,
           "components": {
-            "technical": 64,
-            "flow": 66,
+            "technical": 63,
+            "flow": 67,
             "catalyst": 5,
-            "liquidity": 69
+            "liquidity": 61
           },
-          "discoveryScore": 72.3,
+          "discoveryScore": 55.4,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 399648,
+          "volume": 1374636,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
-        },
-        {
-          "hhmm": "11:00",
-          "ts": "2026-09-04T05:30:39.807Z",
-          "relVol": 2.34,
-          "confidence": 16.5,
-          "components": {
-            "technical": 43,
-            "flow": 55,
-            "catalyst": 5,
-            "liquidity": 75
-          },
-          "discoveryScore": 69.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 584273,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-09-04T06:30:31.743Z",
-          "relVol": 2.04,
-          "confidence": 17.2,
-          "components": {
-            "technical": 47,
-            "flow": 50,
-            "catalyst": 5,
-            "liquidity": 80
-          },
-          "discoveryScore": 75.6,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 801402,
-          "sessionFrac": 0.44,
-          "missing": [
-            "relVol 2.04<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
         }
       ],
-      "lastSeen": "12:00",
-      "bestConfidence": 37.6,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -10.2,
-      "trendBonus": 0
-    },
-    "PAYTM": {
-      "ticker": "PAYTM",
-      "fullName": "One97 Communications Limited",
-      "sector": "Financials",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-09-04T05:30:39.806Z",
-          "relVol": 1.92,
-          "confidence": 49.6,
-          "components": {
-            "technical": 84,
-            "flow": 54,
-            "catalyst": 5,
-            "liquidity": 82
-          },
-          "discoveryScore": 74.4,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2559891,
-          "sessionFrac": 0.28,
-          "missing": [
-            "relVol 1.92<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "11:00",
-      "bestConfidence": 49.6,
+      "lastSeen": "10:00",
+      "bestConfidence": 29.3,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "RBLBANK": {
-      "ticker": "RBLBANK",
-      "fullName": "RBL Bank Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-09-04T05:30:39.807Z",
-          "relVol": 3.52,
-          "confidence": 39.9,
-          "components": {
-            "technical": 70,
-            "flow": 95,
-            "catalyst": 5,
-            "liquidity": 60
-          },
-          "discoveryScore": 66.6,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2769331,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-09-04T06:30:31.743Z",
-          "relVol": 2.83,
-          "confidence": 55.9,
-          "components": {
-            "technical": 81,
-            "flow": 92,
-            "catalyst": 5,
-            "liquidity": 64
-          },
-          "discoveryScore": 64.9,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 3506211,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-09-04T07:30:31.302Z",
-          "relVol": 2.88,
-          "confidence": 29.9,
-          "components": {
-            "technical": 70,
-            "flow": 85,
-            "catalyst": 5,
-            "liquidity": 69
-          },
-          "discoveryScore": 65.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 4867003,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-09-04T08:30:48.732Z",
-          "relVol": 2.74,
-          "confidence": 30.1,
-          "components": {
-            "technical": 70,
-            "flow": 84,
-            "catalyst": 5,
-            "liquidity": 73
-          },
-          "discoveryScore": 70.3,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 5851428,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-09-04T09:30:29.359Z",
-          "relVol": 2.72,
-          "confidence": 29.7,
-          "components": {
-            "technical": 70,
-            "flow": 82,
-            "catalyst": 5,
-            "liquidity": 76
-          },
-          "discoveryScore": 66.3,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 7039092,
-          "sessionFrac": 0.92,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 55.9,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -4.62,
       "trendBonus": 0
     }
   }
