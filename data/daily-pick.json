@@ -1,145 +1,38 @@
 {
   "pick": {
-    "date": "2026-09-07",
+    "date": "2026-09-08",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-07T09:30:20.289Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-08T04:30:25.240Z",
+    "regime": "weak",
+    "market": "weak (v2 score 41, conf 51) — trend 15, breadth 34, vol-factor 91",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "DIVISLAB",
-        "reasons": [
-          "volumeSurge"
-        ]
+        "ticker": "SOLARINDS",
+        "relVol": 2.54,
+        "confidence": 55.4,
+        "effectiveConfidence": 74.2,
+        "institutional": 91.8,
+        "catalyst": "broker upgrade",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 11,
+        "negative": false
       },
       {
-        "ticker": "BLUESTARCO",
-        "reasons": [
-          "illiquid (₹58Cr)"
-        ]
-      },
-      {
-        "ticker": "SBICARD",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ANGELONE",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SUPREMEIND",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MARUTI",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ZYDUSLIFE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "RBLBANK",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "APOLLOHOSP",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "ATHERENERG",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "LAURUSLABS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "EICHERMOT",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "CIPLA",
-        "reasons": [
-          "illiquid (₹44Cr)"
-        ]
-      },
-      {
-        "ticker": "INOXWIND",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTILALOFS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MCX",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MAXHEALTH",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CDSL",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTHERSON",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
+        "ticker": "HAL",
+        "relVol": 4.95,
+        "confidence": 16,
+        "effectiveConfidence": 60.2,
+        "institutional": 56.4,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 6,
+        "negative": false
       }
     ]
   }
