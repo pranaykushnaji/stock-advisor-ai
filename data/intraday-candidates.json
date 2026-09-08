@@ -29,13 +29,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-08T05:30:22.487Z",
+          "relVol": 2.23,
+          "confidence": 58,
+          "components": {
+            "technical": 88,
+            "flow": 85,
+            "catalyst": 5,
+            "liquidity": 74
+          },
+          "discoveryScore": 66.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 118183,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 55.4,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "11:00",
+      "bestConfidence": 58,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 2.6,
+      "trendBonus": 1.6
     },
     "HAL": {
       "ticker": "HAL",
@@ -65,10 +87,106 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-08T05:30:22.488Z",
+          "relVol": 4.96,
+          "confidence": 33,
+          "components": {
+            "technical": 62,
+            "flow": 73,
+            "catalyst": 5,
+            "liquidity": 88
+          },
+          "discoveryScore": 80.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1259132,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 16,
+      "lastSeen": "11:00",
+      "bestConfidence": 33,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 17,
+      "trendBonus": 4
+    },
+    "DIVISLAB": {
+      "ticker": "DIVISLAB",
+      "fullName": "Divi's Laboratories Limited",
+      "sector": "Pharma",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-08T05:30:22.487Z",
+          "relVol": 2,
+          "confidence": 37,
+          "components": {
+            "technical": 73,
+            "flow": 71,
+            "catalyst": 5,
+            "liquidity": 72
+          },
+          "discoveryScore": 66.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 243670,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 37,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "AUROPHARMA": {
+      "ticker": "AUROPHARMA",
+      "fullName": "Aurobindo Pharma Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-08T05:30:22.488Z",
+          "relVol": 2.06,
+          "confidence": 6,
+          "components": {
+            "technical": 51,
+            "flow": 55,
+            "catalyst": 5,
+            "liquidity": 55
+          },
+          "discoveryScore": 64.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 485721,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2.06<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 6,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
