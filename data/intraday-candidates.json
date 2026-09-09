@@ -118,13 +118,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-09-09T09:30:22.586Z",
+          "relVol": 1.87,
+          "confidence": 33.3,
+          "components": {
+            "technical": 80,
+            "flow": 64,
+            "catalyst": 9,
+            "liquidity": 95
+          },
+          "discoveryScore": 86.3,
+          "catalystType": "new product",
+          "verification": "UNVERIFIED",
+          "volume": 6869951,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.87<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 38.9,
       "confidenceTrend": "flat",
-      "confidenceSlope": 1.4,
-      "trendBonus": 1.7
+      "confidenceSlope": 0.24,
+      "trendBonus": 0.3
     },
     "ADANIENT": {
       "ticker": "ADANIENT",
@@ -242,13 +265,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-09-09T09:30:22.586Z",
+          "relVol": 2.84,
+          "confidence": 23.6,
+          "components": {
+            "technical": 54,
+            "flow": 83,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 85.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4921548,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 36.4,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 2.44,
-      "trendBonus": 2.9
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0.63,
+      "trendBonus": 0.8
     },
     "HAL": {
       "ticker": "HAL",
