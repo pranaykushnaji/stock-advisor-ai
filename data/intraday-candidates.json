@@ -51,13 +51,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-09-09T06:30:22.543Z",
+          "relVol": 2.82,
+          "confidence": 38.9,
+          "components": {
+            "technical": 84,
+            "flow": 72,
+            "catalyst": 5,
+            "liquidity": 93
+          },
+          "discoveryScore": 72.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4942837,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 37.9,
+      "lastSeen": "12:00",
+      "bestConfidence": 38.9,
       "confidenceTrend": "rising",
-      "confidenceSlope": 5.9,
-      "trendBonus": 3.5
+      "confidenceSlope": 3.45,
+      "trendBonus": 4.1
     },
     "ADANIENT": {
       "ticker": "ADANIENT",
@@ -109,13 +131,71 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-09-09T06:30:22.545Z",
+          "relVol": 4.89,
+          "confidence": 36.4,
+          "components": {
+            "technical": 66,
+            "flow": 76,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 85,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4105714,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 23.3,
+      "lastSeen": "12:00",
+      "bestConfidence": 36.4,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 6.8,
+      "trendBonus": 8
+    },
+    "HAL": {
+      "ticker": "HAL",
+      "fullName": "Hindustan Aeronautics Limited",
+      "sector": "Defence",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-09-09T06:30:22.545Z",
+          "relVol": 2.42,
+          "confidence": 22,
+          "components": {
+            "technical": 52,
+            "flow": 74,
+            "catalyst": 5,
+            "liquidity": 86
+          },
+          "discoveryScore": 66.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1069870,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 22,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.5,
-      "trendBonus": 0.3
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
