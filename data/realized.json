@@ -1042,6 +1042,52 @@
       "estimatedFrictionBps": 30,
       "estimatedNetPnlPct": -2.09,
       "estimatedNetPnl": -125.41
+    },
+    {
+      "ticker": "KOTAKBANK",
+      "fullName": "Kotak Mahindra Bank Limited",
+      "sector": "UNKNOWN",
+      "entryLane": "momentum",
+      "strategyVersion": "legacy-unknown",
+      "expectedEdge": {
+        "expectedGainPct": 12.2,
+        "expectedLossPct": 4,
+        "probability": 0.581,
+        "edgePct": 5.41,
+        "calibration": "lane+regime+conf"
+      },
+      "confidenceComponents": {
+        "technical": 66,
+        "flow": 90,
+        "catalyst": 5,
+        "liquidity": 79
+      },
+      "effectiveConfidence": 73.7,
+      "thesisScore": 50,
+      "thesisType": "momentum-technical",
+      "regime": "neutral",
+      "entryPrice": 426.05,
+      "entryDate": "2026-08-27",
+      "entryAt": "2026-08-27T04:30:30.049Z",
+      "exitAt": "2026-09-09T04:40:12.443Z",
+      "initialStopPrice": 411.13824999999997,
+      "initialStopPct": 3.5,
+      "riskSource": "legacy-first-observation",
+      "peakPrice": 426.05,
+      "trailingStopPrice": null,
+      "triggerPrice": null,
+      "executionModel": "observed-quote-paper-fill",
+      "exitPrice": 414.75,
+      "exitDate": "2026-09-09",
+      "shares": 16.43,
+      "investedAmount": 7000,
+      "exitReason": "review day 9: 1wk trend weak [mom-lane]",
+      "exitSource": "rule",
+      "realizedPnl": -185.66,
+      "realizedPnlPct": -2.65,
+      "estimatedFrictionBps": 30,
+      "estimatedNetPnlPct": -2.95,
+      "estimatedNetPnl": -206.66
     }
   ]
 }
