@@ -4941,25 +4941,25 @@
     {
       "id": "2026-09-10|360ONE|10:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T05:31:04.472Z",
+      "ts": "2026-09-10T07:31:06.177Z",
       "ticker": "360ONE",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹19Cr)"
+        "illiquid (₹43Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.74,
-      "pChange": 0.45,
-      "sector": 49,
-      "entryRefPrice": 1088.2,
+      "relVol": 0.81,
+      "pChange": 0.76,
+      "sector": 61,
+      "entryRefPrice": 1095.9,
       "yahooSymbol": "360ONE.NS",
       "discoveryParts": {
-        "closingStrength": 74.8,
-        "containedMomentum": 63.4,
-        "breadthRelative": 55,
-        "liquidity": 30.1,
-        "sector": 49,
+        "closingStrength": 84.9,
+        "containedMomentum": 65.7,
+        "breadthRelative": 57.4,
+        "liquidity": 44.1,
+        "sector": 61,
         "volAccel": 50
       }
     },
@@ -5172,25 +5172,25 @@
     {
       "id": "2026-09-10|TATAELXSI|10:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T04:31:09.115Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "TATAELXSI",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹20Cr)"
+        "illiquid (₹51Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 2.37,
-      "pChange": 1.37,
-      "sector": 69,
-      "entryRefPrice": 3433.2,
+      "relVol": 1.48,
+      "pChange": 1,
+      "sector": 47,
+      "entryRefPrice": 3414.1,
       "yahooSymbol": "TATAELXSI.NS",
       "discoveryParts": {
-        "closingStrength": 86.4,
-        "containedMomentum": 70.3,
-        "breadthRelative": 62.2,
-        "liquidity": 31.5,
-        "sector": 69,
+        "closingStrength": 53.7,
+        "containedMomentum": 67.5,
+        "breadthRelative": 59.4,
+        "liquidity": 46.7,
+        "sector": 47,
         "volAccel": 50
       }
     },
@@ -5374,24 +5374,24 @@
     {
       "id": "2026-09-10|CAMS|10:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.728Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "CAMS",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹51Cr)"
+        "illiquid (₹61Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.23,
-      "pChange": 0.24,
+      "relVol": 1.08,
+      "pChange": 0.69,
       "sector": 50,
-      "entryRefPrice": 718.4,
+      "entryRefPrice": 718.2,
       "yahooSymbol": "CAMS.NS",
       "discoveryParts": {
-        "closingStrength": 86.4,
-        "containedMomentum": 61.8,
-        "breadthRelative": 54.6,
-        "liquidity": 46.7,
+        "closingStrength": 94,
+        "containedMomentum": 65.2,
+        "breadthRelative": 56.9,
+        "liquidity": 49.7,
         "sector": 50,
         "volAccel": 50
       }
@@ -5449,25 +5449,25 @@
     {
       "id": "2026-09-10|POLICYBZR|10:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T05:31:04.474Z",
+      "ts": "2026-09-10T07:31:06.177Z",
       "ticker": "POLICYBZR",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹21Cr)"
+        "illiquid (₹38Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.34,
-      "pChange": -0.43,
-      "sector": 49,
-      "entryRefPrice": 1793,
+      "relVol": 0.29,
+      "pChange": 0.4,
+      "sector": 61,
+      "entryRefPrice": 1801.1,
       "yahooSymbol": "POLICYBZR.NS",
       "discoveryParts": {
-        "closingStrength": 70.9,
-        "containedMomentum": 44.6,
-        "breadthRelative": 47.9,
-        "liquidity": 31.8,
-        "sector": 49,
+        "closingStrength": 98.5,
+        "containedMomentum": 63,
+        "breadthRelative": 54.6,
+        "liquidity": 41.8,
+        "sector": 61,
         "volAccel": 50
       }
     },
@@ -5752,44 +5752,45 @@
     {
       "id": "2026-09-10|ATHERENERG|10:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:08.381Z",
+      "ts": "2026-09-10T07:31:10.698Z",
       "ticker": "ATHERENERG",
       "stage": "core-gate",
       "reasons": [
+        "relVol<2.1",
         "catalyst UNVERIFIED"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 2.46,
+      "relVol": 2.02,
       "momentum": 75,
       "catalystScore": 10,
-      "confidence": 38.7,
-      "effectiveConfidence": 76.9,
+      "confidence": 39.3,
+      "effectiveConfidence": 75.2,
       "regime": "weak",
       "sector": 50,
-      "techScore": 74.3,
+      "techScore": 74.1,
       "components": {
-        "technical": 77,
-        "flow": 70,
+        "technical": 75,
+        "flow": 64,
         "catalyst": 9,
-        "liquidity": 93
+        "liquidity": 95
       },
       "discoveryParts": {
-        "closingStrength": 70.1,
-        "containedMomentum": 86.7,
-        "breadthRelative": 81.2,
-        "liquidity": 93,
+        "closingStrength": 77.2,
+        "containedMomentum": 88.1,
+        "breadthRelative": 81.4,
+        "liquidity": 94.9,
         "sector": 50,
-        "volAccel": 36.1
+        "volAccel": 39.3
       },
-      "institutional": 87.6,
-      "entryRefPrice": 1641.5,
+      "institutional": 85.9,
+      "entryRefPrice": 1635.2,
       "yahooSymbol": "ATHERENERG.NS"
     },
     {
       "id": "2026-09-10|PNB|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.725Z",
+      "ts": "2026-09-10T07:31:06.178Z",
       "ticker": "PNB",
       "stage": "quality-filter",
       "reasons": [
@@ -5797,24 +5798,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.88,
-      "pChange": 1.91,
-      "sector": 52,
-      "entryRefPrice": 118.07,
+      "relVol": 1.85,
+      "pChange": 1.44,
+      "sector": 60,
+      "entryRefPrice": 116.85,
       "yahooSymbol": "PNB.NS",
       "discoveryParts": {
-        "closingStrength": 86.1,
-        "containedMomentum": 74.3,
-        "breadthRelative": 68,
-        "liquidity": 60,
-        "sector": 52,
+        "closingStrength": 66.3,
+        "containedMomentum": 70.8,
+        "breadthRelative": 62.9,
+        "liquidity": 64.7,
+        "sector": 60,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|BANKBARODA|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.725Z",
+      "ts": "2026-09-10T07:31:06.177Z",
       "ticker": "BANKBARODA",
       "stage": "quality-filter",
       "reasons": [
@@ -5825,17 +5826,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.63,
-      "pChange": 1.94,
-      "sector": 52,
-      "entryRefPrice": 238.92,
+      "relVol": 1.4,
+      "pChange": 1.89,
+      "sector": 60,
+      "entryRefPrice": 237.55,
       "yahooSymbol": "BANKBARODA.NS",
       "discoveryParts": {
-        "closingStrength": 82.5,
-        "containedMomentum": 74.5,
-        "breadthRelative": 68.2,
-        "liquidity": 62.7,
-        "sector": 52,
+        "closingStrength": 79.7,
+        "containedMomentum": 74.2,
+        "breadthRelative": 66.5,
+        "liquidity": 65.4,
+        "sector": 60,
         "volAccel": 50
       }
     },
@@ -5867,7 +5868,7 @@
     {
       "id": "2026-09-10|COALINDIA|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.178Z",
       "ticker": "COALINDIA",
       "stage": "quality-filter",
       "reasons": [
@@ -5877,16 +5878,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.87,
-      "pChange": 0.3,
+      "relVol": 0.83,
+      "pChange": 0.49,
       "sector": 56,
-      "entryRefPrice": 433.2,
+      "entryRefPrice": 433.3,
       "yahooSymbol": "COALINDIA.NS",
       "discoveryParts": {
-        "closingStrength": 53.5,
-        "containedMomentum": 62.3,
-        "breadthRelative": 55.1,
-        "liquidity": 67.8,
+        "closingStrength": 72.1,
+        "containedMomentum": 63.7,
+        "breadthRelative": 55.3,
+        "liquidity": 72.1,
         "sector": 56,
         "volAccel": 50
       }
@@ -5894,7 +5895,7 @@
     {
       "id": "2026-09-10|AXISBANK|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.725Z",
+      "ts": "2026-09-10T07:31:06.178Z",
       "ticker": "AXISBANK",
       "stage": "quality-filter",
       "reasons": [
@@ -5905,24 +5906,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.52,
-      "pChange": 0.98,
-      "sector": 52,
-      "entryRefPrice": 1250,
+      "relVol": 0.55,
+      "pChange": 0.93,
+      "sector": 60,
+      "entryRefPrice": 1248.1,
       "yahooSymbol": "AXISBANK.NS",
       "discoveryParts": {
-        "closingStrength": 68.9,
-        "containedMomentum": 67.3,
-        "breadthRelative": 60.6,
-        "liquidity": 63.4,
-        "sector": 52,
+        "closingStrength": 64.9,
+        "containedMomentum": 67,
+        "breadthRelative": 58.8,
+        "liquidity": 69.2,
+        "sector": 60,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|ULTRACEMCO|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.178Z",
       "ticker": "ULTRACEMCO",
       "stage": "quality-filter",
       "reasons": [
@@ -5933,24 +5934,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.97,
-      "pChange": 0.19,
-      "sector": 43,
-      "entryRefPrice": 10956,
+      "relVol": 0.91,
+      "pChange": 0.41,
+      "sector": 57,
+      "entryRefPrice": 10934,
       "yahooSymbol": "ULTRACEMCO.NS",
       "discoveryParts": {
-        "closingStrength": 76.8,
-        "containedMomentum": 61.4,
-        "breadthRelative": 54.2,
-        "liquidity": 60.5,
-        "sector": 43,
+        "closingStrength": 79.1,
+        "containedMomentum": 63.1,
+        "breadthRelative": 54.6,
+        "liquidity": 64.5,
+        "sector": 57,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|FORCEMOT|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.178Z",
       "ticker": "FORCEMOT",
       "stage": "quality-filter",
       "reasons": [
@@ -5959,16 +5960,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 2.32,
-      "pChange": 2.54,
+      "relVol": 2.26,
+      "pChange": 3.66,
       "sector": 50,
-      "entryRefPrice": 17812,
+      "entryRefPrice": 18041,
       "yahooSymbol": "FORCEMOT.NS",
       "discoveryParts": {
-        "closingStrength": 64.3,
-        "containedMomentum": 79,
-        "breadthRelative": 73,
-        "liquidity": 63,
+        "closingStrength": 88.9,
+        "containedMomentum": 87.5,
+        "breadthRelative": 80.6,
+        "liquidity": 67.8,
         "sector": 50,
         "volAccel": 50
       }
@@ -6026,7 +6027,7 @@
     {
       "id": "2026-09-10|ADANIPORTS|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "ADANIPORTS",
       "stage": "quality-filter",
       "reasons": [
@@ -6035,16 +6036,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.53,
-      "pChange": -0.16,
+      "relVol": 1.26,
+      "pChange": -0.39,
       "sector": 50,
-      "entryRefPrice": 1769.3,
+      "entryRefPrice": 1765.7,
       "yahooSymbol": "ADANIPORTS.NS",
       "discoveryParts": {
-        "closingStrength": 73.6,
-        "containedMomentum": 44.8,
-        "breadthRelative": 51.4,
-        "liquidity": 75.7,
+        "closingStrength": 59.8,
+        "containedMomentum": 44.6,
+        "breadthRelative": 48.2,
+        "liquidity": 77.6,
         "sector": 50,
         "volAccel": 50
       }
@@ -6079,7 +6080,7 @@
     {
       "id": "2026-09-10|BHARTIARTL|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.179Z",
       "ticker": "BHARTIARTL",
       "stage": "quality-filter",
       "reasons": [
@@ -6090,16 +6091,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.59,
-      "pChange": 0.66,
+      "relVol": 0.55,
+      "pChange": 0.89,
       "sector": 50,
-      "entryRefPrice": 1826.3,
+      "entryRefPrice": 1830.3,
       "yahooSymbol": "BHARTIARTL.NS",
       "discoveryParts": {
-        "closingStrength": 73.3,
-        "containedMomentum": 65,
-        "breadthRelative": 58,
-        "liquidity": 76.7,
+        "closingStrength": 97.1,
+        "containedMomentum": 66.7,
+        "breadthRelative": 58.5,
+        "liquidity": 80.7,
         "sector": 50,
         "volAccel": 50
       }
@@ -6260,25 +6261,25 @@
     {
       "id": "2026-09-10|PNBHOUSING|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.179Z",
       "ticker": "PNBHOUSING",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹18Cr)"
+        "illiquid (₹28Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.47,
-      "pChange": 1.28,
-      "sector": 52,
-      "entryRefPrice": 1160.2,
+      "relVol": 0.52,
+      "pChange": 1.93,
+      "sector": 61,
+      "entryRefPrice": 1163.2,
       "yahooSymbol": "PNBHOUSING.NS",
       "discoveryParts": {
-        "closingStrength": 88.5,
-        "containedMomentum": 69.6,
-        "breadthRelative": 63,
-        "liquidity": 29.9,
-        "sector": 52,
+        "closingStrength": 96.9,
+        "containedMomentum": 74.5,
+        "breadthRelative": 66.8,
+        "liquidity": 36.6,
+        "sector": 61,
         "volAccel": 50
       }
     },
@@ -6360,24 +6361,24 @@
     {
       "id": "2026-09-10|BLUESTARCO|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "BLUESTARCO",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹24Cr)"
+        "illiquid (₹30Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.85,
-      "pChange": 1.43,
+      "relVol": 0.77,
+      "pChange": 1.75,
       "sector": 50,
-      "entryRefPrice": 1480.3,
+      "entryRefPrice": 1490.7,
       "yahooSymbol": "BLUESTARCO.NS",
       "discoveryParts": {
-        "closingStrength": 83.5,
-        "containedMomentum": 70.7,
-        "breadthRelative": 64.2,
-        "liquidity": 34.6,
+        "closingStrength": 95.3,
+        "containedMomentum": 73.1,
+        "breadthRelative": 65.4,
+        "liquidity": 38.2,
         "sector": 50,
         "volAccel": 50
       }
@@ -6422,7 +6423,7 @@
     {
       "id": "2026-09-10|CHOLAFIN|11:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:08.382Z",
+      "ts": "2026-09-10T07:31:10.698Z",
       "ticker": "CHOLAFIN",
       "stage": "core-gate",
       "reasons": [
@@ -6430,36 +6431,36 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 2.39,
+      "relVol": 2.5,
       "momentum": 25,
       "catalystScore": 0,
-      "confidence": 22,
-      "effectiveConfidence": 58.5,
+      "confidence": 30.1,
+      "effectiveConfidence": 66.5,
       "regime": "weak",
-      "sector": 52,
-      "techScore": 65.4,
+      "sector": 61,
+      "techScore": 70.7,
       "components": {
-        "technical": 46,
-        "flow": 64,
+        "technical": 50,
+        "flow": 67,
         "catalyst": 5,
-        "liquidity": 67
+        "liquidity": 73
       },
       "discoveryParts": {
-        "closingStrength": 98.2,
-        "containedMomentum": 72.3,
-        "breadthRelative": 65.8,
-        "liquidity": 66.8,
-        "sector": 52,
-        "volAccel": 64.1
+        "closingStrength": 93.8,
+        "containedMomentum": 74.4,
+        "breadthRelative": 66.7,
+        "liquidity": 72.6,
+        "sector": 61,
+        "volAccel": 52.7
       },
-      "institutional": 44,
-      "entryRefPrice": 1850.3,
+      "institutional": 47.3,
+      "entryRefPrice": 1864,
       "yahooSymbol": "CHOLAFIN.NS"
     },
     {
       "id": "2026-09-10|SHRIRAMFIN|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.725Z",
+      "ts": "2026-09-10T07:31:06.177Z",
       "ticker": "SHRIRAMFIN",
       "stage": "quality-filter",
       "reasons": [
@@ -6469,41 +6470,41 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.5,
-      "pChange": 0.33,
-      "sector": 52,
-      "entryRefPrice": 1033.8,
+      "relVol": 0.53,
+      "pChange": 0.79,
+      "sector": 61,
+      "entryRefPrice": 1036.4,
       "yahooSymbol": "SHRIRAMFIN.NS",
       "discoveryParts": {
-        "closingStrength": 83.9,
-        "containedMomentum": 62.5,
-        "breadthRelative": 55.4,
-        "liquidity": 54.5,
-        "sector": 52,
+        "closingStrength": 95.9,
+        "containedMomentum": 65.9,
+        "breadthRelative": 57.7,
+        "liquidity": 60.6,
+        "sector": 61,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|ASIANPAINT|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "ASIANPAINT",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹39Cr)"
+        "illiquid (₹52Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.62,
+      "relVol": 0.6,
       "pChange": -0.16,
       "sector": 50,
-      "entryRefPrice": 2488.7,
+      "entryRefPrice": 2487.5,
       "yahooSymbol": "ASIANPAINT.NS",
       "discoveryParts": {
-        "closingStrength": 98.8,
+        "closingStrength": 74.9,
         "containedMomentum": 44.8,
-        "breadthRelative": 51.4,
-        "liquidity": 42.3,
+        "breadthRelative": 50.1,
+        "liquidity": 47,
         "sector": 50,
         "volAccel": 50
       }
@@ -6511,7 +6512,7 @@
     {
       "id": "2026-09-10|PFC|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.179Z",
       "ticker": "PFC",
       "stage": "quality-filter",
       "reasons": [
@@ -6522,24 +6523,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.73,
-      "pChange": 0.47,
-      "sector": 52,
-      "entryRefPrice": 353.15,
+      "relVol": 0.75,
+      "pChange": 0.3,
+      "sector": 61,
+      "entryRefPrice": 351.55,
       "yahooSymbol": "PFC.NS",
       "discoveryParts": {
-        "closingStrength": 68.8,
-        "containedMomentum": 63.5,
-        "breadthRelative": 56.5,
-        "liquidity": 58.1,
-        "sector": 52,
+        "closingStrength": 57.8,
+        "containedMomentum": 62.3,
+        "breadthRelative": 53.8,
+        "liquidity": 63.5,
+        "sector": 61,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|LODHA|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.179Z",
       "ticker": "LODHA",
       "stage": "quality-filter",
       "reasons": [
@@ -6549,24 +6550,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.33,
-      "pChange": -0.03,
-      "sector": 50,
-      "entryRefPrice": 1171.2,
+      "relVol": 1.59,
+      "pChange": -0.22,
+      "sector": 58,
+      "entryRefPrice": 1162.1,
       "yahooSymbol": "LODHA.NS",
       "discoveryParts": {
-        "closingStrength": 81.1,
-        "containedMomentum": 45,
-        "breadthRelative": 52.5,
-        "liquidity": 56.7,
-        "sector": 50,
+        "closingStrength": 71.1,
+        "containedMomentum": 44.8,
+        "breadthRelative": 49.6,
+        "liquidity": 64.8,
+        "sector": 58,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|PERSISTENT|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.179Z",
       "ticker": "PERSISTENT",
       "stage": "quality-filter",
       "reasons": [
@@ -6576,16 +6577,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.1,
-      "pChange": 1.73,
+      "relVol": 1.31,
+      "pChange": 2.03,
       "sector": 47,
-      "entryRefPrice": 5513.5,
+      "entryRefPrice": 5525,
       "yahooSymbol": "PERSISTENT.NS",
       "discoveryParts": {
-        "closingStrength": 83.8,
-        "containedMomentum": 73,
-        "breadthRelative": 66.6,
-        "liquidity": 62.1,
+        "closingStrength": 83.6,
+        "containedMomentum": 75.2,
+        "breadthRelative": 67.6,
+        "liquidity": 70.2,
         "sector": 47,
         "volAccel": 50
       }
@@ -6619,7 +6620,7 @@
     {
       "id": "2026-09-10|POWERGRID|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.726Z",
+      "ts": "2026-09-10T07:31:06.179Z",
       "ticker": "POWERGRID",
       "stage": "quality-filter",
       "reasons": [
@@ -6629,24 +6630,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.09,
-      "pChange": 1.47,
-      "sector": 38,
-      "entryRefPrice": 270.15,
+      "relVol": 1.32,
+      "pChange": 1.97,
+      "sector": 39,
+      "entryRefPrice": 270.75,
       "yahooSymbol": "POWERGRID.NS",
       "discoveryParts": {
-        "closingStrength": 92.7,
-        "containedMomentum": 71,
-        "breadthRelative": 64.5,
-        "liquidity": 59,
-        "sector": 38,
+        "closingStrength": 92.1,
+        "containedMomentum": 74.8,
+        "breadthRelative": 67.1,
+        "liquidity": 67.3,
+        "sector": 39,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|HDFCBANK|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.178Z",
       "ticker": "HDFCBANK",
       "stage": "quality-filter",
       "reasons": [
@@ -6658,23 +6659,23 @@
       "evaluated": false,
       "outcome": null,
       "relVol": 1.08,
-      "pChange": 0.36,
-      "sector": 52,
-      "entryRefPrice": 691.75,
+      "pChange": 0.82,
+      "sector": 60,
+      "entryRefPrice": 692.5,
       "yahooSymbol": "HDFCBANK.NS",
       "discoveryParts": {
-        "closingStrength": 74.7,
-        "containedMomentum": 62.7,
-        "breadthRelative": 55.6,
-        "liquidity": 93.5,
-        "sector": 52,
+        "closingStrength": 90.3,
+        "containedMomentum": 66.2,
+        "breadthRelative": 57.9,
+        "liquidity": 95,
+        "sector": 60,
         "volAccel": 50
       }
     },
     {
       "id": "2026-09-10|M&M|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "M&M",
       "stage": "quality-filter",
       "reasons": [
@@ -6685,17 +6686,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.44,
-      "pChange": -0.64,
-      "sector": 39,
-      "entryRefPrice": 3132.7,
+      "relVol": 1.34,
+      "pChange": -0.52,
+      "sector": 38,
+      "entryRefPrice": 3132.2,
       "yahooSymbol": "M&M.NS",
       "discoveryParts": {
-        "closingStrength": 65.2,
-        "containedMomentum": 44.4,
-        "breadthRelative": 47.6,
-        "liquidity": 77.9,
-        "sector": 39,
+        "closingStrength": 73.2,
+        "containedMomentum": 44.5,
+        "breadthRelative": 47.2,
+        "liquidity": 81.9,
+        "sector": 38,
         "volAccel": 50
       }
     },
@@ -6753,7 +6754,7 @@
     {
       "id": "2026-09-10|MAHABANK|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "MAHABANK",
       "stage": "quality-filter",
       "reasons": [
@@ -6762,16 +6763,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.29,
-      "pChange": 0.83,
+      "relVol": 1.12,
+      "pChange": 1.05,
       "sector": 50,
-      "entryRefPrice": 85.24,
+      "entryRefPrice": 85.1,
       "yahooSymbol": "MAHABANK.NS",
       "discoveryParts": {
-        "closingStrength": 46.2,
-        "containedMomentum": 66.2,
-        "breadthRelative": 59.4,
-        "liquidity": 53.4,
+        "closingStrength": 56.5,
+        "containedMomentum": 67.9,
+        "breadthRelative": 59.8,
+        "liquidity": 56.3,
         "sector": 50,
         "volAccel": 50
       }
@@ -6830,25 +6831,25 @@
     {
       "id": "2026-09-10|AUBANK|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.727Z",
+      "ts": "2026-09-10T07:31:06.178Z",
       "ticker": "AUBANK",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹35Cr)"
+        "illiquid (₹48Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.51,
-      "pChange": -0.52,
-      "sector": 52,
-      "entryRefPrice": 1054.8,
+      "relVol": 0.5,
+      "pChange": 0.02,
+      "sector": 60,
+      "entryRefPrice": 1058.2,
       "yahooSymbol": "AUBANK.NS",
       "discoveryParts": {
-        "closingStrength": 66.7,
-        "containedMomentum": 44.5,
-        "breadthRelative": 48.6,
-        "liquidity": 40.8,
-        "sector": 52,
+        "closingStrength": 91.2,
+        "containedMomentum": 60.1,
+        "breadthRelative": 51.5,
+        "liquidity": 45.7,
+        "sector": 60,
         "volAccel": 50
       }
     },
@@ -6933,25 +6934,338 @@
     {
       "id": "2026-09-10|SBILIFE|12:01",
       "date": "2026-09-10",
-      "ts": "2026-09-10T06:31:06.728Z",
+      "ts": "2026-09-10T07:31:06.180Z",
       "ticker": "SBILIFE",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹21Cr)"
+        "illiquid (₹32Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.31,
-      "pChange": -0.12,
-      "sector": 52,
-      "entryRefPrice": 1685.7,
+      "relVol": 0.35,
+      "pChange": 0.36,
+      "sector": 61,
+      "entryRefPrice": 1695,
       "yahooSymbol": "SBILIFE.NS",
       "discoveryParts": {
-        "closingStrength": 60.2,
+        "closingStrength": 67.1,
+        "containedMomentum": 62.7,
+        "breadthRelative": 54.2,
+        "liquidity": 38.9,
+        "sector": 61,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|MUTHOOTFIN|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.177Z",
+      "ticker": "MUTHOOTFIN",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.47,
+      "pChange": 1.14,
+      "sector": 61,
+      "entryRefPrice": 2846.8,
+      "yahooSymbol": "MUTHOOTFIN.NS",
+      "discoveryParts": {
+        "closingStrength": 85.4,
+        "containedMomentum": 68.5,
+        "breadthRelative": 60.5,
+        "liquidity": 53.3,
+        "sector": 61,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|GRASIM|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.177Z",
+      "ticker": "GRASIM",
+      "stage": "quality-filter",
+      "reasons": [
+        "volumeSurge"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.55,
+      "pChange": 0.28,
+      "sector": 57,
+      "entryRefPrice": 3305.8,
+      "yahooSymbol": "GRASIM.NS",
+      "discoveryParts": {
+        "closingStrength": 83.8,
+        "containedMomentum": 62.1,
+        "breadthRelative": 53.6,
+        "liquidity": 62.4,
+        "sector": 57,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|LT|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.178Z",
+      "ticker": "LT",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.12,
+      "pChange": 0.83,
+      "sector": 34,
+      "entryRefPrice": 3945.5,
+      "yahooSymbol": "LT.NS",
+      "discoveryParts": {
+        "closingStrength": 81.1,
+        "containedMomentum": 66.2,
+        "breadthRelative": 58,
+        "liquidity": 78.9,
+        "sector": 34,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|MANAPPURAM|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.178Z",
+      "ticker": "MANAPPURAM",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.78,
+      "pChange": 2.83,
+      "sector": 50,
+      "entryRefPrice": 329,
+      "yahooSymbol": "MANAPPURAM.NS",
+      "discoveryParts": {
+        "closingStrength": 97.3,
+        "containedMomentum": 81.2,
+        "breadthRelative": 74,
+        "liquidity": 54.5,
+        "sector": 50,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|ABCAPITAL|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.179Z",
+      "ticker": "ABCAPITAL",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹34Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.48,
+      "pChange": -0.1,
+      "sector": 61,
+      "entryRefPrice": 398.65,
+      "yahooSymbol": "ABCAPITAL.NS",
+      "discoveryParts": {
+        "closingStrength": 93.8,
         "containedMomentum": 44.9,
-        "breadthRelative": 51.8,
-        "liquidity": 32,
-        "sector": 52,
+        "breadthRelative": 50.6,
+        "liquidity": 40.2,
+        "sector": 61,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|PRESTIGE|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.179Z",
+      "ticker": "PRESTIGE",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹24Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.53,
+      "pChange": 0.03,
+      "sector": 58,
+      "entryRefPrice": 1540.6,
+      "yahooSymbol": "PRESTIGE.NS",
+      "discoveryParts": {
+        "closingStrength": 87.8,
+        "containedMomentum": 60.2,
+        "breadthRelative": 51.6,
+        "liquidity": 34.3,
+        "sector": 58,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|ICICIPRULI|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.179Z",
+      "ticker": "ICICIPRULI",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹32Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.92,
+      "pChange": 0.32,
+      "sector": 50,
+      "entryRefPrice": 463.6,
+      "yahooSymbol": "ICICIPRULI.NS",
+      "discoveryParts": {
+        "closingStrength": 83.7,
+        "containedMomentum": 62.4,
+        "breadthRelative": 53.9,
+        "liquidity": 38.8,
+        "sector": 50,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|DELHIVERY|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.179Z",
+      "ticker": "DELHIVERY",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹41Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.69,
+      "pChange": -0.16,
+      "sector": 50,
+      "entryRefPrice": 450.3,
+      "yahooSymbol": "DELHIVERY.NS",
+      "discoveryParts": {
+        "closingStrength": 92,
+        "containedMomentum": 44.8,
+        "breadthRelative": 50.1,
+        "liquidity": 43,
+        "sector": 50,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|SBICARD|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.179Z",
+      "ticker": "SBICARD",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹53Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.38,
+      "pChange": 0.04,
+      "sector": 50,
+      "entryRefPrice": 667.8,
+      "yahooSymbol": "SBICARD.NS",
+      "discoveryParts": {
+        "closingStrength": 77.5,
+        "containedMomentum": 60.3,
+        "breadthRelative": 51.7,
+        "liquidity": 47.5,
+        "sector": 50,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|YESBANK|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.179Z",
+      "ticker": "YESBANK",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹61Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.93,
+      "pChange": 0,
+      "sector": 60,
+      "entryRefPrice": 22.37,
+      "yahooSymbol": "YESBANK.NS",
+      "discoveryParts": {
+        "closingStrength": 70,
+        "containedMomentum": 60,
+        "breadthRelative": 51.4,
+        "liquidity": 49.8,
+        "sector": 60,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|HDFCLIFE|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.180Z",
+      "ticker": "HDFCLIFE",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.44,
+      "pChange": 1.24,
+      "sector": 61,
+      "entryRefPrice": 519.85,
+      "yahooSymbol": "HDFCLIFE.NS",
+      "discoveryParts": {
+        "closingStrength": 83.5,
+        "containedMomentum": 69.3,
+        "breadthRelative": 61.3,
+        "liquidity": 61.8,
+        "sector": 61,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-09-10|ETERNAL|13:01",
+      "date": "2026-09-10",
+      "ts": "2026-09-10T07:31:06.180Z",
+      "ticker": "ETERNAL",
+      "stage": "quality-filter",
+      "reasons": [
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.28,
+      "pChange": 0.5,
+      "sector": 53,
+      "entryRefPrice": 321.65,
+      "yahooSymbol": "ETERNAL.NS",
+      "discoveryParts": {
+        "closingStrength": 86.9,
+        "containedMomentum": 63.8,
+        "breadthRelative": 55.4,
+        "liquidity": 69.7,
+        "sector": 53,
         "volAccel": 50
       }
     }
