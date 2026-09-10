@@ -51,13 +51,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-09-10T06:31:08.381Z",
+          "relVol": 2.46,
+          "confidence": 38.7,
+          "components": {
+            "technical": 77,
+            "flow": 70,
+            "catalyst": 9,
+            "liquidity": 93
+          },
+          "discoveryScore": 69.2,
+          "catalystType": "broker upgrade",
+          "verification": "UNVERIFIED",
+          "volume": 5142834,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 29.7,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -8,
-      "trendBonus": 0
+      "lastSeen": "12:01",
+      "bestConfidence": 38.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 4.5,
+      "trendBonus": 5.4
     },
     "OIL": {
       "ticker": "OIL",
@@ -124,13 +146,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-09-10T06:31:08.381Z",
+          "relVol": 2.39,
+          "confidence": 22,
+          "components": {
+            "technical": 46,
+            "flow": 64,
+            "catalyst": 5,
+            "liquidity": 67
+          },
+          "discoveryScore": 72.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 921533,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 12.5,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "12:01",
+      "bestConfidence": 22,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 9.5,
+      "trendBonus": 4
     }
   }
 }
