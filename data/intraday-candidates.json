@@ -29,12 +29,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:01",
+          "ts": "2026-09-11T05:31:11.243Z",
+          "relVol": 4.92,
+          "confidence": 31.3,
+          "components": {
+            "technical": 64,
+            "flow": 92,
+            "catalyst": 5,
+            "liquidity": 74
+          },
+          "discoveryScore": 65.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4819127,
+          "sessionFrac": 0.2826666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
+      "lastSeen": "11:01",
       "bestConfidence": 45.8,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -14.5,
       "trendBonus": 0
     },
     "ATHERENERG": {
@@ -66,10 +88,69 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:01",
+          "ts": "2026-09-11T05:31:11.244Z",
+          "relVol": 1.83,
+          "confidence": 5,
+          "components": {
+            "technical": 53,
+            "flow": 61,
+            "catalyst": 5,
+            "liquidity": 82
+          },
+          "discoveryScore": 69.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2551253,
+          "sessionFrac": 0.2826666666666667,
+          "missing": [
+            "relVol 1.83<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
+      "lastSeen": "11:01",
       "bestConfidence": 6.2,
+      "confidenceTrend": "flat",
+      "confidenceSlope": -1.2,
+      "trendBonus": 0
+    },
+    "PAYTM": {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
+      "sector": "Financials",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-09-11T05:31:11.243Z",
+          "relVol": 3.98,
+          "confidence": 40.1,
+          "components": {
+            "technical": 84,
+            "flow": 82,
+            "catalyst": 5,
+            "liquidity": 92
+          },
+          "discoveryScore": 71.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4408090,
+          "sessionFrac": 0.2826666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 40.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
