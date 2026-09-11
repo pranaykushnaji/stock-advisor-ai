@@ -73,13 +73,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-09-11T08:30:38.239Z",
+          "relVol": 3.22,
+          "confidence": 16.9,
+          "components": {
+            "technical": 54,
+            "flow": 91,
+            "catalyst": 5,
+            "liquidity": 84
+          },
+          "discoveryScore": 70.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 8462113,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
+      "lastSeen": "14:00",
       "bestConfidence": 53.3,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 3.75,
-      "trendBonus": 4.5
+      "confidenceTrend": "falling",
+      "confidenceSlope": -6.47,
+      "trendBonus": 0
     },
     "ATHERENERG": {
       "ticker": "ATHERENERG",
@@ -213,12 +235,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-09-11T08:30:38.238Z",
+          "relVol": 2.36,
+          "confidence": 33,
+          "components": {
+            "technical": 82,
+            "flow": 71,
+            "catalyst": 4,
+            "liquidity": 95
+          },
+          "discoveryScore": 75,
+          "catalystType": "new product",
+          "verification": "UNVERIFIED",
+          "volume": 7044876,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
+      "lastSeen": "14:00",
       "bestConfidence": 40.1,
       "confidenceTrend": "falling",
-      "confidenceSlope": -16.3,
+      "confidenceSlope": -4.22,
       "trendBonus": 0
     }
   }
