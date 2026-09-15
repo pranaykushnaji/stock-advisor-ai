@@ -3,11 +3,12 @@
     "date": "2026-09-15",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-15T08:30:31.974Z",
+    "pickedAt": "2026-09-15T09:30:32.220Z",
     "rejected": [
       {
         "ticker": "DABUR",
         "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
           "near52wHigh"
         ]
@@ -22,7 +23,16 @@
       {
         "ticker": "SONACOMS",
         "reasons": [
-          "illiquid (₹59Cr)"
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "MAXHEALTH",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -34,7 +44,7 @@
         ]
       },
       {
-        "ticker": "ALKEM",
+        "ticker": "COLPAL",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -43,10 +53,16 @@
         ]
       },
       {
-        "ticker": "COLPAL",
+        "ticker": "TECHM",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
         "reasons": [
           "priceAboveEma20",
-          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
@@ -61,34 +77,7 @@
         ]
       },
       {
-        "ticker": "RADICO",
-        "reasons": [
-          "illiquid (₹58Cr)"
-        ]
-      },
-      {
-        "ticker": "NAUKRI",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TECHM",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KALYANKJIL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "DMART",
+        "ticker": "ALKEM",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -108,7 +97,27 @@
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MANKIND",
+        "reasons": [
+          "illiquid (₹68Cr)"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KALYANKJIL",
+        "reasons": [
+          "volumeSurge"
         ]
       },
       {
@@ -120,6 +129,12 @@
         ]
       },
       {
+        "ticker": "FEDERALBNK",
+        "reasons": [
+          "illiquid (₹73Cr)"
+        ]
+      },
+      {
         "ticker": "SAGILITY",
         "reasons": [
           "volumeSurge",
@@ -127,31 +142,17 @@
         ]
       },
       {
-        "ticker": "HEROMOTOCO",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SRF",
-        "reasons": [
-          "illiquid (₹22Cr)"
-        ]
-      },
-      {
-        "ticker": "ONGC",
+        "ticker": "SUNPHARMA",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "priceAboveEma20",
           "volumeSurge",
           "near52wHigh"
         ]
