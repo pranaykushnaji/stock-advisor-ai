@@ -1,11 +1,45 @@
 {
-  "date": "2026-09-11",
-  "builtAt": "2026-09-11T02:36:09.234Z",
+  "date": "2026-09-15",
+  "builtAt": "2026-09-15T02:35:31.656Z",
   "marketContext": {
     "tone": "weak",
-    "summary": "Deterministic NSE breadth fallback: 36% advancers, average move -0.15%.",
+    "summary": "Deterministic NSE breadth fallback: 32% advancers, average move -0.54%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": []
+  "watch": [
+    {
+      "ticker": "UNOMINDA",
+      "source": "overnight-filing",
+      "catalyst": {
+        "points": 26,
+        "hasCatalyst": true,
+        "negative": false,
+        "type": "capacity expansion",
+        "confidence": 90,
+        "impact": 7,
+        "stars": 4,
+        "freshness": 0.949,
+        "decay": 0.949,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.45,
+        "evidenceVersion": 2,
+        "eventPublishedAt": 1789400421000,
+        "hasFiling": true,
+        "evidence": [
+          {
+            "articleId": 2,
+            "title": "[OFFICIAL NSE FILING] Capacity addition",
+            "url": null,
+            "publisher": "nse-filing"
+          }
+        ],
+        "verification": "VERIFIED",
+        "sources": 1,
+        "summary": "UNOMINDA announced capacity addition to boost production."
+      },
+      "prevClose": 1201.6
+    }
+  ]
 }
