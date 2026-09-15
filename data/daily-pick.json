@@ -2,24 +2,147 @@
   "pick": {
     "date": "2026-09-15",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-15T04:30:38.500Z",
-    "regime": "weak",
-    "market": "weak (v2 score 42, conf 42) — trend 14, breadth 31, vol-factor 99",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-15T05:30:29.048Z",
+    "rejected": [
       {
-        "ticker": "OFSS",
-        "relVol": 2.3,
-        "confidence": 37.7,
-        "effectiveConfidence": 60,
-        "institutional": 63.7,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
+        "ticker": "HCLTECH",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TECHM",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KPITTECH",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TCS",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DABUR",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INFY",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ALKEM",
+        "reasons": [
+          "illiquid (₹45Cr)"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KALYANKJIL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "WIPRO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ONGC",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "RADICO",
+        "reasons": [
+          "illiquid (₹31Cr)"
+        ]
+      },
+      {
+        "ticker": "HEROMOTOCO",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SAGILITY",
+        "reasons": [
+          "illiquid (₹35Cr)"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
       }
     ]
   }
