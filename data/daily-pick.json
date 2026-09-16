@@ -1,161 +1,25 @@
 {
   "pick": {
-    "date": "2026-09-15",
+    "date": "2026-09-16",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-15T09:30:32.220Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-16T04:30:37.452Z",
+    "regime": "weak",
+    "market": "weak (v2 score 34, conf 41) — trend 13, breadth 25, vol-factor 96",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "DABUR",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SONACOMS",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MAXHEALTH",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COLPAL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TECHM",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NAUKRI",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDUNILVR",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ALKEM",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HDFCBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INFY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MANKIND",
-        "reasons": [
-          "illiquid (₹68Cr)"
-        ]
-      },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KALYANKJIL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "FEDERALBNK",
-        "reasons": [
-          "illiquid (₹73Cr)"
-        ]
-      },
-      {
-        "ticker": "SAGILITY",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SUNPHARMA",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+        "ticker": "PAYTM",
+        "relVol": 12.8,
+        "confidence": 27.9,
+        "effectiveConfidence": 69.9,
+        "institutional": 72.9,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 3,
+        "negative": false
       }
     ]
   }
