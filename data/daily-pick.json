@@ -2,161 +2,23 @@
   "pick": {
     "date": "2026-09-16",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-16T07:30:31.288Z",
-    "rejected": [
-      {
-        "ticker": "PATANJALI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
+    "reason": "PAYTM failed neutral-market entry gates: reward/risk 1.06 < 1.8; historical net edge -1.26% ≤ 0",
+    "pickedAt": "2026-09-16T08:30:33.709Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 52, conf 54) — trend 14, breadth 55, vol-factor 96",
+    "candidate": {
+      "ticker": "PAYTM",
+      "confidence": 37.9,
+      "effectiveConfidence": 79.3,
+      "rewardRisk": {
+        "model": "technical-scenario-v2",
+        "isForecast": false,
+        "rr": 1.06,
+        "upsidePct": 6.5,
+        "downsidePct": 6.1
       },
-      {
-        "ticker": "NESTLEIND",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SBIN",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TATASTEEL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JINDALSTEL",
-        "reasons": [
-          "illiquid (₹33Cr)"
-        ]
-      },
-      {
-        "ticker": "JUBLFOOD",
-        "reasons": [
-          "illiquid (₹12Cr)"
-        ]
-      },
-      {
-        "ticker": "MARICO",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50"
-        ]
-      },
-      {
-        "ticker": "VBL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CUMMINSIND",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CANBK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "POLICYBZR",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BHARATFORG",
-        "reasons": [
-          "illiquid (₹68Cr)"
-        ]
-      },
-      {
-        "ticker": "OBEROIRLTY",
-        "reasons": [
-          "illiquid (₹56Cr)"
-        ]
-      },
-      {
-        "ticker": "HINDALCO",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CONCOR",
-        "reasons": [
-          "illiquid (₹16Cr)"
-        ]
-      },
-      {
-        "ticker": "ICICIGI",
-        "reasons": [
-          "illiquid (₹26Cr)"
-        ]
-      },
-      {
-        "ticker": "PRESTIGE",
-        "reasons": [
-          "illiquid (₹43Cr)"
-        ]
-      },
-      {
-        "ticker": "POLYCAB",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ITC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COLPAL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      }
-    ]
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
