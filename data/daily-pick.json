@@ -2,24 +2,153 @@
   "pick": {
     "date": "2026-09-16",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-16T04:30:37.452Z",
-    "regime": "weak",
-    "market": "weak (v2 score 34, conf 41) — trend 13, breadth 25, vol-factor 96",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-16T05:30:36.523Z",
+    "rejected": [
       {
-        "ticker": "PAYTM",
-        "relVol": 12.8,
-        "confidence": 27.9,
-        "effectiveConfidence": 69.9,
-        "institutional": 72.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 3,
-        "negative": false
+        "ticker": "M&M",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SBIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CUMMINSIND",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PATANJALI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DIXON",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "POLYCAB",
+        "reasons": [
+          "illiquid (₹69Cr)"
+        ]
+      },
+      {
+        "ticker": "BLUESTARCO",
+        "reasons": [
+          "illiquid (₹17Cr)"
+        ]
+      },
+      {
+        "ticker": "CANBK",
+        "reasons": [
+          "illiquid (₹62Cr)"
+        ]
+      },
+      {
+        "ticker": "AXISBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MARICO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KEI",
+        "reasons": [
+          "illiquid (₹65Cr)"
+        ]
+      },
+      {
+        "ticker": "VBL",
+        "reasons": [
+          "illiquid (₹49Cr)"
+        ]
+      },
+      {
+        "ticker": "MUTHOOTFIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HAVELLS",
+        "reasons": [
+          "illiquid (₹17Cr)"
+        ]
+      },
+      {
+        "ticker": "RELIANCE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "NESTLEIND",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JINDALSTEL",
+        "reasons": [
+          "illiquid (₹19Cr)"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "OBEROIRLTY",
+        "reasons": [
+          "illiquid (₹22Cr)"
+        ]
+      },
+      {
+        "ticker": "BANKINDIA",
+        "reasons": [
+          "illiquid (₹19Cr)"
+        ]
       }
     ]
   }
