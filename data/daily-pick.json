@@ -1,24 +1,137 @@
 {
   "pick": {
-    "date": "2026-09-16",
+    "date": "2026-09-17",
     "noTrade": true,
-    "reason": "PAYTM failed neutral-market entry gates: reward/risk 1.03 < 1.8; historical net edge -1.26% ≤ 0",
-    "pickedAt": "2026-09-16T09:30:45.917Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 55, conf 51) — trend 13, breadth 57, vol-factor 96",
-    "candidate": {
-      "ticker": "PAYTM",
-      "confidence": 39.5,
-      "effectiveConfidence": 84.1,
-      "rewardRisk": {
-        "model": "technical-scenario-v2",
-        "isForecast": false,
-        "rr": 1.03,
-        "upsidePct": 6.3,
-        "downsidePct": 6.1
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-17T04:30:31.576Z",
+    "rejected": [
+      {
+        "ticker": "INDUSINDBK",
+        "reasons": [
+          "illiquid (₹66Cr)"
+        ]
       },
-      "catalyst": "no catalyst",
-      "verification": "UNVERIFIED"
-    }
+      {
+        "ticker": "BSE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "FORTIS",
+        "reasons": [
+          "illiquid (₹14Cr)"
+        ]
+      },
+      {
+        "ticker": "PNB",
+        "reasons": [
+          "illiquid (₹61Cr)"
+        ]
+      },
+      {
+        "ticker": "KAYNES",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SONACOMS",
+        "reasons": [
+          "illiquid (₹61Cr)"
+        ]
+      },
+      {
+        "ticker": "MOTHERSON",
+        "reasons": [
+          "illiquid (₹22Cr)"
+        ]
+      },
+      {
+        "ticker": "M&M",
+        "reasons": [
+          "illiquid (₹57Cr)"
+        ]
+      },
+      {
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "illiquid (₹13Cr)"
+        ]
+      },
+      {
+        "ticker": "AXISBANK",
+        "reasons": [
+          "illiquid (₹50Cr)"
+        ]
+      },
+      {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "illiquid (₹25Cr)"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
+          "illiquid (₹12Cr)"
+        ]
+      },
+      {
+        "ticker": "APLAPOLLO",
+        "reasons": [
+          "illiquid (₹14Cr)"
+        ]
+      },
+      {
+        "ticker": "CANBK",
+        "reasons": [
+          "illiquid (₹32Cr)"
+        ]
+      },
+      {
+        "ticker": "JIOFIN",
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "RBLBANK",
+        "reasons": [
+          "illiquid (₹12Cr)"
+        ]
+      },
+      {
+        "ticker": "SHRIRAMFIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHEL",
+        "reasons": [
+          "illiquid (₹45Cr)"
+        ]
+      },
+      {
+        "ticker": "DIVISLAB",
+        "reasons": [
+          "illiquid (₹57Cr)"
+        ]
+      },
+      {
+        "ticker": "MCX",
+        "reasons": [
+          "volumeSurge"
+        ]
+      }
+    ]
   }
 }
