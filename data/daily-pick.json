@@ -3,12 +3,35 @@
     "date": "2026-09-17",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-17T08:30:29.504Z",
+    "pickedAt": "2026-09-17T09:30:29.643Z",
     "rejected": [
+      {
+        "ticker": "POWERINDIA",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MOTHERSON",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
       {
         "ticker": "BLUESTARCO",
         "reasons": [
-          "illiquid (₹53Cr)"
+          "illiquid (₹66Cr)"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
         ]
       },
       {
@@ -30,17 +53,9 @@
         ]
       },
       {
-        "ticker": "MOTHERSON",
+        "ticker": "BHEL",
         "reasons": [
-          "priceAboveEma20",
           "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "DRREDDY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
         ]
       },
       {
@@ -51,21 +66,19 @@
         ]
       },
       {
-        "ticker": "BHEL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "AMBER",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
         "ticker": "ABCAPITAL",
         "reasons": [
-          "illiquid (₹74Cr)"
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -78,16 +91,42 @@
         ]
       },
       {
-        "ticker": "SHRIRAMFIN",
+        "ticker": "FORCEMOT",
         "reasons": [
-          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
+        "ticker": "TATASTEEL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INDHOTEL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
         "ticker": "SBILIFE",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "AMBER",
+        "reasons": [
+          "illiquid (₹56Cr)"
+        ]
+      },
+      {
+        "ticker": "TMPV",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -102,56 +141,15 @@
         ]
       },
       {
-        "ticker": "MFSL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JIOFIN",
+        "ticker": "LTM",
         "reasons": [
           "priceAboveEma20",
-          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "POWERINDIA",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ICICIPRULI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LT",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ALKEM",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CDSL",
+        "ticker": "LTF",
         "reasons": [
           "priceAboveEma20",
           "volumeSurge",
