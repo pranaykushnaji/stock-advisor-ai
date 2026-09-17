@@ -3,30 +3,49 @@
     "date": "2026-09-17",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-17T06:30:29.791Z",
+    "pickedAt": "2026-09-17T07:30:33.940Z",
     "rejected": [
       {
-        "ticker": "DRREDDY",
+        "ticker": "LT",
         "reasons": [
-          "illiquid (₹58Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "CUMMINSIND",
+        "ticker": "DRREDDY",
         "reasons": [
-          "illiquid (₹62Cr)"
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "illiquid (₹72Cr)"
         ]
       },
       {
         "ticker": "MOTHERSON",
         "reasons": [
-          "illiquid (₹44Cr)"
+          "illiquid (₹63Cr)"
         ]
       },
       {
-        "ticker": "SONACOMS",
+        "ticker": "FORTIS",
         "reasons": [
-          "priceAboveEma20"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHEL",
+        "reasons": [
+          "volumeSurge"
         ]
       },
       {
@@ -39,7 +58,13 @@
         ]
       },
       {
-        "ticker": "M&M",
+        "ticker": "HDFCLIFE",
+        "reasons": [
+          "near upper circuit"
+        ]
+      },
+      {
+        "ticker": "CUMMINSIND",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -48,26 +73,30 @@
         ]
       },
       {
-        "ticker": "HDFCLIFE",
+        "ticker": "COFORGE",
         "reasons": [
-          "ema20AboveEma50",
+          "priceAboveEma20",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "FORTIS",
+        "ticker": "SHRIRAMFIN",
         "reasons": [
-          "illiquid (₹61Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
         "ticker": "BLUESTARCO",
         "reasons": [
-          "illiquid (₹29Cr)"
+          "illiquid (₹42Cr)"
         ]
       },
       {
-        "ticker": "LT",
+        "ticker": "ULTRACEMCO",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -76,66 +105,51 @@
         ]
       },
       {
-        "ticker": "HINDZINC",
+        "ticker": "PHOENIXLTD",
         "reasons": [
-          "illiquid (₹63Cr)"
+          "illiquid (₹19Cr)"
         ]
       },
       {
-        "ticker": "KAYNES",
+        "ticker": "LTF",
         "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
+          "illiquid (₹54Cr)"
         ]
       },
       {
-        "ticker": "AXISBANK",
+        "ticker": "SONACOMS",
         "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INDHOTEL",
-        "reasons": [
-          "illiquid (₹51Cr)"
-        ]
-      },
-      {
-        "ticker": "DLF",
-        "reasons": [
-          "illiquid (₹57Cr)"
-        ]
-      },
-      {
-        "ticker": "KFINTECH",
-        "reasons": [
-          "illiquid (₹16Cr)"
-        ]
-      },
-      {
-        "ticker": "ICICIPRULI",
-        "reasons": [
-          "illiquid (₹51Cr)"
-        ]
-      },
-      {
-        "ticker": "DIVISLAB",
-        "reasons": [
-          "volumeSurge"
+          "priceAboveEma20"
         ]
       },
       {
         "ticker": "MFSL",
         "reasons": [
-          "illiquid (₹61Cr)"
+          "near upper circuit"
         ]
       },
       {
-        "ticker": "CDSL",
+        "ticker": "TECHM",
         "reasons": [
           "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "POWERINDIA",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SBILIFE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       }
