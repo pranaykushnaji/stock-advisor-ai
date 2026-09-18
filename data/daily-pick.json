@@ -2,154 +2,24 @@
   "pick": {
     "date": "2026-09-18",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-18T07:30:30.978Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-18T08:30:32.356Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 60, conf 47) — trend 14, breadth 73, vol-factor 95",
+    "momLaneOpen": true,
+    "considered": [
       {
-        "ticker": "BHARATFORG",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BANDHANBNK",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ABCAPITAL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "COCHINSHIP",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PRESTIGE",
-        "reasons": [
-          "illiquid (₹30Cr)"
-        ]
-      },
-      {
-        "ticker": "POWERINDIA",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PIDILITIND",
-        "reasons": [
-          "illiquid (₹69Cr)"
-        ]
-      },
-      {
-        "ticker": "BEL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PATANJALI",
-        "reasons": [
-          "illiquid (₹37Cr)"
-        ]
-      },
-      {
-        "ticker": "COLPAL",
-        "reasons": [
-          "illiquid (₹34Cr)"
-        ]
-      },
-      {
-        "ticker": "MAHABANK",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTHERSON",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "GAIL",
-        "reasons": [
-          "illiquid (₹49Cr)"
-        ]
-      },
-      {
-        "ticker": "LODHA",
-        "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CONCOR",
-        "reasons": [
-          "illiquid (₹36Cr)"
-        ]
-      },
-      {
-        "ticker": "HDFCBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LT",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SHRIRAMFIN",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TVSMOTOR",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "DLF",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+        "ticker": "SONACOMS",
+        "relVol": 2.28,
+        "confidence": 31.4,
+        "effectiveConfidence": 63.1,
+        "institutional": 57.1,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 6,
+        "negative": false
       }
     ]
   }
