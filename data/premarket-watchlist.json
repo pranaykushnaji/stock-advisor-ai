@@ -1,11 +1,45 @@
 {
-  "date": "2026-09-17",
-  "builtAt": "2026-09-17T02:35:31.030Z",
+  "date": "2026-09-18",
+  "builtAt": "2026-09-18T02:35:32.314Z",
   "marketContext": {
-    "tone": "neutral",
-    "summary": "Deterministic NSE breadth fallback: 55% advancers, average move +0.16%.",
+    "tone": "bullish",
+    "summary": "Deterministic NSE breadth fallback: 77% advancers, average move +0.88%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": []
+  "watch": [
+    {
+      "ticker": "ASIANPAINT",
+      "source": "overnight-filing",
+      "catalyst": {
+        "points": 26,
+        "hasCatalyst": true,
+        "negative": false,
+        "type": "capacity expansion",
+        "confidence": 92,
+        "impact": 8,
+        "stars": 4,
+        "freshness": 0.953,
+        "decay": 0.953,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.42,
+        "evidenceVersion": 2,
+        "eventPublishedAt": 1789662362000,
+        "hasFiling": true,
+        "evidence": [
+          {
+            "articleId": 1,
+            "title": "[OFFICIAL NSE FILING] Commencement of commercial production/operations",
+            "url": null,
+            "publisher": "nse-filing"
+          }
+        ],
+        "verification": "VERIFIED",
+        "sources": 1,
+        "summary": "Started commercial production, adding new capacity."
+      },
+      "prevClose": 2454
+    }
+  ]
 }
