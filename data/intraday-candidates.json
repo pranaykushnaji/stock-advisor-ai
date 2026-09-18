@@ -1,4 +1,42 @@
 {
-  "date": "2026-09-17",
-  "candidates": {}
+  "date": "2026-09-18",
+  "candidates": {
+    "BHEL": {
+      "ticker": "BHEL",
+      "fullName": "Bharat Heavy Electricals Limited",
+      "sector": "Infra",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-09-18T04:30:30.979Z",
+          "relVol": 1.9,
+          "confidence": 39.9,
+          "components": {
+            "technical": 67,
+            "flow": 60,
+            "catalyst": 5,
+            "liquidity": 54
+          },
+          "discoveryScore": 64,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1800177,
+          "sessionFrac": 0.15,
+          "missing": [
+            "relVol 1.9<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 39.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
