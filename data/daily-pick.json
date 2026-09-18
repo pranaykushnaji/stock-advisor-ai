@@ -1,160 +1,25 @@
 {
   "pick": {
-    "date": "2026-09-17",
+    "date": "2026-09-18",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-17T09:30:29.643Z",
-    "rejected": [
-      {
-        "ticker": "POWERINDIA",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTHERSON",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "BLUESTARCO",
-        "reasons": [
-          "illiquid (₹66Cr)"
-        ]
-      },
-      {
-        "ticker": "DRREDDY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CUMMINSIND",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GVT&D",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-18T04:30:34.108Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 60, conf 45) — trend 14, breadth 75, vol-factor 95",
+    "momLaneOpen": true,
+    "considered": [
       {
         "ticker": "BHEL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "HDFCLIFE",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ABCAPITAL",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ASHOKLEY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "FORCEMOT",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TATASTEEL",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INDHOTEL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "SBILIFE",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AMBER",
-        "reasons": [
-          "illiquid (₹56Cr)"
-        ]
-      },
-      {
-        "ticker": "TMPV",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TVSMOTOR",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LTF",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+        "relVol": 1.9,
+        "confidence": 39.9,
+        "effectiveConfidence": 61.4,
+        "institutional": 64.3,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 7,
+        "negative": false
       }
     ]
   }
