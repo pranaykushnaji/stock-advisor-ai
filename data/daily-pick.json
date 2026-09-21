@@ -1,25 +1,130 @@
 {
   "pick": {
-    "date": "2026-09-18",
+    "date": "2026-09-21",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-18T09:30:31.258Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 65, conf 43) — trend 15, breadth 79, vol-factor 95",
-    "momLaneOpen": true,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-21T04:30:27.156Z",
+    "rejected": [
       {
-        "ticker": "SONACOMS",
-        "relVol": 2.26,
-        "confidence": 32.1,
-        "effectiveConfidence": 65,
-        "institutional": 59.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 7,
-        "negative": false
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "illiquid (₹66Cr)"
+        ]
+      },
+      {
+        "ticker": "ETERNAL",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "ICICIGI",
+        "reasons": [
+          "illiquid (₹37Cr)"
+        ]
+      },
+      {
+        "ticker": "PATANJALI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MARICO",
+        "reasons": [
+          "illiquid (₹17Cr)"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
+        "reasons": [
+          "illiquid (₹26Cr)"
+        ]
+      },
+      {
+        "ticker": "NTPC",
+        "reasons": [
+          "illiquid (₹18Cr)"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "illiquid (₹33Cr)"
+        ]
+      },
+      {
+        "ticker": "BANDHANBNK",
+        "reasons": [
+          "illiquid (₹71Cr)"
+        ]
+      },
+      {
+        "ticker": "SUNPHARMA",
+        "reasons": [
+          "illiquid (₹43Cr)"
+        ]
+      },
+      {
+        "ticker": "CIPLA",
+        "reasons": [
+          "illiquid (₹13Cr)"
+        ]
+      },
+      {
+        "ticker": "CGPOWER",
+        "reasons": [
+          "illiquid (₹60Cr)"
+        ]
+      },
+      {
+        "ticker": "PREMIERENE",
+        "reasons": [
+          "illiquid (₹21Cr)"
+        ]
+      },
+      {
+        "ticker": "SWIGGY",
+        "reasons": [
+          "illiquid (₹72Cr)"
+        ]
+      },
+      {
+        "ticker": "YESBANK",
+        "reasons": [
+          "illiquid (₹37Cr)"
+        ]
+      },
+      {
+        "ticker": "MANKIND",
+        "reasons": [
+          "illiquid (₹26Cr)"
+        ]
+      },
+      {
+        "ticker": "DLF",
+        "reasons": [
+          "illiquid (₹14Cr)"
+        ]
+      },
+      {
+        "ticker": "HEROMOTOCO",
+        "reasons": [
+          "illiquid (₹42Cr)"
+        ]
+      },
+      {
+        "ticker": "NMDC",
+        "reasons": [
+          "illiquid (₹19Cr)"
+        ]
+      },
+      {
+        "ticker": "UNITDSPR",
+        "reasons": [
+          "illiquid (₹11Cr)"
+        ]
       }
     ]
   }
