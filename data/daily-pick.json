@@ -3,30 +3,14 @@
     "date": "2026-09-21",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-21T05:30:28.702Z",
+    "pickedAt": "2026-09-21T06:30:29.915Z",
     "rejected": [
       {
         "ticker": "ICICIGI",
         "reasons": [
-          "illiquid (₹54Cr)"
-        ]
-      },
-      {
-        "ticker": "LAURUSLABS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "illiquid (₹64Cr)"
-        ]
-      },
-      {
-        "ticker": "MARICO",
-        "reasons": [
-          "illiquid (₹44Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
         ]
       },
       {
@@ -37,15 +21,46 @@
         ]
       },
       {
-        "ticker": "CIPLA",
+        "ticker": "MARICO",
         "reasons": [
-          "illiquid (₹36Cr)"
+          "illiquid (₹73Cr)"
+        ]
+      },
+      {
+        "ticker": "UNITDSPR",
+        "reasons": [
+          "illiquid (₹35Cr)"
+        ]
+      },
+      {
+        "ticker": "BIOCON",
+        "reasons": [
+          "illiquid (₹67Cr)"
         ]
       },
       {
         "ticker": "MANKIND",
         "reasons": [
-          "illiquid (₹72Cr)"
+          "ema20AboveEma50"
+        ]
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "ULTRACEMCO",
+        "reasons": [
+          "illiquid (₹63Cr)"
+        ]
+      },
+      {
+        "ticker": "DMART",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
         ]
       },
       {
@@ -56,67 +71,56 @@
         ]
       },
       {
-        "ticker": "TITAN",
-        "reasons": [
-          "illiquid (₹39Cr)"
-        ]
-      },
-      {
-        "ticker": "SUNPHARMA",
-        "reasons": [
-          "ema20AboveEma50"
-        ]
-      },
-      {
-        "ticker": "ETERNAL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "UNITDSPR",
-        "reasons": [
-          "illiquid (₹27Cr)"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "illiquid (₹47Cr)"
-        ]
-      },
-      {
         "ticker": "KOTAKBANK",
         "reasons": [
-          "illiquid (₹56Cr)"
-        ]
-      },
-      {
-        "ticker": "TORNTPHARM",
-        "reasons": [
-          "illiquid (₹29Cr)"
-        ]
-      },
-      {
-        "ticker": "CGPOWER",
-        "reasons": [
           "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "TITAN",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "DLF",
+        "reasons": [
+          "illiquid (₹34Cr)"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "OIL",
+        "reasons": [
+          "illiquid (₹11Cr)"
+        ]
+      },
+      {
+        "ticker": "MARUTI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
         "ticker": "LICHSGFIN",
         "reasons": [
-          "illiquid (₹55Cr)"
+          "volumeSurge"
         ]
       },
       {
-        "ticker": "HDFCLIFE",
-        "reasons": [
-          "illiquid (₹44Cr)"
-        ]
-      },
-      {
-        "ticker": "DIXON",
+        "ticker": "SOLARINDS",
         "reasons": [
           "priceAboveEma20",
           "volumeSurge",
@@ -124,11 +128,15 @@
         ]
       },
       {
-        "ticker": "TCS",
+        "ticker": "ONGC",
         "reasons": [
-          "priceAboveEma20",
+          "illiquid (₹44Cr)"
+        ]
+      },
+      {
+        "ticker": "BANDHANBNK",
+        "reasons": [
           "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
         ]
       }
