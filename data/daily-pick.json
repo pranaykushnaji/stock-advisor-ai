@@ -2,153 +2,24 @@
   "pick": {
     "date": "2026-09-22",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-22T08:30:31.789Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-22T09:30:34.220Z",
+    "regime": "weak",
+    "market": "weak (v2 score 43, conf 52) — trend 15, breadth 39, vol-factor 95",
+    "momLaneOpen": false,
+    "considered": [
       {
         "ticker": "RBLBANK",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "BANDHANBNK",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PIIND",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ULTRACEMCO",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ONGC",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MCX",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "PATANJALI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTILALOFS",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
-        "ticker": "SOLARINDS",
-        "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BHARATFORG",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NTPC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "OBEROIRLTY",
-        "reasons": [
-          "illiquid (₹66Cr)"
-        ]
-      },
-      {
-        "ticker": "ETERNAL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "COALINDIA",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTHERSON",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "LICI",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PFC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NHPC",
-        "reasons": [
-          "illiquid (₹53Cr)"
-        ]
-      },
-      {
-        "ticker": "OFSS",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+        "relVol": 2.01,
+        "confidence": 29.2,
+        "effectiveConfidence": 66.6,
+        "institutional": 88.9,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
       }
     ]
   }
