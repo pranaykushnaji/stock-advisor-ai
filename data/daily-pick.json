@@ -3,8 +3,15 @@
     "date": "2026-09-22",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-22T06:30:37.722Z",
+    "pickedAt": "2026-09-22T07:30:32.017Z",
     "rejected": [
+      {
+        "ticker": "BANDHANBNK",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "PIIND",
         "reasons": [
@@ -20,6 +27,35 @@
         ]
       },
       {
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "illiquid (₹44Cr)"
+        ]
+      },
+      {
+        "ticker": "RBLBANK",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "ONGC",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PFC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
         "ticker": "SWIGGY",
         "reasons": [
           "volumeSurge",
@@ -27,32 +63,37 @@
         ]
       },
       {
-        "ticker": "MOTILALOFS",
+        "ticker": "NHPC",
         "reasons": [
-          "illiquid (₹32Cr)"
+          "illiquid (₹44Cr)"
         ]
       },
       {
         "ticker": "COALINDIA",
         "reasons": [
           "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "PATANJALI",
+        "ticker": "MOTHERSON",
         "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
+          "illiquid (₹71Cr)"
         ]
       },
       {
-        "ticker": "BSE",
+        "ticker": "ADANIPOWER",
         "reasons": [
-          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ETERNAL",
+        "reasons": [
+          "volumeSurge"
         ]
       },
       {
@@ -63,28 +104,23 @@
         ]
       },
       {
-        "ticker": "MOTHERSON",
+        "ticker": "FORTIS",
         "reasons": [
-          "illiquid (₹57Cr)"
+          "illiquid (₹41Cr)"
         ]
       },
       {
-        "ticker": "LUPIN",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
-        "ticker": "GLENMARK",
-        "reasons": [
-          "illiquid (₹28Cr)"
-        ]
-      },
-      {
-        "ticker": "VBL",
+        "ticker": "POWERGRID",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PATANJALI",
+        "reasons": [
+          "ema20AboveEma50",
           "near52wHigh"
         ]
       },
@@ -97,46 +133,15 @@
         ]
       },
       {
-        "ticker": "MCX",
+        "ticker": "VBL",
         "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "JINDALSTEL",
-        "reasons": [
-          "illiquid (₹48Cr)"
-        ]
-      },
-      {
-        "ticker": "LICI",
-        "reasons": [
-          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "NTPC",
-        "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "ALKEM",
-        "reasons": [
-          "illiquid (₹31Cr)"
-        ]
-      },
-      {
-        "ticker": "LICHSGFIN",
-        "reasons": [
-          "illiquid (₹73Cr)"
-        ]
-      },
-      {
-        "ticker": "RBLBANK",
+        "ticker": "MCX",
         "reasons": [
           "volumeSurge"
         ]
