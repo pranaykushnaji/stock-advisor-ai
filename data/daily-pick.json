@@ -3,8 +3,15 @@
     "date": "2026-09-22",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-22T04:30:31.103Z",
+    "pickedAt": "2026-09-22T05:30:33.191Z",
     "rejected": [
+      {
+        "ticker": "PIIND",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "PATANJALI",
         "reasons": [
@@ -13,28 +20,10 @@
         ]
       },
       {
-        "ticker": "JIOFIN",
+        "ticker": "SOLARINDS",
         "reasons": [
-          "illiquid (₹40Cr)"
-        ]
-      },
-      {
-        "ticker": "DRREDDY",
-        "reasons": [
-          "ema20AboveEma50",
+          "priceAboveEma20",
           "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PIIND",
-        "reasons": [
-          "illiquid (₹54Cr)"
-        ]
-      },
-      {
-        "ticker": "BANDHANBNK",
-        "reasons": [
-          "illiquid (₹74Cr)"
         ]
       },
       {
@@ -45,33 +34,14 @@
         ]
       },
       {
-        "ticker": "OFSS",
+        "ticker": "MOTILALOFS",
         "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "LICI",
-        "reasons": [
-          "illiquid (₹40Cr)"
-        ]
-      },
-      {
-        "ticker": "RBLBANK",
-        "reasons": [
-          "illiquid (₹21Cr)"
-        ]
-      },
-      {
-        "ticker": "IOC",
-        "reasons": [
-          "illiquid (₹25Cr)"
+          "illiquid (₹14Cr)"
         ]
       },
       {
         "ticker": "SWIGGY",
         "reasons": [
-          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -85,28 +55,9 @@
         ]
       },
       {
-        "ticker": "HDFCBANK",
+        "ticker": "IOC",
         "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIENT",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
-        "ticker": "HEROMOTOCO",
-        "reasons": [
-          "illiquid (₹35Cr)"
-        ]
-      },
-      {
-        "ticker": "ADANIPOWER",
-        "reasons": [
-          "illiquid (₹41Cr)"
+          "illiquid (₹74Cr)"
         ]
       },
       {
@@ -119,21 +70,76 @@
         ]
       },
       {
-        "ticker": "WAAREEENER",
+        "ticker": "VEDL",
         "reasons": [
-          "illiquid (₹60Cr)"
+          "illiquid (₹47Cr)"
         ]
       },
       {
-        "ticker": "ATHERENERG",
+        "ticker": "DRREDDY",
         "reasons": [
-          "volumeSurge"
+          "ema20AboveEma50",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "ANGELONE",
+        "ticker": "RBLBANK",
         "reasons": [
-          "illiquid (₹14Cr)"
+          "illiquid (₹64Cr)"
+        ]
+      },
+      {
+        "ticker": "RVNL",
+        "reasons": [
+          "illiquid (₹32Cr)"
+        ]
+      },
+      {
+        "ticker": "ALKEM",
+        "reasons": [
+          "illiquid (₹28Cr)"
+        ]
+      },
+      {
+        "ticker": "MANAPPURAM",
+        "reasons": [
+          "illiquid (₹20Cr)"
+        ]
+      },
+      {
+        "ticker": "JINDALSTEL",
+        "reasons": [
+          "illiquid (₹31Cr)"
+        ]
+      },
+      {
+        "ticker": "LICI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHARTIARTL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "illiquid (₹56Cr)"
+        ]
+      },
+      {
+        "ticker": "OBEROIRLTY",
+        "reasons": [
+          "illiquid (₹27Cr)"
         ]
       }
     ]
