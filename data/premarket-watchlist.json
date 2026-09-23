@@ -1,45 +1,11 @@
 {
-  "date": "2026-09-22",
-  "builtAt": "2026-09-22T02:35:28.893Z",
+  "date": "2026-09-23",
+  "builtAt": "2026-09-23T02:35:29.015Z",
   "marketContext": {
-    "tone": "neutral",
-    "summary": "Deterministic NSE breadth fallback: 48% advancers, average move -0.09%.",
+    "tone": "weak",
+    "summary": "Deterministic NSE breadth fallback: 36% advancers, average move -0.29%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": [
-    {
-      "ticker": "WAAREEENER",
-      "source": "overnight-filing",
-      "catalyst": {
-        "points": 38,
-        "hasCatalyst": true,
-        "negative": false,
-        "type": "large contract",
-        "confidence": 80,
-        "impact": 7,
-        "stars": 5,
-        "freshness": 0.945,
-        "decay": 0.945,
-        "impactClass": "very-high+",
-        "influenceDays": 13,
-        "ageDays": 0.53,
-        "evidenceVersion": 2,
-        "eventPublishedAt": 1789998372000,
-        "hasFiling": true,
-        "evidence": [
-          {
-            "articleId": 1,
-            "title": "[OFFICIAL NSE FILING] Bagging/Receiving of orders/contracts",
-            "url": null,
-            "publisher": "nse-filing"
-          }
-        ],
-        "verification": "VERIFIED",
-        "sources": 1,
-        "summary": "Secured new orders/contracts boosting revenue"
-      },
-      "prevClose": 2499
-    }
-  ]
+  "watch": []
 }
