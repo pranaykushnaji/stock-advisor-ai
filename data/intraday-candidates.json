@@ -1,4 +1,150 @@
 {
   "date": "2026-09-23",
-  "candidates": {}
+  "candidates": {
+    "RBLBANK": {
+      "ticker": "RBLBANK",
+      "fullName": "RBL Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-23T05:30:37.405Z",
+          "relVol": 1.88,
+          "confidence": 51,
+          "components": {
+            "technical": 89,
+            "flow": 70,
+            "catalyst": 5,
+            "liquidity": 55
+          },
+          "discoveryScore": 73.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1985347,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.88<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 51,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "IDFCFIRSTB": {
+      "ticker": "IDFCFIRSTB",
+      "fullName": "IDFC First Bank Limited",
+      "sector": "Bank",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-23T05:30:37.406Z",
+          "relVol": 3.49,
+          "confidence": 37.1,
+          "components": {
+            "technical": 66,
+            "flow": 79,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 83,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 16098060,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 37.1,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "MOTILALOFS": {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-23T05:30:37.406Z",
+          "relVol": 5.26,
+          "confidence": 37.9,
+          "components": {
+            "technical": 73,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 61
+          },
+          "discoveryScore": 71.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1164645,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 37.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "RADICO": {
+      "ticker": "RADICO",
+      "fullName": "Radico Khaitan Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-23T05:30:37.406Z",
+          "relVol": 4.38,
+          "confidence": 15.9,
+          "components": {
+            "technical": 48,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 62
+          },
+          "discoveryScore": 70.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 274052,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 15.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
