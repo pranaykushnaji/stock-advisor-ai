@@ -2,23 +2,38 @@
   "pick": {
     "date": "2026-09-23",
     "noTrade": true,
-    "reason": "MOTILALOFS failed neutral-market entry gates: reward/risk 1.09 < 1.8; historical net edge -1.26% ≤ 0",
-    "pickedAt": "2026-09-23T06:30:38.677Z",
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-23T07:30:39.871Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 58, conf 50) — trend 15, breadth 77, vol-factor 95",
-    "candidate": {
-      "ticker": "MOTILALOFS",
-      "confidence": 41.6,
-      "effectiveConfidence": 73.6,
-      "rewardRisk": {
-        "model": "technical-scenario-v2",
-        "isForecast": false,
-        "rr": 1.09,
-        "upsidePct": 6.7,
-        "downsidePct": 6.2
+    "market": "neutral (v2 score 59, conf 48) — trend 15, breadth 77, vol-factor 95",
+    "momLaneOpen": true,
+    "considered": [
+      {
+        "ticker": "IDFCFIRSTB",
+        "relVol": 5.41,
+        "confidence": 64.4,
+        "effectiveConfidence": 83.7,
+        "institutional": 56.8,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 10,
+        "negative": false
       },
-      "catalyst": "broker upgrade",
-      "verification": "UNVERIFIED"
-    }
+      {
+        "ticker": "RADICO",
+        "relVol": 2.75,
+        "confidence": 11.1,
+        "effectiveConfidence": 59,
+        "institutional": 53.9,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
+      }
+    ]
   }
 }
