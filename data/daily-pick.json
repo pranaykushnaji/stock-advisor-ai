@@ -2,64 +2,23 @@
   "pick": {
     "date": "2026-09-23",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-23T05:30:40.492Z",
+    "reason": "MOTILALOFS failed neutral-market entry gates: reward/risk 1.09 < 1.8; historical net edge -1.26% ≤ 0",
+    "pickedAt": "2026-09-23T06:30:38.677Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 57, conf 50) — trend 15, breadth 74, vol-factor 95",
-    "momLaneOpen": true,
-    "considered": [
-      {
-        "ticker": "RBLBANK",
-        "relVol": 1.88,
-        "confidence": 51,
-        "effectiveConfidence": 72,
-        "institutional": 88.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 7,
-        "negative": false
+    "market": "neutral (v2 score 58, conf 50) — trend 15, breadth 77, vol-factor 95",
+    "candidate": {
+      "ticker": "MOTILALOFS",
+      "confidence": 41.6,
+      "effectiveConfidence": 73.6,
+      "rewardRisk": {
+        "model": "technical-scenario-v2",
+        "isForecast": false,
+        "rr": 1.09,
+        "upsidePct": 6.7,
+        "downsidePct": 6.2
       },
-      {
-        "ticker": "IDFCFIRSTB",
-        "relVol": 3.49,
-        "confidence": 37.1,
-        "effectiveConfidence": 68.7,
-        "institutional": 55.4,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 8,
-        "negative": false
-      },
-      {
-        "ticker": "MOTILALOFS",
-        "relVol": 5.26,
-        "confidence": 37.9,
-        "effectiveConfidence": 67.2,
-        "institutional": 77.3,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
-      },
-      {
-        "ticker": "RADICO",
-        "relVol": 4.38,
-        "confidence": 15.9,
-        "effectiveConfidence": 58.5,
-        "institutional": 51.8,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
-      }
-    ]
+      "catalyst": "broker upgrade",
+      "verification": "UNVERIFIED"
+    }
   }
 }
