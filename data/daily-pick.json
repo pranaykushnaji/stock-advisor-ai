@@ -1,25 +1,130 @@
 {
   "pick": {
-    "date": "2026-09-22",
+    "date": "2026-09-23",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-22T09:30:34.220Z",
-    "regime": "weak",
-    "market": "weak (v2 score 43, conf 52) — trend 15, breadth 39, vol-factor 95",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-23T04:30:27.808Z",
+    "rejected": [
+      {
+        "ticker": "360ONE",
+        "reasons": [
+          "ema20AboveEma50"
+        ]
+      },
+      {
+        "ticker": "SOLARINDS",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CANBK",
+        "reasons": [
+          "illiquid (₹42Cr)"
+        ]
+      },
+      {
+        "ticker": "DABUR",
+        "reasons": [
+          "illiquid (₹9Cr)"
+        ]
+      },
+      {
+        "ticker": "IDFCFIRSTB",
+        "reasons": [
+          "illiquid (₹34Cr)"
+        ]
+      },
+      {
+        "ticker": "BANDHANBNK",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INDUSINDBK",
+        "reasons": [
+          "illiquid (₹41Cr)"
+        ]
+      },
+      {
+        "ticker": "PHOENIXLTD",
+        "reasons": [
+          "illiquid (₹12Cr)"
+        ]
+      },
+      {
+        "ticker": "BANKINDIA",
+        "reasons": [
+          "illiquid (₹15Cr)"
+        ]
+      },
+      {
+        "ticker": "RVNL",
+        "reasons": [
+          "illiquid (₹11Cr)"
+        ]
+      },
+      {
+        "ticker": "WAAREEENER",
+        "reasons": [
+          "illiquid (₹21Cr)"
+        ]
+      },
+      {
+        "ticker": "CROMPTON",
+        "reasons": [
+          "illiquid (₹11Cr)"
+        ]
+      },
+      {
+        "ticker": "PREMIERENE",
+        "reasons": [
+          "illiquid (₹13Cr)"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
+        "reasons": [
+          "illiquid (₹15Cr)"
+        ]
+      },
       {
         "ticker": "RBLBANK",
-        "relVol": 2.01,
-        "confidence": 29.2,
-        "effectiveConfidence": 66.6,
-        "institutional": 88.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
+        "reasons": [
+          "illiquid (₹50Cr)"
+        ]
+      },
+      {
+        "ticker": "MOTILALOFS",
+        "reasons": [
+          "illiquid (₹42Cr)"
+        ]
+      },
+      {
+        "ticker": "LODHA",
+        "reasons": [
+          "illiquid (₹19Cr)"
+        ]
+      },
+      {
+        "ticker": "HINDZINC",
+        "reasons": [
+          "illiquid (₹52Cr)"
+        ]
+      },
+      {
+        "ticker": "ABCAPITAL",
+        "reasons": [
+          "illiquid (₹7Cr)"
+        ]
+      },
+      {
+        "ticker": "TATACONSUM",
+        "reasons": [
+          "illiquid (₹5Cr)"
+        ]
       }
     ]
   }
