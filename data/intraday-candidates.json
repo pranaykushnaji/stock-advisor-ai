@@ -117,13 +117,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-09-24T09:30:41.264Z",
+          "relVol": 2.33,
+          "confidence": 38.1,
+          "components": {
+            "technical": 79,
+            "flow": 68,
+            "catalyst": 18,
+            "liquidity": 95
+          },
+          "discoveryScore": 66.5,
+          "catalystType": "regulatory approval",
+          "verification": "UNVERIFIED",
+          "volume": 3818341,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
-      "bestConfidence": 29.1,
+      "lastSeen": "15:00",
+      "bestConfidence": 38.1,
       "confidenceTrend": "rising",
-      "confidenceSlope": 1.77,
-      "trendBonus": 2.1
+      "confidenceSlope": 3.04,
+      "trendBonus": 3.6
     },
     "RBLBANK": {
       "ticker": "RBLBANK",
@@ -157,6 +179,43 @@
       ],
       "lastSeen": "11:00",
       "bestConfidence": 54,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "MOTHERSON": {
+      "ticker": "MOTHERSON",
+      "fullName": "Samvardhana Motherson International Limited",
+      "sector": "Auto",
+      "firstSeen": "15:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:00",
+          "ts": "2026-09-24T09:30:41.264Z",
+          "relVol": 1.85,
+          "confidence": 13.9,
+          "components": {
+            "technical": 50,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 76
+          },
+          "discoveryScore": 52.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 18028723,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.85<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:00",
+      "bestConfidence": 13.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
