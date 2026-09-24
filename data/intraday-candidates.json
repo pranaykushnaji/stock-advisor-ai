@@ -29,10 +29,68 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-24T05:30:34.946Z",
+          "relVol": 4.1,
+          "confidence": 6.7,
+          "components": {
+            "technical": 56,
+            "flow": 75,
+            "catalyst": 5,
+            "liquidity": 90
+          },
+          "discoveryScore": 68.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2046474,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
+      "lastSeen": "11:00",
       "bestConfidence": 29.1,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -22.4,
+      "trendBonus": 0
+    },
+    "RBLBANK": {
+      "ticker": "RBLBANK",
+      "fullName": "RBL Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-24T05:30:34.945Z",
+          "relVol": 3.63,
+          "confidence": 54,
+          "components": {
+            "technical": 83,
+            "flow": 88,
+            "catalyst": 5,
+            "liquidity": 66
+          },
+          "discoveryScore": 59.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 3938623,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 54,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
