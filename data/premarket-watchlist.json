@@ -1,11 +1,54 @@
 {
-  "date": "2026-09-23",
-  "builtAt": "2026-09-23T02:35:29.015Z",
+  "date": "2026-09-24",
+  "builtAt": "2026-09-24T02:35:28.174Z",
   "marketContext": {
-    "tone": "weak",
-    "summary": "Deterministic NSE breadth fallback: 36% advancers, average move -0.29%.",
+    "tone": "bullish",
+    "summary": "Deterministic NSE breadth fallback: 75% advancers, average move +0.73%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": []
+  "watch": [
+    {
+      "ticker": "POWERGRID",
+      "source": "overnight-filing",
+      "catalyst": {
+        "points": 26,
+        "hasCatalyst": true,
+        "negative": false,
+        "type": "acquisition",
+        "confidence": 95,
+        "impact": 8,
+        "stars": 4,
+        "freshness": 0.94,
+        "decay": 0.94,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.54,
+        "evidenceVersion": 2,
+        "eventPublishedAt": 1790171063000,
+        "hasFiling": true,
+        "evidence": [
+          {
+            "articleId": 1,
+            "title": "[OFFICIAL NSE FILING] Acquisition",
+            "url": null,
+            "publisher": "nse-filing"
+          }
+        ],
+        "verification": "VERIFIED",
+        "sources": 1,
+        "summary": "Powergrid announces acquisition in official filing."
+      },
+      "prevClose": 270.2
+    },
+    {
+      "ticker": "IDFCFIRSTB",
+      "source": "warm-carryover",
+      "yBestConf": 64.5,
+      "yLastRelVol": 3.89,
+      "yTrend": "rising",
+      "catalyst": null,
+      "prevClose": 87.9
+    }
+  ]
 }
