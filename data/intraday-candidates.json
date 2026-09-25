@@ -60,6 +60,42 @@
       "confidenceTrend": "flat",
       "confidenceSlope": 0.2,
       "trendBonus": 0.1
+    },
+    "ZYDUSLIFE": {
+      "ticker": "ZYDUSLIFE",
+      "fullName": "Zydus Lifesciences Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "13:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "13:00",
+          "ts": "2026-09-25T07:30:30.243Z",
+          "relVol": 2.11,
+          "confidence": 29.7,
+          "components": {
+            "technical": 71,
+            "flow": 73,
+            "catalyst": 5,
+            "liquidity": 68
+          },
+          "discoveryScore": 61.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1533160,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "13:00",
+      "bestConfidence": 29.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
