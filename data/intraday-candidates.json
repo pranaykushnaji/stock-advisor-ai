@@ -1,4 +1,42 @@
 {
   "date": "2026-09-25",
-  "candidates": {}
+  "candidates": {
+    "SONACOMS": {
+      "ticker": "SONACOMS",
+      "fullName": "Sona BLW Precision Forgings Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-09-25T05:30:33.473Z",
+          "relVol": 1.92,
+          "confidence": 29.9,
+          "components": {
+            "technical": 71,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 54
+          },
+          "discoveryScore": 65.3,
+          "catalystType": "broker upgrade",
+          "verification": "UNVERIFIED",
+          "volume": 978879,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.92<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 29.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
