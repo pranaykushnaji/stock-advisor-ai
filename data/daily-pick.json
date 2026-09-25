@@ -3,8 +3,16 @@
     "date": "2026-09-25",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-25T08:30:30.247Z",
+    "pickedAt": "2026-09-25T09:30:31.191Z",
     "rejected": [
+      {
+        "ticker": "MFSL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "AXISBANK",
         "reasons": [
@@ -24,60 +32,9 @@
         ]
       },
       {
-        "ticker": "MFSL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HDFCBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LICI",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MAHABANK",
-        "reasons": [
-          "illiquid (₹74Cr)"
-        ]
-      },
-      {
         "ticker": "AUBANK",
         "reasons": [
           "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JUBLFOOD",
-        "reasons": [
-          "illiquid (₹19Cr)"
-        ]
-      },
-      {
-        "ticker": "IREDA",
-        "reasons": [
           "ema20AboveEma50",
           "near52wHigh"
         ]
@@ -92,9 +49,50 @@
         ]
       },
       {
-        "ticker": "BLUESTARCO",
+        "ticker": "HDFCBANK",
         "reasons": [
-          "illiquid (₹48Cr)"
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MAHABANK",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LICI",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHEL",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "RELIANCE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -106,33 +104,15 @@
         ]
       },
       {
-        "ticker": "HYUNDAI",
+        "ticker": "JUBLFOOD",
         "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
+          "illiquid (₹37Cr)"
         ]
       },
       {
-        "ticker": "TVSMOTOR",
+        "ticker": "LICHSGFIN",
         "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DLF",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
+          "illiquid (₹43Cr)"
         ]
       },
       {
@@ -142,15 +122,37 @@
         ]
       },
       {
-        "ticker": "ASIANPAINT",
+        "ticker": "MARUTI",
         "reasons": [
-          "illiquid (₹63Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "HCLTECH",
+        "ticker": "INOXWIND",
+        "reasons": [
+          "illiquid (₹71Cr)"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
         "reasons": [
           "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SUPREMEIND",
+        "reasons": [
+          "illiquid (₹29Cr)"
+        ]
+      },
+      {
+        "ticker": "BLUESTARCO",
+        "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
