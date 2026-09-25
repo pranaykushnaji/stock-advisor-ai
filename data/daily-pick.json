@@ -2,141 +2,24 @@
   "pick": {
     "date": "2026-09-25",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-25T04:30:29.884Z",
-    "rejected": [
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CIPLA",
-        "reasons": [
-          "illiquid (₹33Cr)"
-        ]
-      },
-      {
-        "ticker": "RELIANCE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AUBANK",
-        "reasons": [
-          "illiquid (₹39Cr)"
-        ]
-      },
-      {
-        "ticker": "FEDERALBNK",
-        "reasons": [
-          "illiquid (₹11Cr)"
-        ]
-      },
-      {
-        "ticker": "MAHABANK",
-        "reasons": [
-          "illiquid (₹8Cr)"
-        ]
-      },
-      {
-        "ticker": "HYUNDAI",
-        "reasons": [
-          "illiquid (₹30Cr)"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "illiquid (₹46Cr)"
-        ]
-      },
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KAYNES",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MOTHERSON",
-        "reasons": [
-          "illiquid (₹10Cr)"
-        ]
-      },
-      {
-        "ticker": "WAAREEENER",
-        "reasons": [
-          "illiquid (₹37Cr)"
-        ]
-      },
-      {
-        "ticker": "ASIANPAINT",
-        "reasons": [
-          "illiquid (₹15Cr)"
-        ]
-      },
-      {
-        "ticker": "AXISBANK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "IREDA",
-        "reasons": [
-          "illiquid (₹7Cr)"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "illiquid (₹15Cr)"
-        ]
-      },
-      {
-        "ticker": "BANKBARODA",
-        "reasons": [
-          "illiquid (₹11Cr)"
-        ]
-      },
-      {
-        "ticker": "RADICO",
-        "reasons": [
-          "illiquid (₹28Cr)"
-        ]
-      },
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-25T05:30:36.763Z",
+    "regime": "weak",
+    "market": "weak (v2 score 42, conf 51) — trend 11, breadth 46, vol-factor 91",
+    "momLaneOpen": false,
+    "considered": [
       {
         "ticker": "SONACOMS",
-        "reasons": [
-          "illiquid (₹22Cr)"
-        ]
-      },
-      {
-        "ticker": "MANAPPURAM",
-        "reasons": [
-          "illiquid (₹18Cr)"
-        ]
+        "relVol": 1.92,
+        "confidence": 29.9,
+        "effectiveConfidence": 62.7,
+        "institutional": 82.3,
+        "catalyst": "broker upgrade",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 7,
+        "negative": false
       }
     ]
   }
