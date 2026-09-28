@@ -51,10 +51,69 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-09-28T06:31:10.915Z",
+          "relVol": 4.14,
+          "confidence": 52.6,
+          "components": {
+            "technical": 83,
+            "flow": 92,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 76.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2287802,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 27.6,
+      "lastSeen": "12:01",
+      "bestConfidence": 52.6,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 12.5,
+      "trendBonus": 8
+    },
+    "SONACOMS": {
+      "ticker": "SONACOMS",
+      "fullName": "Sona BLW Precision Forgings Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:01",
+          "ts": "2026-09-28T06:31:10.915Z",
+          "relVol": 2.09,
+          "confidence": 6.4,
+          "components": {
+            "technical": 60,
+            "flow": 69,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 66.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1747550,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "relVol 2.09<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:01",
+      "bestConfidence": 6.4,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
