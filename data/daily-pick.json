@@ -1,162 +1,25 @@
 {
   "pick": {
-    "date": "2026-09-25",
+    "date": "2026-09-28",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-25T09:30:31.191Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-28T04:31:13.859Z",
+    "regime": "weak",
+    "market": "weak (v2 score 27, conf 38) — trend 9, breadth 7, vol-factor 88",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "MFSL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AXISBANK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AUBANK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIPOWER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HDFCBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MAHABANK",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LICI",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BHEL",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "RELIANCE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KAYNES",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "JUBLFOOD",
-        "reasons": [
-          "illiquid (₹37Cr)"
-        ]
-      },
-      {
-        "ticker": "LICHSGFIN",
-        "reasons": [
-          "illiquid (₹43Cr)"
-        ]
-      },
-      {
-        "ticker": "MOTHERSON",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MARUTI",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INOXWIND",
-        "reasons": [
-          "illiquid (₹71Cr)"
-        ]
-      },
-      {
-        "ticker": "NAUKRI",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SUPREMEIND",
-        "reasons": [
-          "illiquid (₹29Cr)"
-        ]
-      },
-      {
-        "ticker": "BLUESTARCO",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
+        "ticker": "ZYDUSLIFE",
+        "relVol": 3.55,
+        "confidence": 27.6,
+        "effectiveConfidence": 67.3,
+        "institutional": 100,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 10,
+        "negative": false
       }
     ]
   }
