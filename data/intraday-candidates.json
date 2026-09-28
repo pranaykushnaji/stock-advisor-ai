@@ -73,12 +73,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-09-28T07:31:21.621Z",
+          "relVol": 3.73,
+          "confidence": 54.3,
+          "components": {
+            "technical": 83,
+            "flow": 91,
+            "catalyst": 18,
+            "liquidity": 78
+          },
+          "discoveryScore": 61.1,
+          "catalystType": "regulatory approval",
+          "verification": "UNVERIFIED",
+          "volume": 2807118,
+          "sessionFrac": 0.6026666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
-      "bestConfidence": 52.6,
+      "lastSeen": "13:01",
+      "bestConfidence": 54.3,
       "confidenceTrend": "rising",
-      "confidenceSlope": 12.5,
+      "confidenceSlope": 10.51,
       "trendBonus": 8
     },
     "SONACOMS": {
@@ -110,13 +132,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-09-28T07:31:21.621Z",
+          "relVol": 2.02,
+          "confidence": 6.6,
+          "components": {
+            "technical": 60,
+            "flow": 61,
+            "catalyst": 5,
+            "liquidity": 68
+          },
+          "discoveryScore": 58,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2298022,
+          "sessionFrac": 0.6026666666666667,
+          "missing": [
+            "relVol 2.02<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
-      "bestConfidence": 6.4,
+      "lastSeen": "13:01",
+      "bestConfidence": 6.6,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.2,
+      "trendBonus": 0.1
     }
   }
 }
