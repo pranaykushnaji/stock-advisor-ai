@@ -2,142 +2,24 @@
   "pick": {
     "date": "2026-09-29",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-09-29T05:31:14.426Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-09-29T06:31:22.266Z",
+    "regime": "weak",
+    "market": "weak (v2 score 39, conf 49) — trend 9, breadth 34, vol-factor 87",
+    "momLaneOpen": false,
+    "considered": [
       {
         "ticker": "MANKIND",
-        "reasons": [
-          "ema20AboveEma50"
-        ]
-      },
-      {
-        "ticker": "COALINDIA",
-        "reasons": [
-          "illiquid (₹72Cr)"
-        ]
-      },
-      {
-        "ticker": "DELHIVERY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DRREDDY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KEI",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
-        "ticker": "ADANIENSOL",
-        "reasons": [
-          "illiquid (₹55Cr)"
-        ]
-      },
-      {
-        "ticker": "BSE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INDUSTOWER",
-        "reasons": [
-          "illiquid (₹53Cr)"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "illiquid (₹70Cr)"
-        ]
-      },
-      {
-        "ticker": "ADANIPORTS",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "INDHOTEL",
-        "reasons": [
-          "illiquid (₹41Cr)"
-        ]
-      },
-      {
-        "ticker": "PAYTM",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BIOCON",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
-        "ticker": "PNBHOUSING",
-        "reasons": [
-          "illiquid (₹20Cr)"
-        ]
-      },
-      {
-        "ticker": "SUNPHARMA",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "INDIGO",
-        "reasons": [
-          "illiquid (₹41Cr)"
-        ]
-      },
-      {
-        "ticker": "ZYDUSLIFE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "priceAboveEma20",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MANAPPURAM",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BANKINDIA",
-        "reasons": [
-          "illiquid (₹36Cr)"
-        ]
+        "relVol": 4.69,
+        "confidence": 29.2,
+        "effectiveConfidence": 69.4,
+        "institutional": 92.2,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 3,
+        "negative": false
       }
     ]
   }
