@@ -1,25 +1,135 @@
 {
   "pick": {
-    "date": "2026-09-28",
+    "date": "2026-09-29",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-28T09:31:32.742Z",
-    "regime": "weak",
-    "market": "weak (v2 score 26, conf 39) — trend 8, breadth 9, vol-factor 87",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-29T04:31:15.287Z",
+    "rejected": [
+      {
+        "ticker": "MANKIND",
+        "reasons": [
+          "illiquid (₹35Cr)"
+        ]
+      },
+      {
+        "ticker": "KALYANKJIL",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DELHIVERY",
+        "reasons": [
+          "illiquid (₹46Cr)"
+        ]
+      },
+      {
+        "ticker": "ADANIPORTS",
+        "reasons": [
+          "illiquid (₹51Cr)"
+        ]
+      },
+      {
+        "ticker": "KAYNES",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KEI",
+        "reasons": [
+          "illiquid (₹29Cr)"
+        ]
+      },
+      {
+        "ticker": "TVSMOTOR",
+        "reasons": [
+          "illiquid (₹41Cr)"
+        ]
+      },
       {
         "ticker": "ZYDUSLIFE",
-        "relVol": 3.19,
-        "confidence": 27.5,
-        "effectiveConfidence": 71,
-        "institutional": 93.6,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 10,
-        "negative": false
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "CGPOWER",
+        "reasons": [
+          "illiquid (₹20Cr)"
+        ]
+      },
+      {
+        "ticker": "SONACOMS",
+        "reasons": [
+          "illiquid (₹21Cr)"
+        ]
+      },
+      {
+        "ticker": "BHARTIARTL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "VEDL",
+        "reasons": [
+          "illiquid (₹33Cr)"
+        ]
+      },
+      {
+        "ticker": "MANAPPURAM",
+        "reasons": [
+          "illiquid (₹39Cr)"
+        ]
+      },
+      {
+        "ticker": "INDHOTEL",
+        "reasons": [
+          "illiquid (₹24Cr)"
+        ]
+      },
+      {
+        "ticker": "ADANIENSOL",
+        "reasons": [
+          "illiquid (₹31Cr)"
+        ]
+      },
+      {
+        "ticker": "POLYCAB",
+        "reasons": [
+          "illiquid (₹49Cr)"
+        ]
+      },
+      {
+        "ticker": "SUNPHARMA",
+        "reasons": [
+          "illiquid (₹65Cr)"
+        ]
+      },
+      {
+        "ticker": "BANKINDIA",
+        "reasons": [
+          "illiquid (₹22Cr)"
+        ]
+      },
+      {
+        "ticker": "GVT&D",
+        "reasons": [
+          "illiquid (₹23Cr)"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
       }
     ]
   }
