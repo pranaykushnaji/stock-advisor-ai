@@ -1,4 +1,41 @@
 {
   "date": "2026-09-29",
-  "candidates": {}
+  "candidates": {
+    "MANKIND": {
+      "ticker": "MANKIND",
+      "fullName": "Mankind Pharma Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:01",
+          "ts": "2026-09-29T06:31:19.227Z",
+          "relVol": 4.69,
+          "confidence": 29.2,
+          "components": {
+            "technical": 68,
+            "flow": 84,
+            "catalyst": 5,
+            "liquidity": 70
+          },
+          "discoveryScore": 82.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 804853,
+          "sessionFrac": 0.44266666666666665,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:01",
+      "bestConfidence": 29.2,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
