@@ -51,13 +51,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-09-30T07:31:11.520Z",
+          "relVol": 1.91,
+          "confidence": 38.7,
+          "components": {
+            "technical": 60,
+            "flow": 64,
+            "catalyst": 5,
+            "liquidity": 86
+          },
+          "discoveryScore": 75,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 13276771,
+          "sessionFrac": 0.6026666666666667,
+          "missing": [
+            "relVol 1.91<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
-      "bestConfidence": 37.5,
+      "lastSeen": "13:01",
+      "bestConfidence": 38.7,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.5,
-      "trendBonus": 0.3
+      "confidenceSlope": 0.85,
+      "trendBonus": 1
     }
   }
 }
