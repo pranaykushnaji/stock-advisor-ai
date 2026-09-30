@@ -1,25 +1,146 @@
 {
   "pick": {
-    "date": "2026-09-29",
+    "date": "2026-09-30",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-09-29T09:31:28.212Z",
-    "regime": "weak",
-    "market": "weak (v2 score 36, conf 49) — trend 7, breadth 29, vol-factor 87",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-09-30T04:31:14.898Z",
+    "rejected": [
       {
-        "ticker": "MANKIND",
-        "relVol": 4.61,
-        "confidence": 28.7,
-        "effectiveConfidence": 71.4,
-        "institutional": 94.4,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 2,
-        "negative": false
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "illiquid (₹38Cr)"
+        ]
+      },
+      {
+        "ticker": "MOTHERSON",
+        "reasons": [
+          "illiquid (₹71Cr)"
+        ]
+      },
+      {
+        "ticker": "SOLARINDS",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ICICIBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DMART",
+        "reasons": [
+          "illiquid (₹37Cr)"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CONCOR",
+        "reasons": [
+          "illiquid (₹7Cr)"
+        ]
+      },
+      {
+        "ticker": "AMBUJACEM",
+        "reasons": [
+          "illiquid (₹10Cr)"
+        ]
+      },
+      {
+        "ticker": "TMPV",
+        "reasons": [
+          "illiquid (₹43Cr)"
+        ]
+      },
+      {
+        "ticker": "PNB",
+        "reasons": [
+          "illiquid (₹15Cr)"
+        ]
+      },
+      {
+        "ticker": "TCS",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "UNIONBANK",
+        "reasons": [
+          "illiquid (₹58Cr)"
+        ]
+      },
+      {
+        "ticker": "AXISBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "WIPRO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PRESTIGE",
+        "reasons": [
+          "illiquid (₹10Cr)"
+        ]
+      },
+      {
+        "ticker": "RVNL",
+        "reasons": [
+          "illiquid (₹15Cr)"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "illiquid (₹19Cr)"
+        ]
+      },
+      {
+        "ticker": "ABB",
+        "reasons": [
+          "illiquid (₹38Cr)"
+        ]
+      },
+      {
+        "ticker": "YESBANK",
+        "reasons": [
+          "illiquid (₹42Cr)"
+        ]
+      },
+      {
+        "ticker": "BANKBARODA",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
       }
     ]
   }
