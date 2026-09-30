@@ -1,4 +1,41 @@
 {
   "date": "2026-09-30",
-  "candidates": {}
+  "candidates": {
+    "KOTAKBANK": {
+      "ticker": "KOTAKBANK",
+      "fullName": "Kotak Mahindra Bank Limited",
+      "sector": "Bank",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-09-30T05:31:12.399Z",
+          "relVol": 2.41,
+          "confidence": 37,
+          "components": {
+            "technical": 57,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 64.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 7857992,
+          "sessionFrac": 0.2826666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 37,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
