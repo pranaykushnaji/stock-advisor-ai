@@ -51,13 +51,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-10-01T06:31:08.383Z",
+          "relVol": 10.14,
+          "confidence": 61.1,
+          "components": {
+            "technical": 78,
+            "flow": 90,
+            "catalyst": 4,
+            "liquidity": 95
+          },
+          "discoveryScore": 63.5,
+          "catalystType": "management change",
+          "verification": "UNVERIFIED",
+          "volume": 56457602,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 55.2,
+      "lastSeen": "12:01",
+      "bestConfidence": 61.1,
       "confidenceTrend": "rising",
-      "confidenceSlope": 25.6,
-      "trendBonus": 4
+      "confidenceSlope": 15.75,
+      "trendBonus": 8
     },
     "BHEL": {
       "ticker": "BHEL",
@@ -87,13 +109,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:01",
+          "ts": "2026-10-01T06:31:08.384Z",
+          "relVol": 2.16,
+          "confidence": 9.4,
+          "components": {
+            "technical": 51,
+            "flow": 56,
+            "catalyst": 30,
+            "liquidity": 73
+          },
+          "discoveryScore": 71.6,
+          "catalystType": "large contract",
+          "verification": "UNVERIFIED",
+          "volume": 5699180,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:01",
-      "bestConfidence": 7.5,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "12:01",
+      "bestConfidence": 9.4,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 1.9,
+      "trendBonus": 1.1
     }
   }
 }
