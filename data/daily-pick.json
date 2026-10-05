@@ -2,25 +2,23 @@
   "pick": {
     "date": "2026-10-05",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-05T07:31:00.543Z",
+    "reason": "NYKAA failed neutral-market entry gates: reward/risk 0.7 < 1.8; historical net edge -1.26% ≤ 0",
+    "pickedAt": "2026-10-05T08:31:16.916Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 49, conf 52) — trend 7, breadth 58, vol-factor 88",
-    "momLaneOpen": true,
-    "considered": [
-      {
-        "ticker": "NYKAA",
-        "relVol": 5.87,
-        "confidence": 37.4,
-        "effectiveConfidence": 69.1,
-        "institutional": 64.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 7,
-        "negative": false
-      }
-    ]
+    "market": "neutral (v2 score 55, conf 48) — trend 8, breadth 65, vol-factor 87",
+    "candidate": {
+      "ticker": "NYKAA",
+      "confidence": 38.4,
+      "effectiveConfidence": 71.3,
+      "rewardRisk": {
+        "model": "technical-scenario-v2",
+        "isForecast": false,
+        "rr": 0.7,
+        "upsidePct": 3,
+        "downsidePct": 4.3
+      },
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
