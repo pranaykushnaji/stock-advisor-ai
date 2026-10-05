@@ -29,12 +29,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-05T05:30:58.828Z",
+          "relVol": 7.74,
+          "confidence": 48.7,
+          "components": {
+            "technical": 75,
+            "flow": 78,
+            "catalyst": 5,
+            "liquidity": 75
+          },
+          "discoveryScore": 73,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 8192815,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
+      "lastSeen": "11:00",
       "bestConfidence": 64.1,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -15.4,
       "trendBonus": 0
     },
     "COFORGE": {
@@ -69,6 +91,78 @@
       ],
       "lastSeen": "10:01",
       "bestConfidence": 18.1,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "RBLBANK": {
+      "ticker": "RBLBANK",
+      "fullName": "RBL Bank Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-05T05:30:58.829Z",
+          "relVol": 2.44,
+          "confidence": 31.7,
+          "components": {
+            "technical": 74,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 58
+          },
+          "discoveryScore": 66.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2470161,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 31.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "BHEL": {
+      "ticker": "BHEL",
+      "fullName": "Bharat Heavy Electricals Limited",
+      "sector": "Infra",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-05T05:30:58.829Z",
+          "relVol": 2.46,
+          "confidence": 22.2,
+          "components": {
+            "technical": 47,
+            "flow": 66,
+            "catalyst": 5,
+            "liquidity": 68
+          },
+          "discoveryScore": 62,
+          "catalystType": "broker upgrade",
+          "verification": "UNVERIFIED",
+          "volume": 4353160,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 22.2,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
