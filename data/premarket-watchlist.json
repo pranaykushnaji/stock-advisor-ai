@@ -1,11 +1,21 @@
 {
-  "date": "2026-10-01",
-  "builtAt": "2026-10-01T02:36:09.770Z",
+  "date": "2026-10-05",
+  "builtAt": "2026-10-05T02:35:52.354Z",
   "marketContext": {
-    "tone": "neutral",
-    "summary": "Deterministic NSE breadth fallback: 51% advancers, average move -0.10%.",
+    "tone": "weak",
+    "summary": "Deterministic NSE breadth fallback: 26% advancers, average move -1.14%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": []
+  "watch": [
+    {
+      "ticker": "KOTAKBANK",
+      "source": "warm-carryover",
+      "yBestConf": 61.1,
+      "yLastRelVol": 6.72,
+      "yTrend": "falling",
+      "catalyst": null,
+      "prevClose": 418.35
+    }
+  ]
 }
