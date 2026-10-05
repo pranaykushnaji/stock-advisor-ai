@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-10-02T09:16:32.866Z",
+  "fetchedAt": "2026-10-05T02:16:18.468Z",
   "diag": {
     "marketStatus": true,
     "moversCount": 213,
@@ -19,7 +19,7 @@
     "largeDeals": true,
     "surveillance": true,
     "announcements": true,
-    "announcementCount": 500,
+    "announcementCount": 306,
     "deliveryData": true
   },
   "data": {
@@ -27,18 +27,18 @@
       "marketState": [
         {
           "market": "Capital Market",
-          "marketStatus": "Close",
+          "marketStatus": "Open",
           "tradeDate": "01-Oct-2026 15:30",
           "index": "NIFTY 50",
           "last": 22421.95,
           "variation": -198.5,
           "percentChange": -0.88,
-          "marketStatusMessage": "Market is Closed"
+          "marketStatusMessage": "Normal Market has Closed"
         },
         {
           "market": "Currency",
-          "marketStatus": "Close",
-          "tradeDate": "01-Oct-2026",
+          "marketStatus": "Open",
+          "tradeDate": "05-Oct-2026",
           "index": "",
           "last": "",
           "variation": "",
@@ -47,8 +47,8 @@
         },
         {
           "market": "Commodity",
-          "marketStatus": "Close",
-          "tradeDate": "01-Oct-2026",
+          "marketStatus": "Open",
+          "tradeDate": "05-Oct-2026",
           "index": "",
           "last": "",
           "variation": "",
@@ -57,8 +57,8 @@
         },
         {
           "market": "Debt",
-          "marketStatus": "Close",
-          "tradeDate": "01-Oct-2026",
+          "marketStatus": "Open",
+          "tradeDate": "05-Oct-2026",
           "index": "",
           "last": "",
           "variation": "",
@@ -74,8 +74,8 @@
         },
         {
           "market": "currencyfuture",
-          "marketStatus": "Close",
-          "tradeDate": "01-Oct-2026",
+          "marketStatus": "Open",
+          "tradeDate": "05-Oct-2026",
           "index": "",
           "last": "96.5425",
           "variation": "",
@@ -111,16 +111,16 @@
         "status": "CLOSE"
       },
       "giftnifty": {
-        "CONTRACTSTRADED": 83278,
-        "DAYCHANGE": 133.5,
+        "CONTRACTSTRADED": 2160,
+        "DAYCHANGE": 19,
         "EXPIRYDATE": "27-Oct-2026",
         "INSTRUMENTTYPE": "FUTIDX",
-        "LASTPRICE": 22624.5,
+        "LASTPRICE": 22630,
         "OPTIONTYPE": "-",
-        "PERCHANGE": 0.59,
+        "PERCHANGE": 0.08,
         "STRIKEPRICE": 0,
         "SYMBOL": "NIFTY",
-        "TIMESTMP": "02-Oct-2026 02:42",
+        "TIMESTMP": "05-Oct-2026 07:43",
         "id": "0/NIFTYFUTIDX27-Oct-2026--"
       },
       "niftyusd": {
@@ -2426,276 +2426,6 @@
     "bulkDeals": [
       {
         "buySell": "BUY",
-        "clientName": "WEALTH 4 U HOSPITALITY CONSULTANCY PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Swastika Infra Limited",
-        "qty": "364467",
-        "remarks": "-",
-        "symbol": "SWASTIKAIN",
-        "watp": "210.72"
-      },
-      {
-        "buySell": "BUY",
-        "clientName": "ALPHAGREP SECURITIES PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Transformers And Rectifie",
-        "qty": "1730595",
-        "remarks": "-",
-        "symbol": "TARIL",
-        "watp": "289.61"
-      },
-      {
-        "buySell": "BUY",
-        "clientName": "JUMP TRADING FINANCIAL INDIA PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Transformers And Rectifie",
-        "qty": "1644556",
-        "remarks": "-",
-        "symbol": "TARIL",
-        "watp": "289.76"
-      },
-      {
-        "buySell": "BUY",
-        "clientName": "MICROCURVES TRADING PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Transformers And Rectifie",
-        "qty": "3166656",
-        "remarks": "-",
-        "symbol": "TARIL",
-        "watp": "288.61"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Moneyview Limited",
-        "qty": "13640653",
-        "remarks": "-",
-        "symbol": "MONEYVIEW",
-        "watp": "56.83"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "MICROCURVES TRADING PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Moneyview Limited",
-        "qty": "12610032",
-        "remarks": "-",
-        "symbol": "MONEYVIEW",
-        "watp": "55.98"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "BLITZQUANT RESEARCH LLP",
-        "date": "01-Oct-2026",
-        "name": "Moneyview Limited",
-        "qty": "13638221",
-        "remarks": "-",
-        "symbol": "MONEYVIEW",
-        "watp": "57.25"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "SILVERLEAF CAPITAL SERVICES PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Maha Tel Nigam Ltd.",
-        "qty": "1724513",
-        "remarks": "-",
-        "symbol": "MTNL",
-        "watp": "25.45"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Maha Tel Nigam Ltd.",
-        "qty": "1881294",
-        "remarks": "-",
-        "symbol": "MTNL",
-        "watp": "25.21"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "NIHAR NANDAN NILEKANI",
-        "date": "01-Oct-2026",
-        "name": "Nirlon Ltd.",
-        "qty": "2325000",
-        "remarks": "-",
-        "symbol": "NIRLON",
-        "watp": "615"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Pix Transmissions Limited",
-        "qty": "97767",
-        "remarks": "-",
-        "symbol": "PIXTRANS",
-        "watp": "1845.71"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "ARIHANT CAPITAL MARKETS LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Ratnaveer Precision Eng L",
-        "qty": "1901877",
-        "remarks": "-",
-        "symbol": "RATNAVEER",
-        "watp": "343.93"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "QE SECURITIES LLP",
-        "date": "01-Oct-2026",
-        "name": "Ratnaveer Precision Eng L",
-        "qty": "681544",
-        "remarks": "-",
-        "symbol": "RATNAVEER",
-        "watp": "342.28"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "HRTI PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Ratnaveer Precision Eng L",
-        "qty": "313726",
-        "remarks": "-",
-        "symbol": "RATNAVEER",
-        "watp": "342.88"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "CAPRIZE GLOBAL STORY LLP",
-        "date": "01-Oct-2026",
-        "name": "Sattva Engineering Cstn L",
-        "qty": "155200",
-        "remarks": "-",
-        "symbol": "SATTVAENGG",
-        "watp": "52.4"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "HRTI PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "SBC Exports Limited",
-        "qty": "4822156",
-        "remarks": "-",
-        "symbol": "SBC",
-        "watp": "58.77"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "GREENBUCKS SECURITIES (P) LTD",
-        "date": "01-Oct-2026",
-        "name": "SBC Exports Limited",
-        "qty": "2456663",
-        "remarks": "-",
-        "symbol": "SBC",
-        "watp": "58.63"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "RAPIDO SECURITIES PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "SBC Exports Limited",
-        "qty": "3247393",
-        "remarks": "-",
-        "symbol": "SBC",
-        "watp": "59.11"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "ACME CAPITAL MARKET LIMITED",
-        "date": "01-Oct-2026",
-        "name": "SBC Exports Limited",
-        "qty": "3054294",
-        "remarks": "-",
-        "symbol": "SBC",
-        "watp": "59"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "KEDIA SECURITIES PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Simplex Infrastructures L",
-        "qty": "500000",
-        "remarks": "-",
-        "symbol": "SIMPLEXINF",
-        "watp": "239.78"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "MULTIPLIER SHARE & STOCK ADVISORS PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Skytech Infinite Platfm L",
-        "qty": "52800",
-        "remarks": "-",
-        "symbol": "SKYTECH",
-        "watp": "38.79"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "PLUTUS WEALTH MANAGEMENT LLP",
-        "date": "01-Oct-2026",
-        "name": "SS Retail Limited",
-        "qty": "411017",
-        "remarks": "-",
-        "symbol": "SSRETAIL",
-        "watp": "720.83"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "VARADA TRADING PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Swastika Infra Limited",
-        "qty": "172223",
-        "remarks": "-",
-        "symbol": "SWASTIKAIN",
-        "watp": "203.17"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "JUMP TRADING FINANCIAL INDIA PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Transformers And Rectifie",
-        "qty": "1644556",
-        "remarks": "-",
-        "symbol": "TARIL",
-        "watp": "288.73"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "ALPHAGREP SECURITIES PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Transformers And Rectifie",
-        "qty": "1730595",
-        "remarks": "-",
-        "symbol": "TARIL",
-        "watp": "289.47"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "QE SECURITIES LLP",
-        "date": "01-Oct-2026",
-        "name": "Transformers And Rectifie",
-        "qty": "1573334",
-        "remarks": "-",
-        "symbol": "TARIL",
-        "watp": "290.15"
-      },
-      {
-        "buySell": "SELL",
-        "clientName": "MICROCURVES TRADING PRIVATE LIMITED",
-        "date": "01-Oct-2026",
-        "name": "Transformers And Rectifie",
-        "qty": "3166656",
-        "remarks": "-",
-        "symbol": "TARIL",
-        "watp": "288.74"
-      },
-      {
-        "buySell": "BUY",
         "clientName": "GROWVIA TRADE PRIVATE LIMITED",
         "date": "01-Oct-2026",
         "name": "Advance Agrolife Limited",
@@ -2723,6 +2453,276 @@
         "remarks": "-",
         "symbol": "AMBANIORGO",
         "watp": "115.05"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "URMILA MAHESHWARI",
+        "date": "01-Oct-2026",
+        "name": "A-One Steels India Ltd",
+        "qty": "470131",
+        "remarks": "-",
+        "symbol": "AONESTEELS",
+        "watp": "426.73"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "IRAGE BROKING SERVICES LLP",
+        "date": "01-Oct-2026",
+        "name": "A-One Steels India Ltd",
+        "qty": "428310",
+        "remarks": "-",
+        "symbol": "AONESTEELS",
+        "watp": "428.18"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MARWADI CHANDARANA INTERMEDIARIES BROKERS PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "A-One Steels India Ltd",
+        "qty": "573384",
+        "remarks": "-",
+        "symbol": "AONESTEELS",
+        "watp": "420.18"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "A-One Steels India Ltd",
+        "qty": "433827",
+        "remarks": "-",
+        "symbol": "AONESTEELS",
+        "watp": "431.54"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "GRT STRATEGIC VENTURES LLP",
+        "date": "01-Oct-2026",
+        "name": "A-One Steels India Ltd",
+        "qty": "514779",
+        "remarks": "-",
+        "symbol": "AONESTEELS",
+        "watp": "433.8"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "GRT STRATEGIC VENTURES LLP",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "189676",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "275.14"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MATHISYS QUANTCAP LLP",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "324437",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "275.31"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "PAWAN KUMAR MITTAL",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "475923",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "277.3"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MICROCURVES TRADING PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "289055",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "273.96"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "ALPHAGREP SECURITIES PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "261724",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "274.76"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "AFFLUENCE FINCON SERVICE PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "350000",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "273.44"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "JUNOMONETA FINSOL PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "216770",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "275.57"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "321474",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "274.76"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "COMFORT CAPITAL PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "ArMee Infotech Limited",
+        "qty": "217570",
+        "remarks": "-",
+        "symbol": "ARMEE",
+        "watp": "278.64"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MANDAKINIBEN PRADYUMANBHAI PATEL",
+        "date": "01-Oct-2026",
+        "name": "C K K Retail Mart Limited",
+        "qty": "84800",
+        "remarks": "-",
+        "symbol": "CKKRETAIL",
+        "watp": "169"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "PRACHI VASANTKUMAR SHAH",
+        "date": "01-Oct-2026",
+        "name": "C K K Retail Mart Limited",
+        "qty": "100000",
+        "remarks": "-",
+        "symbol": "CKKRETAIL",
+        "watp": "171"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "QE SECURITIES LLP",
+        "date": "01-Oct-2026",
+        "name": "Delta Corp Limited",
+        "qty": "1752227",
+        "remarks": "-",
+        "symbol": "DELTACORP",
+        "watp": "77.15"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "HRTI PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "Delta Corp Limited",
+        "qty": "2377627",
+        "remarks": "-",
+        "symbol": "DELTACORP",
+        "watp": "76.67"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "RAMESH JAIN HUF",
+        "date": "01-Oct-2026",
+        "name": "Docmode Health Tech Ltd",
+        "qty": "40000",
+        "remarks": "-",
+        "symbol": "DHTL",
+        "watp": "24.95"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "PABRAI WAGONS ETF",
+        "date": "01-Oct-2026",
+        "name": "Edelweiss Fin Serv Ltd",
+        "qty": "14572000",
+        "remarks": "-",
+        "symbol": "EDELWEISS",
+        "watp": "142.73"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MORGAN STANLEY ASIA SINGAPORE PTE",
+        "date": "01-Oct-2026",
+        "name": "Elevate Campuses Limited",
+        "qty": "998747",
+        "remarks": "-",
+        "symbol": "ELEVATE",
+        "watp": "340.14"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "HRTI PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "Fedders Holding Ltd.",
+        "qty": "3471775",
+        "remarks": "-",
+        "symbol": "FEDDERSHOL",
+        "watp": "65.12"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "QE SECURITIES LLP",
+        "date": "01-Oct-2026",
+        "name": "Fedders Holding Ltd.",
+        "qty": "1814531",
+        "remarks": "-",
+        "symbol": "FEDDERSHOL",
+        "watp": "64.96"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "ALPHAGREP SECURITIES PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "Fedders Holding Ltd.",
+        "qty": "1324357",
+        "remarks": "-",
+        "symbol": "FEDDERSHOL",
+        "watp": "65.59"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "NK SECURITIES RESEARCH PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "Fedders Holding Ltd.",
+        "qty": "2591033",
+        "remarks": "-",
+        "symbol": "FEDDERSHOL",
+        "watp": "65.25"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "MICROCURVES TRADING PRIVATE LIMITED",
+        "date": "01-Oct-2026",
+        "name": "Fedders Holding Ltd.",
+        "qty": "3154967",
+        "remarks": "-",
+        "symbol": "FEDDERSHOL",
+        "watp": "65.54"
+      },
+      {
+        "buySell": "BUY",
+        "clientName": "PLUTUS WEALTH MANAGEMENT LLP",
+        "date": "01-Oct-2026",
+        "name": "Fedders Holding Ltd.",
+        "qty": "1366122",
+        "remarks": "-",
+        "symbol": "FEDDERSHOL",
+        "watp": "65.17"
       }
     ],
     "blockDeals": [
@@ -3187,6 +3187,1301 @@
     ],
     "announcements": [
       {
+        "symbol": "RBLBANK",
+        "subject": "General Updates",
+        "date": "05-Oct-2026 07:20:20"
+      },
+      {
+        "symbol": "SWARAJ",
+        "subject": "General Updates",
+        "date": "04-Oct-2026 23:40:11"
+      },
+      {
+        "symbol": "SWARAJ",
+        "subject": "Cessation",
+        "date": "04-Oct-2026 23:07:19"
+      },
+      {
+        "symbol": "HDFCBANK",
+        "subject": "General Updates",
+        "date": "04-Oct-2026 22:03:36"
+      },
+      {
+        "symbol": "PWL",
+        "subject": "Closure of operations",
+        "date": "04-Oct-2026 21:50:33"
+      },
+      {
+        "symbol": "SPENCERS",
+        "subject": "Copy of Newspaper Publication",
+        "date": "04-Oct-2026 19:16:09"
+      },
+      {
+        "symbol": "NYKAA",
+        "subject": "Updates",
+        "date": "04-Oct-2026 18:31:06"
+      },
+      {
+        "symbol": "GESHIP",
+        "subject": "Change in Management",
+        "date": "04-Oct-2026 18:26:49"
+      },
+      {
+        "symbol": "DHAMPURSUG",
+        "subject": "Updates",
+        "date": "04-Oct-2026 18:04:25"
+      },
+      {
+        "symbol": "OLAELEC",
+        "subject": "Updates",
+        "date": "04-Oct-2026 18:02:32"
+      },
+      {
+        "symbol": "SONACOMS",
+        "subject": "Updates",
+        "date": "04-Oct-2026 17:39:08"
+      },
+      {
+        "symbol": "RITES",
+        "subject": "General Updates",
+        "date": "04-Oct-2026 17:26:09"
+      },
+      {
+        "symbol": "ORCHASP",
+        "subject": "Shareholders meeting",
+        "date": "04-Oct-2026 15:57:39"
+      },
+      {
+        "symbol": "DLF",
+        "subject": "Press Release",
+        "date": "04-Oct-2026 15:20:57"
+      },
+      {
+        "symbol": "ANUP",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "04-Oct-2026 14:54:27"
+      },
+      {
+        "symbol": "RVHL",
+        "subject": "Resignation",
+        "date": "04-Oct-2026 14:21:04"
+      },
+      {
+        "symbol": "ABFRL",
+        "subject": "Copy of Newspaper Publication",
+        "date": "04-Oct-2026 13:16:53"
+      },
+      {
+        "symbol": "DPSCLTD",
+        "subject": "Corporate Insolvency Resolution Process",
+        "date": "04-Oct-2026 13:16:36"
+      },
+      {
+        "symbol": "YESBANK",
+        "subject": "Updates",
+        "date": "04-Oct-2026 13:01:17"
+      },
+      {
+        "symbol": "SPARC",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "04-Oct-2026 12:48:26"
+      },
+      {
+        "symbol": "BCG",
+        "subject": "Updates",
+        "date": "04-Oct-2026 12:25:31"
+      },
+      {
+        "symbol": "VOEPL",
+        "subject": "General Updates",
+        "date": "04-Oct-2026 12:24:40"
+      },
+      {
+        "symbol": "RBLBANK",
+        "subject": "ESOP/ESOS/ESPS",
+        "date": "04-Oct-2026 10:44:29"
+      },
+      {
+        "symbol": "SICALLOG",
+        "subject": "Bagging/Receiving of orders/contracts",
+        "date": "04-Oct-2026 10:10:20"
+      },
+      {
+        "symbol": "BCG",
+        "subject": "Outcome of Board Meeting",
+        "date": "03-Oct-2026 23:48:19"
+      },
+      {
+        "symbol": "GOACARBON",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 22:58:37"
+      },
+      {
+        "symbol": "AXISCADES",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 21:28:59"
+      },
+      {
+        "symbol": "DIACABS",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 21:23:27"
+      },
+      {
+        "symbol": "EQUIPPP",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 21:15:05"
+      },
+      {
+        "symbol": "CHENNPETRO",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 20:05:03"
+      },
+      {
+        "symbol": "ACMESOLAR",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 20:03:23"
+      },
+      {
+        "symbol": "RVHL",
+        "subject": "Resignation of Director/KMP/SMP",
+        "date": "03-Oct-2026 20:02:09"
+      },
+      {
+        "symbol": "PASHUPATI",
+        "subject": "Bonus",
+        "date": "03-Oct-2026 19:58:52"
+      },
+      {
+        "symbol": "FILATEX",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 19:56:12"
+      },
+      {
+        "symbol": "BANDHANBNK",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 19:49:47"
+      },
+      {
+        "symbol": "AUGMONT",
+        "subject": "Press Release",
+        "date": "03-Oct-2026 19:48:17"
+      },
+      {
+        "symbol": "KARAMTARA",
+        "subject": "Updates",
+        "date": "03-Oct-2026 19:43:00"
+      },
+      {
+        "symbol": "KARAMTARA",
+        "subject": "Updates",
+        "date": "03-Oct-2026 19:40:03"
+      },
+      {
+        "symbol": "AUBANK",
+        "subject": "Updates",
+        "date": "03-Oct-2026 19:39:55"
+      },
+      {
+        "symbol": "PNB",
+        "subject": "Trading Window",
+        "date": "03-Oct-2026 19:37:45"
+      },
+      {
+        "symbol": "KARAMTARA",
+        "subject": "Updates",
+        "date": "03-Oct-2026 19:34:31"
+      },
+      {
+        "symbol": "ABFRL",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 19:23:39"
+      },
+      {
+        "symbol": "RUCHINFRA",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "03-Oct-2026 19:08:08"
+      },
+      {
+        "symbol": "PNB",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 19:07:20"
+      },
+      {
+        "symbol": "RAYMOND",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 18:58:38"
+      },
+      {
+        "symbol": "ESSARSHPNG",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 18:58:31"
+      },
+      {
+        "symbol": "FILATFASH",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 18:58:13"
+      },
+      {
+        "symbol": "FILATFASH",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 18:54:36"
+      },
+      {
+        "symbol": "FILATFASH",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 18:50:00"
+      },
+      {
+        "symbol": "RAYMOND",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 18:44:23"
+      },
+      {
+        "symbol": "FILATFASH",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 18:41:31"
+      },
+      {
+        "symbol": "SHRENIK",
+        "subject": "Corporate Insolvency Resolution Process",
+        "date": "03-Oct-2026 18:41:31"
+      },
+      {
+        "symbol": "FILATFASH",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 18:38:00"
+      },
+      {
+        "symbol": "SETL",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 18:37:20"
+      },
+      {
+        "symbol": "LTF",
+        "subject": "Updates",
+        "date": "03-Oct-2026 18:33:08"
+      },
+      {
+        "symbol": "ERAINFRA",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 18:32:08"
+      },
+      {
+        "symbol": "SAHLIBHFI",
+        "subject": "Resignation of Director/KMP/SMP",
+        "date": "03-Oct-2026 18:31:09"
+      },
+      {
+        "symbol": "SOUTHBANK",
+        "subject": "Updates",
+        "date": "03-Oct-2026 18:31:04"
+      },
+      {
+        "symbol": "AAREYDRUGS",
+        "subject": "Disclosure of material issue",
+        "date": "03-Oct-2026 18:30:03"
+      },
+      {
+        "symbol": "HAVISHA",
+        "subject": "Structural Digital Database",
+        "date": "03-Oct-2026 18:29:12"
+      },
+      {
+        "symbol": "AAREYDRUGS",
+        "subject": "Disclosure of material issue",
+        "date": "03-Oct-2026 18:28:58"
+      },
+      {
+        "symbol": "AAREYDRUGS",
+        "subject": "Disclosure of material issue",
+        "date": "03-Oct-2026 18:27:36"
+      },
+      {
+        "symbol": "HAVISHA",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 18:26:16"
+      },
+      {
+        "symbol": "FILATFASH",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 18:22:23"
+      },
+      {
+        "symbol": "ESSARSHPNG",
+        "subject": "Change in Management",
+        "date": "03-Oct-2026 18:21:23"
+      },
+      {
+        "symbol": "ESSARSHPNG",
+        "subject": "Change in Director(s)",
+        "date": "03-Oct-2026 18:19:21"
+      },
+      {
+        "symbol": "VISL",
+        "subject": "Updates",
+        "date": "03-Oct-2026 18:16:35"
+      },
+      {
+        "symbol": "GALAXYSURF",
+        "subject": "Appointment",
+        "date": "03-Oct-2026 18:15:59"
+      },
+      {
+        "symbol": "CANBK",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 18:15:56"
+      },
+      {
+        "symbol": "SAHLIBHFI",
+        "subject": "Resignation",
+        "date": "03-Oct-2026 18:15:43"
+      },
+      {
+        "symbol": "GODAVARIB",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 18:13:20"
+      },
+      {
+        "symbol": "SADBHIN",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 18:11:51"
+      },
+      {
+        "symbol": "VEDL",
+        "subject": "Updates",
+        "date": "03-Oct-2026 18:07:25"
+      },
+      {
+        "symbol": "SADBHAV",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:58:58"
+      },
+      {
+        "symbol": "SOLEX",
+        "subject": "Bagging/Receiving of orders/contracts",
+        "date": "03-Oct-2026 17:58:45"
+      },
+      {
+        "symbol": "ESSARSHPNG",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:58:40"
+      },
+      {
+        "symbol": "SUPREMEENG",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:57:32"
+      },
+      {
+        "symbol": "NLCINDIA",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 17:55:46"
+      },
+      {
+        "symbol": "KSERASERA",
+        "subject": "Extension of Annual General Meeting",
+        "date": "03-Oct-2026 17:53:01"
+      },
+      {
+        "symbol": "CMLL",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:52:43"
+      },
+      {
+        "symbol": "IDBI",
+        "subject": "Updates",
+        "date": "03-Oct-2026 17:52:36"
+      },
+      {
+        "symbol": "SRGHFL",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 17:45:47"
+      },
+      {
+        "symbol": "ZODIAC",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:44:40"
+      },
+      {
+        "symbol": "BAGFILMS",
+        "subject": "Updates",
+        "date": "03-Oct-2026 17:41:02"
+      },
+      {
+        "symbol": "AGROPHOS",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:36:39"
+      },
+      {
+        "symbol": "BANKBARODA",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 17:33:39"
+      },
+      {
+        "symbol": "MUTHOOTCAP",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 17:30:33"
+      },
+      {
+        "symbol": "DSFCL",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 17:30:28"
+      },
+      {
+        "symbol": "SUPREMEENG",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 17:27:50"
+      },
+      {
+        "symbol": "VAML",
+        "subject": "Updates",
+        "date": "03-Oct-2026 17:24:17"
+      },
+      {
+        "symbol": "VOGL",
+        "subject": "Updates",
+        "date": "03-Oct-2026 17:21:36"
+      },
+      {
+        "symbol": "SHARDACROP",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 17:21:32"
+      },
+      {
+        "symbol": "PACEDIGITK",
+        "subject": "Spurt in Volume",
+        "date": "03-Oct-2026 17:19:11"
+      },
+      {
+        "symbol": "RVHL",
+        "subject": "Resignation",
+        "date": "03-Oct-2026 17:17:12"
+      },
+      {
+        "symbol": "DRREDDY",
+        "subject": "Action(s) taken or orders passed",
+        "date": "03-Oct-2026 17:15:38"
+      },
+      {
+        "symbol": "RAYMOND",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:12:32"
+      },
+      {
+        "symbol": "BANKINDIA",
+        "subject": "Updates",
+        "date": "03-Oct-2026 17:11:02"
+      },
+      {
+        "symbol": "RANASUG",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 17:10:26"
+      },
+      {
+        "symbol": "RTNPOWER",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "03-Oct-2026 17:09:44"
+      },
+      {
+        "symbol": "BALAJEE",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 17:07:50"
+      },
+      {
+        "symbol": "FAZE3Q",
+        "subject": "Updates",
+        "date": "03-Oct-2026 17:05:12"
+      },
+      {
+        "symbol": "AUROPHARMA",
+        "subject": "Press Release",
+        "date": "03-Oct-2026 17:03:34"
+      },
+      {
+        "symbol": "CANBK",
+        "subject": "Updates",
+        "date": "03-Oct-2026 16:48:52"
+      },
+      {
+        "symbol": "LINCOLN",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 16:47:50"
+      },
+      {
+        "symbol": "MUTHOOTCAP",
+        "subject": "Issue of Securities",
+        "date": "03-Oct-2026 16:47:39"
+      },
+      {
+        "symbol": "VPRPL",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 16:44:44"
+      },
+      {
+        "symbol": "SMCGLOBAL",
+        "subject": "Action(s) initiated or orders passed",
+        "date": "03-Oct-2026 16:41:46"
+      },
+      {
+        "symbol": "BAJAJELEC",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 16:39:59"
+      },
+      {
+        "symbol": "MUTHOOTCAP",
+        "subject": "Committee Meeting Updates",
+        "date": "03-Oct-2026 16:39:45"
+      },
+      {
+        "symbol": "VEDPOWER",
+        "subject": "Updates",
+        "date": "03-Oct-2026 16:38:53"
+      },
+      {
+        "symbol": "MAHABANK",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 16:36:25"
+      },
+      {
+        "symbol": "UJJIVANSFB",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 16:30:20"
+      },
+      {
+        "symbol": "TMPV",
+        "subject": "Press Release",
+        "date": "03-Oct-2026 16:27:00"
+      },
+      {
+        "symbol": "SURYALAXMI",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 16:21:04"
+      },
+      {
+        "symbol": "NECLIFE",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "03-Oct-2026 16:15:22"
+      },
+      {
+        "symbol": "GSFC",
+        "subject": "Trading Window",
+        "date": "03-Oct-2026 16:14:12"
+      },
+      {
+        "symbol": "ABLBL",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 16:13:17"
+      },
+      {
+        "symbol": "SIGIND",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 16:07:00"
+      },
+      {
+        "symbol": "SIS",
+        "subject": "Allotment of Securities",
+        "date": "03-Oct-2026 16:03:36"
+      },
+      {
+        "symbol": "VRLLOG",
+        "subject": "Trading Window",
+        "date": "03-Oct-2026 16:02:02"
+      },
+      {
+        "symbol": "LUXIND",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 16:00:55"
+      },
+      {
+        "symbol": "BALUFORGE",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 15:58:54"
+      },
+      {
+        "symbol": "BANKINDIA",
+        "subject": "Updates",
+        "date": "03-Oct-2026 15:57:09"
+      },
+      {
+        "symbol": "KNAGRI",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 15:53:51"
+      },
+      {
+        "symbol": "WIPRO",
+        "subject": "Amalgamation/Merger",
+        "date": "03-Oct-2026 15:53:23"
+      },
+      {
+        "symbol": "HMAAGRO",
+        "subject": "Updates",
+        "date": "03-Oct-2026 15:51:14"
+      },
+      {
+        "symbol": "NCC",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 15:46:50"
+      },
+      {
+        "symbol": "CUB",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 15:45:38"
+      },
+      {
+        "symbol": "IOB",
+        "subject": "Updates",
+        "date": "03-Oct-2026 15:41:23"
+      },
+      {
+        "symbol": "EUROTEXIND",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 15:40:46"
+      },
+      {
+        "symbol": "CMRGREEN",
+        "subject": "Resignation",
+        "date": "03-Oct-2026 15:39:22"
+      },
+      {
+        "symbol": "J&KBANK",
+        "subject": "Updates",
+        "date": "03-Oct-2026 15:34:28"
+      },
+      {
+        "symbol": "ALLTIME",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 15:32:29"
+      },
+      {
+        "symbol": "SHANTIGEAR",
+        "subject": "Credit Rating",
+        "date": "03-Oct-2026 15:31:44"
+      },
+      {
+        "symbol": "PATELRMART",
+        "subject": "Credit Rating- Revision",
+        "date": "03-Oct-2026 15:24:46"
+      },
+      {
+        "symbol": "ADROITINFO",
+        "subject": "Outcome of Board Meeting",
+        "date": "03-Oct-2026 15:24:16"
+      },
+      {
+        "symbol": "SILGO",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 15:23:01"
+      },
+      {
+        "symbol": "MEDPLUS",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 15:06:15"
+      },
+      {
+        "symbol": "JAINREC",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 15:01:25"
+      },
+      {
+        "symbol": "DODLA",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 14:53:13"
+      },
+      {
+        "symbol": "FEDERALBNK",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 14:50:22"
+      },
+      {
+        "symbol": "ANSALAPI",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 14:49:15"
+      },
+      {
+        "symbol": "MERCURYEV",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 14:48:28"
+      },
+      {
+        "symbol": "HINDZINC",
+        "subject": "Updates",
+        "date": "03-Oct-2026 14:41:39"
+      },
+      {
+        "symbol": "PIONEEREMB",
+        "subject": "Structural Digital Database",
+        "date": "03-Oct-2026 14:37:49"
+      },
+      {
+        "symbol": "STYLEBAAZA",
+        "subject": "Updates",
+        "date": "03-Oct-2026 14:34:31"
+      },
+      {
+        "symbol": "ZENITHSTL",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 14:18:55"
+      },
+      {
+        "symbol": "GPTINFRA",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 14:16:21"
+      },
+      {
+        "symbol": "MSPL",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 14:07:14"
+      },
+      {
+        "symbol": "NARMADA",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 13:53:13"
+      },
+      {
+        "symbol": "USK",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 13:51:19"
+      },
+      {
+        "symbol": "JARO",
+        "subject": "Updates",
+        "date": "03-Oct-2026 13:43:35"
+      },
+      {
+        "symbol": "DPSCLTD",
+        "subject": "Disclosure of material issue",
+        "date": "03-Oct-2026 13:36:56"
+      },
+      {
+        "symbol": "DPSCLTD",
+        "subject": "Corporate Insolvency Resolution Process",
+        "date": "03-Oct-2026 13:33:14"
+      },
+      {
+        "symbol": "EMSLIMITED",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 13:30:48"
+      },
+      {
+        "symbol": "FACT",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 13:29:22"
+      },
+      {
+        "symbol": "GAYAHWS",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 13:23:53"
+      },
+      {
+        "symbol": "MPIMANIPAL",
+        "subject": "Investor Presentation",
+        "date": "03-Oct-2026 13:23:34"
+      },
+      {
+        "symbol": "BBTCL",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 13:18:43"
+      },
+      {
+        "symbol": "MPIMANIPAL",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 13:08:37"
+      },
+      {
+        "symbol": "MANBA",
+        "subject": "Updates",
+        "date": "03-Oct-2026 13:08:14"
+      },
+      {
+        "symbol": "SPIC",
+        "subject": "Updates",
+        "date": "03-Oct-2026 13:07:34"
+      },
+      {
+        "symbol": "CENTRALBK",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 13:05:29"
+      },
+      {
+        "symbol": "ELECON",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 12:38:42"
+      },
+      {
+        "symbol": "SKIPPER",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "03-Oct-2026 12:35:51"
+      },
+      {
+        "symbol": "EQUITASBNK",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 12:34:13"
+      },
+      {
+        "symbol": "BODALCHEM",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 12:33:06"
+      },
+      {
+        "symbol": "ALPA",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 12:30:08"
+      },
+      {
+        "symbol": "MEDPLUS",
+        "subject": "Credit Rating",
+        "date": "03-Oct-2026 12:25:20"
+      },
+      {
+        "symbol": "DMART",
+        "subject": "Updates",
+        "date": "03-Oct-2026 12:23:41"
+      },
+      {
+        "symbol": "SEDEMAC",
+        "subject": "Press Release",
+        "date": "03-Oct-2026 12:23:08"
+      },
+      {
+        "symbol": "GRWRHITECH",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "03-Oct-2026 12:23:03"
+      },
+      {
+        "symbol": "IDBI",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 12:22:38"
+      },
+      {
+        "symbol": "SAIPARENT",
+        "subject": "Monitoring Agency Report",
+        "date": "03-Oct-2026 12:09:45"
+      },
+      {
+        "symbol": "EIMCOELECO",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 12:05:39"
+      },
+      {
+        "symbol": "TEXRAIL",
+        "subject": "Bagging/Receiving of orders/contracts",
+        "date": "03-Oct-2026 12:03:11"
+      },
+      {
+        "symbol": "BANG",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 12:02:00"
+      },
+      {
+        "symbol": "THOMASCOTT",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 11:51:46"
+      },
+      {
+        "symbol": "MANGALAM",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 11:51:10"
+      },
+      {
+        "symbol": "UNITEDPOLY",
+        "subject": "Shareholders meeting",
+        "date": "03-Oct-2026 11:35:59"
+      },
+      {
+        "symbol": "PREMEXPLN",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 11:31:40"
+      },
+      {
+        "symbol": "ASTRAMICRO",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 11:24:06"
+      },
+      {
+        "symbol": "VHLTD",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 11:20:01"
+      },
+      {
+        "symbol": "AGASTYAEN",
+        "subject": "Copy of Newspaper Publication",
+        "date": "03-Oct-2026 11:19:26"
+      },
+      {
+        "symbol": "MOIL",
+        "subject": "Monthly Business Updates",
+        "date": "03-Oct-2026 11:08:33"
+      },
+      {
+        "symbol": "KISSHT",
+        "subject": "Press Release",
+        "date": "03-Oct-2026 11:03:54"
+      },
+      {
+        "symbol": "BAJFINANCE",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 11:02:00"
+      },
+      {
+        "symbol": "VSTL",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "03-Oct-2026 11:00:49"
+      },
+      {
+        "symbol": "PROSTARM",
+        "subject": "Updates",
+        "date": "03-Oct-2026 10:47:28"
+      },
+      {
+        "symbol": "BAJAJHFL",
+        "subject": "General Updates",
+        "date": "03-Oct-2026 10:42:44"
+      },
+      {
+        "symbol": "NIRAJISPAT",
+        "subject": "Trading Window",
+        "date": "03-Oct-2026 10:37:45"
+      },
+      {
+        "symbol": "PAYTM",
+        "subject": "ESOP/ESOS/ESPS",
+        "date": "03-Oct-2026 09:08:54"
+      },
+      {
+        "symbol": "BBTCL",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 23:55:12"
+      },
+      {
+        "symbol": "PERSISTENT",
+        "subject": "Allotment of Securities",
+        "date": "02-Oct-2026 23:16:35"
+      },
+      {
+        "symbol": "EROSMEDIA",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 23:16:34"
+      },
+      {
+        "symbol": "BUILDPRO",
+        "subject": "Updates",
+        "date": "02-Oct-2026 23:04:51"
+      },
+      {
+        "symbol": "SWARAJ",
+        "subject": "Copy of Newspaper Publication",
+        "date": "02-Oct-2026 22:28:53"
+      },
+      {
+        "symbol": "EROSMEDIA",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 22:13:33"
+      },
+      {
+        "symbol": "ICICIPRULI",
+        "subject": "Resignation of Director/KMP/SMP",
+        "date": "02-Oct-2026 21:56:56"
+      },
+      {
+        "symbol": "GODREJCP",
+        "subject": "Allotment of Securities",
+        "date": "02-Oct-2026 21:42:17"
+      },
+      {
+        "symbol": "EMCURE",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "02-Oct-2026 21:31:28"
+      },
+      {
+        "symbol": "AIFL",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 21:03:01"
+      },
+      {
+        "symbol": "RITCO",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 20:52:36"
+      },
+      {
+        "symbol": "RITCO",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 20:47:11"
+      },
+      {
+        "symbol": "BHAGYANGR",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 20:32:51"
+      },
+      {
+        "symbol": "GRANULES",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 20:29:34"
+      },
+      {
+        "symbol": "SNOWMAN",
+        "subject": "Action(s) initiated or orders passed",
+        "date": "02-Oct-2026 20:25:13"
+      },
+      {
+        "symbol": "PASHUPATI",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 20:16:10"
+      },
+      {
+        "symbol": "M&MFIN",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 19:48:55"
+      },
+      {
+        "symbol": "MWL",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 19:46:29"
+      },
+      {
+        "symbol": "HAL",
+        "subject": "Agreements",
+        "date": "02-Oct-2026 19:46:03"
+      },
+      {
+        "symbol": "ACMESOLAR",
+        "subject": "Credit Rating",
+        "date": "02-Oct-2026 19:44:10"
+      },
+      {
+        "symbol": "INNOVACAP",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 19:33:27"
+      },
+      {
+        "symbol": "PNB",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 19:32:10"
+      },
+      {
+        "symbol": "TFL",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 19:16:19"
+      },
+      {
+        "symbol": "NAVKARURB",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 19:12:21"
+      },
+      {
+        "symbol": "SSRETAIL",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 19:10:43"
+      },
+      {
+        "symbol": "SSRETAIL",
+        "subject": "Trading Window",
+        "date": "02-Oct-2026 19:03:56"
+      },
+      {
+        "symbol": "LEMERITE",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 18:45:09"
+      },
+      {
+        "symbol": "AUROPHARMA",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 18:32:35"
+      },
+      {
+        "symbol": "PFIZER",
+        "subject": "Copy of Newspaper Publication",
+        "date": "02-Oct-2026 18:32:12"
+      },
+      {
+        "symbol": "PETRONET",
+        "subject": "Change in Management",
+        "date": "02-Oct-2026 18:17:01"
+      },
+      {
+        "symbol": "NAGAFERT",
+        "subject": "Updates",
+        "date": "02-Oct-2026 18:12:33"
+      },
+      {
+        "symbol": "SOBHA",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 18:08:01"
+      },
+      {
+        "symbol": "AUROPHARMA",
+        "subject": "Acquisition",
+        "date": "02-Oct-2026 18:05:45"
+      },
+      {
+        "symbol": "NINSYS",
+        "subject": "Updates",
+        "date": "02-Oct-2026 18:05:02"
+      },
+      {
+        "symbol": "GULFPETRO",
+        "subject": "Copy of Newspaper Publication",
+        "date": "02-Oct-2026 18:04:04"
+      },
+      {
+        "symbol": "GICL",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 17:57:35"
+      },
+      {
+        "symbol": "NAGAFERT",
+        "subject": "Trading Window",
+        "date": "02-Oct-2026 17:56:32"
+      },
+      {
+        "symbol": "ICICIBANK",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 17:47:37"
+      },
+      {
+        "symbol": "KNACK",
+        "subject": "Bagging/Receiving of orders/contracts",
+        "date": "02-Oct-2026 17:45:24"
+      },
+      {
+        "symbol": "IBULLSLTD",
+        "subject": "Granting/withdrawal/surrender/cancellation/suspension of key licenses/ regulatory approvals",
+        "date": "02-Oct-2026 17:28:38"
+      },
+      {
+        "symbol": "IBULLSLTD",
+        "subject": "Updates",
+        "date": "02-Oct-2026 17:28:38"
+      },
+      {
+        "symbol": "AWFIS",
+        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
+        "date": "02-Oct-2026 17:22:34"
+      },
+      {
+        "symbol": "SUNPHARMA",
+        "subject": "Copy of Newspaper Publication",
+        "date": "02-Oct-2026 17:15:38"
+      },
+      {
+        "symbol": "ICICIPRULI",
+        "subject": "Change in Director(s)",
+        "date": "02-Oct-2026 17:13:24"
+      },
+      {
+        "symbol": "JYOTICNC",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 17:08:45"
+      },
+      {
+        "symbol": "ICICIPRULI",
+        "subject": "Outcome of Board Meeting",
+        "date": "02-Oct-2026 16:59:20"
+      },
+      {
+        "symbol": "SPECTRUM",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 16:50:24"
+      },
+      {
+        "symbol": "KABRAEXTRU",
+        "subject": "Outcome of Board Meeting",
+        "date": "02-Oct-2026 16:47:01"
+      },
+      {
+        "symbol": "INDHOTEL",
+        "subject": "Copy of Newspaper Publication",
+        "date": "02-Oct-2026 16:46:32"
+      },
+      {
+        "symbol": "TECHM",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "02-Oct-2026 16:38:37"
+      },
+      {
+        "symbol": "TARIL",
+        "subject": "Bagging/Receiving of orders/contracts",
+        "date": "02-Oct-2026 16:31:13"
+      },
+      {
+        "symbol": "ASAHISONG",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 16:30:41"
+      },
+      {
+        "symbol": "LCCINFOTEC",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 16:28:12"
+      },
+      {
+        "symbol": "EROSMEDIA",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 16:16:21"
+      },
+      {
+        "symbol": "FORCEMOT",
+        "subject": "Copy of Newspaper Publication",
+        "date": "02-Oct-2026 16:10:26"
+      },
+      {
+        "symbol": "AGL",
+        "subject": "Change in Director(s)",
+        "date": "02-Oct-2026 16:08:30"
+      },
+      {
+        "symbol": "AGL",
+        "subject": "Appointment",
+        "date": "02-Oct-2026 16:06:04"
+      },
+      {
+        "symbol": "AGL",
+        "subject": "Appointment",
+        "date": "02-Oct-2026 16:06:04"
+      },
+      {
+        "symbol": "FORCEMOT",
+        "subject": "Copy of Newspaper Publication",
+        "date": "02-Oct-2026 16:01:58"
+      },
+      {
+        "symbol": "RUSHIL",
+        "subject": "Structural Digital Database",
+        "date": "02-Oct-2026 15:54:33"
+      },
+      {
+        "symbol": "VGL",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 15:44:32"
+      },
+      {
+        "symbol": "QMSMEDI",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 15:29:13"
+      },
+      {
+        "symbol": "RUSHABEAR",
+        "subject": "Appointment",
+        "date": "02-Oct-2026 15:29:07"
+      },
+      {
+        "symbol": "RISHABH",
+        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
+        "date": "02-Oct-2026 15:15:23"
+      },
+      {
+        "symbol": "INDOUS",
+        "subject": "Shareholders meeting",
+        "date": "02-Oct-2026 15:08:20"
+      },
+      {
+        "symbol": "V2RETAIL",
+        "subject": "General Updates",
+        "date": "02-Oct-2026 14:53:36"
+      },
+      {
+        "symbol": "TDPOWERSYS",
+        "subject": "Updates",
+        "date": "02-Oct-2026 14:50:30"
+      },
+      {
         "symbol": "TVVISION",
         "subject": "Corporate Insolvency Resolution Process",
         "date": "02-Oct-2026 14:46:35"
@@ -3420,2271 +4715,6 @@
         "symbol": "RELTD",
         "subject": "General Updates",
         "date": "02-Oct-2026 08:23:07"
-      },
-      {
-        "symbol": "BRNL",
-        "subject": "Shareholders meeting",
-        "date": "02-Oct-2026 00:55:31"
-      },
-      {
-        "symbol": "BAJAJELEC",
-        "subject": "General Updates",
-        "date": "02-Oct-2026 00:12:25"
-      },
-      {
-        "symbol": "XTRANET",
-        "subject": "Updates",
-        "date": "01-Oct-2026 23:54:44"
-      },
-      {
-        "symbol": "BAJAJELEC",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 23:52:50"
-      },
-      {
-        "symbol": "XTRANET",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 23:50:26"
-      },
-      {
-        "symbol": "SHAREINDIA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 23:48:33"
-      },
-      {
-        "symbol": "KMSUGAR",
-        "subject": "Scheme of Arrangement",
-        "date": "01-Oct-2026 23:47:33"
-      },
-      {
-        "symbol": "UNIVPHOTO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 23:43:20"
-      },
-      {
-        "symbol": "SHAREINDIA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 23:40:23"
-      },
-      {
-        "symbol": "BAJAJFINSV",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 23:37:39"
-      },
-      {
-        "symbol": "ESAFSFB",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 23:31:26"
-      },
-      {
-        "symbol": "KHADIM",
-        "subject": "Credit Rating",
-        "date": "01-Oct-2026 23:27:35"
-      },
-      {
-        "symbol": "SAGILITY",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 23:27:22"
-      },
-      {
-        "symbol": "BAJFINANCE",
-        "subject": "Qualified Institutional Placement",
-        "date": "01-Oct-2026 23:24:08"
-      },
-      {
-        "symbol": "BAJFINANCE",
-        "subject": "Preferential issue",
-        "date": "01-Oct-2026 23:21:29"
-      },
-      {
-        "symbol": "BAJFINANCE",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 23:17:02"
-      },
-      {
-        "symbol": "SAGILITY",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 23:16:25"
-      },
-      {
-        "symbol": "SHREEJISPG",
-        "subject": "Change in Auditors",
-        "date": "01-Oct-2026 23:15:35"
-      },
-      {
-        "symbol": "LASERPOWER",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "01-Oct-2026 23:12:33"
-      },
-      {
-        "symbol": "MANIPALHOS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 23:09:36"
-      },
-      {
-        "symbol": "HINDALCO",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 23:02:51"
-      },
-      {
-        "symbol": "RELINFRA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 23:02:21"
-      },
-      {
-        "symbol": "SWARAJ",
-        "subject": "Change in Director(s)",
-        "date": "01-Oct-2026 23:00:48"
-      },
-      {
-        "symbol": "GANESHBE",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 22:58:07"
-      },
-      {
-        "symbol": "SHREEJISPG",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 22:55:49"
-      },
-      {
-        "symbol": "RPOWER",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 22:48:51"
-      },
-      {
-        "symbol": "HEROMOTORS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 22:48:18"
-      },
-      {
-        "symbol": "BBL",
-        "subject": "Action(s) taken or orders passed",
-        "date": "01-Oct-2026 22:41:29"
-      },
-      {
-        "symbol": "GUJRAFFIA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 22:39:48"
-      },
-      {
-        "symbol": "UNIONBANK",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 22:35:17"
-      },
-      {
-        "symbol": "CSBBANK",
-        "subject": "Updates",
-        "date": "01-Oct-2026 22:29:21"
-      },
-      {
-        "symbol": "INFY",
-        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
-        "date": "01-Oct-2026 22:20:53"
-      },
-      {
-        "symbol": "TMB",
-        "subject": "Change in Director(s)",
-        "date": "01-Oct-2026 22:13:13"
-      },
-      {
-        "symbol": "NILAINFRA",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "01-Oct-2026 22:12:56"
-      },
-      {
-        "symbol": "NILAINFRA",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "01-Oct-2026 22:08:47"
-      },
-      {
-        "symbol": "JSWDULUX",
-        "subject": "Action(s) initiated or orders passed",
-        "date": "01-Oct-2026 22:07:08"
-      },
-      {
-        "symbol": "KERNEX",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 22:06:33"
-      },
-      {
-        "symbol": "FORCEMOT",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 22:06:19"
-      },
-      {
-        "symbol": "RENTOMOJO",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 22:00:13"
-      },
-      {
-        "symbol": "SWARAJ",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 21:56:32"
-      },
-      {
-        "symbol": "AARNAV",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 21:51:02"
-      },
-      {
-        "symbol": "FORCEMOT",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 21:49:50"
-      },
-      {
-        "symbol": "FACT",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 21:49:23"
-      },
-      {
-        "symbol": "JNPR",
-        "subject": "Commencement of commercial production/operations",
-        "date": "01-Oct-2026 21:47:54"
-      },
-      {
-        "symbol": "IREDA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 21:43:35"
-      },
-      {
-        "symbol": "TCS",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 21:42:54"
-      },
-      {
-        "symbol": "ZYDUSLIFE",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 21:39:55"
-      },
-      {
-        "symbol": "PANACEABIO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 21:39:48"
-      },
-      {
-        "symbol": "PRANAV",
-        "subject": "Integrated Filing- Financial",
-        "date": "01-Oct-2026 21:37:06"
-      },
-      {
-        "symbol": "SECURKLOUD",
-        "subject": "Defaults on Payment of Interest/Principal",
-        "date": "01-Oct-2026 21:33:09"
-      },
-      {
-        "symbol": "BIOCON",
-        "subject": "Options to purchase securities",
-        "date": "01-Oct-2026 21:32:13"
-      },
-      {
-        "symbol": "GICRE",
-        "subject": "Change in Auditors",
-        "date": "01-Oct-2026 21:30:47"
-      },
-      {
-        "symbol": "AARTISURF",
-        "subject": "Amendment to AOA/MOA",
-        "date": "01-Oct-2026 21:28:55"
-      },
-      {
-        "symbol": "GVPIL",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 21:27:15"
-      },
-      {
-        "symbol": "FLEXITUFF",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 21:20:57"
-      },
-      {
-        "symbol": "VAML",
-        "subject": "Updates",
-        "date": "01-Oct-2026 21:20:03"
-      },
-      {
-        "symbol": "MAXESTATES",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 21:19:55"
-      },
-      {
-        "symbol": "AYMSYNTEX",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 21:12:13"
-      },
-      {
-        "symbol": "JSWENERGY",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 21:09:08"
-      },
-      {
-        "symbol": "PRANAV",
-        "subject": "Trading Window",
-        "date": "01-Oct-2026 21:05:33"
-      },
-      {
-        "symbol": "TATASTEEL",
-        "subject": "Scheme of Arrangement",
-        "date": "01-Oct-2026 21:04:42"
-      },
-      {
-        "symbol": "RENTOMOJO",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 21:04:37"
-      },
-      {
-        "symbol": "TATASTEEL",
-        "subject": "Amalgamation/Merger",
-        "date": "01-Oct-2026 21:01:37"
-      },
-      {
-        "symbol": "HALEOSLABS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:56:34"
-      },
-      {
-        "symbol": "MIDHANI",
-        "subject": "Retirement",
-        "date": "01-Oct-2026 20:54:14"
-      },
-      {
-        "symbol": "SPECTRUM",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:52:17"
-      },
-      {
-        "symbol": "TECHNOCRAF",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:48:03"
-      },
-      {
-        "symbol": "HARIOMPIPE",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:42:31"
-      },
-      {
-        "symbol": "MCL",
-        "subject": "Updates",
-        "date": "01-Oct-2026 20:38:32"
-      },
-      {
-        "symbol": "MCL",
-        "subject": "Updates",
-        "date": "01-Oct-2026 20:36:44"
-      },
-      {
-        "symbol": "ALGOQUANT",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:35:21"
-      },
-      {
-        "symbol": "FLEXITUFF",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 20:32:39"
-      },
-      {
-        "symbol": "PROZONER",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:30:54"
-      },
-      {
-        "symbol": "SUNTECK",
-        "subject": "Change in Auditors",
-        "date": "01-Oct-2026 20:30:38"
-      },
-      {
-        "symbol": "SAHLIBHFI",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:28:16"
-      },
-      {
-        "symbol": "YATRA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:27:14"
-      },
-      {
-        "symbol": "SKYWAYS",
-        "subject": "Updates",
-        "date": "01-Oct-2026 20:26:55"
-      },
-      {
-        "symbol": "SKYWAYS",
-        "subject": "Updates",
-        "date": "01-Oct-2026 20:25:40"
-      },
-      {
-        "symbol": "SUNTECK",
-        "subject": "Demerger",
-        "date": "01-Oct-2026 20:25:30"
-      },
-      {
-        "symbol": "RUSHABEAR",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:24:01"
-      },
-      {
-        "symbol": "AXISCADES",
-        "subject": "Sale or disposal",
-        "date": "01-Oct-2026 20:22:12"
-      },
-      {
-        "symbol": "NHPC",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 20:21:09"
-      },
-      {
-        "symbol": "AUBANK",
-        "subject": "Credit Rating",
-        "date": "01-Oct-2026 20:20:36"
-      },
-      {
-        "symbol": "SUNTECK",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 20:17:32"
-      },
-      {
-        "symbol": "GTL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:16:22"
-      },
-      {
-        "symbol": "JINDALPOLY",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:16:05"
-      },
-      {
-        "symbol": "FLEXITUFF",
-        "subject": "Change in Auditors",
-        "date": "01-Oct-2026 20:15:48"
-      },
-      {
-        "symbol": "CONFIPET",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:12:42"
-      },
-      {
-        "symbol": "ELEVATE",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:12:39"
-      },
-      {
-        "symbol": "PPLPHARMA",
-        "subject": "Updates",
-        "date": "01-Oct-2026 20:11:35"
-      },
-      {
-        "symbol": "SURANAT&P",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:11:21"
-      },
-      {
-        "symbol": "OSWALGREEN",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:10:43"
-      },
-      {
-        "symbol": "LTF",
-        "subject": "ESOP/ESOS/ESPS",
-        "date": "01-Oct-2026 20:10:17"
-      },
-      {
-        "symbol": "HFCL",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:10:17"
-      },
-      {
-        "symbol": "ABHISHEK",
-        "subject": "Change in Auditors",
-        "date": "01-Oct-2026 20:10:16"
-      },
-      {
-        "symbol": "AFFORDABLE",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:10:11"
-      },
-      {
-        "symbol": "OSWALAGRO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:09:46"
-      },
-      {
-        "symbol": "ELEVATE",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:09:41"
-      },
-      {
-        "symbol": "FLEXITUFF",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 20:09:20"
-      },
-      {
-        "symbol": "TCS",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 20:08:34"
-      },
-      {
-        "symbol": "SYNCOMF",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:08:23"
-      },
-      {
-        "symbol": "ABHISHEK",
-        "subject": "Change in Director(s)",
-        "date": "01-Oct-2026 20:08:02"
-      },
-      {
-        "symbol": "JUBLINGREA",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 20:06:55"
-      },
-      {
-        "symbol": "MAHLIFE",
-        "subject": "Product launch",
-        "date": "01-Oct-2026 20:06:27"
-      },
-      {
-        "symbol": "ABHISHEK",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 20:06:18"
-      },
-      {
-        "symbol": "PREMIER",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:05:55"
-      },
-      {
-        "symbol": "GOCLCORP",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:05:44"
-      },
-      {
-        "symbol": "SYNCOMF",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 20:05:11"
-      },
-      {
-        "symbol": "BHARATCOAL",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 20:05:03"
-      },
-      {
-        "symbol": "DELPHIFX",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:04:21"
-      },
-      {
-        "symbol": "ABHISHEK",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:03:24"
-      },
-      {
-        "symbol": "SYNCOMF",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:02:41"
-      },
-      {
-        "symbol": "SKYWAYS",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 20:02:17"
-      },
-      {
-        "symbol": "ELEVATE",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 20:02:08"
-      },
-      {
-        "symbol": "ANURAS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:01:11"
-      },
-      {
-        "symbol": "SYNCOMF",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 20:00:19"
-      },
-      {
-        "symbol": "SKYWAYS",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 19:59:23"
-      },
-      {
-        "symbol": "GODREJPROP",
-        "subject": "Action(s) initiated or orders passed",
-        "date": "01-Oct-2026 19:58:37"
-      },
-      {
-        "symbol": "SYNCOMF",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:58:06"
-      },
-      {
-        "symbol": "ATULAUTO",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:57:13"
-      },
-      {
-        "symbol": "BCG",
-        "subject": "Updates",
-        "date": "01-Oct-2026 19:57:05"
-      },
-      {
-        "symbol": "HLEGLAS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:56:50"
-      },
-      {
-        "symbol": "HMT",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:53:24"
-      },
-      {
-        "symbol": "PARASPETRO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:53:22"
-      },
-      {
-        "symbol": "JUBLINGREA",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 19:52:59"
-      },
-      {
-        "symbol": "XTGLOBAL",
-        "subject": "Updates",
-        "date": "01-Oct-2026 19:52:40"
-      },
-      {
-        "symbol": "INDIANB",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:52:27"
-      },
-      {
-        "symbol": "VALECHAENG",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:51:35"
-      },
-      {
-        "symbol": "EUREKAFORB",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 19:51:01"
-      },
-      {
-        "symbol": "MPIMANIPAL",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 19:50:44"
-      },
-      {
-        "symbol": "JUBLINGREA",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 19:50:32"
-      },
-      {
-        "symbol": "ASHOKA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:49:40"
-      },
-      {
-        "symbol": "PRANAV",
-        "subject": "Integrated Filing- Financial",
-        "date": "01-Oct-2026 19:48:20"
-      },
-      {
-        "symbol": "BLISSGVS",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 19:47:50"
-      },
-      {
-        "symbol": "PRANAV",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 19:44:47"
-      },
-      {
-        "symbol": "OLAELEC",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:44:24"
-      },
-      {
-        "symbol": "FLEXITUFF",
-        "subject": "Amendment to AOA/MOA",
-        "date": "01-Oct-2026 19:44:16"
-      },
-      {
-        "symbol": "ELEVATE",
-        "subject": "Trading Window",
-        "date": "01-Oct-2026 19:44:16"
-      },
-      {
-        "symbol": "BONLON",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:38:00"
-      },
-      {
-        "symbol": "KIRLOSIND",
-        "subject": "Updates",
-        "date": "01-Oct-2026 19:37:44"
-      },
-      {
-        "symbol": "ELEVATE",
-        "subject": "Trading Window",
-        "date": "01-Oct-2026 19:35:53"
-      },
-      {
-        "symbol": "LALPATHLAB",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:35:12"
-      },
-      {
-        "symbol": "PNB",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:35:08"
-      },
-      {
-        "symbol": "KIRLOSIND",
-        "subject": "Updates",
-        "date": "01-Oct-2026 19:34:09"
-      },
-      {
-        "symbol": "BONLON",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:33:35"
-      },
-      {
-        "symbol": "XTGLOBAL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:33:18"
-      },
-      {
-        "symbol": "MODISONLTD",
-        "subject": "Resignation",
-        "date": "01-Oct-2026 19:32:57"
-      },
-      {
-        "symbol": "SUDARSCHEM",
-        "subject": "Action(s) initiated or orders passed",
-        "date": "01-Oct-2026 19:29:54"
-      },
-      {
-        "symbol": "FLEXITUFF",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:29:12"
-      },
-      {
-        "symbol": "KIRLOSIND",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 19:28:50"
-      },
-      {
-        "symbol": "CNL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:27:31"
-      },
-      {
-        "symbol": "KIRLOSIND",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 19:26:22"
-      },
-      {
-        "symbol": "PWL",
-        "subject": "Options to purchase securities",
-        "date": "01-Oct-2026 19:25:54"
-      },
-      {
-        "symbol": "GULFPETRO",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 19:25:46"
-      },
-      {
-        "symbol": "EIFFL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:23:50"
-      },
-      {
-        "symbol": "5PAISA",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 19:23:08"
-      },
-      {
-        "symbol": "DLF",
-        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
-        "date": "01-Oct-2026 19:22:56"
-      },
-      {
-        "symbol": "ARENTERP",
-        "subject": "Trading Window",
-        "date": "01-Oct-2026 19:20:42"
-      },
-      {
-        "symbol": "COMSYN",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:19:34"
-      },
-      {
-        "symbol": "POLYPLEX",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:19:10"
-      },
-      {
-        "symbol": "MADHAV",
-        "subject": "Trading Window",
-        "date": "01-Oct-2026 19:18:45"
-      },
-      {
-        "symbol": "LEAPIND",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:17:56"
-      },
-      {
-        "symbol": "TRITURBINE",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 19:17:40"
-      },
-      {
-        "symbol": "COMSYN",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 19:15:57"
-      },
-      {
-        "symbol": "PPLPHARMA",
-        "subject": "News Verification",
-        "date": "01-Oct-2026 19:14:49"
-      },
-      {
-        "symbol": "CNL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:14:39"
-      },
-      {
-        "symbol": "PARIN",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 19:14:02"
-      },
-      {
-        "symbol": "POONAWALLA",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 19:13:02"
-      },
-      {
-        "symbol": "TRITURBINE",
-        "subject": "Resignation",
-        "date": "01-Oct-2026 19:12:25"
-      },
-      {
-        "symbol": "VASWANI",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:11:52"
-      },
-      {
-        "symbol": "MPIMANIPAL",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 19:11:21"
-      },
-      {
-        "symbol": "CGCL",
-        "subject": "Updates",
-        "date": "01-Oct-2026 19:10:39"
-      },
-      {
-        "symbol": "COMSYN",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:10:39"
-      },
-      {
-        "symbol": "AXITA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:09:15"
-      },
-      {
-        "symbol": "TARAPUR",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:09:14"
-      },
-      {
-        "symbol": "AARTIDRUGS",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:09:09"
-      },
-      {
-        "symbol": "SOLARWORLD",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:08:38"
-      },
-      {
-        "symbol": "AIRAN",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 19:07:41"
-      },
-      {
-        "symbol": "TALWALKARS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:07:18"
-      },
-      {
-        "symbol": "EMMVEE",
-        "subject": "Updates",
-        "date": "01-Oct-2026 19:07:14"
-      },
-      {
-        "symbol": "COMSYN",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:07:12"
-      },
-      {
-        "symbol": "AIRAN",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 19:06:56"
-      },
-      {
-        "symbol": "ADVANCE",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 19:05:34"
-      },
-      {
-        "symbol": "GANESHCP",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 19:04:51"
-      },
-      {
-        "symbol": "EMMVEE",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 19:04:18"
-      },
-      {
-        "symbol": "LOKESHMACH",
-        "subject": "Spurt in Volume",
-        "date": "01-Oct-2026 19:04:15"
-      },
-      {
-        "symbol": "PACEDIGITK",
-        "subject": "Spurt in Volume",
-        "date": "01-Oct-2026 19:04:07"
-      },
-      {
-        "symbol": "HEROMOTORS",
-        "subject": "Price movement",
-        "date": "01-Oct-2026 19:03:59"
-      },
-      {
-        "symbol": "NLCINDIA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:03:31"
-      },
-      {
-        "symbol": "XLENERGY",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 19:03:16"
-      },
-      {
-        "symbol": "CEREBRAINT",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 19:02:40"
-      },
-      {
-        "symbol": "GANESHCP",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 19:02:11"
-      },
-      {
-        "symbol": "PNB",
-        "subject": "Action(s) taken or orders passed",
-        "date": "01-Oct-2026 19:01:27"
-      },
-      {
-        "symbol": "KARAMTARA",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 18:59:00"
-      },
-      {
-        "symbol": "STLTECH",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 18:57:55"
-      },
-      {
-        "symbol": "VMART",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:57:43"
-      },
-      {
-        "symbol": "AMBER",
-        "subject": "Amalgamation/Merger",
-        "date": "01-Oct-2026 18:56:47"
-      },
-      {
-        "symbol": "KPIGREEN",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 18:54:28"
-      },
-      {
-        "symbol": "RVNL",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "01-Oct-2026 18:54:20"
-      },
-      {
-        "symbol": "KPEL",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 18:54:06"
-      },
-      {
-        "symbol": "FIBERWEB",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:54:06"
-      },
-      {
-        "symbol": "GULFPETRO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:53:32"
-      },
-      {
-        "symbol": "KPIGREEN",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 18:52:51"
-      },
-      {
-        "symbol": "SVPGLOB",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:52:34"
-      },
-      {
-        "symbol": "FINOPB",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 18:51:46"
-      },
-      {
-        "symbol": "KPEL",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 18:51:41"
-      },
-      {
-        "symbol": "SUNPHARMA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:51:31"
-      },
-      {
-        "symbol": "VALECHAENG",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:50:43"
-      },
-      {
-        "symbol": "ONEPOINT",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:50:25"
-      },
-      {
-        "symbol": "ALPSINDUS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:50:18"
-      },
-      {
-        "symbol": "VERTOZ",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:48:29"
-      },
-      {
-        "symbol": "CEREBRAINT",
-        "subject": "Resignation",
-        "date": "01-Oct-2026 18:47:54"
-      },
-      {
-        "symbol": "ASHIANA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:47:49"
-      },
-      {
-        "symbol": "SAMMAANCAP",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:46:47"
-      },
-      {
-        "symbol": "FINOPB",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 18:45:50"
-      },
-      {
-        "symbol": "DELHIVERY",
-        "subject": "Options to purchase securities",
-        "date": "01-Oct-2026 18:45:34"
-      },
-      {
-        "symbol": "LOTUSDEV",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 18:43:53"
-      },
-      {
-        "symbol": "NAVKARURB",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 18:43:48"
-      },
-      {
-        "symbol": "TCS",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 18:41:18"
-      },
-      {
-        "symbol": "GFSTEELS",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 18:41:14"
-      },
-      {
-        "symbol": "AEPL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:40:39"
-      },
-      {
-        "symbol": "UCOBANK",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:40:23"
-      },
-      {
-        "symbol": "ALPSINDUS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:40:05"
-      },
-      {
-        "symbol": "RTNINDIA",
-        "subject": "Change in Company Secretary/Compliance Officer",
-        "date": "01-Oct-2026 18:39:56"
-      },
-      {
-        "symbol": "TCS",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 18:39:47"
-      },
-      {
-        "symbol": "CLEANMAX",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:39:16"
-      },
-      {
-        "symbol": "ZOTA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:38:13"
-      },
-      {
-        "symbol": "SKYWAYS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:37:28"
-      },
-      {
-        "symbol": "NINSYS",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:36:17"
-      },
-      {
-        "symbol": "CEREBRAINT",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 18:35:25"
-      },
-      {
-        "symbol": "KIRLOSENG",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:34:30"
-      },
-      {
-        "symbol": "HINDUNILVR",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 18:34:06"
-      },
-      {
-        "symbol": "AEPL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:33:21"
-      },
-      {
-        "symbol": "MOIL",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:32:54"
-      },
-      {
-        "symbol": "UDS",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:32:23"
-      },
-      {
-        "symbol": "SANSERA",
-        "subject": "ESOP/ESOS/ESPS",
-        "date": "01-Oct-2026 18:31:11"
-      },
-      {
-        "symbol": "INTERARCH",
-        "subject": "Action(s) taken or orders passed",
-        "date": "01-Oct-2026 18:30:56"
-      },
-      {
-        "symbol": "SITINET",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:30:47"
-      },
-      {
-        "symbol": "SURYODAY",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 18:30:43"
-      },
-      {
-        "symbol": "CANBK",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 18:30:12"
-      },
-      {
-        "symbol": "ARVINDFASN",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:29:58"
-      },
-      {
-        "symbol": "JSLL",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:29:55"
-      },
-      {
-        "symbol": "ASHIANA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:29:53"
-      },
-      {
-        "symbol": "MOKSH",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:29:47"
-      },
-      {
-        "symbol": "SITINET",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:29:22"
-      },
-      {
-        "symbol": "HORIZONIND",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:28:11"
-      },
-      {
-        "symbol": "TINNARUBR",
-        "subject": "Credit Rating",
-        "date": "01-Oct-2026 18:27:18"
-      },
-      {
-        "symbol": "SRF",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 18:27:11"
-      },
-      {
-        "symbol": "CEREBRAINT",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:27:09"
-      },
-      {
-        "symbol": "VASWANI",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:26:07"
-      },
-      {
-        "symbol": "FINKURVE",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 18:25:01"
-      },
-      {
-        "symbol": "SUDARCOLOR",
-        "subject": "Disclosure under SEBI Takeover Regulations",
-        "date": "01-Oct-2026 18:25:00"
-      },
-      {
-        "symbol": "PNCINFRA",
-        "subject": "Change in Auditors",
-        "date": "01-Oct-2026 18:24:45"
-      },
-      {
-        "symbol": "BILVYAPAR",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 18:24:22"
-      },
-      {
-        "symbol": "HDFCBANK",
-        "subject": "Change in Director(s)",
-        "date": "01-Oct-2026 18:23:52"
-      },
-      {
-        "symbol": "BANDHANBNK",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 18:23:45"
-      },
-      {
-        "symbol": "GOODLUCK",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:23:37"
-      },
-      {
-        "symbol": "SGFIN",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:23:36"
-      },
-      {
-        "symbol": "SINDHUTRAD",
-        "subject": "Disclosure under SEBI Takeover Regulations",
-        "date": "01-Oct-2026 18:23:07"
-      },
-      {
-        "symbol": "UYFINCORP",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:22:59"
-      },
-      {
-        "symbol": "VISL",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 18:21:46"
-      },
-      {
-        "symbol": "PNCINFRA",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 18:21:44"
-      },
-      {
-        "symbol": "INDIANB",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:21:16"
-      },
-      {
-        "symbol": "DSSL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:21:02"
-      },
-      {
-        "symbol": "VCL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:20:52"
-      },
-      {
-        "symbol": "VCL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:20:52"
-      },
-      {
-        "symbol": "KIRLOSENG",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:20:41"
-      },
-      {
-        "symbol": "WIPRO",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:20:19"
-      },
-      {
-        "symbol": "MUTHOOTFIN",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 18:19:45"
-      },
-      {
-        "symbol": "MUTHOOTFIN",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 18:19:45"
-      },
-      {
-        "symbol": "MUTHOOTFIN",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 18:19:45"
-      },
-      {
-        "symbol": "BILVYAPAR",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:19:42"
-      },
-      {
-        "symbol": "MONEYBOXX",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:19:38"
-      },
-      {
-        "symbol": "DSSL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:19:32"
-      },
-      {
-        "symbol": "IMPEXFERRO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:18:52"
-      },
-      {
-        "symbol": "PNCINFRA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:18:24"
-      },
-      {
-        "symbol": "EIHOTEL",
-        "subject": "Action(s) initiated or orders passed",
-        "date": "01-Oct-2026 18:17:56"
-      },
-      {
-        "symbol": "SHANTI",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:16:33"
-      },
-      {
-        "symbol": "UYFINCORP",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:15:08"
-      },
-      {
-        "symbol": "OMAXE",
-        "subject": "Sale or disposal",
-        "date": "01-Oct-2026 18:15:07"
-      },
-      {
-        "symbol": "PROSTARM",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:13:35"
-      },
-      {
-        "symbol": "ROTO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:13:12"
-      },
-      {
-        "symbol": "GOODLUCK",
-        "subject": "Disclosure under SEBI Takeover Regulations",
-        "date": "01-Oct-2026 18:12:27"
-      },
-      {
-        "symbol": "SALASAR",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:12:19"
-      },
-      {
-        "symbol": "GOODLUCK",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:11:42"
-      },
-      {
-        "symbol": "KSHINTL",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 18:11:28"
-      },
-      {
-        "symbol": "GANESHBE",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:10:45"
-      },
-      {
-        "symbol": "ALPSINDUS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:10:08"
-      },
-      {
-        "symbol": "GTPL",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:09:33"
-      },
-      {
-        "symbol": "SWELECTES",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 18:09:21"
-      },
-      {
-        "symbol": "CAMS",
-        "subject": "Allotment of Securities",
-        "date": "01-Oct-2026 18:08:18"
-      },
-      {
-        "symbol": "INDOBORAX",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 18:08:10"
-      },
-      {
-        "symbol": "STARHEALTH",
-        "subject": "Credit Rating",
-        "date": "01-Oct-2026 18:08:00"
-      },
-      {
-        "symbol": "PGIL",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 18:07:47"
-      },
-      {
-        "symbol": "EUROTEXIND",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:07:45"
-      },
-      {
-        "symbol": "MOLDTKPAC",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:07:33"
-      },
-      {
-        "symbol": "MUTHOOTCAP",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:07:01"
-      },
-      {
-        "symbol": "GRAPHITE",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 18:06:27"
-      },
-      {
-        "symbol": "ORTINGLOBE",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:06:13"
-      },
-      {
-        "symbol": "CEIGALL",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 18:05:08"
-      },
-      {
-        "symbol": "KSHINTL",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 18:04:38"
-      },
-      {
-        "symbol": "MRPL",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 18:03:26"
-      },
-      {
-        "symbol": "JGCHEM",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:01:40"
-      },
-      {
-        "symbol": "ANNAPURNA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 18:01:34"
-      },
-      {
-        "symbol": "VALIANTORG",
-        "subject": "Updates",
-        "date": "01-Oct-2026 18:00:52"
-      },
-      {
-        "symbol": "UNIMECH",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 18:00:24"
-      },
-      {
-        "symbol": "EFCIL",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 18:00:10"
-      },
-      {
-        "symbol": "PREMEXPLN",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:59:39"
-      },
-      {
-        "symbol": "CEWATER",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "01-Oct-2026 17:59:19"
-      },
-      {
-        "symbol": "TTKPRESTIG",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 17:59:06"
-      },
-      {
-        "symbol": "SWELECTES",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:58:49"
-      },
-      {
-        "symbol": "CELEBRITY",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:57:46"
-      },
-      {
-        "symbol": "GPTINFRA",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "01-Oct-2026 17:57:35"
-      },
-      {
-        "symbol": "ATLANTAA",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 17:57:27"
-      },
-      {
-        "symbol": "VIYASH",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 17:57:24"
-      },
-      {
-        "symbol": "PNGJL",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 17:57:23"
-      },
-      {
-        "symbol": "EFCIL",
-        "subject": "Allotment of Securities",
-        "date": "01-Oct-2026 17:56:42"
-      },
-      {
-        "symbol": "CCAVENUE",
-        "subject": "Record Date",
-        "date": "01-Oct-2026 17:56:28"
-      },
-      {
-        "symbol": "SUNDARMFIN",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:56:11"
-      },
-      {
-        "symbol": "UNIMECH",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 17:55:55"
-      },
-      {
-        "symbol": "DEVIT",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:55:28"
-      },
-      {
-        "symbol": "ATLANTAA",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 17:55:22"
-      },
-      {
-        "symbol": "NIACL",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 17:54:44"
-      },
-      {
-        "symbol": "CEIGALL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:54:18"
-      },
-      {
-        "symbol": "SANGAMIND",
-        "subject": "Disruption of Operations",
-        "date": "01-Oct-2026 17:53:40"
-      },
-      {
-        "symbol": "GARUDA",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:53:28"
-      },
-      {
-        "symbol": "IMPEXFERRO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:53:28"
-      },
-      {
-        "symbol": "ATHERENERG",
-        "subject": "Allotment of Securities",
-        "date": "01-Oct-2026 17:52:39"
-      },
-      {
-        "symbol": "SHIPROCKET",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:52:16"
-      },
-      {
-        "symbol": "EMBDL",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 17:52:13"
-      },
-      {
-        "symbol": "ABREL",
-        "subject": "Credit Rating- New",
-        "date": "01-Oct-2026 17:51:53"
-      },
-      {
-        "symbol": "PARIN",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:50:58"
-      },
-      {
-        "symbol": "AURUS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:49:54"
-      },
-      {
-        "symbol": "AVROIND",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:49:23"
-      },
-      {
-        "symbol": "KOHINOOR",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:47:51"
-      },
-      {
-        "symbol": "SUNPHARMA",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 17:47:03"
-      },
-      {
-        "symbol": "PRIMO",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:46:58"
-      },
-      {
-        "symbol": "CEINSYS",
-        "subject": "Bagging/Receiving of orders/contracts",
-        "date": "01-Oct-2026 17:46:47"
-      },
-      {
-        "symbol": "DBOL",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 17:46:38"
-      },
-      {
-        "symbol": "SKIPPER",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 17:46:34"
-      },
-      {
-        "symbol": "ALMONDZ",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:45:57"
-      },
-      {
-        "symbol": "BONLON",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 17:45:45"
-      },
-      {
-        "symbol": "KSHINTL",
-        "subject": "Resignation",
-        "date": "01-Oct-2026 17:45:38"
-      },
-      {
-        "symbol": "KEI",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 17:43:57"
-      },
-      {
-        "symbol": "FINKURVE",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 17:43:33"
-      },
-      {
-        "symbol": "PRAENG",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 17:43:11"
-      },
-      {
-        "symbol": "SHIVAUM",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 17:42:53"
-      },
-      {
-        "symbol": "SURYALAXMI",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:42:51"
-      },
-      {
-        "symbol": "FINKURVE",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 17:42:00"
-      },
-      {
-        "symbol": "SURYALAXMI",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:41:39"
-      },
-      {
-        "symbol": "HEROMOTORS",
-        "subject": "Credit Rating- New",
-        "date": "01-Oct-2026 17:41:34"
-      },
-      {
-        "symbol": "CGCL",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:41:12"
-      },
-      {
-        "symbol": "FINKURVE",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 17:40:36"
-      },
-      {
-        "symbol": "SAIPARENT",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 17:40:10"
-      },
-      {
-        "symbol": "KAVDEFENCE",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:40:08"
-      },
-      {
-        "symbol": "AMDIND",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:39:04"
-      },
-      {
-        "symbol": "SUNTECK",
-        "subject": "Credit Rating",
-        "date": "01-Oct-2026 17:38:35"
-      },
-      {
-        "symbol": "GICHSGFIN",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:36:53"
-      },
-      {
-        "symbol": "RETAIL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:36:26"
-      },
-      {
-        "symbol": "CGCL",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:35:45"
-      },
-      {
-        "symbol": "KSHINTL",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 17:35:28"
-      },
-      {
-        "symbol": "KAVDEFENCE",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:35:23"
-      },
-      {
-        "symbol": "TECHNOE",
-        "subject": "Resignation",
-        "date": "01-Oct-2026 17:34:47"
-      },
-      {
-        "symbol": "WEWORK",
-        "subject": "Pendency of Litigation(s)/dispute(s) or the outcome impacting the Company",
-        "date": "01-Oct-2026 17:34:40"
-      },
-      {
-        "symbol": "KRONOX",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:34:10"
-      },
-      {
-        "symbol": "VAML",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:33:50"
-      },
-      {
-        "symbol": "SWARAJENG",
-        "subject": "Trading Window",
-        "date": "01-Oct-2026 17:32:54"
-      },
-      {
-        "symbol": "INFY",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:32:39"
-      },
-      {
-        "symbol": "PSB",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:31:46"
-      },
-      {
-        "symbol": "AKASH",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:31:06"
-      },
-      {
-        "symbol": "ABCAPITAL",
-        "subject": "ESOP/ESOS/ESPS",
-        "date": "01-Oct-2026 17:30:55"
-      },
-      {
-        "symbol": "PPL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:30:17"
-      },
-      {
-        "symbol": "SUPERSPIN",
-        "subject": "Credit Rating",
-        "date": "01-Oct-2026 17:29:30"
-      },
-      {
-        "symbol": "INDIACEM",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 17:29:24"
-      },
-      {
-        "symbol": "KSHINTL",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 17:29:00"
-      },
-      {
-        "symbol": "ULTRACEMCO",
-        "subject": "Rumour Verification - Regulation 30(11)",
-        "date": "01-Oct-2026 17:28:13"
-      },
-      {
-        "symbol": "PTC",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:27:52"
-      },
-      {
-        "symbol": "SOMICONVEY",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:26:35"
-      },
-      {
-        "symbol": "GLOSTERLTD",
-        "subject": "Credit Rating- New",
-        "date": "01-Oct-2026 17:24:06"
-      },
-      {
-        "symbol": "CRAMC",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 17:23:13"
-      },
-      {
-        "symbol": "LATTEYS",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:22:15"
-      },
-      {
-        "symbol": "FERMENTA",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "01-Oct-2026 17:21:06"
-      },
-      {
-        "symbol": "MALLCOM",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:20:46"
-      },
-      {
-        "symbol": "HFCL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:19:51"
-      },
-      {
-        "symbol": "ATLANTAA",
-        "subject": "Resignation",
-        "date": "01-Oct-2026 17:19:38"
-      },
-      {
-        "symbol": "MCLEODRUSS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:18:42"
-      },
-      {
-        "symbol": "RANASUG",
-        "subject": "Cessation",
-        "date": "01-Oct-2026 17:18:05"
-      },
-      {
-        "symbol": "UFLEX",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:17:50"
-      },
-      {
-        "symbol": "AGIIL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:17:08"
-      },
-      {
-        "symbol": "ETERNAL",
-        "subject": "ESOP/ESOS/ESPS",
-        "date": "01-Oct-2026 17:16:35"
-      },
-      {
-        "symbol": "LATTEYS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:16:25"
-      },
-      {
-        "symbol": "AUGMONT",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:16:14"
-      },
-      {
-        "symbol": "AARTIIND",
-        "subject": "Outcome of Board Meeting",
-        "date": "01-Oct-2026 17:16:12"
-      },
-      {
-        "symbol": "AQYLON",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:13:42"
-      },
-      {
-        "symbol": "AIRAN",
-        "subject": "Resignation",
-        "date": "01-Oct-2026 17:10:20"
-      },
-      {
-        "symbol": "MKPL",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 17:10:09"
-      },
-      {
-        "symbol": "RANASUG",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 17:09:50"
-      },
-      {
-        "symbol": "MRPL",
-        "subject": "Press Release",
-        "date": "01-Oct-2026 17:09:44"
-      },
-      {
-        "symbol": "TVSSCS",
-        "subject": "Amalgamation/Merger",
-        "date": "01-Oct-2026 17:08:38"
-      },
-      {
-        "symbol": "TREL",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 17:06:22"
-      },
-      {
-        "symbol": "MASTERTR",
-        "subject": "ESOP/ESOS/ESPS",
-        "date": "01-Oct-2026 17:05:57"
-      },
-      {
-        "symbol": "GPIL",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 17:05:40"
-      },
-      {
-        "symbol": "MODISONLTD",
-        "subject": "Certificate under SEBI (Depositories and Participants) Regulations, 2018",
-        "date": "01-Oct-2026 17:05:38"
-      },
-      {
-        "symbol": "RAJTV",
-        "subject": "Change in Director(s)",
-        "date": "01-Oct-2026 17:04:41"
-      },
-      {
-        "symbol": "TECHNOE",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 17:04:30"
-      },
-      {
-        "symbol": "DANGEE",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:04:24"
-      },
-      {
-        "symbol": "TIRUMALCHM",
-        "subject": "Action(s) initiated or orders passed",
-        "date": "01-Oct-2026 17:03:55"
-      },
-      {
-        "symbol": "ICICIBANK",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 17:02:41"
-      },
-      {
-        "symbol": "HITECHCORP",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 17:02:20"
-      },
-      {
-        "symbol": "TITAGARH",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:01:47"
-      },
-      {
-        "symbol": "ICICIGI",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:01:42"
-      },
-      {
-        "symbol": "JAGSNPHARM",
-        "subject": "Updates",
-        "date": "01-Oct-2026 17:00:19"
-      },
-      {
-        "symbol": "FISCHER",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 17:00:19"
-      },
-      {
-        "symbol": "PCJEWELLER",
-        "subject": "Resignation of Director/KMP/SMP",
-        "date": "01-Oct-2026 16:59:15"
-      },
-      {
-        "symbol": "RAJTV",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:58:51"
-      },
-      {
-        "symbol": "MKPL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:57:17"
-      },
-      {
-        "symbol": "SWANDEF",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 16:57:08"
-      },
-      {
-        "symbol": "IDFCFIRSTB",
-        "subject": "Credit Rating- New",
-        "date": "01-Oct-2026 16:56:47"
-      },
-      {
-        "symbol": "PARAGMILK",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:56:19"
-      },
-      {
-        "symbol": "BLKASHYAP",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:55:48"
-      },
-      {
-        "symbol": "NMDC",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 16:53:40"
-      },
-      {
-        "symbol": "DPWIRES",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:50:32"
-      },
-      {
-        "symbol": "SADHNANIQ",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:49:58"
-      },
-      {
-        "symbol": "DEEPAKFERT",
-        "subject": "Action(s) taken or orders passed",
-        "date": "01-Oct-2026 16:49:51"
-      },
-      {
-        "symbol": "HAVELLS",
-        "subject": "Options to purchase securities",
-        "date": "01-Oct-2026 16:47:12"
-      },
-      {
-        "symbol": "ASAL",
-        "subject": "Change in Management",
-        "date": "01-Oct-2026 16:44:18"
-      },
-      {
-        "symbol": "RUDRA",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 16:44:11"
-      },
-      {
-        "symbol": "BGRENERGY",
-        "subject": "Corporate Insolvency Resolution Process",
-        "date": "01-Oct-2026 16:42:43"
-      },
-      {
-        "symbol": "FORCEMOT",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 16:42:43"
-      },
-      {
-        "symbol": "NAUKRI",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 16:42:01"
-      },
-      {
-        "symbol": "VISACHROME",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:41:29"
-      },
-      {
-        "symbol": "PRAKASH",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:41:09"
-      },
-      {
-        "symbol": "ZEEMEDIA",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 16:41:05"
-      },
-      {
-        "symbol": "JAYNECOIND",
-        "subject": "Appointment",
-        "date": "01-Oct-2026 16:40:53"
-      },
-      {
-        "symbol": "FORCEMOT",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 16:40:15"
-      },
-      {
-        "symbol": "VENUSPIPES",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 16:35:41"
-      },
-      {
-        "symbol": "SINDHUTRAD",
-        "subject": "Disclosure under SEBI Takeover Regulations",
-        "date": "01-Oct-2026 16:34:48"
-      },
-      {
-        "symbol": "SENCO",
-        "subject": "Copy of Newspaper Publication",
-        "date": "01-Oct-2026 16:34:41"
-      },
-      {
-        "symbol": "ROLLT",
-        "subject": "Reply to Clarification- Financial results",
-        "date": "01-Oct-2026 16:34:37"
-      },
-      {
-        "symbol": "AMBIKCO",
-        "subject": "Updates",
-        "date": "01-Oct-2026 16:33:49"
-      },
-      {
-        "symbol": "JAIPURKURT",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:33:41"
-      },
-      {
-        "symbol": "WEWIN",
-        "subject": "Updates",
-        "date": "01-Oct-2026 16:33:23"
-      },
-      {
-        "symbol": "REDTAPE",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 16:33:17"
-      },
-      {
-        "symbol": "STUDDS",
-        "subject": "Postponement of commercial production/operations",
-        "date": "01-Oct-2026 16:33:03"
-      },
-      {
-        "symbol": "CANBK",
-        "subject": "Updates",
-        "date": "01-Oct-2026 16:33:02"
-      },
-      {
-        "symbol": "VARMORA",
-        "subject": "Trading Window",
-        "date": "01-Oct-2026 16:32:37"
-      },
-      {
-        "symbol": "MRPL",
-        "subject": "News Verification",
-        "date": "01-Oct-2026 16:32:04"
-      },
-      {
-        "symbol": "SHREEPUSHK",
-        "subject": "Amalgamation/Merger",
-        "date": "01-Oct-2026 16:30:57"
-      },
-      {
-        "symbol": "MTNL",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:30:56"
-      },
-      {
-        "symbol": "GOYALALUM",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:30:36"
-      },
-      {
-        "symbol": "SOUTHBANK",
-        "subject": "General Updates",
-        "date": "01-Oct-2026 16:30:25"
-      },
-      {
-        "symbol": "SUDARSCHEM",
-        "subject": "Acquisition",
-        "date": "01-Oct-2026 16:28:55"
-      },
-      {
-        "symbol": "GENESYS",
-        "subject": "Shareholders meeting",
-        "date": "01-Oct-2026 16:28:00"
       }
     ],
     "deliverySample": {
