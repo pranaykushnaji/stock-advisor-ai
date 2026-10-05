@@ -1,163 +1,38 @@
 {
   "pick": {
-    "date": "2026-10-01",
+    "date": "2026-10-05",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-01T09:31:21.953Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-05T04:31:10.531Z",
+    "regime": "neutral",
+    "market": "neutral (v2 score 60, conf 42) — trend 9, breadth 80, vol-factor 87",
+    "momLaneOpen": true,
+    "considered": [
+      {
+        "ticker": "NYKAA",
+        "relVol": 7.12,
+        "confidence": 64.1,
+        "effectiveConfidence": 71.4,
+        "institutional": 51.3,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
+      },
       {
         "ticker": "COFORGE",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HDFCBANK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HDFCAMC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ENRIN",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INFY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CGPOWER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SIEMENS",
-        "reasons": [
-          "illiquid (₹75Cr)"
-        ]
-      },
-      {
-        "ticker": "PRESTIGE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "FORTIS",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MAHABANK",
-        "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "HAVELLS",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HDFCLIFE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "RBLBANK",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MANKIND",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "ALKEM",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COALINDIA",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BAJAJFINSV",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SBILIFE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
+        "relVol": 4.19,
+        "confidence": 18.1,
+        "effectiveConfidence": 57.1,
+        "institutional": 44.9,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 3,
+        "negative": false
       }
     ]
   }
