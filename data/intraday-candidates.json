@@ -29,13 +29,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:01",
+          "ts": "2026-10-06T05:31:01.540Z",
+          "relVol": 3.43,
+          "confidence": 42.1,
+          "components": {
+            "technical": 72,
+            "flow": 95,
+            "catalyst": 5,
+            "liquidity": 89
+          },
+          "discoveryScore": 80,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 15527246,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
-      "bestConfidence": 41.4,
+      "lastSeen": "11:01",
+      "bestConfidence": 42.1,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.7,
+      "trendBonus": 0.4
     },
     "BHEL": {
       "ticker": "BHEL",
@@ -65,10 +87,69 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:01",
+          "ts": "2026-10-06T05:31:01.540Z",
+          "relVol": 5.73,
+          "confidence": 39.7,
+          "components": {
+            "technical": 72,
+            "flow": 82,
+            "catalyst": 5,
+            "liquidity": 83
+          },
+          "discoveryScore": 89.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 10014527,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:01",
-      "bestConfidence": 33.2,
+      "lastSeen": "11:01",
+      "bestConfidence": 39.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 6.5,
+      "trendBonus": 3.9
+    },
+    "LAURUSLABS": {
+      "ticker": "LAURUSLABS",
+      "fullName": "Laurus Labs Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-10-06T05:31:01.541Z",
+          "relVol": 2.03,
+          "confidence": 24.6,
+          "components": {
+            "technical": 67,
+            "flow": 52,
+            "catalyst": 5,
+            "liquidity": 68
+          },
+          "discoveryScore": 68.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 893137,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2.03<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 24.6,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
