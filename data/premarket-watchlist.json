@@ -1,21 +1,54 @@
 {
-  "date": "2026-10-05",
-  "builtAt": "2026-10-05T02:35:52.354Z",
+  "date": "2026-10-06",
+  "builtAt": "2026-10-06T02:35:51.586Z",
   "marketContext": {
-    "tone": "weak",
-    "summary": "Deterministic NSE breadth fallback: 26% advancers, average move -1.14%.",
+    "tone": "bullish",
+    "summary": "Deterministic NSE breadth fallback: 63% advancers, average move +0.50%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
   "watch": [
     {
-      "ticker": "KOTAKBANK",
+      "ticker": "MARICO",
+      "source": "overnight-filing",
+      "catalyst": {
+        "points": 26,
+        "hasCatalyst": true,
+        "negative": false,
+        "type": "acquisition",
+        "confidence": 80,
+        "impact": 7,
+        "stars": 4,
+        "freshness": 0.945,
+        "decay": 0.945,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.49,
+        "evidenceVersion": 2,
+        "eventPublishedAt": 1791211999000,
+        "hasFiling": true,
+        "evidence": [
+          {
+            "articleId": 1,
+            "title": "[OFFICIAL NSE FILING] Acquisition",
+            "url": null,
+            "publisher": "nse-filing"
+          }
+        ],
+        "verification": "VERIFIED",
+        "sources": 1,
+        "summary": "Company announced acquisition per official NSE filing."
+      },
+      "prevClose": 790
+    },
+    {
+      "ticker": "NYKAA",
       "source": "warm-carryover",
-      "yBestConf": 61.1,
-      "yLastRelVol": 6.72,
+      "yBestConf": 64.1,
+      "yLastRelVol": 4.96,
       "yTrend": "falling",
       "catalyst": null,
-      "prevClose": 418.35
+      "prevClose": 339.55
     }
   ]
 }
