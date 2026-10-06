@@ -73,13 +73,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-10-06T07:31:14.162Z",
+          "relVol": 2.65,
+          "confidence": 59.8,
+          "components": {
+            "technical": 83,
+            "flow": 93,
+            "catalyst": 18,
+            "liquidity": 95
+          },
+          "discoveryScore": 85,
+          "catalystType": "earnings beat",
+          "verification": "UNVERIFIED",
+          "volume": 25892443,
+          "sessionFrac": 0.6026666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
-      "bestConfidence": 42.1,
-      "confidenceTrend": "flat",
-      "confidenceSlope": -0.05,
-      "trendBonus": 0
+      "lastSeen": "13:01",
+      "bestConfidence": 59.8,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 5.44,
+      "trendBonus": 6.5
     },
     "BHEL": {
       "ticker": "BHEL",
@@ -153,13 +175,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-10-06T07:31:14.163Z",
+          "relVol": 3.93,
+          "confidence": 64.5,
+          "components": {
+            "technical": 83,
+            "flow": 88,
+            "catalyst": 5,
+            "liquidity": 89
+          },
+          "discoveryScore": 90.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 14778170,
+          "sessionFrac": 0.6026666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
-      "bestConfidence": 39.7,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0.55,
-      "trendBonus": 0.7
+      "lastSeen": "13:01",
+      "bestConfidence": 64.5,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 8.85,
+      "trendBonus": 8
     },
     "LAURUSLABS": {
       "ticker": "LAURUSLABS",
@@ -194,6 +238,79 @@
       ],
       "lastSeen": "11:01",
       "bestConfidence": 24.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "MOTILALOFS": {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "13:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "13:01",
+          "ts": "2026-10-06T07:31:14.163Z",
+          "relVol": 2.04,
+          "confidence": 9,
+          "components": {
+            "technical": 56,
+            "flow": 51,
+            "catalyst": 5,
+            "liquidity": 57
+          },
+          "discoveryScore": 74.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 899014,
+          "sessionFrac": 0.6026666666666667,
+          "missing": [
+            "relVol 2.04<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "13:01",
+      "bestConfidence": 9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "RADICO": {
+      "ticker": "RADICO",
+      "fullName": "Radico Khaitan Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "13:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "13:01",
+          "ts": "2026-10-06T07:31:14.163Z",
+          "relVol": 2.17,
+          "confidence": 10.1,
+          "components": {
+            "technical": 47,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 63
+          },
+          "discoveryScore": 73.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 313224,
+          "sessionFrac": 0.6026666666666667,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "13:01",
+      "bestConfidence": 10.1,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
