@@ -1,14 +1,36 @@
 {
-  "version": 1,
-  "updatedAt": "2026-07-10T00:00:00.000Z",
-  "method": "seed (hand-tuned launch weights)",
+  "version": 2,
+  "updatedAt": "2026-10-07T10:40:57.077Z",
+  "method": "quarterly corr-optimization over 110 evaluated candidates",
   "weights": {
-    "closingStrength": 24,
-    "breadthRelative": 20,
-    "volAccel": 16,
-    "containedMomentum": 14,
-    "sector": 14,
-    "liquidity": 12
+    "closingStrength": 20,
+    "breadthRelative": 21,
+    "volAccel": 18,
+    "containedMomentum": 11,
+    "sector": 15,
+    "liquidity": 15
   },
-  "history": []
+  "correlations": {
+    "closingStrength": -0.035,
+    "breadthRelative": 0.054,
+    "volAccel": 0.135,
+    "containedMomentum": 0.045,
+    "sector": 0.124,
+    "liquidity": 0.229
+  },
+  "history": [
+    {
+      "version": 1,
+      "weights": {
+        "closingStrength": 24,
+        "breadthRelative": 20,
+        "volAccel": 16,
+        "containedMomentum": 14,
+        "sector": 14,
+        "liquidity": 12
+      },
+      "updatedAt": "2026-07-10T00:00:00.000Z",
+      "method": "seed (hand-tuned launch weights)"
+    }
+  ]
 }
