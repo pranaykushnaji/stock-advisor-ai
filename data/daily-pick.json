@@ -2,134 +2,37 @@
   "pick": {
     "date": "2026-10-07",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-07T04:31:03.523Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-07T05:31:05.898Z",
+    "regime": "weak",
+    "market": "weak (v2 score 37, conf 48) — trend 12, breadth 30, vol-factor 85",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "KALYANKJIL",
-        "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIGREEN",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "RECLTD",
-        "reasons": [
-          "illiquid (₹32Cr)"
-        ]
+        "ticker": "KOTAKBANK",
+        "relVol": 2.32,
+        "confidence": 53.7,
+        "effectiveConfidence": 76.1,
+        "institutional": 95.8,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 12,
+        "negative": false
       },
       {
         "ticker": "PAYTM",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "LTF",
-        "reasons": [
-          "illiquid (₹13Cr)"
-        ]
-      },
-      {
-        "ticker": "SUPREMEIND",
-        "reasons": [
-          "illiquid (₹19Cr)"
-        ]
-      },
-      {
-        "ticker": "BAJFINANCE",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "360ONE",
-        "reasons": [
-          "illiquid (₹7Cr)"
-        ]
-      },
-      {
-        "ticker": "PNBHOUSING",
-        "reasons": [
-          "illiquid (₹7Cr)"
-        ]
-      },
-      {
-        "ticker": "SONACOMS",
-        "reasons": [
-          "illiquid (₹27Cr)"
-        ]
-      },
-      {
-        "ticker": "HDFCLIFE",
-        "reasons": [
-          "illiquid (₹10Cr)"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "illiquid (₹60Cr)"
-        ]
-      },
-      {
-        "ticker": "ASTRAL",
-        "reasons": [
-          "illiquid (₹12Cr)"
-        ]
-      },
-      {
-        "ticker": "ANANDRATHI",
-        "reasons": [
-          "illiquid (₹15Cr)"
-        ]
-      },
-      {
-        "ticker": "INDIGO",
-        "reasons": [
-          "illiquid (₹51Cr)"
-        ]
-      },
-      {
-        "ticker": "JSWENERGY",
-        "reasons": [
-          "illiquid (₹6Cr)"
-        ]
-      },
-      {
-        "ticker": "BHARTIARTL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PFC",
-        "reasons": [
-          "illiquid (₹66Cr)"
-        ]
-      },
-      {
-        "ticker": "MANAPPURAM",
-        "reasons": [
-          "illiquid (₹21Cr)"
-        ]
-      },
-      {
-        "ticker": "NYKAA",
-        "reasons": [
-          "illiquid (₹15Cr)"
-        ]
+        "relVol": 1.87,
+        "confidence": 6.7,
+        "effectiveConfidence": 51.6,
+        "institutional": 32.2,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
       }
     ]
   }
