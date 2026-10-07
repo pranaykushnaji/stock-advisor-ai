@@ -1,4 +1,78 @@
 {
   "date": "2026-10-07",
-  "candidates": {}
+  "candidates": {
+    "KOTAKBANK": {
+      "ticker": "KOTAKBANK",
+      "fullName": "Kotak Mahindra Bank Limited",
+      "sector": "Bank",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-10-07T05:31:02.499Z",
+          "relVol": 2.32,
+          "confidence": 53.7,
+          "components": {
+            "technical": 81,
+            "flow": 84,
+            "catalyst": 5,
+            "liquidity": 85
+          },
+          "discoveryScore": 69.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 11580132,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 53.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "PAYTM": {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
+      "sector": "Financials",
+      "firstSeen": "11:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:01",
+          "ts": "2026-10-07T05:31:02.499Z",
+          "relVol": 1.87,
+          "confidence": 6.7,
+          "components": {
+            "technical": 55,
+            "flow": 41,
+            "catalyst": 5,
+            "liquidity": 79
+          },
+          "discoveryScore": 64.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2109267,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.87<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:01",
+      "bestConfidence": 6.7,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
