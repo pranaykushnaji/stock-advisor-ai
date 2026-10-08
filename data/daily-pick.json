@@ -1,25 +1,140 @@
 {
   "pick": {
-    "date": "2026-10-07",
+    "date": "2026-10-08",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-07T09:31:25.432Z",
-    "regime": "weak",
-    "market": "weak (v2 score 37, conf 51) — trend 10, breadth 28, vol-factor 84",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-10-08T04:30:57.175Z",
+    "rejected": [
       {
-        "ticker": "KOTAKBANK",
-        "relVol": 1.98,
-        "confidence": 29.7,
-        "effectiveConfidence": 70.7,
-        "institutional": 96.8,
-        "catalyst": "earnings beat",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 12,
-        "negative": false
+        "ticker": "LICHSGFIN",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "WIPRO",
+        "reasons": [
+          "illiquid (₹60Cr)"
+        ]
+      },
+      {
+        "ticker": "TECHM",
+        "reasons": [
+          "illiquid (₹36Cr)"
+        ]
+      },
+      {
+        "ticker": "PNBHOUSING",
+        "reasons": [
+          "illiquid (₹39Cr)"
+        ]
+      },
+      {
+        "ticker": "INFY",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TCS",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PNB",
+        "reasons": [
+          "illiquid (₹31Cr)"
+        ]
+      },
+      {
+        "ticker": "BANKBARODA",
+        "reasons": [
+          "illiquid (₹33Cr)"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
+          "illiquid (₹28Cr)"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "illiquid (₹18Cr)"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "illiquid (₹40Cr)"
+        ]
+      },
+      {
+        "ticker": "ICICIGI",
+        "reasons": [
+          "illiquid (₹17Cr)"
+        ]
+      },
+      {
+        "ticker": "BAJFINANCE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "POLYCAB",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TRENT",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BANKINDIA",
+        "reasons": [
+          "illiquid (₹21Cr)"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
+          "illiquid (₹30Cr)"
+        ]
+      },
+      {
+        "ticker": "OFSS",
+        "reasons": [
+          "illiquid (₹67Cr)"
+        ]
       }
     ]
   }
