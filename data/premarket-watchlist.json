@@ -1,54 +1,11 @@
 {
-  "date": "2026-10-07",
-  "builtAt": "2026-10-07T02:35:52.692Z",
+  "date": "2026-10-08",
+  "builtAt": "2026-10-08T02:35:49.949Z",
   "marketContext": {
-    "tone": "bullish",
-    "summary": "Deterministic NSE breadth fallback: 70% advancers, average move +1.06%.",
+    "tone": "weak",
+    "summary": "Deterministic NSE breadth fallback: 26% advancers, average move -0.74%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": [
-    {
-      "ticker": "CONCOR",
-      "source": "overnight-filing",
-      "catalyst": {
-        "points": 38,
-        "hasCatalyst": true,
-        "negative": false,
-        "type": "large contract",
-        "confidence": 80,
-        "impact": 7,
-        "stars": 5,
-        "freshness": 0.94,
-        "decay": 0.94,
-        "impactClass": "very-high+",
-        "influenceDays": 13,
-        "ageDays": 0.58,
-        "evidenceVersion": 2,
-        "eventPublishedAt": 1791290814000,
-        "hasFiling": true,
-        "evidence": [
-          {
-            "articleId": 2,
-            "title": "[OFFICIAL NSE FILING] Awarding of order(s)/contract(s)",
-            "url": null,
-            "publisher": "nse-filing"
-          }
-        ],
-        "verification": "VERIFIED",
-        "sources": 1,
-        "summary": "Awarded new contracts boosting revenue"
-      },
-      "prevClose": 445.85
-    },
-    {
-      "ticker": "BHEL",
-      "source": "warm-carryover",
-      "yBestConf": 64.5,
-      "yLastRelVol": 3.41,
-      "yTrend": "rising",
-      "catalyst": null,
-      "prevClose": 452
-    }
-  ]
+  "watch": []
 }
