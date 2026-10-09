@@ -3,8 +3,31 @@
     "date": "2026-10-09",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-09T08:31:32.500Z",
+    "pickedAt": "2026-10-09T09:30:54.829Z",
     "rejected": [
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ICICIBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "SHRIRAMFIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "TCS",
         "reasons": [
@@ -13,10 +36,11 @@
         ]
       },
       {
-        "ticker": "ABCAPITAL",
+        "ticker": "CHOLAFIN",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -30,90 +54,12 @@
         ]
       },
       {
-        "ticker": "SHRIRAMFIN",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "SBIN",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ICICIBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "LICI",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "CUMMINSIND",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "FEDERALBNK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "POLYCAB",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GMRAIRPORT",
-        "reasons": [
-          "illiquid (₹59Cr)"
-        ]
-      },
-      {
-        "ticker": "APOLLOHOSP",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PHOENIXLTD",
-        "reasons": [
-          "illiquid (₹69Cr)"
         ]
       },
       {
@@ -134,7 +80,7 @@
         ]
       },
       {
-        "ticker": "ITC",
+        "ticker": "FEDERALBNK",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -151,7 +97,7 @@
         ]
       },
       {
-        "ticker": "TATASTEEL",
+        "ticker": "LICI",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -163,6 +109,63 @@
         "ticker": "M&M",
         "reasons": [
           "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HINDALCO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "CUMMINSIND",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "APOLLOHOSP",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ITC",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "AMBUJACEM",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "AUROPHARMA",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
