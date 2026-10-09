@@ -3,8 +3,15 @@
     "date": "2026-10-09",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-09T07:30:53.141Z",
+    "pickedAt": "2026-10-09T08:31:32.500Z",
     "rejected": [
+      {
+        "ticker": "TCS",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "ABCAPITAL",
         "reasons": [
@@ -14,23 +21,7 @@
         ]
       },
       {
-        "ticker": "TCS",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "SUZLON",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LICI",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -48,7 +39,14 @@
         ]
       },
       {
-        "ticker": "POWERGRID",
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SBIN",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -57,7 +55,14 @@
         ]
       },
       {
-        "ticker": "SBIN",
+        "ticker": "ICICIBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "LICI",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -75,24 +80,11 @@
         ]
       },
       {
-        "ticker": "ICICIBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "ITC",
+        "ticker": "FEDERALBNK",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AMBUJACEM",
-        "reasons": [
-          "illiquid (₹58Cr)"
         ]
       },
       {
@@ -105,7 +97,27 @@
         ]
       },
       {
-        "ticker": "TITAN",
+        "ticker": "GMRAIRPORT",
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "APOLLOHOSP",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PHOENIXLTD",
+        "reasons": [
+          "illiquid (₹69Cr)"
+        ]
+      },
+      {
+        "ticker": "POWERGRID",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -122,13 +134,15 @@
         ]
       },
       {
-        "ticker": "DRREDDY",
+        "ticker": "ITC",
         "reasons": [
-          "illiquid (₹74Cr)"
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "M&M",
+        "ticker": "INFY",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -146,22 +160,12 @@
         ]
       },
       {
-        "ticker": "DABUR",
+        "ticker": "M&M",
         "reasons": [
-          "illiquid (₹18Cr)"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "AUROPHARMA",
-        "reasons": [
-          "illiquid (₹48Cr)"
         ]
       }
     ]
