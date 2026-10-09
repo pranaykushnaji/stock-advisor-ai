@@ -58,6 +58,43 @@
       "confidenceTrend": "flat",
       "confidenceSlope": 0.3,
       "trendBonus": 0.2
+    },
+    "BHEL": {
+      "ticker": "BHEL",
+      "fullName": "Bharat Heavy Electricals Limited",
+      "sector": "Infra",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-09T06:30:59.732Z",
+          "relVol": 2.07,
+          "confidence": 40.9,
+          "components": {
+            "technical": 71,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 78
+          },
+          "discoveryScore": 68.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 7790944,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.07<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 40.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
