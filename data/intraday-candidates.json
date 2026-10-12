@@ -1,4 +1,42 @@
 {
   "date": "2026-10-12",
-  "candidates": {}
+  "candidates": {
+    "AUROPHARMA": {
+      "ticker": "AUROPHARMA",
+      "fullName": "Aurobindo Pharma Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-12T06:30:53.483Z",
+          "relVol": 1.97,
+          "confidence": 29.1,
+          "components": {
+            "technical": 62,
+            "flow": 53,
+            "catalyst": 5,
+            "liquidity": 61
+          },
+          "discoveryScore": 59.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 693037,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.97<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 29.1,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
