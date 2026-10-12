@@ -2,139 +2,24 @@
   "pick": {
     "date": "2026-10-12",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-12T05:31:01.186Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-12T06:30:56.519Z",
+    "regime": "weak",
+    "market": "weak (v2 score 44, conf 58) — trend 11, breadth 47, vol-factor 80",
+    "momLaneOpen": false,
+    "considered": [
       {
-        "ticker": "DELHIVERY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "POLYCAB",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PNBHOUSING",
-        "reasons": [
-          "illiquid (₹63Cr)"
-        ]
-      },
-      {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SUZLON",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PGEL",
-        "reasons": [
-          "illiquid (₹17Cr)"
-        ]
-      },
-      {
-        "ticker": "COCHINSHIP",
-        "reasons": [
-          "illiquid (₹49Cr)"
-        ]
-      },
-      {
-        "ticker": "ANANDRATHI",
-        "reasons": [
-          "priceAboveEma20"
-        ]
-      },
-      {
-        "ticker": "SIEMENS",
-        "reasons": [
-          "illiquid (₹34Cr)"
-        ]
-      },
-      {
-        "ticker": "PHOENIXLTD",
-        "reasons": [
-          "illiquid (₹17Cr)"
-        ]
-      },
-      {
-        "ticker": "POLICYBZR",
-        "reasons": [
-          "surveillance (ASM/GSM)",
-          "illiquid (₹70Cr)"
-        ]
-      },
-      {
-        "ticker": "HAL",
-        "reasons": [
-          "illiquid (₹56Cr)"
-        ]
-      },
-      {
-        "ticker": "ABB",
-        "reasons": [
-          "illiquid (₹48Cr)"
-        ]
-      },
-      {
-        "ticker": "BEL",
-        "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "MAZDOCK",
-        "reasons": [
-          "illiquid (₹69Cr)"
-        ]
-      },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "illiquid (₹32Cr)"
-        ]
-      },
-      {
-        "ticker": "JSWSTEEL",
-        "reasons": [
-          "illiquid (₹34Cr)"
-        ]
-      },
-      {
-        "ticker": "ANGELONE",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "IRFC",
-        "reasons": [
-          "illiquid (₹56Cr)"
-        ]
+        "ticker": "AUROPHARMA",
+        "relVol": 1.97,
+        "confidence": 29.1,
+        "effectiveConfidence": 56.1,
+        "institutional": 44.7,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 2,
+        "negative": false
       }
     ]
   }
