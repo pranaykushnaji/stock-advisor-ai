@@ -3,16 +3,23 @@
     "date": "2026-10-12",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-12T08:31:07.240Z",
+    "pickedAt": "2026-10-12T09:30:58.757Z",
     "rejected": [
       {
-        "ticker": "PHOENIXLTD",
+        "ticker": "ANANDRATHI",
         "reasons": [
-          "illiquid (₹59Cr)"
+          "priceAboveEma20",
+          "volumeSurge"
         ]
       },
       {
-        "ticker": "POLYCAB",
+        "ticker": "PHOENIXLTD",
+        "reasons": [
+          "illiquid (₹74Cr)"
+        ]
+      },
+      {
+        "ticker": "PGEL",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -20,15 +27,12 @@
         ]
       },
       {
-        "ticker": "ANANDRATHI",
+        "ticker": "UPL",
         "reasons": [
-          "priceAboveEma20"
-        ]
-      },
-      {
-        "ticker": "LAURUSLABS",
-        "reasons": [
-          "volumeSurge"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -48,39 +52,24 @@
         ]
       },
       {
-        "ticker": "HAL",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
-      },
-      {
         "ticker": "PNBHOUSING",
         "reasons": [
           "volumeSurge"
         ]
       },
       {
-        "ticker": "ADANIGREEN",
+        "ticker": "POLYCAB",
         "reasons": [
-          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "PGEL",
-        "reasons": [
-          "illiquid (₹66Cr)"
-        ]
-      },
-      {
-        "ticker": "ANGELONE",
+        "ticker": "HAL",
         "reasons": [
           "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
+          "volumeSurge"
         ]
       },
       {
@@ -91,43 +80,7 @@
         ]
       },
       {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UPL",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "LODHA",
-        "reasons": [
-          "illiquid (₹59Cr)"
-        ]
-      },
-      {
-        "ticker": "IRFC",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MANKIND",
-        "reasons": [
-          "illiquid (₹22Cr)"
-        ]
-      },
-      {
-        "ticker": "TVSMOTOR",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -142,7 +95,61 @@
         ]
       },
       {
-        "ticker": "TATAPOWER",
+        "ticker": "IRFC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ADANIGREEN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ANGELONE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MANKIND",
+        "reasons": [
+          "illiquid (₹30Cr)"
+        ]
+      },
+      {
+        "ticker": "LICHSGFIN",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "BEL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TVSMOTOR",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
