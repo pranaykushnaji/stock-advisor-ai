@@ -2,24 +2,153 @@
   "pick": {
     "date": "2026-10-12",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-12T07:31:08.049Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 47, conf 59) — trend 11, breadth 53, vol-factor 80",
-    "momLaneOpen": true,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-10-12T08:31:07.240Z",
+    "rejected": [
       {
-        "ticker": "AUROPHARMA",
-        "relVol": 1.81,
-        "confidence": 29.5,
-        "effectiveConfidence": 58.6,
-        "institutional": 47.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
+        "ticker": "PHOENIXLTD",
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "POLYCAB",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ANANDRATHI",
+        "reasons": [
+          "priceAboveEma20"
+        ]
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "SUZLON",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DELHIVERY",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HAL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "PNBHOUSING",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "ADANIGREEN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PGEL",
+        "reasons": [
+          "illiquid (₹66Cr)"
+        ]
+      },
+      {
+        "ticker": "ANGELONE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "UPL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LODHA",
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "IRFC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MANKIND",
+        "reasons": [
+          "illiquid (₹22Cr)"
+        ]
+      },
+      {
+        "ticker": "TVSMOTOR",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "POLICYBZR",
+        "reasons": [
+          "surveillance (ASM/GSM)"
+        ]
+      },
+      {
+        "ticker": "TATAPOWER",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
