@@ -3,7 +3,7 @@
     "date": "2026-10-12",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-12T04:30:57.634Z",
+    "pickedAt": "2026-10-12T05:31:01.186Z",
     "rejected": [
       {
         "ticker": "DELHIVERY",
@@ -21,15 +21,25 @@
         ]
       },
       {
-        "ticker": "JSWENERGY",
+        "ticker": "M&M",
         "reasons": [
-          "illiquid (₹10Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "JSWSTEEL",
+        "ticker": "PNBHOUSING",
         "reasons": [
-          "illiquid (₹16Cr)"
+          "illiquid (₹63Cr)"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
         ]
       },
       {
@@ -41,93 +51,89 @@
         ]
       },
       {
-        "ticker": "SAIL",
+        "ticker": "PGEL",
         "reasons": [
-          "illiquid (₹55Cr)"
+          "illiquid (₹17Cr)"
         ]
       },
       {
-        "ticker": "MAXHEALTH",
-        "reasons": [
-          "illiquid (₹16Cr)"
-        ]
-      },
-      {
-        "ticker": "ADANIGREEN",
-        "reasons": [
-          "illiquid (₹55Cr)"
-        ]
-      },
-      {
-        "ticker": "ANANDRATHI",
-        "reasons": [
-          "illiquid (₹61Cr)"
-        ]
-      },
-      {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "illiquid (₹62Cr)"
-        ]
-      },
-      {
-        "ticker": "ASHOKLEY",
-        "reasons": [
-          "illiquid (₹33Cr)"
-        ]
-      },
-      {
-        "ticker": "PAYTM",
-        "reasons": [
-          "illiquid (₹63Cr)"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "illiquid (₹74Cr)"
-        ]
-      },
-      {
-        "ticker": "POWERGRID",
-        "reasons": [
-          "illiquid (₹23Cr)"
-        ]
-      },
-      {
-        "ticker": "PNBHOUSING",
-        "reasons": [
-          "illiquid (₹20Cr)"
-        ]
-      },
-      {
-        "ticker": "TATASTEEL",
-        "reasons": [
-          "illiquid (₹54Cr)"
-        ]
-      },
-      {
-        "ticker": "JINDALSTEL",
-        "reasons": [
-          "illiquid (₹14Cr)"
-        ]
-      },
-      {
-        "ticker": "EICHERMOT",
+        "ticker": "COCHINSHIP",
         "reasons": [
           "illiquid (₹49Cr)"
         ]
       },
       {
-        "ticker": "ATHERENERG",
+        "ticker": "ANANDRATHI",
         "reasons": [
-          "illiquid (₹63Cr)"
+          "priceAboveEma20"
         ]
       },
       {
-        "ticker": "BAJFINANCE",
+        "ticker": "SIEMENS",
         "reasons": [
-          "illiquid (₹47Cr)"
+          "illiquid (₹34Cr)"
+        ]
+      },
+      {
+        "ticker": "PHOENIXLTD",
+        "reasons": [
+          "illiquid (₹17Cr)"
+        ]
+      },
+      {
+        "ticker": "POLICYBZR",
+        "reasons": [
+          "surveillance (ASM/GSM)",
+          "illiquid (₹70Cr)"
+        ]
+      },
+      {
+        "ticker": "HAL",
+        "reasons": [
+          "illiquid (₹56Cr)"
+        ]
+      },
+      {
+        "ticker": "ABB",
+        "reasons": [
+          "illiquid (₹48Cr)"
+        ]
+      },
+      {
+        "ticker": "BEL",
+        "reasons": [
+          "illiquid (₹67Cr)"
+        ]
+      },
+      {
+        "ticker": "MAZDOCK",
+        "reasons": [
+          "illiquid (₹69Cr)"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "illiquid (₹32Cr)"
+        ]
+      },
+      {
+        "ticker": "JSWSTEEL",
+        "reasons": [
+          "illiquid (₹34Cr)"
+        ]
+      },
+      {
+        "ticker": "ANGELONE",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "IRFC",
+        "reasons": [
+          "illiquid (₹56Cr)"
         ]
       }
     ]
