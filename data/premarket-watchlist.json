@@ -1,11 +1,57 @@
 {
-  "date": "2026-10-12",
-  "builtAt": "2026-10-12T02:35:51.277Z",
+  "date": "2026-10-13",
+  "builtAt": "2026-10-13T02:35:58.057Z",
   "marketContext": {
-    "tone": "bullish",
-    "summary": "Deterministic NSE breadth fallback: 85% advancers, average move +1.32%.",
+    "tone": "neutral",
+    "summary": "Deterministic NSE breadth fallback: 48% advancers, average move +0.18%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": []
+  "watch": [
+    {
+      "ticker": "POWERGRID",
+      "source": "overnight-filing",
+      "catalyst": {
+        "points": 25,
+        "hasCatalyst": true,
+        "negative": false,
+        "type": "acquisition",
+        "confidence": 95,
+        "impact": 8,
+        "stars": 4,
+        "freshness": 0.932,
+        "decay": 0.932,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.61,
+        "evidenceVersion": 2,
+        "eventPublishedAt": 1791806429000,
+        "hasFiling": true,
+        "evidence": [
+          {
+            "articleId": 1,
+            "title": "[OFFICIAL NSE FILING] Acquisition",
+            "url": null,
+            "publisher": "nse-filing"
+          },
+          {
+            "articleId": 2,
+            "title": "[OFFICIAL NSE FILING] Acquisition",
+            "url": null,
+            "publisher": "nse-filing"
+          },
+          {
+            "articleId": 3,
+            "title": "[OFFICIAL NSE FILING] Acquisition",
+            "url": null,
+            "publisher": "nse-filing"
+          }
+        ],
+        "verification": "VERIFIED",
+        "sources": 1,
+        "summary": "Power Grid announces acquisition, expanding its network."
+      },
+      "prevClose": 249
+    }
+  ]
 }
