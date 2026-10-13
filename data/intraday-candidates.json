@@ -1,4 +1,42 @@
 {
   "date": "2026-10-13",
-  "candidates": {}
+  "candidates": {
+    "PAYTM": {
+      "ticker": "PAYTM",
+      "fullName": "One97 Communications Limited",
+      "sector": "Financials",
+      "firstSeen": "15:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:01",
+          "ts": "2026-10-13T09:31:27.377Z",
+          "relVol": 1.85,
+          "confidence": 38.9,
+          "components": {
+            "technical": 55,
+            "flow": 52,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 80.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 8479838,
+          "sessionFrac": 0.9226666666666666,
+          "missing": [
+            "relVol 1.85<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:01",
+      "bestConfidence": 38.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
