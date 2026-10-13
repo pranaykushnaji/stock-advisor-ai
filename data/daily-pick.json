@@ -3,7 +3,7 @@
     "date": "2026-10-13",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-13T04:31:00.620Z",
+    "pickedAt": "2026-10-13T05:31:00.722Z",
     "rejected": [
       {
         "ticker": "HCLTECH",
@@ -15,7 +15,9 @@
       {
         "ticker": "WIPRO",
         "reasons": [
-          "illiquid (₹73Cr)"
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -41,15 +43,74 @@
         ]
       },
       {
-        "ticker": "INDIANB",
+        "ticker": "BEL",
         "reasons": [
-          "illiquid (₹31Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "LTM",
+        "ticker": "TECHM",
         "reasons": [
-          "illiquid (₹43Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PFC",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INDIANB",
+        "reasons": [
+          "illiquid (₹53Cr)"
+        ]
+      },
+      {
+        "ticker": "KFINTECH",
+        "reasons": [
+          "illiquid (₹59Cr)"
+        ]
+      },
+      {
+        "ticker": "PNB",
+        "reasons": [
+          "illiquid (₹48Cr)"
+        ]
+      },
+      {
+        "ticker": "TITAN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "RECLTD",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ZYDUSLIFE",
+        "reasons": [
+          "illiquid (₹35Cr)"
         ]
       },
       {
@@ -61,13 +122,23 @@
         ]
       },
       {
-        "ticker": "JUBLFOOD",
+        "ticker": "TATAELXSI",
         "reasons": [
-          "illiquid (₹8Cr)"
+          "ema20AboveEma50",
+          "near52wHigh"
         ]
       },
       {
-        "ticker": "JIOFIN",
+        "ticker": "LTM",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "WAAREEENER",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -75,64 +146,9 @@
         ]
       },
       {
-        "ticker": "RECLTD",
+        "ticker": "POLICYBZR",
         "reasons": [
-          "illiquid (₹30Cr)"
-        ]
-      },
-      {
-        "ticker": "BEL",
-        "reasons": [
-          "illiquid (₹44Cr)"
-        ]
-      },
-      {
-        "ticker": "KFINTECH",
-        "reasons": [
-          "illiquid (₹23Cr)"
-        ]
-      },
-      {
-        "ticker": "PNB",
-        "reasons": [
-          "illiquid (₹22Cr)"
-        ]
-      },
-      {
-        "ticker": "LT",
-        "reasons": [
-          "illiquid (₹64Cr)"
-        ]
-      },
-      {
-        "ticker": "INFY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "illiquid (₹55Cr)"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "RVNL",
-        "reasons": [
-          "illiquid (₹17Cr)"
-        ]
-      },
-      {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "illiquid (₹38Cr)"
+          "surveillance (ASM/GSM)"
         ]
       }
     ]
