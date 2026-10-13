@@ -3,10 +3,17 @@
     "date": "2026-10-13",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-13T06:30:58.737Z",
+    "pickedAt": "2026-10-13T07:31:11.025Z",
     "rejected": [
       {
         "ticker": "HCLTECH",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INFY",
         "reasons": [
           "ema20AboveEma50",
           "near52wHigh"
@@ -36,19 +43,6 @@
         ]
       },
       {
-        "ticker": "COFORGE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "KPITTECH",
         "reasons": [
           "priceAboveEma20",
@@ -57,11 +51,24 @@
         ]
       },
       {
-        "ticker": "BEL",
+        "ticker": "TECHM",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "CROMPTON",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -74,8 +81,18 @@
         ]
       },
       {
-        "ticker": "PERSISTENT",
+        "ticker": "BAJFINANCE",
         "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
           "near52wHigh"
         ]
       },
@@ -87,18 +104,17 @@
         ]
       },
       {
-        "ticker": "TECHM",
+        "ticker": "PERSISTENT",
         "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "INFY",
+        "ticker": "BEL",
         "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -119,30 +135,6 @@
         ]
       },
       {
-        "ticker": "HINDUNILVR",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "WAAREEENER",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KFINTECH",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "AXISBANK",
         "reasons": [
           "ema20AboveEma50",
@@ -151,9 +143,21 @@
         ]
       },
       {
-        "ticker": "INDIANB",
+        "ticker": "OFSS",
         "reasons": [
-          "illiquid (₹74Cr)"
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TITAN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       }
     ]
