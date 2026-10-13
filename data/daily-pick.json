@@ -3,11 +3,19 @@
     "date": "2026-10-13",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-13T07:31:11.025Z",
+    "pickedAt": "2026-10-13T08:31:29.477Z",
     "rejected": [
       {
         "ticker": "HCLTECH",
         "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BANDHANBNK",
+        "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
           "near52wHigh"
         ]
@@ -28,7 +36,7 @@
         ]
       },
       {
-        "ticker": "BANDHANBNK",
+        "ticker": "CROMPTON",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -43,41 +51,10 @@
         ]
       },
       {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TECHM",
+        "ticker": "ICICIBANK",
         "reasons": [
           "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
           "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "CROMPTON",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
         ]
       },
       {
@@ -86,26 +63,6 @@
           "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
           "near52wHigh"
         ]
       },
@@ -119,18 +76,10 @@
         ]
       },
       {
-        "ticker": "ICICIBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "ULTRACEMCO",
+        "ticker": "KPITTECH",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -143,9 +92,51 @@
         ]
       },
       {
-        "ticker": "OFSS",
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "M&M",
         "reasons": [
           "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ULTRACEMCO",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MAZDOCK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TECHM",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
@@ -158,6 +149,18 @@
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "UNITDSPR",
+        "reasons": [
+          "illiquid (₹57Cr)"
         ]
       }
     ]
