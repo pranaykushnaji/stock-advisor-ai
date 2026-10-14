@@ -3,17 +3,19 @@
     "date": "2026-10-14",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-14T05:30:56.083Z",
+    "pickedAt": "2026-10-14T06:30:59.663Z",
     "rejected": [
-      {
-        "ticker": "JSWENERGY",
-        "reasons": [
-          "near upper circuit"
-        ]
-      },
       {
         "ticker": "TATAELXSI",
         "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JSWENERGY",
+        "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
           "near52wHigh"
         ]
@@ -35,70 +37,7 @@
         ]
       },
       {
-        "ticker": "TATAPOWER",
-        "reasons": [
-          "illiquid (₹58Cr)"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "illiquid (₹74Cr)"
-        ]
-      },
-      {
-        "ticker": "PIIND",
-        "reasons": [
-          "illiquid (₹34Cr)"
-        ]
-      },
-      {
-        "ticker": "BRITANNIA",
-        "reasons": [
-          "illiquid (₹25Cr)"
-        ]
-      },
-      {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "SAGILITY",
-        "reasons": [
-          "illiquid (₹53Cr)"
-        ]
-      },
-      {
-        "ticker": "ICICIPRULI",
-        "reasons": [
-          "illiquid (₹47Cr)"
-        ]
-      },
-      {
-        "ticker": "AXISBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NESTLEIND",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UPL",
-        "reasons": [
-          "illiquid (₹67Cr)"
-        ]
-      },
-      {
-        "ticker": "MARUTI",
+        "ticker": "ADANIPOWER",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -107,9 +46,30 @@
         ]
       },
       {
-        "ticker": "PIDILITIND",
+        "ticker": "TCS",
         "reasons": [
-          "illiquid (₹25Cr)"
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "POLYCAB",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SAGILITY",
+        "reasons": [
+          "illiquid (₹65Cr)"
+        ]
+      },
+      {
+        "ticker": "BRITANNIA",
+        "reasons": [
+          "illiquid (₹39Cr)"
         ]
       },
       {
@@ -121,20 +81,67 @@
         ]
       },
       {
-        "ticker": "KEI",
+        "ticker": "PIIND",
         "reasons": [
           "illiquid (₹61Cr)"
         ]
       },
       {
-        "ticker": "OIL",
+        "ticker": "HINDPETRO",
         "reasons": [
-          "illiquid (₹24Cr)"
+          "illiquid (₹43Cr)"
         ]
       },
       {
-        "ticker": "COALINDIA",
+        "ticker": "KEI",
         "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "OIL",
+        "reasons": [
+          "illiquid (₹37Cr)"
+        ]
+      },
+      {
+        "ticker": "NAUKRI",
+        "reasons": [
+          "illiquid (₹52Cr)"
+        ]
+      },
+      {
+        "ticker": "TECHM",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INDUSTOWER",
+        "reasons": [
+          "illiquid (₹54Cr)"
+        ]
+      },
+      {
+        "ticker": "PETRONET",
+        "reasons": [
+          "illiquid (₹34Cr)"
+        ]
+      },
+      {
+        "ticker": "IEX",
+        "reasons": [
+          "illiquid (₹25Cr)"
+        ]
+      },
+      {
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
