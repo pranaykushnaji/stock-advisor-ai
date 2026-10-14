@@ -1,25 +1,139 @@
 {
   "pick": {
-    "date": "2026-10-13",
+    "date": "2026-10-14",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-13T09:31:31.060Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 62, conf 47) — trend 16, breadth 74, vol-factor 78",
-    "momLaneOpen": true,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-10-14T04:31:03.251Z",
+    "rejected": [
       {
-        "ticker": "PAYTM",
-        "relVol": 1.85,
-        "confidence": 38.9,
-        "effectiveConfidence": 61.8,
-        "institutional": 43.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 5,
-        "negative": false
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KPITTECH",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "INFY",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JSWENERGY",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ICICIPRULI",
+        "reasons": [
+          "illiquid (₹26Cr)"
+        ]
+      },
+      {
+        "ticker": "TCS",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAPOWER",
+        "reasons": [
+          "illiquid (₹26Cr)"
+        ]
+      },
+      {
+        "ticker": "ADANIENSOL",
+        "reasons": [
+          "illiquid (₹18Cr)"
+        ]
+      },
+      {
+        "ticker": "SAGILITY",
+        "reasons": [
+          "illiquid (₹32Cr)"
+        ]
+      },
+      {
+        "ticker": "ADANIENT",
+        "reasons": [
+          "illiquid (₹73Cr)"
+        ]
+      },
+      {
+        "ticker": "MARUTI",
+        "reasons": [
+          "illiquid (₹63Cr)"
+        ]
+      },
+      {
+        "ticker": "PRESTIGE",
+        "reasons": [
+          "illiquid (₹15Cr)"
+        ]
+      },
+      {
+        "ticker": "HINDPETRO",
+        "reasons": [
+          "illiquid (₹11Cr)"
+        ]
+      },
+      {
+        "ticker": "OIL",
+        "reasons": [
+          "illiquid (₹8Cr)"
+        ]
+      },
+      {
+        "ticker": "NATIONALUM",
+        "reasons": [
+          "illiquid (₹56Cr)"
+        ]
+      },
+      {
+        "ticker": "PETRONET",
+        "reasons": [
+          "illiquid (₹6Cr)"
+        ]
+      },
+      {
+        "ticker": "INDUSINDBK",
+        "reasons": [
+          "illiquid (₹13Cr)"
+        ]
+      },
+      {
+        "ticker": "IEX",
+        "reasons": [
+          "illiquid (₹6Cr)"
+        ]
+      },
+      {
+        "ticker": "BSE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
