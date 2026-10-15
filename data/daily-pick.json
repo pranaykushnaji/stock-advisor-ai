@@ -3,20 +3,20 @@
     "date": "2026-10-15",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-15T06:30:57.223Z",
+    "pickedAt": "2026-10-15T07:31:03.503Z",
     "rejected": [
+      {
+        "ticker": "BHARTIARTL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
       {
         "ticker": "RELIANCE",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BHARTIARTL",
-        "reasons": [
-          "ema20AboveEma50",
           "near52wHigh"
         ]
       },
@@ -36,12 +36,23 @@
         ]
       },
       {
-        "ticker": "EICHERMOT",
+        "ticker": "ICICIBANK",
         "reasons": [
-          "priceAboveEma20",
           "ema20AboveEma50",
-          "volumeSurge",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HINDPETRO",
+        "reasons": [
+          "ema20AboveEma50",
           "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TECHM",
+        "reasons": [
+          "ema20AboveEma50"
         ]
       },
       {
@@ -54,30 +65,9 @@
         ]
       },
       {
-        "ticker": "FORCEMOT",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "SUNPHARMA",
         "reasons": [
-          "illiquid (₹60Cr)"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HINDPETRO",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
+          "illiquid (₹75Cr)"
         ]
       },
       {
@@ -90,38 +80,22 @@
         ]
       },
       {
-        "ticker": "HDFCBANK",
+        "ticker": "ZYDUSLIFE",
         "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KEI",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TECHM",
-        "reasons": [
-          "ema20AboveEma50"
-        ]
-      },
-      {
-        "ticker": "ICICIBANK",
-        "reasons": [
-          "ema20AboveEma50",
+          "priceAboveEma20",
           "volumeSurge"
         ]
       },
       {
-        "ticker": "M&M",
+        "ticker": "FORCEMOT",
         "reasons": [
-          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
@@ -135,24 +109,42 @@
         ]
       },
       {
-        "ticker": "SHRIRAMFIN",
+        "ticker": "HCLTECH",
         "reasons": [
-          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PAYTM",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "AXISBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HEROMOTOCO",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "EICHERMOT",
+        "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "WIPRO",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ASHOKLEY",
+        "ticker": "M&M",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
