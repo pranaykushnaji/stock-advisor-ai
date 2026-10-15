@@ -1,25 +1,140 @@
 {
   "pick": {
-    "date": "2026-10-14",
+    "date": "2026-10-15",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-14T09:31:08.488Z",
-    "regime": "weak",
-    "market": "weak (v2 score 44, conf 67) — trend 18, breadth 45, vol-factor 77",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-10-15T04:31:01.343Z",
+    "rejected": [
       {
-        "ticker": "BHEL",
-        "relVol": 3.73,
-        "confidence": 31.9,
-        "effectiveConfidence": 76.8,
-        "institutional": 99.2,
-        "catalyst": "earnings beat",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 14,
-        "negative": false
+        "ticker": "TCS",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BHARTIARTL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
+          "illiquid (₹61Cr)"
+        ]
+      },
+      {
+        "ticker": "DRREDDY",
+        "reasons": [
+          "illiquid (₹27Cr)"
+        ]
+      },
+      {
+        "ticker": "INFY",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TECHM",
+        "reasons": [
+          "ema20AboveEma50"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KEI",
+        "reasons": [
+          "illiquid (₹29Cr)"
+        ]
+      },
+      {
+        "ticker": "CAMS",
+        "reasons": [
+          "illiquid (₹32Cr)"
+        ]
+      },
+      {
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SUNPHARMA",
+        "reasons": [
+          "illiquid (₹18Cr)"
+        ]
+      },
+      {
+        "ticker": "ICICIBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "WIPRO",
+        "reasons": [
+          "illiquid (₹54Cr)"
+        ]
+      },
+      {
+        "ticker": "AUBANK",
+        "reasons": [
+          "illiquid (₹14Cr)"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "AXISBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ANGELONE",
+        "reasons": [
+          "illiquid (₹57Cr)"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HEROMOTOCO",
+        "reasons": [
+          "illiquid (₹74Cr)"
+        ]
       }
     ]
   }
