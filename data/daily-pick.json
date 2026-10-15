@@ -3,10 +3,25 @@
     "date": "2026-10-15",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-15T08:30:55.560Z",
+    "pickedAt": "2026-10-15T09:30:58.009Z",
     "rejected": [
       {
+        "ticker": "ICICIBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
         "ticker": "RELIANCE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HDFCAMC",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -31,18 +46,15 @@
         ]
       },
       {
-        "ticker": "SUNPHARMA",
+        "ticker": "HINDPETRO",
         "reasons": [
-          "priceAboveEma20",
           "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "ICICIBANK",
+        "ticker": "PAYTM",
         "reasons": [
-          "ema20AboveEma50",
           "volumeSurge"
         ]
       },
@@ -53,9 +65,31 @@
         ]
       },
       {
-        "ticker": "HINDPETRO",
+        "ticker": "HCLTECH",
         "reasons": [
           "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TCS",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ZYDUSLIFE",
+        "reasons": [
+          "priceAboveEma20",
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HEROMOTOCO",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -69,50 +103,15 @@
         ]
       },
       {
-        "ticker": "HDFCAMC",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GRASIM",
-        "reasons": [
-          "illiquid (₹52Cr)"
-        ]
-      },
-      {
-        "ticker": "ASHOKLEY",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "FORCEMOT",
         "reasons": [
           "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "ZYDUSLIFE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "HEROMOTOCO",
+        "ticker": "EICHERMOT",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -120,9 +119,11 @@
         ]
       },
       {
-        "ticker": "KOTAKBANK",
+        "ticker": "HDFCBANK",
         "reasons": [
-          "volumeSurge"
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -131,13 +132,6 @@
           "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "ema20AboveEma50",
           "near52wHigh"
         ]
       },
@@ -151,7 +145,15 @@
         ]
       },
       {
-        "ticker": "PAYTM",
+        "ticker": "BSE",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KOTAKBANK",
         "reasons": [
           "volumeSurge"
         ]
