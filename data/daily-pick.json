@@ -2,138 +2,24 @@
   "pick": {
     "date": "2026-10-16",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-16T04:30:54.922Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-16T05:30:58.552Z",
+    "regime": "weak",
+    "market": "weak (v2 score 46, conf 70) — trend 23, breadth 48, vol-factor 73",
+    "momLaneOpen": false,
+    "considered": [
       {
         "ticker": "TECHM",
-        "reasons": [
-          "near upper circuit"
-        ]
-      },
-      {
-        "ticker": "WIPRO",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INFY",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "KPITTECH",
-        "reasons": [
-          "illiquid (₹61Cr)"
-        ]
-      },
-      {
-        "ticker": "RBLBANK",
-        "reasons": [
-          "illiquid (₹47Cr)"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INDIANB",
-        "reasons": [
-          "illiquid (₹30Cr)"
-        ]
-      },
-      {
-        "ticker": "CANBK",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "UJJIVANSFB",
-        "reasons": [
-          "illiquid (₹23Cr)"
-        ]
-      },
-      {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BHARTIARTL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "INDHOTEL",
-        "reasons": [
-          "illiquid (₹36Cr)"
-        ]
-      },
-      {
-        "ticker": "ETERNAL",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "illiquid (₹25Cr)"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
-        "reasons": [
-          "illiquid (₹24Cr)"
-        ]
-      },
-      {
-        "ticker": "HINDZINC",
-        "reasons": [
-          "illiquid (₹24Cr)"
-        ]
-      },
-      {
-        "ticker": "SWIGGY",
-        "reasons": [
-          "illiquid (₹51Cr)"
-        ]
-      },
-      {
-        "ticker": "LTM",
-        "reasons": [
-          "illiquid (₹40Cr)"
-        ]
+        "relVol": 15.21,
+        "confidence": 39.6,
+        "effectiveConfidence": 75.8,
+        "institutional": 100,
+        "catalyst": "earnings beat",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 19,
+        "negative": false
       }
     ]
   }
