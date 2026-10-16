@@ -29,13 +29,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-16T06:30:55.044Z",
+          "relVol": 11.85,
+          "confidence": 40.1,
+          "components": {
+            "technical": 67,
+            "flow": 88,
+            "catalyst": 18,
+            "liquidity": 95
+          },
+          "discoveryScore": 87,
+          "catalystType": "earnings beat",
+          "verification": "UNVERIFIED",
+          "volume": 13484502,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 39.6,
+      "lastSeen": "12:00",
+      "bestConfidence": 40.1,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "confidenceSlope": 0.5,
+      "trendBonus": 0.3
     }
   }
 }
