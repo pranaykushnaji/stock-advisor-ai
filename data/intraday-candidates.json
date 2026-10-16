@@ -73,13 +73,72 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "14:01",
+          "ts": "2026-10-16T08:31:03.818Z",
+          "relVol": 9.13,
+          "confidence": 63.7,
+          "components": {
+            "technical": 78,
+            "flow": 94,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 87,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 17948784,
+          "sessionFrac": 0.76,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "13:00",
-      "bestConfidence": 40.1,
+      "lastSeen": "14:01",
+      "bestConfidence": 63.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 7.2,
+      "trendBonus": 8
+    },
+    "INDHOTEL": {
+      "ticker": "INDHOTEL",
+      "fullName": "The Indian Hotels Company Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "14:01",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "14:01",
+          "ts": "2026-10-16T08:31:03.819Z",
+          "relVol": 1.98,
+          "confidence": 10,
+          "components": {
+            "technical": 60,
+            "flow": 66,
+            "catalyst": 5,
+            "liquidity": 82
+          },
+          "discoveryScore": 84.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5497524,
+          "sessionFrac": 0.76,
+          "missing": [
+            "relVol 1.98<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "14:01",
+      "bestConfidence": 10,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0.1,
-      "trendBonus": 0.1
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
