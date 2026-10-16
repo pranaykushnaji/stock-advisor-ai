@@ -1,4 +1,41 @@
 {
   "date": "2026-10-16",
-  "candidates": {}
+  "candidates": {
+    "TECHM": {
+      "ticker": "TECHM",
+      "fullName": "Tech Mahindra Limited",
+      "sector": "IT",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-16T05:30:54.989Z",
+          "relVol": 15.21,
+          "confidence": 39.6,
+          "components": {
+            "technical": 67,
+            "flow": 88,
+            "catalyst": 18,
+            "liquidity": 95
+          },
+          "discoveryScore": 90,
+          "catalystType": "earnings beat",
+          "verification": "UNVERIFIED",
+          "volume": 11015196,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 39.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
