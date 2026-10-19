@@ -1,24 +1,39 @@
 {
   "pick": {
-    "date": "2026-10-16",
+    "date": "2026-10-19",
     "noTrade": true,
-    "reason": "TECHM failed neutral-market entry gates: reward/risk 1.22 < 1.8; historical net edge -1.26% ≤ 0",
-    "pickedAt": "2026-10-16T09:31:09.092Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 47, conf 72) — trend 23, breadth 50, vol-factor 73",
-    "candidate": {
-      "ticker": "TECHM",
-      "confidence": 63.6,
-      "effectiveConfidence": 89.7,
-      "rewardRisk": {
-        "model": "technical-scenario-v2",
-        "isForecast": false,
-        "rr": 1.22,
-        "upsidePct": 5.7,
-        "downsidePct": 4.7
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-19T04:30:20.039Z",
+    "regime": "weak",
+    "market": "weak (v2 score 44, conf 67) — trend 21, breadth 46, vol-factor 73",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "TECHM",
+        "relVol": 2.78,
+        "confidence": 55.5,
+        "effectiveConfidence": 76.3,
+        "institutional": 96.5,
+        "catalyst": "earnings beat",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 9,
+        "negative": false
       },
-      "catalyst": "no catalyst",
-      "verification": "UNVERIFIED"
-    }
+      {
+        "ticker": "PNB",
+        "relVol": 19.18,
+        "confidence": 8.3,
+        "effectiveConfidence": 65.1,
+        "institutional": 88.7,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 14,
+        "negative": false
+      }
+    ]
   }
 }
