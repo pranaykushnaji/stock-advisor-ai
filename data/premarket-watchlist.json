@@ -1,45 +1,21 @@
 {
-  "date": "2026-10-16",
-  "builtAt": "2026-10-16T02:35:54.159Z",
+  "date": "2026-10-19",
+  "builtAt": "2026-10-19T02:35:07.753Z",
   "marketContext": {
     "tone": "neutral",
-    "summary": "Deterministic NSE breadth fallback: 56% advancers, average move +0.07%.",
+    "summary": "Deterministic NSE breadth fallback: 45% advancers, average move +0.10%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
   "watch": [
     {
-      "ticker": "MANKIND",
-      "source": "overnight-filing",
-      "catalyst": {
-        "points": 26,
-        "hasCatalyst": true,
-        "negative": false,
-        "type": "acquisition",
-        "confidence": 80,
-        "impact": 7,
-        "stars": 4,
-        "freshness": 0.941,
-        "decay": 0.941,
-        "impactClass": "high+",
-        "influenceDays": 12,
-        "ageDays": 0.53,
-        "evidenceVersion": 2,
-        "eventPublishedAt": 1792072695000,
-        "hasFiling": true,
-        "evidence": [
-          {
-            "articleId": 3,
-            "title": "[OFFICIAL NSE FILING] Acquisition",
-            "url": null,
-            "publisher": "nse-filing"
-          }
-        ],
-        "verification": "VERIFIED",
-        "sources": 1,
-        "summary": "Announced acquisition to expand business operations"
-      },
-      "prevClose": 2347.6
+      "ticker": "TECHM",
+      "source": "warm-carryover",
+      "yBestConf": 63.7,
+      "yLastRelVol": 7.97,
+      "yTrend": "rising",
+      "catalyst": null,
+      "prevClose": 1790
     }
   ]
 }
