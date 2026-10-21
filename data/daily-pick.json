@@ -3,19 +3,19 @@
     "date": "2026-10-21",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-21T05:30:59.910Z",
+    "pickedAt": "2026-10-21T06:30:58.665Z",
     "rejected": [
       {
-        "ticker": "INFY",
+        "ticker": "TCS",
         "reasons": [
-          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "TCS",
+        "ticker": "INFY",
         "reasons": [
+          "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
         ]
@@ -28,12 +28,6 @@
         ]
       },
       {
-        "ticker": "TECHM",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
         "ticker": "ULTRACEMCO",
         "reasons": [
           "ema20AboveEma50",
@@ -42,9 +36,59 @@
         ]
       },
       {
-        "ticker": "KALYANKJIL",
+        "ticker": "PERSISTENT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TECHM",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "MPHASIS",
+        "reasons": [
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KPITTECH",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TATAELXSI",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SAIL",
         "reasons": [
           "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -57,73 +101,11 @@
         ]
       },
       {
-        "ticker": "MPHASIS",
-        "reasons": [
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COFORGE",
-        "reasons": [
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "NAUKRI",
-        "reasons": [
-          "illiquid (₹30Cr)"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "HCLTECH",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TATAELXSI",
-        "reasons": [
-          "illiquid (₹69Cr)"
-        ]
-      },
-      {
-        "ticker": "ICICIBANK",
-        "reasons": [
-          "ema20AboveEma50"
-        ]
-      },
-      {
         "ticker": "RELIANCE",
         "reasons": [
           "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GODREJCP",
-        "reasons": [
-          "illiquid (₹40Cr)"
-        ]
-      },
-      {
-        "ticker": "UNIONBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DRREDDY",
-        "reasons": [
-          "illiquid (₹54Cr)"
         ]
       },
       {
@@ -134,12 +116,35 @@
         ]
       },
       {
-        "ticker": "OFSS",
+        "ticker": "KALYANKJIL",
         "reasons": [
           "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
           "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LUPIN",
+        "reasons": [
+          "illiquid (₹50Cr)"
+        ]
+      },
+      {
+        "ticker": "SBILIFE",
+        "reasons": [
+          "illiquid (₹60Cr)"
+        ]
+      },
+      {
+        "ticker": "UNIONBANK",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PETRONET",
+        "reasons": [
+          "illiquid (₹37Cr)"
         ]
       }
     ]
