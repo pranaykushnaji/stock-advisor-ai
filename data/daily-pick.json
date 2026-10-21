@@ -3,15 +3,8 @@
     "date": "2026-10-21",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-10-21T06:30:58.665Z",
+    "pickedAt": "2026-10-21T07:30:54.597Z",
     "rejected": [
-      {
-        "ticker": "TCS",
-        "reasons": [
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
       {
         "ticker": "INFY",
         "reasons": [
@@ -24,20 +17,6 @@
         "ticker": "WIPRO",
         "reasons": [
           "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ULTRACEMCO",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PERSISTENT",
-        "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
@@ -49,9 +28,10 @@
         ]
       },
       {
-        "ticker": "COFORGE",
+        "ticker": "TCS",
         "reasons": [
-          "volumeSurge"
+          "volumeSurge",
+          "near52wHigh"
         ]
       },
       {
@@ -61,15 +41,32 @@
         ]
       },
       {
-        "ticker": "HCLTECH",
+        "ticker": "PERSISTENT",
         "reasons": [
           "volumeSurge",
           "near52wHigh"
         ]
       },
       {
-        "ticker": "KPITTECH",
+        "ticker": "ULTRACEMCO",
         "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SAIL",
+        "reasons": [
+          "priceAboveEma20",
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
@@ -84,7 +81,33 @@
         ]
       },
       {
-        "ticker": "SAIL",
+        "ticker": "KALYANKJIL",
+        "reasons": [
+          "priceAboveEma20",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COFORGE",
+        "reasons": [
+          "volumeSurge"
+        ]
+      },
+      {
+        "ticker": "HCLTECH",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LUPIN",
+        "reasons": [
+          "illiquid (₹68Cr)"
+        ]
+      },
+      {
+        "ticker": "GODREJCP",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
@@ -93,7 +116,15 @@
         ]
       },
       {
-        "ticker": "SBIN",
+        "ticker": "NHPC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KPITTECH",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -109,42 +140,15 @@
         ]
       },
       {
-        "ticker": "LTM",
+        "ticker": "ANANDRATHI",
         "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
+          "volumeSurge"
         ]
       },
       {
-        "ticker": "KALYANKJIL",
+        "ticker": "ZYDUSLIFE",
         "reasons": [
-          "priceAboveEma20",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "LUPIN",
-        "reasons": [
-          "illiquid (₹50Cr)"
-        ]
-      },
-      {
-        "ticker": "SBILIFE",
-        "reasons": [
-          "illiquid (₹60Cr)"
-        ]
-      },
-      {
-        "ticker": "UNIONBANK",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PETRONET",
-        "reasons": [
-          "illiquid (₹37Cr)"
+          "illiquid (₹35Cr)"
         ]
       }
     ]
