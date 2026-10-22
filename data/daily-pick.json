@@ -2,37 +2,158 @@
   "pick": {
     "date": "2026-10-22",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-22T04:30:56.995Z",
-    "regime": "weak",
-    "market": "weak (v2 score 32, conf 50) — trend 16, breadth 13, vol-factor 72",
-    "momLaneOpen": false,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-10-22T05:30:56.417Z",
+    "rejected": [
       {
         "ticker": "INDHOTEL",
-        "relVol": 6.78,
-        "confidence": 37.9,
-        "effectiveConfidence": 71.3,
-        "institutional": 78.7,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 11,
-        "negative": false
+        "reasons": [
+          "near upper circuit"
+        ]
       },
       {
-        "ticker": "COFORGE",
-        "relVol": 2.17,
-        "confidence": 22.6,
-        "effectiveConfidence": 60.6,
-        "institutional": 87,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 4,
-        "negative": false
+        "ticker": "BAJFINANCE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SAGILITY",
+        "reasons": [
+          "illiquid (₹70Cr)"
+        ]
+      },
+      {
+        "ticker": "LT",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "KAYNES",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SBIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BPCL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DIXON",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "UJJIVANSFB",
+        "reasons": [
+          "illiquid (₹46Cr)"
+        ]
+      },
+      {
+        "ticker": "MARUTI",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LTM",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "FEDERALBNK",
+        "reasons": [
+          "illiquid (₹66Cr)"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LTF",
+        "reasons": [
+          "illiquid (₹36Cr)"
+        ]
+      },
+      {
+        "ticker": "ZYDUSLIFE",
+        "reasons": [
+          "illiquid (₹36Cr)"
+        ]
+      },
+      {
+        "ticker": "BSE",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "TVSMOTOR",
+        "reasons": [
+          "illiquid (₹52Cr)"
+        ]
+      },
+      {
+        "ticker": "CROMPTON",
+        "reasons": [
+          "illiquid (₹30Cr)"
+        ]
+      },
+      {
+        "ticker": "BHARTIARTL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "PFC",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
