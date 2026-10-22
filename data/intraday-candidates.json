@@ -1,28 +1,28 @@
 {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "candidates": {
-    "PNB": {
-      "ticker": "PNB",
-      "fullName": "Punjab National Bank",
-      "sector": "Bank",
+    "INDHOTEL": {
+      "ticker": "INDHOTEL",
+      "fullName": "The Indian Hotels Company Limited",
+      "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-10-21T04:30:55.484Z",
-          "relVol": 3.03,
-          "confidence": 38.6,
+          "ts": "2026-10-22T04:30:53.249Z",
+          "relVol": 6.78,
+          "confidence": 37.9,
           "components": {
-            "technical": 66,
-            "flow": 86,
-            "catalyst": 11,
-            "liquidity": 57
+            "technical": 72,
+            "flow": 85,
+            "catalyst": 5,
+            "liquidity": 77
           },
-          "discoveryScore": 67.3,
-          "catalystType": "earnings beat",
+          "discoveryScore": 81,
+          "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 7753478,
+          "volume": 4231758,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -32,7 +32,43 @@
         }
       ],
       "lastSeen": "10:00",
-      "bestConfidence": 38.6,
+      "bestConfidence": 37.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "COFORGE": {
+      "ticker": "COFORGE",
+      "fullName": "Coforge Limited",
+      "sector": "IT",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-10-22T04:30:53.249Z",
+          "relVol": 2.17,
+          "confidence": 22.6,
+          "components": {
+            "technical": 67,
+            "flow": 66,
+            "catalyst": 5,
+            "liquidity": 62
+          },
+          "discoveryScore": 68.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 663666,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 22.6,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
