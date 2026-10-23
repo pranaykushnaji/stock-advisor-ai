@@ -117,13 +117,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-10-23T09:30:57.674Z",
+          "relVol": 2.15,
+          "confidence": 52.1,
+          "components": {
+            "technical": 83,
+            "flow": 73,
+            "catalyst": 5,
+            "liquidity": 92
+          },
+          "discoveryScore": 60.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 10182841,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 52.3,
       "confidenceTrend": "rising",
-      "confidenceSlope": 2.72,
-      "trendBonus": 3.3
+      "confidenceSlope": 3.27,
+      "trendBonus": 3.9
     },
     "COFORGE": {
       "ticker": "COFORGE",
@@ -300,12 +322,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-10-23T09:30:57.674Z",
+          "relVol": 2.01,
+          "confidence": 5.4,
+          "components": {
+            "technical": 56,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 70
+          },
+          "discoveryScore": 71.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 956820,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 2.01<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 27.8,
       "confidenceTrend": "falling",
-      "confidenceSlope": -7.37,
+      "confidenceSlope": -6.68,
       "trendBonus": 0
     }
   }
