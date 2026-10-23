@@ -73,12 +73,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-10-23T07:31:01.792Z",
+          "relVol": 2.29,
+          "confidence": 36.2,
+          "components": {
+            "technical": 70,
+            "flow": 76,
+            "catalyst": 5,
+            "liquidity": 86
+          },
+          "discoveryScore": 60.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 7076417,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
+      "lastSeen": "13:01",
       "bestConfidence": 38.8,
       "confidenceTrend": "flat",
-      "confidenceSlope": -0.9,
+      "confidenceSlope": -0.68,
       "trendBonus": 0
     },
     "COFORGE": {
@@ -211,12 +233,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "13:01",
+          "ts": "2026-10-23T07:31:01.791Z",
+          "relVol": 2.06,
+          "confidence": 20.3,
+          "components": {
+            "technical": 69,
+            "flow": 68,
+            "catalyst": 5,
+            "liquidity": 64
+          },
+          "discoveryScore": 69.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 645231,
+          "sessionFrac": 0.6,
+          "missing": [
+            "relVol 2.06<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "12:01",
+      "lastSeen": "13:01",
       "bestConfidence": 27.8,
-      "confidenceTrend": "flat",
-      "confidenceSlope": -0.1,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -3.75,
       "trendBonus": 0
     }
   }
