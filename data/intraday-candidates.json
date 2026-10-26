@@ -51,13 +51,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-26T06:30:46.089Z",
+          "relVol": 5.39,
+          "confidence": 46.7,
+          "components": {
+            "technical": 75,
+            "flow": 76,
+            "catalyst": 5,
+            "liquidity": 89
+          },
+          "discoveryScore": 86.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 5136833,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 38.5,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -5.9,
-      "trendBonus": 0
+      "lastSeen": "12:00",
+      "bestConfidence": 46.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 4.1,
+      "trendBonus": 4.9
     },
     "KOTAKBANK": {
       "ticker": "KOTAKBANK",
@@ -145,13 +167,72 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-26T06:30:46.089Z",
+          "relVol": 2.64,
+          "confidence": 48.5,
+          "components": {
+            "technical": 72,
+            "flow": 76,
+            "catalyst": 5,
+            "liquidity": 85
+          },
+          "discoveryScore": 77.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2629705,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 40.7,
+      "lastSeen": "12:00",
+      "bestConfidence": 48.5,
       "confidenceTrend": "rising",
-      "confidenceSlope": 7.9,
-      "trendBonus": 4
+      "confidenceSlope": 7.85,
+      "trendBonus": 8
+    },
+    "ZYDUSLIFE": {
+      "ticker": "ZYDUSLIFE",
+      "fullName": "Zydus Lifesciences Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-26T06:30:46.089Z",
+          "relVol": 2.03,
+          "confidence": 6.5,
+          "components": {
+            "technical": 45,
+            "flow": 44,
+            "catalyst": 5,
+            "liquidity": 66
+          },
+          "discoveryScore": 69.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1427458,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.03<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 6.5,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
     }
   }
 }
