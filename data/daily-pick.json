@@ -2,38 +2,23 @@
   "pick": {
     "date": "2026-10-26",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-26T07:30:50.425Z",
+    "reason": "DRREDDY failed neutral-market entry gates: historical net edge -1.26% ≤ 0",
+    "pickedAt": "2026-10-26T08:30:50.043Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 51, conf 67) — trend 19, breadth 55, vol-factor 73",
-    "momLaneOpen": true,
-    "considered": [
-      {
-        "ticker": "COFORGE",
-        "relVol": 2.32,
-        "confidence": 56.1,
-        "effectiveConfidence": 81.3,
-        "institutional": 61.5,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 16,
-        "negative": false
+    "market": "neutral (v2 score 55, conf 64) — trend 20, breadth 64, vol-factor 73",
+    "candidate": {
+      "ticker": "DRREDDY",
+      "confidence": 49.3,
+      "effectiveConfidence": 81.7,
+      "rewardRisk": {
+        "model": "technical-scenario-v2",
+        "isForecast": false,
+        "rr": 2.05,
+        "upsidePct": 8.2,
+        "downsidePct": 4
       },
-      {
-        "ticker": "ZYDUSLIFE",
-        "relVol": 1.83,
-        "confidence": 8.9,
-        "effectiveConfidence": 52.7,
-        "institutional": 42.3,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
-      }
-    ]
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
