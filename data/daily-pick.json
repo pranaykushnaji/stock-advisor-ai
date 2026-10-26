@@ -2,38 +2,23 @@
   "pick": {
     "date": "2026-10-26",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-26T05:30:51.353Z",
+    "reason": "DRREDDY failed neutral-market entry gates: historical net edge -1.26% ≤ 0",
+    "pickedAt": "2026-10-26T06:30:49.768Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 53, conf 65) — trend 19, breadth 63, vol-factor 73",
-    "momLaneOpen": true,
-    "considered": [
-      {
-        "ticker": "DRREDDY",
-        "relVol": 6.69,
-        "confidence": 32.6,
-        "effectiveConfidence": 67.6,
-        "institutional": 64.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 19,
-        "negative": false
+    "market": "neutral (v2 score 48, conf 69) — trend 19, breadth 49, vol-factor 73",
+    "candidate": {
+      "ticker": "DRREDDY",
+      "confidence": 46.7,
+      "effectiveConfidence": 78.6,
+      "rewardRisk": {
+        "model": "technical-scenario-v2",
+        "isForecast": false,
+        "rr": 2.3,
+        "upsidePct": 9.2,
+        "downsidePct": 4
       },
-      {
-        "ticker": "COFORGE",
-        "relVol": 3.16,
-        "confidence": 40.7,
-        "effectiveConfidence": 73.8,
-        "institutional": 59.7,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 15,
-        "negative": false
-      }
-    ]
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
