@@ -29,12 +29,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-26T05:30:47.594Z",
+          "relVol": 6.69,
+          "confidence": 32.6,
+          "components": {
+            "technical": 66,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 85
+          },
+          "discoveryScore": 81.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4062097,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
+      "lastSeen": "11:00",
       "bestConfidence": 38.5,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -5.9,
       "trendBonus": 0
     },
     "KOTAKBANK": {
@@ -101,13 +123,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-26T05:30:47.594Z",
+          "relVol": 3.16,
+          "confidence": 40.7,
+          "components": {
+            "technical": 64,
+            "flow": 78,
+            "catalyst": 5,
+            "liquidity": 80
+          },
+          "discoveryScore": 79.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2001125,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 32.8,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "11:00",
+      "bestConfidence": 40.7,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 7.9,
+      "trendBonus": 4
     }
   }
 }
