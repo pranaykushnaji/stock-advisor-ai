@@ -2,51 +2,23 @@
   "pick": {
     "date": "2026-10-27",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-10-27T05:30:50.642Z",
+    "reason": "ATHERENERG failed neutral-market entry gates: reward/risk 1 < 1.8; historical net edge -1.26% ≤ 0",
+    "pickedAt": "2026-10-27T06:30:52.545Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 56, conf 62) — trend 20, breadth 67, vol-factor 72",
-    "momLaneOpen": true,
-    "considered": [
-      {
-        "ticker": "LAURUSLABS",
-        "relVol": 3.37,
-        "confidence": 41.2,
-        "effectiveConfidence": 71.3,
-        "institutional": 63.9,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 1,
-        "negative": false
+    "market": "neutral (v2 score 56, conf 60) — trend 20, breadth 66, vol-factor 72",
+    "candidate": {
+      "ticker": "ATHERENERG",
+      "confidence": 57.8,
+      "effectiveConfidence": 82.7,
+      "rewardRisk": {
+        "model": "technical-scenario-v2",
+        "isForecast": false,
+        "rr": 1,
+        "upsidePct": 7.6,
+        "downsidePct": 7.6
       },
-      {
-        "ticker": "DIVISLAB",
-        "relVol": 2.08,
-        "confidence": 30.6,
-        "effectiveConfidence": 62.9,
-        "institutional": 50.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 0,
-        "negative": false
-      },
-      {
-        "ticker": "APLAPOLLO",
-        "relVol": 3.86,
-        "confidence": 39.6,
-        "effectiveConfidence": 64.1,
-        "institutional": 48.6,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 12,
-        "negative": false
-      }
-    ]
+      "catalyst": "no catalyst",
+      "verification": "UNVERIFIED"
+    }
   }
 }
