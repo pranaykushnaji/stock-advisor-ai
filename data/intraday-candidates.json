@@ -137,13 +137,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-27T05:30:46.892Z",
+          "relVol": 3.86,
+          "confidence": 39.6,
+          "components": {
+            "technical": 48,
+            "flow": 75,
+            "catalyst": 5,
+            "liquidity": 62
+          },
+          "discoveryScore": 79.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 584362,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 34.1,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "11:00",
+      "bestConfidence": 39.6,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 5.5,
+      "trendBonus": 3.3
     },
     "DIVISLAB": {
       "ticker": "DIVISLAB",
@@ -173,10 +195,69 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-27T05:30:46.891Z",
+          "relVol": 2.08,
+          "confidence": 30.6,
+          "components": {
+            "technical": 53,
+            "flow": 57,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 76.2,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 331704,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 2.08<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "10:00",
-      "bestConfidence": 20.9,
+      "lastSeen": "11:00",
+      "bestConfidence": 30.6,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 9.7,
+      "trendBonus": 4
+    },
+    "LAURUSLABS": {
+      "ticker": "LAURUSLABS",
+      "fullName": "Laurus Labs Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-10-27T05:30:46.891Z",
+          "relVol": 3.37,
+          "confidence": 41.2,
+          "components": {
+            "technical": 82,
+            "flow": 65,
+            "catalyst": 5,
+            "liquidity": 76
+          },
+          "discoveryScore": 70.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1394841,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 41.2,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
