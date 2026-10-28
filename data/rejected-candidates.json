@@ -12584,7 +12584,7 @@
     {
       "id": "2026-10-28|LT|10:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.219Z",
+      "ts": "2026-10-28T08:30:40.653Z",
       "ticker": "LT",
       "stage": "quality-filter",
       "reasons": [
@@ -12593,17 +12593,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 3.77,
-      "pChange": 4.29,
-      "sector": 69,
-      "entryRefPrice": 3831.2,
+      "relVol": 3.44,
+      "pChange": 4.01,
+      "sector": 66,
+      "entryRefPrice": 3812.8,
       "yahooSymbol": "LT.NS",
       "discoveryParts": {
-        "closingStrength": 42.3,
-        "containedMomentum": 88.3,
-        "breadthRelative": 82.5,
+        "closingStrength": 33.9,
+        "containedMomentum": 89.9,
+        "breadthRelative": 79.8,
         "liquidity": 95,
-        "sector": 69,
+        "sector": 66,
         "volAccel": 50
       }
     },
@@ -12819,25 +12819,26 @@
     {
       "id": "2026-10-28|SYRMA|10:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T06:30:40.743Z",
+      "ts": "2026-10-28T08:30:40.654Z",
       "ticker": "SYRMA",
       "stage": "quality-filter",
       "reasons": [
         "priceAboveEma20",
+        "volumeSurge",
         "near52wHigh"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 2.64,
-      "pChange": 3.45,
+      "relVol": 1.76,
+      "pChange": 4.08,
       "sector": 50,
-      "entryRefPrice": 1573.8,
+      "entryRefPrice": 1578.2,
       "yahooSymbol": "SYRMA.NS",
       "discoveryParts": {
-        "closingStrength": 72.2,
-        "containedMomentum": 85.9,
-        "breadthRelative": 79.5,
-        "liquidity": 71.6,
+        "closingStrength": 85.3,
+        "containedMomentum": 89.5,
+        "breadthRelative": 80.3,
+        "liquidity": 74,
         "sector": 50,
         "volAccel": 50
       }
@@ -12870,7 +12871,7 @@
     {
       "id": "2026-10-28|BSE|10:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.655Z",
       "ticker": "BSE",
       "stage": "quality-filter",
       "reasons": [
@@ -12880,16 +12881,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.58,
-      "pChange": 1.57,
+      "relVol": 0.54,
+      "pChange": 1.8,
       "sector": 50,
-      "entryRefPrice": 3505.2,
+      "entryRefPrice": 3480.9,
       "yahooSymbol": "BSE.NS",
       "discoveryParts": {
-        "closingStrength": 96.2,
-        "containedMomentum": 71.8,
-        "breadthRelative": 60.7,
-        "liquidity": 89.3,
+        "closingStrength": 92,
+        "containedMomentum": 73.5,
+        "breadthRelative": 62.1,
+        "liquidity": 92.1,
         "sector": 50,
         "volAccel": 50
       }
@@ -13151,7 +13152,7 @@
     {
       "id": "2026-10-28|PGEL|10:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.218Z",
+      "ts": "2026-10-28T08:30:40.651Z",
       "ticker": "PGEL",
       "stage": "quality-filter",
       "reasons": [
@@ -13160,16 +13161,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 11.74,
-      "pChange": 8.08,
+      "relVol": 10.57,
+      "pChange": 7.45,
       "sector": 50,
-      "entryRefPrice": 538.85,
+      "entryRefPrice": 536.7,
       "yahooSymbol": "PGEL.NS",
       "discoveryParts": {
-        "closingStrength": 99.1,
-        "containedMomentum": 65.3,
+        "closingStrength": 85.9,
+        "containedMomentum": 69.3,
         "breadthRelative": 100,
-        "liquidity": 83.9,
+        "liquidity": 86,
         "sector": 50,
         "volAccel": 50
       }
@@ -13531,44 +13532,45 @@
     {
       "id": "2026-10-28|SONACOMS|10:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:47.196Z",
+      "ts": "2026-10-28T08:30:45.141Z",
       "ticker": "SONACOMS",
       "stage": "core-gate",
       "reasons": [
+        "relVol<2.1",
         "catalyst UNVERIFIED"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 2.23,
+      "relVol": 1.96,
       "momentum": 50,
       "catalystScore": 15,
-      "confidence": 32.3,
-      "effectiveConfidence": 71.5,
+      "confidence": 32.4,
+      "effectiveConfidence": 70.7,
       "regime": "neutral",
       "sector": 50,
-      "techScore": 81.7,
+      "techScore": 81.8,
       "components": {
         "technical": 68,
-        "flow": 77,
+        "flow": 74,
         "catalyst": 13,
-        "liquidity": 80
+        "liquidity": 81
       },
       "discoveryParts": {
-        "closingStrength": 78,
-        "containedMomentum": 80.6,
-        "breadthRelative": 70.2,
-        "liquidity": 79.5,
+        "closingStrength": 89.7,
+        "containedMomentum": 83.9,
+        "breadthRelative": 73.2,
+        "liquidity": 81.3,
         "sector": 50,
-        "volAccel": 51.4
+        "volAccel": 42.7
       },
-      "institutional": 96.5,
-      "entryRefPrice": 880.6,
+      "institutional": 96.2,
+      "entryRefPrice": 879.3,
       "yahooSymbol": "SONACOMS.NS"
     },
     {
       "id": "2026-10-28|CUMMINSIND|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.655Z",
       "ticker": "CUMMINSIND",
       "stage": "quality-filter",
       "reasons": [
@@ -13579,17 +13581,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.56,
-      "pChange": 1.28,
-      "sector": 69,
-      "entryRefPrice": 4587.7,
+      "relVol": 1.4,
+      "pChange": 1.42,
+      "sector": 66,
+      "entryRefPrice": 4589,
       "yahooSymbol": "CUMMINSIND.NS",
       "discoveryParts": {
-        "closingStrength": 51.7,
-        "containedMomentum": 69.6,
-        "breadthRelative": 58.4,
-        "liquidity": 69.8,
-        "sector": 69,
+        "closingStrength": 55.6,
+        "containedMomentum": 70.7,
+        "breadthRelative": 59,
+        "liquidity": 72,
+        "sector": 66,
         "volAccel": 50
       }
     },
@@ -13621,7 +13623,7 @@
     {
       "id": "2026-10-28|APOLLOHOSP|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.653Z",
       "ticker": "APOLLOHOSP",
       "stage": "quality-filter",
       "reasons": [
@@ -13631,17 +13633,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.02,
-      "pChange": 3.39,
-      "sector": 76,
-      "entryRefPrice": 8063,
+      "relVol": 0.85,
+      "pChange": 3.45,
+      "sector": 70,
+      "entryRefPrice": 8058.5,
       "yahooSymbol": "APOLLOHOSP.NS",
       "discoveryParts": {
-        "closingStrength": 87.2,
-        "containedMomentum": 85.4,
+        "closingStrength": 88.4,
+        "containedMomentum": 85.9,
         "breadthRelative": 75.3,
-        "liquidity": 78.8,
-        "sector": 76,
+        "liquidity": 79.8,
+        "sector": 70,
         "volAccel": 50
       }
     },
@@ -13673,7 +13675,7 @@
     {
       "id": "2026-10-28|VOLTAS|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.652Z",
       "ticker": "VOLTAS",
       "stage": "quality-filter",
       "reasons": [
@@ -13683,24 +13685,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 5.03,
-      "pChange": 7.45,
-      "sector": 69,
-      "entryRefPrice": 1013.2,
+      "relVol": 4.63,
+      "pChange": 7.17,
+      "sector": 66,
+      "entryRefPrice": 1011.6,
       "yahooSymbol": "VOLTAS.NS",
       "discoveryParts": {
-        "closingStrength": 96.3,
-        "containedMomentum": 69.3,
+        "closingStrength": 93.3,
+        "containedMomentum": 71,
         "breadthRelative": 100,
-        "liquidity": 70.3,
-        "sector": 69,
+        "liquidity": 72.8,
+        "sector": 66,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|AXISBANK|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.654Z",
       "ticker": "AXISBANK",
       "stage": "quality-filter",
       "reasons": [
@@ -13711,24 +13713,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.58,
-      "pChange": 0.7,
-      "sector": 59,
-      "entryRefPrice": 1219,
+      "relVol": 0.5,
+      "pChange": 0.73,
+      "sector": 62,
+      "entryRefPrice": 1215.2,
       "yahooSymbol": "AXISBANK.NS",
       "discoveryParts": {
-        "closingStrength": 97.9,
-        "containedMomentum": 65.3,
-        "breadthRelative": 53.8,
-        "liquidity": 77.3,
-        "sector": 59,
+        "closingStrength": 74.7,
+        "containedMomentum": 65.5,
+        "breadthRelative": 53.5,
+        "liquidity": 78.8,
+        "sector": 62,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|HEROMOTOCO|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.219Z",
+      "ts": "2026-10-28T08:30:40.654Z",
       "ticker": "HEROMOTOCO",
       "stage": "quality-filter",
       "reasons": [
@@ -13738,17 +13740,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.8,
-      "pChange": 1.76,
-      "sector": 70,
-      "entryRefPrice": 5320,
+      "relVol": 0.71,
+      "pChange": 1.53,
+      "sector": 65,
+      "entryRefPrice": 5311.5,
       "yahooSymbol": "HEROMOTOCO.NS",
       "discoveryParts": {
-        "closingStrength": 96,
-        "containedMomentum": 73.2,
-        "breadthRelative": 62.2,
-        "liquidity": 62.9,
-        "sector": 70,
+        "closingStrength": 68.6,
+        "containedMomentum": 71.5,
+        "breadthRelative": 59.9,
+        "liquidity": 64.6,
+        "sector": 65,
         "volAccel": 50
       }
     },
@@ -13807,7 +13809,7 @@
     {
       "id": "2026-10-28|NAVINFLUOR|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T06:30:40.743Z",
+      "ts": "2026-10-28T08:30:40.655Z",
       "ticker": "NAVINFLUOR",
       "stage": "quality-filter",
       "reasons": [
@@ -13815,16 +13817,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 4.62,
-      "pChange": 3.49,
+      "relVol": 3.13,
+      "pChange": 3.74,
       "sector": 50,
-      "entryRefPrice": 8541,
+      "entryRefPrice": 8563,
       "yahooSymbol": "NAVINFLUOR.NS",
       "discoveryParts": {
-        "closingStrength": 77.7,
-        "containedMomentum": 86.2,
-        "breadthRelative": 79.8,
-        "liquidity": 66.8,
+        "closingStrength": 82.8,
+        "containedMomentum": 88,
+        "breadthRelative": 77.6,
+        "liquidity": 69.5,
         "sector": 50,
         "volAccel": 50
       }
@@ -13885,25 +13887,25 @@
     {
       "id": "2026-10-28|PNBHOUSING|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T05:30:41.876Z",
+      "ts": "2026-10-28T08:30:40.656Z",
       "ticker": "PNBHOUSING",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹27Cr)"
+        "illiquid (₹42Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.07,
-      "pChange": 2.25,
-      "sector": 43,
-      "entryRefPrice": 1109.3,
+      "relVol": 0.6,
+      "pChange": 2.96,
+      "sector": 64,
+      "entryRefPrice": 1114.7,
       "yahooSymbol": "PNBHOUSING.NS",
       "discoveryParts": {
-        "closingStrength": 88.6,
-        "containedMomentum": 76.9,
-        "breadthRelative": 72.3,
-        "liquidity": 36.3,
-        "sector": 43,
+        "closingStrength": 92.7,
+        "containedMomentum": 82.2,
+        "breadthRelative": 71.4,
+        "liquidity": 43.5,
+        "sector": 64,
         "volAccel": 50
       }
     },
@@ -13960,7 +13962,7 @@
     {
       "id": "2026-10-28|BHEL|11:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.222Z",
+      "ts": "2026-10-28T08:30:40.656Z",
       "ticker": "BHEL",
       "stage": "quality-filter",
       "reasons": [
@@ -13971,17 +13973,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.61,
-      "pChange": 1.73,
-      "sector": 69,
-      "entryRefPrice": 407.85,
+      "relVol": 0.54,
+      "pChange": 1.78,
+      "sector": 66,
+      "entryRefPrice": 406.8,
       "yahooSymbol": "BHEL.NS",
       "discoveryParts": {
-        "closingStrength": 89.5,
-        "containedMomentum": 73,
-        "breadthRelative": 62,
-        "liquidity": 69.5,
-        "sector": 69,
+        "closingStrength": 89.3,
+        "containedMomentum": 73.3,
+        "breadthRelative": 61.9,
+        "liquidity": 71.2,
+        "sector": 66,
         "volAccel": 50
       }
     },
@@ -14088,7 +14090,7 @@
     {
       "id": "2026-10-28|AUBANK|12:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.654Z",
       "ticker": "AUBANK",
       "stage": "quality-filter",
       "reasons": [
@@ -14098,24 +14100,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 2.13,
-      "pChange": 4.59,
-      "sector": 59,
-      "entryRefPrice": 884.4,
+      "relVol": 1.89,
+      "pChange": 4.01,
+      "sector": 62,
+      "entryRefPrice": 881.4,
       "yahooSymbol": "AUBANK.NS",
       "discoveryParts": {
-        "closingStrength": 98.6,
-        "containedMomentum": 86.5,
-        "breadthRelative": 84.9,
-        "liquidity": 71.8,
-        "sector": 59,
+        "closingStrength": 87,
+        "containedMomentum": 89.9,
+        "breadthRelative": 79.8,
+        "liquidity": 73.6,
+        "sector": 62,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|SBILIFE|12:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.219Z",
+      "ts": "2026-10-28T08:30:40.652Z",
       "ticker": "SBILIFE",
       "stage": "quality-filter",
       "reasons": [
@@ -14126,16 +14128,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.66,
-      "pChange": 2.14,
+      "relVol": 0.58,
+      "pChange": 2.38,
       "sector": 64,
-      "entryRefPrice": 1666,
+      "entryRefPrice": 1669,
       "yahooSymbol": "SBILIFE.NS",
       "discoveryParts": {
-        "closingStrength": 94.7,
-        "containedMomentum": 76,
-        "breadthRelative": 65.3,
-        "liquidity": 57.3,
+        "closingStrength": 95.2,
+        "containedMomentum": 77.8,
+        "breadthRelative": 66.7,
+        "liquidity": 58.9,
         "sector": 64,
         "volAccel": 50
       }
@@ -14143,7 +14145,7 @@
     {
       "id": "2026-10-28|INDUSINDBK|12:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.219Z",
+      "ts": "2026-10-28T08:30:40.654Z",
       "ticker": "INDUSINDBK",
       "stage": "quality-filter",
       "reasons": [
@@ -14154,17 +14156,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.83,
-      "pChange": 2.5,
-      "sector": 59,
-      "entryRefPrice": 851.95,
+      "relVol": 0.77,
+      "pChange": 1.9,
+      "sector": 62,
+      "entryRefPrice": 848,
       "yahooSymbol": "INDUSINDBK.NS",
       "discoveryParts": {
-        "closingStrength": 97.7,
-        "containedMomentum": 78.8,
-        "breadthRelative": 68.2,
-        "liquidity": 58,
-        "sector": 59,
+        "closingStrength": 75,
+        "containedMomentum": 74.3,
+        "breadthRelative": 62.9,
+        "liquidity": 60.6,
+        "sector": 62,
         "volAccel": 50
       }
     },
@@ -14199,28 +14201,27 @@
     {
       "id": "2026-10-28|NATIONALUM|12:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T06:30:40.743Z",
+      "ts": "2026-10-28T08:30:40.655Z",
       "ticker": "NATIONALUM",
       "stage": "quality-filter",
       "reasons": [
-        "priceAboveEma20",
         "ema20AboveEma50",
         "volumeSurge",
         "near52wHigh"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.5,
-      "pChange": 4.35,
-      "sector": 45,
-      "entryRefPrice": 323.4,
+      "relVol": 1.13,
+      "pChange": 4.92,
+      "sector": 46,
+      "entryRefPrice": 324.05,
       "yahooSymbol": "NATIONALUM.NS",
       "discoveryParts": {
-        "closingStrength": 83.3,
-        "containedMomentum": 87.9,
-        "breadthRelative": 86.7,
-        "liquidity": 60.2,
-        "sector": 45,
+        "closingStrength": 86,
+        "containedMomentum": 84.5,
+        "breadthRelative": 87,
+        "liquidity": 64.5,
+        "sector": 46,
         "volAccel": 50
       }
     },
@@ -14277,7 +14278,7 @@
     {
       "id": "2026-10-28|HINDZINC|12:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.656Z",
       "ticker": "HINDZINC",
       "stage": "quality-filter",
       "reasons": [
@@ -14288,17 +14289,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.03,
-      "pChange": 3.38,
-      "sector": 47,
-      "entryRefPrice": 509.8,
+      "relVol": 0.98,
+      "pChange": 3.32,
+      "sector": 46,
+      "entryRefPrice": 509.25,
       "yahooSymbol": "HINDZINC.NS",
       "discoveryParts": {
-        "closingStrength": 99.3,
-        "containedMomentum": 85.3,
-        "breadthRelative": 75.2,
-        "liquidity": 59.5,
-        "sector": 47,
+        "closingStrength": 87,
+        "containedMomentum": 84.9,
+        "breadthRelative": 74.2,
+        "liquidity": 62.4,
+        "sector": 46,
         "volAccel": 50
       }
     },
@@ -14456,7 +14457,7 @@
     {
       "id": "2026-10-28|DIXON|12:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.655Z",
       "ticker": "DIXON",
       "stage": "quality-filter",
       "reasons": [
@@ -14467,24 +14468,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.9,
-      "pChange": 2.31,
-      "sector": 69,
-      "entryRefPrice": 11511,
+      "relVol": 0.84,
+      "pChange": 2.22,
+      "sector": 66,
+      "entryRefPrice": 11437,
       "yahooSymbol": "DIXON.NS",
       "discoveryParts": {
-        "closingStrength": 93.9,
-        "containedMomentum": 77.3,
-        "breadthRelative": 66.6,
-        "liquidity": 66.8,
-        "sector": 69,
+        "closingStrength": 90,
+        "containedMomentum": 76.7,
+        "breadthRelative": 65.4,
+        "liquidity": 69.5,
+        "sector": 66,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|SUZLON|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.654Z",
       "ticker": "SUZLON",
       "stage": "quality-filter",
       "reasons": [
@@ -14495,51 +14496,52 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.14,
-      "pChange": 1.52,
-      "sector": 61,
-      "entryRefPrice": 37.6,
+      "relVol": 1.04,
+      "pChange": 1.33,
+      "sector": 50,
+      "entryRefPrice": 37.27,
       "yahooSymbol": "SUZLON.NS",
       "discoveryParts": {
-        "closingStrength": 92.6,
-        "containedMomentum": 71.4,
-        "breadthRelative": 60.3,
-        "liquidity": 68,
-        "sector": 61,
+        "closingStrength": 70.8,
+        "containedMomentum": 70,
+        "breadthRelative": 58.3,
+        "liquidity": 70.4,
+        "sector": 50,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|NAUKRI|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.653Z",
       "ticker": "NAUKRI",
       "stage": "quality-filter",
       "reasons": [
+        "priceAboveEma20",
         "ema20AboveEma50",
         "volumeSurge",
         "near52wHigh"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.93,
-      "pChange": 3.44,
-      "sector": 39,
-      "entryRefPrice": 1258,
+      "relVol": 0.81,
+      "pChange": 3.06,
+      "sector": 45,
+      "entryRefPrice": 1172.7,
       "yahooSymbol": "NAUKRI.NS",
       "discoveryParts": {
-        "closingStrength": 90.4,
-        "containedMomentum": 85.8,
-        "breadthRelative": 75.7,
-        "liquidity": 57,
-        "sector": 39,
+        "closingStrength": 83.9,
+        "containedMomentum": 83,
+        "breadthRelative": 72.2,
+        "liquidity": 58.5,
+        "sector": 45,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|CIPLA|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.653Z",
       "ticker": "CIPLA",
       "stage": "quality-filter",
       "reasons": [
@@ -14549,24 +14551,24 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.92,
-      "pChange": 0.99,
-      "sector": 76,
-      "entryRefPrice": 1365.5,
+      "relVol": 0.78,
+      "pChange": 1.01,
+      "sector": 70,
+      "entryRefPrice": 1362.6,
       "yahooSymbol": "CIPLA.NS",
       "discoveryParts": {
-        "closingStrength": 89.2,
-        "containedMomentum": 67.4,
-        "breadthRelative": 56.1,
-        "liquidity": 55.1,
-        "sector": 76,
+        "closingStrength": 89.7,
+        "containedMomentum": 67.6,
+        "breadthRelative": 55.8,
+        "liquidity": 56.3,
+        "sector": 70,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|HAVELLS|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.653Z",
       "ticker": "HAVELLS",
       "stage": "quality-filter",
       "reasons": [
@@ -14577,41 +14579,42 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.35,
-      "pChange": 1.43,
-      "sector": 69,
-      "entryRefPrice": 1022.4,
+      "relVol": 1.2,
+      "pChange": 1.64,
+      "sector": 66,
+      "entryRefPrice": 1028,
       "yahooSymbol": "HAVELLS.NS",
       "discoveryParts": {
-        "closingStrength": 83.7,
-        "containedMomentum": 70.7,
-        "breadthRelative": 59.6,
-        "liquidity": 54.9,
-        "sector": 69,
+        "closingStrength": 91.5,
+        "containedMomentum": 72.3,
+        "breadthRelative": 60.8,
+        "liquidity": 57,
+        "sector": 66,
         "volAccel": 50
       }
     },
     {
       "id": "2026-10-28|CUB|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.220Z",
+      "ts": "2026-10-28T08:30:40.656Z",
       "ticker": "CUB",
       "stage": "quality-filter",
       "reasons": [
-        "priceAboveEma20"
+        "priceAboveEma20",
+        "near52wHigh"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 3.93,
-      "pChange": 5.03,
+      "relVol": 3.75,
+      "pChange": 3.35,
       "sector": 50,
-      "entryRefPrice": 222.25,
+      "entryRefPrice": 217.05,
       "yahooSymbol": "CUB.NS",
       "discoveryParts": {
-        "closingStrength": 51.7,
-        "containedMomentum": 83.8,
-        "breadthRelative": 88.4,
-        "liquidity": 62.4,
+        "closingStrength": 34.1,
+        "containedMomentum": 85.1,
+        "breadthRelative": 74.5,
+        "liquidity": 65.2,
         "sector": 50,
         "volAccel": 50
       }
@@ -14619,7 +14622,7 @@
     {
       "id": "2026-10-28|WAAREEENER|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.653Z",
       "ticker": "WAAREEENER",
       "stage": "quality-filter",
       "reasons": [
@@ -14629,16 +14632,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 5.02,
-      "pChange": -0.08,
+      "relVol": 4.44,
+      "pChange": 0.84,
       "sector": 50,
-      "entryRefPrice": 2274.2,
+      "entryRefPrice": 2274,
       "yahooSymbol": "WAAREEENER.NS",
       "discoveryParts": {
-        "closingStrength": 91.9,
-        "containedMomentum": 44.9,
-        "breadthRelative": 47.5,
-        "liquidity": 83.7,
+        "closingStrength": 91.1,
+        "containedMomentum": 66.3,
+        "breadthRelative": 54.4,
+        "liquidity": 85.7,
         "sector": 50,
         "volAccel": 50
       }
@@ -14646,24 +14649,24 @@
     {
       "id": "2026-10-28|LICHSGFIN|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.656Z",
       "ticker": "LICHSGFIN",
       "stage": "hard-reject",
       "reasons": [
-        "illiquid (₹24Cr)"
+        "illiquid (₹26Cr)"
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.23,
-      "pChange": 0.56,
+      "relVol": 0.19,
+      "pChange": 0.35,
       "sector": 64,
-      "entryRefPrice": 512.65,
+      "entryRefPrice": 511.15,
       "yahooSymbol": "LICHSGFIN.NS",
       "discoveryParts": {
-        "closingStrength": 98.6,
-        "containedMomentum": 64.2,
-        "breadthRelative": 52.6,
-        "liquidity": 34.6,
+        "closingStrength": 88.6,
+        "containedMomentum": 62.6,
+        "breadthRelative": 50.5,
+        "liquidity": 35.7,
         "sector": 64,
         "volAccel": 50
       }
@@ -14671,7 +14674,7 @@
     {
       "id": "2026-10-28|LTM|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.654Z",
       "ticker": "LTM",
       "stage": "quality-filter",
       "reasons": [
@@ -14682,16 +14685,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.82,
-      "pChange": 0.17,
+      "relVol": 0.79,
+      "pChange": 1.01,
       "sector": 50,
-      "entryRefPrice": 4094.3,
+      "entryRefPrice": 4088.2,
       "yahooSymbol": "LTM.NS",
       "discoveryParts": {
-        "closingStrength": 95.4,
-        "containedMomentum": 61.3,
-        "breadthRelative": 49.5,
-        "liquidity": 58.2,
+        "closingStrength": 95.1,
+        "containedMomentum": 67.6,
+        "breadthRelative": 55.8,
+        "liquidity": 61.6,
         "sector": 50,
         "volAccel": 50
       }
@@ -14724,7 +14727,7 @@
     {
       "id": "2026-10-28|BIOCON|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.221Z",
+      "ts": "2026-10-28T08:30:40.655Z",
       "ticker": "BIOCON",
       "stage": "quality-filter",
       "reasons": [
@@ -14735,16 +14738,16 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.44,
-      "pChange": 3.94,
+      "relVol": 1.28,
+      "pChange": 4.33,
       "sector": 50,
-      "entryRefPrice": 348.05,
+      "entryRefPrice": 346.75,
       "yahooSymbol": "BIOCON.NS",
       "discoveryParts": {
-        "closingStrength": 95.2,
-        "containedMomentum": 89.5,
-        "breadthRelative": 79.7,
-        "liquidity": 54.2,
+        "closingStrength": 92.3,
+        "containedMomentum": 88,
+        "breadthRelative": 82.3,
+        "liquidity": 56.2,
         "sector": 50,
         "volAccel": 50
       }
@@ -14752,7 +14755,7 @@
     {
       "id": "2026-10-28|BANDHANBNK|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.222Z",
+      "ts": "2026-10-28T08:30:40.656Z",
       "ticker": "BANDHANBNK",
       "stage": "quality-filter",
       "reasons": [
@@ -14763,17 +14766,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 0.7,
-      "pChange": 2.78,
-      "sector": 59,
-      "entryRefPrice": 156.68,
+      "relVol": 0.61,
+      "pChange": 2.9,
+      "sector": 62,
+      "entryRefPrice": 156.07,
       "yahooSymbol": "BANDHANBNK.NS",
       "discoveryParts": {
-        "closingStrength": 95.3,
-        "containedMomentum": 80.8,
-        "breadthRelative": 70.4,
-        "liquidity": 54.9,
-        "sector": 59,
+        "closingStrength": 92.7,
+        "containedMomentum": 81.8,
+        "breadthRelative": 70.9,
+        "liquidity": 56.7,
+        "sector": 62,
         "volAccel": 50
       }
     },
@@ -14836,7 +14839,7 @@
     {
       "id": "2026-10-28|COFORGE|13:00",
       "date": "2026-10-28",
-      "ts": "2026-10-28T07:30:40.222Z",
+      "ts": "2026-10-28T08:30:40.655Z",
       "ticker": "COFORGE",
       "stage": "quality-filter",
       "reasons": [
@@ -14844,17 +14847,17 @@
       ],
       "evaluated": false,
       "outcome": null,
-      "relVol": 1.01,
-      "pChange": -1.53,
-      "sector": 39,
-      "entryRefPrice": 1972,
+      "relVol": 0.87,
+      "pChange": -1.05,
+      "sector": 45,
+      "entryRefPrice": 1961.6,
       "yahooSymbol": "COFORGE.NS",
       "discoveryParts": {
-        "closingStrength": 99.1,
-        "containedMomentum": 43.5,
-        "breadthRelative": 35.9,
-        "liquidity": 76.5,
-        "sector": 39,
+        "closingStrength": 97.6,
+        "containedMomentum": 44,
+        "breadthRelative": 39.3,
+        "liquidity": 78.1,
+        "sector": 45,
         "volAccel": 50
       }
     },
@@ -14883,6 +14886,272 @@
         "breadthRelative": 55.6,
         "liquidity": 71.1,
         "sector": 70,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|KPITTECH|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.652Z",
+      "ticker": "KPITTECH",
+      "stage": "quality-filter",
+      "reasons": [
+        "ema20AboveEma50",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.95,
+      "pChange": 4.98,
+      "sector": 45,
+      "entryRefPrice": 550,
+      "yahooSymbol": "KPITTECH.NS",
+      "discoveryParts": {
+        "closingStrength": 77.2,
+        "containedMomentum": 84.1,
+        "breadthRelative": 87.5,
+        "liquidity": 69.6,
+        "sector": 45,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|CHOLAFIN|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.653Z",
+      "ticker": "CHOLAFIN",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.64,
+      "pChange": 1.78,
+      "sector": 64,
+      "entryRefPrice": 1543.5,
+      "yahooSymbol": "CHOLAFIN.NS",
+      "discoveryParts": {
+        "closingStrength": 90,
+        "containedMomentum": 73.3,
+        "breadthRelative": 61.9,
+        "liquidity": 60.7,
+        "sector": 64,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|VEDL|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.654Z",
+      "ticker": "VEDL",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.59,
+      "pChange": 2.57,
+      "sector": 46,
+      "entryRefPrice": 231.2,
+      "yahooSymbol": "VEDL.NS",
+      "discoveryParts": {
+        "closingStrength": 80.6,
+        "containedMomentum": 79.3,
+        "breadthRelative": 68.2,
+        "liquidity": 59.8,
+        "sector": 46,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|MOTHERSON|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.654Z",
+      "ticker": "MOTHERSON",
+      "stage": "quality-filter",
+      "reasons": [
+        "ema20AboveEma50",
+        "volumeSurge"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.63,
+      "pChange": 1.35,
+      "sector": 65,
+      "entryRefPrice": 160.11,
+      "yahooSymbol": "MOTHERSON.NS",
+      "discoveryParts": {
+        "closingStrength": 79.4,
+        "containedMomentum": 70.1,
+        "breadthRelative": 58.5,
+        "liquidity": 55.2,
+        "sector": 65,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|NYKAA|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.654Z",
+      "ticker": "NYKAA",
+      "stage": "quality-filter",
+      "reasons": [
+        "volumeSurge"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.67,
+      "pChange": 1.21,
+      "sector": 47,
+      "entryRefPrice": 343.1,
+      "yahooSymbol": "NYKAA.NS",
+      "discoveryParts": {
+        "closingStrength": 94.2,
+        "containedMomentum": 69.1,
+        "breadthRelative": 57.4,
+        "liquidity": 55.8,
+        "sector": 47,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|CROMPTON|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.655Z",
+      "ticker": "CROMPTON",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.99,
+      "pChange": 3.59,
+      "sector": 66,
+      "entryRefPrice": 202.36,
+      "yahooSymbol": "CROMPTON.NS",
+      "discoveryParts": {
+        "closingStrength": 89.2,
+        "containedMomentum": 86.9,
+        "breadthRelative": 76.4,
+        "liquidity": 54.2,
+        "sector": 66,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|BLUESTARCO|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.655Z",
+      "ticker": "BLUESTARCO",
+      "stage": "quality-filter",
+      "reasons": [
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.42,
+      "pChange": 5.21,
+      "sector": 50,
+      "entryRefPrice": 1606,
+      "yahooSymbol": "BLUESTARCO.NS",
+      "discoveryParts": {
+        "closingStrength": 88.6,
+        "containedMomentum": 82.7,
+        "breadthRelative": 89.4,
+        "liquidity": 54.7,
+        "sector": 50,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|BRITANNIA|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.655Z",
+      "ticker": "BRITANNIA",
+      "stage": "quality-filter",
+      "reasons": [
+        "priceAboveEma20",
+        "ema20AboveEma50",
+        "volumeSurge",
+        "near52wHigh"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1.28,
+      "pChange": 0.17,
+      "sector": 41,
+      "entryRefPrice": 4575.3,
+      "yahooSymbol": "BRITANNIA.NS",
+      "discoveryParts": {
+        "closingStrength": 94.8,
+        "containedMomentum": 61.3,
+        "breadthRelative": 49,
+        "liquidity": 59.3,
+        "sector": 43,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|HDFCLIFE|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.656Z",
+      "ticker": "HDFCLIFE",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹49Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 0.42,
+      "pChange": 0.24,
+      "sector": 64,
+      "entryRefPrice": 517.9,
+      "yahooSymbol": "HDFCLIFE.NS",
+      "discoveryParts": {
+        "closingStrength": 81.4,
+        "containedMomentum": 61.8,
+        "breadthRelative": 49.6,
+        "liquidity": 46.1,
+        "sector": 64,
+        "volAccel": 50
+      }
+    },
+    {
+      "id": "2026-10-28|RVNL|14:00",
+      "date": "2026-10-28",
+      "ts": "2026-10-28T08:30:40.656Z",
+      "ticker": "RVNL",
+      "stage": "hard-reject",
+      "reasons": [
+        "illiquid (₹63Cr)"
+      ],
+      "evaluated": false,
+      "outcome": null,
+      "relVol": 1,
+      "pChange": 2.69,
+      "sector": 66,
+      "entryRefPrice": 184.85,
+      "yahooSymbol": "RVNL.NS",
+      "discoveryParts": {
+        "closingStrength": 89.7,
+        "containedMomentum": 80.2,
+        "breadthRelative": 69.2,
+        "liquidity": 50.2,
+        "sector": 66,
         "volAccel": 50
       }
     }
