@@ -1,24 +1,26 @@
 {
   "pick": {
-    "date": "2026-10-27",
+    "date": "2026-10-28",
     "noTrade": true,
-    "reason": "ATHERENERG failed neutral-market entry gates: reward/risk 1.01 < 1.8; historical net edge -1.26% ≤ 0",
-    "pickedAt": "2026-10-27T09:30:48.885Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 54, conf 61) — trend 20, breadth 58, vol-factor 72",
-    "candidate": {
-      "ticker": "ATHERENERG",
-      "confidence": 44,
-      "effectiveConfidence": 80.3,
-      "rewardRisk": {
-        "model": "technical-scenario-v2",
-        "isForecast": false,
-        "rr": 1.01,
-        "upsidePct": 7.7,
-        "downsidePct": 7.6
-      },
-      "catalyst": "no catalyst",
-      "verification": "UNVERIFIED"
-    }
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-28T04:30:52.378Z",
+    "regime": "weak",
+    "market": "weak (v2 score 43, conf 66) — trend 23, breadth 39, vol-factor 72",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "SONACOMS",
+        "relVol": 1.86,
+        "confidence": 31,
+        "effectiveConfidence": 62.7,
+        "institutional": 91.9,
+        "catalyst": "earnings beat",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 13,
+        "negative": false
+      }
+    ]
   }
 }
