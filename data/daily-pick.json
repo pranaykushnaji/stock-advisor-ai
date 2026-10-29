@@ -2,23 +2,64 @@
   "pick": {
     "date": "2026-10-29",
     "noTrade": true,
-    "reason": "TVSMOTOR failed neutral-market entry gates: reward/risk 1.52 < 1.8; historical net edge -1.26% ≤ 0",
-    "pickedAt": "2026-10-29T04:30:57.916Z",
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-29T05:30:58.485Z",
     "regime": "neutral",
-    "market": "neutral (v2 score 54, conf 67) — trend 26, breadth 62, vol-factor 74",
-    "candidate": {
-      "ticker": "TVSMOTOR",
-      "confidence": 36.1,
-      "effectiveConfidence": 74.2,
-      "rewardRisk": {
-        "model": "technical-scenario-v2",
-        "isForecast": false,
-        "rr": 1.52,
-        "upsidePct": 6.6,
-        "downsidePct": 4.4
+    "market": "neutral (v2 score 60, conf 62) — trend 27, breadth 73, vol-factor 73",
+    "momLaneOpen": true,
+    "considered": [
+      {
+        "ticker": "ADANIPORTS",
+        "relVol": 3.47,
+        "confidence": 46.6,
+        "effectiveConfidence": 80.7,
+        "institutional": 62.4,
+        "catalyst": "earnings beat",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 13,
+        "negative": false
       },
-      "catalyst": "earnings beat",
-      "verification": "UNVERIFIED"
-    }
+      {
+        "ticker": "APLAPOLLO",
+        "relVol": 2.84,
+        "confidence": 47.8,
+        "effectiveConfidence": 67.1,
+        "institutional": 62.8,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 11,
+        "negative": false
+      },
+      {
+        "ticker": "CUB",
+        "relVol": 7.36,
+        "confidence": 35.9,
+        "effectiveConfidence": 67.1,
+        "institutional": 77.2,
+        "catalyst": "earnings beat",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 9,
+        "negative": false
+      },
+      {
+        "ticker": "SYRMA",
+        "relVol": 3.79,
+        "confidence": 6.8,
+        "effectiveConfidence": 55.4,
+        "institutional": 57.5,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 1,
+        "negative": false
+      }
+    ]
   }
 }
