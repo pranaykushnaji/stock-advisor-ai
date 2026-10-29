@@ -1,11 +1,45 @@
 {
-  "date": "2026-10-28",
-  "builtAt": "2026-10-28T02:35:44.806Z",
+  "date": "2026-10-29",
+  "builtAt": "2026-10-29T02:35:54.372Z",
   "marketContext": {
-    "tone": "bullish",
-    "summary": "Deterministic NSE breadth fallback: 63% advancers, average move +0.96%.",
+    "tone": "neutral",
+    "summary": "Deterministic NSE breadth fallback: 51% advancers, average move +0.19%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": []
+  "watch": [
+    {
+      "ticker": "ICICIGI",
+      "source": "overnight-filing",
+      "catalyst": {
+        "points": 26,
+        "hasCatalyst": true,
+        "negative": false,
+        "type": "acquisition",
+        "confidence": 90,
+        "impact": 7,
+        "stars": 4,
+        "freshness": 0.955,
+        "decay": 0.955,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.4,
+        "evidenceVersion": 2,
+        "eventPublishedAt": 1793206579000,
+        "hasFiling": true,
+        "evidence": [
+          {
+            "articleId": 1,
+            "title": "[OFFICIAL NSE FILING] Acquisition",
+            "url": null,
+            "publisher": "nse-filing"
+          }
+        ],
+        "verification": "VERIFIED",
+        "sources": 1,
+        "summary": "Official filing announces acquisition"
+      },
+      "prevClose": 1583.8
+    }
+  ]
 }
