@@ -2,19 +2,19 @@
   "pick": {
     "date": "2026-10-29",
     "noTrade": true,
-    "reason": "CUB failed neutral-market entry gates: reward/risk 1.22 < 1.8; historical net edge -1.26% ≤ 0",
-    "pickedAt": "2026-10-29T08:31:01.803Z",
-    "regime": "neutral",
-    "market": "neutral (v2 score 58, conf 64) — trend 27, breadth 68, vol-factor 73",
+    "reason": "CUB failed bullish-market entry gates: reward/risk 1.13 < 1.5; historical net edge -1.34% ≤ 0",
+    "pickedAt": "2026-10-29T09:31:00.921Z",
+    "regime": "bullish",
+    "market": "bullish (v2 score 65, conf 54) — trend 28, breadth 76, vol-factor 72",
     "candidate": {
       "ticker": "CUB",
-      "confidence": 40,
-      "effectiveConfidence": 68,
+      "confidence": 33.1,
+      "effectiveConfidence": 69.8,
       "rewardRisk": {
         "model": "technical-scenario-v2",
         "isForecast": false,
-        "rr": 1.22,
-        "upsidePct": 7.7,
+        "rr": 1.13,
+        "upsidePct": 7.1,
         "downsidePct": 6.3
       },
       "catalyst": "no catalyst",
