@@ -1,28 +1,28 @@
 {
-  "date": "2026-10-29",
+  "date": "2026-10-30",
   "candidates": {
-    "TVSMOTOR": {
-      "ticker": "TVSMOTOR",
-      "fullName": "TVS Motor Company Limited",
-      "sector": "Auto",
+    "LAURUSLABS": {
+      "ticker": "LAURUSLABS",
+      "fullName": "Laurus Labs Limited",
+      "sector": "UNKNOWN",
       "firstSeen": "10:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-10-29T04:30:53.629Z",
-          "relVol": 6.13,
-          "confidence": 36.1,
+          "ts": "2026-10-30T04:30:55.366Z",
+          "relVol": 8.33,
+          "confidence": 57.4,
           "components": {
-            "technical": 67,
-            "flow": 90,
+            "technical": 86,
+            "flow": 95,
             "catalyst": 15,
-            "liquidity": 75
+            "liquidity": 84
           },
-          "discoveryScore": 71.3,
+          "discoveryScore": 84.7,
           "catalystType": "earnings beat",
           "verification": "UNVERIFIED",
-          "volume": 664557,
+          "volume": 2056352,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -32,7 +32,43 @@
         }
       ],
       "lastSeen": "10:00",
-      "bestConfidence": 36.1,
+      "bestConfidence": 57.4,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "COFORGE": {
+      "ticker": "COFORGE",
+      "fullName": "Coforge Limited",
+      "sector": "IT",
+      "firstSeen": "10:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "10:00",
+          "ts": "2026-10-30T04:30:55.366Z",
+          "relVol": 4.33,
+          "confidence": 37.3,
+          "components": {
+            "technical": 73,
+            "flow": 79,
+            "catalyst": 5,
+            "liquidity": 78
+          },
+          "discoveryScore": 78.6,
+          "catalystType": "new product",
+          "verification": "UNVERIFIED",
+          "volume": 1708090,
+          "sessionFrac": 0.15,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "10:00",
+      "bestConfidence": 37.3,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
@@ -46,404 +82,32 @@
       "scans": [
         {
           "hhmm": "10:00",
-          "ts": "2026-10-29T04:30:53.630Z",
-          "relVol": 3.03,
-          "confidence": 27.3,
+          "ts": "2026-10-30T04:30:55.366Z",
+          "relVol": 2.95,
+          "confidence": 5.9,
           "components": {
-            "technical": 69,
-            "flow": 66,
-            "catalyst": 18,
-            "liquidity": 73
+            "technical": 55,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 74
           },
-          "discoveryScore": 77.3,
-          "catalystType": "earnings beat",
+          "discoveryScore": 68.1,
+          "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 1406929,
+          "volume": 1446564,
           "sessionFrac": 0.15,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
-        },
-        {
-          "hhmm": "11:00",
-          "ts": "2026-10-29T05:30:54.154Z",
-          "relVol": 3.47,
-          "confidence": 46.6,
-          "components": {
-            "technical": 87,
-            "flow": 69,
-            "catalyst": 18,
-            "liquidity": 86
-          },
-          "discoveryScore": 85.1,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 3004921,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-29T06:30:59.180Z",
-          "relVol": 2.82,
-          "confidence": 46,
-          "components": {
-            "technical": 88,
-            "flow": 69,
-            "catalyst": 18,
-            "liquidity": 90
-          },
-          "discoveryScore": 82.7,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 3837793,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-10-29T07:30:56.346Z",
-          "relVol": 2.63,
-          "confidence": 42.8,
-          "components": {
-            "technical": 82,
-            "flow": 63,
-            "catalyst": 18,
-            "liquidity": 94
-          },
-          "discoveryScore": 86.6,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 4878300,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-10-29T09:30:55.874Z",
-          "relVol": 2.44,
-          "confidence": 51.2,
-          "components": {
-            "technical": 86,
-            "flow": 69,
-            "catalyst": 5,
-            "liquidity": 95
-          },
-          "discoveryScore": 86.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 6953873,
-          "sessionFrac": 0.92,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
         }
       ],
-      "lastSeen": "15:00",
-      "bestConfidence": 51.2,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 4.4,
-      "trendBonus": 5.3
-    },
-    "APLAPOLLO": {
-      "ticker": "APLAPOLLO",
-      "fullName": "APL Apollo Tubes Limited",
-      "sector": "Metal",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-10-29T05:30:54.154Z",
-          "relVol": 2.84,
-          "confidence": 47.8,
-          "components": {
-            "technical": 67,
-            "flow": 74,
-            "catalyst": 5,
-            "liquidity": 60
-          },
-          "discoveryScore": 69.6,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 520398,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-29T06:30:59.180Z",
-          "relVol": 2.3,
-          "confidence": 40.3,
-          "components": {
-            "technical": 67,
-            "flow": 67,
-            "catalyst": 5,
-            "liquidity": 64
-          },
-          "discoveryScore": 65.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 663228,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "12:00",
-      "bestConfidence": 47.8,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -7.5,
-      "trendBonus": 0
-    },
-    "CUB": {
-      "ticker": "CUB",
-      "fullName": "City Union Bank Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-10-29T05:30:54.154Z",
-          "relVol": 7.36,
-          "confidence": 35.9,
-          "components": {
-            "technical": 52,
-            "flow": 88,
-            "catalyst": 15,
-            "liquidity": 62
-          },
-          "discoveryScore": 72.6,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 5688287,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-29T06:30:59.180Z",
-          "relVol": 5.17,
-          "confidence": 35.2,
-          "components": {
-            "technical": 52,
-            "flow": 88,
-            "catalyst": 15,
-            "liquidity": 64
-          },
-          "discoveryScore": 70.8,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 6279050,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-10-29T07:30:56.346Z",
-          "relVol": 4.09,
-          "confidence": 24,
-          "components": {
-            "technical": 45,
-            "flow": 86,
-            "catalyst": 5,
-            "liquidity": 65
-          },
-          "discoveryScore": 72.5,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 6779835,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-10-29T08:30:57.023Z",
-          "relVol": 3.37,
-          "confidence": 40,
-          "components": {
-            "technical": 55,
-            "flow": 86,
-            "catalyst": 5,
-            "liquidity": 66
-          },
-          "discoveryScore": 73,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 7070102,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-10-29T09:30:55.875Z",
-          "relVol": 3.1,
-          "confidence": 33.1,
-          "components": {
-            "technical": 53,
-            "flow": 90,
-            "catalyst": 5,
-            "liquidity": 67
-          },
-          "discoveryScore": 77.9,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 7863757,
-          "sessionFrac": 0.92,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 40,
+      "lastSeen": "10:00",
+      "bestConfidence": 5.9,
       "confidenceTrend": "flat",
-      "confidenceSlope": -0.08,
+      "confidenceSlope": 0,
       "trendBonus": 0
-    },
-    "SYRMA": {
-      "ticker": "SYRMA",
-      "fullName": "Syrma SGS Technology Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-10-29T05:30:54.154Z",
-          "relVol": 3.79,
-          "confidence": 6.8,
-          "components": {
-            "technical": 40,
-            "flow": 61,
-            "catalyst": 5,
-            "liquidity": 71
-          },
-          "discoveryScore": 74.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1341699,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-29T06:30:59.180Z",
-          "relVol": 2.89,
-          "confidence": 6.2,
-          "components": {
-            "technical": 40,
-            "flow": 60,
-            "catalyst": 5,
-            "liquidity": 74
-          },
-          "discoveryScore": 71.4,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1607056,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-10-29T08:30:57.022Z",
-          "relVol": 2.61,
-          "confidence": 24.9,
-          "components": {
-            "technical": 60,
-            "flow": 62,
-            "catalyst": 5,
-            "liquidity": 82
-          },
-          "discoveryScore": 74.4,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2514721,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-10-29T09:30:55.875Z",
-          "relVol": 2.31,
-          "confidence": 16.3,
-          "components": {
-            "technical": 52,
-            "flow": 56,
-            "catalyst": 5,
-            "liquidity": 83
-          },
-          "discoveryScore": 74,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 2692252,
-          "sessionFrac": 0.92,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 24.9,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 4.72,
-      "trendBonus": 5.7
     }
   }
 }
