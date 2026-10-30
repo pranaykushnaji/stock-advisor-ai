@@ -51,12 +51,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-30T06:30:53.498Z",
+          "relVol": 6.35,
+          "confidence": 56.6,
+          "components": {
+            "technical": 85,
+            "flow": 92,
+            "catalyst": 15,
+            "liquidity": 95
+          },
+          "discoveryScore": 87.2,
+          "catalystType": "earnings beat",
+          "verification": "UNVERIFIED",
+          "volume": 4597734,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 57.4,
       "confidenceTrend": "flat",
-      "confidenceSlope": -1.2,
+      "confidenceSlope": -0.4,
       "trendBonus": 0
     },
     "COFORGE": {
@@ -109,13 +131,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-30T06:30:53.499Z",
+          "relVol": 3.48,
+          "confidence": 55.2,
+          "components": {
+            "technical": 86,
+            "flow": 82,
+            "catalyst": 5,
+            "liquidity": 93
+          },
+          "discoveryScore": 77.3,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4023642,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 54.1,
+      "lastSeen": "12:00",
+      "bestConfidence": 55.2,
       "confidenceTrend": "rising",
-      "confidenceSlope": 16.8,
-      "trendBonus": 4
+      "confidenceSlope": 8.95,
+      "trendBonus": 8
     },
     "ADANIPORTS": {
       "ticker": "ADANIPORTS",
@@ -182,12 +226,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-30T06:30:53.499Z",
+          "relVol": 2.42,
+          "confidence": 12.5,
+          "components": {
+            "technical": 57,
+            "flow": 57,
+            "catalyst": 5,
+            "liquidity": 68
+          },
+          "discoveryScore": 79.4,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1501421,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 13.9,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceSlope": -1.4,
       "trendBonus": 0
     },
     "ETERNAL": {
@@ -218,13 +284,36 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-30T06:30:53.499Z",
+          "relVol": 1.84,
+          "confidence": 22.4,
+          "components": {
+            "technical": 57,
+            "flow": 51,
+            "catalyst": 5,
+            "liquidity": 92
+          },
+          "discoveryScore": 69.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 22585824,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 1.84<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
-      "bestConfidence": 15.7,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
+      "lastSeen": "12:00",
+      "bestConfidence": 22.4,
+      "confidenceTrend": "rising",
+      "confidenceSlope": 6.7,
+      "trendBonus": 4
     },
     "APLAPOLLO": {
       "ticker": "APLAPOLLO",
@@ -258,6 +347,43 @@
       ],
       "lastSeen": "11:00",
       "bestConfidence": 15.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "NAVINFLUOR": {
+      "ticker": "NAVINFLUOR",
+      "fullName": "Navin Fluorine International Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-10-30T06:30:53.499Z",
+          "relVol": 2.06,
+          "confidence": 25.2,
+          "components": {
+            "technical": 56,
+            "flow": 67,
+            "catalyst": 5,
+            "liquidity": 57
+          },
+          "discoveryScore": 67.1,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 114548,
+          "sessionFrac": 0.44,
+          "missing": [
+            "relVol 2.06<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 25.2,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
