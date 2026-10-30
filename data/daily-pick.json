@@ -1,24 +1,52 @@
 {
   "pick": {
-    "date": "2026-10-29",
+    "date": "2026-10-30",
     "noTrade": true,
-    "reason": "CUB failed bullish-market entry gates: reward/risk 1.13 < 1.5; historical net edge -1.34% ≤ 0",
-    "pickedAt": "2026-10-29T09:31:00.921Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 65, conf 54) — trend 28, breadth 76, vol-factor 72",
-    "candidate": {
-      "ticker": "CUB",
-      "confidence": 33.1,
-      "effectiveConfidence": 69.8,
-      "rewardRisk": {
-        "model": "technical-scenario-v2",
-        "isForecast": false,
-        "rr": 1.13,
-        "upsidePct": 7.1,
-        "downsidePct": 6.3
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-10-30T04:30:59.557Z",
+    "regime": "weak",
+    "market": "weak (v2 score 38, conf 64) — trend 30, breadth 26, vol-factor 73",
+    "momLaneOpen": false,
+    "considered": [
+      {
+        "ticker": "LAURUSLABS",
+        "relVol": 8.33,
+        "confidence": 57.4,
+        "effectiveConfidence": 81.5,
+        "institutional": 97.9,
+        "catalyst": "earnings beat",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 11,
+        "negative": false
       },
-      "catalyst": "no catalyst",
-      "verification": "UNVERIFIED"
-    }
+      {
+        "ticker": "COFORGE",
+        "relVol": 4.33,
+        "confidence": 37.3,
+        "effectiveConfidence": 70.6,
+        "institutional": 78.7,
+        "catalyst": "new product",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
+      },
+      {
+        "ticker": "ADANIPORTS",
+        "relVol": 2.95,
+        "confidence": 5.9,
+        "effectiveConfidence": 59.8,
+        "institutional": 71.1,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 13,
+        "negative": false
+      }
+    ]
   }
 }
