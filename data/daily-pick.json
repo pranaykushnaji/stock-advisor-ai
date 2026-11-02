@@ -3,12 +3,20 @@
     "date": "2026-11-02",
     "noTrade": true,
     "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-11-02T08:30:35.305Z",
+    "pickedAt": "2026-11-02T09:30:35.840Z",
     "rejected": [
       {
         "ticker": "RELIANCE",
         "reasons": [
           "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "COALINDIA",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -20,21 +28,7 @@
         ]
       },
       {
-        "ticker": "COALINDIA",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
         "ticker": "JSWSTEEL",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge"
-        ]
-      },
-      {
-        "ticker": "GAIL",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge"
@@ -49,9 +43,26 @@
         ]
       },
       {
+        "ticker": "GAIL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge"
+        ]
+      },
+      {
         "ticker": "JINDALSTEL",
         "reasons": [
           "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "HDFCBANK",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
           "near52wHigh"
         ]
       },
@@ -64,7 +75,14 @@
         ]
       },
       {
-        "ticker": "ASHOKLEY",
+        "ticker": "TRENT",
+        "reasons": [
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "GVT&D",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -72,11 +90,24 @@
         ]
       },
       {
-        "ticker": "SAIL",
+        "ticker": "MUTHOOTFIN",
         "reasons": [
           "priceAboveEma20",
           "ema20AboveEma50",
-          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "UNOMINDA",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "IOC",
+        "reasons": [
+          "ema20AboveEma50",
           "near52wHigh"
         ]
       },
@@ -89,15 +120,7 @@
         ]
       },
       {
-        "ticker": "BEL",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "VEDL",
+        "ticker": "ASHOKLEY",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -114,40 +137,7 @@
         ]
       },
       {
-        "ticker": "M&M",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MUTHOOTFIN",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NTPC",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ADANIPOWER",
-        "reasons": [
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NATIONALUM",
+        "ticker": "LT",
         "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
@@ -158,6 +148,14 @@
         "ticker": "SHRIRAMFIN",
         "reasons": [
           "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ADANIPOWER",
+        "reasons": [
           "ema20AboveEma50",
           "volumeSurge",
           "near52wHigh"
