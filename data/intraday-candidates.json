@@ -1,4 +1,42 @@
 {
   "date": "2026-11-02",
-  "candidates": {}
+  "candidates": {
+    "COFORGE": {
+      "ticker": "COFORGE",
+      "fullName": "Coforge Limited",
+      "sector": "IT",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-11-02T05:30:38.263Z",
+          "relVol": 1.93,
+          "confidence": 41.9,
+          "components": {
+            "technical": 71,
+            "flow": 70,
+            "catalyst": 5,
+            "liquidity": 77
+          },
+          "discoveryScore": 68.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1506026,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.93<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 41.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
