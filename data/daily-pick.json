@@ -2,143 +2,24 @@
   "pick": {
     "date": "2026-11-02",
     "noTrade": true,
-    "reason": "no stock passed the quality-momentum filter",
-    "pickedAt": "2026-11-02T04:30:34.785Z",
-    "rejected": [
+    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
+    "pickedAt": "2026-11-02T05:30:42.389Z",
+    "regime": "bullish",
+    "market": "bullish (v2 score 74, conf 66) — trend 67, breadth 82, vol-factor 71",
+    "momLaneOpen": true,
+    "considered": [
       {
-        "ticker": "RELIANCE",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "DIXON",
-        "reasons": [
-          "near upper circuit"
-        ]
-      },
-      {
-        "ticker": "DELHIVERY",
-        "reasons": [
-          "near upper circuit"
-        ]
-      },
-      {
-        "ticker": "MAXHEALTH",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "NTPC",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "COALINDIA",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BEL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "GVT&D",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "ONGC",
-        "reasons": [
-          "illiquid (₹34Cr)"
-        ]
-      },
-      {
-        "ticker": "MUTHOOTFIN",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "MARUTI",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "POWERGRID",
-        "reasons": [
-          "illiquid (₹43Cr)"
-        ]
-      },
-      {
-        "ticker": "TATASTEEL",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "PHOENIXLTD",
-        "reasons": [
-          "illiquid (₹40Cr)"
-        ]
-      },
-      {
-        "ticker": "SHRIRAMFIN",
-        "reasons": [
-          "illiquid (₹41Cr)"
-        ]
-      },
-      {
-        "ticker": "M&M",
-        "reasons": [
-          "priceAboveEma20",
-          "ema20AboveEma50",
-          "volumeSurge",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "BANKBARODA",
-        "reasons": [
-          "ema20AboveEma50",
-          "near52wHigh"
-        ]
-      },
-      {
-        "ticker": "TMPV",
-        "reasons": [
-          "illiquid (₹46Cr)"
-        ]
-      },
-      {
-        "ticker": "IREDA",
-        "reasons": [
-          "illiquid (₹8Cr)"
-        ]
-      },
-      {
-        "ticker": "ASHOKLEY",
-        "reasons": [
-          "illiquid (₹18Cr)"
-        ]
+        "ticker": "COFORGE",
+        "relVol": 1.93,
+        "confidence": 41.9,
+        "effectiveConfidence": 72.1,
+        "institutional": 88.1,
+        "catalyst": "no catalyst",
+        "verification": "UNVERIFIED",
+        "filing": false,
+        "sources": 0,
+        "articles": 4,
+        "negative": false
       }
     ]
   }
