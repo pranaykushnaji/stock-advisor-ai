@@ -2,24 +2,154 @@
   "pick": {
     "date": "2026-11-02",
     "noTrade": true,
-    "reason": "no stock qualified on either lane (verified catalyst, or high-bar momentum)",
-    "pickedAt": "2026-11-02T05:30:42.389Z",
-    "regime": "bullish",
-    "market": "bullish (v2 score 74, conf 66) — trend 67, breadth 82, vol-factor 71",
-    "momLaneOpen": true,
-    "considered": [
+    "reason": "no stock passed the quality-momentum filter",
+    "pickedAt": "2026-11-02T06:30:35.342Z",
+    "rejected": [
       {
-        "ticker": "COFORGE",
-        "relVol": 1.93,
-        "confidence": 41.9,
-        "effectiveConfidence": 72.1,
-        "institutional": 88.1,
-        "catalyst": "no catalyst",
-        "verification": "UNVERIFIED",
-        "filing": false,
-        "sources": 0,
-        "articles": 4,
-        "negative": false
+        "ticker": "RELIANCE",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DIXON",
+        "reasons": [
+          "near upper circuit"
+        ]
+      },
+      {
+        "ticker": "COALINDIA",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "GAIL",
+        "reasons": [
+          "ema20AboveEma50"
+        ]
+      },
+      {
+        "ticker": "MAXHEALTH",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JINDALSTEL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "DELHIVERY",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MUTHOOTFIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SAIL",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "BEL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ONGC",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "illiquid (₹67Cr)"
+        ]
+      },
+      {
+        "ticker": "TATASTEEL",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "MARUTI",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "LT",
+        "reasons": [
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "RVNL",
+        "reasons": [
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "SUZLON",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "near52wHigh"
+        ]
+      },
+      {
+        "ticker": "JSWSTEEL",
+        "reasons": [
+          "illiquid (₹64Cr)"
+        ]
+      },
+      {
+        "ticker": "IREDA",
+        "reasons": [
+          "illiquid (₹27Cr)"
+        ]
+      },
+      {
+        "ticker": "SHRIRAMFIN",
+        "reasons": [
+          "priceAboveEma20",
+          "ema20AboveEma50",
+          "volumeSurge",
+          "near52wHigh"
+        ]
       }
     ]
   }
