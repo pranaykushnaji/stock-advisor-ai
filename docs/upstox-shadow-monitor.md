@@ -6,6 +6,10 @@ The adapter, both endpoints and scheduler are read-only with respect to the trad
 and GitHub trade files. Shadow state belongs to separate Cloudflare Durable Objects. No order
 API exists in this integration. Production activation and merging require authorization.
 
+The two public monitor paths are rewrites into the existing `sell-check` function, which
+dispatches to private handler modules only when the explicit monitor route is requested.
+This preserves the existing 12 deployable function count and normal hourly sell-check flow.
+
 ## Implemented
 
 - Official NSE BOD JSON mapping, raw gzip decoding, six-hour in-process caching, exact ticker

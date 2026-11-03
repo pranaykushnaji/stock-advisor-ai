@@ -139,6 +139,18 @@ async function fetchLive(ticker, yahooSymbol) {
 export default async function handler(req, res) {
   if (!requireCronAuth(req, res)) return;
 
+  // Read-only monitor routes share this existing function bundle to stay within Vercel's
+  // 12-function deployment allowance. Normal hourly sell-check requests take the same path.
+  if (req.query?.monitorMode === 'prices') {
+    const { default: monitor } = await import('./_minute-monitor-handler.js');
+    return monitor(req, res);
+  }
+  if (req.query?.monitorMode === 'entries') {
+    const { default: research } = await import('./_entry-research-handler.js');
+    return research(req, res);
+  }
+  if (req.query?.monitorMode != null) return res.status(400).json({ error: 'unknown read-only monitor mode' });
+
   // Only act during/after market hours on trading days (unless forced).
   const mkt = marketStatus();
   if (!mkt.open && req.query.force !== 'true') {

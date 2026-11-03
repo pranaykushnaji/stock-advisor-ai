@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { evaluateMonitor, monitorSession, positionIdentity } from '../api/_minute-monitor.js';
-import { createMonitorHandler } from '../api/minute-monitor.js';
+import { createMonitorHandler } from '../api/_minute-monitor-handler.js';
 import { priceRiskGate, rulesGate } from '../api/_sell-engine.js';
+import sellHandler from '../api/sell-check.js';
+import fs from 'node:fs';
 
 const now = new Date('2026-11-03T05:30:00Z'), key = 'NSE_EQ|INE745G01043';
 const p = { ticker: 'MCX', date: '2026-11-02', addedAt: '2026-11-02T05:30:00Z', entryPrice: 100,
@@ -73,4 +75,20 @@ test('HTTP monitor is disabled by default and enabled evaluation makes only inje
     assert.equal(reads, 1); assert.equal(on.code, 200); assert.equal(on.body.positions[0].status, 'would_sell');
     assert.equal(on.body.mode, 'read-only-shadow');
   } finally { if (saved == null) delete process.env.CRON_SECRET; else process.env.CRON_SECRET = saved; }
+});
+
+test('monitor rewrites share an existing function and never fall through to trade execution', async () => {
+  const keys = ['CRON_SECRET', 'UPSTOX_MONITOR_ENABLED', 'ENTRY_SETUP_RESEARCH_ENABLED'];
+  const old = Object.fromEntries(keys.map(k => [k, process.env[k]]));
+  process.env.CRON_SECRET = 'test-only'; delete process.env.UPSTOX_MONITOR_ENABLED; delete process.env.ENTRY_SETUP_RESEARCH_ENABLED;
+  try {
+    for (const mode of ['prices', 'entries', 'unknown']) {
+      const r = { code: 0, body: null, setHeader() {}, status(n) { this.code = n; return this; }, json(d) { this.body = d; return this; } };
+      await sellHandler({ method: 'POST', query: { monitorMode: mode }, headers: { authorization: 'Bearer test-only' } }, r);
+      assert.equal(r.code, mode === 'unknown' ? 400 : 200);
+      if (mode !== 'unknown') assert.equal(r.body.status, 'disabled');
+    }
+  } finally { for (const [k, v] of Object.entries(old)) { if (v == null) delete process.env[k]; else process.env[k] = v; } }
+  const routes = fs.readdirSync(new URL('../api/', import.meta.url)).filter(f => f.endsWith('.js') && !f.startsWith('_'));
+  assert.ok(routes.length <= 12, `standalone function count ${routes.length} exceeds deployment allowance`);
 });

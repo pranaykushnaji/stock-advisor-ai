@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { qualityMomentumChecks } from '../api/_scoring.js';
 import { entryLaneDiagnostics } from '../api/_entry-lanes.js';
 import { findResearchEntry, replayResearchExit, completedFiveMinuteBars, liveResearchEntry } from '../api/_entry-research.js';
-import { createEntryResearchHandler } from '../api/entry-research.js';
+import { createEntryResearchHandler } from '../api/_entry-research-handler.js';
 
 test('official circuit policy distinguishes a daily high from an actual exchange band', () => {
   const closes = Array(252).fill(100), volumes = Array(252).fill(1000000);
