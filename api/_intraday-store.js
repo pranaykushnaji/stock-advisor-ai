@@ -89,6 +89,7 @@ export function recordObservation(store, obs) {
   entry.lastSeen = hhmm;
   entry.scans.push({
     hhmm, ts,
+    entryRefPrice: obs.entryRefPrice ?? null,
     relVol: obs.relVol ?? null,
     confidence: obs.confidence ?? null,
     components: obs.components ?? null, // v2 modular scores {technical,flow,catalyst,liquidity}

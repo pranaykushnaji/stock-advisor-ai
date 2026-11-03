@@ -90,6 +90,41 @@ export function exitBands(recentCloses, lane = null) {
   };
 }
 
+// Price-only subset used by the one-minute shadow monitor. It owns exactly the same immutable
+// initial-stop and monotonic trailing-stop behavior as rulesGate(), but deliberately excludes
+// thesis, review-date, EMA and multi-session momentum exits. It mutates only the supplied copy.
+export function priceRiskGate(item, recentCloses = null, { heldSessions = null } = {}) {
+  const entry = item.entryPrice, cur = item.currentPrice;
+  if (!(entry > 0) || !(cur > 0)) return null;
+  const pnlPct = ((cur - entry) / entry) * 100;
+  const held = heldSessions ?? daysHeld(item.date);
+  if (isSuspiciousMove(pnlPct, held)) return null;
+
+  const bands = exitBands(recentCloses, item.entryLane);
+  seedRisk(item, bands, new Date(), 'legacy-first-observation');
+  const stopPct = item.initialStopPct;
+  let trailPct = item.initialTrailPct ?? bands.trailPct;
+  const laneTag = item.entryLane === 'momentum' ? ' [mom-lane]' : '';
+  const ts = item.thesisScore;
+  if (ts != null && isFinite(ts)) {
+    if (ts >= 70) trailPct = Math.min(trailPct * 1.15, bands.trailPct + 2);
+    else if (ts < 40) trailPct = Math.max(trailPct * 0.85, 2.5);
+  }
+  if (cur <= item.initialStopPrice) {
+    return { verdict: 'SELL', source: 'rule', triggerPrice: item.initialStopPrice,
+      reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)${laneTag}` };
+  }
+  const peak = Math.max(item.peakPrice ?? entry, cur);
+  if ((peak - entry) / entry * 100 >= trailPct) {
+    item.trailingStopPrice = Math.max(item.trailingStopPrice || 0, peak * (1 - trailPct / 100));
+  }
+  if (item.trailingStopPrice > 0 && cur <= item.trailingStopPrice) {
+    return { verdict: 'SELL', source: 'rule', triggerPrice: item.trailingStopPrice,
+      reason: `trailing stop (+${pnlPct.toFixed(1)}% at observed price)${laneTag}` };
+  }
+  return null;
+}
+
 // Deterministic gate. Returns a forced SELL decision, or null to keep holding. The caller may
 // still ask the LLM for advisory context, but a model opinion alone cannot execute an exit.
 // `recentCloses` (optional) enables vol-adaptive stops, a trailing exit, and momentum-fade.
@@ -104,11 +139,9 @@ export function rulesGate(item, recentCloses = null, { heldSessions = null } = {
   // bad price and defer (return null) instead of booking a phantom exit.
   if (isSuspiciousMove(pnlPct, held)) return null;
 
+  const riskDecision = priceRiskGate(item, recentCloses, { heldSessions: held });
+  if (riskDecision) return riskDecision;
   const R = laneRules(item.entryLane);
-  const bands = exitBands(recentCloses, item.entryLane);
-  seedRisk(item, bands, new Date(), 'legacy-first-observation');
-  const stopPct = item.initialStopPct;
-  let trailPct = item.initialTrailPct ?? bands.trailPct;
   let maxHold = R.MAX_HOLD_DAYS;
   const laneTag = item.entryLane === 'momentum' ? ' [mom-lane]' : '';
 
@@ -119,20 +152,8 @@ export function rulesGate(item, recentCloses = null, { heldSessions = null } = {
   // touched in either direction — capital protection is not negotiable.
   const ts = item.thesisScore;
   if (ts != null && isFinite(ts)) {
-    if (ts >= 70) { trailPct = Math.min(trailPct * 1.15, bands.trailPct + 2); maxHold += (item.entryLane === 'momentum' ? 2 : 3); }
-    else if (ts < 40) { trailPct = Math.max(trailPct * 0.85, 2.5); }
+    if (ts >= 70) maxHold += (item.entryLane === 'momentum' ? 2 : 3);
   }
-
-  // 1. Initial volatility stop, measured from entry. ABSOLUTE — no thesis adjustment.
-  //    (V2.1: the old fixed +25% "failsafe target" was removed — a fixed profit level is just a
-  //    cap on compounding; the trailing stop below is the profit protection.)
-  if (cur <= item.initialStopPrice) return { verdict: 'SELL', source: 'rule', triggerPrice: item.initialStopPrice, reason: `vol-stop (${pnlPct.toFixed(1)}%, ${stopPct.toFixed(1)}% band)${laneTag}` };
-  // 2. Trailing stop — once the peak is up more than a trail band, protect gains from the peak.
-  const peak = Math.max(item.peakPrice ?? entry, cur);
-  if ((peak - entry) / entry * 100 >= trailPct) {
-    item.trailingStopPrice = Math.max(item.trailingStopPrice || 0, peak * (1 - trailPct / 100));
-  }
-  if (item.trailingStopPrice > 0 && cur <= item.trailingStopPrice) return { verdict: 'SELL', source: 'rule', triggerPrice: item.trailingStopPrice, reason: `trailing stop (+${pnlPct.toFixed(1)}% at observed price)${laneTag}` };
   // 3. REVIEW DATE (V2.1, replaces the automatic max-hold exit): once a position reaches its
   //    review age (10d catalyst / 7d momentum, +3/+2 when the thesis strengthened), it must
   //    RE-EARN its slot at every check — "would this still be worth holding as a fresh
@@ -264,6 +285,8 @@ export function bookExit(item, realExit) {
     riskSource: item.riskSource ?? null, peakPrice: item.peakPrice ?? null,
     trailingStopPrice: item.trailingStopPrice ?? null, triggerPrice: item.triggerPrice ?? null,
     executionModel: 'observed-quote-paper-fill',
+    quoteTimestamp: item.quoteTimestamp ?? null, quoteSymbol: item.quoteSymbol ?? null,
+    quoteCurrency: item.quoteCurrency ?? null, quoteSource: item.quoteSource ?? null,
     exitPrice: +Number(exit).toFixed(2),
     exitDate: new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10),
     shares: item.shares || 0, investedAmount: item.investedAmount || 10000,

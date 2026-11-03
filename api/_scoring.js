@@ -321,7 +321,12 @@ export function qualityMomentumChecks(closes, volumes, ctx = {}) {
   if (gapUp != null && gapUp > 8) rejects.push(`gap-up ${gapUp.toFixed(1)}%`);
   if (ctx.surveillance) rejects.push('surveillance (ASM/GSM)');
   if (ctx.tradedValueCr != null && ctx.tradedValueCr < 75) rejects.push(`illiquid (₹${ctx.tradedValueCr.toFixed(0)}Cr)`);
-  if (ctx.dayHigh != null && ctx.dayLow != null && ctx.pChange != null) {
+  if (ctx.circuitPolicy === 'official') {
+    // Opt-in correction under study: a daily high/low is not an exchange circuit band.
+    if (ctx.upperCircuit > 0 && price >= ctx.upperCircuit * 0.999) rejects.push('near official upper circuit');
+    if (ctx.lowerCircuit > 0 && price <= ctx.lowerCircuit * 1.001) rejects.push('near official lower circuit');
+    if (ctx.circuitLocked === true) rejects.push('official circuit-locked');
+  } else if (ctx.dayHigh != null && ctx.dayLow != null && ctx.pChange != null) {
     if (ctx.dayHigh === ctx.dayLow) rejects.push('circuit-locked');
     else if (price != null && price >= ctx.dayHigh * 0.999 && ctx.pChange >= 5) rejects.push('near upper circuit');
     else if (price != null && price <= ctx.dayLow * 1.001 && ctx.pChange <= -5) rejects.push('near lower circuit');

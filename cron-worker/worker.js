@@ -17,6 +17,9 @@
 // "skipped"), and re-firing the snapshot on a holiday is harmless — so the Worker doesn't
 // need its own holiday calendar. It only avoids weekends (the cron is Mon–Fri).
 
+import { dispatchMonitor, isMonitorMinute, monitorHistory } from './upstox-monitor.js';
+export { UpstoxMonitor } from './upstox-monitor.js';
+
 const SELL = { kind: 'vercel', path: '/api/sell-check' };
 const BUY  = { kind: 'vercel', path: '/api/stock-of-the-day' };
 const SNAP = { kind: 'github' };
@@ -93,6 +96,7 @@ async function triggerVercel(env, path) {
   const r = await fetch(`${env.VERCEL_BASE}${path}`, {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${env.CRON_SECRET}` },
+    signal: AbortSignal.timeout(55000),
   });
   return { ok: r.ok, status: r.status, body: (await r.text()).slice(0, 500) };
 }
@@ -170,9 +174,27 @@ export default {
     // mid-day IST, so UTC day == IST day here.
     const dow = now.getUTCDay(); // 0=Sun .. 6=Sat
     if (dow === 0 || dow === 6) return;
+    if (env.UPSTOX_MONITOR_ENABLED === 'true' && isMonitorMinute(now)) {
+      // Monitor errors must never suppress an existing scheduled buy/sell/snapshot job.
+      ctx.waitUntil(dispatchMonitor(env, event.scheduledTime).then(result => {
+        console.log(JSON.stringify({ job: 'upstox-shadow-monitor', ...result }));
+      }).catch(() => console.error('upstox-shadow-monitor failed; inspect authenticated monitor history')));
+    }
+    if (env.ENTRY_SETUP_RESEARCH_ENABLED === 'true' && isMonitorMinute(now) && now.getUTCMinutes() % 15 === 0) {
+      ctx.waitUntil(dispatchMonitor(env, event.scheduledTime, 'entries')
+        .then(result => console.log(JSON.stringify({ job: 'entry-setup-research', ...result })))
+        .catch(() => console.error('entry-setup-research failed; inspect authenticated research history')));
+    }
+    if (env.SCHEDULER_MODE === 'monitor-only') return;
+    if(env.PAPER_SIMULATION_ENABLED==='true' && isMonitorMinute(now) && now.getUTCMinutes()%5===0){
+      const action=now.getUTCMinutes()%15===0?'scan':'risk';
+      const result=await runJobWithRetry(env,{kind:'vercel',path:`/api/paper-simulation?action=${action}`});
+      await logRun(env,{ts:new Date().toISOString(),hhmm:hhmm(now),job:`paper-simulation-${action}`,trigger:'cron',summary:{ok:result.ok,httpStatus:result.status,detail:result.body}});
+    }
     const key = hhmm(now);
     const entry = SCHEDULE[key];
     if (!entry) return; // a tick with nothing scheduled — do nothing
+    if(env.PAPER_SIMULATION_ENABLED==='true' && [BUY.path,'/api/open-scan'].includes(entry.path))return;
     const res = await runJobWithRetry(env, entry);
     const job = jobName(entry);
     console.log(`[cron ${key}] ${job} -> ${res.status} ${res.ok ? 'OK' : 'FAIL'} ${res.body}`);
@@ -185,6 +207,12 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    if (url.pathname === '/monitor/log' || url.pathname === '/monitor/entries/log') {
+      const bearer = (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
+      if (!env.CRON_SECRET || bearer !== env.CRON_SECRET) return new Response('unauthorized', { status: 401 });
+      return monitorHistory(env, url.pathname === '/monitor/entries/log' ? 'entries' : 'positions');
+    }
+
     // Public run-log for the Tracker tab (CORS-open, read-only).
     if (url.pathname === '/log') {
       const raw = env.CRON_LOG ? await env.CRON_LOG.get('runs') : null;
@@ -194,12 +222,14 @@ export default {
     if (url.pathname !== '/run') {
       return new Response('StockAdvisor cron worker. /log shows run history; POST /run?job=<name> with Authorization: Bearer <secret> to test.', { status: 200 });
     }
+    if (env.SCHEDULER_MODE === 'monitor-only') return new Response('trading jobs unavailable on shadow worker', { status: 404 });
     const bearer = (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '');
     if ((bearer || url.searchParams.get('key')) !== env.CRON_SECRET) {
       return new Response('unauthorized', { status: 401 });
     }
     const job = url.searchParams.get('job');
     const MAP = {
+      'paper-simulation': {kind:'vercel',path:'/api/paper-simulation'},
       'nse-snapshot': { kind: 'github' },
       'stock-of-the-day': { kind: 'vercel', path: '/api/stock-of-the-day' },
       'refresh-prices': { kind: 'vercel', path: '/api/refresh-prices' },

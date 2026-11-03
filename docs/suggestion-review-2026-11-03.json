@@ -1,0 +1,1037 @@
+{
+  "from": "2026-10-28",
+  "to": "2026-11-03",
+  "ref": "origin/main",
+  "generatedAt": "2026-11-03T17:31:36.018Z",
+  "consideredStockDays": 19,
+  "distinctStocks": 16,
+  "summary": {
+    "available": 19,
+    "positiveAfterSuggestion": 12,
+    "meanAfterSuggestionClosePct": 0.6806960142308159,
+    "experimentalEntries": 7,
+    "existingTrailMeanNetPct": 0.2585917038535774,
+    "tighterTrailMeanNetPct": 0.2585917038535774
+  },
+  "cases": [
+    {
+      "date": "2026-10-28",
+      "ticker": "SONACOMS",
+      "firstSuggestedAt": "2026-10-28T04:30:52.378Z",
+      "scans": [
+        {
+          "at": "2026-10-28T04:30:52.378Z",
+          "regime": "weak",
+          "relativeVolume": 1.86,
+          "effectiveConfidence": 62.7,
+          "accumulationProxy": 91.9,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-28T05:30:52.910Z",
+          "regime": "weak",
+          "relativeVolume": 2.07,
+          "effectiveConfidence": 64.7,
+          "accumulationProxy": 87.8,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-28T06:30:51.921Z",
+          "regime": "weak",
+          "relativeVolume": 2.18,
+          "effectiveConfidence": 68.5,
+          "accumulationProxy": 95.3,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-28T07:30:51.614Z",
+          "regime": "neutral",
+          "relativeVolume": 2.23,
+          "effectiveConfidence": 71.5,
+          "accumulationProxy": 96.5,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-28T08:30:49.579Z",
+          "regime": "neutral",
+          "relativeVolume": 1.96,
+          "effectiveConfidence": 70.7,
+          "accumulationProxy": 96.2,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-28T09:30:48.598Z",
+          "regime": "neutral",
+          "relativeVolume": 1.86,
+          "effectiveConfidence": 70.2,
+          "accumulationProxy": 97.2,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "9056a032b48de25c59de7572072be134a9b74e6d",
+      "dayReturnPct": 3.2400114353597687,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-28T04:35:00.000Z",
+        "referencePrice": 862.5999755859375,
+        "maxGainPct": 2.4692846546461533,
+        "maxAdversePct": -0.5796429563545535,
+        "closeReturnPct": 1.9534010083466669
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 4.053657978790862,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "ticker": "ADANIPORTS",
+      "firstSuggestedAt": "2026-10-29T05:30:58.485Z",
+      "scans": [
+        {
+          "at": "2026-10-29T05:30:58.485Z",
+          "regime": "neutral",
+          "relativeVolume": 3.47,
+          "effectiveConfidence": 80.7,
+          "accumulationProxy": 62.4,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "4cb00fa210e7d0ae050cd1335ad98783af833b60",
+      "dayReturnPct": 6.285127354963094,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-29T05:35:00.000Z",
+        "referencePrice": 1834,
+        "maxGainPct": 2.071973827699014,
+        "maxAdversePct": -0.4907306434024039,
+        "closeReturnPct": 2.071973827699014
+      },
+      "experimental": {
+        "setup": {
+          "status": "setup",
+          "signalAt": "2026-10-29T06:25:00.000Z",
+          "entryAt": "2026-10-29T06:25:00.000Z",
+          "entryPrice": 1841.9000244140625,
+          "entryIndex": 32,
+          "breakoutLevel": 1836,
+          "supportLevel": 1825,
+          "vwap": 1819.3333864089673,
+          "volumeRatio": 3.118130880642774,
+          "setupVersion": "consolidation-v1"
+        },
+        "initialStopPct": 3.772180614375811,
+        "existingTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 1872,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 1.6341807474329562,
+          "netReturnPct": 1.3341807474329561,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        },
+        "tighterTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 1872,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 1.6341807474329562,
+          "netReturnPct": 1.3341807474329561,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        }
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "ticker": "APLAPOLLO",
+      "firstSuggestedAt": "2026-10-29T05:30:58.485Z",
+      "scans": [
+        {
+          "at": "2026-10-29T05:30:58.485Z",
+          "regime": "neutral",
+          "relativeVolume": 2.84,
+          "effectiveConfidence": 67.1,
+          "accumulationProxy": 62.8,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "4cb00fa210e7d0ae050cd1335ad98783af833b60",
+      "dayReturnPct": 1.371632129595568,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-29T05:35:00.000Z",
+        "referencePrice": 2235.39990234375,
+        "maxGainPct": 0.15210461809584963,
+        "maxAdversePct": -1.954905300213039,
+        "closeReturnPct": -1.8072785232473132
+      },
+      "experimental": {
+        "setup": {
+          "status": "setup",
+          "signalAt": "2026-10-29T05:35:00.000Z",
+          "entryAt": "2026-10-29T05:35:00.000Z",
+          "entryPrice": 2235.39990234375,
+          "entryIndex": 22,
+          "breakoutLevel": 2233.60009765625,
+          "supportLevel": 2216.800048828125,
+          "vwap": 2221.452162921714,
+          "volumeRatio": 1.767961313311275,
+          "setupVersion": "consolidation-v1"
+        },
+        "initialStopPct": 3.777500869836819,
+        "existingTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 2195,
+          "reason": "same-session research horizon",
+          "grossReturnPct": -1.8072785232473132,
+          "netReturnPct": -2.107278523247313,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        },
+        "tighterTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 2195,
+          "reason": "same-session research horizon",
+          "grossReturnPct": -1.8072785232473132,
+          "netReturnPct": -2.107278523247313,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        }
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "ticker": "CUB",
+      "firstSuggestedAt": "2026-10-29T05:30:58.485Z",
+      "scans": [
+        {
+          "at": "2026-10-29T05:30:58.485Z",
+          "regime": "neutral",
+          "relativeVolume": 7.36,
+          "effectiveConfidence": 67.1,
+          "accumulationProxy": 77.2,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "4cb00fa210e7d0ae050cd1335ad98783af833b60",
+      "dayReturnPct": 5.534880882085758,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-29T05:35:00.000Z",
+        "referencePrice": 224.75999450683594,
+        "maxGainPct": 1.2190806015884403,
+        "maxAdversePct": -0.284747911234251,
+        "closeReturnPct": 0.9521264646513261
+      },
+      "experimental": {
+        "setup": {
+          "status": "setup",
+          "signalAt": "2026-10-29T08:05:00.000Z",
+          "entryAt": "2026-10-29T08:05:00.000Z",
+          "entryPrice": 225.05999755859375,
+          "entryIndex": 52,
+          "breakoutLevel": 225.02999877929688,
+          "supportLevel": 224.5,
+          "vwap": 225.05242132038282,
+          "volumeRatio": 3.8140094093047567,
+          "setupVersion": "consolidation-v1"
+        },
+        "initialStopPct": 5.014642203742486,
+        "existingTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 226.89999389648438,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 0.8175581435397428,
+          "netReturnPct": 0.5175581435397427,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        },
+        "tighterTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 226.89999389648438,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 0.8175581435397428,
+          "netReturnPct": 0.5175581435397427,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        }
+      }
+    },
+    {
+      "date": "2026-10-29",
+      "ticker": "SYRMA",
+      "firstSuggestedAt": "2026-10-29T05:30:58.485Z",
+      "scans": [
+        {
+          "at": "2026-10-29T05:30:58.485Z",
+          "regime": "neutral",
+          "relativeVolume": 3.79,
+          "effectiveConfidence": 55.4,
+          "accumulationProxy": 57.5,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "4cb00fa210e7d0ae050cd1335ad98783af833b60",
+      "dayReturnPct": 6.781829814459384,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-29T05:35:00.000Z",
+        "referencePrice": 1649.5,
+        "maxGainPct": 2.1400453972794775,
+        "maxAdversePct": -0.44862227426871737,
+        "closeReturnPct": 1.1821764170960813
+      },
+      "experimental": {
+        "setup": {
+          "status": "setup",
+          "signalAt": "2026-10-29T06:45:00.000Z",
+          "entryAt": "2026-10-29T06:45:00.000Z",
+          "entryPrice": 1654.800048828125,
+          "entryIndex": 36,
+          "breakoutLevel": 1653.4000244140625,
+          "supportLevel": 1642.0999755859375,
+          "vwap": 1636.5193957645533,
+          "volumeRatio": 2.1280361513839203,
+          "setupVersion": "consolidation-v1"
+        },
+        "initialStopPct": 5.631302443778428,
+        "existingTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 1669,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 0.8581067653418817,
+          "netReturnPct": 0.5581067653418816,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        },
+        "tighterTrail": {
+          "exitAt": "2026-10-29T10:00:00.000Z",
+          "fillPrice": 1669,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 0.8581067653418817,
+          "netReturnPct": 0.5581067653418816,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        }
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "LAURUSLABS",
+      "firstSuggestedAt": "2026-10-30T04:30:59.557Z",
+      "scans": [
+        {
+          "at": "2026-10-30T04:30:59.557Z",
+          "regime": "weak",
+          "relativeVolume": 8.33,
+          "effectiveConfidence": 81.5,
+          "accumulationProxy": 97.9,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T05:31:01.679Z",
+          "regime": "weak",
+          "relativeVolume": 7.79,
+          "effectiveConfidence": 83.2,
+          "accumulationProxy": 98.5,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T06:30:58.409Z",
+          "regime": "weak",
+          "relativeVolume": 6.35,
+          "effectiveConfidence": 82.8,
+          "accumulationProxy": 98.8,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T07:31:00.324Z",
+          "regime": "weak",
+          "relativeVolume": 5.51,
+          "effectiveConfidence": 83.8,
+          "accumulationProxy": 98.5,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T08:30:54.861Z",
+          "regime": "weak",
+          "relativeVolume": 4.99,
+          "effectiveConfidence": 83.6,
+          "accumulationProxy": 99.8,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T09:31:03.796Z",
+          "regime": "weak",
+          "relativeVolume": 4.62,
+          "effectiveConfidence": 83.6,
+          "accumulationProxy": 100,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "58a011a35a495076efa9348b3a4df1e7f4b3513d",
+      "dayReturnPct": 7.196969696969702,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T04:35:00.000Z",
+        "referencePrice": 2337.300048828125,
+        "maxGainPct": 2.9178945683960844,
+        "maxAdversePct": -0.9412569862834008,
+        "closeReturnPct": 2.9178945683960844
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 3.721697444754653,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "COFORGE",
+      "firstSuggestedAt": "2026-10-30T04:30:59.557Z",
+      "scans": [
+        {
+          "at": "2026-10-30T04:30:59.557Z",
+          "regime": "weak",
+          "relativeVolume": 4.33,
+          "effectiveConfidence": 70.6,
+          "accumulationProxy": 78.7,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T05:31:01.679Z",
+          "regime": "weak",
+          "relativeVolume": 4.26,
+          "effectiveConfidence": 80.4,
+          "accumulationProxy": 83.4,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T06:30:58.409Z",
+          "regime": "weak",
+          "relativeVolume": 3.48,
+          "effectiveConfidence": 87.4,
+          "accumulationProxy": 86.2,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T07:31:00.324Z",
+          "regime": "weak",
+          "relativeVolume": 2.89,
+          "effectiveConfidence": 71.9,
+          "accumulationProxy": 85.3,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T08:30:54.861Z",
+          "regime": "weak",
+          "relativeVolume": 2.48,
+          "effectiveConfidence": 70,
+          "accumulationProxy": 87.2,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T09:31:03.796Z",
+          "regime": "weak",
+          "relativeVolume": 2.32,
+          "effectiveConfidence": 69.7,
+          "accumulationProxy": 89.4,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "58a011a35a495076efa9348b3a4df1e7f4b3513d",
+      "dayReturnPct": 4.230377166156973,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T04:35:00.000Z",
+        "referencePrice": 2032,
+        "maxGainPct": 1.4468455877829633,
+        "maxAdversePct": -0.24606299212598381,
+        "closeReturnPct": 0.639763779527569
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 4.939239778833799,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "ADANIPORTS",
+      "firstSuggestedAt": "2026-10-30T04:30:59.557Z",
+      "scans": [
+        {
+          "at": "2026-10-30T04:30:59.557Z",
+          "regime": "weak",
+          "relativeVolume": 2.95,
+          "effectiveConfidence": 59.8,
+          "accumulationProxy": 71.1,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "58a011a35a495076efa9348b3a4df1e7f4b3513d",
+      "dayReturnPct": -1.175213675213671,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T04:35:00.000Z",
+        "referencePrice": 1843.300048828125,
+        "maxGainPct": 0.797480105380588,
+        "maxAdversePct": -0.7106872082262683,
+        "closeReturnPct": 0.3634758853358955
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 3.842356801300744,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "ZYDUSLIFE",
+      "firstSuggestedAt": "2026-10-30T05:31:01.679Z",
+      "scans": [
+        {
+          "at": "2026-10-30T05:31:01.679Z",
+          "regime": "weak",
+          "relativeVolume": 1.8,
+          "effectiveConfidence": 53.1,
+          "accumulationProxy": 62.4,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T06:30:58.409Z",
+          "regime": "weak",
+          "relativeVolume": 2.42,
+          "effectiveConfidence": 56.8,
+          "accumulationProxy": 65.9,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T07:31:00.324Z",
+          "regime": "weak",
+          "relativeVolume": 2.5,
+          "effectiveConfidence": 56.4,
+          "accumulationProxy": 67.6,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T08:30:54.861Z",
+          "regime": "weak",
+          "relativeVolume": 2.55,
+          "effectiveConfidence": 57,
+          "accumulationProxy": 69,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T09:31:03.796Z",
+          "regime": "weak",
+          "relativeVolume": 2.57,
+          "effectiveConfidence": 60,
+          "accumulationProxy": 86.2,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "1051aead44ac16191e27a7e3fb545715f0d0b16a",
+      "dayReturnPct": 5.15872799109105,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T05:35:00.000Z",
+        "referencePrice": 1229.4000244140625,
+        "maxGainPct": 1.5780074856683646,
+        "maxAdversePct": -0.1382847900135431,
+        "closeReturnPct": 1.3095798980165885
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 3.5,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "ETERNAL",
+      "firstSuggestedAt": "2026-10-30T05:31:01.679Z",
+      "scans": [
+        {
+          "at": "2026-10-30T05:31:01.679Z",
+          "regime": "weak",
+          "relativeVolume": 2.24,
+          "effectiveConfidence": 60.9,
+          "accumulationProxy": 56.7,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T06:30:58.409Z",
+          "regime": "weak",
+          "relativeVolume": 1.84,
+          "effectiveConfidence": 62.8,
+          "accumulationProxy": 55.9,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "1051aead44ac16191e27a7e3fb545715f0d0b16a",
+      "dayReturnPct": 1.7167345532596023,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T05:35:00.000Z",
+        "referencePrice": 344.54998779296875,
+        "maxGainPct": 0.5514510176689358,
+        "maxAdversePct": -0.6530257088129598,
+        "closeReturnPct": -0.2612085120795804
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 4.286592516264265,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "APLAPOLLO",
+      "firstSuggestedAt": "2026-10-30T05:31:01.679Z",
+      "scans": [
+        {
+          "at": "2026-10-30T05:31:01.679Z",
+          "regime": "weak",
+          "relativeVolume": 3.76,
+          "effectiveConfidence": 58.7,
+          "accumulationProxy": 57.7,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "1051aead44ac16191e27a7e3fb545715f0d0b16a",
+      "dayReturnPct": -1.3621823391230081,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T05:35:00.000Z",
+        "referencePrice": 2190.10009765625,
+        "maxGainPct": 0.20089960036340226,
+        "maxAdversePct": -1.141500337210788,
+        "closeReturnPct": -1.141500337210788
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 3.7733111160981534,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "NAVINFLUOR",
+      "firstSuggestedAt": "2026-10-30T06:30:58.409Z",
+      "scans": [
+        {
+          "at": "2026-10-30T06:30:58.409Z",
+          "regime": "weak",
+          "relativeVolume": 2.06,
+          "effectiveConfidence": 58,
+          "accumulationProxy": 51.7,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "196e3564481ae99cff16b620f7eb0f4280136ca6",
+      "dayReturnPct": 5.0783850856485735,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T06:35:00.000Z",
+        "referencePrice": 8497,
+        "maxGainPct": 2.8892550311874876,
+        "maxAdversePct": -0.3471813581264027,
+        "closeReturnPct": 2.153701306343425
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 4.365369407652227,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-10-30",
+      "ticker": "ATHERENERG",
+      "firstSuggestedAt": "2026-10-30T07:31:00.324Z",
+      "scans": [
+        {
+          "at": "2026-10-30T07:31:00.324Z",
+          "regime": "weak",
+          "relativeVolume": 2.13,
+          "effectiveConfidence": 75.4,
+          "accumulationProxy": 94.7,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T08:30:54.861Z",
+          "regime": "weak",
+          "relativeVolume": 2.25,
+          "effectiveConfidence": 76.6,
+          "accumulationProxy": 93.8,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-10-30T09:31:03.796Z",
+          "regime": "weak",
+          "relativeVolume": 2.13,
+          "effectiveConfidence": 75.8,
+          "accumulationProxy": 95.3,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "eb1e181a325a7fda3607c2b67af33c78adb50f7a",
+      "dayReturnPct": 5.592303066746851,
+      "afterSuggestion": {
+        "referenceAt": "2026-10-30T07:35:00.000Z",
+        "referencePrice": 1769.199951171875,
+        "maxGainPct": 0.7347954080254793,
+        "maxAdversePct": -1.0004494494899263,
+        "closeReturnPct": -0.7460971928657134
+      },
+      "experimental": {
+        "setup": {
+          "status": "blocked",
+          "reason": "regime weak"
+        },
+        "initialStopPct": 6.085981758528223,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-11-02",
+      "ticker": "COFORGE",
+      "firstSuggestedAt": "2026-11-02T05:30:42.389Z",
+      "scans": [
+        {
+          "at": "2026-11-02T05:30:42.389Z",
+          "regime": "bullish",
+          "relativeVolume": 1.93,
+          "effectiveConfidence": 72.1,
+          "accumulationProxy": 88.1,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "49f472282d385de83d349b002983e5270cb38662",
+      "dayReturnPct": 2.6405867970660246,
+      "afterSuggestion": {
+        "referenceAt": "2026-11-02T05:35:00.000Z",
+        "referencePrice": 2104.10009765625,
+        "maxGainPct": 0.289903200062569,
+        "maxAdversePct": -1.4400478789899807,
+        "closeReturnPct": -0.24238854710053603
+      },
+      "experimental": {
+        "setup": {
+          "status": "no_setup",
+          "reason": "no confirmed consolidation breakout with bounded extension and volume"
+        },
+        "initialStopPct": 4.956961859340769,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-11-03",
+      "ticker": "MOTILALOFS",
+      "firstSuggestedAt": "2026-11-03T05:30:43.349Z",
+      "scans": [
+        {
+          "at": "2026-11-03T05:30:43.349Z",
+          "regime": "bullish",
+          "relativeVolume": 4.54,
+          "effectiveConfidence": 68.1,
+          "accumulationProxy": 48.7,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-11-03T06:30:41.111Z",
+          "regime": "bullish",
+          "relativeVolume": 3.43,
+          "effectiveConfidence": 67.3,
+          "accumulationProxy": 50.8,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-11-03T07:30:41.342Z",
+          "regime": "bullish",
+          "relativeVolume": 2.84,
+          "effectiveConfidence": 64.3,
+          "accumulationProxy": 51.9,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-11-03T08:30:42.113Z",
+          "regime": "bullish",
+          "relativeVolume": 2.55,
+          "effectiveConfidence": 62.7,
+          "accumulationProxy": 53.4,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "87780616589a4c4fb2c5da4438eff256919406d5",
+      "dayReturnPct": 4.728325843173065,
+      "afterSuggestion": {
+        "referenceAt": "2026-11-03T05:35:00.000Z",
+        "referencePrice": 1014.0499877929688,
+        "maxGainPct": 1.2425459072798795,
+        "maxAdversePct": -1.5383832921185725,
+        "closeReturnPct": -0.39938739132410195
+      },
+      "experimental": {
+        "setup": {
+          "status": "setup",
+          "signalAt": "2026-11-03T06:25:00.000Z",
+          "entryAt": "2026-11-03T06:25:00.000Z",
+          "entryPrice": 1023.7999877929688,
+          "entryIndex": 32,
+          "breakoutLevel": 1022,
+          "supportLevel": 1015.0999755859375,
+          "vwap": 1015.5584576865116,
+          "volumeRatio": 1.5872641509433962,
+          "setupVersion": "consolidation-v1"
+        },
+        "initialStopPct": 4.973707616484225,
+        "existingTrail": {
+          "exitAt": "2026-11-03T10:00:00.000Z",
+          "fillPrice": 1010,
+          "reason": "same-session research horizon",
+          "grossReturnPct": -1.3479183392761884,
+          "netReturnPct": -1.6479183392761885,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        },
+        "tighterTrail": {
+          "exitAt": "2026-11-03T10:00:00.000Z",
+          "fillPrice": 1010,
+          "reason": "same-session research horizon",
+          "grossReturnPct": -1.3479183392761884,
+          "netReturnPct": -1.6479183392761885,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        }
+      }
+    },
+    {
+      "date": "2026-11-03",
+      "ticker": "MCX",
+      "firstSuggestedAt": "2026-11-03T05:30:43.349Z",
+      "scans": [
+        {
+          "at": "2026-11-03T05:30:43.349Z",
+          "regime": "bullish",
+          "relativeVolume": 1.9,
+          "effectiveConfidence": 62.6,
+          "accumulationProxy": 46.3,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-11-03T08:30:42.113Z",
+          "regime": "bullish",
+          "relativeVolume": 2.86,
+          "effectiveConfidence": 78.6,
+          "accumulationProxy": 54.8,
+          "verification": "UNVERIFIED"
+        },
+        {
+          "at": "2026-11-03T09:30:39.855Z",
+          "regime": "bullish",
+          "relativeVolume": 3.01,
+          "effectiveConfidence": 67,
+          "accumulationProxy": 56.9,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "87780616589a4c4fb2c5da4438eff256919406d5",
+      "dayReturnPct": 7.420747850300091,
+      "afterSuggestion": {
+        "referenceAt": "2026-11-03T05:35:00.000Z",
+        "referencePrice": 3338.5,
+        "maxGainPct": 5.963759103077737,
+        "maxAdversePct": -0.4792571514153021,
+        "closeReturnPct": 4.5409644348135325
+      },
+      "experimental": {
+        "setup": {
+          "status": "setup",
+          "signalAt": "2026-11-03T06:35:00.000Z",
+          "entryAt": "2026-11-03T06:35:00.000Z",
+          "entryPrice": 3354.199951171875,
+          "entryIndex": 34,
+          "breakoutLevel": 3345,
+          "supportLevel": 3322.5,
+          "vwap": 3318.567905824404,
+          "volumeRatio": 7.399925627163248,
+          "setupVersion": "consolidation-v1"
+        },
+        "initialStopPct": 4.8268802742860375,
+        "existingTrail": {
+          "exitAt": "2026-11-03T10:00:00.000Z",
+          "fillPrice": 3490.10009765625,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 4.051641180094068,
+          "netReturnPct": 3.751641180094068,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        },
+        "tighterTrail": {
+          "exitAt": "2026-11-03T10:00:00.000Z",
+          "fillPrice": 3490.10009765625,
+          "reason": "same-session research horizon",
+          "grossReturnPct": 4.051641180094068,
+          "netReturnPct": 3.751641180094068,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        }
+      }
+    },
+    {
+      "date": "2026-11-03",
+      "ticker": "MOTHERSON",
+      "firstSuggestedAt": "2026-11-03T05:30:43.349Z",
+      "scans": [
+        {
+          "at": "2026-11-03T05:30:43.349Z",
+          "regime": "bullish",
+          "relativeVolume": 2.51,
+          "effectiveConfidence": 60.3,
+          "accumulationProxy": 47.5,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "87780616589a4c4fb2c5da4438eff256919406d5",
+      "dayReturnPct": 0.6289308176100628,
+      "afterSuggestion": {
+        "referenceAt": "2026-11-03T05:35:00.000Z",
+        "referencePrice": 161.89999389648438,
+        "maxGainPct": 0.12354058960566405,
+        "maxAdversePct": -1.420622532227711,
+        "closeReturnPct": -1.1735602026638703
+      },
+      "experimental": {
+        "setup": {
+          "status": "no_setup",
+          "reason": "no confirmed consolidation breakout with bounded extension and volume"
+        },
+        "initialStopPct": 4.340431556071956,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    },
+    {
+      "date": "2026-11-03",
+      "ticker": "PETRONET",
+      "firstSuggestedAt": "2026-11-03T06:30:41.111Z",
+      "scans": [
+        {
+          "at": "2026-11-03T06:30:41.111Z",
+          "regime": "bullish",
+          "relativeVolume": 2.47,
+          "effectiveConfidence": 66.6,
+          "accumulationProxy": 89.7,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "3db79b0411b270198d3003e86f15919bea87649c",
+      "dayReturnPct": 0.6811721913333901,
+      "afterSuggestion": {
+        "referenceAt": "2026-11-03T06:35:00.000Z",
+        "referencePrice": 302.45001220703125,
+        "maxGainPct": 1.0580200232436,
+        "maxAdversePct": -0.6612662983233597,
+        "closeReturnPct": 0.18184419598974433
+      },
+      "experimental": {
+        "setup": {
+          "status": "setup",
+          "signalAt": "2026-11-03T09:25:00.000Z",
+          "entryAt": "2026-11-03T09:25:00.000Z",
+          "entryPrice": 303.8999938964844,
+          "entryIndex": 68,
+          "breakoutLevel": 302.3999938964844,
+          "supportLevel": 301.79998779296875,
+          "vwap": 300.7359849531684,
+          "volumeRatio": 2.6673319655679943,
+          "setupVersion": "consolidation-v1"
+        },
+        "initialStopPct": 3.7952995204819637,
+        "existingTrail": {
+          "exitAt": "2026-11-03T10:00:00.000Z",
+          "fillPrice": 303,
+          "reason": "same-session research horizon",
+          "grossReturnPct": -0.2961480469101052,
+          "netReturnPct": -0.5961480469101053,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        },
+        "tighterTrail": {
+          "exitAt": "2026-11-03T10:00:00.000Z",
+          "fillPrice": 303,
+          "reason": "same-session research horizon",
+          "grossReturnPct": -0.2961480469101052,
+          "netReturnPct": -0.5961480469101053,
+          "frictionBps": 30,
+          "model": "assumed-open-low-high-close-5m"
+        }
+      }
+    },
+    {
+      "date": "2026-11-03",
+      "ticker": "BHARTIARTL",
+      "firstSuggestedAt": "2026-11-03T09:30:39.855Z",
+      "scans": [
+        {
+          "at": "2026-11-03T09:30:39.855Z",
+          "regime": "bullish",
+          "relativeVolume": 1.85,
+          "effectiveConfidence": 78.2,
+          "accumulationProxy": 91.5,
+          "verification": "UNVERIFIED"
+        }
+      ],
+      "sourceCommit": "1a763d62e5fa71037d7d237ff4abe591a7c54233",
+      "dayReturnPct": 3.774057724736757,
+      "afterSuggestion": {
+        "referenceAt": "2026-11-03T09:35:00.000Z",
+        "referencePrice": 2056,
+        "maxGainPct": 0.43774319066147704,
+        "maxAdversePct": -0.26264116457928033,
+        "closeReturnPct": 0.43774319066147704
+      },
+      "experimental": {
+        "setup": {
+          "status": "no_setup",
+          "reason": "no confirmed consolidation breakout with bounded extension and volume"
+        },
+        "initialStopPct": 3.5,
+        "existingTrail": null,
+        "tighterTrail": null
+      }
+    }
+  ],
+  "limitations": [
+    "All considered names in the chosen window, not just remembered winners. Discovery/quality rejects are outside this cohort.",
+    "Daily return and maximum favorable excursion are NOT captured profits.",
+    "Five-minute OHLC assumes a path; precise stop timing and fills require tick or one-minute replay.",
+    "Research setup ignores the production confidence/edge gate and does not authorize a buy.",
+    "Five sessions and a small sample cannot establish profitable parameters; costs use a 0.30% scenario.",
+    "Experimental exits use a same-session horizon for comparison; production positions can span sessions."
+  ]
+}
