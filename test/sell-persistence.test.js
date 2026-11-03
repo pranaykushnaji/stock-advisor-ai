@@ -15,7 +15,7 @@ async function runSell(price, { failRiskWrite = false } = {}) {
   };
   globalThis.fetch = async (url, options = {}) => {
     if (String(url).startsWith('https://query1.finance.yahoo.com/')) return Response.json({ chart: { result: [{
-      meta: { regularMarketPrice: price, currency: 'INR' }, timestamp: [Date.now() / 1000],
+      meta: { regularMarketPrice: price, currency: 'INR', symbol: 'TEST.NS', regularMarketTime: Date.now() / 1000 }, timestamp: [Date.now() / 1000],
       indicators: { quote: [{ close: Array(30).fill(100), high: [130] }] },
     }] } });
     const path = String(url).split('/contents/')[1];

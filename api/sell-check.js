@@ -11,6 +11,7 @@ import { observePrice, mergeRiskState, seedRisk, tradingSessionsHeld } from './_
 import { classifyCatalyst, scoreCatalyst } from './_catalyst.js';
 import { requireCronAuth } from './_cron-auth.js';
 import { parseNseDateMs } from './_nse-date.js';
+import { validateQuote, quoteBase } from './_quote-validation.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
@@ -24,11 +25,13 @@ const MAX_THESIS_LLM = 3; // cap classification calls per hourly run
 // { changed, breakSell } — breakSell is a forced-exit decision on a confident negative filing.
 // Mutates item.thesisScore / currentThesis / lastThesisUpdate.
 async function updateThesis(item, filings, apiKey, budget) {
-  const lastMs = Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0;
+  const lastMs = Date.parse(item.lastFilingUpdate || item.lastThesisUpdate || item.addedAt || '') || 0;
   const fresh = (filings || []).filter(f => { const t = parseNseDateMs(f.date); return t != null && t > lastMs; });
   if (!fresh.length) return { changed: false, breakSell: null };
   const material = fresh.filter(f => !ROUTINE_RE.test(f.subject || ''));
   if (!material.length) {
+    item.lastIntelUpdate ??= new Date(Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0).toISOString();
+    item.lastFilingUpdate = new Date(Math.max(...fresh.map(f => parseNseDateMs(f.date)))).toISOString();
     item.lastThesisUpdate = new Date().toISOString();
     return { changed: true, breakSell: null };
   }
@@ -39,9 +42,13 @@ async function updateThesis(item, filings, apiKey, budget) {
   let scored = null;
   try {
     const articles = material.map(f => ({ title: '[OFFICIAL NSE FILING] ' + f.subject, url: '', publishedAt: parseNseDateMs(f.date) || Date.now(), source: 'nse-filing' }));
-    scored = scoreCatalyst(await classifyCatalyst(item.fullName || item.ticker, articles, apiKey), articles);
+    const classification = await classifyCatalyst(item.fullName || item.ticker, articles, apiKey);
+    if (!classification) return { changed: false, breakSell: null };
+    scored = scoreCatalyst(classification, articles);
   } catch (e) { return { changed: false, breakSell: null }; }
   if (!scored) return { changed: false, breakSell: null };
+  item.lastIntelUpdate ??= new Date(Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0).toISOString();
+  item.lastFilingUpdate = new Date(Math.max(...fresh.map(f => parseNseDateMs(f.date)))).toISOString();
   item.lastThesisUpdate = new Date().toISOString();
   const prev = item.thesisScore ?? 50;
   if (scored.negative) {
@@ -64,12 +71,6 @@ async function fetchWithTimeout(url, opts = {}, ms = 8000) {
   const t = setTimeout(() => ctrl.abort(), ms);
   try { return await fetch(url, { ...opts, signal: ctrl.signal }); }
   finally { clearTimeout(t); }
-}
-
-const ALIASES = { ZOMATO: 'ETERNAL', MOTHERSUMI: 'MOTHERSON', MINDTREE: 'LTIM' };
-function aliasBase(sym) {
-  const u = (sym || '').replace(/\.(NS|BO)$/i, '').toUpperCase();
-  return ALIASES[u] || u;
 }
 
 async function ghGetFile(path, token) {
@@ -98,7 +99,10 @@ async function ghPutWithRetry(path, buildObj, token, message, attempts = 4) {
   for (let i = 0; i < attempts; i++) {
     const cur = await ghGetFile(path, token);
     let existing = null;
-    try { existing = cur.content ? JSON.parse(cur.content) : null; } catch (e) {}
+    if (cur.status !== 200 && cur.status !== 404) return false;
+    try { existing = cur.content != null ? JSON.parse(cur.content) : null; } catch (e) { return false; }
+    if (cur.status === 200 && (path === 'data/realized.json'
+      ? !Array.isArray(existing?.trades) : !Array.isArray(existing?.bouquet))) return false;
     const obj = buildObj(existing);
     if (obj === null) return true; // nothing to write
     if (await ghPutFile(path, obj, cur.sha, token, message)) return true;
@@ -107,8 +111,8 @@ async function ghPutWithRetry(path, buildObj, token, message, attempts = 4) {
 }
 
 // Fetch live price + recent closes (Yahoo NSE-first, no heavy fallback to stay fast).
-async function fetchLive(ticker, yahooSymbol) {
-  const base = aliasBase(yahooSymbol || ticker);
+async function fetchLive(ticker) {
+  const base = quoteBase(ticker);
   for (const sym of [`${base}.NS`, `${base}.BO`]) {
     try {
       const r = await fetchWithTimeout(
@@ -122,9 +126,11 @@ async function fetchLive(ticker, yahooSymbol) {
       const result = (await r.json())?.chart?.result?.[0];
       if (!result?.meta?.regularMarketPrice) continue;
       const meta = result.meta;
-      if (meta.currency && meta.currency !== 'INR') continue;
+      const provenance = validateQuote(meta, ticker);
+      if (!provenance) continue;
       const q = result.indicators?.quote?.[0] || {};
       return {
+        ...provenance,
         price: +meta.regularMarketPrice.toFixed(2),
         dayHigh: Number.isFinite(q.high?.at(-1)) ? q.high.at(-1) : null,
         highDate: result.timestamp?.length ? new Date(result.timestamp.at(-1) * 1000 + 19800000).toISOString().slice(0, 10) : null,
@@ -200,11 +206,14 @@ export default async function handler(req, res) {
     if (ageH <= 20 && ni.marketContext) morningContext = ni.marketContext; // advisory for llmDecide
   } catch (e) {}
   function applyIntelNegatives(item) {
-    const lastMs = Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0;
+    const lastMs = Date.parse(item.lastIntelUpdate || item.lastThesisUpdate || item.addedAt || '') || 0;
     const hit = intelItems.find(it => String(it.ticker || '').toUpperCase() === String(item.ticker).toUpperCase()
       && String(it.direction) === 'negative' && (it.materiality ?? 0) >= 6
       && ((it.publishedAt ? Date.parse(it.publishedAt) : intelGeneratedMs) > lastMs));
     if (!hit) return { changed: false, breakSell: null };
+    // Freeze independent migration cursors before changing the shared display timestamp.
+    item.lastFilingUpdate ??= new Date(Date.parse(item.lastThesisUpdate || item.addedAt || '') || 0).toISOString();
+    item.lastIntelUpdate = new Date(hit.publishedAt ? Date.parse(hit.publishedAt) : intelGeneratedMs).toISOString();
     item.lastThesisUpdate = new Date().toISOString();
     item.thesisScore = Math.max(0, (item.thesisScore ?? 50) - 30);
     item.currentThesis = { type: hit.eventType || 'negative news', summary: hit.summary || 'material negative news', points: 0 };
@@ -218,7 +227,7 @@ export default async function handler(req, res) {
   const checked = [];
 
   for (const item of open) {
-    const live = await fetchLive(item.ticker, item.yahooSymbol);
+    const live = await fetchLive(item.ticker);
     if (!live) { checked.push({ ticker: item.ticker, result: 'no_price' }); continue; }
     const move = item.entryPrice > 0 ? (live.price / item.entryPrice - 1) * 100 : 0;
     if (isSuspiciousMove(move, tradingSessionsHeld(item.date))) {
@@ -230,6 +239,7 @@ export default async function handler(req, res) {
     }
     // Freshen current price + peak (for the trailing stop) for the rules gate.
     observePrice(item, live.price, { dayHigh: live.dayHigh, highDate: live.highDate });
+    for (const field of ['quoteTimestamp', 'quoteSymbol', 'quoteCurrency', 'quoteSource']) item[field] = live[field];
     seedRisk(item, exitBands(live.closes, item.entryLane), new Date(), 'legacy-first-observation');
     riskChangedKeys.add(`${item.ticker}|${item.date}`); // persist risk state on every priced check
 
@@ -287,7 +297,12 @@ export default async function handler(req, res) {
         const k = `${b.ticker}|${b.date}`;
         const src = riskChangedKeys.has(k) || thesisChangedKeys.has(k) ? thesisByKey.get(k) : null;
         if (src) {
+          const newerQuote = Date.parse(src.lastPriceUpdate || '') >= (Date.parse(b.lastPriceUpdate || '') || 0);
           Object.assign(b, mergeRiskState(b, src));
+          if (newerQuote) for (const field of ['quoteTimestamp', 'quoteSymbol', 'quoteCurrency', 'quoteSource']) b[field] = src[field];
+          for (const field of ['lastFilingUpdate', 'lastIntelUpdate']) {
+            if (Date.parse(src[field] || '') > (Date.parse(b[field] || '') || 0)) b[field] = src[field];
+          }
           if (thesisChangedKeys.has(k) && Date.parse(src.lastThesisUpdate || '') >= (Date.parse(b.lastThesisUpdate || '') || 0)) {
             b.thesisScore = src.thesisScore ?? b.thesisScore;
             b.currentThesis = src.currentThesis ?? b.currentThesis;

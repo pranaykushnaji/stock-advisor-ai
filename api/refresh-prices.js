@@ -5,6 +5,7 @@ import { marketStatus } from './_market-calendar.js';
 import { bookExit } from './_sell-engine.js';
 import { observePrice, mergeRiskState } from './_position-risk.js';
 import { requireCronAuth } from './_cron-auth.js';
+import { validateQuote } from './_quote-validation.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 
@@ -38,7 +39,10 @@ async function ghPutWithRetry(path, buildObj, token, message, attempts = 4) {
   for (let i = 0; i < attempts; i++) {
     const cur = await ghGetFile(path, token);
     let existing = null;
-    try { existing = cur.content ? JSON.parse(cur.content) : null; } catch (e) {}
+    if (cur.status !== 200 && cur.status !== 404) return false;
+    try { existing = cur.content != null ? JSON.parse(cur.content) : null; } catch (e) { return false; }
+    if (cur.status === 200 && (path === 'data/realized.json'
+      ? !Array.isArray(existing?.trades) : !Array.isArray(existing?.bouquet))) return false;
     const obj = buildObj(existing);
     if (obj === null) return true;
     if (await ghPutFile(path, obj, cur.sha, token, message)) return true;
@@ -53,6 +57,7 @@ const REFRESH_PRICE_FIELDS = [
   'prevClose', 'yahooSymbol', 'entryPrice', 'dayOpen', 'entryFromPrevClose',
   'entryPriceProvisional', 'currentPrice', 'peakPrice', 'lastPriceUpdate', 'shares',
   'todayChangePct', 'marketState', 'niftyAtEntry', 'niftyNow',
+  'quoteTimestamp', 'quoteSymbol', 'quoteCurrency', 'quoteSource',
 ];
 
 // Map company names / tickers to Yahoo NSE symbols
@@ -69,10 +74,6 @@ const SYMBOL_MAP = {
   'NESTLE INDIA':'NESTLEIND.NS','BAJAJ AUTO':'BAJAJ-AUTO.NS','HINDALCO':'HINDALCO.NS',
   'ZOMATO':'ETERNAL.NS','ETERNAL':'ETERNAL.NS','DMART':'DMART.NS','AVENUE SUPERMARTS':'DMART.NS'
 };
-
-// Ticker aliases for rebrands (LLM/stored ticker may be stale). Applied to AV fallback too.
-const TICKER_ALIASES = { 'ZOMATO':'ETERNAL','MINDTREE':'LTIM','MOTHERSUMI':'MOTHERSON' };
-function aliasBase(sym){const u=(sym||'').toUpperCase().replace(/\.(NS|BO|BSE)$/,'');return TICKER_ALIASES[u]||u;}
 
 // Fetch with a hard timeout so a hanging source can't blow the serverless limit
 async function fetchWithTimeout(url, opts = {}, ms = 4000) {
@@ -103,9 +104,8 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
       const result = d?.chart?.result?.[0];
       const meta = result?.meta;
       if (meta?.regularMarketPrice) {
-        // Prefer INR (NSE/BSE); skip USD ADR unless last symbol
-        const isLast = sym === trySymbols[trySymbols.length - 1];
-        if (meta.currency && meta.currency !== 'INR' && !isLast) continue;
+        const provenance = validateQuote(meta, ticker);
+        if (!provenance) continue;
         // Today's daily candle (last bar) — has the real session open & close
         const q = result?.indicators?.quote?.[0] || {};
         const opens = (q.open || []).filter(v => v != null);
@@ -115,6 +115,7 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
         const candleClose = closes.length ? +closes[closes.length - 1].toFixed(2) : null;
         const dayHigh = highs.length ? +highs[highs.length - 1].toFixed(2) : null;
         return {
+          ...provenance,
           price: +meta.regularMarketPrice.toFixed(2),
           open: meta.regularMarketOpen ? +meta.regularMarketOpen.toFixed(2) : null,
           candleOpen,   // today's real opening price from the completed daily bar
@@ -127,38 +128,7 @@ async function fetchPrice(ticker, fullName, knownSymbol) {
       }
     } catch (e) { continue; }
   }
-  // Fallback: Alpha Vantage when Yahoo fails (apply rebrand alias)
-  return await fetchPriceAV(aliasBase(clean));
-}
-
-// Alpha Vantage fallback for refresh — daily OHLC, last bar = today's candle
-async function fetchPriceAV(base) {
-  const apiKey = process.env.ALPHAVANTAGE_KEY;
-  if (!apiKey) return null;
-  for (const sym of [`${base}.BSE`, base]) {
-    try {
-      const url = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${encodeURIComponent(sym)}&outputsize=compact&apikey=${apiKey}`;
-      const r = await fetchWithTimeout(url, {}, 8000);
-      if (!r.ok) continue;
-      const d = await r.json();
-      const series = d?.['Time Series (Daily)'];
-      if (!series || typeof series !== 'object') continue;
-      const dates = Object.keys(series).sort();
-      if (!dates.length) continue;
-      const lastDt = dates[dates.length - 1], prevDt = dates[dates.length - 2];
-      const bar = series[lastDt];
-      const close = parseFloat(bar['4. close']);
-      const open = parseFloat(bar['1. open']);
-      const high = parseFloat(bar['2. high']);
-      const prevClose = prevDt ? parseFloat(series[prevDt]['4. close']) : close;
-      return {
-        price: +close.toFixed(2), open: +open.toFixed(2),
-        candleOpen: +open.toFixed(2), candleClose: +close.toFixed(2), dayHigh: Number.isFinite(high) ? +high.toFixed(2) : null,
-        prevClose: +prevClose.toFixed(2), symbol: sym,
-        marketState: 'CLOSED'  // AV daily is end-of-day data
-      };
-    } catch (e) { continue; }
-  }
+  // Daily AV bars do not carry a verified live quote time/currency; never use them as fills.
   return null;
 }
 
@@ -233,18 +203,19 @@ export default async function handler(req, res) {
         // Only update the LIVE price + today's move when the data is actually live/complete.
         // Pre-market (PRE/PREPRE) prices are stale or indicative — skip them to avoid bogus moves.
         if (reliable) {
-          // Prefer the completed candle close for "current" after market close; else live price
-          item.currentPrice = pd.candleClose || pd.price;
+          // Use the validated provider quote, not an independently dated daily candle.
+          item.currentPrice = pd.price;
           // Track the peak since entry for the trailing stop (use the day's HIGH when available).
           // No timestamped high is available here. Only the observed quote is safe;
           // sell-check can use a dated daily high on sessions after entry.
           observePrice(item, item.currentPrice, { observedAt: now });
+          for (const field of ['quoteTimestamp', 'quoteSymbol', 'quoteCurrency', 'quoteSource']) item[field] = pd[field];
           // Backward compatibility: finalize any legacy SELL_PENDING position at this price.
-          if (item.status === 'SELL_PENDING') item._realExit = pd.candleClose || pd.price;
+          if (item.status === 'SELL_PENDING') item._realExit = pd.price;
           item.lastPriceUpdate = now;
           const invested = item.investedAmount || 10000;
           if (item.entryPrice > 0) item.shares = +(invested / item.entryPrice).toFixed(3);
-          item.todayChangePct = pd.prevClose ? +((((pd.candleClose || pd.price) - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
+          item.todayChangePct = pd.prevClose ? +(((pd.price - pd.prevClose) / pd.prevClose) * 100).toFixed(2) : null;
           item.marketState = pd.marketState;
           if (niftyNow != null && item.niftyAtEntry == null) item.niftyAtEntry = niftyNow;
           if (niftyNow != null) item.niftyNow = niftyNow;
@@ -259,12 +230,11 @@ export default async function handler(req, res) {
   }
 
   // ---- Legacy compatibility: finalize SELL_PENDING positions ----
-  // Book the real exit (fresh price captured above; fall back to provisional if the
-  // fetch failed), append to data/realized.json, and remove from the bouquet.
+  // Book only a validated quote captured above, append to the ledger, and remove the holding.
   // A pending position with no fresh price stays pending and retries next cycle.
   const closedTrades = [];
   for (const item of bouquet) {
-    if (item.status === 'SELL_PENDING' && (item._realExit != null || item.provisionalExitPrice != null)) {
+    if (item.status === 'SELL_PENDING' && item._realExit != null) {
       closedTrades.push(bookExit(item, item._realExit));
     }
   }
@@ -321,6 +291,9 @@ export default async function handler(req, res) {
           const merged = { ...fb };
           for (const f of REFRESH_PRICE_FIELDS) if (upd[f] !== undefined) merged[f] = upd[f];
           Object.assign(merged, mergeRiskState(fb, upd));
+          if (Date.parse(upd.lastPriceUpdate || '') < (Date.parse(fb.lastPriceUpdate || '') || 0)) {
+            for (const field of ['quoteTimestamp', 'quoteSymbol', 'quoteCurrency', 'quoteSource']) merged[field] = fb[field];
+          }
           delete merged._realExit;
           out.push(merged);
         } else {
@@ -343,5 +316,5 @@ export default async function handler(req, res) {
   if (skippedPremarket) out.skippedPremarket = skippedPremarket;
   if (failed.length) out.failed = failed;
   if (realizedWritten) out.closed = realizedWritten;
-  return res.status(200).json(out);
+  return res.status(failed.length ? 502 : 200).json(out);
 }

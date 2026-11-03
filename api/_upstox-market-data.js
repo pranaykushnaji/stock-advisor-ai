@@ -101,6 +101,13 @@ export async function fetchFullQuotes(instrumentKeys, options = {}) {
     const key = quote?.instrument_token;
     if (!keys.includes(key) || !Number.isFinite(quote.last_price) || !(quote.last_price > 0)) continue;
     const lastTradeMs = Number(quote.last_trade_time);
+    const positive = value => value != null && Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value) : null;
+    const levels = side => (Array.isArray(quote.depth?.[side]) ? quote.depth[side] : [])
+      .filter(row => positive(row.price) && positive(row.quantity));
+    const bid = levels('buy').sort((a, b) => Number(b.price) - Number(a.price))[0];
+    const ask = levels('sell').sort((a, b) => Number(a.price) - Number(b.price))[0];
+    const bidPrice = positive(bid?.price), askPrice = positive(ask?.price);
+    const validSpread = bidPrice != null && askPrice != null && askPrice >= bidPrice;
     out[key] = {
       instrumentKey: key,
       symbol: cleanSymbol(quote.symbol),
@@ -109,6 +116,16 @@ export async function fetchFullQuotes(instrumentKeys, options = {}) {
       responseAt: Number.isFinite(Date.parse(quote.timestamp)) ? new Date(quote.timestamp).toISOString() : null,
       volume: Number.isFinite(Number(quote.volume)) ? Number(quote.volume) : null,
       previousClose: Number.isFinite(Number(quote.prev_close_price)) ? Number(quote.prev_close_price) : null,
+      // Preserve exchange information that the research desk previously discarded.
+      // Missing/crossed books remain unknown, never a zero spread or execution guarantee.
+      bidPrice: validSpread ? bidPrice : null, askPrice: validSpread ? askPrice : null,
+      bidQuantity: validSpread ? positive(bid?.quantity) : null,
+      askQuantity: validSpread ? positive(ask?.quantity) : null,
+      spreadBps: validSpread ? (askPrice - bidPrice) / ((askPrice + bidPrice) / 2) * 10000 : null,
+      averagePrice: positive(quote.average_price),
+      dayOpen: positive(quote.ohlc?.open), dayHigh: positive(quote.ohlc?.high), dayLow: positive(quote.ohlc?.low),
+      upperCircuit: positive(quote.upper_circuit_limit), lowerCircuit: positive(quote.lower_circuit_limit),
+      yearHigh: positive(quote.year_high), yearLow: positive(quote.year_low),
     };
   }
   return out;

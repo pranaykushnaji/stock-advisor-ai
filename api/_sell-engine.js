@@ -285,6 +285,8 @@ export function bookExit(item, realExit) {
     riskSource: item.riskSource ?? null, peakPrice: item.peakPrice ?? null,
     trailingStopPrice: item.trailingStopPrice ?? null, triggerPrice: item.triggerPrice ?? null,
     executionModel: 'observed-quote-paper-fill',
+    quoteTimestamp: item.quoteTimestamp ?? null, quoteSymbol: item.quoteSymbol ?? null,
+    quoteCurrency: item.quoteCurrency ?? null, quoteSource: item.quoteSource ?? null,
     exitPrice: +Number(exit).toFixed(2),
     exitDate: new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10),
     shares: item.shares || 0, investedAmount: item.investedAmount || 10000,

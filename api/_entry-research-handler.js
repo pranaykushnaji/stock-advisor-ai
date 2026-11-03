@@ -3,6 +3,9 @@ import { mapNseSymbols, fetchFullQuotes, fetchIntradayOneMinuteCandles, quoteFre
 import { monitorSession } from './_minute-monitor.js';
 import { liveResearchEntry } from './_entry-research.js';
 import { nowIST } from './_market-calendar.js';
+import registry from '../research/universe.json' with { type: 'json' };
+import { quoteBatches } from '../research/coverage.js';
+import { summarizeQuoteCoverage } from '../research/quote-coverage.js';
 
 async function readContext() {
   const token = process.env.GITHUB_TOKEN;
@@ -26,11 +29,21 @@ export function createEntryResearchHandler({ read = readContext, map = mapNseSym
     if (env.ENTRY_SETUP_RESEARCH_ENABLED !== 'true') return res.status(200).json({ status: 'disabled' });
     if (!env.UPSTOX_ACCESS_TOKEN) return res.status(503).json({ status: 'not_configured' });
     const at = now(), date = nowIST(at).ymd;
-    if (!monitorSession(at).open) return res.status(200).json({ status: 'skipped' });
     let body;
     try { body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {}); }
     catch { return res.status(400).json({ error: 'invalid JSON' }); }
     if (!body || typeof body !== 'object' || JSON.stringify(body).length > 128000) return res.status(400).json({ error: 'invalid payload' });
+    if (body.mode === 'coverage') {
+      if (env.RESEARCH_COVERAGE_ENABLED !== 'true') return res.status(200).json({status:'disabled'});
+      try {
+        // An explicit authenticated diagnostic, never called by the normal scheduler.
+        // Current registry is versioned; session membership and quote identity remain explicit.
+        const allQuotes = {};
+        for (const batch of quoteBatches(registry.members)) Object.assign(allQuotes, await quotes(batch));
+        return res.status(200).json({status:'coverage_observed',...summarizeQuoteCoverage(registry,allQuotes,at)});
+      } catch { return res.status(502).json({status:'coverage_unavailable'}); }
+    }
+    if (!monitorSession(at).open) return res.status(200).json({ status: 'skipped' });
     if (body.slot && (!Number.isFinite(Date.parse(body.slot)) || Math.abs(at - Date.parse(body.slot)) > 90000)) return res.status(409).json({ status: 'expired_slot' });
     try {
       const context = await read();

@@ -18,6 +18,7 @@ import { requireCronAuth } from './_cron-auth.js';
 import { tradeSessionState } from './_trade-session.js';
 import { alignCloseVolume } from './_series.js';
 import { entryLaneDiagnostics } from './_entry-lanes.js';
+import { selectEligibleCandidate } from './_candidate-eligibility.js';
 import { seedRisk } from './_position-risk.js';
 import { exitBands } from './_sell-engine.js';
 import { freshStore, recordObservation, prevVolumeMap, markBought, hhmmIST } from './_intraday-store.js';
@@ -761,9 +762,35 @@ export default async function handler(req, res) {
   // V2 CONCENTRATION GUARD: a candidate whose sector/theme already has 2+ open positions is
   // skipped entirely (next-ranked candidate gets its shot); 1 overlap halves the size later.
   const concentrationBySym = new Map(ranked.map(r => [r.symbol, concentrationCheck(r.symbol, openPositions)]));
-  const concentrationOk = (r) => concentrationBySym.get(r.symbol)?.action !== 'reject';
-  const winner = ranked.find(r => fresh(r) && concentrationOk(r));
+  const { winner, evaluated } = selectEligibleCandidate(ranked, r => ({
+    fresh: fresh(r),
+    concentration: concentrationBySym.get(r.symbol) || { action: 'ok', factor: 1, reason: null },
+    gates, regime, momentumConfidenceExtra: MOMENTUM_LANE.CONF_EXTRA,
+    catalyst: tradeable.find(s => s.symbol === r.symbol)?._catalyst || null,
+  }), ({ candidate: r, reasons }) => {
+    const src = tradeable.find(s => s.symbol === r.symbol);
+    const conf = r.effectiveConfidence ?? r.confidence ?? 0;
+    addRejection(r.symbol, 'regime-gate', reasons, {
+      momentum: r.factors?.momentum ?? null, catalystScore: r.factors?.catalyst ?? null,
+      confidence: r.confidence ?? null, effectiveConfidence: Number.isFinite(conf) ? +conf.toFixed(1) : null, regime: regime.regime,
+      sector: r.factors?.sector ?? null, techScore: r.factors?.technicals ?? null,
+      components: r.confidenceComponents ?? null, expectedEdge: r.expectedEdge ?? null,
+      discoveryParts: discoveryMeta.get(r.symbol)?.discoveryParts ?? null,
+      rewardRisk: r.rewardRisk ?? null, institutional: r.institutional ?? null,
+      entryRefPrice: src?.price ?? null, yahooSymbol: src?._price?.symbol || null,
+    });
+  });
   if (!winner) {
+    // Keep the previous top portfolio-eligible candidate's regime diagnostics on no-trade.
+    const first = evaluated.find(e => e.context.fresh && e.context.concentration.action !== 'reject');
+    if (first) {
+      const r = first.candidate, cat = first.context.catalyst;
+      const conf = r.effectiveConfidence ?? r.confidence ?? 0;
+      return noTrade(`${r.symbol} failed ${regime.regime}-market entry gates: ${first.reasons.join('; ')}`, {
+        regime: regime.regime, market: regime.reason,
+        candidate: { ticker: r.symbol, confidence: r.confidence, effectiveConfidence: Number.isFinite(conf) ? +conf.toFixed(1) : null, rewardRisk: r.rewardRisk, catalyst: cat?.type, verification: cat?.verification },
+      });
+    }
     return noTrade('all qualifying stocks are already held/traded today or fail concentration limits', {
       blocked: ranked.map(r => ({ ticker: r.symbol, tradedToday: !fresh(r), concentration: concentrationBySym.get(r.symbol)?.reason || null })),
     });
@@ -772,39 +799,9 @@ export default async function handler(req, res) {
   const winnerSrc = tradeable.find(s => s.symbol === winner.symbol);
   const winnerCatalyst = winnerSrc?._catalyst || null;
 
-  // REGIME-ADAPTIVE ENTRY GATES — the final check the directive demands: ranking #1 does not
-  // justify buying. Require multi-signal confidence, asymmetric reward/risk, and (in weak or
-  // volatile markets) a VERIFIED catalyst. Fail any → NO TRADE (capital preservation first).
-  const rr = winner.rewardRisk?.rr ?? 0;
+  // The winner has passed every unchanged final gate; earlier failures cannot block it.
   const winnerConf = winner.effectiveConfidence ?? winner.confidence ?? 0;
   const winnerLane = winner.lane || 'catalyst';
-  // Momentum-lane entries face a HIGHER confidence bar (regime bar + CONF_EXTRA) — the extra
-  // conviction is the price of entering without a verified catalyst.
-  const confBar = winnerLane === 'momentum' ? gates.minConfidence + MOMENTUM_LANE.CONF_EXTRA : gates.minConfidence;
-  const gateFail = [];
-  if (winnerConf < confBar) gateFail.push(`confidence ${+winnerConf.toFixed(1)} < ${confBar}${winnerLane === 'momentum' ? ' (momentum-lane bar)' : ''}`);
-  if (rr < gates.minRR) gateFail.push(`reward/risk ${rr} < ${gates.minRR}`);
-  if (winnerLane === 'catalyst' && gates.requireVerified && winnerCatalyst?.verification !== 'VERIFIED') gateFail.push(`catalyst ${winnerCatalyst?.verification || 'UNVERIFIED'} (need VERIFIED in ${regime.regime} market)`);
-  // V2: positive-expectancy gate — a trade whose probability-weighted loss outweighs its
-  // probability-weighted gain is a bad bet regardless of how good it looks on any one signal.
-  if (winner.expectedEdge?.edgePct == null) gateFail.push(winner.expectedEdge?.reason || 'insufficient payoff evidence');
-  else if (winner.expectedEdge.edgePct <= 0) gateFail.push(`historical net edge ${winner.expectedEdge.edgePct}% ≤ 0`);
-  if (winnerConc.action === 'reject') gateFail.push(winnerConc.reason);
-  if (gateFail.length) {
-    addRejection(winner.symbol, 'regime-gate', gateFail, {
-      momentum: winner.factors?.momentum ?? null, catalystScore: winner.factors?.catalyst ?? null,
-      confidence: winner.confidence ?? null, effectiveConfidence: +winnerConf.toFixed(1), regime: regime.regime,
-      sector: winner.factors?.sector ?? null, techScore: winner.factors?.technicals ?? null,
-      components: winner.confidenceComponents ?? null, expectedEdge: winner.expectedEdge ?? null,
-      discoveryParts: discoveryMeta.get(winner.symbol)?.discoveryParts ?? null,
-      rewardRisk: winner.rewardRisk ?? null, institutional: winner.institutional ?? null,
-      entryRefPrice: winnerSrc?.price ?? null, yahooSymbol: winnerSrc?._price?.symbol || null,
-    });
-    return noTrade(`${winner.symbol} failed ${regime.regime}-market entry gates: ${gateFail.join('; ')}`, {
-      regime: regime.regime, market: regime.reason,
-      candidate: { ticker: winner.symbol, confidence: winner.confidence, effectiveConfidence: +winnerConf.toFixed(1), rewardRisk: winner.rewardRisk, catalyst: winnerCatalyst?.type, verification: winnerCatalyst?.verification },
-    });
-  }
 
   try {
     const priceData = winnerSrc?._price;
