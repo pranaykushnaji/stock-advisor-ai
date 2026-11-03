@@ -72,13 +72,15 @@ deployment is needed. The current PR does not activate automatic minute exits.
 Send an authenticated POST to the preview's `/api/minute-monitor` with JSON:
 
 ```json
-{"mode":"connection-test","symbols":["MCX","COFORGE"]}
+{"mode":"connection-test","symbols":["MCX","COFORGE"],"testCandles":true}
 ```
 
 Use `Authorization: Bearer <preview CRON_SECRET>` as a header. This explicit test can run after
 hours, but returned prices will correctly show as stale then. It tests mapping and full-quote
 authentication; the current-day and historical candle APIs require separate entitlement checks.
-The Analytics Token stays in Vercel. None of these tokens belong in URLs or public logs.
+With `testCandles:true`, the response also reports authorization and row counts for prior-session
+historical candles and current-day intraday candles. The Analytics Token stays in Vercel.
+None of these tokens belong in URLs or public logs.
 
 ## Entry investigation and proposed fixes
 

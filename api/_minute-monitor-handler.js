@@ -1,6 +1,7 @@
 import { requireCronAuth } from './_cron-auth.js';
-import { mapNseSymbols, fetchFullQuotes, quoteFreshness } from './_upstox-market-data.js';
+import { mapNseSymbols, fetchFullQuotes, quoteFreshness, fetchOneMinuteCandles, fetchIntradayOneMinuteCandles } from './_upstox-market-data.js';
 import { evaluateMonitor, monitorSession } from './_minute-monitor.js';
+import { marketStatus, nowIST } from './_market-calendar.js';
 
 const REPO = 'pranaykushnaji/stock-advisor-ai';
 async function readHoldings() {
@@ -17,6 +18,7 @@ async function readHoldings() {
 }
 
 export function createMonitorHandler({ read = readHoldings, map = mapNseSymbols, quotes = fetchFullQuotes,
+  history = fetchOneMinuteCandles, intraday = fetchIntradayOneMinuteCandles,
   now = () => new Date(), env = process.env } = {}) {
   return async function handler(req, res) {
     res.setHeader?.('Cache-Control', 'no-store');
@@ -40,8 +42,22 @@ export function createMonitorHandler({ read = readHoldings, map = mapNseSymbols,
         }
         const m = await map(symbols), q = await quotes(Object.values(m.mapped));
         const missing = Object.values(m.mapped).filter(k => !q[k]);
-        return res.status(missing.length || m.unresolved.length || m.ambiguous.length ? 502 : 200).json({
+        let candleAccess = [];
+        if (body.testCandles === true) {
+          const prior = new Date(at);
+          do { prior.setUTCDate(prior.getUTCDate() - 1); } while (!marketStatus(prior).open && at - prior < 15 * 86400000);
+          const date = nowIST(prior).ymd;
+          candleAccess = await Promise.all(Object.entries(m.mapped).map(async ([symbol, key]) => {
+            const [h, i] = await Promise.allSettled([history(key, date, date), intraday(key)]);
+            return { symbol, historicalDate: date, historicalAllowed: h.status === 'fulfilled',
+              historicalCandles: h.status === 'fulfilled' ? h.value.length : null,
+              intradayAllowed: i.status === 'fulfilled', intradayCandles: i.status === 'fulfilled' ? i.value.length : null };
+          }));
+        }
+        const failedCandles = candleAccess.some(c => !c.historicalAllowed || !c.intradayAllowed);
+        return res.status(missing.length || m.unresolved.length || m.ambiguous.length || failedCandles ? 502 : 200).json({
           status: 'connection_test', mode: 'read-only-shadow', mapping: m, missing,
+          candleAccess,
           quotes: Object.values(q).map(x => ({ ...x, freshness: quoteFreshness(x, { nowMs: at.getTime() }) })),
         });
       }

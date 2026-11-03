@@ -92,3 +92,20 @@ test('monitor rewrites share an existing function and never fall through to trad
   const routes = fs.readdirSync(new URL('../api/', import.meta.url)).filter(f => f.endsWith('.js') && !f.startsWith('_'));
   assert.ok(routes.length <= 12, `standalone function count ${routes.length} exceeds deployment allowance`);
 });
+
+test('authenticated after-hours connection test validates quote and candle access without reading holdings', async () => {
+  const saved = process.env.CRON_SECRET; process.env.CRON_SECRET = 'test-only';
+  const make = () => ({ code: null, body: null, setHeader() {}, status(n) { this.code = n; return this; }, json(d) { this.body = d; return this; } });
+  const deps = { env: { UPSTOX_MONITOR_ENABLED: 'true', UPSTOX_ACCESS_TOKEN: 'test' }, now: () => new Date('2026-11-03T17:00:00Z'),
+    read: async () => { throw Error('must not read positions'); },
+    map: async () => ({ mapped: { MCX: key }, unresolved: [], ambiguous: [] }), quotes: async () => q(100),
+    history: async (_key, from, to) => { assert.equal(from, '2026-11-02'); assert.equal(to, from); return [[1]]; },
+    intraday: async () => [[1], [2]] };
+  const req = { method: 'POST', headers: { authorization: 'Bearer test-only' }, body: { mode: 'connection-test', symbols: ['MCX'], testCandles: true } };
+  try {
+    const good = make(); await createMonitorHandler(deps)(req, good);
+    assert.equal(good.code, 200); assert.equal(good.body.candleAccess[0].intradayCandles, 2);
+    const failed = make(); await createMonitorHandler({ ...deps, history: async () => { throw Error('forbidden'); } })(req, failed);
+    assert.equal(failed.code, 502); assert.equal(failed.body.candleAccess[0].historicalAllowed, false);
+  } finally { if (saved == null) delete process.env.CRON_SECRET; else process.env.CRON_SECRET = saved; }
+});
