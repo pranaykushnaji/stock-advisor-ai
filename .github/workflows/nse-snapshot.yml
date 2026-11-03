@@ -42,6 +42,7 @@ jobs:
         run: node scripts/fetch-nse-snapshot.js
 
       - name: Refresh official research registry
+        continue-on-error: true  # retain prior registry; its seven-day age guard blocks stale entries
         run: node scripts/research-universe.js --refresh
 
       - name: Commit snapshot if changed

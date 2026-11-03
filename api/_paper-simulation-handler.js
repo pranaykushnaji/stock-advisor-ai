@@ -68,7 +68,8 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
         return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:10000,
           positions:initial.data.positions.length,trades:initial.data.trades.length,
           registryMapped:members.filter(m=>m.instrumentKey).length,quotesRequested:checkedMembers.length,quotesReceived:Object.keys(q).length,candleAccess,
-          marketOpen:marketStatus(at).open,ordersExecuted:0});
+          marketOpen:marketStatus(at).open&&at.getTime()>=Date.parse(`${nowIST(at).ymd}T09:15:00+05:30`)
+            &&at.getTime()<Date.parse(`${nowIST(at).ymd}T15:30:00+05:30`),ordersExecuted:0});
       }
       const mkt=marketStatus(at),ist=new Date(at.getTime()+19800000),minute=ist.getUTCHours()*60+ist.getUTCMinutes();
       if(!mkt.open||minute<555||minute>=930)return res.status(200).json({status:'skipped',reason:!mkt.open?mkt.reason:'outside market hours',paperTrading:true});
