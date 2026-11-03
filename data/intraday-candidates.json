@@ -154,13 +154,35 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "15:00",
+          "ts": "2026-11-03T09:30:35.713Z",
+          "relVol": 3.01,
+          "confidence": 11.9,
+          "components": {
+            "technical": 56,
+            "flow": 64,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 76.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 4190056,
+          "sessionFrac": 0.92,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "14:00",
+      "lastSeen": "15:00",
       "bestConfidence": 43.1,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 8.6,
-      "trendBonus": 4
+      "confidenceTrend": "falling",
+      "confidenceSlope": -11.3,
+      "trendBonus": 0
     },
     "MOTHERSON": {
       "ticker": "MOTHERSON",
@@ -230,6 +252,43 @@
       ],
       "lastSeen": "12:00",
       "bestConfidence": 28.6,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "BHARTIARTL": {
+      "ticker": "BHARTIARTL",
+      "fullName": "Bharti Airtel Limited",
+      "sector": "Telecom",
+      "firstSeen": "15:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "15:00",
+          "ts": "2026-11-03T09:30:35.712Z",
+          "relVol": 1.85,
+          "confidence": 57.9,
+          "components": {
+            "technical": 76,
+            "flow": 77,
+            "catalyst": 5,
+            "liquidity": 95
+          },
+          "discoveryScore": 68.9,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 15370431,
+          "sessionFrac": 0.92,
+          "missing": [
+            "relVol 1.85<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "15:00",
+      "bestConfidence": 57.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
