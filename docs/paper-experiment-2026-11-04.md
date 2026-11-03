@@ -13,9 +13,11 @@ nor consent to a real-money trading service. No broker order endpoint is used.
 - Experimental modeled initial risk ₹100/trade and ₹500 aggregate open initial risk. These
   are study configuration assumptions, **not the user's declared loss tolerance**, and not
   maximum guaranteed losses. Gaps, circuits and missing observations can exceed modeled risk.
-- Price checks every five minutes 09:15–15:25 IST; candidate scans every fifteen minutes.
-  Candidate entry window 09:50–14:45; on the quarter-hour schedule the first potential entry
-  is 10:00 IST. Scans outside that window still perform price protection.
+- Saved-research suggestions refresh every five minutes 08:00–09:10 IST, without funding,
+  prices, or trades. The existing 07:45 snapshot and 08:05 morning research builder remain.
+- BOTH entry and exit checks run every five minutes 09:15–15:25 IST. No 09:50/10:00 gate or
+  14:45 cutoff remains. The exchange session is still binding: no premarket/post-close fills.
+  Rule revision: `five-minute-opening-v2`; the ledger remains backward compatible.
 - The legacy opening/hourly BUY handlers return `legacy_paused` when the experiment flag is
   enabled. Legacy positions still retain their old sell handler; there were none at release.
 - The separate Upstox shadow worker is unchanged. It is not the production execution owner.
@@ -36,11 +38,28 @@ above EMA20. No hard near-52-week-high, accumulation-proxy or calibrated-probabi
 Reuse the versioned completed-candle consolidation setup: six prior five-minute bars inside
 a ≤2% range, breakout close above that range, breakout volume ≥1.5× recent-bar average, above
 session VWAP but ≤2% extended, and no >0.75% gap above the signal close at the proposed fill.
-Daily history excludes the signal session. Quotes are refreshed after slower research.
-No compulsory verified positive catalyst for this deliberately price/volume-only lane.
-The LLM neither buys nor sells this portfolio; full news/event interpretation remains a
-separate research layer. Official-subject risk words are review exclusions, not assertions
-that an allegation is true.
+Before enough regular-session bars exist, an opening variant requires at least two COMPLETE
+five-minute range bars plus a COMPLETE breakout bar: at least 2x recent-bar volume, range
+at most 1.5%, extension above VWAP at most 1.5%, signal-to-quote gap at most 0.5%. Its range
+grows from two to five bars until the standard six-bar setup is available. No missing minutes
+are allowed. Earliest theoretical setup is 09:30, because fifteen minutes of evidence must
+exist; this is NOT a clock instruction to buy at 09:30. No confirmation means no entry.
+The execution quote must come AFTER the signal candle completes. Daily history excludes the
+signal session. Held and candidate quotes are refreshed after slower research.
+
+Reuse the morning watchlist, catalyst memory and news-intel files, not new per-stock LLM calls
+every five minutes. Original event evidence must be at most 72h old, not renewed by a rebuild.
+Verified events require evidence-version 2 plus an official filing or distinct linked sources
+with distinct headlines. Only these earn the existing discovery catalyst bonus. A current
+morning watchlist or fresh advisor report can reserve two of eight detailed research slots,
+but cannot bypass any execution gate; advisor articles remain explicitly unverified. Stale
+reports are ignored. Missing optional research does not invent a catalyst or stop price exits.
+Mandatory surveillance context still blocks new buys when unavailable.
+
+There is no compulsory verified positive catalyst for the technical lane. The LLM neither
+buys nor sells this portfolio; saved news interpretation remains advisory. Verified negative
+events and material official-subject risk flags can exclude buys or exit positions. Such risk
+words are conservative review exclusions, not assertions that an allegation is true.
 
 The initial stop lies just below consolidation support and must be 0.5–3% below the simulated
 entry. Position quantity is the minimum permitted by stop risk, daily cash allowance and
@@ -72,6 +91,10 @@ history outages are explicit. Force parameters cannot bypass market hours. The a
 not backfilled with hypothetical morning purchases. Closed outcomes are separate from the
 archived legacy trades and never manufacture a historical win probability.
 
+The public desk shows premarket suggestions, explicit rejection reasons and simulated picks
+separately. Today's picks remain visible after held symbols leave discovery. No saved headline
+or suggestion is displayed as an executed trade. Premarket research does not credit cash.
+
 Flags: `PAPER_SIMULATION_ENABLED=true` on Vercel and the existing production worker. Disable
 the worker flag first to pause scheduling; disable the Vercel flag to stop the experiment.
 Do not re-enable legacy buys without separately reviewing their evidence and budget settings.
@@ -85,6 +108,10 @@ This is **forward testing**, not proof of historical or future profitability. No
 expected edge, win rate or claimed return improvement is asserted. The existing daily-candle
 backtest is NOT evidence for this new intraday setup. The deterministic transition is injectable
 for replay once point-in-time quotes, depth, safety data and candles have been collected.
+The opening variant uses the SAME parameterized completed-bar detector as the replay helper;
+synthetic tests cover pre-10am entries, stricter opening volume, missing candles, gaps, event
+freshness, scheduler cadence and safety-feed outages. Historical profitability of the new
+opening setup has NOT been established. Do not present daily-bar backtests as its validation.
 
 Intraday bars only observe available completed candles. Five-minute risk sampling can miss
 price excursions between checks. Sector scores, liquidity floors, risk units, cost allowances

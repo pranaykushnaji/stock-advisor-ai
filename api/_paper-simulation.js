@@ -3,11 +3,12 @@
 import { quoteFreshness } from './_upstox-market-data.js';
 import { rankByDiscoveryScore } from './_discovery-score.js';
 import { ema } from './_indicators.js';
-import { liveResearchEntry } from './_entry-research.js';
+import { liveSimulationEntry } from './_entry-research.js';
 import { researchExitObservation } from '../research/paper-plan.js';
 import { tradingSessionsHeld } from './_position-risk.js';
 
 export const SIM_CONFIG = Object.freeze({ version: 'paper-breakout-v1', dailyInvestment: 10000,
+  executionRuleVersion:'five-minute-opening-v2',
   maxPositionInvestment: 5000, maxBuysPerDay: 3, maxOpenPositions: 5,
   modeledRiskPerTrade: 100, maxModeledOpenRisk: 500,
   maxSpreadBps: 30, minimumAverageTurnoverCr: 10,
@@ -45,7 +46,7 @@ export function dailyReference(candles, date) {
     averageTurnoverCr:last.reduce((s,r)=>s+r.close*r.volume,0)/20/1e7 };
 }
 
-export function rankSimulationUniverse(members, quotes, {at, surveillance = [], negativeSymbols = [], blocked = []} = {}) {
+export function rankSimulationUniverse(members, quotes, {at, surveillance = [], negativeSymbols = [], blocked = [], researchBySymbol = {}} = {}) {
   const reject = [], rows = [], membersBySymbol = new Map(members.map(m=>[m.symbol,m]));
   const excluded = new Set([...surveillance,...negativeSymbols,...blocked]);
   for (const m of members) {
@@ -69,7 +70,8 @@ export function rankSimulationUniverse(members, quotes, {at, surveillance = [], 
     const a=sectors.get(member.sector)||[];a.push((q.price/q.previousClose-1)*100);sectors.set(member.sector,a);}
   const ranked=rankByDiscoveryScore(rows,r=>{
     const peers=sectors.get(membersBySymbol.get(r.symbol).sector)||[];
-    return {sectorScore:peers.length>=3?Math.min(100,50+peers.reduce((s,n)=>s+n,0)/peers.length*10):50};
+    return {sectorScore:peers.length>=3?Math.min(100,50+peers.reduce((s,n)=>s+n,0)/peers.length*10):50,
+      hasCatalyst:researchBySymbol[r.symbol]?.verified===true};
   });
   return {ranked,rejected:reject};
 }
@@ -77,10 +79,23 @@ export function rankSimulationUniverse(members, quotes, {at, surveillance = [], 
 export function transitionSimulation(input, market, {at, action='risk', config=SIM_CONFIG} = {}) {
   validateSimulation(input);
   const s=structuredClone(input),date=ymd(at),slot=Math.floor(at.getTime()/300000)*300000;
-  if (!['risk','scan'].includes(action)) throw new Error('Invalid simulation action');
+  if (!['risk','scan','research'].includes(action)) throw new Error('Invalid simulation action');
   if (slot <= (s.lastSlots[action] || 0)) return {state:s,status:'duplicate',changed:false};
   // Decisions older than a committed observation must never execute backwards in time.
   if (at.getTime() < (Date.parse(s.updatedAt)||0)) return {state:s,status:'out_of_order',changed:false};
+  if(action==='research'){
+    const blocked=new Set(s.positions.map(p=>p.ticker));
+    s.suggestions=(market.candidates||[]).filter(c=>!blocked.has(c.symbol)).map(c=>({
+      ticker:c.symbol,fullName:c.name,sector:c.sector,discoveryScore:null,price:null,observedAt:null,
+      research:market.researchBySymbol?.[c.symbol]??null,status:market.researchBySymbol?.[c.symbol]?.negative?'not-qualified':'watch',
+      reasons:[market.researchBySymbol?.[c.symbol]?.negative
+        ?'verified negative event: excluded from entries'
+        :'premarket research only; awaiting fresh market data and a completed breakout']}));
+    s.lastSlots.research=slot;s.updatedAt=at.toISOString();s.config=config;
+    s.lastCheck={at:s.updatedAt,action,bought:null,checked:[]};
+    validateSimulation(s);
+    return {state:s,status:'researched',changed:true,bought:null,checked:[]};
+  }
   if (!s.days[date]) {
     s.days[date]={contribution:config.dailyInvestment,invested:0,buys:[],exits:[]};
     s.cash=round(s.cash+config.dailyInvestment);s.contributions=round(s.contributions+config.dailyInvestment);
@@ -114,7 +129,8 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
   if(action==='scan'){
     s.suggestions=(market.candidates||[]).map(c=>({ticker:c.symbol,fullName:c.name,sector:c.sector,
       discoveryScore:c.discoveryScore??null,price:market.quotes[c.instrumentKey]?.price??null,
-      observedAt:market.quotes[c.instrumentKey]?.lastTradeAt??null,reasons:[],status:'watch'}));
+      observedAt:market.quotes[c.instrumentKey]?.lastTradeAt??null,
+      research:market.researchBySymbol?.[c.symbol]??null,reasons:[],status:'watch'}));
     const blocked=new Set([...s.positions.map(p=>p.ticker),...day.buys,...day.exits]);
     const benchmark=market.quotes['NSE_INDEX|Nifty 50'];
     const benchmarkFresh=quoteFreshness(benchmark,{nowMs:at.getTime()}).fresh;
@@ -138,7 +154,7 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       if(s.positions.some(p=>p.sector===c.sector))reasons.push('sector already represented');
       if(reasons.length)continue;
       if(!(q.upperCircuit>q.price && q.lowerCircuit<q.price) || q.price>=q.upperCircuit*0.995 || q.price<=q.lowerCircuit*1.005){reasons.push('official circuit limit unavailable or too close at execution');continue;}
-      const setup=liveResearchEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'});
+      const setup=liveSimulationEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'});
       if(setup.status!=='setup'){reasons.push(setup.reason||'no confirmed consolidation breakout');continue;}
       const fill=q.askPrice*(1+config.entrySlippageBps/10000),stop=setup.supportLevel*0.999;
       const stopPct=(1-stop/fill)*100;
@@ -156,16 +172,20 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
         fullName:c.name,sector:c.sector,date,addedAt:q.lastTradeAt,strategyVersion:config.version,entryLane:'experimental-consolidation',
         entryPrice:fill,shares,investedAmount:invested,entryCost,initialStopPrice:stop,initialStopPct:stopPct,
         modeledInitialRisk:round(shares*lossPerShare),peakPrice:fill,currentPrice:q.price,lastObservedAt:q.lastTradeAt,lastPriceUpdate:q.lastTradeAt,
-        summary:'Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.',
-        setup,quoteTimestamp:q.lastTradeAt,paperTrading:true,expectedEdge:null};
+        summary:setup.setupVersion==='opening-consolidation-v1'
+          ?'Completed opening-range breakout with at least 2x recent-bar volume; above VWAP and EMA20, positive relative strength.'
+          :'Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.',
+        setup,research:market.researchBySymbol?.[c.symbol]??null,executionRuleVersion:config.executionRuleVersion,
+        quoteTimestamp:q.lastTradeAt,paperTrading:true,expectedEdge:null};
       s.positions.push(p);s.cash=round(s.cash-invested-entryCost);day.invested=round(day.invested+invested+entryCost);day.buys.push(c.symbol);
-      row.status='simulated-buy';row.reasons=['confirmed setup; simulated fill recorded'];bought=c.symbol;break;
+      row.status='simulated-buy';row.setup=setup;row.reasons=['confirmed setup; simulated fill recorded'];bought=c.symbol;break;
     }
     for(const row of s.suggestions){if(row.status!=='simulated-buy')row.status=row.reasons.length?'not-qualified':'not-selected';}
     s.discovery=market.discovery||null;
   }
   s.lastSlots[action]=slot;s.updatedAt=at.toISOString();s.config=config;
-  s.lastCheck={at:s.updatedAt,action,bought,checked};
+  s.lastCheck={at:s.updatedAt,action,bought,checked,entryPause:market.entryPause??null,
+    researchStatus:market.researchUnavailable?'unavailable':'loaded'};
   validateSimulation(s);
   return {state:s,status:checked.some(r=>r.status==='unusable_price')?'partial':'processed',changed:true,bought,checked};
 }

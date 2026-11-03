@@ -231,7 +231,7 @@ const metric = (title, value, note, className = '') => `<div class="metric"><dl>
 const field = (title, value) => `<div><dt>${e(title)}</dt><dd>${e(value)}</dd></div>`;
 const heading = (eyebrow, title, description, badge = '') => `<div class="section-heading"><div><p class="eyebrow">${e(eyebrow)}</p><h1>${e(title)}</h1><p class="muted">${e(description)}</p></div>${badge ? `<span class="badge">${e(badge)}</span>` : ''}</div>`;
 const empty = (title, body) => `<div class="empty"><h2>${e(title)}</h2><p class="muted">${e(body)}</p></div>`;
-const pill = row => `<span class="badge ${row.status === 'Watch' ? 'watch' : 'warning'}">${e(row.status)}</span>`;
+const pill = row => `<span class="badge ${['Watch','Simulated pick'].includes(row.status) ? 'watch' : 'warning'}">${e(row.status)}</span>`;
 const list = values => `<ul>${values.map(value => `<li>${e(value)}</li>`).join('')}</ul>`;
 const expiryText = row => row.expiresAt ? `${row.expired ? 'Expired' : 'Expires'} ${dateTime(row.expiresAt)}${row.expiryInferred ? ' · session end inferred' : ''}` : 'Setup expiry not supplied';
 
@@ -246,7 +246,7 @@ function suggestionDetails(row) {
     ${row.dailyReason ? `<p><strong>Daily decision:</strong> ${e(row.dailyReason)}</p>` : ''}
     <dl class="key-values divider">${field('Latest scan discovery score', decimal(row.discoveryScore))}${field('Current model score', decimal(row.modelScore))}${field('Daily effective score', decimal(row.effectiveScore))}${field(row.accumulationSource, decimal(row.accumulation))}${field('Latest scan Flow score · separate signal', decimal(row.flowScore))}${field('Current relative volume', row.relVol === null ? NA : `${decimal(row.relVol)}×`)}${field('Catalyst verification', row.verification)}</dl>
     <p class="small divider">Scores are ranking signals, not probabilities. Accumulation is a volume/flow proxy, not proof of institutional buying.</p>
-    <p class="small">Catalyst: ${e(row.catalyst)}. ${row.preliminary ? 'scan.tradeable is true: preliminary scan only; no entry is authorized.' : 'No entry is authorized by this preview.'}</p>
+    <p class="small">Catalyst: ${e(row.catalyst)}. ${row.status==='Simulated pick'?'A simulated fill was recorded; no real broker order was placed.':row.preliminary ? 'scan.tradeable is true: preliminary scan only; no entry is authorized.' : 'Research alone is not a fill; the deterministic engine must confirm an entry.'}</p>
     <dl class="key-values divider">${field('Saved quote', money(row.price))}${field('VWAP', money(row.vwap))}${field('Trigger', money(row.trigger))}${field('Stop', money(row.stop))}</dl>
     <p class="small divider">Quote: ${e(row.priceSource)} · ${e(dateTime(row.priceAt))}. Saved quote is not a fill or a live executable price.</p>
     ${row.daily ? `<p class="small">Daily considered: ${e(dateTime(row.dailyAt))} · daily-pick.json / main branch</p>` : ''}
@@ -258,6 +258,30 @@ export function renderSuggestions(rows) {
   if (!rows.length) return empty('No matching suggestions', 'Change the filter or refresh files. Missing sources are listed in system health.');
   return `<div class="panel desktop-table"><table class="stock-table"><caption>Watchlist research · main branch · scores are not probabilities</caption><thead><tr><th scope="col">Stock / source</th><th scope="col">Status / setup time</th><th scope="col" class="number">Discovery score</th><th scope="col" class="number">Saved price</th><th scope="col" class="reason-column">Entry review</th></tr></thead><tbody>${rows.map(row => `<tr><td><strong>${e(row.ticker)}</strong><span class="cell-note">${e(row.name)}</span><span class="cell-note">${e(row.sector ?? 'Sector not available')}</span><span class="cell-note">${e(row.sources.join(' + '))}</span></td><td>${pill(row)}<span class="cell-note">${e(row.chosenSource)} ${e(dateTime(row.chosenAt))}</span><span class="cell-note">${e(expiryText(row))}</span></td><td class="number">${e(decimal(row.discoveryScore))}<span class="cell-note">Latest scan · ${e(dateTime(row.scanAt))}</span></td><td class="number">${e(money(row.price))}<span class="cell-note">${e(row.priceSource)}</span><span class="cell-note">${e(dateTime(row.priceAt))}</span></td><td>${e(row.currentReason)}${suggestionDetails(row)}</td></tr>`).join('')}</tbody></table></div>
     <div class="panel mobile-cards">${rows.map(row => `<article class="stock-card"><header><div><h2>${e(row.ticker)}</h2><p class="muted small">${e(row.name)}</p><p class="small muted">${e(row.sector ?? 'Sector not available')}</p></div>${pill(row)}</header><p class="small muted">${e(row.sources.join(' + '))} · main branch</p><p class="small muted">${e(row.chosenSource)} ${e(dateTime(row.chosenAt))}</p><p class="small muted">${e(expiryText(row))}</p><dl class="key-values">${field('Saved price', money(row.price))}${field('Latest scan discovery score · not probability', decimal(row.discoveryScore))}${field('VWAP', money(row.vwap))}${field('Trigger / stop', `${money(row.trigger)} / ${money(row.stop)}`)}</dl><p>${e(row.currentReason)}</p>${suggestionDetails(row)}</article>`).join('')}</div>`;
+}
+
+export function simulationSuggestions(sim, now=Date.now()) {
+  const rows=new Map((sim?.suggestions||[]).map(r=>[r.ticker,r]));
+  const today=new Date(now+19800000).toISOString().slice(0,10);
+  // Held names leave discovery. Keep today's actual simulated picks visible instead
+  // of making them disappear from Suggestions on the very next five-minute scan.
+  for(const p of [...(sim?.positions||[]),...(sim?.trades||[])])if((p.date||p.entryDate)===today){
+    rows.set(p.ticker,{...rows.get(p.ticker),ticker:p.ticker,fullName:p.fullName,sector:p.sector,
+      status:'simulated-buy',price:p.currentPrice,observedAt:p.lastPriceUpdate,pickedAt:p.addedAt,
+      setup:p.setup,research:p.research,reasons:[p.exitAt?`Simulated pick; exited: ${p.exitReason}`:'Simulated fill recorded; position is managed by exit checks']});
+  }
+  return [...rows.values()].map(r=>({ticker:r.ticker,name:r.fullName||r.ticker,sector:r.sector,
+    reasons:r.reasons||[],scanReasons:[],laneReasons:[],sources:['Upstox paper scan',...(r.research?[r.research.source||'Saved research']:[])],
+    status:r.status==='simulated-buy'?'Simulated pick':r.status==='not-qualified'?'Not qualified':'Watch',
+    chosenSource:r.status==='simulated-buy'?'Simulated fill':'Paper experiment',chosenAt:r.pickedAt||sim.updatedAt,currentReason:(r.reasons||[]).join('; ')||'Not selected in this scan',
+    discoveryScore:r.discoveryScore,modelScore:null,effectiveScore:null,accumulation:null,flowScore:null,accumulationSource:'Not an institutional signal',
+    relVol:r.setup?.volumeRatio??null,verification:r.research?.verification||'No verified event supplied',
+    catalyst:r.research?`${r.research.type}: ${r.research.summary}`:'No positive-catalyst requirement; price/volume confirmation remains mandatory',
+    price:r.price,priceAt:r.observedAt,priceSource:r.price==null?'No live premarket price claimed':'Saved Upstox observation',
+    vwap:r.setup?.vwap??null,trigger:r.setup?.breakoutLevel??null,stop:null,
+    expiresAt:sessionEnd(sim.updatedAt?.slice(0,10)),expiryInferred:true,expired:timestamp(sessionEnd(sim.updatedAt?.slice(0,10)))<now,
+    preliminary:false,scanAt:sim.updatedAt,daily:null,candidate:null
+  }));
 }
 
 function coverageCard(coverage) {
@@ -278,11 +302,12 @@ function renderOverview(data, suggestions, ledger, coverage) {
   const pick = data['daily-pick']?.pick;
   if(data['paper-simulation']){
     const sim=data['paper-simulation'],today=new Date(Date.now()+19800000).toISOString().slice(0,10),day=sim.days?.[today];
+    const latestPick=[...(sim.positions||[]),...(sim.trades||[])].sort((a,b)=>(timestamp(b.addedAt)??0)-(timestamp(a.addedAt)??0))[0];
     const equity=number(sim.cash)===null?null:sim.cash+(sim.positions||[]).reduce((s,p)=>s+(p.shares*p.currentPrice||0),0);
     return heading('Experimental portfolio','Overview','₹10,000 per trading day · price/volume setups · no real orders','Paper only')+
       `<div class="metrics">${metric('Simulated realized P&L',money(ledger.gross),'Before estimated costs',tone(ledger.gross))}${metric('Realized after estimated costs',money(ledger.estimatedNet),'From recorded simulated fills',tone(ledger.estimatedNet))}${metric('Daily investment remaining',money(Math.max(0,10000-(day?.invested||0))),'Costs included · unused budget is not a buy signal')}${metric('Open positions',decimal(ledger.openCount),'At most five open; three new per day')}</div>`+
-      `<div class="two-column"><section class="panel panel-pad"><h2>Simulation account</h2><dl class="key-values">${field('Hypothetical cash',money(sim.cash))}${field('Hypothetical contributions',money(sim.contributions))}${field('Cash + marked positions',money(equity))}${field('Version',sim.strategyVersion)}</dl><p class="small divider">₹10,000 hypothetical funding is added once on each trading day when the first scheduled check runs. Unspent cash carries forward, but new investment remains capped at ₹10,000/day.</p><p class="small">Entry scans every 15 minutes; price-risk checks every five minutes. Modeled initial risk ₹100/trade, at most ₹500 open risk. Gaps can exceed these estimates. No fixed profit target or guaranteed daily return.</p><p class="small">${sim.updatedAt?`Last state update: ${e(dateTime(sim.updatedAt))}`:'Waiting for the first market-hours check; no trades have been invented.'}</p></section>${coverageCard(coverage)}</div>`+
-      `<section class="panel panel-pad"><h2>Current research</h2><p>${e(sim.lastCheck?.bought?`Latest simulated buy: ${sim.lastCheck.bought}`:sim.suggestions?.length?'No forced entry. Review each candidate’s recorded conditions.':'No experimental scan yet. Research starts during the regular session.')}</p><a class="text-link" href="#suggestions">Review suggestions →</a><p class="small">This version is collecting its own evidence. Legacy results remain archived and are not presented as validation of this experiment. Cost assumption: 15bp per side; additional 5bp execution slippage per side plus observed bid/ask spread.</p></section>`;
+      `<div class="two-column"><section class="panel panel-pad"><h2>Simulation account</h2><dl class="key-values">${field('Hypothetical cash',money(sim.cash))}${field('Hypothetical contributions',money(sim.contributions))}${field('Cash + marked positions',money(equity))}${field('Version',sim.strategyVersion)}</dl><p class="small divider">₹10,000 hypothetical funding is added once on each trading day when the first market-hours check runs. Unspent cash carries forward, but new investment remains capped at ₹10,000/day.</p><p class="small">Research suggestions refresh every five minutes from 08:00 IST. Entry AND exit checks run every five minutes from 09:15 to 15:25 IST. Entries are evidence-led, not held until 10:00; completed opening-range confirmation is still required. Modeled initial risk ₹100/trade, at most ₹500 open risk. Gaps can exceed these estimates. No fixed profit target or guaranteed daily return.</p><p class="small">${sim.updatedAt?`Last state update: ${e(dateTime(sim.updatedAt))}`:'Waiting for the first scheduled research check; no trades have been invented.'}</p></section>${coverageCard(coverage)}</div>`+
+      `<section class="panel panel-pad"><h2>Suggestions + picks</h2><p>${e(latestPick?`Latest simulated pick: ${latestPick.ticker} · ${dateTime(latestPick.addedAt)}`:sim.suggestions?.length?'No pick yet. Review the current research suggestions and their recorded blockers.':'No research suggestions yet. Fresh saved morning/news research is checked from 08:00 IST; Upstox momentum is checked after the market opens.')}</p><a class="text-link" href="#suggestions">Review suggestions →</a><p class="small">This version is collecting its own evidence. Legacy results remain archived and are not presented as validation of this experiment. Cost assumption: 15bp per side; additional 5bp execution slippage per side plus observed bid/ask spread.</p></section>`;
   }
   return heading('Your working desk', 'Overview', 'Review the queue, paper positions and data quality.', 'Paper only') +
     `<div class="metrics">${metric('Realized paper P&L', money(ledger.gross), ledger.missingRealized ? `Partial: ${ledger.missingRealized} amounts missing · before costs` : 'Recorded rupee sum · before costs', tone(ledger.gross))}${metric('Open unrealized P&L', money(ledger.unrealized), ledger.openCount === null ? 'Position source unavailable' : `${ledger.openCount} open positions${ledger.missingOpen ? ` · ${ledger.missingOpen} unpriced` : ''}`, tone(ledger.unrealized))}${metric('Closed trades / wins', ledger.count === null ? NA : `${ledger.count} / ${ledger.wins}`, 'Mixed / unknown strategy versions')}${metric('Research queue', suggestions.length ? decimal(suggestions.length) : data['daily-pick'] || data['intraday-candidates'] ? '0' : NA, 'Daily + intraday · deduplicated')}</div>
@@ -387,21 +412,13 @@ export function startDesk(doc = document, win = window) {
     const states = await Promise.all(SOURCES.map(fetchSource));
     const data = Object.fromEntries(states.map(state => [state.name, state.data]));
     const sim=data['paper-simulation'];
-    suggestions = sim ? (sim.suggestions||[]).map(r=>({ticker:r.ticker,name:r.fullName||r.ticker,sector:r.sector,
-      reasons:r.reasons||[],scanReasons:[],laneReasons:[],sources:['Experimental scan'],status:r.status==='not-qualified'?'Not qualified':'Watch',
-      chosenSource:'Paper experiment',chosenAt:sim.updatedAt,currentReason:(r.reasons||[]).join('; ')||'Not selected in this scan',
-      discoveryScore:r.discoveryScore,modelScore:null,effectiveScore:null,accumulation:null,flowScore:null,accumulationSource:'Not an institutional signal',
-      relVol:null,verification:'Not required for this price/volume experiment',catalyst:'No claim of a verified catalyst',
-      price:r.price,priceAt:r.observedAt,priceSource:'Saved Upstox observation',vwap:null,trigger:null,stop:null,
-      expiresAt:sessionEnd(sim.updatedAt?.slice(0,10)),expiryInferred:true,expired:timestamp(sessionEnd(sim.updatedAt?.slice(0,10)))<Date.now(),
-      preliminary:false,scanAt:sim.updatedAt,daily:null,candidate:null
-    })) : [];
+    suggestions = sim ? simulationSuggestions(sim) : [];
     const trades = sim?.trades ?? null, positions = sim?.positions ?? null;
     const ledger = summarizeLedger(trades, positions), coverage = coverageSummary(data['nse-snapshot'], data.universe, suggestions);
     $('overview').innerHTML = sim?renderOverview(data, suggestions, ledger, coverage):empty('Simulation state unavailable','The new paper ledger could not be read. This is not a zero balance or a successful scan. Check file health.');
     $('positions').innerHTML = renderPositions(positions, ledger);
     $('results').innerHTML = renderResults(trades, ledger,{experimental:!!sim});
-    $('suggestion-context').textContent = 'Experimental candidates from the latest Upstox scan. A watchlist is not a fill. Simulated fills appear under Positions and Results. Discovery scores are rankings, not win probabilities.';
+    $('suggestion-context').textContent = 'Suggestions + simulated picks: saved morning/news research before the open, then Upstox momentum checks every five minutes. Only “Simulated pick” means a fill was recorded. Advisor news is not automatically verified. Scores are rankings, not win probabilities.';
     const failed = states.filter(state => state.error).length;
     const stale = states.filter(state => state.data && freshness(sourceTime(state.name, state.data).value).stale).length;
     $('health-summary').textContent = `${failed} unavailable · ${stale} stale / age unknown`;

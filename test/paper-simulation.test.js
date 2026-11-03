@@ -2,6 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {emptySimulation,validateSimulation,dailyReference,transitionSimulation,rankSimulationUniverse,SIM_CONFIG} from '../api/_paper-simulation.js';
 import {createSimulationHandler} from '../api/_paper-simulation-handler.js';
+import {savedResearchContext,verifiedResearchEvent} from '../api/_paper-research-context.js';
+import {liveSimulationEntry} from '../api/_entry-research.js';
 
 const start=Date.parse('2026-11-04T04:30:05Z');
 const c=(symbol='ABC',sector='IT')=>({symbol,name:symbol,sector,marketCapBucket:'mid',instrumentKey:`NSE_EQ|${symbol}`});
@@ -95,5 +97,99 @@ test('simulation handler retries CAS against fresh state without double-counting
   try{await h({method:'POST',query:{action:'scan'},headers:{authorization:'Bearer test'}},res);
     assert.equal(current.positions.length,1);assert.equal(current.days['2026-11-04'].buys.length,1);assert.equal(current.contributions,10000);
     assert.equal(res.body.status,'duplicate');
+  }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
+});
+
+test('opening entries mature from completed evidence, not a fixed 10am threshold',()=>{
+  for(const time of ['09:15:05','09:20:05','09:25:05']){
+    const at=new Date(`2026-11-04T${time}+05:30`);
+    assert.notEqual(liveSimulationEntry(candles(at),quote(c(),at),{now:at}).status,'setup');
+  }
+  const at=new Date('2026-11-04T09:30:05+05:30');
+  const r=transitionSimulation(emptySimulation(),market(at),{at,action:'scan'});
+  assert.equal(r.bought,'ABC');assert.equal(r.state.positions[0].setup.setupVersion,'opening-consolidation-v1');
+  assert.equal(r.state.positions[0].addedAt,at.toISOString());
+  const minutes=candles(at);minutes.splice(21,1);
+  assert.notEqual(liveSimulationEntry(minutes,quote(c(),at),{now:at}).status,'setup');
+  const beforeSignal=quote(c(),at);beforeSignal.lastTradeAt='2026-11-04T03:59:59Z';
+  assert.notEqual(liveSimulationEntry(candles(at),beforeSignal,{now:at}).status,'setup');
+});
+test('short opening history requires stronger volume and does not chase a gap',()=>{
+  const at=new Date('2026-11-04T09:30:05+05:30'),rows=candles(at);
+  for(const row of rows.slice(-5))row[5]=190;
+  assert.notEqual(liveSimulationEntry(rows,quote(c(),at),{now:at}).status,'setup');
+  assert.notEqual(liveSimulationEntry(candles(at),quote(c(),at,102),{now:at}).status,'setup');
+});
+test('premarket suggestions are persisted without funding, a price, or a fabricated pick',()=>{
+  const at=new Date('2026-11-04T08:10:05+05:30'),m={candidates:[c()],researchBySymbol:{ABC:{summary:'Morning watch',verified:false}}};
+  const r=transitionSimulation(emptySimulation(),m,{at,action:'research'});
+  assert.equal(r.state.cash,0);assert.equal(r.state.contributions,0);assert.deepEqual(r.state.days,{});
+  assert.equal(r.state.positions.length,0);assert.equal(r.state.suggestions[0].price,null);
+  assert.match(r.state.suggestions[0].reasons[0],/premarket research only/);
+  assert.equal(transitionSimulation(r.state,m,{at,action:'research'}).status,'duplicate');
+});
+test('premarket handler uses saved research without querying live executable prices or funding',async()=>{
+  const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';
+  const at=new Date('2026-11-04T08:10:05+05:30');let current=emptySimulation();
+  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},
+    now:()=>at,members:[c()],read:async()=>({data:structuredClone(current),sha:'x'}),write:async s=>{current=s;return true;},
+    quotes:async()=>{throw Error('No premarket quote call allowed');},
+    safety:async()=>({safetyReady:true,researchBySymbol:{ABC:{source:'morning research',verified:false,summary:'Watch'}}})});
+  const res={setHeader(){},status(){return this;},json(body){this.body=body;return this;}};
+  try{await h({method:'POST',query:{action:'research'},headers:{authorization:'Bearer test'}},res);
+    assert.equal(res.body.status,'researched');assert.equal(current.suggestions.length,1);
+    assert.equal(current.contributions,0);assert.equal(current.positions.length,0);
+  }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
+});
+test('a stale universe pauses entries without pausing five-minute stop protection',async()=>{
+  const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';
+  const entryAt=new Date(start);let current=transitionSimulation(emptySimulation(),market(entryAt),{at:entryAt,action:'scan'}).state;
+  const at=new Date(start+300000),member=c();
+  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},
+    now:()=>at,members:[member],registryFetchedAt:'2026-10-01T00:00:00Z',
+    read:async()=>({data:structuredClone(current),sha:'x'}),write:async s=>{current=s;return true;},
+    quotes:async keys=>{assert.deepEqual(keys,[member.instrumentKey]);return {[member.instrumentKey]:quote(member,at,95)};},
+    safety:async()=>({safetyReady:true})});
+  const res={setHeader(){},status(){return this;},json(body){this.body=body;return this;}};
+  try{await h({method:'POST',query:{action:'scan'},headers:{authorization:'Bearer test'}},res);
+    assert.equal(res.body.entryPause,'registry_stale');assert.equal(current.positions.length,0);assert.equal(current.trades.length,1);
+  }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
+});
+test('saved research requires original dated independent evidence; stale advisor news never gets a verified bonus',()=>{
+  const at=new Date(start),event={type:'government order',summary:'Official order',verification:'VERIFIED',evidenceVersion:2,
+    hasCatalyst:true,eventPublishedAt:start-3600000,evidence:[{title:'Official order',publisher:'nse-filing'}]};
+  assert.equal(verifiedResearchEvent(event,start),true);
+  assert.equal(verifiedResearchEvent({...event,eventPublishedAt:start-73*3600000},start),false);
+  assert.equal(verifiedResearchEvent({...event,eventPublishedAt:start+1},start),false);
+  assert.equal(verifiedResearchEvent({...event,evidence:[{title:'Same headline',url:'https://a.test/1'},
+    {title:'Same headline',url:'https://b.test/2'}]},start),false);
+  const r=savedResearchContext({watchlist:{date:'2026-11-04',builtAt:at.toISOString(),watch:[{ticker:'ABC',catalyst:event}]},
+    intel:{generatedAt:'2026-07-13T00:00:00Z',items:[{ticker:'XYZ'}]}},at,[c(),c('XYZ')]);
+  assert.equal(r.researchBySymbol.ABC.verified,true);assert.equal(r.researchBySymbol.XYZ,undefined);
+  const base=rankSimulationUniverse([c()],market(at).quotes,{at}).ranked[0].discoveryScore;
+  const bonus=rankSimulationUniverse([c()],market(at).quotes,{at,...r}).ranked[0].discoveryScore;
+  assert.ok(bonus>base);
+});
+test('news can prioritize a suggestion but never bypass missing breakout confirmation',()=>{
+  const at=new Date(start),m=market(at);m.researchBySymbol={ABC:{verified:true,summary:'Official order'}};m.candles.ABC=[];
+  const r=transitionSimulation(emptySimulation(),m,{at,action:'scan'});
+  assert.equal(r.bought,null);assert.equal(r.state.suggestions[0].research.verified,true);
+});
+test('handler evaluates a pre-10am non-quarter-hour scan and preserves risk exits if safety reads fail',async()=>{
+  const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';
+  let at=new Date('2026-11-04T09:35:05+05:30'),current=emptySimulation(),m=market(at),failSafety=false;
+  current.dailyCache.ABC={asOf:'2026-11-04',ema20:99,averageTurnoverCr:20};
+  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},
+    now:()=>at,members:[c()],read:async()=>({data:structuredClone(current),sha:'x'}),
+    write:async state=>{current=state;return true;},quotes:async keys=>Object.fromEntries(keys.map(k=>[k,m.quotes[k]])),
+    intraday:async()=>candles(at),daily:async()=>[],safety:async()=>{if(failSafety)throw Error('outage');return {safetyReady:true};}});
+  const req={method:'POST',query:{action:'scan'},headers:{authorization:'Bearer test'}};
+  const response=()=>({setHeader(){},status(){return this;},json(d){this.body=d;return this;}});
+  try{
+    const r=response();await h(req,r);assert.equal(current.positions.length,1);assert.equal(r.body.bought,'ABC');
+    at=new Date('2026-11-04T09:40:05+05:30');m=market(at);failSafety=true;
+    m.quotes[c().instrumentKey]=quote(c(),at,95);
+    await h(req,response());assert.equal(current.positions.length,0);assert.equal(current.trades.length,1);
+    assert.equal(current.trades[0].exitAt,at.toISOString());
   }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
 });

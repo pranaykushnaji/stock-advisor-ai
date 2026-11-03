@@ -4,7 +4,7 @@ import { laneStats, expectedEdge } from '../api/_edge.js';
 import {
   SOURCES, number, escapeHTML, freshness, timestamp, sourceTime, validateData,
   mergeSuggestions, realizedAmount, positionAmount, summarizeLedger, laneEvidence,
-  coverageSummary, renderSuggestions, renderPositions, renderResults, renderHealth,
+  coverageSummary, renderSuggestions, renderPositions, renderResults, renderHealth, simulationSuggestions,
 } from '../desk/desk.js';
 
 const now = Date.parse('2026-11-03T10:00:00Z');
@@ -16,6 +16,20 @@ const intra = (scan = {}, candidates = {}) => ({ date: '2026-11-03', candidates:
 } });
 const trade = (overrides = {}) => ({ ticker: 'AAA', entryDate: '2026-10-01', exitDate: '2026-10-05',
   entryLane: 'momentum', realizedPnlPct: -1, realizedPnl: -10, investedAmount: 1000, ...overrides });
+
+test('paper UI distinguishes picks, unverified news, missing premarket prices and rejected suggestions',()=>{
+  const rows=simulationSuggestions({updatedAt:'2026-11-03T08:00:00Z',suggestions:[
+    {ticker:'AAA',status:'simulated-buy',price:101,setup:{volumeRatio:2.1,vwap:100},reasons:['confirmed simulated fill']},
+    {ticker:'BBB',status:'watch',price:null,research:{source:'morning research',type:'order',summary:'Unverified watch',verification:'ADVISOR / UNVERIFIED'}},
+    {ticker:'CCC',status:'not-qualified',reasons:['volume insufficient']}]},now);
+  assert.equal(rows[0].status,'Simulated pick');assert.equal(rows[0].relVol,2.1);
+  assert.equal(rows[1].price,null);assert.match(rows[1].verification,/UNVERIFIED/);
+  assert.equal(rows[2].status,'Not qualified');
+  const html=renderSuggestions(rows);assert.match(html,/Simulated pick/);assert.match(html,/Unverified watch/);
+  const later=simulationSuggestions({updatedAt:'2026-11-03T09:00:00Z',suggestions:[],positions:[{
+    ticker:'PICK',date:'2026-11-03',addedAt:'2026-11-03T04:00:00Z',currentPrice:100}]},now);
+  assert.equal(later[0].status,'Simulated pick');assert.equal(later[0].chosenAt,'2026-11-03T04:00:00Z');
+});
 
 test('sources use public main branch and the explicit local registry, without fallback', () => {
   assert.equal(SOURCES.length, 7);

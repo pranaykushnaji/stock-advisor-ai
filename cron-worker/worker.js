@@ -186,8 +186,10 @@ export default {
         .catch(() => console.error('entry-setup-research failed; inspect authenticated research history')));
     }
     if (env.SCHEDULER_MODE === 'monitor-only') return;
-    if(env.PAPER_SIMULATION_ENABLED==='true' && isMonitorMinute(now) && now.getUTCMinutes()%5===0){
-      const action=now.getUTCMinutes()%15===0?'scan':'risk';
+    const utcMinute=now.getUTCHours()*60+now.getUTCMinutes();
+    const paperResearchWindow=utcMinute>=150&&utcMinute<225; // 08:00–09:10 IST, research only
+    if(env.PAPER_SIMULATION_ENABLED==='true' && (isMonitorMinute(now)||paperResearchWindow) && now.getUTCMinutes()%5===0){
+      const action=paperResearchWindow?'research':'scan'; // Every scan checks exits BEFORE candidate research.
       const result=await runJobWithRetry(env,{kind:'vercel',path:`/api/paper-simulation?action=${action}`});
       await logRun(env,{ts:new Date().toISOString(),hhmm:hhmm(now),job:`paper-simulation-${action}`,trigger:'cron',summary:{ok:result.ok,httpStatus:result.status,detail:result.body}});
     }

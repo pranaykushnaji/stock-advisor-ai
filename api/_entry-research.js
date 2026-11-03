@@ -1,4 +1,5 @@
-// Experimental, pure research setup. No production caller places a trade from this result.
+// Shared pure setup detector. The production PAPER experiment uses liveSimulationEntry;
+// the separate shadow monitor remains read-only. No broker order is placed here.
 // Uses completed 5-minute candles, a bounded consolidation breakout above session VWAP, and
 // next-candle opening execution. Daily +7% is never treated as a captured return.
 export const RESEARCH_SETUP = Object.freeze({ version: 'consolidation-v1', bars: 6,
@@ -26,7 +27,7 @@ export function completedFiveMinuteBars(candles, now = new Date()) {
   });
 }
 
-export function liveResearchEntry(candles, quote, { now = new Date(), regime, firstSeenAt } = {}) {
+export function liveResearchEntry(candles, quote, { now = new Date(), regime, firstSeenAt, params = RESEARCH_SETUP } = {}) {
   const bars = completedFiveMinuteBars(candles, now), boundary = Math.floor(now.getTime() / 300000) * 300000;
   if (now.getTime() - boundary > 90000 || !bars.length || bars.at(-1).ms + 300000 !== boundary) {
     return { status: 'unavailable', reason: 'latest completed five-minute candle is unavailable or too old' };
@@ -34,9 +35,30 @@ export function liveResearchEntry(candles, quote, { now = new Date(), regime, fi
   // The next candle has only just started. Use the current timestamped quote as a proposed
   // shadow price; never borrow the eventual opening price from a future historical candle.
   const current = { ms: boundary, open: quote.price, high: quote.price, low: quote.price, close: quote.price, volume: 0 };
-  const result = findResearchEntry([...bars, current], { regime,
+  const result = findResearchEntry([...bars, current], { regime, params,
     notBefore: new Date(Math.max(Date.parse(firstSeenAt) || 0, boundary)).toISOString() });
   return result.status === 'setup' ? { ...result, entryAt: quote.lastTradeAt, execution: 'shadow-quote-only' } : result;
+}
+
+// The live paper experiment may use an opening range before thirty minutes of
+// consolidation exists. Evidence, not a wall-clock buy time, controls eligibility.
+// Two completed range bars + a completed breakout are the minimum; the shorter
+// history requires stronger volume and tighter extension than the normal setup.
+export function liveSimulationEntry(candles, quote, {now=new Date(),regime='neutral'}={}) {
+  const boundary=Math.floor(now.getTime()/300000)*300000;
+  if(!Number.isFinite(Date.parse(quote?.lastTradeAt))||Date.parse(quote.lastTradeAt)<boundary||Date.parse(quote.lastTradeAt)>now.getTime())
+    return {status:'unavailable',reason:'execution quote must be observed after the latest signal candle completed'};
+  const bars=completedFiveMinuteBars(candles,now);
+  const open=Date.parse(`${new Date(now.getTime()+19800000).toISOString().slice(0,10)}T09:15:00+05:30`);
+  const elapsed=Math.floor((now.getTime()-open)/300000);
+  if(elapsed<7){
+    if(bars.length<3||bars[0].ms!==open||bars.length!==elapsed)
+      return {status:'no_setup',reason:'opening setup needs complete range bars and a completed volume-confirmed breakout'};
+    return liveResearchEntry(candles,quote,{now,regime,params:{...RESEARCH_SETUP,
+      version:'opening-consolidation-v1',bars:bars.length-1,maxRangePct:1.5,
+      minVolumeRatio:2,maxAboveVwapPct:1.5,maxEntryGapPct:0.5}});
+  }
+  return liveResearchEntry(candles,quote,{now,regime});
 }
 
 export function findResearchEntry(bars, { notBefore, regime, params = RESEARCH_SETUP } = {}) {

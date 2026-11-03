@@ -87,7 +87,7 @@ test('separate shadow scheduler dispatches every-minute holdings and fifteen-min
   assert.notEqual(channels[0].name, channels[1].name);
 });
 
-test('production paper scheduler uses five-minute protection and fifteen-minute entry scans, not legacy buys',async t=>{
+test('production paper scheduler researches premarket and checks BOTH entries/exits every five minutes, not legacy buys',async t=>{
   const calls=[];t.mock.method(globalThis,'fetch',async url=>{calls.push(url);return Response.json({status:'processed',paperTrading:true});});
   const env={PAPER_SIMULATION_ENABLED:'true',VERCEL_BASE:'https://paper.vercel.app',CRON_SECRET:'fixture'};
   const ctx={waitUntil(){}};
@@ -95,7 +95,16 @@ test('production paper scheduler uses five-minute protection and fifteen-minute 
   assert.deepEqual(calls,['https://paper.vercel.app/api/paper-simulation?action=scan']);
   calls.length=0;
   await worker.scheduled({scheduledTime:Date.parse('2026-11-04T04:35:00Z')},env,ctx);
-  assert.deepEqual(calls,['https://paper.vercel.app/api/paper-simulation?action=risk']);
+  assert.deepEqual(calls,['https://paper.vercel.app/api/paper-simulation?action=scan']);
+  calls.length=0;
+  await worker.scheduled({scheduledTime:Date.parse('2026-11-04T03:45:00Z')},env,ctx);
+  assert.deepEqual(calls,['https://paper.vercel.app/api/paper-simulation?action=scan']);
+  calls.length=0;
+  await worker.scheduled({scheduledTime:Date.parse('2026-11-04T02:30:00Z')},env,ctx);
+  assert.deepEqual(calls,['https://paper.vercel.app/api/paper-simulation?action=research']);
+  calls.length=0;
+  await worker.scheduled({scheduledTime:Date.parse('2026-11-04T09:55:00Z')},env,ctx);
+  assert.deepEqual(calls,['https://paper.vercel.app/api/paper-simulation?action=scan']);
   calls.length=0;
   await worker.scheduled({scheduledTime:Date.parse('2026-11-04T10:00:00Z')},env,ctx);
   assert.equal(calls.length,0);
