@@ -1,4 +1,114 @@
 {
   "date": "2026-11-03",
-  "candidates": {}
+  "candidates": {
+    "MOTILALOFS": {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-11-03T05:30:39.057Z",
+          "relVol": 4.54,
+          "confidence": 42.8,
+          "components": {
+            "technical": 62,
+            "flow": 75,
+            "catalyst": 5,
+            "liquidity": 62
+          },
+          "discoveryScore": 69.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1229875,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 42.8,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "MCX": {
+      "ticker": "MCX",
+      "fullName": "Multi Commodity Exchange of India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-11-03T05:30:39.058Z",
+          "relVol": 1.9,
+          "confidence": 34.5,
+          "components": {
+            "technical": 70,
+            "flow": 45,
+            "catalyst": 5,
+            "liquidity": 74
+          },
+          "discoveryScore": 67,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 806451,
+          "sessionFrac": 0.28,
+          "missing": [
+            "relVol 1.9<2.1",
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 34.5,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "MOTHERSON": {
+      "ticker": "MOTHERSON",
+      "fullName": "Samvardhana Motherson International Limited",
+      "sector": "Auto",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "11:00",
+          "ts": "2026-11-03T05:30:39.058Z",
+          "relVol": 2.51,
+          "confidence": 33.9,
+          "components": {
+            "technical": 54,
+            "flow": 61,
+            "catalyst": 5,
+            "liquidity": 60
+          },
+          "discoveryScore": 65.7,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 7081021,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "11:00",
+      "bestConfidence": 33.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    }
+  }
 }
