@@ -2,6 +2,37 @@
 
 Development branch: `feature/upstox-market-data`. Draft PR: https://github.com/pranaykushnaji/stock-advisor-ai/pull/1.
 
+## Activation record — 3 November 2026, 23:34 IST
+
+The separate shadow service is deployed and enabled following user configuration of the
+Upstox Analytics Token. Production trading code remains unmerged and unchanged.
+
+- Vercel target: `https://stock-advisor-ai-git-feature-upstox-market-data-pk7.vercel.app`.
+- Tested deployment: `https://stock-advisor-6xkvctk0q-pk7.vercel.app`, code `73f3913`.
+- Cloudflare: `https://stock-advisor-upstox-shadow.pranaykushnaji.workers.dev`.
+- Active worker version: `9fcd1c75-4643-4f36-9cd6-99aaaef52d67`.
+- Remote flags verified: `SCHEDULER_MODE=monitor-only`, `UPSTOX_MONITOR_ENABLED=true`,
+  `ENTRY_SETUP_RESEARCH_ENABLED=true`, and the feature preview origin above.
+- Quote/candle connection test: HTTP 200; MCX and COFORGE map correctly and each return
+  375 historical one-minute candles for November 2 and 375 current-day candles for November 3.
+  Quotes were stale after market close, as expected; freshness checks remain enforced.
+- Both authenticated preview routes return HTTP 200 `skipped` after hours. Both authenticated
+  worker history routes return HTTP 200 and an empty history before the first scheduled session.
+- First eligible session: November 4, 2026, 09:15 IST. Held-position checks every minute;
+  considered-candidate research every 15 minutes. No future cron tick is claimed as observed.
+- Vercel and Cloudflare logins were renewed. Preview/worker share a fresh separate cron secret;
+  production's cron secret was not changed. Preview protection remains enabled and the worker
+  uses its automation bypass secret. No secret values are written to source or this document.
+- The user's existing unreadable Upstox secret is targeted to Preview as well as Production;
+  its value was never retrieved. Existing Preview GitHub access is inherited. Runtime tests
+  verify quote/candle access; a first scheduled open-session check is still needed to observe
+  the complete held-position flow (the current bouquet is empty).
+
+Checked-in worker flags remain false as a safe default. Redeploying the shadow worker later
+requires the same explicit `--var` overrides for the two true flags and preview base, or the
+deployment will deliberately disable monitoring again. There is no automatic paper exit or
+buy execution on this service: its signals are shadow observations only.
+
 The adapter, both endpoints and scheduler are read-only with respect to the trading account
 and GitHub trade files. Shadow state belongs to separate Cloudflare Durable Objects. No order
 API exists in this integration. Production activation and merging require authorization.
@@ -154,13 +185,13 @@ Both stop variants retain the same initial volatility stop; production threshold
 - Automated tests cover gzip/ambiguity/identity, provider/auth errors, timestamps, missing risk,
   duplicate and out-of-order data, no mutation of holdings, stop equivalence, actor serialization
   across restarts, failed-response retryability, holding exclusion and shadow-only entry signals.
-- All 57 automated tests, syntax checks and Cloudflare shadow-worker dry-run build pass.
+- All 58 automated tests, syntax checks and Cloudflare shadow-worker dry-run build pass.
 - The feature preview build succeeds with the existing 12 deployable function count. Remote
   anonymous smoke checks reach Vercel's SSO redirect rather than the app; authenticated
   end-to-end testing therefore also requires a preview protection bypass secret or a renewed
   Vercel login. The local Vercel CLI login is expired. No protection setting was disabled.
-- Current worktree has no configured Upstox token; authenticated live quotes/history and
-  preview-to-worker end-to-end validation remain dependent on securely configured preview env.
+- Authenticated live quote/history/intraday and protected worker history checks passed on
+  November 3 as recorded above. No Upstox token is present in local source or shell env.
 - Recent production bouquet is empty. The monitor correctly returns `no_open_positions`;
   connection testing or fixture tests are needed to verify quote access while it is empty.
 - The exchange calendar still covers 2026 only and fails closed for unknown years. Add the
