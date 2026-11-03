@@ -29,12 +29,34 @@
           ],
           "passedFilter": true,
           "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-11-03T06:30:37.160Z",
+          "relVol": 3.43,
+          "confidence": 42.7,
+          "components": {
+            "technical": 61,
+            "flow": 74,
+            "catalyst": 11,
+            "liquidity": 64
+          },
+          "discoveryScore": 68.2,
+          "catalystType": "earnings beat",
+          "verification": "UNVERIFIED",
+          "volume": 1459527,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
         }
       ],
-      "lastSeen": "11:00",
+      "lastSeen": "12:00",
       "bestConfidence": 42.8,
       "confidenceTrend": "flat",
-      "confidenceSlope": 0,
+      "confidenceSlope": -0.1,
       "trendBonus": 0
     },
     "MCX": {
@@ -106,6 +128,42 @@
       ],
       "lastSeen": "11:00",
       "bestConfidence": 33.9,
+      "confidenceTrend": "flat",
+      "confidenceSlope": 0,
+      "trendBonus": 0
+    },
+    "PETRONET": {
+      "ticker": "PETRONET",
+      "fullName": "Petronet LNG Limited",
+      "sector": "Energy",
+      "firstSeen": "12:00",
+      "status": "watching",
+      "scans": [
+        {
+          "hhmm": "12:00",
+          "ts": "2026-11-03T06:30:37.161Z",
+          "relVol": 2.47,
+          "confidence": 28.6,
+          "components": {
+            "technical": 67,
+            "flow": 71,
+            "catalyst": 5,
+            "liquidity": 54
+          },
+          "discoveryScore": 72.5,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 2672311,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        }
+      ],
+      "lastSeen": "12:00",
+      "bestConfidence": 28.6,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
