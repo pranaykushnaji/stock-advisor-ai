@@ -1,45 +1,45 @@
 {
-  "date": "2026-10-30",
-  "builtAt": "2026-10-30T02:35:53.301Z",
+  "date": "2026-11-03",
+  "builtAt": "2026-11-03T02:35:34.651Z",
   "marketContext": {
     "tone": "bullish",
-    "summary": "Deterministic NSE breadth fallback: 78% advancers, average move +1.24%.",
+    "summary": "Deterministic NSE breadth fallback: 81% advancers, average move +1.61%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
   "watch": [
     {
-      "ticker": "RVNL",
+      "ticker": "KAYNES",
       "source": "overnight-filing",
       "catalyst": {
-        "points": 38,
+        "points": 26,
         "hasCatalyst": true,
         "negative": false,
-        "type": "government order",
-        "confidence": 90,
-        "impact": 7,
-        "stars": 5,
-        "freshness": 0.949,
-        "decay": 0.949,
-        "impactClass": "very-high+",
-        "influenceDays": 13,
-        "ageDays": 0.49,
+        "type": "acquisition",
+        "confidence": 95,
+        "impact": 8,
+        "stars": 4,
+        "freshness": 0.946,
+        "decay": 0.946,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.48,
         "evidenceVersion": 2,
-        "eventPublishedAt": 1793285832000,
+        "eventPublishedAt": 1793632051000,
         "hasFiling": true,
         "evidence": [
           {
             "articleId": 1,
-            "title": "[OFFICIAL NSE FILING] Bagging/Receiving of orders/contracts",
+            "title": "[OFFICIAL NSE FILING] Acquisition",
             "url": null,
             "publisher": "nse-filing"
           }
         ],
         "verification": "VERIFIED",
         "sources": 1,
-        "summary": "RVNL reports receipt of new orders/contracts in official filing"
+        "summary": "Official filing announces acquisition, indicating strategic expansion."
       },
-      "prevClose": 186
+      "prevClose": 3210
     }
   ]
 }

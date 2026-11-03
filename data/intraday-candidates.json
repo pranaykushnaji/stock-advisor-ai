@@ -1,403 +1,133 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-11-03",
   "candidates": {
-    "LAURUSLABS": {
-      "ticker": "LAURUSLABS",
-      "fullName": "Laurus Labs Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-10-30T04:30:55.366Z",
-          "relVol": 8.33,
-          "confidence": 57.4,
-          "components": {
-            "technical": 86,
-            "flow": 95,
-            "catalyst": 15,
-            "liquidity": 84
-          },
-          "discoveryScore": 84.7,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 2056352,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "11:00",
-          "ts": "2026-10-30T05:30:57.307Z",
-          "relVol": 7.79,
-          "confidence": 56.2,
-          "components": {
-            "technical": 89,
-            "flow": 92,
-            "catalyst": 5,
-            "liquidity": 93
-          },
-          "discoveryScore": 88.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 3588488,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-30T06:30:53.498Z",
-          "relVol": 6.35,
-          "confidence": 56.6,
-          "components": {
-            "technical": 85,
-            "flow": 92,
-            "catalyst": 15,
-            "liquidity": 95
-          },
-          "discoveryScore": 87.2,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 4597734,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-10-30T07:30:55.684Z",
-          "relVol": 5.51,
-          "confidence": 56.2,
-          "components": {
-            "technical": 83,
-            "flow": 96,
-            "catalyst": 5,
-            "liquidity": 95
-          },
-          "discoveryScore": 88.2,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 5443358,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-10-30T08:30:50.905Z",
-          "relVol": 4.99,
-          "confidence": 57.3,
-          "components": {
-            "technical": 83,
-            "flow": 97,
-            "catalyst": 18,
-            "liquidity": 95
-          },
-          "discoveryScore": 88.3,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 6247295,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-10-30T09:30:59.738Z",
-          "relVol": 4.62,
-          "confidence": 55.7,
-          "components": {
-            "technical": 83,
-            "flow": 97,
-            "catalyst": 5,
-            "liquidity": 95
-          },
-          "discoveryScore": 88.6,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 6999327,
-          "sessionFrac": 0.92,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 57.4,
-      "confidenceTrend": "flat",
-      "confidenceSlope": -0.16,
-      "trendBonus": 0
-    },
-    "COFORGE": {
-      "ticker": "COFORGE",
-      "fullName": "Coforge Limited",
-      "sector": "IT",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-10-30T04:30:55.366Z",
-          "relVol": 4.33,
-          "confidence": 37.3,
-          "components": {
-            "technical": 73,
-            "flow": 79,
-            "catalyst": 5,
-            "liquidity": 78
-          },
-          "discoveryScore": 78.6,
-          "catalystType": "new product",
-          "verification": "UNVERIFIED",
-          "volume": 1708090,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "11:00",
-          "ts": "2026-10-30T05:30:57.308Z",
-          "relVol": 4.26,
-          "confidence": 54.1,
-          "components": {
-            "technical": 82,
-            "flow": 81,
-            "catalyst": 7,
-            "liquidity": 89
-          },
-          "discoveryScore": 79.5,
-          "catalystType": "new product",
-          "verification": "UNVERIFIED",
-          "volume": 3138615,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-30T06:30:53.499Z",
-          "relVol": 3.48,
-          "confidence": 55.2,
-          "components": {
-            "technical": 86,
-            "flow": 82,
-            "catalyst": 5,
-            "liquidity": 93
-          },
-          "discoveryScore": 77.3,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 4023642,
-          "sessionFrac": 0.44,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "13:00",
-          "ts": "2026-10-30T07:30:55.684Z",
-          "relVol": 2.89,
-          "confidence": 20.7,
-          "components": {
-            "technical": 67,
-            "flow": 77,
-            "catalyst": 7,
-            "liquidity": 95
-          },
-          "discoveryScore": 76.2,
-          "catalystType": "new product",
-          "verification": "UNVERIFIED",
-          "volume": 4567103,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-10-30T08:30:50.906Z",
-          "relVol": 2.48,
-          "confidence": 20.3,
-          "components": {
-            "technical": 67,
-            "flow": 73,
-            "catalyst": 7,
-            "liquidity": 95
-          },
-          "discoveryScore": 72.7,
-          "catalystType": "new product",
-          "verification": "UNVERIFIED",
-          "volume": 4964789,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "15:00",
-          "ts": "2026-10-30T09:30:59.739Z",
-          "relVol": 2.32,
-          "confidence": 20,
-          "components": {
-            "technical": 67,
-            "flow": 72,
-            "catalyst": 5,
-            "liquidity": 95
-          },
-          "discoveryScore": 79.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 5621541,
-          "sessionFrac": 0.92,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "15:00",
-      "bestConfidence": 55.2,
-      "confidenceTrend": "falling",
-      "confidenceSlope": -6.35,
-      "trendBonus": 0
-    },
-    "ADANIPORTS": {
-      "ticker": "ADANIPORTS",
-      "fullName": "Adani Ports and Special Economic Zone Limited",
-      "sector": "Logistics",
-      "firstSeen": "10:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "10:00",
-          "ts": "2026-10-30T04:30:55.366Z",
-          "relVol": 2.95,
-          "confidence": 5.9,
-          "components": {
-            "technical": 55,
-            "flow": 67,
-            "catalyst": 5,
-            "liquidity": 74
-          },
-          "discoveryScore": 68.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1446564,
-          "sessionFrac": 0.15,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "10:00",
-      "bestConfidence": 5.9,
-      "confidenceTrend": "flat",
-      "confidenceSlope": 0,
-      "trendBonus": 0
-    },
-    "ZYDUSLIFE": {
-      "ticker": "ZYDUSLIFE",
-      "fullName": "Zydus Lifesciences Limited",
+    "MOTILALOFS": {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Limited",
       "sector": "UNKNOWN",
       "firstSeen": "11:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "11:00",
-          "ts": "2026-10-30T05:30:57.308Z",
-          "relVol": 1.8,
-          "confidence": 13.9,
+          "ts": "2026-11-03T05:30:39.057Z",
+          "relVol": 4.54,
+          "confidence": 42.8,
           "components": {
-            "technical": 63,
-            "flow": 48,
+            "technical": 62,
+            "flow": 75,
             "catalyst": 5,
-            "liquidity": 56
+            "liquidity": 62
+          },
+          "discoveryScore": 69.6,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1229875,
+          "sessionFrac": 0.28,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        },
+        {
+          "hhmm": "12:00",
+          "ts": "2026-11-03T06:30:37.160Z",
+          "relVol": 3.43,
+          "confidence": 42.7,
+          "components": {
+            "technical": 61,
+            "flow": 74,
+            "catalyst": 11,
+            "liquidity": 64
+          },
+          "discoveryScore": 68.2,
+          "catalystType": "earnings beat",
+          "verification": "UNVERIFIED",
+          "volume": 1459527,
+          "sessionFrac": 0.44,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        },
+        {
+          "hhmm": "13:00",
+          "ts": "2026-11-03T07:30:37.210Z",
+          "relVol": 2.84,
+          "confidence": 31.8,
+          "components": {
+            "technical": 60,
+            "flow": 66,
+            "catalyst": 5,
+            "liquidity": 66
+          },
+          "discoveryScore": 68.8,
+          "catalystType": "no catalyst",
+          "verification": "UNVERIFIED",
+          "volume": 1651643,
+          "sessionFrac": 0.6,
+          "missing": [
+            "catalyst UNVERIFIED (need VERIFIED)"
+          ],
+          "passedFilter": true,
+          "tradeable": false
+        },
+        {
+          "hhmm": "14:00",
+          "ts": "2026-11-03T08:30:37.826Z",
+          "relVol": 2.55,
+          "confidence": 26.3,
+          "components": {
+            "technical": 49,
+            "flow": 70,
+            "catalyst": 5,
+            "liquidity": 69
           },
           "discoveryScore": 71.1,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 712767,
-          "sessionFrac": 0.28,
-          "missing": [
-            "relVol 1.8<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-30T06:30:53.499Z",
-          "relVol": 2.42,
-          "confidence": 12.5,
-          "components": {
-            "technical": 57,
-            "flow": 57,
-            "catalyst": 5,
-            "liquidity": 68
-          },
-          "discoveryScore": 79.4,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 1501421,
-          "sessionFrac": 0.44,
+          "volume": 1873957,
+          "sessionFrac": 0.76,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
           "tradeable": false
-        },
+        }
+      ],
+      "lastSeen": "14:00",
+      "bestConfidence": 42.8,
+      "confidenceTrend": "falling",
+      "confidenceSlope": -6.04,
+      "trendBonus": 0
+    },
+    "MCX": {
+      "ticker": "MCX",
+      "fullName": "Multi Commodity Exchange of India Limited",
+      "sector": "UNKNOWN",
+      "firstSeen": "11:00",
+      "status": "watching",
+      "scans": [
         {
-          "hhmm": "13:00",
-          "ts": "2026-10-30T07:30:55.685Z",
-          "relVol": 2.5,
-          "confidence": 5.6,
+          "hhmm": "11:00",
+          "ts": "2026-11-03T05:30:39.058Z",
+          "relVol": 1.9,
+          "confidence": 34.5,
           "components": {
-            "technical": 50,
-            "flow": 59,
+            "technical": 70,
+            "flow": 45,
             "catalyst": 5,
             "liquidity": 74
           },
-          "discoveryScore": 74.6,
+          "discoveryScore": 67,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 2115547,
-          "sessionFrac": 0.6,
+          "volume": 806451,
+          "sessionFrac": 0.28,
           "missing": [
+            "relVol 1.9<2.1",
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
@@ -405,19 +135,19 @@
         },
         {
           "hhmm": "14:00",
-          "ts": "2026-10-30T08:30:50.906Z",
-          "relVol": 2.55,
-          "confidence": 5.1,
+          "ts": "2026-11-03T08:30:37.825Z",
+          "relVol": 2.86,
+          "confidence": 43.1,
           "components": {
-            "technical": 50,
-            "flow": 60,
+            "technical": 79,
+            "flow": 62,
             "catalyst": 5,
-            "liquidity": 78
+            "liquidity": 95
           },
           "discoveryScore": 82.8,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 2729516,
+          "volume": 3286144,
           "sessionFrac": 0.76,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -427,19 +157,19 @@
         },
         {
           "hhmm": "15:00",
-          "ts": "2026-10-30T09:30:59.739Z",
-          "relVol": 2.57,
-          "confidence": 5.2,
+          "ts": "2026-11-03T09:30:35.713Z",
+          "relVol": 3.01,
+          "confidence": 11.9,
           "components": {
-            "technical": 50,
-            "flow": 68,
+            "technical": 56,
+            "flow": 64,
             "catalyst": 5,
-            "liquidity": 80
+            "liquidity": 95
           },
-          "discoveryScore": 84.2,
+          "discoveryScore": 76.9,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 3157859,
+          "volume": 4190056,
           "sessionFrac": 0.92,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -449,92 +179,33 @@
         }
       ],
       "lastSeen": "15:00",
-      "bestConfidence": 13.9,
+      "bestConfidence": 43.1,
       "confidenceTrend": "falling",
-      "confidenceSlope": -2.48,
+      "confidenceSlope": -11.3,
       "trendBonus": 0
     },
-    "ETERNAL": {
-      "ticker": "ETERNAL",
-      "fullName": "Eternal Limited",
-      "sector": "Retail",
+    "MOTHERSON": {
+      "ticker": "MOTHERSON",
+      "fullName": "Samvardhana Motherson International Limited",
+      "sector": "Auto",
       "firstSeen": "11:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "11:00",
-          "ts": "2026-10-30T05:30:57.308Z",
-          "relVol": 2.24,
-          "confidence": 15.7,
+          "ts": "2026-11-03T05:30:39.058Z",
+          "relVol": 2.51,
+          "confidence": 33.9,
           "components": {
-            "technical": 62,
-            "flow": 56,
+            "technical": 54,
+            "flow": 61,
             "catalyst": 5,
-            "liquidity": 88
+            "liquidity": 60
           },
-          "discoveryScore": 71.7,
+          "discoveryScore": 65.7,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 17560159,
-          "sessionFrac": 0.28,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "12:00",
-          "ts": "2026-10-30T06:30:53.499Z",
-          "relVol": 1.84,
-          "confidence": 22.4,
-          "components": {
-            "technical": 57,
-            "flow": 51,
-            "catalyst": 5,
-            "liquidity": 92
-          },
-          "discoveryScore": 69.7,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 22585824,
-          "sessionFrac": 0.44,
-          "missing": [
-            "relVol 1.84<2.1",
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        }
-      ],
-      "lastSeen": "12:00",
-      "bestConfidence": 22.4,
-      "confidenceTrend": "rising",
-      "confidenceSlope": 6.7,
-      "trendBonus": 4
-    },
-    "APLAPOLLO": {
-      "ticker": "APLAPOLLO",
-      "fullName": "APL Apollo Tubes Limited",
-      "sector": "Metal",
-      "firstSeen": "11:00",
-      "status": "watching",
-      "scans": [
-        {
-          "hhmm": "11:00",
-          "ts": "2026-10-30T05:30:57.308Z",
-          "relVol": 3.76,
-          "confidence": 15.6,
-          "components": {
-            "technical": 42,
-            "flow": 81,
-            "catalyst": 5,
-            "liquidity": 65
-          },
-          "discoveryScore": 63.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 689342,
+          "volume": 7081021,
           "sessionFrac": 0.28,
           "missing": [
             "catalyst UNVERIFIED (need VERIFIED)"
@@ -544,36 +215,35 @@
         }
       ],
       "lastSeen": "11:00",
-      "bestConfidence": 15.6,
+      "bestConfidence": 33.9,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
     },
-    "NAVINFLUOR": {
-      "ticker": "NAVINFLUOR",
-      "fullName": "Navin Fluorine International Limited",
-      "sector": "UNKNOWN",
+    "PETRONET": {
+      "ticker": "PETRONET",
+      "fullName": "Petronet LNG Limited",
+      "sector": "Energy",
       "firstSeen": "12:00",
       "status": "watching",
       "scans": [
         {
           "hhmm": "12:00",
-          "ts": "2026-10-30T06:30:53.499Z",
-          "relVol": 2.06,
-          "confidence": 25.2,
+          "ts": "2026-11-03T06:30:37.161Z",
+          "relVol": 2.47,
+          "confidence": 28.6,
           "components": {
-            "technical": 56,
-            "flow": 67,
+            "technical": 67,
+            "flow": 71,
             "catalyst": 5,
-            "liquidity": 57
+            "liquidity": 54
           },
-          "discoveryScore": 67.1,
+          "discoveryScore": 72.5,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 114548,
+          "volume": 2672311,
           "sessionFrac": 0.44,
           "missing": [
-            "relVol 2.06<2.1",
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
@@ -581,79 +251,36 @@
         }
       ],
       "lastSeen": "12:00",
-      "bestConfidence": 25.2,
+      "bestConfidence": 28.6,
       "confidenceTrend": "flat",
       "confidenceSlope": 0,
       "trendBonus": 0
     },
-    "ATHERENERG": {
-      "ticker": "ATHERENERG",
-      "fullName": "Ather Energy Limited",
-      "sector": "UNKNOWN",
-      "firstSeen": "13:00",
+    "BHARTIARTL": {
+      "ticker": "BHARTIARTL",
+      "fullName": "Bharti Airtel Limited",
+      "sector": "Telecom",
+      "firstSeen": "15:00",
       "status": "watching",
       "scans": [
         {
-          "hhmm": "13:00",
-          "ts": "2026-10-30T07:30:55.684Z",
-          "relVol": 2.13,
-          "confidence": 53.8,
-          "components": {
-            "technical": 78,
-            "flow": 78,
-            "catalyst": 5,
-            "liquidity": 92
-          },
-          "discoveryScore": 78.9,
-          "catalystType": "earnings beat",
-          "verification": "UNVERIFIED",
-          "volume": 4587182,
-          "sessionFrac": 0.6,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
-          "hhmm": "14:00",
-          "ts": "2026-10-30T08:30:50.906Z",
-          "relVol": 2.25,
-          "confidence": 53.9,
-          "components": {
-            "technical": 80,
-            "flow": 79,
-            "catalyst": 5,
-            "liquidity": 95
-          },
-          "discoveryScore": 78.1,
-          "catalystType": "no catalyst",
-          "verification": "UNVERIFIED",
-          "volume": 6135493,
-          "sessionFrac": 0.76,
-          "missing": [
-            "catalyst UNVERIFIED (need VERIFIED)"
-          ],
-          "passedFilter": true,
-          "tradeable": false
-        },
-        {
           "hhmm": "15:00",
-          "ts": "2026-10-30T09:30:59.739Z",
-          "relVol": 2.13,
-          "confidence": 53.4,
+          "ts": "2026-11-03T09:30:35.712Z",
+          "relVol": 1.85,
+          "confidence": 57.9,
           "components": {
-            "technical": 78,
-            "flow": 79,
+            "technical": 76,
+            "flow": 77,
             "catalyst": 5,
             "liquidity": 95
           },
-          "discoveryScore": 78.3,
+          "discoveryScore": 68.9,
           "catalystType": "no catalyst",
           "verification": "UNVERIFIED",
-          "volume": 7036417,
+          "volume": 15370431,
           "sessionFrac": 0.92,
           "missing": [
+            "relVol 1.85<2.1",
             "catalyst UNVERIFIED (need VERIFIED)"
           ],
           "passedFilter": true,
@@ -661,9 +288,9 @@
         }
       ],
       "lastSeen": "15:00",
-      "bestConfidence": 53.9,
+      "bestConfidence": 57.9,
       "confidenceTrend": "flat",
-      "confidenceSlope": -0.2,
+      "confidenceSlope": 0,
       "trendBonus": 0
     }
   }
