@@ -11,8 +11,10 @@
     "api/analytics.js": { "maxDuration": 60 },
     "api/sell-check.js": { "maxDuration": 60 }
   },
+  "redirects": [
+    { "source": "/", "destination": "/desk/", "permanent": false }
+  ],
   "rewrites": [
-    { "source": "/", "destination": "/desk/index.html" },
     { "source": "/legacy", "destination": "/index.html" },
     { "source": "/api/paper-simulation", "destination": "/api/sell-check?monitorMode=simulation" },
     { "source": "/api/minute-monitor", "destination": "/api/sell-check?monitorMode=prices" },
