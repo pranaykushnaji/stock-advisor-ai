@@ -152,7 +152,11 @@ Both stop variants retain the same initial volatility stop; production threshold
 - Automated tests cover gzip/ambiguity/identity, provider/auth errors, timestamps, missing risk,
   duplicate and out-of-order data, no mutation of holdings, stop equivalence, actor serialization
   across restarts, failed-response retryability, holding exclusion and shadow-only entry signals.
-- Existing trading tests, syntax checks and Cloudflare shadow-worker dry-run build pass.
+- All 57 automated tests, syntax checks and Cloudflare shadow-worker dry-run build pass.
+- The feature preview build succeeds with the existing 12 deployable function count. Remote
+  anonymous smoke checks reach Vercel's SSO redirect rather than the app; authenticated
+  end-to-end testing therefore also requires a preview protection bypass secret or a renewed
+  Vercel login. The local Vercel CLI login is expired. No protection setting was disabled.
 - Current worktree has no configured Upstox token; authenticated live quotes/history and
   preview-to-worker end-to-end validation remain dependent on securely configured preview env.
 - Recent production bouquet is empty. The monitor correctly returns `no_open_positions`;
