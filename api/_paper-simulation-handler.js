@@ -56,10 +56,18 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
       const initial=await read(FILE);validateSimulation(initial.data);
       if(body.mode==='health'){
         const sample=members.filter(m=>m.instrumentKey).slice(0,1);
-        const q=await quotes(sample.map(m=>m.instrumentKey));
+        const q={};
+        const checkedMembers=body.testCoverage===true?members.filter(m=>['mid','small'].includes(m.marketCapBucket)&&m.instrumentKey):sample;
+        for(const batch of quoteBatches(checkedMembers))Object.assign(q,await quotes(batch));
+        let candleAccess=null;
+        if(body.testCandles===true){
+          const date=nowIST(at).ymd,from=new Date(at.getTime()-100*86400000).toISOString().slice(0,10);
+          const [h,i]=await Promise.all([daily(sample[0].instrumentKey,from,date),intraday(sample[0].instrumentKey)]);
+          candleAccess={historicalDaily:h.length,intradayMinutes:i.length};
+        }
         return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:10000,
           positions:initial.data.positions.length,trades:initial.data.trades.length,
-          registryMapped:members.filter(m=>m.instrumentKey).length,quotesReceived:Object.keys(q).length,
+          registryMapped:members.filter(m=>m.instrumentKey).length,quotesRequested:checkedMembers.length,quotesReceived:Object.keys(q).length,candleAccess,
           marketOpen:marketStatus(at).open,ordersExecuted:0});
       }
       const mkt=marketStatus(at),ist=new Date(at.getTime()+19800000),minute=ist.getUTCHours()*60+ist.getUTCMinutes();
