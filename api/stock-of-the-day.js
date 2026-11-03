@@ -17,6 +17,7 @@ import { concentrationCheck } from './_correlation.js';
 import { requireCronAuth } from './_cron-auth.js';
 import { tradeSessionState } from './_trade-session.js';
 import { alignCloseVolume } from './_series.js';
+import { entryLaneDiagnostics } from './_entry-lanes.js';
 import { seedRisk } from './_position-risk.js';
 import { exitBands } from './_sell-engine.js';
 import { freshStore, recordObservation, prevVolumeMap, markBought, hhmmIST } from './_intraday-store.js';
@@ -536,6 +537,9 @@ export default async function handler(req, res) {
       todayVolume: snap.totalTradedVolume ?? undefined,
       open: s._price?.open, prevClose: s._price?.prevClose,
       dayHigh: snap.dayHigh, dayLow: snap.dayLow,
+      circuitPolicy: process.env.ENTRY_OFFICIAL_CIRCUIT_FILTER_ENABLED === 'true' ? 'official' : undefined,
+      upperCircuit: snap.upperCircuit ?? snap.upperCP,
+      lowerCircuit: snap.lowerCircuit ?? snap.lowerCP,
       surveillance: surveillanceSet.has(s.symbol),
       sessionElapsedFraction: sessionFrac,
     });
@@ -637,6 +641,7 @@ export default async function handler(req, res) {
 
     const entry = recordObservation(intradayStore, {
       ticker: s.symbol, fullName: s.fullName, sector: s.sector || scored?.sector,
+      entryRefPrice: s.price,
       relVol, confidence: scored?.confidence ?? null, components: s._comps,
       discoveryScore: discoveryMeta.get(s.symbol)?.discoveryScore ?? null,
       catalystType: s._catalyst?.type ?? null, verification: s._catalyst?.verification ?? null,
@@ -671,6 +676,16 @@ export default async function handler(req, res) {
   };
   for (const s of catalystPool) {
     s._lane = laneOf(s);
+    s._laneDiagnostics = entryLaneDiagnostics(s, { regime, gates, momLaneOpen, momentum: MOMENTUM_LANE });
+    // Update the just-recorded scan with lane-specific scores and actual blockers. The legacy
+    // percentile confidence remains available but is not presented as the effective score.
+    const scan = intradayStore.candidates[s.symbol]?.scans?.at(-1);
+    if (scan) {
+      scan.lanes = s._laneDiagnostics;
+      scan.effectiveConfidence = s._lane === 'catalyst' ? s._effConfCat : s._effConfMom;
+      scan.tradeable = !!s._lane;
+      scan.missing = s._lane ? [] : [...s._laneDiagnostics.catalyst.reasons, ...s._laneDiagnostics.momentum.reasons];
+    }
     // Lock the lane-relevant confidence (and its explanation) once the lane is known.
     if (s._lane) {
       s._effConf = s._lane === 'momentum' ? s._effConfMom : s._effConfCat;
@@ -684,18 +699,16 @@ export default async function handler(req, res) {
     // bars are too strict (did any of these go on to run without us?).
     for (const s of catalystPool) {
       const scored = scoredBySym.get(s.symbol);
-      addRejection(s.symbol, 'core-gate', (s._catalyst?.negative ? ['negative catalyst'] : []).concat(
-        (s._qm?.relVol == null || s._qm.relVol < RELVOL_INTRADAY_MIN) ? [`relVol<${RELVOL_INTRADAY_MIN}`] : [],
-        (!s._catalyst?.hasCatalyst) ? [`catalyst ${s._catalyst?.verification || 'none'}`] : []),
+      addRejection(s.symbol, 'core-gate', [...s._laneDiagnostics.catalyst.reasons, ...s._laneDiagnostics.momentum.reasons],
         { relVol: s._qm?.relVol ?? null, momentum: scored?.factors?.momentum ?? null, catalystScore: scored?.factors?.catalyst ?? null,
-          confidence: scored?.confidence ?? null, effectiveConfidence: s._effConf ?? null, regime: regime.regime,
+          confidence: scored?.confidence ?? null, effectiveConfidence: s._effConf ?? null, regime: regime.regime, lanes: s._laneDiagnostics,
           sector: s.sectorScore ?? null, techScore: scored?.factors?.technicals ?? null,
           components: s._comps ?? null, discoveryParts: discoveryMeta.get(s.symbol)?.discoveryParts ?? null,
           institutional: s._inst?.score ?? null, entryRefPrice: s.price ?? null, yahooSymbol: s._price?.symbol || null });
     }
     return noTrade('no stock qualified on either lane (verified catalyst, or high-bar momentum)', {
       regime: regime.regime, market: regime.reason, momLaneOpen,
-      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, confidence: scoredBySym.get(s.symbol)?.confidence, effectiveConfidence: s._effConf, institutional: s._inst?.score, catalyst: s._catalyst?.type, verification: s._catalyst?.verification, filing: s._catalyst?.hasFiling, recalled: s._catalyst?.recalled, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative })),
+      considered: catalystPool.map(s => ({ ticker: s.symbol, relVol: s._qm?.relVol, confidence: scoredBySym.get(s.symbol)?.confidence, effectiveConfidence: s._effConf, institutional: s._inst?.score, catalyst: s._catalyst?.type, verification: s._catalyst?.verification, filing: s._catalyst?.hasFiling, recalled: s._catalyst?.recalled, sources: s._catalyst?.sources, articles: s._catalyst?.articleCount, negative: s._catalyst?.negative, lanes: s._laneDiagnostics })),
     });
   }
 

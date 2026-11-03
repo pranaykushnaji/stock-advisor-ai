@@ -1,0 +1,23 @@
+# Separate staging worker. Deploying this config never replaces stock-advisor-cron.
+# Configure CRON_SECRET and optional VERCEL_AUTOMATION_BYPASS_SECRET via wrangler secret put.
+name = "stock-advisor-upstox-shadow"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[triggers]
+crons = ["* 3-9 * * mon-fri"]
+
+[vars]
+SCHEDULER_MODE = "monitor-only"
+UPSTOX_MONITOR_ENABLED = "false"
+ENTRY_SETUP_RESEARCH_ENABLED = "false"
+# Set UPSTOX_MONITOR_BASE to the separate Vercel feature-branch preview origin.
+# The production origin is explicitly rejected.
+
+[[durable_objects.bindings]]
+name = "UPSTOX_MONITOR"
+class_name = "UpstoxMonitor"
+
+[[migrations]]
+tag = "upstox-shadow-v1"
+new_sqlite_classes = ["UpstoxMonitor"]

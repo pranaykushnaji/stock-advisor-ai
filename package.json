@@ -7,6 +7,7 @@
   "scripts": {
     "test": "node --test test/*.test.js",
     "audit:trades": "node scripts/audit-trades.js",
-    "check": "node --check app.js && node --check api/stock-of-the-day.js && node --check api/open-scan.js && node --check api/sell-check.js && node --check api/analytics.js && node --check cron-worker/worker.js"
+    "review:suggestions": "node scripts/review-suggestions.js",
+    "check": "node --check app.js && node --check api/stock-of-the-day.js && node --check api/open-scan.js && node --check api/sell-check.js && node --check api/analytics.js && node --check api/minute-monitor.js && node --check api/entry-research.js && node --check cron-worker/worker.js && node --check cron-worker/upstox-monitor.js"
   }
 }
