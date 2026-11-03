@@ -150,6 +150,13 @@ export async function fetchIntradayOneMinuteCandles(instrumentKey, options = {})
   return data.candles;
 }
 
+export async function fetchDailyCandles(instrumentKey, from, to, options = {}) {
+  if (!validInstrumentKey(instrumentKey) || !/^\d{4}-\d{2}-\d{2}$/.test(from) || !/^\d{4}-\d{2}-\d{2}$/.test(to) || from > to) throw new Error('Invalid daily history request');
+  const data = await apiRequest(`/v3/historical-candle/${encodeURIComponent(instrumentKey)}/days/1/${to}/${from}`, options);
+  if (!Array.isArray(data.candles)) throw new Error('Missing daily candles');
+  return data.candles;
+}
+
 export function quoteFreshness(quote, { nowMs = Date.now(), maxAgeMs = 90_000, futureToleranceMs = 15_000 } = {}) {
   const tradedMs = Date.parse(quote?.lastTradeAt || '');
   if (!Number.isFinite(quote?.price) || !(quote?.price > 0) || !Number.isFinite(tradedMs)) return { fresh: false, reason: 'missing price or trade timestamp', ageMs: null };

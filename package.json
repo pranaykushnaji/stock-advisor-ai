@@ -9,6 +9,6 @@
     "audit:trades": "node scripts/audit-trades.js",
     "review:suggestions": "node scripts/review-suggestions.js",
     "research:universe": "node scripts/research-universe.js",
-    "check": "node --check app.js && node --check api/stock-of-the-day.js && node --check api/open-scan.js && node --check api/sell-check.js && node --check api/analytics.js && node --check api/_minute-monitor-handler.js && node --check api/_entry-research-handler.js && node --check cron-worker/worker.js && node --check cron-worker/upstox-monitor.js"
+    "check": "node --check app.js && node --check desk/desk.js && node --check api/stock-of-the-day.js && node --check api/open-scan.js && node --check api/sell-check.js && node --check api/analytics.js && node --check api/_minute-monitor-handler.js && node --check api/_entry-research-handler.js && node --check api/_paper-simulation.js && node --check api/_paper-simulation-handler.js && node --check cron-worker/worker.js && node --check cron-worker/upstox-monitor.js"
   }
 }

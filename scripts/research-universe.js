@@ -1,6 +1,7 @@
 // Public reference-data fetch only. Prints JSON; never uses a token or writes trade data.
 import { CONSTITUENT_SOURCES, parseConstituents, buildResearchUniverse } from '../research/coverage.js';
 import { NSE_INSTRUMENTS_URL } from '../api/_upstox-market-data.js';
+import fs from 'node:fs';
 
 async function download(url) {
   const r = await fetch(url, { headers: { 'User-Agent': 'StockAdvisor-Research/1.0', Accept: 'application/json,text/csv,*/*' }, signal: AbortSignal.timeout(20000) });
@@ -17,5 +18,10 @@ const bytes = new Uint8Array(await (await download(NSE_INSTRUMENTS_URL)).arrayBu
 const text = bytes[0] === 0x1f && bytes[1] === 0x8b
   ? await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()
   : new TextDecoder().decode(bytes);
-console.log(JSON.stringify(buildResearchUniverse({ ...lists, instruments: JSON.parse(text),
-  fetchedAt: new Date().toISOString(), sources: { ...CONSTITUENT_SOURCES, instruments: NSE_INSTRUMENTS_URL } }), null, 2));
+const manifest=buildResearchUniverse({ ...lists, instruments: JSON.parse(text),
+  fetchedAt: new Date().toISOString(), sources: { ...CONSTITUENT_SOURCES, instruments: NSE_INSTRUMENTS_URL } });
+if(process.argv.includes('--refresh')){
+  // Generated public reference artifact; never a trade or credential file.
+  fs.writeFileSync(new URL('../research/universe.json',import.meta.url),JSON.stringify(manifest,null,2)+'\n');
+  console.log(JSON.stringify({status:'registry_refreshed',...manifest.summary}));
+}else console.log(JSON.stringify(manifest,null,2));

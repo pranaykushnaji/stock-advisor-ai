@@ -96,6 +96,7 @@ async function triggerVercel(env, path) {
   const r = await fetch(`${env.VERCEL_BASE}${path}`, {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${env.CRON_SECRET}` },
+    signal: AbortSignal.timeout(55000),
   });
   return { ok: r.ok, status: r.status, body: (await r.text()).slice(0, 500) };
 }
@@ -185,9 +186,15 @@ export default {
         .catch(() => console.error('entry-setup-research failed; inspect authenticated research history')));
     }
     if (env.SCHEDULER_MODE === 'monitor-only') return;
+    if(env.PAPER_SIMULATION_ENABLED==='true' && isMonitorMinute(now) && now.getUTCMinutes()%5===0){
+      const action=now.getUTCMinutes()%15===0?'scan':'risk';
+      const result=await runJobWithRetry(env,{kind:'vercel',path:`/api/paper-simulation?action=${action}`});
+      await logRun(env,{ts:new Date().toISOString(),hhmm:hhmm(now),job:`paper-simulation-${action}`,trigger:'cron',summary:{ok:result.ok,httpStatus:result.status,detail:result.body}});
+    }
     const key = hhmm(now);
     const entry = SCHEDULE[key];
     if (!entry) return; // a tick with nothing scheduled — do nothing
+    if(env.PAPER_SIMULATION_ENABLED==='true' && [BUY.path,'/api/open-scan'].includes(entry.path))return;
     const res = await runJobWithRetry(env, entry);
     const job = jobName(entry);
     console.log(`[cron ${key}] ${job} -> ${res.status} ${res.ok ? 'OK' : 'FAIL'} ${res.body}`);
@@ -222,6 +229,7 @@ export default {
     }
     const job = url.searchParams.get('job');
     const MAP = {
+      'paper-simulation': {kind:'vercel',path:'/api/paper-simulation'},
       'nse-snapshot': { kind: 'github' },
       'stock-of-the-day': { kind: 'vercel', path: '/api/stock-of-the-day' },
       'refresh-prices': { kind: 'vercel', path: '/api/refresh-prices' },

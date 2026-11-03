@@ -292,6 +292,7 @@ async function ghPutWithRetry(path, buildObj, token, message) {
 
 export default async function handler(req, res) {
   if (!requireCronAuth(req, res)) return;
+  if(process.env.PAPER_SIMULATION_ENABLED==='true')return res.status(200).json({status:'legacy_paused',reason:'new versioned paper experiment owns entries'});
 
   // Skip on weekends / NSE holidays. Manual calls with ?force=true bypass (for testing).
   const mkt = marketStatus();

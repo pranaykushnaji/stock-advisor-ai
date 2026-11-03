@@ -3,7 +3,8 @@ on:
   pull_request:
     branches: [main]
   push:
-    branches: [feature/upstox-market-data]
+    branches: [main, feature/upstox-market-data, codex/trading-desk-preview]
+    paths-ignore: ['data/**', 'research/universe.json']
 permissions:
   contents: read
 jobs:

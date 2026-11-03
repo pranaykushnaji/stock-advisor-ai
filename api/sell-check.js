@@ -145,6 +145,11 @@ async function fetchLive(ticker) {
 export default async function handler(req, res) {
   if (!requireCronAuth(req, res)) return;
 
+  if (req.query?.monitorMode === 'simulation') {
+    const {default: simulation}=await import('./_paper-simulation-handler.js');
+    return simulation(req,res);
+  }
+
   // Read-only monitor routes share this existing function bundle to stay within Vercel's
   // 12-function deployment allowance. Normal hourly sell-check requests take the same path.
   if (req.query?.monitorMode === 'prices') {

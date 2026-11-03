@@ -18,7 +18,7 @@ const trade = (overrides = {}) => ({ ticker: 'AAA', entryDate: '2026-10-01', exi
   entryLane: 'momentum', realizedPnlPct: -1, realizedPnl: -10, investedAmount: 1000, ...overrides });
 
 test('sources use public main branch and the explicit local registry, without fallback', () => {
-  assert.equal(SOURCES.length, 6);
+  assert.equal(SOURCES.length, 7);
   assert.ok(SOURCES.slice(0, 5).every(s => s.url.startsWith('https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/')));
   assert.equal(SOURCES.at(-1).url, '../research/universe.json');
 });

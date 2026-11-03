@@ -33,7 +33,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install NSE library
         run: npm install stock-nse-india --no-save
@@ -41,12 +41,15 @@ jobs:
       - name: Fetch NSE snapshot
         run: node scripts/fetch-nse-snapshot.js
 
+      - name: Refresh official research registry
+        run: node scripts/research-universe.js --refresh
+
       - name: Commit snapshot if changed
         run: |
           git config user.name "pranaykushnaji"
           git config user.email "pranaykushnaji284@gmail.com"
-          if [ -n "$(git status --porcelain data/nse-snapshot.json)" ]; then
-            git add data/nse-snapshot.json
+          if [ -n "$(git status --porcelain data/nse-snapshot.json research/universe.json)" ]; then
+            git add data/nse-snapshot.json research/universe.json
             git commit -m "chore: update NSE snapshot [skip ci]"
             # Other writers (Stock of the Day / sell-check via the Vercel GitHub API) may
             # push to main at the same moment, which makes a plain `git push` fail with a
