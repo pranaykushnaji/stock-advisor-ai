@@ -41,11 +41,12 @@ export function sameTimeRelativeVolume({ current, history, nowMs, minimumSession
 
 // Amount-at-risk sizing: no confidence ladder or minimum spend that overrides reductions.
 // All budgets must be chosen explicitly. Rupee losses remain estimates, never guarantees.
-export function researchPositionPlan({ entryPrice, stopPrice, quote, nowMs,
+export function researchPositionPlan({ entryPrice, stopPrice, quote, nowMs, symbol, instrumentKey,
   riskBudget, remainingDailyLossBudget, remainingDailyInvestmentBudget,
   cashAvailable, remainingExposureBudget, roundTripCostBps = 30,
   maxEntrySlippageBps = 10 } = {}) {
   const fail = reason => ({ status: 'blocked', reason, shares: 0, productionEnabled: false });
+  if (!symbol || !instrumentKey || quote?.symbol !== symbol || quote?.instrumentKey !== instrumentKey) return fail('explicit matching instrument identity required');
   if (![riskBudget, remainingDailyLossBudget, remainingDailyInvestmentBudget, cashAvailable, remainingExposureBudget].every(x => Number.isFinite(x) && x >= 0)) return fail('explicit capital and loss budgets required');
   if (!positive(entryPrice) || !positive(stopPrice) || stopPrice >= entryPrice) return fail('invalid entry or invalidation price');
   if (![roundTripCostBps, maxEntrySlippageBps].every(x => Number.isFinite(x) && x >= 0)) return fail('invalid execution-cost assumptions');
@@ -75,6 +76,7 @@ export const CONSERVATIVE_EXIT = Object.freeze({ version: 'risk-unit-trail-v1', 
 export function researchExitObservation(position, quote, { nowMs, config = CONSERVATIVE_EXIT } = {}) {
   const state = { ...position };
   const invalid = reason => ({ status: 'unavailable', reason, state });
+  if (!state.symbol || !state.instrumentKey || quote?.symbol !== state.symbol || quote?.instrumentKey !== state.instrumentKey) return invalid('matching position and quote identity required');
   if (!Number.isFinite(nowMs)) return invalid('explicit observation time required');
   if (!quoteFreshness(quote, { nowMs }).fresh) return invalid('unusable quote');
   if (!positive(state.entryPrice) || !positive(state.initialStopPrice) || state.initialStopPrice >= state.entryPrice) return invalid('missing frozen initial risk');
