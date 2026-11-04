@@ -7,7 +7,58 @@
   "positions": [],
   "trades": [],
   "days": {},
-  "lastSlots": {},
+  "lastSlots": {
+    "research": 1793759400000
+  },
   "dailyCache": {},
-  "suggestions": []
+  "suggestions": [
+    {
+      "ticker": "KAYNES",
+      "fullName": "Kaynes Technology India Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": null,
+      "price": null,
+      "observedAt": null,
+      "research": {
+        "source": "verified catalyst memory",
+        "observedAt": "2026-11-02T15:07:31.000Z",
+        "verified": true,
+        "negative": false,
+        "type": "acquisition",
+        "summary": "Official filing announces acquisition, indicating strategic expansion.",
+        "eventPublishedAt": 1793632051000,
+        "verification": "VERIFIED"
+      },
+      "status": "watch",
+      "reasons": [
+        "premarket research only; awaiting fresh market data and a completed breakout"
+      ]
+    }
+  ],
+  "updatedAt": "2026-11-04T02:30:38.137Z",
+  "config": {
+    "version": "paper-breakout-v1",
+    "dailyInvestment": 10000,
+    "executionRuleVersion": "five-minute-opening-v2",
+    "maxPositionInvestment": 5000,
+    "maxBuysPerDay": 3,
+    "maxOpenPositions": 5,
+    "modeledRiskPerTrade": 100,
+    "maxModeledOpenRisk": 500,
+    "maxSpreadBps": 30,
+    "minimumAverageTurnoverCr": 10,
+    "minStopPct": 0.5,
+    "maxStopPct": 3,
+    "entrySlippageBps": 5,
+    "exitSlippageBps": 5,
+    "costBpsPerSide": 15,
+    "noProgressSessions": 3,
+    "maximumSessions": 5
+  },
+  "lastCheck": {
+    "at": "2026-11-04T02:30:38.137Z",
+    "action": "research",
+    "bought": null,
+    "checked": []
+  }
 }
