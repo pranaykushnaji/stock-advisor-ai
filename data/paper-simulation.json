@@ -2,40 +2,187 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 0,
-  "contributions": 0,
+  "cash": 10000,
+  "contributions": 10000,
   "positions": [],
   "trades": [],
-  "days": {},
-  "lastSlots": {
-    "research": 1793763600000
+  "days": {
+    "2026-11-04": {
+      "contribution": 10000,
+      "invested": 0,
+      "buys": [],
+      "exits": []
+    }
   },
-  "dailyCache": {},
+  "lastSlots": {
+    "research": 1793763600000,
+    "scan": 1793763900000
+  },
+  "dailyCache": {
+    "GROWW": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 192.40166613315333,
+      "averageTurnoverCr": 520.5781011669501
+    },
+    "NH": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 1751.1396792955675,
+      "averageTurnoverCr": 29.9095526245
+    },
+    "JSWINFRA": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 328.113289984031,
+      "averageTurnoverCr": 82.4970610945
+    },
+    "DABUR": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 373.8785451365305,
+      "averageTurnoverCr": 50.608932152499996
+    },
+    "UNOMINDA": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 1108.115756936075,
+      "averageTurnoverCr": 59.19554736200001
+    },
+    "BHEL": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 410.70166596147834,
+      "averageTurnoverCr": 576.49154183325
+    },
+    "HEGAM": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 239.23388408699785,
+      "averageTurnoverCr": 29.9609877008
+    },
+    "MARICO": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 797.172236409722,
+      "averageTurnoverCr": 191.95029862375
+    }
+  },
   "suggestions": [
     {
-      "ticker": "KAYNES",
-      "fullName": "Kaynes Technology India Ltd.",
+      "ticker": "BHEL",
+      "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": null,
-      "price": null,
-      "observedAt": null,
-      "research": {
-        "source": "verified catalyst memory",
-        "observedAt": "2026-11-02T15:07:31.000Z",
-        "verified": true,
-        "negative": false,
-        "type": "acquisition",
-        "summary": "Official filing announces acquisition, indicating strategic expansion.",
-        "eventPublishedAt": 1793632051000,
-        "verification": "VERIFIED"
-      },
-      "status": "watch",
+      "discoveryScore": 65.8,
+      "price": 412,
+      "observedAt": "2026-11-04T03:45:39.596Z",
+      "research": null,
       "reasons": [
-        "premarket research only; awaiting fresh market data and a completed breakout"
-      ]
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "HEGAM",
+      "fullName": "HEG Advanced Materials Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 65.5,
+      "price": 257.81,
+      "observedAt": "2026-11-04T03:45:39.826Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "UNOMINDA",
+      "fullName": "UNO Minda Ltd.",
+      "sector": "Automobile and Auto Components",
+      "discoveryScore": 65.5,
+      "price": 1161.3,
+      "observedAt": "2026-11-04T03:45:33.765Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "GROWW",
+      "fullName": "Billionbrains Garage Ventures Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 60.6,
+      "price": 208.64,
+      "observedAt": "2026-11-04T03:45:39.808Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "JSWINFRA",
+      "fullName": "JSW Infrastructure Ltd.",
+      "sector": "Services",
+      "discoveryScore": 60.3,
+      "price": 330.85,
+      "observedAt": "2026-11-04T03:45:38.129Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "MARICO",
+      "fullName": "Marico Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "discoveryScore": 59.8,
+      "price": 879.7,
+      "observedAt": "2026-11-04T03:45:39.863Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "DABUR",
+      "fullName": "Dabur India Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "discoveryScore": 59.6,
+      "price": 385.75,
+      "observedAt": "2026-11-04T03:45:32.423Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "NH",
+      "fullName": "Narayana Hrudayalaya Ltd.",
+      "sector": "Healthcare",
+      "discoveryScore": 59.6,
+      "price": 1897.1,
+      "observedAt": "2026-11-04T03:45:37.727Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
     }
   ],
-  "updatedAt": "2026-11-04T03:40:38.077Z",
+  "updatedAt": "2026-11-04T03:45:40.138Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -56,9 +203,205 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T03:40:38.077Z",
-    "action": "research",
+    "at": "2026-11-04T03:45:40.138Z",
+    "action": "scan",
     "bought": null,
-    "checked": []
+    "checked": [],
+    "entryPause": null,
+    "researchStatus": "loaded"
+  },
+  "discovery": {
+    "at": "2026-11-04T03:45:39.268Z",
+    "requested": 395,
+    "quotesReceived": 395,
+    "shortlisted": 8,
+    "rejected": [
+      {
+        "ticker": "360ONE",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AADHARHFC",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
+        "ticker": "AARTIIND",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AAVAS",
+        "reasons": [
+          "missing or wide bid/ask spread",
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ABBOTINDIA",
+        "reasons": [
+          "missing or stale instrument quote"
+        ]
+      },
+      {
+        "ticker": "ABCAPITAL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ABDL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ABREL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ACC",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ACE",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AEGISLOG",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AEGISVOPAK",
+        "reasons": [
+          "missing or wide bid/ask spread",
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AETHER",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
+        "ticker": "AFCONS",
+        "reasons": [
+          "missing or wide bid/ask spread",
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AFFLE",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AIAENG",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AIIL",
+        "reasons": [
+          "missing or wide bid/ask spread",
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AJANTPHARM",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ALKEM",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AMBER",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ANANTRAJ",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ANGELONE",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "APLAPOLLO",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "APOLLOTYRE",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "APTUS",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ASTERDM",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ASTRAL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ATGL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ATUL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      }
+    ],
+    "source": "Upstox",
+    "registryAt": "2026-11-04T03:16:54.077Z"
   }
 }
