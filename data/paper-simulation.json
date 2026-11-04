@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 1910.15,
+  "cash": 172.48,
   "contributions": 10000,
   "positions": [
     {
@@ -75,9 +75,9 @@
       "initialStopPct": 0.634147809038621,
       "modeledInitialRisk": 47.11,
       "peakPrice": 1199.4,
-      "currentPrice": 1198.6,
-      "lastObservedAt": "2026-11-04T07:25:36.533Z",
-      "lastPriceUpdate": "2026-11-04T07:25:36.533Z",
+      "currentPrice": 1198.4,
+      "lastObservedAt": "2026-11-04T07:25:39.356Z",
+      "lastPriceUpdate": "2026-11-04T07:25:39.356Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -97,23 +97,67 @@
       "quoteTimestamp": "2026-11-04T07:00:39.517Z",
       "paperTrading": true,
       "expectedEdge": null
+    },
+    {
+      "id": "2026-11-04|GODREJPROP|paper-breakout-v1",
+      "ticker": "GODREJPROP",
+      "symbol": "GODREJPROP",
+      "instrumentKey": "NSE_EQ|INE484J01027",
+      "fullName": "Godrej Properties Ltd.",
+      "sector": "Realty",
+      "date": "2026-11-04",
+      "addedAt": "2026-11-04T07:25:39.244Z",
+      "strategyVersion": "paper-breakout-v1",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 1735.0671,
+      "shares": 1,
+      "investedAmount": 1735.07,
+      "entryCost": 2.6,
+      "initialStopPrice": 1712.8854,
+      "initialStopPct": 1.2784347072225644,
+      "modeledInitialRisk": 28.25,
+      "peakPrice": 1735.0671,
+      "currentPrice": 1734.1,
+      "lastObservedAt": "2026-11-04T07:25:39.244Z",
+      "lastPriceUpdate": "2026-11-04T07:25:39.244Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T07:25:00.000Z",
+        "entryAt": "2026-11-04T07:25:39.244Z",
+        "entryPrice": 1734.1,
+        "entryIndex": 44,
+        "breakoutLevel": 1726.8,
+        "supportLevel": 1714.6,
+        "vwap": 1714.2535243114094,
+        "volumeRatio": 14.819430467538826,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 75.3,
+      "research": null,
+      "executionRuleVersion": "five-minute-opening-v2",
+      "quoteTimestamp": "2026-11-04T07:25:39.244Z",
+      "paperTrading": true,
+      "expectedEdge": null
     }
   ],
   "trades": [],
   "days": {
     "2026-11-04": {
       "contribution": 10000,
-      "invested": 8089.85,
+      "invested": 9827.52,
       "buys": [
         "KAYNES",
-        "UNOMINDA"
+        "UNOMINDA",
+        "GODREJPROP"
       ],
       "exits": []
     }
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793776800000,
+    "scan": 1793777100000,
     "risk": 1793777100000
   },
   "dailyCache": {
@@ -414,84 +458,13 @@
   },
   "suggestions": [
     {
-      "ticker": "HSCL",
-      "fullName": "Himadri Speciality Chemical Ltd.",
-      "sector": "Chemicals",
-      "discoveryScore": 77.3,
-      "price": 563.2,
-      "observedAt": "2026-11-04T07:20:36.112Z",
-      "sessionChangePct": 6.47,
-      "research": null,
-      "reasons": [
-        "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
       "ticker": "PFOCUS",
       "fullName": "Prime Focus Ltd.",
       "sector": "Media Entertainment & Publication",
       "discoveryScore": 77.2,
-      "price": 305.2,
-      "observedAt": "2026-11-04T07:20:37.367Z",
-      "sessionChangePct": 5.4,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "JYOTICNC",
-      "fullName": "Jyoti CNC Automation Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 77,
-      "price": 1025.6,
-      "observedAt": "2026-11-04T07:20:38.989Z",
-      "sessionChangePct": 6.02,
-      "research": null,
-      "reasons": [
-        "sector already represented"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-04T07:20:00.000Z",
-        "entryAt": "2026-11-04T07:20:38.989Z",
-        "entryPrice": 1025.6,
-        "entryIndex": 43,
-        "breakoutLevel": 1020,
-        "supportLevel": 1003.2,
-        "vwap": 1006.1751982052488,
-        "volumeRatio": 3.272525453571155,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      }
-    },
-    {
-      "ticker": "VEDPOWER",
-      "fullName": "Vedanta Power Ltd.",
-      "sector": "Power",
-      "discoveryScore": 77,
-      "price": 36.2,
-      "observedAt": "2026-11-04T07:20:39.518Z",
-      "sessionChangePct": 6.13,
+      "price": 305.25,
+      "observedAt": "2026-11-04T07:25:36.568Z",
+      "sessionChangePct": 5.42,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -507,13 +480,52 @@
       "ticker": "BHEL",
       "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 76.9,
-      "price": 422.6,
-      "observedAt": "2026-11-04T07:20:38.270Z",
-      "sessionChangePct": 5.65,
+      "discoveryScore": 77.1,
+      "price": 422.75,
+      "observedAt": "2026-11-04T07:25:38.008Z",
+      "sessionChangePct": 5.69,
       "research": null,
       "reasons": [
         "sector already represented",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "HSCL",
+      "fullName": "Himadri Speciality Chemical Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 77.1,
+      "price": 562.85,
+      "observedAt": "2026-11-04T07:25:32.676Z",
+      "sessionChangePct": 6.4,
+      "research": null,
+      "reasons": [
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "VEDPOWER",
+      "fullName": "Vedanta Power Ltd.",
+      "sector": "Power",
+      "discoveryScore": 77.1,
+      "price": 36.2,
+      "observedAt": "2026-11-04T07:25:39.472Z",
+      "sessionChangePct": 6.13,
+      "research": null,
+      "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -527,10 +539,10 @@
       "ticker": "GVT&D",
       "fullName": "GE Vernova T&D India Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 76.9,
-      "price": 4221.5,
-      "observedAt": "2026-11-04T07:20:38.592Z",
-      "sessionChangePct": 4.23,
+      "discoveryScore": 77,
+      "price": 4223.7,
+      "observedAt": "2026-11-04T07:25:40.015Z",
+      "sessionChangePct": 4.29,
       "research": null,
       "reasons": [
         "sector already represented",
@@ -544,16 +556,16 @@
       }
     },
     {
-      "ticker": "LINDEINDIA",
-      "fullName": "Linde India Ltd.",
-      "sector": "Chemicals",
-      "discoveryScore": 74.9,
-      "price": 6274,
-      "observedAt": "2026-11-04T07:20:38.209Z",
-      "sessionChangePct": 7.28,
+      "ticker": "JYOTICNC",
+      "fullName": "Jyoti CNC Automation Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 75.7,
+      "price": 1024.75,
+      "observedAt": "2026-11-04T07:25:39.999Z",
+      "sessionChangePct": 5.93,
       "research": null,
       "reasons": [
-        "20-session average turnover below ₹10Cr or missing",
+        "sector already represented",
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -564,27 +576,51 @@
       }
     },
     {
-      "ticker": "HINDCOPPER",
-      "fullName": "Hindustan Copper Ltd.",
-      "sector": "Metals & Mining",
-      "discoveryScore": 74.2,
-      "price": 414.55,
-      "observedAt": "2026-11-04T07:20:37.418Z",
-      "sessionChangePct": 3.56,
+      "ticker": "GODREJPROP",
+      "fullName": "Godrej Properties Ltd.",
+      "sector": "Realty",
+      "discoveryScore": 75.3,
+      "price": 1734.1,
+      "observedAt": "2026-11-04T07:25:39.244Z",
+      "sessionChangePct": 3.87,
       "research": null,
       "reasons": [
-        "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
+        "confirmed setup; simulated fill recorded"
       ],
-      "status": "not-qualified",
+      "status": "simulated-buy",
       "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
+        "status": "setup",
+        "reason": null,
+        "version": "consolidation-v1"
+      },
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T07:25:00.000Z",
+        "entryAt": "2026-11-04T07:25:39.244Z",
+        "entryPrice": 1734.1,
+        "entryIndex": 44,
+        "breakoutLevel": 1726.8,
+        "supportLevel": 1714.6,
+        "vwap": 1714.2535243114094,
+        "volumeRatio": 14.819430467538826,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
       }
+    },
+    {
+      "ticker": "LINDEINDIA",
+      "fullName": "Linde India Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 75.3,
+      "price": 6278.5,
+      "observedAt": "2026-11-04T07:25:28.820Z",
+      "sessionChangePct": 7.35,
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-04T07:25:37.904Z",
+  "updatedAt": "2026-11-04T07:25:40.381Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -605,9 +641,9 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T07:25:37.904Z",
-    "action": "risk",
-    "bought": null,
+    "at": "2026-11-04T07:25:40.381Z",
+    "action": "scan",
+    "bought": "GODREJPROP",
     "checked": [
       {
         "ticker": "KAYNES",
@@ -622,7 +658,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T07:20:40.149Z",
+    "at": "2026-11-04T07:25:39.866Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -637,6 +673,12 @@
         "ticker": "ABCAPITAL",
         "reasons": [
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AEGISVOPAK",
+        "reasons": [
+          "missing or stale instrument quote"
         ]
       },
       {
@@ -676,6 +718,12 @@
         ]
       },
       {
+        "ticker": "APOLLOTYRE",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "ASAHIINDIA",
         "reasons": [
           "weak or overextended session move"
@@ -689,6 +737,18 @@
       },
       {
         "ticker": "BATAINDIA",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "BLS",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "BLUESTARCO",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -742,6 +802,12 @@
         ]
       },
       {
+        "ticker": "CRAFTSMAN",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "CYIENT",
         "reasons": [
           "weak or overextended session move"
@@ -760,50 +826,21 @@
         ]
       },
       {
-        "ticker": "EMAMILTD",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "EMCURE",
         "reasons": [
+          "missing or wide bid/ask spread",
           "official circuit bands unavailable or reached",
           "weak or overextended session move"
         ]
       },
       {
+        "ticker": "FEDERALBNK",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "FRACTAL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GABRIEL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GALLANTT",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GLAND",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GLAXO",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GMDCLTD",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -814,11 +851,11 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.04367756715950577,
-      "observedAt": "2026-11-04T07:20:40.556Z",
+      "changePct": 0.012809286522741381,
+      "observedAt": "2026-11-04T07:25:40.273Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 23821.25,
-      "previousClose": 23810.85
+      "price": 23813.9,
+      "previousClose": 23810.850000000002
     }
   },
   "scanHistory": {
@@ -839,6 +876,12 @@
       {
         "at": "2026-11-04T07:20:40.670Z",
         "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-04T07:25:40.381Z",
+        "bought": "GODREJPROP",
         "shortlisted": 8,
         "benchmarkFresh": true
       }
@@ -868,11 +911,17 @@
             "price": 36.2,
             "score": 77,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T07:25:39.472Z",
+            "price": 36.2,
+            "score": 77.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T07:20:39.518Z",
+        "lastSeenAt": "2026-11-04T07:25:39.472Z",
         "lastPrice": 36.2,
-        "discoveryScore": 77,
+        "discoveryScore": 77.1,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -901,11 +950,17 @@
             "price": 563.2,
             "score": 77.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T07:25:32.676Z",
+            "price": 562.85,
+            "score": 77.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T07:20:36.112Z",
-        "lastPrice": 563.2,
-        "discoveryScore": 77.3,
+        "lastSeenAt": "2026-11-04T07:25:32.676Z",
+        "lastPrice": 562.85,
+        "discoveryScore": 77.1,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -935,10 +990,16 @@
             "price": 305.2,
             "score": 77.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T07:25:36.568Z",
+            "price": 305.25,
+            "score": 77.2,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T07:20:37.367Z",
-        "lastPrice": 305.2,
+        "lastSeenAt": "2026-11-04T07:25:36.568Z",
+        "lastPrice": 305.25,
         "discoveryScore": 77.2,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -968,11 +1029,17 @@
             "price": 422.6,
             "score": 76.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T07:25:38.008Z",
+            "price": 422.75,
+            "score": 77.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T07:20:38.270Z",
-        "lastPrice": 422.6,
-        "discoveryScore": 76.9,
+        "lastSeenAt": "2026-11-04T07:25:38.008Z",
+        "lastPrice": 422.75,
+        "discoveryScore": 77.1,
         "reasons": [
           "sector already represented",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -1002,11 +1069,17 @@
             "price": 4221.5,
             "score": 76.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T07:25:40.015Z",
+            "price": 4223.7,
+            "score": 77,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T07:20:38.592Z",
-        "lastPrice": 4221.5,
-        "discoveryScore": 76.9,
+        "lastSeenAt": "2026-11-04T07:25:40.015Z",
+        "lastPrice": 4223.7,
+        "discoveryScore": 77,
         "reasons": [
           "sector already represented",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -1030,13 +1103,20 @@
             "price": 1025.6,
             "score": 77,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-04T07:25:39.999Z",
+            "price": 1024.75,
+            "score": 75.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T07:20:38.989Z",
-        "lastPrice": 1025.6,
-        "discoveryScore": 77,
+        "lastSeenAt": "2026-11-04T07:25:39.999Z",
+        "lastPrice": 1024.75,
+        "discoveryScore": 75.7,
         "reasons": [
-          "sector already represented"
+          "sector already represented",
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "LINDEINDIA": {
@@ -1063,15 +1143,18 @@
             "price": 6274,
             "score": 74.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T07:25:28.820Z",
+            "price": 6278.5,
+            "score": 75.3,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-04T07:20:38.209Z",
-        "lastPrice": 6274,
-        "discoveryScore": 74.9,
-        "reasons": [
-          "20-session average turnover below ₹10Cr or missing",
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-04T07:25:28.820Z",
+        "lastPrice": 6278.5,
+        "discoveryScore": 75.3,
+        "reasons": []
       },
       "MRPL": {
         "ticker": "MRPL",
@@ -1142,6 +1225,27 @@
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "GODREJPROP": {
+        "ticker": "GODREJPROP",
+        "fullName": "Godrej Properties Ltd.",
+        "sector": "Realty",
+        "firstSeenAt": "2026-11-04T07:25:39.244Z",
+        "firstPrice": 1734.1,
+        "observations": [
+          {
+            "at": "2026-11-04T07:25:39.244Z",
+            "price": 1734.1,
+            "score": 75.3,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-04T07:25:39.244Z",
+        "lastPrice": 1734.1,
+        "discoveryScore": 75.3,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
         ]
       }
     }
