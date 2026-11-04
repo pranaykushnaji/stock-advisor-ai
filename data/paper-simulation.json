@@ -74,10 +74,10 @@
       "initialStopPrice": 1189.0098,
       "initialStopPct": 0.634147809038621,
       "modeledInitialRisk": 47.11,
-      "peakPrice": 1197,
-      "currentPrice": 1197,
-      "lastObservedAt": "2026-11-04T07:05:35.196Z",
-      "lastPriceUpdate": "2026-11-04T07:05:35.196Z",
+      "peakPrice": 1197.2,
+      "currentPrice": 1197.2,
+      "lastObservedAt": "2026-11-04T07:05:39.852Z",
+      "lastPriceUpdate": "2026-11-04T07:05:39.852Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -113,7 +113,7 @@
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793775600000,
+    "scan": 1793775900000,
     "risk": 1793775900000
   },
   "dailyCache": {
@@ -414,31 +414,12 @@
   },
   "suggestions": [
     {
-      "ticker": "ZEEL",
-      "fullName": "Zee Entertainment Enterprises Ltd.",
-      "sector": "Media Entertainment & Publication",
-      "discoveryScore": 79.8,
-      "price": 66.27,
-      "observedAt": "2026-11-04T07:00:38.814Z",
-      "research": null,
-      "reasons": [
-        "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
       "ticker": "PFOCUS",
       "fullName": "Prime Focus Ltd.",
       "sector": "Media Entertainment & Publication",
-      "discoveryScore": 77.7,
-      "price": 303.55,
-      "observedAt": "2026-11-04T07:00:33.647Z",
+      "discoveryScore": 77.6,
+      "price": 303.9,
+      "observedAt": "2026-11-04T07:05:37.353Z",
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -454,9 +435,9 @@
       "ticker": "HSCL",
       "fullName": "Himadri Speciality Chemical Ltd.",
       "sector": "Chemicals",
-      "discoveryScore": 77.2,
-      "price": 561.85,
-      "observedAt": "2026-11-04T07:00:35.819Z",
+      "discoveryScore": 76.6,
+      "price": 561.5,
+      "observedAt": "2026-11-04T07:05:37.320Z",
       "research": null,
       "reasons": [
         "below 20-session EMA",
@@ -470,12 +451,30 @@
       }
     },
     {
-      "ticker": "BHEL",
-      "fullName": "Bharat Heavy Electricals Ltd.",
+      "ticker": "VEDPOWER",
+      "fullName": "Vedanta Power Ltd.",
+      "sector": "Power",
+      "discoveryScore": 76.5,
+      "price": 36.15,
+      "observedAt": "2026-11-04T07:05:39.713Z",
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "GVT&D",
+      "fullName": "GE Vernova T&D India Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 77.1,
-      "price": 422.95,
-      "observedAt": "2026-11-04T07:00:37.307Z",
+      "discoveryScore": 76.2,
+      "price": 4218,
+      "observedAt": "2026-11-04T07:05:38.840Z",
       "research": null,
       "reasons": [
         "sector already represented",
@@ -489,14 +488,15 @@
       }
     },
     {
-      "ticker": "VEDPOWER",
-      "fullName": "Vedanta Power Ltd.",
-      "sector": "Power",
-      "discoveryScore": 77.1,
-      "price": 36.14,
-      "observedAt": "2026-11-04T07:00:37.748Z",
+      "ticker": "BHEL",
+      "fullName": "Bharat Heavy Electricals Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 76.1,
+      "price": 422.3,
+      "observedAt": "2026-11-04T07:05:34.267Z",
       "research": null,
       "reasons": [
+        "sector already represented",
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -507,60 +507,64 @@
       }
     },
     {
-      "ticker": "UNOMINDA",
-      "fullName": "UNO Minda Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 76.4,
-      "price": 1196,
-      "observedAt": "2026-11-04T07:00:39.517Z",
-      "research": null,
-      "reasons": [
-        "confirmed setup; simulated fill recorded"
-      ],
-      "status": "simulated-buy",
-      "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-04T07:00:00.000Z",
-        "entryAt": "2026-11-04T07:00:39.517Z",
-        "entryPrice": 1196,
-        "entryIndex": 39,
-        "breakoutLevel": 1194,
-        "supportLevel": 1190.2,
-        "vwap": 1176.3076388694376,
-        "volumeRatio": 1.9302651029861042,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      }
-    },
-    {
-      "ticker": "GVT&D",
-      "fullName": "GE Vernova T&D India Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 76.1,
-      "price": 4217.4,
-      "observedAt": "2026-11-04T07:00:38.589Z",
-      "research": null,
-      "reasons": [],
-      "status": "not-selected"
-    },
-    {
       "ticker": "LINDEINDIA",
       "fullName": "Linde India Ltd.",
       "sector": "Chemicals",
-      "discoveryScore": 75.6,
-      "price": 6287,
-      "observedAt": "2026-11-04T07:00:35.035Z",
+      "discoveryScore": 75.1,
+      "price": 6278.5,
+      "observedAt": "2026-11-04T07:05:19.517Z",
       "research": null,
-      "reasons": [],
-      "status": "not-selected"
+      "reasons": [
+        "20-session average turnover below ₹10Cr or missing",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "ZEEL",
+      "fullName": "Zee Entertainment Enterprises Ltd.",
+      "sector": "Media Entertainment & Publication",
+      "discoveryScore": 74.8,
+      "price": 65.34,
+      "observedAt": "2026-11-04T07:05:39.677Z",
+      "research": null,
+      "reasons": [
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "HINDCOPPER",
+      "fullName": "Hindustan Copper Ltd.",
+      "sector": "Metals & Mining",
+      "discoveryScore": 73.9,
+      "price": 414.5,
+      "observedAt": "2026-11-04T07:05:37.644Z",
+      "research": null,
+      "reasons": [
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     }
   ],
-  "updatedAt": "2026-11-04T07:05:37.850Z",
+  "updatedAt": "2026-11-04T07:05:40.902Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -581,8 +585,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T07:05:37.850Z",
-    "action": "risk",
+    "at": "2026-11-04T07:05:40.902Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -598,11 +602,17 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T07:00:39.390Z",
+    "at": "2026-11-04T07:05:39.758Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
     "rejected": [
+      {
+        "ticker": "360ONE",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
       {
         "ticker": "ABCAPITAL",
         "reasons": [
@@ -724,12 +734,6 @@
         ]
       },
       {
-        "ticker": "EIHOTEL",
-        "reasons": [
-          "missing or stale instrument quote"
-        ]
-      },
-      {
         "ticker": "EMCURE",
         "reasons": [
           "missing or wide bid/ask spread",
@@ -745,6 +749,12 @@
       },
       {
         "ticker": "FRACTAL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "FSL",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -778,12 +788,6 @@
         "reasons": [
           "weak or overextended session move"
         ]
-      },
-      {
-        "ticker": "GRAPHITE",
-        "reasons": [
-          "weak or overextended session move"
-        ]
       }
     ],
     "source": "Upstox",
@@ -791,10 +795,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.007769567235094144,
-      "observedAt": "2026-11-04T07:00:39.785Z",
+      "changePct": -0.027088491171045614,
+      "observedAt": "2026-11-04T07:05:40.803Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 23812.7,
+      "price": 23804.4,
       "previousClose": 23810.850000000002
     }
   }
