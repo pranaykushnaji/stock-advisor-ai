@@ -2,21 +2,75 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 10000,
+  "cash": 6703.72,
   "contributions": 10000,
-  "positions": [],
+  "positions": [
+    {
+      "id": "2026-11-04|KAYNES|paper-breakout-v1",
+      "ticker": "KAYNES",
+      "symbol": "KAYNES",
+      "instrumentKey": "NSE_EQ|INE918Z01012",
+      "fullName": "Kaynes Technology India Ltd.",
+      "sector": "Capital Goods",
+      "date": "2026-11-04",
+      "addedAt": "2026-11-04T06:40:39.704Z",
+      "strategyVersion": "paper-breakout-v1",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 3291.3448499999995,
+      "shares": 1,
+      "investedAmount": 3291.34,
+      "entryCost": 4.94,
+      "initialStopPrice": 3271.4253,
+      "initialStopPct": 0.6052100557010776,
+      "modeledInitialRisk": 31.44,
+      "peakPrice": 3291.3448499999995,
+      "currentPrice": 3288.9,
+      "lastObservedAt": "2026-11-04T06:40:39.704Z",
+      "lastPriceUpdate": "2026-11-04T06:40:39.704Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T06:40:00.000Z",
+        "entryAt": "2026-11-04T06:40:39.704Z",
+        "entryPrice": 3288.9,
+        "entryIndex": 35,
+        "breakoutLevel": 3284.9,
+        "supportLevel": 3274.7,
+        "vwap": 3275.184383898991,
+        "volumeRatio": 2.2082311256473153,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "research": {
+        "source": "verified catalyst memory",
+        "observedAt": "2026-11-02T15:07:31.000Z",
+        "verified": true,
+        "negative": false,
+        "type": "acquisition",
+        "summary": "Official filing announces acquisition, indicating strategic expansion.",
+        "eventPublishedAt": 1793632051000,
+        "verification": "VERIFIED"
+      },
+      "executionRuleVersion": "five-minute-opening-v2",
+      "quoteTimestamp": "2026-11-04T06:40:39.704Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    }
+  ],
   "trades": [],
   "days": {
     "2026-11-04": {
       "contribution": 10000,
-      "invested": 0,
-      "buys": [],
+      "invested": 3296.28,
+      "buys": [
+        "KAYNES"
+      ],
       "exits": []
     }
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793774100000
+    "scan": 1793774400000
   },
   "dailyCache": {
     "GROWW": {
@@ -302,104 +356,103 @@
   },
   "suggestions": [
     {
-      "ticker": "LINDEINDIA",
-      "fullName": "Linde India Ltd.",
-      "sector": "Chemicals",
-      "discoveryScore": 76.7,
-      "price": 6291.5,
-      "observedAt": "2026-11-04T06:35:35.701Z",
+      "ticker": "VEDPOWER",
+      "fullName": "Vedanta Power Ltd.",
+      "sector": "Power",
+      "discoveryScore": 76.6,
+      "price": 36.06,
+      "observedAt": "2026-11-04T06:40:40.235Z",
       "research": null,
       "reasons": [
-        "benchmark price unavailable",
-        "20-session average turnover below ₹10Cr or missing"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
-      "status": "not-qualified"
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     },
     {
       "ticker": "BHEL",
       "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 76.4,
-      "price": 422.65,
-      "observedAt": "2026-11-04T06:35:37.766Z",
+      "discoveryScore": 76.2,
+      "price": 422.75,
+      "observedAt": "2026-11-04T06:40:40.072Z",
       "research": null,
       "reasons": [
-        "benchmark price unavailable"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
-      "status": "not-qualified"
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     },
     {
-      "ticker": "GVT&D",
-      "fullName": "GE Vernova T&D India Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 75.9,
-      "price": 4216.1,
-      "observedAt": "2026-11-04T06:35:39.495Z",
+      "ticker": "LINDEINDIA",
+      "fullName": "Linde India Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 76.2,
+      "price": 6298.5,
+      "observedAt": "2026-11-04T06:40:37.414Z",
       "research": null,
       "reasons": [
-        "benchmark price unavailable"
+        "20-session average turnover below ₹10Cr or missing",
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
-      "status": "not-qualified"
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     },
     {
       "ticker": "PFOCUS",
       "fullName": "Prime Focus Ltd.",
       "sector": "Media Entertainment & Publication",
-      "discoveryScore": 75.9,
-      "price": 301.4,
-      "observedAt": "2026-11-04T06:35:35.093Z",
+      "discoveryScore": 76,
+      "price": 302.45,
+      "observedAt": "2026-11-04T06:40:31.026Z",
       "research": null,
       "reasons": [
-        "benchmark price unavailable"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
-      "status": "not-qualified"
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     },
     {
-      "ticker": "VEDPOWER",
-      "fullName": "Vedanta Power Ltd.",
-      "sector": "Power",
-      "discoveryScore": 75.5,
-      "price": 35.91,
-      "observedAt": "2026-11-04T06:35:39.969Z",
+      "ticker": "GVT&D",
+      "fullName": "GE Vernova T&D India Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 75.3,
+      "price": 4209.1,
+      "observedAt": "2026-11-04T06:40:40.014Z",
       "research": null,
       "reasons": [
-        "benchmark price unavailable"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
-      "status": "not-qualified"
-    },
-    {
-      "ticker": "MRPL",
-      "fullName": "Mangalore Refinery & Petrochemicals Ltd.",
-      "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 75.2,
-      "price": 188,
-      "observedAt": "2026-11-04T06:35:39.585Z",
-      "research": null,
-      "reasons": [
-        "benchmark price unavailable"
-      ],
-      "status": "not-qualified"
-    },
-    {
-      "ticker": "UNOMINDA",
-      "fullName": "UNO Minda Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 74.5,
-      "price": 1192,
-      "observedAt": "2026-11-04T06:35:39.143Z",
-      "research": null,
-      "reasons": [
-        "benchmark price unavailable"
-      ],
-      "status": "not-qualified"
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     },
     {
       "ticker": "KAYNES",
       "fullName": "Kaynes Technology India Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 72.9,
-      "price": 3283.4,
-      "observedAt": "2026-11-04T06:35:29.595Z",
+      "discoveryScore": 75.2,
+      "price": 3288.9,
+      "observedAt": "2026-11-04T06:40:39.704Z",
       "research": {
         "source": "verified catalyst memory",
         "observedAt": "2026-11-02T15:07:31.000Z",
@@ -411,12 +464,52 @@
         "verification": "VERIFIED"
       },
       "reasons": [
-        "benchmark price unavailable"
+        "confirmed setup; simulated fill recorded"
       ],
-      "status": "not-qualified"
+      "status": "simulated-buy",
+      "entryDiagnostics": {
+        "status": "setup",
+        "reason": null,
+        "version": "consolidation-v1"
+      },
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T06:40:00.000Z",
+        "entryAt": "2026-11-04T06:40:39.704Z",
+        "entryPrice": 3288.9,
+        "entryIndex": 35,
+        "breakoutLevel": 3284.9,
+        "supportLevel": 3274.7,
+        "vwap": 3275.184383898991,
+        "volumeRatio": 2.2082311256473153,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      }
+    },
+    {
+      "ticker": "UNOMINDA",
+      "fullName": "UNO Minda Ltd.",
+      "sector": "Automobile and Auto Components",
+      "discoveryScore": 75.2,
+      "price": 1193.1,
+      "observedAt": "2026-11-04T06:40:38.870Z",
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
+      "ticker": "MRPL",
+      "fullName": "Mangalore Refinery & Petrochemicals Ltd.",
+      "sector": "Oil Gas & Consumable Fuels",
+      "discoveryScore": 74.4,
+      "price": 187.7,
+      "observedAt": "2026-11-04T06:40:40.274Z",
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-04T06:35:40.351Z",
+  "updatedAt": "2026-11-04T06:40:40.605Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -437,15 +530,15 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T06:35:40.351Z",
+    "at": "2026-11-04T06:40:40.605Z",
     "action": "scan",
-    "bought": null,
+    "bought": "KAYNES",
     "checked": [],
     "entryPause": null,
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T06:35:39.283Z",
+    "at": "2026-11-04T06:40:39.564Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -471,7 +564,7 @@
       {
         "ticker": "AIIL",
         "reasons": [
-          "weak or overextended session move"
+          "missing or stale instrument quote"
         ]
       },
       {
@@ -493,6 +586,12 @@
         ]
       },
       {
+        "ticker": "ANURAS",
+        "reasons": [
+          "missing or stale instrument quote"
+        ]
+      },
+      {
         "ticker": "ASAHIINDIA",
         "reasons": [
           "weak or overextended session move"
@@ -506,6 +605,12 @@
       },
       {
         "ticker": "BANDHANBNK",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "BANKINDIA",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -535,12 +640,6 @@
         ]
       },
       {
-        "ticker": "CANHLIFE",
-        "reasons": [
-          "missing or stale instrument quote"
-        ]
-      },
-      {
         "ticker": "CARBORUNIV",
         "reasons": [
           "weak or overextended session move"
@@ -550,6 +649,12 @@
         "ticker": "CDSL",
         "reasons": [
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "CHOICEIN",
+        "reasons": [
+          "missing or stale instrument quote"
         ]
       },
       {
@@ -595,9 +700,9 @@
         ]
       },
       {
-        "ticker": "EIDPARRY",
+        "ticker": "EMAMILTD",
         "reasons": [
-          "missing or stale instrument quote"
+          "weak or overextended session move"
         ]
       },
       {
@@ -619,21 +724,18 @@
         "reasons": [
           "weak or overextended session move"
         ]
-      },
-      {
-        "ticker": "FRACTAL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GABRIEL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
       }
     ],
     "source": "Upstox",
-    "registryAt": "2026-11-04T06:16:55.053Z"
+    "registryAt": "2026-11-04T06:16:55.053Z",
+    "benchmark": {
+      "fresh": true,
+      "reason": "fresh provider index snapshot",
+      "changePct": -0.14888170728890593,
+      "observedAt": "2026-11-04T06:40:40.497Z",
+      "timestampBasis": "provider-index-snapshot",
+      "price": 23775.4,
+      "previousClose": 23810.850000000002
+    }
   }
 }
