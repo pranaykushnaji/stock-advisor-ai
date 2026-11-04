@@ -130,6 +130,8 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
     s.suggestions=(market.candidates||[]).map(c=>({ticker:c.symbol,fullName:c.name,sector:c.sector,
       discoveryScore:c.discoveryScore??null,price:market.quotes[c.instrumentKey]?.price??null,
       observedAt:market.quotes[c.instrumentKey]?.lastTradeAt??null,
+      sessionChangePct:market.quotes[c.instrumentKey]?.previousClose>0
+        ?round((market.quotes[c.instrumentKey].price/market.quotes[c.instrumentKey].previousClose-1)*100):null,
       research:market.researchBySymbol?.[c.symbol]??null,reasons:[],status:'watch'}));
     const blocked=new Set([...s.positions.map(p=>p.ticker),...day.buys,...day.exits]);
     const benchmark=market.quotes['NSE_INDEX|Nifty 50'];
@@ -178,13 +180,25 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
         summary:setup.setupVersion==='opening-consolidation-v1'
           ?'Completed opening-range breakout with at least 2x recent-bar volume; above VWAP and EMA20, positive relative strength.'
           :'Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.',
-        setup,research:market.researchBySymbol?.[c.symbol]??null,executionRuleVersion:config.executionRuleVersion,
+        setup,discoveryScore:c.discoveryScore??null,research:market.researchBySymbol?.[c.symbol]??null,executionRuleVersion:config.executionRuleVersion,
         quoteTimestamp:q.lastTradeAt,paperTrading:true,expectedEdge:null};
       s.positions.push(p);s.cash=round(s.cash-invested-entryCost);day.invested=round(day.invested+invested+entryCost);day.buys.push(c.symbol);
       row.status='simulated-buy';row.setup=setup;row.reasons=['confirmed setup; simulated fill recorded'];bought=c.symbol;break;
     }
     for(const row of s.suggestions){if(row.status!=='simulated-buy')row.status=row.reasons.length?'not-qualified':'not-selected';}
     s.discovery=market.discovery||null;
+    const history=s.scanHistory?.date===date?s.scanHistory:{date,scans:[],candidates:{}};
+    for(const row of s.suggestions){
+      if(!Number.isFinite(row.price)||!row.observedAt)continue;
+      const h=history.candidates[row.ticker]||{ticker:row.ticker,fullName:row.fullName,sector:row.sector,
+        firstSeenAt:row.observedAt,firstPrice:row.price,observations:[]};
+      h.lastSeenAt=row.observedAt;h.lastPrice=row.price;h.discoveryScore=row.discoveryScore;h.reasons=row.reasons;
+      h.observations=[...h.observations,{at:row.observedAt,price:row.price,score:row.discoveryScore,setup:row.entryDiagnostics?.status??'not-evaluated'}].slice(-36);
+      history.candidates[row.ticker]=h;
+    }
+    history.scans=[...history.scans,{at:at.toISOString(),bought,shortlisted:s.suggestions.length,
+      benchmarkFresh:benchmarkState.fresh}].slice(-90);
+    s.scanHistory=history;
   }
   s.lastSlots[action]=slot;s.updatedAt=at.toISOString();s.config=config;
   s.lastCheck={at:s.updatedAt,action,bought,checked,entryPause:market.entryPause??null,

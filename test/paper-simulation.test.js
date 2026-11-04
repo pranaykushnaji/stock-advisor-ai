@@ -45,6 +45,8 @@ test('duplicate ticks and stale quotes never duplicate deposits, entries or exit
   const twice=transitionSimulation(one.state,m,{at,action:'scan'});assert.equal(twice.status,'duplicate');assert.equal(twice.state.positions.length,1);
   const later=new Date(start+5*60000),stale=transitionSimulation(one.state,m,{at:later,action:'risk'});
   assert.equal(stale.status,'partial');assert.equal(stale.state.positions.length,1);assert.equal(stale.state.trades.length,0);
+  assert.equal(one.state.scanHistory.scans.length,1);assert.equal(twice.state.scanHistory.scans.length,1);
+  assert.equal(one.state.scanHistory.candidates.ABC.firstPrice,101);
 });
 test('new day adds exactly one contribution, even across concurrent action kinds',()=>{
   const at=new Date(start),s=transitionSimulation(emptySimulation(),market(at),{at,action:'risk'}).state;
@@ -89,7 +91,7 @@ test('after-hours handler never funds, researches or writes a simulated trade, e
 test('simulation handler retries CAS against fresh state without double-counting a buy',async()=>{
   const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';let current=emptySimulation(),writes=0;
   const at=new Date(start),member=c(),m=market(at,[member]);
-  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},now:()=>at,members:[member],
+  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},now:()=>at,members:[member],registryFetchedAt:'2026-11-03T00:00:00Z',
     read:async()=>({data:structuredClone(current),sha:String(writes)}),write:async(state)=>{writes++;if(writes===1){current=state;return false;}current=state;return true;},
     quotes:async keys=>Object.fromEntries(keys.map(k=>[k,m.quotes[k]])),intraday:async()=>candles(at),daily:async()=>[],safety:async()=>({safetyReady:true,negativeSymbols:[],surveillance:[]})});
   current.dailyCache.ABC={asOf:'2026-11-04',ema20:99,averageTurnoverCr:20};
@@ -180,7 +182,7 @@ test('handler evaluates a pre-10am non-quarter-hour scan and preserves risk exit
   let at=new Date('2026-11-04T09:35:05+05:30'),current=emptySimulation(),m=market(at),failSafety=false;
   current.dailyCache.ABC={asOf:'2026-11-04',ema20:99,averageTurnoverCr:20};
   const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},
-    now:()=>at,members:[c()],read:async()=>({data:structuredClone(current),sha:'x'}),
+    now:()=>at,members:[c()],registryFetchedAt:'2026-11-03T00:00:00Z',read:async()=>({data:structuredClone(current),sha:'x'}),
     write:async state=>{current=state;return true;},quotes:async keys=>Object.fromEntries(keys.map(k=>[k,m.quotes[k]])),
     intraday:async()=>candles(at),daily:async()=>[],safety:async()=>{if(failSafety)throw Error('outage');return {safetyReady:true};}});
   const req={method:'POST',query:{action:'scan'},headers:{authorization:'Bearer test'}};

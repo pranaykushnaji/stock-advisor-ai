@@ -1,0 +1,2520 @@
+{
+  "schemaVersion": 1,
+  "mode": "historical-replay",
+  "date": "2026-11-04",
+  "generatedAt": "2026-11-04T07:02:15.851Z",
+  "asOf": "2026-11-04T06:50:40.766Z",
+  "strategyVersion": "paper-breakout-v1",
+  "executionRuleVersion": "five-minute-opening-v2",
+  "capital": 10000,
+  "cash": 240.22,
+  "invested": 9759.78,
+  "positions": [
+    {
+      "id": "replay|2026-11-04|UNOMINDA",
+      "ticker": "UNOMINDA",
+      "symbol": "UNOMINDA",
+      "instrumentKey": "NSE_EQ|replay-UNOMINDA",
+      "date": "2026-11-04",
+      "sector": "Automobile and Auto Components",
+      "entryAt": "2026-11-04T04:35:37.121Z",
+      "addedAt": "2026-11-04T04:35:37.121Z",
+      "entryPrice": 1177.8518816249998,
+      "observedReferencePrice": 1175.5,
+      "shares": 4,
+      "investedAmount": 4711.41,
+      "entryCost": 7.07,
+      "initialStopPrice": 1159.7391243896484,
+      "peakPrice": 1194.4000244140625,
+      "currentPrice": 1193,
+      "lastObservedAt": "2026-11-04T06:50:00.000Z",
+      "modeledInitialRisk": 88.94,
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T04:35:00.000Z",
+        "entryAt": "2026-11-04T04:35:37.121Z",
+        "entryPrice": 1175.5,
+        "entryIndex": 10,
+        "breakoutLevel": 1174.199951171875,
+        "supportLevel": 1160.9000244140625,
+        "vwap": 1166.7840851077053,
+        "volumeRatio": 3.7955504806117384,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "sourceCommit": "7bc33726904e16c57f182f69e199614a6f4a5820",
+      "historicalReplay": true,
+      "synthetic": true,
+      "executed": false,
+      "excludeFromLiveStatistics": true,
+      "executionConfidence": "ESTIMATED — historical bid/ask and execution bands not archived",
+      "lastMarkedAt": "2026-11-04T06:50:00.000Z"
+    },
+    {
+      "id": "replay|2026-11-04|KAYNES",
+      "ticker": "KAYNES",
+      "symbol": "KAYNES",
+      "instrumentKey": "NSE_EQ|replay-KAYNES",
+      "date": "2026-11-04",
+      "sector": "Capital Goods",
+      "entryAt": "2026-11-04T04:45:33.405Z",
+      "addedAt": "2026-11-04T04:45:33.405Z",
+      "entryPrice": 3300.1896702,
+      "observedReferencePrice": 3293.6,
+      "shares": 1,
+      "investedAmount": 3300.19,
+      "entryCost": 4.95,
+      "initialStopPrice": 3263.733,
+      "peakPrice": 3300.1896702,
+      "currentPrice": 3289.10009765625,
+      "lastObservedAt": "2026-11-04T06:50:00.000Z",
+      "modeledInitialRisk": 48.01,
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T04:45:00.000Z",
+        "entryAt": "2026-11-04T04:45:33.405Z",
+        "entryPrice": 3293.6,
+        "entryIndex": 12,
+        "breakoutLevel": 3293,
+        "supportLevel": 3267,
+        "vwap": 3273.1463042879273,
+        "volumeRatio": 1.8313168058204197,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "sourceCommit": "7242236f33f21e7a4ee987ed87c5d5b0dfc5de92",
+      "historicalReplay": true,
+      "synthetic": true,
+      "executed": false,
+      "excludeFromLiveStatistics": true,
+      "executionConfidence": "ESTIMATED — historical bid/ask and execution bands not archived",
+      "lastMarkedAt": "2026-11-04T06:50:00.000Z"
+    },
+    {
+      "id": "replay|2026-11-04|GODREJPROP",
+      "ticker": "GODREJPROP",
+      "symbol": "GODREJPROP",
+      "instrumentKey": "NSE_EQ|replay-GODREJPROP",
+      "date": "2026-11-04",
+      "sector": "Realty",
+      "entryAt": "2026-11-04T05:20:38.573Z",
+      "addedAt": "2026-11-04T05:20:38.573Z",
+      "entryPrice": 1733.561497575,
+      "observedReferencePrice": 1730.1,
+      "shares": 1,
+      "investedAmount": 1733.56,
+      "entryCost": 2.6,
+      "initialStopPrice": 1702.5957487792969,
+      "peakPrice": 1733.561497575,
+      "currentPrice": 1719,
+      "lastObservedAt": "2026-11-04T06:50:00.000Z",
+      "modeledInitialRisk": 37.03,
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T05:20:00.000Z",
+        "entryAt": "2026-11-04T05:20:38.573Z",
+        "entryPrice": 1730.1,
+        "entryIndex": 19,
+        "breakoutLevel": 1722.5,
+        "supportLevel": 1704.300048828125,
+        "vwap": 1705.9638094669622,
+        "volumeRatio": 1.6883961637071503,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "sourceCommit": "e59df1729387ec0f9d5ea6cd8dcfb6dcda53bfd9",
+      "historicalReplay": true,
+      "synthetic": true,
+      "executed": false,
+      "excludeFromLiveStatistics": true,
+      "executionConfidence": "ESTIMATED — historical bid/ask and execution bands not archived",
+      "lastMarkedAt": "2026-11-04T06:50:00.000Z"
+    }
+  ],
+  "trades": [],
+  "checks": [
+    {
+      "at": "2026-11-04T03:45:40.138Z",
+      "sourceCommit": "b4e222dacbaee4fea63e40c3669beb81863c7bf4",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "HEGAM",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "UNOMINDA",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "GROWW",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "JSWINFRA",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "MARICO",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "DABUR",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "NH",
+          "reasons": [
+            "historical Nifty observation unavailable",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T03:50:39.201Z",
+      "sourceCommit": "f6a9ee1859c9d3bcd904c973c38fb9646a81ad56",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "FRACTAL",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "MARICO",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "ENGINERSIN",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "NH",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T03:55:39.477Z",
+      "sourceCommit": "07b5ff938a39058562b1bf62f3b3bcec42afb5ab",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "FRACTAL",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "liquidity reference failed",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "MARICO",
+          "reasons": [
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        },
+        {
+          "ticker": "NEULANDLAB",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:00:39.349Z",
+      "sourceCommit": "88a8e798d78b842d3e94f2163152c22c93469fd1",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ARE&M",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "UNOMINDA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:05:38.721Z",
+      "sourceCommit": "dfee312336ff888c4ad1cabc8ae1bc364603954d",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ARE&M",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "UNOMINDA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "INOXWIND",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:10:38.718Z",
+      "sourceCommit": "e96652a2219325855e8eae37e44ec83e641b71ef",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "ARE&M",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GODFRYPHLP",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ICICILIFE",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "CROMPTON",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:15:38.571Z",
+      "sourceCommit": "949e4bfe5d5b422cce6731a9d0e6bdd4d0da5a46",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ARE&M",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "INOXWIND",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "CROMPTON",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:20:39.056Z",
+      "sourceCommit": "229e6fe01b0bca65b6e1ffd8a2a9c65e3ef8d002",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ARE&M",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "CHENNPETRO",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:25:39.249Z",
+      "sourceCommit": "67683e2a57de9c2ea11550824dc073571bcbcb43",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "SUZLON",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "INOXWIND",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:30:39.520Z",
+      "sourceCommit": "dd9ccfbad8a7d6bbc945434e54b9cb3b068816ed",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:35:39.681Z",
+      "sourceCommit": "7bc33726904e16c57f182f69e199614a6f4a5820",
+      "bought": "UNOMINDA",
+      "rejected": [
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "SUZLON",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:40:39.272Z",
+      "sourceCommit": "c7b3d76188b52b2627a56e8ea77e5f4b9da2022f",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KAYNES",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "SUZLON",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:45:40.226Z",
+      "sourceCommit": "7242236f33f21e7a4ee987ed87c5d5b0dfc5de92",
+      "bought": "KAYNES",
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:50:39.212Z",
+      "sourceCommit": "59c28fdc03e0c83e832fa12bf2f192bccf52f02b",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GMDCLTD",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "SAGILITY",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "JYOTICNC",
+          "reasons": [
+            "sector already represented"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T04:55:39.774Z",
+      "sourceCommit": "87ff11471f1ce9f446ad472d107f7b2ea8c650e7",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "SAGILITY",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MFSL",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GMDCLTD",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:00:38.839Z",
+      "sourceCommit": "7ef7289d07e4e1d98e5799dbe8c7f70c92c7352f",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "KFINTECH",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MFSL",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "SAGILITY",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:05:38.640Z",
+      "sourceCommit": "4602d116a6e9999971ea404862340540907bc6d8",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MEDANTA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "SAGILITY",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MFSL",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:10:39.898Z",
+      "sourceCommit": "799eac4969591ed03b34603ff8788cd83ca36527",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "GMDCLTD",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "WELSPUNLIV",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MFSL",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:15:39.605Z",
+      "sourceCommit": "2747bbe451b762917a948653c528930cbbc92673",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GODREJPROP",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MFSL",
+          "reasons": [
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "NLCINDIA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:20:40.004Z",
+      "sourceCommit": "e59df1729387ec0f9d5ea6cd8dcfb6dcda53bfd9",
+      "bought": "GODREJPROP",
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:25:39.763Z",
+      "sourceCommit": "645747aacc0e030e69a2d09bd84011bea87db90d",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MFSL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "TDPOWERSYS",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "NLCINDIA",
+          "reasons": [
+            "daily new-position limit"
+          ]
+        },
+        {
+          "ticker": "JSWINFRA",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:30:40.313Z",
+      "sourceCommit": "c632ea5faccd5717041cecca2ce59d313186a772",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ACE",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "TDPOWERSYS",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "execution quote must be observed after the latest signal candle completed"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:35:39.182Z",
+      "sourceCommit": "ccb414454a202cd39ea988a1becc6a99fba5426f",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed"
+          ]
+        },
+        {
+          "ticker": "ACE",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "TDPOWERSYS",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "TARIL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:40:39.512Z",
+      "sourceCommit": "1ba4a678757ae90fed8960372a7bf75036965903",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "NLCINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "POLICYBZR",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:45:40.002Z",
+      "sourceCommit": "d4428e4f233ffb5bff038290b9d098b1be460e55",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "POLICYBZR",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ACE",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:50:39.911Z",
+      "sourceCommit": "e3eee2cd774b25751d2626f96962000bfd720489",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "POLICYBZR",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T05:55:39.824Z",
+      "sourceCommit": "164c8cb66248b62ba862df4b479fe38b71c0c52c",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "TEGA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:00:39.261Z",
+      "sourceCommit": "101c4b6edb27de6f9fc6541024e40ea23023bf3d",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:05:39.690Z",
+      "sourceCommit": "ba74f75081cb82253fa70afc7042265e9eeba8b9",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:10:39.973Z",
+      "sourceCommit": "a9009726e2edf30aacee461885e890ec4f60a0bc",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "TEGA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LODHA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:15:39.621Z",
+      "sourceCommit": "496cb32ef158f061fc055d63d9ef4b9b54a32128",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "TEGA",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MFSL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:20:38.877Z",
+      "sourceCommit": "5a339e996d99901bec3d5956f74a8248922906f4",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "daily new-position limit"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "POLICYBZR",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:25:40.131Z",
+      "sourceCommit": "b0f91f073aecd87b12528e0304aa3ef23f421bf5",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:30:40.892Z",
+      "sourceCommit": "9d98a97fed8b8afd775dd40f375efc42749fc964",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "daily new-position limit"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:35:40.351Z",
+      "sourceCommit": "1d12827f7be013bda28fc64c2b0148ba25ce59cd",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "PFOCUS",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:40:40.605Z",
+      "sourceCommit": "67d900c0281470cb4a0a4c9de77d633522f87c29",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "PFOCUS",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:45:40.132Z",
+      "sourceCommit": "c4ceee80a7749c1ea2a41078c23c48422d46c944",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "PFOCUS",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "MRPL",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    },
+    {
+      "at": "2026-11-04T06:50:40.766Z",
+      "sourceCommit": "62ad6def7e5772a97435677bd6005eb8f8a6a2ea",
+      "bought": null,
+      "rejected": [
+        {
+          "ticker": "LINDEINDIA",
+          "reasons": [
+            "daily new-position limit",
+            "liquidity reference failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "ZEEL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "VEDPOWER",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "PFOCUS",
+          "reasons": [
+            "daily new-position limit",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "BHEL",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "GVT&D",
+          "reasons": [
+            "daily new-position limit",
+            "sector already represented",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        },
+        {
+          "ticker": "HSCL",
+          "reasons": [
+            "daily new-position limit",
+            "EMA20 confirmation failed",
+            "no confirmed consolidation breakout with bounded extension and volume"
+          ]
+        }
+      ],
+      "exits": []
+    }
+  ],
+  "observations": {
+    "BHEL": {
+      "firstAt": "2026-11-04T03:45:39.596Z",
+      "firstPrice": 412,
+      "maxObservedPrice": 424.4,
+      "minObservedPrice": 412,
+      "lastAt": "2026-11-04T06:50:40.012Z",
+      "lastPrice": 421.9
+    },
+    "HEGAM": {
+      "firstAt": "2026-11-04T03:45:39.826Z",
+      "firstPrice": 257.81,
+      "maxObservedPrice": 257.81,
+      "minObservedPrice": 257.81,
+      "lastAt": "2026-11-04T03:45:39.826Z",
+      "lastPrice": 257.81
+    },
+    "UNOMINDA": {
+      "firstAt": "2026-11-04T03:45:33.765Z",
+      "firstPrice": 1161.3,
+      "maxObservedPrice": 1193.4,
+      "minObservedPrice": 1161.3,
+      "lastAt": "2026-11-04T06:50:35.737Z",
+      "lastPrice": 1192.9
+    },
+    "GROWW": {
+      "firstAt": "2026-11-04T03:45:39.808Z",
+      "firstPrice": 208.64,
+      "maxObservedPrice": 208.64,
+      "minObservedPrice": 208.64,
+      "lastAt": "2026-11-04T03:45:39.808Z",
+      "lastPrice": 208.64
+    },
+    "JSWINFRA": {
+      "firstAt": "2026-11-04T03:45:38.129Z",
+      "firstPrice": 330.85,
+      "maxObservedPrice": 339.5,
+      "minObservedPrice": 330.85,
+      "lastAt": "2026-11-04T05:25:37.965Z",
+      "lastPrice": 339.5
+    },
+    "MARICO": {
+      "firstAt": "2026-11-04T03:45:39.863Z",
+      "firstPrice": 879.7,
+      "maxObservedPrice": 891.5,
+      "minObservedPrice": 879.7,
+      "lastAt": "2026-11-04T03:55:39.144Z",
+      "lastPrice": 891.5
+    },
+    "DABUR": {
+      "firstAt": "2026-11-04T03:45:32.423Z",
+      "firstPrice": 385.75,
+      "maxObservedPrice": 385.75,
+      "minObservedPrice": 385.75,
+      "lastAt": "2026-11-04T03:45:32.423Z",
+      "lastPrice": 385.75
+    },
+    "NH": {
+      "firstAt": "2026-11-04T03:45:37.727Z",
+      "firstPrice": 1897.1,
+      "maxObservedPrice": 1913,
+      "minObservedPrice": 1897.1,
+      "lastAt": "2026-11-04T03:50:36.242Z",
+      "lastPrice": 1913
+    },
+    "FRACTAL": {
+      "firstAt": "2026-11-04T03:50:38.802Z",
+      "firstPrice": 783.3,
+      "maxObservedPrice": 790.4,
+      "minObservedPrice": 783.3,
+      "lastAt": "2026-11-04T03:55:39.242Z",
+      "lastPrice": 790.4
+    },
+    "MEDANTA": {
+      "firstAt": "2026-11-04T03:50:38.925Z",
+      "firstPrice": 1375,
+      "maxObservedPrice": 1416.4,
+      "minObservedPrice": 1375,
+      "lastAt": "2026-11-04T05:05:37.596Z",
+      "lastPrice": 1409.6
+    },
+    "WELSPUNLIV": {
+      "firstAt": "2026-11-04T03:50:38.846Z",
+      "firstPrice": 260.25,
+      "maxObservedPrice": 266.1,
+      "minObservedPrice": 260.25,
+      "lastAt": "2026-11-04T05:10:39.377Z",
+      "lastPrice": 263.68
+    },
+    "KFINTECH": {
+      "firstAt": "2026-11-04T03:50:34.038Z",
+      "firstPrice": 890.55,
+      "maxObservedPrice": 908.15,
+      "minObservedPrice": 890.55,
+      "lastAt": "2026-11-04T05:00:29.266Z",
+      "lastPrice": 905.2
+    },
+    "ENGINERSIN": {
+      "firstAt": "2026-11-04T03:50:36.673Z",
+      "firstPrice": 296.5,
+      "maxObservedPrice": 296.5,
+      "minObservedPrice": 296.5,
+      "lastAt": "2026-11-04T03:50:36.673Z",
+      "lastPrice": 296.5
+    },
+    "KAYNES": {
+      "firstAt": "2026-11-04T03:55:38.971Z",
+      "firstPrice": 3265.6,
+      "maxObservedPrice": 3293.6,
+      "minObservedPrice": 3265.6,
+      "lastAt": "2026-11-04T06:40:39.704Z",
+      "lastPrice": 3288.9
+    },
+    "VEDPOWER": {
+      "firstAt": "2026-11-04T03:55:39.144Z",
+      "firstPrice": 35.17,
+      "maxObservedPrice": 36.06,
+      "minObservedPrice": 35.17,
+      "lastAt": "2026-11-04T06:50:37.716Z",
+      "lastPrice": 36.03
+    },
+    "LINDEINDIA": {
+      "firstAt": "2026-11-04T03:55:38.511Z",
+      "firstPrice": 6046,
+      "maxObservedPrice": 6314,
+      "minObservedPrice": 6046,
+      "lastAt": "2026-11-04T06:50:36.626Z",
+      "lastPrice": 6314
+    },
+    "NEULANDLAB": {
+      "firstAt": "2026-11-04T03:55:38.620Z",
+      "firstPrice": 19696,
+      "maxObservedPrice": 19696,
+      "minObservedPrice": 19696,
+      "lastAt": "2026-11-04T03:55:38.620Z",
+      "lastPrice": 19696
+    },
+    "ARE&M": {
+      "firstAt": "2026-11-04T04:00:38.859Z",
+      "firstPrice": 737.8,
+      "maxObservedPrice": 746.4,
+      "minObservedPrice": 737.8,
+      "lastAt": "2026-11-04T04:20:31.499Z",
+      "lastPrice": 739.05
+    },
+    "INOXWIND": {
+      "firstAt": "2026-11-04T04:05:37.488Z",
+      "firstPrice": 61.58,
+      "maxObservedPrice": 62.09,
+      "minObservedPrice": 61.58,
+      "lastAt": "2026-11-04T04:25:38.265Z",
+      "lastPrice": 62.09
+    },
+    "GODFRYPHLP": {
+      "firstAt": "2026-11-04T04:10:37.808Z",
+      "firstPrice": 1805,
+      "maxObservedPrice": 1805,
+      "minObservedPrice": 1805,
+      "lastAt": "2026-11-04T04:10:37.808Z",
+      "lastPrice": 1805
+    },
+    "LODHA": {
+      "firstAt": "2026-11-04T04:10:36.714Z",
+      "firstPrice": 1094.3,
+      "maxObservedPrice": 1107.6,
+      "minObservedPrice": 1094.3,
+      "lastAt": "2026-11-04T06:10:33.091Z",
+      "lastPrice": 1104.3
+    },
+    "ICICILIFE": {
+      "firstAt": "2026-11-04T04:10:37.773Z",
+      "firstPrice": 424.2,
+      "maxObservedPrice": 424.2,
+      "minObservedPrice": 424.2,
+      "lastAt": "2026-11-04T04:10:37.773Z",
+      "lastPrice": 424.2
+    },
+    "CROMPTON": {
+      "firstAt": "2026-11-04T04:10:34.234Z",
+      "firstPrice": 205.23,
+      "maxObservedPrice": 205.31,
+      "minObservedPrice": 205.23,
+      "lastAt": "2026-11-04T04:15:33.843Z",
+      "lastPrice": 205.31
+    },
+    "MRPL": {
+      "firstAt": "2026-11-04T04:20:38.748Z",
+      "firstPrice": 186.33,
+      "maxObservedPrice": 188.18,
+      "minObservedPrice": 186.33,
+      "lastAt": "2026-11-04T06:45:37.887Z",
+      "lastPrice": 187.5
+    },
+    "CHENNPETRO": {
+      "firstAt": "2026-11-04T04:20:38.085Z",
+      "firstPrice": 1588,
+      "maxObservedPrice": 1588,
+      "minObservedPrice": 1588,
+      "lastAt": "2026-11-04T04:20:38.085Z",
+      "lastPrice": 1588
+    },
+    "SUZLON": {
+      "firstAt": "2026-11-04T04:25:35.116Z",
+      "firstPrice": 37.07,
+      "maxObservedPrice": 37.15,
+      "minObservedPrice": 37.07,
+      "lastAt": "2026-11-04T04:40:35.717Z",
+      "lastPrice": 37.12
+    },
+    "GMDCLTD": {
+      "firstAt": "2026-11-04T04:50:37.533Z",
+      "firstPrice": 454.85,
+      "maxObservedPrice": 459.55,
+      "minObservedPrice": 452.85,
+      "lastAt": "2026-11-04T05:10:39.373Z",
+      "lastPrice": 459.55
+    },
+    "SAGILITY": {
+      "firstAt": "2026-11-04T04:50:37.658Z",
+      "firstPrice": 43.9,
+      "maxObservedPrice": 43.96,
+      "minObservedPrice": 43.9,
+      "lastAt": "2026-11-04T05:05:35.100Z",
+      "lastPrice": 43.96
+    },
+    "JYOTICNC": {
+      "firstAt": "2026-11-04T04:50:37.929Z",
+      "firstPrice": 1013.1,
+      "maxObservedPrice": 1013.1,
+      "minObservedPrice": 1013.1,
+      "lastAt": "2026-11-04T04:50:37.929Z",
+      "lastPrice": 1013.1
+    },
+    "GVT&D": {
+      "firstAt": "2026-11-04T04:55:38.867Z",
+      "firstPrice": 4168.3,
+      "maxObservedPrice": 4216.3,
+      "minObservedPrice": 4168.3,
+      "lastAt": "2026-11-04T06:50:40.017Z",
+      "lastPrice": 4210.7
+    },
+    "MFSL": {
+      "firstAt": "2026-11-04T04:55:35.739Z",
+      "firstPrice": 1241.2,
+      "maxObservedPrice": 1247.4,
+      "minObservedPrice": 1241.2,
+      "lastAt": "2026-11-04T06:15:37.589Z",
+      "lastPrice": 1247.2
+    },
+    "GODREJPROP": {
+      "firstAt": "2026-11-04T05:15:38.614Z",
+      "firstPrice": 1723,
+      "maxObservedPrice": 1730.1,
+      "minObservedPrice": 1723,
+      "lastAt": "2026-11-04T05:20:38.573Z",
+      "lastPrice": 1730.1
+    },
+    "NLCINDIA": {
+      "firstAt": "2026-11-04T05:15:32.387Z",
+      "firstPrice": 242.28,
+      "maxObservedPrice": 243.75,
+      "minObservedPrice": 242.28,
+      "lastAt": "2026-11-04T05:40:38.968Z",
+      "lastPrice": 243.75
+    },
+    "TDPOWERSYS": {
+      "firstAt": "2026-11-04T05:25:37.112Z",
+      "firstPrice": 737.7,
+      "maxObservedPrice": 737.7,
+      "minObservedPrice": 736.15,
+      "lastAt": "2026-11-04T05:35:38.199Z",
+      "lastPrice": 736.15
+    },
+    "ACE": {
+      "firstAt": "2026-11-04T05:30:37.343Z",
+      "firstPrice": 1107.2,
+      "maxObservedPrice": 1118.7,
+      "minObservedPrice": 1107.2,
+      "lastAt": "2026-11-04T05:45:37.203Z",
+      "lastPrice": 1118.7
+    },
+    "TARIL": {
+      "firstAt": "2026-11-04T05:35:31.508Z",
+      "firstPrice": 313.15,
+      "maxObservedPrice": 313.15,
+      "minObservedPrice": 313.15,
+      "lastAt": "2026-11-04T05:35:31.508Z",
+      "lastPrice": 313.15
+    },
+    "HSCL": {
+      "firstAt": "2026-11-04T05:40:38.229Z",
+      "firstPrice": 549.75,
+      "maxObservedPrice": 560.8,
+      "minObservedPrice": 549.75,
+      "lastAt": "2026-11-04T06:50:40.246Z",
+      "lastPrice": 559.15
+    },
+    "POLICYBZR": {
+      "firstAt": "2026-11-04T05:40:39.001Z",
+      "firstPrice": 958.4,
+      "maxObservedPrice": 969.9,
+      "minObservedPrice": 958.4,
+      "lastAt": "2026-11-04T06:20:38.004Z",
+      "lastPrice": 966
+    },
+    "TEGA": {
+      "firstAt": "2026-11-04T05:55:37.710Z",
+      "firstPrice": 1804.8,
+      "maxObservedPrice": 1807.2,
+      "minObservedPrice": 1804.8,
+      "lastAt": "2026-11-04T06:15:33.005Z",
+      "lastPrice": 1806
+    },
+    "PFOCUS": {
+      "firstAt": "2026-11-04T06:35:35.093Z",
+      "firstPrice": 301.4,
+      "maxObservedPrice": 302.6,
+      "minObservedPrice": 301.4,
+      "lastAt": "2026-11-04T06:50:31.026Z",
+      "lastPrice": 302.5
+    },
+    "ZEEL": {
+      "firstAt": "2026-11-04T06:50:40.013Z",
+      "firstPrice": 64.26,
+      "maxObservedPrice": 64.26,
+      "minObservedPrice": 64.26,
+      "lastAt": "2026-11-04T06:50:40.013Z",
+      "lastPrice": 64.26
+    }
+  },
+  "summary": {
+    "newPositions": 3,
+    "closedTrades": 0,
+    "openPositions": 3,
+    "realizedGross": 0,
+    "realizedNet": 0,
+    "markedUnrealized": 34.94
+  },
+  "assumptions": {
+    "halfSpreadBps": 15,
+    "slippageBpsPerSide": 5,
+    "costBpsPerSide": 15,
+    "candidateUniverse": "only original committed shortlists; not a complete hypothetical rediscovery",
+    "priceBasis": "entry reference = original saved price at its recorded time; exits = last completed one-minute close"
+  },
+  "limitations": [
+    "Counterfactual estimated scenario, NOT executed paper trades or certain historical fills.",
+    "Historical bid/ask depth and execution-time circuit bands were not archived; exact live eligibility cannot be established.",
+    "Discovery passed for archived candidates; later execution book/circuit checks remain unverified.",
+    "Candles fetched retrospectively can contain provider revisions. Only completed, pre-decision bars are used.",
+    "Intraday candle history is Yahoo, not a recovered Upstox stream. Cross-provider differences can affect setup signals.",
+    "No old live positions, contributions or performance statistics are overwritten."
+  ],
+  "source": {
+    "ref": "origin/main",
+    "lastCommit": "62ad6def7e5772a97435677bd6005eb8f8a6a2ea",
+    "archivedScans": 38,
+    "consideredTickers": 41,
+    "availableIntradaySeries": 41,
+    "historyFailures": {},
+    "historicalProvider": "Yahoo Finance one-minute OHLC; not historical bid/ask depth"
+  }
+}

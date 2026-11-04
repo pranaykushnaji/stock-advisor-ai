@@ -32,8 +32,8 @@ test('paper UI distinguishes picks, unverified news, missing premarket prices an
 });
 
 test('sources use public main branch and the explicit local registry, without fallback', () => {
-  assert.equal(SOURCES.length, 7);
-  assert.ok(SOURCES.slice(0, 5).every(s => s.url.startsWith('https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/')));
+  assert.equal(SOURCES.length, 4);
+  assert.ok(SOURCES.slice(0, 3).every(s => s.url.startsWith('https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/')));
   assert.equal(SOURCES.at(-1).url, '../research/universe.json');
 });
 
