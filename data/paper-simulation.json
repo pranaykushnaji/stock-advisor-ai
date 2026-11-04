@@ -24,9 +24,9 @@
       "initialStopPct": 0.6052100557010776,
       "modeledInitialRisk": 31.44,
       "peakPrice": 3291.3448499999995,
-      "currentPrice": 3286.3,
-      "lastObservedAt": "2026-11-04T07:00:19.082Z",
-      "lastPriceUpdate": "2026-11-04T07:00:19.082Z",
+      "currentPrice": 3288.8,
+      "lastObservedAt": "2026-11-04T07:05:21.111Z",
+      "lastPriceUpdate": "2026-11-04T07:05:21.111Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -74,10 +74,10 @@
       "initialStopPrice": 1189.0098,
       "initialStopPct": 0.634147809038621,
       "modeledInitialRisk": 47.11,
-      "peakPrice": 1196.598,
-      "currentPrice": 1196,
-      "lastObservedAt": "2026-11-04T07:00:39.517Z",
-      "lastPriceUpdate": "2026-11-04T07:00:39.517Z",
+      "peakPrice": 1197,
+      "currentPrice": 1197,
+      "lastObservedAt": "2026-11-04T07:05:35.196Z",
+      "lastPriceUpdate": "2026-11-04T07:05:35.196Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -114,7 +114,7 @@
   "lastSlots": {
     "research": 1793763600000,
     "scan": 1793775600000,
-    "risk": 1793775600000
+    "risk": 1793775900000
   },
   "dailyCache": {
     "GROWW": {
@@ -560,7 +560,7 @@
       "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-04T07:00:39.891Z",
+  "updatedAt": "2026-11-04T07:05:37.850Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -581,12 +581,16 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T07:00:39.891Z",
-    "action": "scan",
-    "bought": "UNOMINDA",
+    "at": "2026-11-04T07:05:37.850Z",
+    "action": "risk",
+    "bought": null,
     "checked": [
       {
         "ticker": "KAYNES",
+        "status": "hold"
+      },
+      {
+        "ticker": "UNOMINDA",
         "status": "hold"
       }
     ],
