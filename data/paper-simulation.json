@@ -157,7 +157,7 @@
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793785200000,
+    "scan": 1793785500000,
     "risk": 1793785500000
   },
   "dailyCache": {
@@ -503,36 +503,14 @@
       "ticker": "HINDCOPPER",
       "fullName": "Hindustan Copper Ltd.",
       "sector": "Metals & Mining",
-      "discoveryScore": 78.8,
-      "price": 422.3,
-      "observedAt": "2026-11-04T09:41:08.118Z",
-      "sessionChangePct": 5.5,
+      "discoveryScore": 79.2,
+      "price": 422.95,
+      "observedAt": "2026-11-04T09:45:42.020Z",
+      "sessionChangePct": 5.66,
       "research": null,
       "reasons": [
         "three daily positions already opened",
         "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "SUZLON",
-      "fullName": "Suzlon Energy Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 78.3,
-      "price": 37.34,
-      "observedAt": "2026-11-04T09:41:07.912Z",
-      "sessionChangePct": 4.45,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "below 20-session EMA",
-        "sector already represented",
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -546,82 +524,20 @@
       "ticker": "BHEL",
       "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 78.2,
-      "price": 423.5,
-      "observedAt": "2026-11-04T09:41:06.899Z",
-      "sessionChangePct": 5.88,
+      "discoveryScore": 78.8,
+      "price": 424,
+      "observedAt": "2026-11-04T09:44:59.755Z",
+      "sessionChangePct": 6,
       "research": null,
       "reasons": [
         "three daily positions already opened",
         "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
+        "execution quote must be observed after the latest signal candle completed"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "LODHA",
-      "fullName": "Lodha Developers Ltd.",
-      "sector": "Realty",
-      "discoveryScore": 77.8,
-      "price": 1113.6,
-      "observedAt": "2026-11-04T09:41:07.938Z",
-      "sessionChangePct": 4.98,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "PVRINOX",
-      "fullName": "PVR INOX Ltd.",
-      "sector": "Media Entertainment & Publication",
-      "discoveryScore": 77.8,
-      "price": 1579.4,
-      "observedAt": "2026-11-04T09:41:06.070Z",
-      "sessionChangePct": 3.64,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "BDL",
-      "fullName": "Bharat Dynamics Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 77.7,
-      "price": 1079.5,
-      "observedAt": "2026-11-04T09:41:07.970Z",
-      "sessionChangePct": 6.15,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "status": "unavailable",
+        "reason": "execution quote must be observed after the latest signal candle completed",
         "version": null
       }
     },
@@ -629,10 +545,10 @@
       "ticker": "JYOTICNC",
       "fullName": "Jyoti CNC Automation Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 77.2,
-      "price": 1033.6,
-      "observedAt": "2026-11-04T09:41:08.009Z",
-      "sessionChangePct": 6.84,
+      "discoveryScore": 78.2,
+      "price": 1035.55,
+      "observedAt": "2026-11-04T09:45:36.767Z",
+      "sessionChangePct": 7.04,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -647,39 +563,111 @@
       }
     },
     {
-      "ticker": "PFOCUS",
-      "fullName": "Prime Focus Ltd.",
-      "sector": "Media Entertainment & Publication",
-      "discoveryScore": 77,
-      "price": 305.25,
-      "observedAt": "2026-11-04T09:41:07.083Z",
-      "sessionChangePct": 5.42,
+      "ticker": "SUZLON",
+      "fullName": "Suzlon Energy Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 78.2,
+      "price": 37.46,
+      "observedAt": "2026-11-04T09:44:59.803Z",
+      "sessionChangePct": 4.78,
       "research": null,
       "reasons": [
-        "three daily positions already opened"
+        "three daily positions already opened",
+        "below 20-session EMA",
+        "sector already represented",
+        "execution quote must be observed after the latest signal candle completed"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-04T09:40:00.000Z",
-        "entryAt": "2026-11-04T09:41:07.083Z",
-        "entryPrice": 305.25,
-        "entryIndex": 71,
-        "breakoutLevel": 304.9,
-        "supportLevel": 302.95,
-        "vwap": 300.1707975248997,
-        "volumeRatio": 2.117847230602148,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
+        "status": "unavailable",
+        "reason": "execution quote must be observed after the latest signal candle completed",
+        "version": null
+      }
+    },
+    {
+      "ticker": "BDL",
+      "fullName": "Bharat Dynamics Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 76.8,
+      "price": 1078,
+      "observedAt": "2026-11-04T09:44:59.025Z",
+      "sessionChangePct": 6,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "sector already represented",
+        "execution quote must be observed after the latest signal candle completed"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "unavailable",
+        "reason": "execution quote must be observed after the latest signal candle completed",
+        "version": null
+      }
+    },
+    {
+      "ticker": "PFOCUS",
+      "fullName": "Prime Focus Ltd.",
+      "sector": "Media Entertainment & Publication",
+      "discoveryScore": 76.7,
+      "price": 305.1,
+      "observedAt": "2026-11-04T09:45:37.814Z",
+      "sessionChangePct": 5.37,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "INOXWIND",
+      "fullName": "Inox Wind Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 76.6,
+      "price": 63.35,
+      "observedAt": "2026-11-04T09:44:59.162Z",
+      "sessionChangePct": 6.61,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "sector already represented",
+        "execution quote must be observed after the latest signal candle completed"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "unavailable",
+        "reason": "execution quote must be observed after the latest signal candle completed",
+        "version": null
+      }
+    },
+    {
+      "ticker": "WELSPUNLIV",
+      "fullName": "Welspun Living Ltd.",
+      "sector": "Textiles",
+      "discoveryScore": 76.1,
+      "price": 265.12,
+      "observedAt": "2026-11-04T09:45:41.904Z",
+      "sessionChangePct": 4.75,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
       }
     }
   ],
-  "updatedAt": "2026-11-04T09:45:37.682Z",
+  "updatedAt": "2026-11-04T09:45:42.437Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -700,8 +688,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T09:45:37.682Z",
-    "action": "risk",
+    "at": "2026-11-04T09:45:42.437Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -721,15 +709,15 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T09:41:08.142Z",
+    "at": "2026-11-04T09:45:41.881Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
     "rejected": [
       {
-        "ticker": "ABCAPITAL",
+        "ticker": "360ONE",
         "reasons": [
-          "weak or overextended session move"
+          "missing or wide bid/ask spread"
         ]
       },
       {
@@ -763,9 +751,33 @@
         ]
       },
       {
+        "ticker": "AMBER",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
+        "ticker": "APLAPOLLO",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
         "ticker": "ASAHIINDIA",
         "reasons": [
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AUBANK",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
+        "ticker": "AUROPHARMA",
+        "reasons": [
+          "missing or wide bid/ask spread"
         ]
       },
       {
@@ -781,9 +793,15 @@
         ]
       },
       {
+        "ticker": "BHARATFORG",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
         "ticker": "BIOCON",
         "reasons": [
-          "weak or overextended session move"
+          "missing or wide bid/ask spread"
         ]
       },
       {
@@ -811,19 +829,7 @@
         ]
       },
       {
-        "ticker": "CARTRADE",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "CGCL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "CHOICEIN",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -843,13 +849,32 @@
       {
         "ticker": "COFORGE",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "CONCOR",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
+        "ticker": "COROMANDEL",
+        "reasons": [
+          "missing or wide bid/ask spread"
         ]
       },
       {
         "ticker": "CYIENT",
         "reasons": [
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "DELHIVERY",
+        "reasons": [
+          "missing or wide bid/ask spread"
         ]
       },
       {
@@ -869,42 +894,6 @@
         "reasons": [
           "weak or overextended session move"
         ]
-      },
-      {
-        "ticker": "EMCURE",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "FRACTAL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GABRIEL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GLAND",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GLAXO",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GMDCLTD",
-        "reasons": [
-          "weak or overextended session move"
-        ]
       }
     ],
     "source": "Upstox",
@@ -912,10 +901,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.4548346657091251,
-      "observedAt": "2026-11-04T09:41:08.538Z",
+      "changePct": 0.42354640846504754,
+      "observedAt": "2026-11-04T09:45:42.328Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 23919.15,
+      "price": 23911.7,
       "previousClose": 23810.850000000002
     }
   },
@@ -1104,6 +1093,12 @@
       },
       {
         "at": "2026-11-04T09:41:08.637Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-04T09:45:42.437Z",
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
@@ -1425,13 +1420,20 @@
             "price": 305.25,
             "score": 77,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-04T09:45:37.814Z",
+            "price": 305.1,
+            "score": 76.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:41:07.083Z",
-        "lastPrice": 305.25,
-        "discoveryScore": 77,
+        "lastSeenAt": "2026-11-04T09:45:37.814Z",
+        "lastPrice": 305.1,
+        "discoveryScore": 76.7,
         "reasons": [
-          "three daily positions already opened"
+          "three daily positions already opened",
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "BHEL": {
@@ -1626,15 +1628,21 @@
             "price": 423.5,
             "score": 78.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:44:59.755Z",
+            "price": 424,
+            "score": 78.8,
+            "setup": "unavailable"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:41:06.899Z",
-        "lastPrice": 423.5,
-        "discoveryScore": 78.2,
+        "lastSeenAt": "2026-11-04T09:44:59.755Z",
+        "lastPrice": 424,
+        "discoveryScore": 78.8,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "execution quote must be observed after the latest signal candle completed"
         ]
       },
       "GVT&D": {
@@ -1924,11 +1932,17 @@
             "price": 1033.6,
             "score": 77.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:45:36.767Z",
+            "price": 1035.55,
+            "score": 78.2,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:41:08.009Z",
-        "lastPrice": 1033.6,
-        "discoveryScore": 77.2,
+        "lastSeenAt": "2026-11-04T09:45:36.767Z",
+        "lastPrice": 1035.55,
+        "discoveryScore": 78.2,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
@@ -2219,11 +2233,17 @@
             "price": 422.3,
             "score": 78.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:45:42.020Z",
+            "price": 422.95,
+            "score": 79.2,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:41:08.118Z",
-        "lastPrice": 422.3,
-        "discoveryScore": 78.8,
+        "lastSeenAt": "2026-11-04T09:45:42.020Z",
+        "lastPrice": 422.95,
+        "discoveryScore": 79.2,
         "reasons": [
           "three daily positions already opened",
           "below 20-session EMA",
@@ -2659,16 +2679,22 @@
             "price": 37.34,
             "score": 78.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:44:59.803Z",
+            "price": 37.46,
+            "score": 78.2,
+            "setup": "unavailable"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:41:07.912Z",
-        "lastPrice": 37.34,
-        "discoveryScore": 78.3,
+        "lastSeenAt": "2026-11-04T09:44:59.803Z",
+        "lastPrice": 37.46,
+        "discoveryScore": 78.2,
         "reasons": [
           "three daily positions already opened",
           "below 20-session EMA",
           "sector already represented",
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "execution quote must be observed after the latest signal candle completed"
         ]
       },
       "INOXWIND": {
@@ -2719,15 +2745,21 @@
             "price": 63.3,
             "score": 76.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:44:59.162Z",
+            "price": 63.35,
+            "score": 76.6,
+            "setup": "unavailable"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:35:48.551Z",
-        "lastPrice": 63.3,
-        "discoveryScore": 76.8,
+        "lastSeenAt": "2026-11-04T09:44:59.162Z",
+        "lastPrice": 63.35,
+        "discoveryScore": 76.6,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "execution quote must be observed after the latest signal candle completed"
         ]
       },
       "REDINGTON": {
@@ -2932,11 +2964,17 @@
             "price": 265.26,
             "score": 76.6,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:45:41.904Z",
+            "price": 265.12,
+            "score": 76.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:10:36.723Z",
-        "lastPrice": 265.26,
-        "discoveryScore": 76.6,
+        "lastSeenAt": "2026-11-04T09:45:41.904Z",
+        "lastPrice": 265.12,
+        "discoveryScore": 76.1,
         "reasons": [
           "three daily positions already opened",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -2984,15 +3022,21 @@
             "price": 1079.5,
             "score": 77.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:44:59.025Z",
+            "price": 1078,
+            "score": 76.8,
+            "setup": "unavailable"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:41:07.970Z",
-        "lastPrice": 1079.5,
-        "discoveryScore": 77.7,
+        "lastSeenAt": "2026-11-04T09:44:59.025Z",
+        "lastPrice": 1078,
+        "discoveryScore": 76.8,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "execution quote must be observed after the latest signal candle completed"
         ]
       }
     }
