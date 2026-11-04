@@ -23,10 +23,10 @@
       "initialStopPrice": 3271.4253,
       "initialStopPct": 0.6052100557010776,
       "modeledInitialRisk": 31.44,
-      "peakPrice": 3307.7,
-      "currentPrice": 3307.7,
-      "lastObservedAt": "2026-11-04T09:05:37.177Z",
-      "lastPriceUpdate": "2026-11-04T09:05:37.177Z",
+      "peakPrice": 3308,
+      "currentPrice": 3308,
+      "lastObservedAt": "2026-11-04T09:05:37.582Z",
+      "lastPriceUpdate": "2026-11-04T09:05:37.582Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -76,8 +76,8 @@
       "modeledInitialRisk": 47.11,
       "peakPrice": 1200,
       "currentPrice": 1195.9,
-      "lastObservedAt": "2026-11-04T09:05:37.293Z",
-      "lastPriceUpdate": "2026-11-04T09:05:37.293Z",
+      "lastObservedAt": "2026-11-04T09:05:38.195Z",
+      "lastPriceUpdate": "2026-11-04T09:05:38.195Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -117,9 +117,9 @@
       "initialStopPct": 1.2784347072225644,
       "modeledInitialRisk": 28.25,
       "peakPrice": 1744.2,
-      "currentPrice": 1740,
-      "lastObservedAt": "2026-11-04T09:05:36.076Z",
-      "lastPriceUpdate": "2026-11-04T09:05:36.076Z",
+      "currentPrice": 1740.5,
+      "lastObservedAt": "2026-11-04T09:05:39.558Z",
+      "lastPriceUpdate": "2026-11-04T09:05:39.558Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -157,7 +157,7 @@
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793782800000,
+    "scan": 1793783100000,
     "risk": 1793783100000
   },
   "dailyCache": {
@@ -486,34 +486,13 @@
   },
   "suggestions": [
     {
-      "ticker": "ZEEL",
-      "fullName": "Zee Entertainment Enterprises Ltd.",
-      "sector": "Media Entertainment & Publication",
-      "discoveryScore": 80.2,
-      "price": 66.18,
-      "observedAt": "2026-11-04T09:00:40.656Z",
-      "sessionChangePct": 7.31,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
       "ticker": "BHEL",
       "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
       "discoveryScore": 78.9,
-      "price": 424.1,
-      "observedAt": "2026-11-04T09:00:40.161Z",
-      "sessionChangePct": 6.03,
+      "price": 424.15,
+      "observedAt": "2026-11-04T09:05:39.168Z",
+      "sessionChangePct": 6.04,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -531,10 +510,10 @@
       "ticker": "HINDCOPPER",
       "fullName": "Hindustan Copper Ltd.",
       "sector": "Metals & Mining",
-      "discoveryScore": 78.6,
-      "price": 421.55,
-      "observedAt": "2026-11-04T09:00:40.166Z",
-      "sessionChangePct": 5.31,
+      "discoveryScore": 77.7,
+      "price": 421,
+      "observedAt": "2026-11-04T09:05:40.206Z",
+      "sessionChangePct": 5.17,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -552,10 +531,10 @@
       "ticker": "SUZLON",
       "fullName": "Suzlon Energy Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 77.7,
-      "price": 37.23,
-      "observedAt": "2026-11-04T09:00:41.118Z",
-      "sessionChangePct": 4.14,
+      "discoveryScore": 77.1,
+      "price": 37.24,
+      "observedAt": "2026-11-04T09:05:39.107Z",
+      "sessionChangePct": 4.17,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -571,13 +550,33 @@
       }
     },
     {
-      "ticker": "EXIDEIND",
-      "fullName": "Exide Industries Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 77.6,
-      "price": 373.1,
-      "observedAt": "2026-11-04T09:00:39.954Z",
-      "sessionChangePct": 7.75,
+      "ticker": "NLCINDIA",
+      "fullName": "NLC India Ltd.",
+      "sector": "Power",
+      "discoveryScore": 76.5,
+      "price": 247.44,
+      "observedAt": "2026-11-04T09:05:40.050Z",
+      "sessionChangePct": 7.44,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "GVT&D",
+      "fullName": "GE Vernova T&D India Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 76.4,
+      "price": 4234.1,
+      "observedAt": "2026-11-04T09:05:40.017Z",
+      "sessionChangePct": 4.55,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -595,10 +594,10 @@
       "ticker": "PFOCUS",
       "fullName": "Prime Focus Ltd.",
       "sector": "Media Entertainment & Publication",
-      "discoveryScore": 76.9,
-      "price": 305.3,
-      "observedAt": "2026-11-04T09:00:37.706Z",
-      "sessionChangePct": 5.44,
+      "discoveryScore": 76.4,
+      "price": 304.6,
+      "observedAt": "2026-11-04T09:05:35.540Z",
+      "sessionChangePct": 5.2,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -612,34 +611,13 @@
       }
     },
     {
-      "ticker": "POLICYBZR",
-      "fullName": "PB Fintech Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 76.3,
-      "price": 975,
-      "observedAt": "2026-11-04T09:00:39.530Z",
-      "sessionChangePct": 5.06,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "JYOTICNC",
-      "fullName": "Jyoti CNC Automation Ltd.",
+      "ticker": "INOXWIND",
+      "fullName": "Inox Wind Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 76.1,
-      "price": 1031.65,
-      "observedAt": "2026-11-04T09:00:40.902Z",
-      "sessionChangePct": 6.64,
+      "discoveryScore": 76.3,
+      "price": 63.19,
+      "observedAt": "2026-11-04T09:05:34.443Z",
+      "sessionChangePct": 6.34,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -652,9 +630,30 @@
         "reason": "no confirmed consolidation breakout with bounded extension and volume",
         "version": null
       }
+    },
+    {
+      "ticker": "HSCL",
+      "fullName": "Himadri Speciality Chemical Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 76.1,
+      "price": 561.9,
+      "observedAt": "2026-11-04T09:05:35.667Z",
+      "sessionChangePct": 6.22,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     }
   ],
-  "updatedAt": "2026-11-04T09:05:38.010Z",
+  "updatedAt": "2026-11-04T09:05:40.819Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -675,8 +674,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T09:05:38.010Z",
-    "action": "risk",
+    "at": "2026-11-04T09:05:40.819Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -696,7 +695,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T09:00:40.940Z",
+    "at": "2026-11-04T09:05:40.339Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -816,13 +815,13 @@
         ]
       },
       {
-        "ticker": "EMAMILTD",
+        "ticker": "EMCURE",
         "reasons": [
           "weak or overextended session move"
         ]
       },
       {
-        "ticker": "EMCURE",
+        "ticker": "EXIDEIND",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -889,10 +888,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.3790288880909376,
-      "observedAt": "2026-11-04T09:00:41.393Z",
+      "changePct": 0.3819687243420633,
+      "observedAt": "2026-11-04T09:05:40.713Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 23901.1,
+      "price": 23901.8,
       "previousClose": 23810.85
     }
   },
@@ -1033,6 +1032,12 @@
       },
       {
         "at": "2026-11-04T09:00:41.494Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-04T09:05:40.819Z",
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
@@ -1193,11 +1198,17 @@
             "price": 562,
             "score": 76.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:35.667Z",
+            "price": 561.9,
+            "score": 76.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T08:45:38.555Z",
-        "lastPrice": 562,
-        "discoveryScore": 76.3,
+        "lastSeenAt": "2026-11-04T09:05:35.667Z",
+        "lastPrice": 561.9,
+        "discoveryScore": 76.1,
         "reasons": [
           "three daily positions already opened",
           "below 20-session EMA",
@@ -1318,11 +1329,17 @@
             "price": 305.3,
             "score": 76.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:35.540Z",
+            "price": 304.6,
+            "score": 76.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:00:37.706Z",
-        "lastPrice": 305.3,
-        "discoveryScore": 76.9,
+        "lastSeenAt": "2026-11-04T09:05:35.540Z",
+        "lastPrice": 304.6,
+        "discoveryScore": 76.4,
         "reasons": [
           "three daily positions already opened",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -1472,10 +1489,16 @@
             "price": 424.1,
             "score": 78.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:39.168Z",
+            "price": 424.15,
+            "score": 78.9,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:00:40.161Z",
-        "lastPrice": 424.1,
+        "lastSeenAt": "2026-11-04T09:05:39.168Z",
+        "lastPrice": 424.15,
         "discoveryScore": 78.9,
         "reasons": [
           "three daily positions already opened",
@@ -1621,11 +1644,17 @@
             "price": 4239.3,
             "score": 76.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:40.017Z",
+            "price": 4234.1,
+            "score": 76.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T08:55:40.014Z",
-        "lastPrice": 4239.3,
-        "discoveryScore": 76.8,
+        "lastSeenAt": "2026-11-04T09:05:40.017Z",
+        "lastPrice": 4234.1,
+        "discoveryScore": 76.4,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
@@ -1969,11 +1998,17 @@
             "price": 421.55,
             "score": 78.6,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:40.206Z",
+            "price": 421,
+            "score": 77.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:00:40.166Z",
-        "lastPrice": 421.55,
-        "discoveryScore": 78.6,
+        "lastSeenAt": "2026-11-04T09:05:40.206Z",
+        "lastPrice": 421,
+        "discoveryScore": 77.7,
         "reasons": [
           "three daily positions already opened",
           "below 20-session EMA",
@@ -2319,11 +2354,17 @@
             "price": 37.23,
             "score": 77.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:39.107Z",
+            "price": 37.24,
+            "score": 77.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T09:00:41.118Z",
-        "lastPrice": 37.23,
-        "discoveryScore": 77.7,
+        "lastSeenAt": "2026-11-04T09:05:39.107Z",
+        "lastPrice": 37.24,
+        "discoveryScore": 77.1,
         "reasons": [
           "three daily positions already opened",
           "below 20-session EMA",
@@ -2361,11 +2402,17 @@
             "price": 63.16,
             "score": 76.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:34.443Z",
+            "price": 63.19,
+            "score": 76.3,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T08:50:38.025Z",
-        "lastPrice": 63.16,
-        "discoveryScore": 76.1,
+        "lastSeenAt": "2026-11-04T09:05:34.443Z",
+        "lastPrice": 63.19,
+        "discoveryScore": 76.3,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
@@ -2437,11 +2484,17 @@
             "price": 247.15,
             "score": 78,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-04T09:05:40.050Z",
+            "price": 247.44,
+            "score": 76.5,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-04T08:55:40.349Z",
-        "lastPrice": 247.15,
-        "discoveryScore": 78,
+        "lastSeenAt": "2026-11-04T09:05:40.050Z",
+        "lastPrice": 247.44,
+        "discoveryScore": 76.5,
         "reasons": [
           "three daily positions already opened",
           "no confirmed consolidation breakout with bounded extension and volume"
