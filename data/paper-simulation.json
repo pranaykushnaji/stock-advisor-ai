@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 6703.72,
+  "cash": 1910.15,
   "contributions": 10000,
   "positions": [
     {
@@ -55,22 +55,65 @@
       "quoteTimestamp": "2026-11-04T06:40:39.704Z",
       "paperTrading": true,
       "expectedEdge": null
+    },
+    {
+      "id": "2026-11-04|UNOMINDA|paper-breakout-v1",
+      "ticker": "UNOMINDA",
+      "symbol": "UNOMINDA",
+      "instrumentKey": "NSE_EQ|INE405E01023",
+      "fullName": "UNO Minda Ltd.",
+      "sector": "Automobile and Auto Components",
+      "date": "2026-11-04",
+      "addedAt": "2026-11-04T07:00:39.517Z",
+      "strategyVersion": "paper-breakout-v1",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 1196.598,
+      "shares": 4,
+      "investedAmount": 4786.39,
+      "entryCost": 7.18,
+      "initialStopPrice": 1189.0098,
+      "initialStopPct": 0.634147809038621,
+      "modeledInitialRisk": 47.11,
+      "peakPrice": 1196.598,
+      "currentPrice": 1196,
+      "lastObservedAt": "2026-11-04T07:00:39.517Z",
+      "lastPriceUpdate": "2026-11-04T07:00:39.517Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T07:00:00.000Z",
+        "entryAt": "2026-11-04T07:00:39.517Z",
+        "entryPrice": 1196,
+        "entryIndex": 39,
+        "breakoutLevel": 1194,
+        "supportLevel": 1190.2,
+        "vwap": 1176.3076388694376,
+        "volumeRatio": 1.9302651029861042,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "research": null,
+      "executionRuleVersion": "five-minute-opening-v2",
+      "quoteTimestamp": "2026-11-04T07:00:39.517Z",
+      "paperTrading": true,
+      "expectedEdge": null
     }
   ],
   "trades": [],
   "days": {
     "2026-11-04": {
       "contribution": 10000,
-      "invested": 3296.28,
+      "invested": 8089.85,
       "buys": [
-        "KAYNES"
+        "KAYNES",
+        "UNOMINDA"
       ],
       "exits": []
     }
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793775300000,
+    "scan": 1793775600000,
     "risk": 1793775600000
   },
   "dailyCache": {
@@ -374,9 +417,9 @@
       "ticker": "ZEEL",
       "fullName": "Zee Entertainment Enterprises Ltd.",
       "sector": "Media Entertainment & Publication",
-      "discoveryScore": 79,
-      "price": 65.11,
-      "observedAt": "2026-11-04T06:55:39.294Z",
+      "discoveryScore": 79.8,
+      "price": 66.27,
+      "observedAt": "2026-11-04T07:00:38.814Z",
       "research": null,
       "reasons": [
         "below 20-session EMA",
@@ -393,9 +436,9 @@
       "ticker": "PFOCUS",
       "fullName": "Prime Focus Ltd.",
       "sector": "Media Entertainment & Publication",
-      "discoveryScore": 77.4,
-      "price": 302.95,
-      "observedAt": "2026-11-04T06:55:26.959Z",
+      "discoveryScore": 77.7,
+      "price": 303.55,
+      "observedAt": "2026-11-04T07:00:33.647Z",
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -411,30 +454,12 @@
       "ticker": "HSCL",
       "fullName": "Himadri Speciality Chemical Ltd.",
       "sector": "Chemicals",
-      "discoveryScore": 75.8,
-      "price": 560,
-      "observedAt": "2026-11-04T06:55:37.604Z",
+      "discoveryScore": 77.2,
+      "price": 561.85,
+      "observedAt": "2026-11-04T07:00:35.819Z",
       "research": null,
       "reasons": [
         "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "VEDPOWER",
-      "fullName": "Vedanta Power Ltd.",
-      "sector": "Power",
-      "discoveryScore": 75.8,
-      "price": 36,
-      "observedAt": "2026-11-04T06:55:38.254Z",
-      "research": null,
-      "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -448,9 +473,9 @@
       "ticker": "BHEL",
       "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 75.5,
-      "price": 421.85,
-      "observedAt": "2026-11-04T06:55:39.376Z",
+      "discoveryScore": 77.1,
+      "price": 422.95,
+      "observedAt": "2026-11-04T07:00:37.307Z",
       "research": null,
       "reasons": [
         "sector already represented",
@@ -464,15 +489,14 @@
       }
     },
     {
-      "ticker": "GVT&D",
-      "fullName": "GE Vernova T&D India Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 75.4,
-      "price": 4210.8,
-      "observedAt": "2026-11-04T06:55:37.293Z",
+      "ticker": "VEDPOWER",
+      "fullName": "Vedanta Power Ltd.",
+      "sector": "Power",
+      "discoveryScore": 77.1,
+      "price": 36.14,
+      "observedAt": "2026-11-04T07:00:37.748Z",
       "research": null,
       "reasons": [
-        "sector already represented",
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -486,41 +510,57 @@
       "ticker": "UNOMINDA",
       "fullName": "UNO Minda Ltd.",
       "sector": "Automobile and Auto Components",
-      "discoveryScore": 75.3,
-      "price": 1193.3,
-      "observedAt": "2026-11-04T06:55:37.761Z",
+      "discoveryScore": 76.4,
+      "price": 1196,
+      "observedAt": "2026-11-04T07:00:39.517Z",
       "research": null,
       "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
+        "confirmed setup; simulated fill recorded"
       ],
-      "status": "not-qualified",
+      "status": "simulated-buy",
       "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
+        "status": "setup",
+        "reason": null,
+        "version": "consolidation-v1"
+      },
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T07:00:00.000Z",
+        "entryAt": "2026-11-04T07:00:39.517Z",
+        "entryPrice": 1196,
+        "entryIndex": 39,
+        "breakoutLevel": 1194,
+        "supportLevel": 1190.2,
+        "vwap": 1176.3076388694376,
+        "volumeRatio": 1.9302651029861042,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
       }
     },
     {
-      "ticker": "HINDCOPPER",
-      "fullName": "Hindustan Copper Ltd.",
-      "sector": "Metals & Mining",
-      "discoveryScore": 74.5,
-      "price": 413.75,
-      "observedAt": "2026-11-04T06:55:37.694Z",
+      "ticker": "GVT&D",
+      "fullName": "GE Vernova T&D India Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 76.1,
+      "price": 4217.4,
+      "observedAt": "2026-11-04T07:00:38.589Z",
       "research": null,
-      "reasons": [
-        "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
+      "ticker": "LINDEINDIA",
+      "fullName": "Linde India Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 75.6,
+      "price": 6287,
+      "observedAt": "2026-11-04T07:00:35.035Z",
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-04T07:00:37.448Z",
+  "updatedAt": "2026-11-04T07:00:39.891Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -541,9 +581,9 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T07:00:37.448Z",
-    "action": "risk",
-    "bought": null,
+    "at": "2026-11-04T07:00:39.891Z",
+    "action": "scan",
+    "bought": "UNOMINDA",
     "checked": [
       {
         "ticker": "KAYNES",
@@ -554,7 +594,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T06:55:39.589Z",
+    "at": "2026-11-04T07:00:39.390Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -602,12 +642,6 @@
         ]
       },
       {
-        "ticker": "ANURAS",
-        "reasons": [
-          "missing or stale instrument quote"
-        ]
-      },
-      {
         "ticker": "ASAHIINDIA",
         "reasons": [
           "weak or overextended session move"
@@ -620,25 +654,7 @@
         ]
       },
       {
-        "ticker": "BANDHANBNK",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "BATAINDIA",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "BBOX",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "BLS",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -680,12 +696,6 @@
         ]
       },
       {
-        "ticker": "CMPDI",
-        "reasons": [
-          "missing or stale instrument quote"
-        ]
-      },
-      {
         "ticker": "COFORGE",
         "reasons": [
           "weak or overextended session move"
@@ -710,16 +720,16 @@
         ]
       },
       {
-        "ticker": "EMAMILTD",
+        "ticker": "EIHOTEL",
         "reasons": [
-          "weak or overextended session move"
+          "missing or stale instrument quote"
         ]
       },
       {
         "ticker": "EMCURE",
         "reasons": [
           "missing or wide bid/ask spread",
-          "too close to official circuit",
+          "official circuit bands unavailable or reached",
           "weak or overextended session move"
         ]
       },
@@ -736,7 +746,37 @@
         ]
       },
       {
-        "ticker": "FSL",
+        "ticker": "GABRIEL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "GLAND",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "GLAXO",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "GMDCLTD",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "GRANULES",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "GRAPHITE",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -747,11 +787,11 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": -0.07874561386930212,
-      "observedAt": "2026-11-04T06:55:39.986Z",
+      "changePct": 0.007769567235094144,
+      "observedAt": "2026-11-04T07:00:39.785Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 23792.1,
-      "previousClose": 23810.85
+      "price": 23812.7,
+      "previousClose": 23810.850000000002
     }
   }
 }
