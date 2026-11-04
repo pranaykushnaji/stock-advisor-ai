@@ -16,7 +16,7 @@
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793769000000
+    "scan": 1793769300000
   },
   "dailyCache": {
     "GROWW": {
@@ -235,42 +235,30 @@
       "sessions": 69,
       "ema20": 1266.3043349665431,
       "averageTurnoverCr": 130.0443858875
+    },
+    "NLCINDIA": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 240.3069501063997,
+      "averageTurnoverCr": 32.280237884399995
+    },
+    "GODREJPROP": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 1606.840282240524,
+      "averageTurnoverCr": 97.1998546935
     }
   },
   "suggestions": [
     {
-      "ticker": "GMDCLTD",
-      "fullName": "Gujarat Mineral Development Corporation Ltd.",
-      "sector": "Metals & Mining",
-      "discoveryScore": 74.8,
-      "price": 459.55,
-      "observedAt": "2026-11-04T05:10:39.373Z",
-      "research": null,
-      "reasons": [
-        "benchmark price unavailable"
-      ],
-      "status": "not-qualified"
-    },
-    {
       "ticker": "BHEL",
       "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 74.6,
-      "price": 421.75,
-      "observedAt": "2026-11-04T05:10:38.109Z",
-      "research": null,
-      "reasons": [
-        "benchmark price unavailable"
-      ],
-      "status": "not-qualified"
-    },
-    {
-      "ticker": "WELSPUNLIV",
-      "fullName": "Welspun Living Ltd.",
-      "sector": "Textiles",
-      "discoveryScore": 73.8,
-      "price": 263.68,
-      "observedAt": "2026-11-04T05:10:39.377Z",
+      "discoveryScore": 76.5,
+      "price": 423.25,
+      "observedAt": "2026-11-04T05:15:36.826Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -282,8 +270,8 @@
       "fullName": "UNO Minda Ltd.",
       "sector": "Automobile and Auto Components",
       "discoveryScore": 73.6,
-      "price": 1178.8,
-      "observedAt": "2026-11-04T05:10:39.238Z",
+      "price": 1180,
+      "observedAt": "2026-11-04T05:15:37.310Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -294,9 +282,9 @@
       "ticker": "GVT&D",
       "fullName": "GE Vernova T&D India Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 72.4,
-      "price": 4180.3,
-      "observedAt": "2026-11-04T05:10:38.689Z",
+      "discoveryScore": 73.2,
+      "price": 4184.2,
+      "observedAt": "2026-11-04T05:15:37.991Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -304,12 +292,26 @@
       "status": "not-qualified"
     },
     {
-      "ticker": "MRPL",
-      "fullName": "Mangalore Refinery & Petrochemicals Ltd.",
-      "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 72.3,
-      "price": 186.68,
-      "observedAt": "2026-11-04T05:10:39.258Z",
+      "ticker": "LINDEINDIA",
+      "fullName": "Linde India Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 72.4,
+      "price": 6153,
+      "observedAt": "2026-11-04T05:15:28.420Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable",
+        "20-session average turnover below ₹10Cr or missing"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "GODREJPROP",
+      "fullName": "Godrej Properties Ltd.",
+      "sector": "Realty",
+      "discoveryScore": 72.2,
+      "price": 1723,
+      "observedAt": "2026-11-04T05:15:38.614Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -320,9 +322,9 @@
       "ticker": "MFSL",
       "fullName": "Max Financial Services Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 71.7,
-      "price": 1243.2,
-      "observedAt": "2026-11-04T05:10:29.370Z",
+      "discoveryScore": 72,
+      "price": 1243.8,
+      "observedAt": "2026-11-04T05:15:34.305Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable",
@@ -331,12 +333,25 @@
       "status": "not-qualified"
     },
     {
+      "ticker": "NLCINDIA",
+      "fullName": "NLC India Ltd.",
+      "sector": "Power",
+      "discoveryScore": 71.6,
+      "price": 242.28,
+      "observedAt": "2026-11-04T05:15:32.387Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
       "ticker": "KAYNES",
       "fullName": "Kaynes Technology India Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 70.3,
-      "price": 3276.7,
-      "observedAt": "2026-11-04T05:10:38.352Z",
+      "discoveryScore": 68.6,
+      "price": 3273.6,
+      "observedAt": "2026-11-04T05:15:34.040Z",
       "research": {
         "source": "verified catalyst memory",
         "observedAt": "2026-11-02T15:07:31.000Z",
@@ -348,12 +363,13 @@
         "verification": "VERIFIED"
       },
       "reasons": [
-        "benchmark price unavailable"
+        "benchmark price unavailable",
+        "below 20-session EMA"
       ],
       "status": "not-qualified"
     }
   ],
-  "updatedAt": "2026-11-04T05:10:39.898Z",
+  "updatedAt": "2026-11-04T05:15:39.605Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -374,7 +390,7 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T05:10:39.898Z",
+    "at": "2026-11-04T05:15:39.605Z",
     "action": "scan",
     "bought": null,
     "checked": [],
@@ -382,7 +398,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T05:10:39.008Z",
+    "at": "2026-11-04T05:15:39.114Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -466,7 +482,19 @@
         ]
       },
       {
+        "ticker": "BERGEPAINT",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "BLS",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "BSOFT",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -475,6 +503,12 @@
         "ticker": "CANFINHOME",
         "reasons": [
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "CANHLIFE",
+        "reasons": [
+          "missing or stale instrument quote"
         ]
       },
       {
@@ -503,6 +537,12 @@
       },
       {
         "ticker": "CLEAN",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "CLEANMAX",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -539,30 +579,6 @@
       },
       {
         "ticker": "EMAMILTD",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "EMCURE",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "ENDURANCE",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "FEDERALBNK",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "FIVESTAR",
         "reasons": [
           "weak or overextended session move"
         ]
