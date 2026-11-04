@@ -1,6 +1,6 @@
 // Versioned paper experiment, deliberately separate from the archived executed-trade model.
 // No broker order APIs. A single JSON state holds cash, positions and closed trades atomically.
-import { quoteFreshness } from './_upstox-market-data.js';
+import { quoteFreshness, benchmarkObservation } from './_upstox-market-data.js';
 import { rankByDiscoveryScore } from './_discovery-score.js';
 import { ema } from './_indicators.js';
 import { liveSimulationEntry } from './_entry-research.js';
@@ -133,11 +133,15 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       research:market.researchBySymbol?.[c.symbol]??null,reasons:[],status:'watch'}));
     const blocked=new Set([...s.positions.map(p=>p.ticker),...day.buys,...day.exits]);
     const benchmark=market.quotes['NSE_INDEX|Nifty 50'];
-    const benchmarkFresh=quoteFreshness(benchmark,{nowMs:at.getTime()}).fresh;
-    const benchChange=benchmark?.previousClose>0?(benchmark.price/benchmark.previousClose-1)*100:null;
+    const benchmarkState=benchmarkObservation(benchmark,{nowMs:at.getTime()});
+    const benchmarkFresh=benchmarkState.fresh,benchChange=benchmarkState.changePct;
+    market.discovery={...(market.discovery||{}),benchmark:benchmarkState};
     for(const c of market.candidates||[]){
       const row=s.suggestions.find(r=>r.ticker===c.symbol),reasons=row.reasons;
       const q=market.quotes[c.instrumentKey],reference=market.references?.[c.symbol];
+      const setup=freshQuote(q,c,at)?liveSimulationEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'}):null;
+      row.entryDiagnostics=setup?{status:setup.status,reason:setup.reason??null,version:setup.setupVersion??null}:null;
+      if(setup?.status==='setup')row.setup=setup;
       if(blocked.has(c.symbol))reasons.push('held or traded today');
       if(day.buys.length>=config.maxBuysPerDay)reasons.push('three daily positions already opened');
       if(s.positions.length>=config.maxOpenPositions)reasons.push('five-position exposure cap');
@@ -152,10 +156,9 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       else if(q?.price<=reference.ema20)reasons.push('below 20-session EMA');
       if(benchChange!=null&&q?.previousClose>0&&(q.price/q.previousClose-1)*100<=benchChange)reasons.push('not outperforming Nifty');
       if(s.positions.some(p=>p.sector===c.sector))reasons.push('sector already represented');
+      if(setup?.status!=='setup')reasons.push(setup?.reason||'no usable completed breakout evidence');
       if(reasons.length)continue;
       if(!(q.upperCircuit>q.price && q.lowerCircuit<q.price) || q.price>=q.upperCircuit*0.995 || q.price<=q.lowerCircuit*1.005){reasons.push('official circuit limit unavailable or too close at execution');continue;}
-      const setup=liveSimulationEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'});
-      if(setup.status!=='setup'){reasons.push(setup.reason||'no confirmed consolidation breakout');continue;}
       const fill=q.askPrice*(1+config.entrySlippageBps/10000),stop=setup.supportLevel*0.999;
       const stopPct=(1-stop/fill)*100;
       if(stopPct<config.minStopPct||stopPct>config.maxStopPct){reasons.push('structure stop outside experimental 0.5–3% band');continue;}

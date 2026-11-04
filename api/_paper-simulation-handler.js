@@ -134,7 +134,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           }catch{/* Missing evidence is a rejection, never a fabricated signal. */}
         }));
         // Refresh executable quotes AFTER all slower history work. Never book an earlier quote.
-        const refreshKeys=[...new Set([...heldKeys,...market.candidates.map(c=>c.instrumentKey)])];
+        const refreshKeys=[...new Set([...heldKeys,...market.candidates.map(c=>c.instrumentKey),'NSE_INDEX|Nifty 50'])];
         if(refreshKeys.length)Object.assign(market.quotes,await quotes(refreshKeys));
         market.references=preparedReferences;
       }

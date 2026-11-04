@@ -97,8 +97,10 @@ export async function fetchFullQuotes(instrumentKeys, options = {}) {
   if (!keys.length) return {};
   const raw = await apiRequest(`/v3/market-quote/quotes?instrument_key=${encodeURIComponent(keys.join(','))}`, options);
   const out = {};
-  for (const quote of Object.values(raw)) {
-    const key = quote?.instrument_token;
+  for (const [displayKey,quote] of Object.entries(raw)) {
+    // The documented index display key is exact, not an equity-symbol heuristic.
+    const indexKey=displayKey.startsWith('NSE_INDEX:')?displayKey.replace(':','|'):null;
+    const key = quote?.instrument_token || (keys.includes(indexKey)?indexKey:null);
     if (!keys.includes(key) || !Number.isFinite(quote.last_price) || !(quote.last_price > 0)) continue;
     const lastTradeMs = Number(quote.last_trade_time);
     const positive = value => value != null && Number.isFinite(Number(value)) && Number(value) > 0 ? Number(value) : null;
@@ -115,7 +117,9 @@ export async function fetchFullQuotes(instrumentKeys, options = {}) {
       lastTradeAt: Number.isFinite(lastTradeMs) && lastTradeMs > 0 && lastTradeMs < 8.64e15 ? new Date(lastTradeMs).toISOString() : null,
       responseAt: Number.isFinite(Date.parse(quote.timestamp)) ? new Date(quote.timestamp).toISOString() : null,
       volume: Number.isFinite(Number(quote.volume)) ? Number(quote.volume) : null,
-      previousClose: Number.isFinite(Number(quote.prev_close_price)) ? Number(quote.prev_close_price) : null,
+      previousClose: positive(quote.prev_close_price) ?? (key.startsWith('NSE_INDEX|')&&quote.net_change!=null
+        &&Number.isFinite(Number(quote.net_change))?positive(quote.last_price-Number(quote.net_change)):null),
+      netChange:quote.net_change!=null&&Number.isFinite(Number(quote.net_change))?Number(quote.net_change):null,
       // Preserve exchange information that the research desk previously discarded.
       // Missing/crossed books remain unknown, never a zero spread or execution guarantee.
       bidPrice: validSpread ? bidPrice : null, askPrice: validSpread ? askPrice : null,
@@ -129,6 +133,20 @@ export async function fetchFullQuotes(instrumentKeys, options = {}) {
     };
   }
   return out;
+}
+
+// An index is calculated, not traded. It may legitimately have no last_trade_time.
+// Use the timestamp INSIDE the provider's index snapshot, never local HTTP receipt time.
+// This helper is deliberately separate: equities still require actual last-trade freshness.
+export function benchmarkObservation(quote,{nowMs=Date.now(),maxAgeMs=90000}={}) {
+  const fail=reason=>({fresh:false,reason,changePct:null,observedAt:quote?.responseAt??null});
+  if(quote?.instrumentKey!=='NSE_INDEX|Nifty 50')return fail('missing or mismatched Nifty index');
+  if(!Number.isFinite(quote.price)||quote.price<=0||!Number.isFinite(quote.previousClose)||quote.previousClose<=0)
+    return fail('missing index price or previous close');
+  const ms=Date.parse(quote.responseAt||''),age=nowMs-ms;
+  if(!Number.isFinite(ms)||age>maxAgeMs||age< -15000)return fail('missing, stale or future provider index timestamp');
+  return {fresh:true,reason:'fresh provider index snapshot',changePct:(quote.price/quote.previousClose-1)*100,
+    observedAt:quote.responseAt,timestampBasis:'provider-index-snapshot',price:quote.price,previousClose:quote.previousClose};
 }
 
 // From/to use YYYY-MM-DD. Candles are research data, not assumed executable fills.
