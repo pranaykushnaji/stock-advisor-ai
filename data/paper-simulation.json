@@ -16,7 +16,7 @@
   },
   "lastSlots": {
     "research": 1793763600000,
-    "scan": 1793770200000
+    "scan": 1793770500000
   },
   "dailyCache": {
     "GROWW": {
@@ -263,6 +263,13 @@
       "sessions": 69,
       "ema20": 1084.3642899571757,
       "averageTurnoverCr": 30.90534650475
+    },
+    "TARIL": {
+      "asOf": "2026-11-04",
+      "lastSession": "2026-11-03",
+      "sessions": 69,
+      "ema20": 306.1044808404221,
+      "averageTurnoverCr": 223.44282082675008
     }
   },
   "suggestions": [
@@ -270,9 +277,9 @@
       "ticker": "BHEL",
       "fullName": "Bharat Heavy Electricals Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 78.2,
-      "price": 424.4,
-      "observedAt": "2026-11-04T05:30:40.005Z",
+      "discoveryScore": 77.5,
+      "price": 423.6,
+      "observedAt": "2026-11-04T05:35:38.216Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -280,12 +287,39 @@
       "status": "not-qualified"
     },
     {
+      "ticker": "LINDEINDIA",
+      "fullName": "Linde India Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 74.4,
+      "price": 6197.5,
+      "observedAt": "2026-11-04T05:35:36.860Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable",
+        "20-session average turnover below ₹10Cr or missing"
+      ],
+      "status": "not-qualified"
+    },
+    {
       "ticker": "UNOMINDA",
       "fullName": "UNO Minda Ltd.",
       "sector": "Automobile and Auto Components",
-      "discoveryScore": 74.9,
-      "price": 1190.9,
-      "observedAt": "2026-11-04T05:30:35.206Z",
+      "discoveryScore": 73.5,
+      "price": 1187.6,
+      "observedAt": "2026-11-04T05:35:37.935Z",
+      "research": null,
+      "reasons": [
+        "benchmark price unavailable"
+      ],
+      "status": "not-qualified"
+    },
+    {
+      "ticker": "ACE",
+      "fullName": "Action Construction Equipment Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 73.1,
+      "price": 1113.25,
+      "observedAt": "2026-11-04T05:35:37.520Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -297,21 +331,8 @@
       "fullName": "GE Vernova T&D India Ltd.",
       "sector": "Capital Goods",
       "discoveryScore": 72.8,
-      "price": 4183,
-      "observedAt": "2026-11-04T05:30:38.808Z",
-      "research": null,
-      "reasons": [
-        "benchmark price unavailable"
-      ],
-      "status": "not-qualified"
-    },
-    {
-      "ticker": "ACE",
-      "fullName": "Action Construction Equipment Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 72,
-      "price": 1107.2,
-      "observedAt": "2026-11-04T05:30:37.343Z",
+      "price": 4180,
+      "observedAt": "2026-11-04T05:35:38.013Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -322,9 +343,9 @@
       "ticker": "TDPOWERSYS",
       "fullName": "TD Power Systems Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 71.8,
+      "discoveryScore": 72,
       "price": 736.15,
-      "observedAt": "2026-11-04T05:30:38.974Z",
+      "observedAt": "2026-11-04T05:35:38.199Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -332,26 +353,12 @@
       "status": "not-qualified"
     },
     {
-      "ticker": "LINDEINDIA",
-      "fullName": "Linde India Ltd.",
-      "sector": "Chemicals",
-      "discoveryScore": 71.6,
-      "price": 6138.5,
-      "observedAt": "2026-11-04T05:29:27.821Z",
-      "research": null,
-      "reasons": [
-        "benchmark price unavailable",
-        "20-session average turnover below ₹10Cr or missing"
-      ],
-      "status": "not-qualified"
-    },
-    {
-      "ticker": "LODHA",
-      "fullName": "Lodha Developers Ltd.",
-      "sector": "Realty",
-      "discoveryScore": 71.6,
-      "price": 1100.3,
-      "observedAt": "2026-11-04T05:30:36.317Z",
+      "ticker": "TARIL",
+      "fullName": "Transformers And Rectifiers (India) Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 71.7,
+      "price": 313.15,
+      "observedAt": "2026-11-04T05:35:31.508Z",
       "research": null,
       "reasons": [
         "benchmark price unavailable"
@@ -362,9 +369,9 @@
       "ticker": "KAYNES",
       "fullName": "Kaynes Technology India Ltd.",
       "sector": "Capital Goods",
-      "discoveryScore": 70,
-      "price": 3276.6,
-      "observedAt": "2026-11-04T05:30:37.381Z",
+      "discoveryScore": 68.9,
+      "price": 3273.8,
+      "observedAt": "2026-11-04T05:35:34.490Z",
       "research": {
         "source": "verified catalyst memory",
         "observedAt": "2026-11-02T15:07:31.000Z",
@@ -376,12 +383,13 @@
         "verification": "VERIFIED"
       },
       "reasons": [
-        "benchmark price unavailable"
+        "benchmark price unavailable",
+        "below 20-session EMA"
       ],
       "status": "not-qualified"
     }
   ],
-  "updatedAt": "2026-11-04T05:30:40.313Z",
+  "updatedAt": "2026-11-04T05:35:39.182Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -402,7 +410,7 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-04T05:30:40.313Z",
+    "at": "2026-11-04T05:35:39.182Z",
     "action": "scan",
     "bought": null,
     "checked": [],
@@ -410,11 +418,17 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-04T05:30:39.457Z",
+    "at": "2026-11-04T05:35:38.689Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
     "rejected": [
+      {
+        "ticker": "AARTIIND",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
       {
         "ticker": "ABCAPITAL",
         "reasons": [
@@ -488,6 +502,12 @@
         ]
       },
       {
+        "ticker": "BANDHANBNK",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "BATAINDIA",
         "reasons": [
           "weak or overextended session move"
@@ -507,12 +527,6 @@
       },
       {
         "ticker": "CANFINHOME",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "CASTROLIND",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -566,12 +580,6 @@
         ]
       },
       {
-        "ticker": "ELECON",
-        "reasons": [
-          "missing or stale instrument quote"
-        ]
-      },
-      {
         "ticker": "EMAMILTD",
         "reasons": [
           "weak or overextended session move"
@@ -580,7 +588,8 @@
       {
         "ticker": "EMCURE",
         "reasons": [
-          "too close to official circuit",
+          "missing or wide bid/ask spread",
+          "official circuit bands unavailable or reached",
           "weak or overextended session move"
         ]
       },
