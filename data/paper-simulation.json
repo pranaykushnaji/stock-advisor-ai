@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 3689.65,
+  "cash": 5466.19,
   "contributions": 20000,
   "positions": [
     {
@@ -24,9 +24,9 @@
       "initialStopPct": 0.634147809038621,
       "modeledInitialRisk": 47.11,
       "peakPrice": 1233.6,
-      "currentPrice": 1232.8,
-      "lastObservedAt": "2026-11-05T05:10:36.167Z",
-      "lastPriceUpdate": "2026-11-05T05:10:36.167Z",
+      "currentPrice": 1232.2,
+      "lastObservedAt": "2026-11-05T05:15:36.863Z",
+      "lastPriceUpdate": "2026-11-05T05:15:36.863Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -49,50 +49,6 @@
       "trailingStopPrice": 1226.0118
     },
     {
-      "id": "2026-11-04|GODREJPROP|paper-breakout-v1",
-      "ticker": "GODREJPROP",
-      "symbol": "GODREJPROP",
-      "instrumentKey": "NSE_EQ|INE484J01027",
-      "fullName": "Godrej Properties Ltd.",
-      "sector": "Realty",
-      "date": "2026-11-04",
-      "addedAt": "2026-11-04T07:25:39.244Z",
-      "strategyVersion": "paper-breakout-v1",
-      "entryLane": "experimental-consolidation",
-      "entryPrice": 1735.0671,
-      "shares": 1,
-      "investedAmount": 1735.07,
-      "entryCost": 2.6,
-      "initialStopPrice": 1712.8854,
-      "initialStopPct": 1.2784347072225644,
-      "modeledInitialRisk": 28.25,
-      "peakPrice": 1807.1,
-      "currentPrice": 1789.5,
-      "lastObservedAt": "2026-11-05T05:10:38.657Z",
-      "lastPriceUpdate": "2026-11-05T05:10:38.657Z",
-      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-04T07:25:00.000Z",
-        "entryAt": "2026-11-04T07:25:39.244Z",
-        "entryPrice": 1734.1,
-        "entryIndex": 44,
-        "breakoutLevel": 1726.8,
-        "supportLevel": 1714.6,
-        "vwap": 1714.2535243114094,
-        "volumeRatio": 14.819430467538826,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      },
-      "discoveryScore": 75.3,
-      "research": null,
-      "executionRuleVersion": "five-minute-opening-v2",
-      "quoteTimestamp": "2026-11-04T07:25:39.244Z",
-      "paperTrading": true,
-      "expectedEdge": null,
-      "trailingStopPrice": 1784.9182999999998
-    },
-    {
       "id": "2026-11-05|ANGELONE|paper-breakout-v1",
       "ticker": "ANGELONE",
       "symbol": "ANGELONE",
@@ -111,9 +67,9 @@
       "initialStopPct": 2.186744051287215,
       "modeledInitialRisk": 99.29,
       "peakPrice": 327.25,
-      "currentPrice": 325.95,
-      "lastObservedAt": "2026-11-05T05:10:37.926Z",
-      "lastPriceUpdate": "2026-11-05T05:10:37.926Z",
+      "currentPrice": 324.75,
+      "lastObservedAt": "2026-11-05T05:15:34.552Z",
+      "lastPriceUpdate": "2026-11-05T05:15:34.552Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -154,9 +110,9 @@
       "initialStopPct": 1.2708364278302686,
       "modeledInitialRisk": 72.81,
       "peakPrice": 563.45,
-      "currentPrice": 560.5,
-      "lastObservedAt": "2026-11-05T05:10:38.609Z",
-      "lastPriceUpdate": "2026-11-05T05:10:38.609Z",
+      "currentPrice": 559.8,
+      "lastObservedAt": "2026-11-05T05:15:34.646Z",
+      "lastPriceUpdate": "2026-11-05T05:15:34.646Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -197,9 +153,9 @@
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
       "peakPrice": 236.33,
-      "currentPrice": 236.31,
-      "lastObservedAt": "2026-11-05T05:10:39.489Z",
-      "lastPriceUpdate": "2026-11-05T05:10:39.489Z",
+      "currentPrice": 236.32,
+      "lastObservedAt": "2026-11-05T05:15:37.825Z",
+      "lastPriceUpdate": "2026-11-05T05:15:37.825Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -297,6 +253,73 @@
       "exitCost": 5.01,
       "estimatedCostAmount": 9.95,
       "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-04|GODREJPROP|paper-breakout-v1",
+      "ticker": "GODREJPROP",
+      "symbol": "GODREJPROP",
+      "instrumentKey": "NSE_EQ|INE484J01027",
+      "fullName": "Godrej Properties Ltd.",
+      "sector": "Realty",
+      "date": "2026-11-04",
+      "addedAt": "2026-11-04T07:25:39.244Z",
+      "strategyVersion": "paper-breakout-v1",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 1735.0671,
+      "shares": 1,
+      "investedAmount": 1735.07,
+      "entryCost": 2.6,
+      "initialStopPrice": 1712.8854,
+      "initialStopPct": 1.2784347072225644,
+      "modeledInitialRisk": 28.25,
+      "peakPrice": 1807.1,
+      "currentPrice": 1780.4,
+      "lastObservedAt": "2026-11-05T05:15:35.908Z",
+      "lastPriceUpdate": "2026-11-05T05:15:35.908Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T07:25:00.000Z",
+        "entryAt": "2026-11-04T07:25:39.244Z",
+        "entryPrice": 1734.1,
+        "entryIndex": 44,
+        "breakoutLevel": 1726.8,
+        "supportLevel": 1714.6,
+        "vwap": 1714.2535243114094,
+        "volumeRatio": 14.819430467538826,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 75.3,
+      "research": null,
+      "executionRuleVersion": "five-minute-opening-v2",
+      "quoteTimestamp": "2026-11-04T07:25:39.244Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "trailingStopPrice": 1784.9182999999998,
+      "exitIntent": {
+        "id": "2026-11-04|GODREJPROP|paper-breakout-v1|risk-unit-trail-v1",
+        "observedAt": "2026-11-05T05:15:35.908Z",
+        "triggerPrice": 1784.9182999999998,
+        "observedFillPrice": 1780.1,
+        "reason": "experimental profit protection",
+        "grossReturnPct": 2.5954558183945764,
+        "estimatedNetReturnPct": 2.2954558183945766,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-04T07:25:39.244Z",
+      "entryDate": "2026-11-04",
+      "exitAt": "2026-11-05T05:15:35.908Z",
+      "exitDate": "2026-11-05",
+      "exitPrice": 1779.20995,
+      "triggerPrice": 1784.9182999999998,
+      "exitReason": "experimental profit protection",
+      "realizedPnl": 44.14,
+      "realizedNetPnl": 38.87,
+      "realizedPnlPct": 2.54,
+      "exitCost": 2.67,
+      "estimatedCostAmount": 5.27,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
     }
   ],
   "days": {
@@ -319,14 +342,15 @@
         "MEESHO"
       ],
       "exits": [
-        "KAYNES"
+        "KAYNES",
+        "GODREJPROP"
       ]
     }
   },
   "lastSlots": {
     "research": 1793850000000,
     "scan": 1793855400000,
-    "risk": 1793855400000
+    "risk": 1793855700000
   },
   "dailyCache": {
     "GROWW": {
@@ -1156,7 +1180,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-05T05:10:40.407Z",
+  "updatedAt": "2026-11-05T05:15:38.324Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -1177,8 +1201,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T05:10:40.407Z",
-    "action": "scan",
+    "at": "2026-11-05T05:15:38.324Z",
+    "action": "risk",
     "bought": null,
     "checked": [
       {
@@ -1187,7 +1211,9 @@
       },
       {
         "ticker": "GODREJPROP",
-        "status": "hold"
+        "status": "sold",
+        "reason": "experimental profit protection",
+        "netPnl": 38.87
       },
       {
         "ticker": "ANGELONE",
