@@ -2,52 +2,9 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 5466.19,
+  "cash": 10388.73,
   "contributions": 20000,
   "positions": [
-    {
-      "id": "2026-11-04|UNOMINDA|paper-breakout-v1",
-      "ticker": "UNOMINDA",
-      "symbol": "UNOMINDA",
-      "instrumentKey": "NSE_EQ|INE405E01023",
-      "fullName": "UNO Minda Ltd.",
-      "sector": "Automobile and Auto Components",
-      "date": "2026-11-04",
-      "addedAt": "2026-11-04T07:00:39.517Z",
-      "strategyVersion": "paper-breakout-v1",
-      "entryLane": "experimental-consolidation",
-      "entryPrice": 1196.598,
-      "shares": 4,
-      "investedAmount": 4786.39,
-      "entryCost": 7.18,
-      "initialStopPrice": 1189.0098,
-      "initialStopPct": 0.634147809038621,
-      "modeledInitialRisk": 47.11,
-      "peakPrice": 1241.6,
-      "currentPrice": 1239,
-      "lastObservedAt": "2026-11-05T05:25:39.237Z",
-      "lastPriceUpdate": "2026-11-05T05:25:39.237Z",
-      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-04T07:00:00.000Z",
-        "entryAt": "2026-11-04T07:00:39.517Z",
-        "entryPrice": 1196,
-        "entryIndex": 39,
-        "breakoutLevel": 1194,
-        "supportLevel": 1190.2,
-        "vwap": 1176.3076388694376,
-        "volumeRatio": 1.9302651029861042,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      },
-      "research": null,
-      "executionRuleVersion": "five-minute-opening-v2",
-      "quoteTimestamp": "2026-11-04T07:00:39.517Z",
-      "paperTrading": true,
-      "expectedEdge": null,
-      "trailingStopPrice": 1234.0118
-    },
     {
       "id": "2026-11-05|ANGELONE|paper-breakout-v1",
       "ticker": "ANGELONE",
@@ -68,8 +25,8 @@
       "modeledInitialRisk": 99.29,
       "peakPrice": 327.25,
       "currentPrice": 324.5,
-      "lastObservedAt": "2026-11-05T05:25:39.735Z",
-      "lastPriceUpdate": "2026-11-05T05:25:39.735Z",
+      "lastObservedAt": "2026-11-05T05:30:33.872Z",
+      "lastPriceUpdate": "2026-11-05T05:30:33.872Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -110,9 +67,9 @@
       "initialStopPct": 1.2708364278302686,
       "modeledInitialRisk": 72.81,
       "peakPrice": 567.05,
-      "currentPrice": 566.5,
-      "lastObservedAt": "2026-11-05T05:25:39.583Z",
-      "lastPriceUpdate": "2026-11-05T05:25:39.583Z",
+      "currentPrice": 564.45,
+      "lastObservedAt": "2026-11-05T05:30:37.131Z",
+      "lastPriceUpdate": "2026-11-05T05:30:37.131Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -153,9 +110,9 @@
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
       "peakPrice": 236.33,
-      "currentPrice": 235.44,
-      "lastObservedAt": "2026-11-05T05:25:38.560Z",
-      "lastPriceUpdate": "2026-11-05T05:25:38.560Z",
+      "currentPrice": 235.53,
+      "lastObservedAt": "2026-11-05T05:30:33.067Z",
+      "lastPriceUpdate": "2026-11-05T05:30:33.067Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -320,6 +277,72 @@
       "exitCost": 2.67,
       "estimatedCostAmount": 5.27,
       "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-04|UNOMINDA|paper-breakout-v1",
+      "ticker": "UNOMINDA",
+      "symbol": "UNOMINDA",
+      "instrumentKey": "NSE_EQ|INE405E01023",
+      "fullName": "UNO Minda Ltd.",
+      "sector": "Automobile and Auto Components",
+      "date": "2026-11-04",
+      "addedAt": "2026-11-04T07:00:39.517Z",
+      "strategyVersion": "paper-breakout-v1",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 1196.598,
+      "shares": 4,
+      "investedAmount": 4786.39,
+      "entryCost": 7.18,
+      "initialStopPrice": 1189.0098,
+      "initialStopPct": 0.634147809038621,
+      "modeledInitialRisk": 47.11,
+      "peakPrice": 1241.6,
+      "currentPrice": 1233.5,
+      "lastObservedAt": "2026-11-05T05:30:31.558Z",
+      "lastPriceUpdate": "2026-11-05T05:30:31.558Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-04T07:00:00.000Z",
+        "entryAt": "2026-11-04T07:00:39.517Z",
+        "entryPrice": 1196,
+        "entryIndex": 39,
+        "breakoutLevel": 1194,
+        "supportLevel": 1190.2,
+        "vwap": 1176.3076388694376,
+        "volumeRatio": 1.9302651029861042,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "research": null,
+      "executionRuleVersion": "five-minute-opening-v2",
+      "quoteTimestamp": "2026-11-04T07:00:39.517Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "trailingStopPrice": 1234.0118,
+      "exitIntent": {
+        "id": "2026-11-04|UNOMINDA|paper-breakout-v1|risk-unit-trail-v1",
+        "observedAt": "2026-11-05T05:30:31.558Z",
+        "triggerPrice": 1234.0118,
+        "observedFillPrice": 1233.1,
+        "reason": "experimental profit protection",
+        "grossReturnPct": 3.050481448239095,
+        "estimatedNetReturnPct": 2.7504814482390954,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-04T07:00:39.517Z",
+      "entryDate": "2026-11-04",
+      "exitAt": "2026-11-05T05:30:31.558Z",
+      "exitDate": "2026-11-05",
+      "exitPrice": 1232.48345,
+      "triggerPrice": 1234.0118,
+      "exitReason": "experimental profit protection",
+      "realizedPnl": 143.54,
+      "realizedNetPnl": 128.97,
+      "realizedPnlPct": 3,
+      "exitCost": 7.39,
+      "estimatedCostAmount": 14.57,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
     }
   ],
   "days": {
@@ -343,14 +366,15 @@
       ],
       "exits": [
         "KAYNES",
-        "GODREJPROP"
+        "GODREJPROP",
+        "UNOMINDA"
       ]
     }
   },
   "lastSlots": {
     "research": 1793850000000,
     "scan": 1793856300000,
-    "risk": 1793856300000
+    "risk": 1793856600000
   },
   "dailyCache": {
     "GROWW": {
@@ -1149,7 +1173,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-05T05:25:40.366Z",
+  "updatedAt": "2026-11-05T05:30:38.001Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -1170,13 +1194,15 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T05:25:40.366Z",
-    "action": "scan",
+    "at": "2026-11-05T05:30:38.001Z",
+    "action": "risk",
     "bought": null,
     "checked": [
       {
         "ticker": "UNOMINDA",
-        "status": "hold"
+        "status": "sold",
+        "reason": "experimental profit protection",
+        "netPnl": 128.97
       },
       {
         "ticker": "ANGELONE",
