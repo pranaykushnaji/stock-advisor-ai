@@ -118,10 +118,10 @@
       "initialStopPrice": 1712.8854,
       "initialStopPct": 1.2784347072225644,
       "modeledInitialRisk": 28.25,
-      "peakPrice": 1798.3,
-      "currentPrice": 1798.3,
-      "lastObservedAt": "2026-11-05T04:00:36.868Z",
-      "lastPriceUpdate": "2026-11-05T04:00:36.868Z",
+      "peakPrice": 1798.4,
+      "currentPrice": 1798.4,
+      "lastObservedAt": "2026-11-05T04:00:40.655Z",
+      "lastPriceUpdate": "2026-11-05T04:00:40.655Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -142,7 +142,7 @@
       "quoteTimestamp": "2026-11-04T07:25:39.244Z",
       "paperTrading": true,
       "expectedEdge": null,
-      "trailingStopPrice": 1776.1182999999999
+      "trailingStopPrice": 1776.2183
     }
   ],
   "trades": [],
@@ -166,7 +166,7 @@
   },
   "lastSlots": {
     "research": 1793850000000,
-    "scan": 1793850900000,
+    "scan": 1793851200000,
     "risk": 1793851200000
   },
   "dailyCache": {
@@ -617,122 +617,77 @@
       "sessions": 69,
       "ema20": 446.42363882518066,
       "averageTurnoverCr": 213.10255907950005
+    },
+    "MOTILALOFS": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 993.6066146774962,
+      "averageTurnoverCr": 98.12778203375
+    },
+    "CHOLAHLDNG": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 1364.7538309218942,
+      "averageTurnoverCr": 18.567351286500003
     }
   },
   "suggestions": [
     {
-      "ticker": "ASHOKLEY",
-      "fullName": "Ashok Leyland Ltd.",
-      "sector": "Capital Goods",
-      "discoveryScore": 77.7,
-      "price": 165.9,
-      "observedAt": "2026-11-05T03:55:40.186Z",
-      "sessionChangePct": 7.71,
-      "research": null,
-      "reasons": [
-        "sector already represented",
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
-        "version": null
-      }
-    },
-    {
-      "ticker": "SBICARD",
-      "fullName": "SBI Cards and Payment Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 72.5,
-      "price": 580.7,
-      "observedAt": "2026-11-05T03:55:38.185Z",
-      "sessionChangePct": 5.01,
-      "research": null,
-      "reasons": [
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
-        "version": null
-      }
-    },
-    {
-      "ticker": "HUDCO",
-      "fullName": "Housing & Urban Development Corporation Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 72.1,
-      "price": 160.9,
-      "observedAt": "2026-11-05T03:55:35.281Z",
-      "sessionChangePct": 5.12,
-      "research": null,
-      "reasons": [
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
-        "version": null
-      }
-    },
-    {
-      "ticker": "M&MFIN",
-      "fullName": "Mahindra & Mahindra Financial Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 71.1,
-      "price": 286.25,
-      "observedAt": "2026-11-05T03:55:39.195Z",
-      "sessionChangePct": 5.98,
-      "research": null,
-      "reasons": [
-        "below 20-session EMA",
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
-        "version": null
-      }
-    },
-    {
       "ticker": "SAMMAANCAP",
       "fullName": "Sammaan Capital Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 71.1,
-      "price": 134.5,
-      "observedAt": "2026-11-05T03:55:39.509Z",
-      "sessionChangePct": 6.76,
+      "discoveryScore": 72.7,
+      "price": 135.01,
+      "observedAt": "2026-11-05T04:00:38.437Z",
+      "sessionChangePct": 7.17,
       "research": null,
       "reasons": [
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
         "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
         "version": null
       }
     },
     {
-      "ticker": "POONAWALLA",
-      "fullName": "Poonawalla Fincorp Ltd.",
+      "ticker": "CHOLAHLDNG",
+      "fullName": "Cholamandalam Financial Holdings Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 70.8,
-      "price": 487.8,
-      "observedAt": "2026-11-05T03:55:36.366Z",
-      "sessionChangePct": 3.9,
+      "discoveryScore": 72.2,
+      "price": 1467,
+      "observedAt": "2026-11-05T04:00:33.123Z",
+      "sessionChangePct": 6.71,
       "research": null,
       "reasons": [
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
         "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 72,
+      "price": 1060.45,
+      "observedAt": "2026-11-05T04:00:39.531Z",
+      "sessionChangePct": 4.68,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
         "version": null
       }
     },
@@ -740,19 +695,77 @@
       "ticker": "LODHA",
       "fullName": "Lodha Developers Ltd.",
       "sector": "Realty",
-      "discoveryScore": 70.1,
-      "price": 1158,
-      "observedAt": "2026-11-05T03:55:35.907Z",
-      "sessionChangePct": 3.21,
+      "discoveryScore": 71.8,
+      "price": 1162.3,
+      "observedAt": "2026-11-05T04:00:29.414Z",
+      "sessionChangePct": 3.59,
       "research": null,
       "reasons": [
         "sector already represented",
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
         "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "SBICARD",
+      "fullName": "SBI Cards and Payment Services Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 71.7,
+      "price": 583.1,
+      "observedAt": "2026-11-05T04:00:40.082Z",
+      "sessionChangePct": 5.44,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "ASHOKLEY",
+      "fullName": "Ashok Leyland Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 71.4,
+      "price": 165.67,
+      "observedAt": "2026-11-05T04:00:40.530Z",
+      "sessionChangePct": 7.56,
+      "research": null,
+      "reasons": [
+        "sector already represented",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "HINDPETRO",
+      "fullName": "Hindustan Petroleum Corporation Ltd.",
+      "sector": "Oil Gas & Consumable Fuels",
+      "discoveryScore": 71.2,
+      "price": 388.95,
+      "observedAt": "2026-11-05T04:00:40.558Z",
+      "sessionChangePct": 6.17,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
         "version": null
       }
     },
@@ -760,23 +773,23 @@
       "ticker": "GROWW",
       "fullName": "Billionbrains Garage Ventures Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 69.9,
-      "price": 215,
-      "observedAt": "2026-11-05T03:55:38.638Z",
-      "sessionChangePct": 3.75,
+      "discoveryScore": 71.1,
+      "price": 215.15,
+      "observedAt": "2026-11-05T04:00:39.511Z",
+      "sessionChangePct": 3.82,
       "research": null,
       "reasons": [
-        "opening setup needs complete range bars and a completed volume-confirmed breakout"
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
         "status": "no_setup",
-        "reason": "opening setup needs complete range bars and a completed volume-confirmed breakout",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
         "version": null
       }
     }
   ],
-  "updatedAt": "2026-11-05T04:00:37.777Z",
+  "updatedAt": "2026-11-05T04:00:41.108Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -797,8 +810,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T04:00:37.777Z",
-    "action": "risk",
+    "at": "2026-11-05T04:00:41.108Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -818,7 +831,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-05T03:55:39.908Z",
+    "at": "2026-11-05T04:00:40.244Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -884,31 +897,13 @@
         ]
       },
       {
-        "ticker": "BALRAMCHIN",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "BHARTIHEXA",
         "reasons": [
           "weak or overextended session move"
         ]
       },
       {
-        "ticker": "BHEL",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "CHENNPETRO",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "CPPLUS",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -944,6 +939,12 @@
         ]
       },
       {
+        "ticker": "FRACTAL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "GESHIP",
         "reasons": [
           "weak or overextended session move"
@@ -951,6 +952,12 @@
       },
       {
         "ticker": "GLAND",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "GLENMARK",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1002,6 +1009,12 @@
         "reasons": [
           "weak or overextended session move"
         ]
+      },
+      {
+        "ticker": "LALPATHLAB",
+        "reasons": [
+          "weak or overextended session move"
+        ]
       }
     ],
     "source": "Upstox",
@@ -1009,10 +1022,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 1.5794679599008488,
-      "observedAt": "2026-11-05T03:55:40.289Z",
+      "changePct": 1.5577656653005256,
+      "observedAt": "2026-11-05T04:00:41.007Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24339.05,
+      "price": 24333.85,
       "previousClose": 23960.6
     }
   },
@@ -1033,6 +1046,12 @@
       },
       {
         "at": "2026-11-05T03:55:40.390Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-05T04:00:41.108Z",
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
@@ -1057,13 +1076,19 @@
             "price": 215,
             "score": 69.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:00:39.511Z",
+            "price": 215.15,
+            "score": 71.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T03:55:38.638Z",
-        "lastPrice": 215,
-        "discoveryScore": 69.9,
+        "lastSeenAt": "2026-11-05T04:00:39.511Z",
+        "lastPrice": 215.15,
+        "discoveryScore": 71.1,
         "reasons": [
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "GMRAIRPORT": {
@@ -1180,13 +1205,19 @@
             "price": 580.7,
             "score": 72.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:00:40.082Z",
+            "price": 583.1,
+            "score": 71.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T03:55:38.185Z",
-        "lastPrice": 580.7,
-        "discoveryScore": 72.5,
+        "lastSeenAt": "2026-11-05T04:00:40.082Z",
+        "lastPrice": 583.1,
+        "discoveryScore": 71.7,
         "reasons": [
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "VISL": {
@@ -1244,13 +1275,19 @@
             "price": 388.7,
             "score": 74.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:00:40.558Z",
+            "price": 388.95,
+            "score": 71.2,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T03:50:40.174Z",
-        "lastPrice": 388.7,
-        "discoveryScore": 74.5,
+        "lastSeenAt": "2026-11-05T04:00:40.558Z",
+        "lastPrice": 388.95,
+        "discoveryScore": 71.2,
         "reasons": [
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "360ONE": {
@@ -1292,13 +1329,19 @@
             "price": 134.5,
             "score": 71.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:00:38.437Z",
+            "price": 135.01,
+            "score": 72.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T03:55:39.509Z",
-        "lastPrice": 134.5,
-        "discoveryScore": 71.1,
+        "lastSeenAt": "2026-11-05T04:00:38.437Z",
+        "lastPrice": 135.01,
+        "discoveryScore": 72.7,
         "reasons": [
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "ASHOKLEY": {
@@ -1319,14 +1362,20 @@
             "price": 165.9,
             "score": 77.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:00:40.530Z",
+            "price": 165.67,
+            "score": 71.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T03:55:40.186Z",
-        "lastPrice": 165.9,
-        "discoveryScore": 77.7,
+        "lastSeenAt": "2026-11-05T04:00:40.530Z",
+        "lastPrice": 165.67,
+        "discoveryScore": 71.4,
         "reasons": [
           "sector already represented",
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "HUDCO": {
@@ -1417,14 +1466,62 @@
             "price": 1158,
             "score": 70.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:00:29.414Z",
+            "price": 1162.3,
+            "score": 71.8,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T03:55:35.907Z",
-        "lastPrice": 1158,
-        "discoveryScore": 70.1,
+        "lastSeenAt": "2026-11-05T04:00:29.414Z",
+        "lastPrice": 1162.3,
+        "discoveryScore": 71.8,
         "reasons": [
           "sector already represented",
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "CHOLAHLDNG": {
+        "ticker": "CHOLAHLDNG",
+        "fullName": "Cholamandalam Financial Holdings Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-05T04:00:33.123Z",
+        "firstPrice": 1467,
+        "observations": [
+          {
+            "at": "2026-11-05T04:00:33.123Z",
+            "price": 1467,
+            "score": 72.2,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:00:33.123Z",
+        "lastPrice": 1467,
+        "discoveryScore": 72.2,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "MOTILALOFS": {
+        "ticker": "MOTILALOFS",
+        "fullName": "Motilal Oswal Financial Services Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-05T04:00:39.531Z",
+        "firstPrice": 1060.45,
+        "observations": [
+          {
+            "at": "2026-11-05T04:00:39.531Z",
+            "price": 1060.45,
+            "score": 72,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:00:39.531Z",
+        "lastPrice": 1060.45,
+        "discoveryScore": 72,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       }
     }
