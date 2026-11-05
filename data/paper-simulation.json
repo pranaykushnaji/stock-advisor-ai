@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 5090.39,
+  "cash": 3689.65,
   "contributions": 20000,
   "positions": [
     {
@@ -67,9 +67,9 @@
       "initialStopPct": 1.2784347072225644,
       "modeledInitialRisk": 28.25,
       "peakPrice": 1807.1,
-      "currentPrice": 1800.2,
-      "lastObservedAt": "2026-11-05T04:45:30.735Z",
-      "lastPriceUpdate": "2026-11-05T04:45:30.735Z",
+      "currentPrice": 1801.2,
+      "lastObservedAt": "2026-11-05T04:45:39.222Z",
+      "lastPriceUpdate": "2026-11-05T04:45:39.222Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -154,9 +154,9 @@
       "initialStopPct": 1.2708364278302686,
       "modeledInitialRisk": 72.81,
       "peakPrice": 561.4806,
-      "currentPrice": 560.6,
-      "lastObservedAt": "2026-11-05T04:45:35.759Z",
-      "lastPriceUpdate": "2026-11-05T04:45:35.759Z",
+      "currentPrice": 560.75,
+      "lastObservedAt": "2026-11-05T04:45:36.986Z",
+      "lastPriceUpdate": "2026-11-05T04:45:36.986Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -175,6 +175,49 @@
       "research": null,
       "executionRuleVersion": "five-minute-opening-v2",
       "quoteTimestamp": "2026-11-05T04:40:38.764Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-05|MEESHO|paper-breakout-v1",
+      "ticker": "MEESHO",
+      "symbol": "MEESHO",
+      "instrumentKey": "NSE_EQ|INE0VDM01015",
+      "fullName": "Meesho Ltd.",
+      "sector": "Consumer Services",
+      "date": "2026-11-05",
+      "addedAt": "2026-11-05T04:45:39.355Z",
+      "strategyVersion": "paper-breakout-v1",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 233.106495,
+      "shares": 6,
+      "investedAmount": 1398.64,
+      "entryCost": 2.1,
+      "initialStopPrice": 228.78099,
+      "initialStopPct": 1.855591797216971,
+      "modeledInitialRisk": 30.85,
+      "peakPrice": 233.106495,
+      "currentPrice": 232.99,
+      "lastObservedAt": "2026-11-05T04:45:39.355Z",
+      "lastPriceUpdate": "2026-11-05T04:45:39.355Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-05T04:45:00.000Z",
+        "entryAt": "2026-11-05T04:45:39.355Z",
+        "entryPrice": 232.99,
+        "entryIndex": 12,
+        "breakoutLevel": 232.16,
+        "supportLevel": 229.01,
+        "vwap": 230.18247517530415,
+        "volumeRatio": 1.8860567106589634,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 74.8,
+      "research": null,
+      "executionRuleVersion": "five-minute-opening-v2",
+      "quoteTimestamp": "2026-11-05T04:45:39.355Z",
       "paperTrading": true,
       "expectedEdge": null
     }
@@ -269,10 +312,11 @@
     },
     "2026-11-05": {
       "contribution": 10000,
-      "invested": 8418.41,
+      "invested": 9819.15,
       "buys": [
         "ANGELONE",
-        "ZENSARTECH"
+        "ZENSARTECH",
+        "MEESHO"
       ],
       "exits": [
         "KAYNES"
@@ -281,7 +325,7 @@
   },
   "lastSlots": {
     "research": 1793850000000,
-    "scan": 1793853600000,
+    "scan": 1793853900000,
     "risk": 1793853900000
   },
   "dailyCache": {
@@ -858,6 +902,20 @@
       "sessions": 69,
       "ema20": 901.6496716044223,
       "averageTurnoverCr": 21.766927756
+    },
+    "ABCAPITAL": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 371.8970683704491,
+      "averageTurnoverCr": 131.42321569425
+    },
+    "MEESHO": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 223.63576680734434,
+      "averageTurnoverCr": 374.250768897
     }
   },
   "suggestions": [
@@ -865,10 +923,10 @@
       "ticker": "GROWW",
       "fullName": "Billionbrains Garage Ventures Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 78.1,
-      "price": 218.55,
-      "observedAt": "2026-11-05T04:40:39.498Z",
-      "sessionChangePct": 5.46,
+      "discoveryScore": 79,
+      "price": 219.23,
+      "observedAt": "2026-11-05T04:45:39.844Z",
+      "sessionChangePct": 5.79,
       "research": null,
       "reasons": [
         "sector already represented"
@@ -881,26 +939,46 @@
       },
       "setup": {
         "status": "setup",
-        "signalAt": "2026-11-05T04:40:00.000Z",
-        "entryAt": "2026-11-05T04:40:39.498Z",
-        "entryPrice": 218.55,
-        "entryIndex": 11,
-        "breakoutLevel": 218.35,
+        "signalAt": "2026-11-05T04:45:00.000Z",
+        "entryAt": "2026-11-05T04:45:39.844Z",
+        "entryPrice": 219.23,
+        "entryIndex": 12,
+        "breakoutLevel": 219,
         "supportLevel": 215.1,
-        "vwap": 215.77225666109786,
-        "volumeRatio": 1.5285306770741418,
+        "vwap": 216.11910785997617,
+        "volumeRatio": 1.6620935377278898,
         "setupVersion": "consolidation-v1",
         "execution": "shadow-quote-only"
+      }
+    },
+    {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 77.9,
+      "price": 1079.75,
+      "observedAt": "2026-11-05T04:45:39.019Z",
+      "sessionChangePct": 6.59,
+      "research": null,
+      "reasons": [
+        "sector already represented",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
       }
     },
     {
       "ticker": "CARTRADE",
       "fullName": "Cartrade Tech Ltd.",
       "sector": "Consumer Services",
-      "discoveryScore": 75.7,
-      "price": 2660,
-      "observedAt": "2026-11-05T04:40:37.018Z",
-      "sessionChangePct": 6.7,
+      "discoveryScore": 75.9,
+      "price": 2655.8,
+      "observedAt": "2026-11-05T04:45:38.562Z",
+      "sessionChangePct": 6.53,
       "research": null,
       "reasons": [
         "below 20-session EMA",
@@ -914,53 +992,13 @@
       }
     },
     {
-      "ticker": "MOTILALOFS",
-      "fullName": "Motilal Oswal Financial Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 74.5,
-      "price": 1071.1,
-      "observedAt": "2026-11-05T04:40:37.301Z",
-      "sessionChangePct": 5.74,
-      "research": null,
-      "reasons": [
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "BALKRISIND",
-      "fullName": "Balkrishna Industries Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 74.4,
-      "price": 2401,
-      "observedAt": "2026-11-05T04:40:38.334Z",
-      "sessionChangePct": 7.01,
-      "research": null,
-      "reasons": [
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
       "ticker": "PAYTM",
       "fullName": "One 97 Communications Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 73.6,
-      "price": 1788,
-      "observedAt": "2026-11-05T04:40:39.417Z",
-      "sessionChangePct": 3.21,
+      "discoveryScore": 75.5,
+      "price": 1798.8,
+      "observedAt": "2026-11-05T04:45:39.598Z",
+      "sessionChangePct": 3.83,
       "research": null,
       "reasons": [
         "sector already represented",
@@ -974,33 +1012,13 @@
       }
     },
     {
-      "ticker": "M&MFIN",
-      "fullName": "Mahindra & Mahindra Financial Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 73.5,
-      "price": 289,
-      "observedAt": "2026-11-05T04:40:35.952Z",
-      "sessionChangePct": 7,
-      "research": null,
-      "reasons": [
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "ZENSARTECH",
-      "fullName": "Zensar Technolgies Ltd.",
-      "sector": "Information Technology",
-      "discoveryScore": 73.5,
-      "price": 561,
-      "observedAt": "2026-11-05T04:40:38.764Z",
-      "sessionChangePct": 5.25,
+      "ticker": "MEESHO",
+      "fullName": "Meesho Ltd.",
+      "sector": "Consumer Services",
+      "discoveryScore": 74.8,
+      "price": 232.99,
+      "observedAt": "2026-11-05T04:45:39.355Z",
+      "sessionChangePct": 3.76,
       "research": null,
       "reasons": [
         "confirmed setup; simulated fill recorded"
@@ -1013,32 +1031,56 @@
       },
       "setup": {
         "status": "setup",
-        "signalAt": "2026-11-05T04:40:00.000Z",
-        "entryAt": "2026-11-05T04:40:38.764Z",
-        "entryPrice": 561,
-        "entryIndex": 11,
-        "breakoutLevel": 560.95,
-        "supportLevel": 554.9,
-        "vwap": 554.5873628243943,
-        "volumeRatio": 1.7174195270508015,
+        "signalAt": "2026-11-05T04:45:00.000Z",
+        "entryAt": "2026-11-05T04:45:39.355Z",
+        "entryPrice": 232.99,
+        "entryIndex": 12,
+        "breakoutLevel": 232.16,
+        "supportLevel": 229.01,
+        "vwap": 230.18247517530415,
+        "volumeRatio": 1.8860567106589634,
         "setupVersion": "consolidation-v1",
         "execution": "shadow-quote-only"
       }
     },
     {
-      "ticker": "ABSLAMC",
-      "fullName": "Aditya Birla Sun Life AMC Ltd.",
+      "ticker": "PINELABS",
+      "fullName": "Pine Labs Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 73.1,
-      "price": 910,
-      "observedAt": "2026-11-05T04:40:32.695Z",
-      "sessionChangePct": 6.41,
+      "discoveryScore": 74.8,
+      "price": 163.73,
+      "observedAt": "2026-11-05T04:45:39.825Z",
+      "sessionChangePct": 3.78,
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
+      "ticker": "BALKRISIND",
+      "fullName": "Balkrishna Industries Ltd.",
+      "sector": "Automobile and Auto Components",
+      "discoveryScore": 74.6,
+      "price": 2400,
+      "observedAt": "2026-11-05T04:45:39.679Z",
+      "sessionChangePct": 6.97,
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
+      "ticker": "ABCAPITAL",
+      "fullName": "Aditya Birla Capital Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 73.8,
+      "price": 395.3,
+      "observedAt": "2026-11-05T04:45:37.004Z",
+      "sessionChangePct": 4.04,
       "research": null,
       "reasons": [],
       "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-05T04:45:37.836Z",
+  "updatedAt": "2026-11-05T04:45:40.314Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -1059,9 +1101,9 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T04:45:37.836Z",
-    "action": "risk",
-    "bought": null,
+    "at": "2026-11-05T04:45:40.314Z",
+    "action": "scan",
+    "bought": "MEESHO",
     "checked": [
       {
         "ticker": "UNOMINDA",
@@ -1084,7 +1126,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-05T04:40:39.556Z",
+    "at": "2026-11-05T04:45:39.806Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -1103,6 +1145,12 @@
       },
       {
         "ticker": "AEGISLOG",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AFFLE",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1186,12 +1234,6 @@
         ]
       },
       {
-        "ticker": "ELGIEQUIP",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "EXIDEIND",
         "reasons": [
           "weak or overextended session move"
@@ -1199,12 +1241,6 @@
       },
       {
         "ticker": "FACT",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "FIVESTAR",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1229,12 +1265,6 @@
       },
       {
         "ticker": "INDUSTOWER",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "IPCALAB",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1268,6 +1298,18 @@
         "reasons": [
           "weak or overextended session move"
         ]
+      },
+      {
+        "ticker": "KIRLOSENG",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "LALPATHLAB",
+        "reasons": [
+          "weak or overextended session move"
+        ]
       }
     ],
     "source": "Upstox",
@@ -1275,11 +1317,11 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 1.7290885870971495,
-      "observedAt": "2026-11-05T04:40:40.353Z",
+      "changePct": 1.803585886830894,
+      "observedAt": "2026-11-05T04:45:40.213Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24374.9,
-      "previousClose": 23960.600000000002
+      "price": 24392.75,
+      "previousClose": 23960.6
     }
   },
   "scanHistory": {
@@ -1356,6 +1398,12 @@
         "bought": "ZENSARTECH",
         "shortlisted": 8,
         "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-05T04:45:40.314Z",
+        "bought": "MEESHO",
+        "shortlisted": 8,
+        "benchmarkFresh": true
       }
     ],
     "candidates": {
@@ -1419,11 +1467,17 @@
             "price": 218.55,
             "score": 78.1,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-05T04:45:39.844Z",
+            "price": 219.23,
+            "score": 79,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:40:39.498Z",
-        "lastPrice": 218.55,
-        "discoveryScore": 78.1,
+        "lastSeenAt": "2026-11-05T04:45:39.844Z",
+        "lastPrice": 219.23,
+        "discoveryScore": 79,
         "reasons": [
           "sector already represented"
         ]
@@ -1994,11 +2048,17 @@
             "price": 1071.1,
             "score": 74.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:45:39.019Z",
+            "price": 1079.75,
+            "score": 77.9,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:40:37.301Z",
-        "lastPrice": 1071.1,
-        "discoveryScore": 74.5,
+        "lastSeenAt": "2026-11-05T04:45:39.019Z",
+        "lastPrice": 1079.75,
+        "discoveryScore": 77.9,
         "reasons": [
           "sector already represented",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -2058,11 +2118,17 @@
             "price": 2660,
             "score": 75.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:45:38.562Z",
+            "price": 2655.8,
+            "score": 75.9,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:40:37.018Z",
-        "lastPrice": 2660,
-        "discoveryScore": 75.7,
+        "lastSeenAt": "2026-11-05T04:45:38.562Z",
+        "lastPrice": 2655.8,
+        "discoveryScore": 75.9,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -2116,15 +2182,18 @@
             "price": 2401,
             "score": 74.4,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:45:39.679Z",
+            "price": 2400,
+            "score": 74.6,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:40:38.334Z",
-        "lastPrice": 2401,
-        "discoveryScore": 74.4,
-        "reasons": [
-          "sector already represented",
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-05T04:45:39.679Z",
+        "lastPrice": 2400,
+        "discoveryScore": 74.6,
+        "reasons": []
       },
       "PIRAMALFIN": {
         "ticker": "PIRAMALFIN",
@@ -2228,14 +2297,18 @@
             "price": 163.25,
             "score": 72.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:45:39.825Z",
+            "price": 163.73,
+            "score": 74.8,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:15:36.359Z",
-        "lastPrice": 163.25,
-        "discoveryScore": 72.2,
-        "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-05T04:45:39.825Z",
+        "lastPrice": 163.73,
+        "discoveryScore": 74.8,
+        "reasons": []
       },
       "MANAPPURAM": {
         "ticker": "MANAPPURAM",
@@ -2420,11 +2493,17 @@
             "price": 1788,
             "score": 73.6,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:45:39.598Z",
+            "price": 1798.8,
+            "score": 75.5,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:40:39.417Z",
-        "lastPrice": 1788,
-        "discoveryScore": 73.6,
+        "lastSeenAt": "2026-11-05T04:45:39.598Z",
+        "lastPrice": 1798.8,
+        "discoveryScore": 75.5,
         "reasons": [
           "sector already represented",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -2447,6 +2526,46 @@
         "lastSeenAt": "2026-11-05T04:40:32.695Z",
         "lastPrice": 910,
         "discoveryScore": 73.1,
+        "reasons": []
+      },
+      "MEESHO": {
+        "ticker": "MEESHO",
+        "fullName": "Meesho Ltd.",
+        "sector": "Consumer Services",
+        "firstSeenAt": "2026-11-05T04:45:39.355Z",
+        "firstPrice": 232.99,
+        "observations": [
+          {
+            "at": "2026-11-05T04:45:39.355Z",
+            "price": 232.99,
+            "score": 74.8,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:45:39.355Z",
+        "lastPrice": 232.99,
+        "discoveryScore": 74.8,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "ABCAPITAL": {
+        "ticker": "ABCAPITAL",
+        "fullName": "Aditya Birla Capital Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-05T04:45:37.004Z",
+        "firstPrice": 395.3,
+        "observations": [
+          {
+            "at": "2026-11-05T04:45:37.004Z",
+            "price": 395.3,
+            "score": 73.8,
+            "setup": "not-evaluated"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:45:37.004Z",
+        "lastPrice": 395.3,
+        "discoveryScore": 73.8,
         "reasons": []
       }
     }
