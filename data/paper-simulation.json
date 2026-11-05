@@ -25,8 +25,8 @@
       "modeledInitialRisk": 99.29,
       "peakPrice": 327.25,
       "currentPrice": 327,
-      "lastObservedAt": "2026-11-05T08:00:33.807Z",
-      "lastPriceUpdate": "2026-11-05T08:00:33.807Z",
+      "lastObservedAt": "2026-11-05T08:00:38.646Z",
+      "lastPriceUpdate": "2026-11-05T08:00:38.646Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -67,9 +67,9 @@
       "initialStopPct": 1.2708364278302686,
       "modeledInitialRisk": 72.81,
       "peakPrice": 568.15,
-      "currentPrice": 560.15,
-      "lastObservedAt": "2026-11-05T08:00:35.369Z",
-      "lastPriceUpdate": "2026-11-05T08:00:35.369Z",
+      "currentPrice": 560.4,
+      "lastObservedAt": "2026-11-05T08:00:38.228Z",
+      "lastPriceUpdate": "2026-11-05T08:00:38.228Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -111,8 +111,8 @@
       "modeledInitialRisk": 30.85,
       "peakPrice": 236.88,
       "currentPrice": 235.69,
-      "lastObservedAt": "2026-11-05T08:00:37.008Z",
-      "lastPriceUpdate": "2026-11-05T08:00:37.008Z",
+      "lastObservedAt": "2026-11-05T08:00:40.090Z",
+      "lastPriceUpdate": "2026-11-05T08:00:40.090Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -373,7 +373,7 @@
   },
   "lastSlots": {
     "research": 1793850000000,
-    "scan": 1793865300000,
+    "scan": 1793865600000,
     "risk": 1793865600000
   },
   "dailyCache": {
@@ -1062,10 +1062,10 @@
       "ticker": "GROWW",
       "fullName": "Billionbrains Garage Ventures Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 82.3,
-      "price": 223.39,
-      "observedAt": "2026-11-05T07:55:39.462Z",
-      "sessionChangePct": 7.8,
+      "discoveryScore": 82.4,
+      "price": 223.42,
+      "observedAt": "2026-11-05T08:00:38.671Z",
+      "sessionChangePct": 7.81,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1080,13 +1080,13 @@
       }
     },
     {
-      "ticker": "INDUSINDBK",
-      "fullName": "IndusInd Bank Ltd.",
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 79.4,
-      "price": 915.25,
-      "observedAt": "2026-11-05T07:55:38.172Z",
-      "sessionChangePct": 5.79,
+      "discoveryScore": 80.1,
+      "price": 1093.3,
+      "observedAt": "2026-11-05T08:00:38.003Z",
+      "sessionChangePct": 7.93,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1100,68 +1100,26 @@
       },
       "setup": {
         "status": "setup",
-        "signalAt": "2026-11-05T07:55:00.000Z",
-        "entryAt": "2026-11-05T07:55:38.172Z",
-        "entryPrice": 915.25,
-        "entryIndex": 50,
-        "breakoutLevel": 914.9,
-        "supportLevel": 909.55,
-        "vwap": 899.8656653705144,
-        "volumeRatio": 3.836716973634832,
+        "signalAt": "2026-11-05T08:00:00.000Z",
+        "entryAt": "2026-11-05T08:00:38.003Z",
+        "entryPrice": 1093.3,
+        "entryIndex": 51,
+        "breakoutLevel": 1093,
+        "supportLevel": 1085.95,
+        "vwap": 1073.7914120190426,
+        "volumeRatio": 1.6126348776752966,
         "setupVersion": "consolidation-v1",
         "execution": "shadow-quote-only"
-      }
-    },
-    {
-      "ticker": "MOTILALOFS",
-      "fullName": "Motilal Oswal Financial Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 79.4,
-      "price": 1090.55,
-      "observedAt": "2026-11-05T07:55:38.036Z",
-      "sessionChangePct": 7.66,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
       }
     },
     {
       "ticker": "NAM-INDIA",
       "fullName": "Nippon Life India Asset Management Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 78.7,
-      "price": 1073.75,
-      "observedAt": "2026-11-05T07:55:39.660Z",
-      "sessionChangePct": 7.34,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "LTF",
-      "fullName": "L&T Finance Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 78,
-      "price": 279.6,
-      "observedAt": "2026-11-05T07:55:39.142Z",
-      "sessionChangePct": 6.03,
+      "discoveryScore": 79,
+      "price": 1074.55,
+      "observedAt": "2026-11-05T08:00:32.427Z",
+      "sessionChangePct": 7.42,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1179,9 +1137,9 @@
       "ticker": "SWIGGY",
       "fullName": "Swiggy Ltd.",
       "sector": "Consumer Services",
-      "discoveryScore": 78,
+      "discoveryScore": 78.1,
       "price": 188.58,
-      "observedAt": "2026-11-05T07:55:39.802Z",
+      "observedAt": "2026-11-05T08:00:37.631Z",
       "sessionChangePct": 5.42,
       "research": null,
       "reasons": [
@@ -1198,13 +1156,13 @@
       }
     },
     {
-      "ticker": "MAHABANK",
-      "fullName": "Bank of Maharashtra",
+      "ticker": "INDUSINDBK",
+      "fullName": "IndusInd Bank Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 77.6,
-      "price": 84.46,
-      "observedAt": "2026-11-05T07:55:40.060Z",
-      "sessionChangePct": 6.09,
+      "discoveryScore": 77.9,
+      "price": 914.1,
+      "observedAt": "2026-11-05T08:00:41.002Z",
+      "sessionChangePct": 5.66,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1219,13 +1177,67 @@
       }
     },
     {
+      "ticker": "LTF",
+      "fullName": "L&T Finance Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 77.8,
+      "price": 280.13,
+      "observedAt": "2026-11-05T08:00:40.733Z",
+      "sessionChangePct": 6.23,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "sector already represented"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "setup",
+        "reason": null,
+        "version": "consolidation-v1"
+      },
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-05T08:00:00.000Z",
+        "entryAt": "2026-11-05T08:00:40.733Z",
+        "entryPrice": 280.13,
+        "entryIndex": 51,
+        "breakoutLevel": 279.64,
+        "supportLevel": 278,
+        "vwap": 276.76694820558276,
+        "volumeRatio": 2.9909974504605,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      }
+    },
+    {
       "ticker": "MANAPPURAM",
       "fullName": "Manappuram Finance Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 76.7,
+      "discoveryScore": 76.8,
       "price": 327.55,
-      "observedAt": "2026-11-05T07:55:36.520Z",
+      "observedAt": "2026-11-05T08:00:36.964Z",
       "sessionChangePct": 4.25,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "sector already represented",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "KARURVYSYA",
+      "fullName": "Karur Vysya Bank Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 76.7,
+      "price": 361.95,
+      "observedAt": "2026-11-05T08:00:40.360Z",
+      "sessionChangePct": 5.25,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1240,7 +1252,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-05T08:00:37.905Z",
+  "updatedAt": "2026-11-05T08:00:41.563Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -1261,8 +1273,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T08:00:37.905Z",
-    "action": "risk",
+    "at": "2026-11-05T08:00:41.563Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -1282,7 +1294,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-05T07:55:40.118Z",
+    "at": "2026-11-05T08:00:40.489Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -1408,13 +1420,37 @@
         ]
       },
       {
+        "ticker": "CANHLIFE",
+        "reasons": [
+          "missing or stale instrument quote"
+        ]
+      },
+      {
         "ticker": "CARBORUNIV",
         "reasons": [
           "weak or overextended session move"
         ]
       },
       {
+        "ticker": "CASTROLIND",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "CESC",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "CHENNPETRO",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "CRISIL",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1442,30 +1478,6 @@
         "reasons": [
           "weak or overextended session move"
         ]
-      },
-      {
-        "ticker": "ELGIEQUIP",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "ENGINERSIN",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "FACT",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "FINCABLES",
-        "reasons": [
-          "weak or overextended session move"
-        ]
       }
     ],
     "source": "Upstox",
@@ -1473,10 +1485,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 2.2002787910152533,
-      "observedAt": "2026-11-05T07:55:40.492Z",
+      "changePct": 2.210921262405785,
+      "observedAt": "2026-11-05T08:00:41.465Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24487.8,
+      "price": 24490.35,
       "previousClose": 23960.6
     }
   },
@@ -1788,6 +1800,12 @@
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-05T08:00:41.563Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
       }
     ],
     "candidates": {
@@ -1798,12 +1816,6 @@
         "firstSeenAt": "2026-11-05T03:45:39.966Z",
         "firstPrice": 215.99,
         "observations": [
-          {
-            "at": "2026-11-05T05:00:39.187Z",
-            "price": 219,
-            "score": 78.4,
-            "setup": "no_setup"
-          },
           {
             "at": "2026-11-05T05:05:38.482Z",
             "price": 219.25,
@@ -2013,11 +2025,17 @@
             "price": 223.39,
             "score": 82.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T08:00:38.671Z",
+            "price": 223.42,
+            "score": 82.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T07:55:39.462Z",
-        "lastPrice": 223.39,
-        "discoveryScore": 82.3,
+        "lastSeenAt": "2026-11-05T08:00:38.671Z",
+        "lastPrice": 223.42,
+        "discoveryScore": 82.4,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
@@ -2075,15 +2093,20 @@
             "price": 279.6,
             "score": 78,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T08:00:40.733Z",
+            "price": 280.13,
+            "score": 77.8,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T07:55:39.142Z",
-        "lastPrice": 279.6,
-        "discoveryScore": 78,
+        "lastSeenAt": "2026-11-05T08:00:40.733Z",
+        "lastPrice": 280.13,
+        "discoveryScore": 77.8,
         "reasons": [
           "three daily positions already opened",
-          "sector already represented",
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "sector already represented"
         ]
       },
       "NAM-INDIA": {
@@ -2176,11 +2199,17 @@
             "price": 1073.75,
             "score": 78.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T08:00:32.427Z",
+            "price": 1074.55,
+            "score": 79,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T07:55:39.660Z",
-        "lastPrice": 1073.75,
-        "discoveryScore": 78.7,
+        "lastSeenAt": "2026-11-05T08:00:32.427Z",
+        "lastPrice": 1074.55,
+        "discoveryScore": 79,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
@@ -2822,12 +2851,6 @@
         "firstPrice": 1060.45,
         "observations": [
           {
-            "at": "2026-11-05T05:00:40.140Z",
-            "price": 1081.15,
-            "score": 76.1,
-            "setup": "no_setup"
-          },
-          {
             "at": "2026-11-05T05:05:38.003Z",
             "price": 1084.9,
             "score": 78,
@@ -3036,15 +3059,20 @@
             "price": 1090.55,
             "score": 79.4,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T08:00:38.003Z",
+            "price": 1093.3,
+            "score": 80.1,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T07:55:38.036Z",
-        "lastPrice": 1090.55,
-        "discoveryScore": 79.4,
+        "lastSeenAt": "2026-11-05T08:00:38.003Z",
+        "lastPrice": 1093.3,
+        "discoveryScore": 80.1,
         "reasons": [
           "three daily positions already opened",
-          "sector already represented",
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "sector already represented"
         ]
       },
       "CARTRADE": {
@@ -3630,14 +3658,21 @@
             "price": 915.25,
             "score": 79.4,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-05T08:00:41.002Z",
+            "price": 914.1,
+            "score": 77.9,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T07:55:38.172Z",
-        "lastPrice": 915.25,
-        "discoveryScore": 79.4,
+        "lastSeenAt": "2026-11-05T08:00:41.002Z",
+        "lastPrice": 914.1,
+        "discoveryScore": 77.9,
         "reasons": [
           "three daily positions already opened",
-          "sector already represented"
+          "sector already represented",
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "PINELABS": {
@@ -3701,11 +3736,17 @@
             "price": 327.55,
             "score": 76.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T08:00:36.964Z",
+            "price": 327.55,
+            "score": 76.8,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T07:55:36.520Z",
+        "lastSeenAt": "2026-11-05T08:00:36.964Z",
         "lastPrice": 327.55,
-        "discoveryScore": 76.7,
+        "discoveryScore": 76.8,
         "reasons": [
           "three daily positions already opened",
           "sector already represented",
@@ -4377,11 +4418,17 @@
             "price": 188.58,
             "score": 78,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T08:00:37.631Z",
+            "price": 188.58,
+            "score": 78.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T07:55:39.802Z",
+        "lastSeenAt": "2026-11-05T08:00:37.631Z",
         "lastPrice": 188.58,
-        "discoveryScore": 78,
+        "discoveryScore": 78.1,
         "reasons": [
           "three daily positions already opened",
           "below 20-session EMA",
@@ -4886,14 +4933,21 @@
             "price": 361.45,
             "score": 75.4,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-05T08:00:40.360Z",
+            "price": 361.95,
+            "score": 76.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T06:40:40.219Z",
-        "lastPrice": 361.45,
-        "discoveryScore": 75.4,
+        "lastSeenAt": "2026-11-05T08:00:40.360Z",
+        "lastPrice": 361.95,
+        "discoveryScore": 76.7,
         "reasons": [
           "three daily positions already opened",
-          "sector already represented"
+          "sector already represented",
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "WOCKPHARMA": {
