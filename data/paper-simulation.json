@@ -2,8 +2,8 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 172.48,
-  "contributions": 10000,
+  "cash": 10172.48,
+  "contributions": 20000,
   "positions": [
     {
       "id": "2026-11-04|KAYNES|paper-breakout-v1",
@@ -23,10 +23,10 @@
       "initialStopPrice": 3271.4253,
       "initialStopPct": 0.6052100557010776,
       "modeledInitialRisk": 31.44,
-      "peakPrice": 3313,
-      "currentPrice": 3300,
-      "lastObservedAt": "2026-11-04T09:44:58.787Z",
-      "lastPriceUpdate": "2026-11-04T09:44:58.787Z",
+      "peakPrice": 3357.9,
+      "currentPrice": 3357.9,
+      "lastObservedAt": "2026-11-05T03:45:36.931Z",
+      "lastPriceUpdate": "2026-11-05T03:45:36.931Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -54,7 +54,8 @@
       "executionRuleVersion": "five-minute-opening-v2",
       "quoteTimestamp": "2026-11-04T06:40:39.704Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 3337.9804500000005
     },
     {
       "id": "2026-11-04|UNOMINDA|paper-breakout-v1",
@@ -74,10 +75,10 @@
       "initialStopPrice": 1189.0098,
       "initialStopPct": 0.634147809038621,
       "modeledInitialRisk": 47.11,
-      "peakPrice": 1200,
-      "currentPrice": 1197.2,
-      "lastObservedAt": "2026-11-04T09:44:58.580Z",
-      "lastPriceUpdate": "2026-11-04T09:44:58.580Z",
+      "peakPrice": 1215.2,
+      "currentPrice": 1215.2,
+      "lastObservedAt": "2026-11-05T03:45:35.271Z",
+      "lastPriceUpdate": "2026-11-05T03:45:35.271Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -96,7 +97,8 @@
       "executionRuleVersion": "five-minute-opening-v2",
       "quoteTimestamp": "2026-11-04T07:00:39.517Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 1207.6118000000001
     },
     {
       "id": "2026-11-04|GODREJPROP|paper-breakout-v1",
@@ -116,10 +118,10 @@
       "initialStopPrice": 1712.8854,
       "initialStopPct": 1.2784347072225644,
       "modeledInitialRisk": 28.25,
-      "peakPrice": 1755,
-      "currentPrice": 1750,
-      "lastObservedAt": "2026-11-04T09:44:58.958Z",
-      "lastPriceUpdate": "2026-11-04T09:44:58.958Z",
+      "peakPrice": 1778.6,
+      "currentPrice": 1778.6,
+      "lastObservedAt": "2026-11-05T03:45:33.760Z",
+      "lastPriceUpdate": "2026-11-05T03:45:33.760Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -139,7 +141,8 @@
       "executionRuleVersion": "five-minute-opening-v2",
       "quoteTimestamp": "2026-11-04T07:25:39.244Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 1756.4182999999998
     }
   ],
   "trades": [],
@@ -153,12 +156,18 @@
         "GODREJPROP"
       ],
       "exits": []
+    },
+    "2026-11-05": {
+      "contribution": 10000,
+      "invested": 0,
+      "buys": [],
+      "exits": []
     }
   },
   "lastSlots": {
     "research": 1793850000000,
     "scan": 1793786100000,
-    "risk": 1793786100000
+    "risk": 1793850300000
   },
   "dailyCache": {
     "GROWW": {
@@ -520,7 +529,7 @@
     }
   },
   "suggestions": [],
-  "updatedAt": "2026-11-05T03:40:37.841Z",
+  "updatedAt": "2026-11-05T03:45:37.771Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -541,10 +550,25 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T03:40:37.841Z",
-    "action": "research",
+    "at": "2026-11-05T03:45:37.771Z",
+    "action": "risk",
     "bought": null,
-    "checked": []
+    "checked": [
+      {
+        "ticker": "KAYNES",
+        "status": "hold"
+      },
+      {
+        "ticker": "UNOMINDA",
+        "status": "hold"
+      },
+      {
+        "ticker": "GODREJPROP",
+        "status": "hold"
+      }
+    ],
+    "entryPause": null,
+    "researchStatus": "loaded"
   },
   "discovery": {
     "at": "2026-11-04T09:55:42.742Z",
