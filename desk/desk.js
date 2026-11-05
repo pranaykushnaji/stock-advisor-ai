@@ -2,6 +2,7 @@
 import { laneStats, expectedEdge, EDGE_COST_BPS } from '../research/evidence.js';
 import {renderSignalCards,renderWorkspaceOverview,renderReplayPanel,renderPerformanceTracker} from './workspace.js';
 import {estimatedTradeCost, tradeNetAmount, tradeNetReturnPct, positionReturnPct, performanceSummary} from './performance.js';
+import {visibleRefresh} from './visible-refresh.js';
 const MAIN_DATA = 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/';
 export const SOURCES = Object.freeze([
   ...['nse-snapshot', 'paper-simulation'].map(name => ({
@@ -426,6 +427,8 @@ export function startDesk(doc = document, win = window) {
   $('stock-search').addEventListener('input', filterSuggestions);
   $('status-filter').addEventListener('change', filterSuggestions);
   async function refresh() {
+    if($('refresh').disabled)return;
+    const expanded=[...doc.querySelectorAll('details[open]')].map(d=>d.querySelector('summary')?.textContent?.split(' · saved ')[0]);
     $('refresh').disabled = true; $('refresh').textContent = 'Reading files…';
     $('main').setAttribute('aria-busy', 'true');
     $('load-status').textContent = 'Reading public main branch data and local registry…';
@@ -448,11 +451,13 @@ export function startDesk(doc = document, win = window) {
     $('health-content').innerHTML = renderHealth(states, coverage);
     $('load-status').textContent = `Saved market observations · ${failed?'Source needs attention':stale?'Check source freshness':'Sources connected'} · 5-minute engine`;
     filterSuggestions(); selectTab(active); route();
+    for(const detail of doc.querySelectorAll('details'))if(expanded.includes(detail.querySelector('summary')?.textContent?.split(' · saved ')[0]))detail.open=true;
     $('main').setAttribute('aria-busy', 'false');
     $('refresh').disabled = false; $('refresh').textContent = 'Refresh files';
   }
   $('refresh').addEventListener('click', refresh);
   route();
+  visibleRefresh({doc,win,refresh});
   return refresh();
 }
 if (typeof document !== 'undefined' && document.getElementById('tab-overview')) startDesk();

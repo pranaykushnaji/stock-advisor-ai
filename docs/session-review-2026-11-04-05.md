@@ -120,5 +120,8 @@ and portfolio / contributions %. Position cards/tables show entry-relative gross
 rows show after-cost net %, and suggestion cards retain first-observation changes separately
 from trade P&L. Formulas, quote timestamps, missing-data states and replay exclusions are visible.
 The last saved session stays visible after midnight instead of losing its candidate history.
+The browser now refreshes saved files once a minute while visible and on return from a hidden
+tab; the old page fetched only at load/manual refresh, so an already-open tab could display
+4 November records well into the following day. Expansion states are preserved on refresh.
 Read-only return arithmetic and audit functions have dedicated regression tests. No trading
 threshold, schedule, capital limit, open position or realised record changed.
