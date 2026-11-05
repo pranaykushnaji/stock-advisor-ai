@@ -1,6 +1,7 @@
 /* Static, read-only desk. Exported helpers have no browser or network dependencies. */
 import { laneStats, expectedEdge, EDGE_COST_BPS } from '../research/evidence.js';
-import {renderSignalCards,renderWorkspaceOverview,renderReplayPanel} from './workspace.js';
+import {renderSignalCards,renderWorkspaceOverview,renderReplayPanel,renderPerformanceTracker} from './workspace.js';
+import {estimatedTradeCost, tradeNetAmount, tradeNetReturnPct, positionReturnPct, performanceSummary} from './performance.js';
 const MAIN_DATA = 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/';
 export const SOURCES = Object.freeze([
   ...['nse-snapshot', 'paper-simulation'].map(name => ({
@@ -176,7 +177,7 @@ export function summarizeLedger(trades, positions) {
   const missingOpen = open?.filter(t => positionAmount(t) === null).length ?? null;
   const gross = sum(closed, realizedAmount), unrealized = sum(open, positionAmount);
   const costRows = closed?.filter(t => investedBasis(t) !== null) ?? [];
-  const estimatedCosts = closed === null ? null : costRows.reduce((total, t) => total + (number(t.estimatedCostAmount) ?? investedBasis(t) * 0.003), 0);
+  const estimatedCosts = closed === null ? null : costRows.reduce((total, t) => total + estimatedTradeCost(t), 0);
   return {
     count: closed?.length ?? null, openCount: open?.length ?? null,
     wins: closed?.filter(t => realizedAmount(t) > 0).length ?? null,
@@ -184,7 +185,7 @@ export function summarizeLedger(trades, positions) {
     missingRealized, missingOpen, gross, unrealized,
     combined: gross === null || unrealized === null || missingRealized || missingOpen ? null : gross + unrealized,
     estimatedCosts, costCount: costRows.length,
-    estimatedNet: gross === null || missingRealized || costRows.length !== closed?.length ? null : gross - estimatedCosts,
+    estimatedNet: closed === null || closed.some(t=>tradeNetAmount(t)===null) || costRows.length !== closed.length ? null : closed.reduce((s,t)=>s+tradeNetAmount(t),0),
   };
 }
 export function laneEvidence(trades, lane, asOf = new Date().toISOString().slice(0, 10)) {
@@ -264,7 +265,7 @@ export function renderSuggestions(rows) {
 
 export function simulationSuggestions(sim, now=Date.now(), archivedObservations={}) {
   const rows=new Map((sim?.suggestions||[]).map(r=>[r.ticker,r]));
-  const today=new Date(now+19800000).toISOString().slice(0,10);
+  const today=simulationSession(sim,now);
   const history={...(sim?.scanHistory?.date===today?sim.scanHistory.candidates||{}:{})};
   for(const [ticker,h] of Object.entries(archivedObservations||{})){
     if(!h.firstAt?.startsWith(today)||timestamp(h.firstAt)>now)continue;
@@ -281,6 +282,7 @@ export function simulationSuggestions(sim, now=Date.now(), archivedObservations=
   for(const p of [...(sim?.positions||[]),...(sim?.trades||[])])if((p.date||p.entryDate)===today){
     rows.set(p.ticker,{...rows.get(p.ticker),ticker:p.ticker,fullName:p.fullName,sector:p.sector,
       status:'simulated-buy',price:p.currentPrice,observedAt:p.lastPriceUpdate,pickedAt:p.addedAt,
+      entryReturnPct:p.exitAt?tradeNetReturnPct(p):positionReturnPct(p),shares:p.shares,closedPick:!!p.exitAt,
       setup:p.setup,research:p.research,discoveryScore:p.discoveryScore??rows.get(p.ticker)?.discoveryScore,
       reasons:[p.exitAt?`Simulated pick; exited: ${p.exitReason}`:'Simulated fill recorded; position is managed by exit checks']});
   }
@@ -293,13 +295,20 @@ export function simulationSuggestions(sim, now=Date.now(), archivedObservations=
     catalyst:r.research?`${r.research.type}: ${r.research.summary}`:'No positive-catalyst requirement; price/volume confirmation remains mandatory',
     price:r.price,priceAt:r.observedAt,priceSource:r.price==null?'No live premarket price claimed':'Saved Upstox observation',
     vwap:r.setup?.vwap??null,trigger:r.setup?.breakoutLevel??null,stop:null,
-    research:r.research,sessionChangePct:r.sessionChangePct??null,
+    research:r.research,sessionChangePct:r.sessionChangePct??null,sessionDate:today,
+    entryReturnPct:r.entryReturnPct??null,shares:r.shares??null,closedPick:r.closedPick??false,
     observations:history[r.ticker]?.observations||[],
     sinceFirstSeenPct:history[r.ticker]?.firstPrice>0&&r.price>0?(r.price/history[r.ticker].firstPrice-1)*100:null,
     expiresAt:sessionEnd(sim.updatedAt?.slice(0,10)),expiryInferred:true,expired:timestamp(sessionEnd(sim.updatedAt?.slice(0,10)))<now,
     preliminary:false,scanAt:r.observedAt||sim.updatedAt,daily:null,candidate:null
   })).sort((a,b)=>(b.status==='Simulated pick')-(a.status==='Simulated pick')
     ||(a.status==='Earlier watch')-(b.status==='Earlier watch')||(b.discoveryScore??-1)-(a.discoveryScore??-1));
+}
+
+// Keep the last saved session visible overnight, explicitly dated rather than called "today".
+export function simulationSession(sim, now=Date.now()) {
+  const ms=timestamp(sim?.updatedAt);
+  return new Date((ms!==null&&ms<=now?ms:now)+19800000).toISOString().slice(0,10);
 }
 
 function coverageCard(coverage) {
@@ -325,15 +334,17 @@ export function renderPositions(positions, ledger) {
   const intro = heading('Paper ledger', 'Positions', 'Open paper positions valued only from recorded shares, entry and current price.');
   if (positions === null) return intro + empty('Positions unavailable', 'paper-simulation.json could not be read. No position count or value can be inferred.');
   if (!positions.length) return intro + empty('No open paper positions', 'The saved position file contains an empty bouquet. Watching a stock does not create a position.');
-  const fields = row => `${field('Shares', decimal(row.shares))}${field('Entry', money(row.entryPrice))}${field('Recorded current price', money(row.currentPrice))}${field('Unrealized · before costs', money(positionAmount(row)))}${field('Trigger', money(row.triggerPrice))}${field('Stop', money(row.trailingStopPrice ?? row.initialStopPrice ?? row.stopPrice))}`;
-  return intro + `<p class="notice">Open unrealized: ${e(money(ledger.unrealized))}${ledger.missingOpen ? ` · Partial: ${ledger.missingOpen} positions lack shares or prices.` : ' · Before costs.'} Prices are saved observations.</p><div class="panel desktop-table"><table class="stock-table"><caption>Source: paper-simulation.json / main branch</caption><thead><tr><th scope="col">Stock</th><th scope="col">Shares</th><th scope="col">Entry / current</th><th scope="col">Trigger / stop</th><th scope="col">Unrealized</th></tr></thead><tbody>${positions.map(row => `<tr><td><strong>${e(row.ticker)}</strong><span class="cell-note">${e(dateTime(row.lastPriceUpdate))}</span></td><td>${e(decimal(row.shares))}</td><td>${e(money(row.entryPrice))} / ${e(money(row.currentPrice))}</td><td>${e(money(row.triggerPrice))} / ${e(money(row.trailingStopPrice ?? row.initialStopPrice ?? row.stopPrice))}</td><td class="${tone(positionAmount(row))}">${e(money(positionAmount(row)))}</td></tr>`).join('')}</tbody></table></div><div class="panel mobile-cards">${positions.map(row => `<article class="stock-card"><h2>${e(row.ticker)}</h2><p class="small muted">Quote observed: ${e(dateTime(row.lastPriceUpdate))} · main branch</p><dl class="key-values">${fields(row)}</dl></article>`).join('')}</div>`;
+  const fields = row => `${field('Quantity · shares in one position', decimal(row.shares))}${field('Entry', money(row.entryPrice))}${field('Recorded current price', money(row.currentPrice))}${field('Unrealized · before costs', money(positionAmount(row)))}${field('Gain since entry · before costs', percent(positionReturnPct(row)))}${field('Trigger', money(row.triggerPrice))}${field('Stop', money(row.trailingStopPrice ?? row.initialStopPrice ?? row.stopPrice))}`;
+  return intro + `<p class="notice">${positions.length} open positions · each row is one entry; quantity means shares, not repeated purchases. Open unrealized: ${e(money(ledger.unrealized))}${ledger.missingOpen ? ` · Partial: ${ledger.missingOpen} positions lack shares or prices.` : ' · Before costs.'} Prices are saved observations.</p>
+    <div class="panel desktop-table"><table class="stock-table"><caption>Source: paper-simulation.json / main branch</caption><thead><tr><th scope="col">Stock</th><th scope="col">Quantity · shares</th><th scope="col">Entry / current</th><th scope="col">Trigger / stop</th><th scope="col">Unrealized / gain %</th></tr></thead><tbody>${positions.map(row => `<tr><td><strong>${e(row.ticker)}</strong><span class="cell-note">Entry: ${e(dateTime(row.addedAt ?? row.entryAt))}</span><span class="cell-note">Price: ${e(dateTime(row.lastPriceUpdate))}</span></td><td>${e(decimal(row.shares))}<span class="cell-note">1 position</span></td><td>${e(money(row.entryPrice))} / ${e(money(row.currentPrice))}</td><td>${e(money(row.triggerPrice))} / ${e(money(row.trailingStopPrice ?? row.initialStopPrice ?? row.stopPrice))}</td><td class="${tone(positionAmount(row))}">${e(money(positionAmount(row)))}<span class="cell-note">${e(percent(positionReturnPct(row)))} · before costs</span></td></tr>`).join('')}</tbody></table></div>
+    <div class="panel mobile-cards">${positions.map(row => `<article class="stock-card"><h2>${e(row.ticker)}</h2><p class="small muted">One entry: ${e(dateTime(row.addedAt ?? row.entryAt))}. Quote: ${e(dateTime(row.lastPriceUpdate))} · main branch</p><dl class="key-values">${fields(row)}</dl></article>`).join('')}</div>`;
 }
 export function renderResults(trades, ledger, {experimental=false}={}) {
   const intro = heading('Closed paper ledger', 'Results', 'Recorded rupee results, with estimated costs shown separately.');
   if (trades === null) return intro + empty('Results unavailable', 'paper-simulation.json could not be read. Missing results are not zero returns.');
-  const cost = row => number(row.estimatedCostAmount) ?? (investedBasis(row) === null ? null : investedBasis(row) * 0.003);
+  const cost = estimatedTradeCost;
   return intro + `<div class="metrics">${metric('Realized · before costs', money(ledger.gross), ledger.missingRealized ? `Partial: ${ledger.missingRealized} missing amounts` : `${ledger.count} recorded trades`, tone(ledger.gross))}${metric('Estimated costs', money(ledger.estimatedCosts), `Recorded cost scenario · ${ledger.costCount}/${ledger.count} trades`)}${metric('Realized after estimated costs', money(ledger.estimatedNet), 'Estimate, not a broker reconciliation', tone(ledger.estimatedNet))}${metric('Wins / closed trades', `${ledger.wins} / ${ledger.count}`, `${ledger.losses} losses · before estimated costs`)}</div><p class="notice warning">${experimental?'Experimental paper-breakout-v1 only. No legacy trades are mixed into these results. Costs use 15bp per side; fill prices additionally include 5bp slippage per side and the observed bid/ask spread. These are estimates, not actual broker charges. No daily profit is guaranteed.':'Mixed / unknown strategy versions. Historical results do not validate the current entry rules. No capital history is supplied, so portfolio return, alpha and CAGR are unavailable. The cost estimate is 30bp of known invested capital per closed trade, not an actual fee breakdown.'}</p>
-    ${!trades.length ? empty('No closed paper trades', 'The source ledger contains no closed trades.') : `<div class="panel desktop-table"><table class="stock-table"><caption>Source: paper-simulation.json / main branch · newest exit first</caption><thead><tr><th scope="col">Stock / lane</th><th scope="col">Entry → exit</th><th scope="col" class="number">Realized ₹</th><th scope="col" class="number">Est. costs ₹</th><th scope="col">Exit reason / version</th></tr></thead><tbody>${sortedTrades(trades).map(row => `<tr><td><strong>${e(row.ticker)}</strong><span class="cell-note">${e(row.entryLane ?? 'Lane unknown')}</span></td><td>${e(row.entryDate ?? NA)} → ${e(row.exitDate ?? NA)}<span class="cell-note">${e(money(row.entryPrice))} → ${e(money(row.exitPrice))} · ${e(decimal(row.shares))} shares</span></td><td class="number ${tone(realizedAmount(row))}">${e(money(realizedAmount(row)))}</td><td class="number">${e(money(cost(row)))}</td><td>${e(row.exitReason ?? NA)}<span class="cell-note">${e(row.strategyVersion ?? 'Version unknown')}</span></td></tr>`).join('')}</tbody></table></div><div class="panel mobile-cards">${sortedTrades(trades).map(row => `<article class="stock-card"><header><div><h2>${e(row.ticker)}</h2><p class="small muted">${e(row.entryLane ?? 'Lane unknown')} · ${e(row.exitDate ?? NA)}</p></div><strong class="${tone(realizedAmount(row))}">${e(money(realizedAmount(row)))}</strong></header><dl class="key-values">${field('Entry → exit', `${money(row.entryPrice)} → ${money(row.exitPrice)}`)}${field('Estimated costs · 30bp', money(cost(row)))}${field('Shares', decimal(row.shares))}${field('Strategy version', row.strategyVersion ?? 'Unknown')}</dl><details><summary>Exit details for ${e(row.ticker)}</summary><p>${e(row.exitReason ?? NA)}</p><p class="small muted">Entry: ${e(row.entryDate ?? NA)} · Exit: ${e(row.exitDate ?? NA)} · main branch</p></details></article>`).join('')}</div>`}`;
+    ${!trades.length ? empty('No closed paper trades', 'The source ledger contains no closed trades.') : `<div class="panel desktop-table"><table class="stock-table"><caption>Source: paper-simulation.json / main branch · newest exit first</caption><thead><tr><th scope="col">Stock / lane</th><th scope="col">Entry → exit</th><th scope="col" class="number">Net ₹ / return %</th><th scope="col" class="number">Est. costs ₹</th><th scope="col">Exit reason / version</th></tr></thead><tbody>${sortedTrades(trades).map(row => `<tr><td><strong>${e(row.ticker)}</strong><span class="cell-note">${e(row.entryLane ?? 'Lane unknown')}</span></td><td>${e(dateTime(row.entryAt??row.addedAt??row.entryDate))} → ${e(dateTime(row.exitAt??row.exitDate))}<span class="cell-note">${e(money(row.entryPrice))} → ${e(money(row.exitPrice))} · ${e(decimal(row.shares))} shares</span></td><td class="number ${tone(tradeNetAmount(row))}">${e(money(tradeNetAmount(row)))}<span class="cell-note">${e(percent(tradeNetReturnPct(row)))} · after est. costs</span></td><td class="number">${e(money(cost(row)))}</td><td>${e(row.exitReason ?? NA)}<span class="cell-note">${e(row.strategyVersion ?? 'Version unknown')}</span></td></tr>`).join('')}</tbody></table></div><div class="panel mobile-cards">${sortedTrades(trades).map(row => `<article class="stock-card"><header><div><h2>${e(row.ticker)}</h2><p class="small muted">${e(row.entryLane ?? 'Lane unknown')} · ${e(row.exitDate ?? NA)}</p></div><strong class="${tone(tradeNetAmount(row))}">${e(money(tradeNetAmount(row)))}</strong></header><dl class="key-values">${field('Net return · after est. costs',percent(tradeNetReturnPct(row)))}${field('Entry → exit', `${money(row.entryPrice)} → ${money(row.exitPrice)}`)}${field('Estimated costs', money(cost(row)))}${field('Quantity · shares in one entry', decimal(row.shares))}${field('Strategy version', row.strategyVersion ?? 'Unknown')}</dl><details><summary>Exit details for ${e(row.ticker)}</summary><p>${e(row.exitReason ?? NA)}</p><p class="small muted">Entry: ${e(dateTime(row.entryAt??row.addedAt??row.entryDate))} · Exit: ${e(dateTime(row.exitAt??row.exitDate))} · main branch</p></details></article>`).join('')}</div>`}`;
 }
 const sortedTrades = trades => [...trades].sort((a, b) => (timestamp(b.exitAt ?? b.exitDate) ?? 0) - (timestamp(a.exitAt ?? a.exitDate) ?? 0));
 
@@ -429,7 +440,7 @@ export function startDesk(doc = document, win = window) {
     const ledger = summarizeLedger(trades, positions), coverage = coverageSummary(data['nse-snapshot'], data.universe, suggestions);
     $('overview').innerHTML = sim?renderOverview(data, suggestions, ledger, coverage):empty('Simulation state unavailable','The new paper ledger could not be read. This is not a zero balance or a successful scan. Check file health.');
     $('positions').innerHTML = renderPositions(positions, ledger);
-    $('results').innerHTML = renderResults(trades, ledger,{experimental:!!sim})+renderReplayPanel(data['session-replay'],{e,money,decimal,percent,dateTime});
+    $('results').innerHTML = (sim?renderPerformanceTracker(sim,{e,money,percent,dateTime}):'')+renderResults(trades, ledger,{experimental:!!sim})+renderReplayPanel(data['session-replay'],{e,money,decimal,percent,dateTime});
     $('suggestion-context').textContent = 'Suggestions + simulated picks: saved morning/news research before the open, then Upstox momentum checks every five minutes. Only “Simulated pick” means a fill was recorded. Advisor news is not automatically verified. Scores are rankings, not win probabilities.';
     const failed = states.filter(state => !state.optional&&state.error).length;
     const stale = states.filter(state => !state.optional&&state.data && freshness(sourceTime(state.name, state.data).value).stale).length;

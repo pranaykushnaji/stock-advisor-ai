@@ -1,4 +1,5 @@
 // Lightweight, data-honest presentation. No synthetic charts, probabilities or orders.
+import {performanceSummary} from './performance.js';
 const paths = {
   grid: "M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z",
   signal: "m3 17 6-6 4 4 8-10 M15 5h6v6",
@@ -63,7 +64,8 @@ export function renderSignalCards(
           ? Math.max(0, Math.min(100, row.discoveryScore))
           : null;
       return `<article class="opportunity-card ${picked ? "is-picked" : ""}"><div class="stock-top"><div class="stock-identity">${symbolMark(row.ticker, e)}<div><h${compact ? "3" : "2"}>${e(row.ticker)}</h${compact ? "3" : "2"}><p class="company-name">${e(row.name)}</p></div></div><span class="badge ${picked ? "picked" : row.status === "Watch" ? "watch" : "warning"}">${e(row.status)}</span></div>
-      <div class="stock-price"><strong>${e(money(row.price))}</strong><span class="${safeClass(row.sessionChangePct)}">${Number.isFinite(row.sessionChangePct) ? e(percent(row.sessionChangePct)) + " today" : "Saved observation"}</span></div>
+      <div class="stock-price"><strong>${e(money(row.price))}</strong><span class="${safeClass(row.sessionChangePct)}">${Number.isFinite(row.sessionChangePct) ? e(percent(row.sessionChangePct)) + " · " + e(row.sessionDate || "saved session") : "Saved observation"}</span></div>
+      ${picked ? `<p class="signal-return"><strong class="${safeClass(row.entryReturnPct)}">${e(percent(row.entryReturnPct))}</strong> ${row.closedPick ? 'net since entry · closed' : 'since entry · before costs'}${row.shares ? ` · 1 entry, ${e(row.shares)} shares` : ''}</p>` : Number.isFinite(row.sinceFirstSeenPct) ? `<p class="signal-return"><strong class="${safeClass(row.sinceFirstSeenPct)}">${e(percent(row.sinceFirstSeenPct))}</strong> since first suggestion · not a trade</p>` : ''}
       <div class="signal-score"><span>Discovery score <strong>${score === null ? "—" : e(decimal(score))}<small>/100</small></strong></span><div class="score-track"><span style="width:${score ?? 0}%"></span></div></div>
       <p class="stock-blocker">${picked ? icon("shield") : icon("clock")}<span>${e(row.currentReason)}</span></p>
       <div class="stock-bottom"><span>${e(row.sector || "Sector unavailable")}</span><span>${e(shortTime(row.priceAt || row.chosenAt))} IST</span></div>
@@ -72,21 +74,25 @@ export function renderSignalCards(
     })
     .join("")}</div>`;
 }
+
+export function renderPerformanceTracker(sim, {e,money,percent,dateTime}) {
+  const p=performanceSummary(sim);
+  if(!p)return '';
+  const metric=(title,value,note)=>`<div class="metric"><dl><dt>${e(title)}</dt><dd class="${safeClass(value)}">${e(percent(value))}</dd></dl><p>${e(note)}</p></div>`;
+  const olderMarks=(sim.positions||[]).filter(r=>!Number.isFinite(Date.parse(r.lastPriceUpdate))||Date.parse(sim.updatedAt)-Date.parse(r.lastPriceUpdate)>90000);
+  return `<section class="return-tracker" aria-label="Percentage gain tracker"><div class="section-row"><div><p class="eyebrow">RETURNS, NOT JUST PRICE MOVES</p><h2>Percentage gain tracker</h2></div><span class="badge">AFTER ESTIMATED COSTS</span></div>
+    ${p.duplicateCount||p.duplicateOpenTickers?'<p class="notice warning">Duplicate ledger entries detected. Account percentage returns are unavailable pending reconciliation.</p>':''}
+    <div class="metrics return-metrics">${metric('Avg profit per closed stock',p.averageClosedStockPct,`${p.closedStocks} unique closed stocks · equal weight per stock`)}${metric('Profit / capital invested',p.deployedReturnPct,`${money(p.accountPnl)} marked P&L / ${money(p.deployedCapital)} deployed`)}${metric('Portfolio / contributions',p.accountReturnPct,`${money(p.accountPnl)} marked P&L / ${money(sim.contributions)} funded`)}</div>
+    ${olderMarks.length?`<p class="notice warning">Older marks: ${e(olderMarks.map(r=>r.ticker).join(', '))}. Saved prices are more than 90 seconds older than the last scan, or lack a timestamp. Account returns are marked estimates, not a fresh executable valuation.</p>`:''}
+    <details class="return-definitions"><summary>How returns are calculated · saved ${e(dateTime(sim.updatedAt))}</summary><div class="details-body"><p>Average per stock: closed net profit ÷ that stock’s entry capital, then an equal-weight average across unique tickers. Re-entries are combined per stock. Open trades are not counted as closed profits.</p><p>Profit / capital invested: cash + saved open-position value − contributions, divided by all entry notionals, including open trades. Reinvested capital is counted again. This is a return on deployed capital, not a time-weighted portfolio return.</p><p>Portfolio / contributions: marked profit ÷ external contributions. Contributions are not profit. ${e(money(p.closedNet))} is closed net profit; weighted return on closed invested capital is ${e(percent(p.closedWeightedPct))}.</p><p>Open positions use their last saved prices, not guaranteed liquidation prices. Paid entry costs and closed exit costs are included; future exit fees, spread and slippage are not. Quotes can have different timestamps. Nifty’s saved session move uses a different period and is not portfolio alpha.</p><p>Historical replays, voided and synthetic rows do not count as trades. If they appear inside the live account, account returns are withheld instead of mixing scenarios. ${p.excludedCount} excluded rows.</p></div></details></section>`;
+}
 export function renderWorkspaceOverview({ sim, suggestions, ledger }, f) {
-  const { e, money, decimal, dateTime } = f,
-    date = new Date(Date.now() + 19800000).toISOString().slice(0, 10),
+  const { e, money, decimal, dateTime, percent } = f,
+    date = new Date((Date.parse(sim.updatedAt)||Date.now()) + 19800000).toISOString().slice(0, 10),
     day = sim.days?.[date];
   const positions = sim.positions || [],
     trades = sim.trades || [],
-    equity =
-      sim.cash +
-      positions.reduce(
-        (sum, p) =>
-          sum +
-          (Number.isFinite(p.currentPrice) ? p.currentPrice * p.shares : 0),
-        0,
-      );
-  const missingPrice = positions.some((p) => !Number.isFinite(p.currentPrice));
+    performance = performanceSummary(sim), equity = performance?.equity;
   const blocked =
     sim.lastCheck?.entryPause ||
     (sim.discovery?.benchmark?.fresh === false ||
@@ -95,13 +101,15 @@ export function renderWorkspaceOverview({ sim, suggestions, ledger }, f) {
     )
       ? "Benchmark feed needs attention"
       : null);
+  const clockIST=new Date(Date.now()+19800000), minute=clockIST.getUTCHours()*60+clockIST.getUTCMinutes();
+  const outsideWindow=[0,6].includes(clockIST.getUTCDay())||minute<480||minute>925;
   const age = Date.now() - Date.parse(sim.updatedAt || ""),
     status = blocked
       ? "Entries blocked"
       : !Number.isFinite(age)
         ? "Awaiting first scan"
         : age > 7 * 60000
-          ? "Last scan is old"
+          ? outsideWindow ? "Outside scan window" : "Last scan is old"
           : "Scanning";
   const top = suggestions
     .filter((r) => r.status !== "Earlier watch")
@@ -119,13 +127,14 @@ export function renderWorkspaceOverview({ sim, suggestions, ledger }, f) {
   const net = ledger.estimatedNet;
   return `<div class="section-heading workspace-heading"><div><p class="eyebrow">YOUR SIGNAL WORKSPACE</p><h1>The market. <span>Less noise.</span></h1><p class="muted">Find the setup. Know the risk. Track the outcome.</p></div><span class="session-label">${icon("clock")}${e(new Intl.DateTimeFormat("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "short", year: "numeric" }).format(new Date()))}<span class="badge">NSE · PAPER</span></span></div>
     ${blocked ? `<div class="engine-alert">${icon("shield")}<div><strong>New entries are paused by a data check</strong><p>${e(blocked)}. This is an operational blocker, not evidence that every stock is a poor opportunity. Existing price exits remain separate.</p></div><a href="#system-health">Inspect →</a></div>` : ""}
-    <div class="desk-hero"><section class="equity-card"><div class="card-eyebrow"><span>PAPER PORTFOLIO</span><span class="badge">SIMULATED</span></div><div class="equity-value">${e(money(missingPrice ? null : equity))}</div><p class="equity-sub">${e(money(sim.contributions))} contributed <span>·</span> ${positions.length} open ${positions.length === 1 ? "position" : "positions"}</p>
+    <div class="desk-hero"><section class="equity-card"><div class="card-eyebrow"><span>PAPER PORTFOLIO</span><span class="badge">SIMULATED</span></div><div class="equity-value">${e(money(equity))}</div><p class="equity-sub">${e(money(sim.contributions))} contributed <span>·</span> ${positions.length} open ${positions.length === 1 ? "position" : "positions"}</p><p class="portfolio-return ${safeClass(performance?.accountReturnPct)}">${e(percent(performance?.accountReturnPct))} <span>on contributions · since experiment start</span></p>
       <div class="equity-baseline"><span class="baseline-line"></span><span>${trades.length ? `${trades.length} closed paper trades` : "A clean start. Your own evidence, from here."}</span></div>
       <div class="hero-bottom"><div><span>Realized after est. costs</span><strong class="${safeClass(net)}">${e(money(net))}</strong></div><div><span>Open P&L · before costs</span><strong class="${safeClass(ledger.unrealized)}">${e(money(ledger.unrealized))}</strong></div><a class="icon-button" href="#results" aria-label="See paper trading results">${icon("arrow")}</a></div></section>
-      <section class="engine-card"><div class="inline-heading"><h2>${icon("pulse")} Engine pulse</h2><span class="status-pill ${blocked ? "is-warning" : ""}"><i></i>${e(status)}</span></div><div class="engine-stat"><span>Market coverage</span><strong>${e(decimal(sim.discovery?.quotesReceived ?? null))}<small> / ${e(decimal(sim.discovery?.requested ?? null))} quotes</small></strong></div><div class="engine-stat"><span>Entry & exit cadence</span><strong>Every 5 minutes</strong></div><div class="engine-stat"><span>Nifty snapshot</span><strong class="${sim.discovery?.benchmark?.fresh ? "positive" : ""}">${sim.discovery?.benchmark?.fresh ? "Validated" : sim.discovery?.benchmark ? "Needs attention" : "Not measured yet"}</strong></div><div class="engine-stat"><span>Last saved scan</span><strong>${sim.updatedAt ? e(shortTime(sim.updatedAt)) + " IST" : "—"}</strong></div><a href="#system-health" class="engine-link">Data & safety checks ${icon("arrow")}</a></section></div>
+      <section class="engine-card"><div class="inline-heading"><h2>${icon("pulse")} Engine pulse</h2><span class="status-pill ${blocked ? "is-warning" : ""}"><i></i>${e(status)}</span></div><div class="engine-stat"><span>Market coverage</span><strong>${e(decimal(sim.discovery?.quotesReceived ?? null))}<small> / ${e(decimal(sim.discovery?.requested ?? null))} quotes</small></strong></div><div class="engine-stat"><span>Entry & exit cadence</span><strong>Every 5 minutes</strong></div><div class="engine-stat"><span>Nifty · ${e(date)} saved session</span><strong class="${safeClass(sim.discovery?.benchmark?.changePct)}">${sim.discovery?.benchmark?.fresh ? e(percent(sim.discovery.benchmark.changePct)) : "Needs attention"}</strong></div><div class="engine-stat"><span>Last saved scan</span><strong>${e(dateTime(sim.updatedAt))}</strong></div><a href="#system-health" class="engine-link">Data & safety checks ${icon("arrow")}</a></section></div>
+    ${renderPerformanceTracker(sim,f)}
     <div class="section-row"><div><p class="eyebrow">THE OPPORTUNITY RADAR</p><h2>Suggestions & picks <span class="count-bubble">${suggestions.length}</span></h2></div><a class="text-link" href="#suggestions">Explore all ${icon("arrow")}</a></div>
     ${renderSignalCards(top, f, undefined, { compact: true })}
-    <div class="metrics compact-metrics"><div class="metric"><dt>${icon("wallet")} Daily investment left</dt><dd>${e(money(Math.max(0, 10000 - (day?.invested || 0))))}</dd><p>₹10,000 daily allowance · costs included</p></div><div class="metric"><dt>${icon("signal")} New picks today</dt><dd>${day?.buys?.length ?? 0}<small> / 3</small></dd><p>No forced trades. Quality before activity.</p></div><div class="metric"><dt>${icon("shield")} Modeled initial risk</dt><dd>₹100<small> / trade</small></dd><p>Gaps can exceed the modeled loss.</p></div></div>
+    <div class="metrics compact-metrics"><div class="metric"><dt>${icon("wallet")} Daily investment left</dt><dd>${e(money(Math.max(0, (sim.config?.dailyInvestment??10000) - (day?.invested || 0))))}</dd><p>${e(date)} · allowance includes costs</p></div><div class="metric"><dt>${icon("signal")} New positions · ${e(date)}</dt><dd>${day?.buys?.length ?? 0}<small> / ${e(sim.config?.maxBuysPerDay??3)}</small></dd><p>Positions, not number of shares.</p></div><div class="metric"><dt>${icon("shield")} Modeled initial risk</dt><dd>₹100<small> / trade</small></dd><p>Gaps can exceed the modeled loss.</p></div></div>
     <div class="lower-grid"><section class="panel panel-pad scan-panel"><div class="inline-heading"><h2>${icon("pulse")} Scan activity</h2><span class="badge">5 MIN</span></div>${
       history.length
         ? `<div class="scan-timeline">${history

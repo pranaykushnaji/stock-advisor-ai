@@ -569,6 +569,21 @@ dt,
 .equity-sub span {
   padding: 0 8px;
 }
+.portfolio-return { font-size: 1.05rem; font-variant-numeric: tabular-nums; margin-top: 9px; }
+.portfolio-return span { font-size: .7rem; color: var(--muted); }
+.return-tracker { margin: 0 0 30px; }
+.return-tracker .metrics.return-metrics { grid-template-columns: repeat(3,minmax(0,1fr)); margin-bottom: 10px; }
+.return-definitions { font-size: .75rem; color: var(--muted); }
+.return-definitions summary { min-height: 44px; padding: 10px 0; cursor: pointer; }
+.return-definitions p { line-height: 1.6; margin-bottom: 10px; }
+.signal-return { font-size: .7rem; color: var(--muted); margin: 0 0 15px; }
+.signal-return strong { font-size: .85rem; }
+@media(max-width:600px) {
+  .return-tracker .metrics.return-metrics { grid-template-columns: 1fr; gap: 9px; }
+  .return-tracker .section-row { align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .return-metrics .metric { padding: 16px 20px; }
+  .return-metrics .metric dd { margin: 7px 0; }
+}
 .equity-baseline {
   display: flex;
   align-items: center;
