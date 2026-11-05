@@ -25,8 +25,8 @@
       "modeledInitialRisk": 47.11,
       "peakPrice": 1233.6,
       "currentPrice": 1228,
-      "lastObservedAt": "2026-11-05T04:55:36.861Z",
-      "lastPriceUpdate": "2026-11-05T04:55:36.861Z",
+      "lastObservedAt": "2026-11-05T04:55:39.000Z",
+      "lastPriceUpdate": "2026-11-05T04:55:39.000Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -112,8 +112,8 @@
       "modeledInitialRisk": 99.29,
       "peakPrice": 327.25,
       "currentPrice": 325.65,
-      "lastObservedAt": "2026-11-05T04:55:36.188Z",
-      "lastPriceUpdate": "2026-11-05T04:55:36.188Z",
+      "lastObservedAt": "2026-11-05T04:55:38.402Z",
+      "lastPriceUpdate": "2026-11-05T04:55:38.402Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -154,9 +154,9 @@
       "initialStopPct": 1.2708364278302686,
       "modeledInitialRisk": 72.81,
       "peakPrice": 563.45,
-      "currentPrice": 562.95,
-      "lastObservedAt": "2026-11-05T04:55:34.639Z",
-      "lastPriceUpdate": "2026-11-05T04:55:34.639Z",
+      "currentPrice": 563.15,
+      "lastObservedAt": "2026-11-05T04:55:38.157Z",
+      "lastPriceUpdate": "2026-11-05T04:55:38.157Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -196,10 +196,10 @@
       "initialStopPrice": 228.78099,
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
-      "peakPrice": 233.44,
-      "currentPrice": 233.44,
-      "lastObservedAt": "2026-11-05T04:55:36.949Z",
-      "lastPriceUpdate": "2026-11-05T04:55:36.949Z",
+      "peakPrice": 233.45,
+      "currentPrice": 233.45,
+      "lastObservedAt": "2026-11-05T04:55:38.195Z",
+      "lastPriceUpdate": "2026-11-05T04:55:38.195Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -325,7 +325,7 @@
   },
   "lastSlots": {
     "research": 1793850000000,
-    "scan": 1793854200000,
+    "scan": 1793854500000,
     "risk": 1793854500000
   },
   "dailyCache": {
@@ -930,6 +930,20 @@
       "sessions": 69,
       "ema20": 936.4277442906543,
       "averageTurnoverCr": 13.33167482825
+    },
+    "SWIGGY": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 204.5299731287201,
+      "averageTurnoverCr": 422.28357177845004
+    },
+    "KEC": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 345.15293186545307,
+      "averageTurnoverCr": 121.91054498950002
     }
   },
   "suggestions": [
@@ -937,10 +951,32 @@
       "ticker": "GROWW",
       "fullName": "Billionbrains Garage Ventures Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 79.6,
-      "price": 219.45,
-      "observedAt": "2026-11-05T04:50:40.604Z",
-      "sessionChangePct": 5.9,
+      "discoveryScore": 77,
+      "price": 218.58,
+      "observedAt": "2026-11-05T04:55:40.222Z",
+      "sessionChangePct": 5.48,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "five-position exposure cap",
+        "sector already represented",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "MOTILALOFS",
+      "fullName": "Motilal Oswal Financial Services Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 76.1,
+      "price": 1081.3,
+      "observedAt": "2026-11-05T04:55:38.003Z",
+      "sessionChangePct": 6.74,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -959,10 +995,10 @@
       "ticker": "M&MFIN",
       "fullName": "Mahindra & Mahindra Financial Services Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 76.5,
-      "price": 290.75,
-      "observedAt": "2026-11-05T04:50:38.312Z",
-      "sessionChangePct": 7.65,
+      "discoveryScore": 76,
+      "price": 290.6,
+      "observedAt": "2026-11-05T04:55:38.241Z",
+      "sessionChangePct": 7.59,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -978,13 +1014,13 @@
       }
     },
     {
-      "ticker": "CARTRADE",
-      "fullName": "Cartrade Tech Ltd.",
+      "ticker": "SWIGGY",
+      "fullName": "Swiggy Ltd.",
       "sector": "Consumer Services",
-      "discoveryScore": 76.1,
-      "price": 2660.5,
-      "observedAt": "2026-11-05T04:50:36.889Z",
-      "sessionChangePct": 6.72,
+      "discoveryScore": 75.8,
+      "price": 186.75,
+      "observedAt": "2026-11-05T04:55:40.223Z",
+      "sessionChangePct": 4.39,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1001,47 +1037,13 @@
       }
     },
     {
-      "ticker": "MOTILALOFS",
-      "fullName": "Motilal Oswal Financial Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 75.9,
-      "price": 1080.8,
-      "observedAt": "2026-11-05T04:50:38.561Z",
-      "sessionChangePct": 6.69,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "five-position exposure cap",
-        "sector already represented"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-05T04:50:00.000Z",
-        "entryAt": "2026-11-05T04:50:38.561Z",
-        "entryPrice": 1080.8,
-        "entryIndex": 13,
-        "breakoutLevel": 1079.5,
-        "supportLevel": 1060.9,
-        "vwap": 1062.5867357568188,
-        "volumeRatio": 2.247650685437623,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      }
-    },
-    {
       "ticker": "CEMPRO",
       "fullName": "Cemindia Projects Ltd.",
       "sector": "Construction",
-      "discoveryScore": 75.5,
-      "price": 1400.8,
-      "observedAt": "2026-11-05T04:50:39.518Z",
-      "sessionChangePct": 6.92,
+      "discoveryScore": 75.6,
+      "price": 1400,
+      "observedAt": "2026-11-05T04:55:39.597Z",
+      "sessionChangePct": 6.86,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1056,13 +1058,69 @@
       }
     },
     {
-      "ticker": "BALKRISIND",
-      "fullName": "Balkrishna Industries Ltd.",
+      "ticker": "DALBHARAT",
+      "fullName": "Dalmia Bharat Ltd.",
+      "sector": "Construction Materials",
+      "discoveryScore": 75.6,
+      "price": 1493.8,
+      "observedAt": "2026-11-05T04:55:38.935Z",
+      "sessionChangePct": 6.17,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "five-position exposure cap",
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "KEC",
+      "fullName": "Kec International Ltd.",
+      "sector": "Construction",
+      "discoveryScore": 75.6,
+      "price": 334.15,
+      "observedAt": "2026-11-05T04:55:39.941Z",
+      "sessionChangePct": 3.92,
+      "research": null,
+      "reasons": [
+        "three daily positions already opened",
+        "five-position exposure cap",
+        "below 20-session EMA"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "setup",
+        "reason": null,
+        "version": "consolidation-v1"
+      },
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-05T04:55:00.000Z",
+        "entryAt": "2026-11-05T04:55:39.941Z",
+        "entryPrice": 334.15,
+        "entryIndex": 14,
+        "breakoutLevel": 332.8,
+        "supportLevel": 328.15,
+        "vwap": 328.51494153524203,
+        "volumeRatio": 1.5872219090413624,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      }
+    },
+    {
+      "ticker": "MRF",
+      "fullName": "MRF Ltd.",
       "sector": "Automobile and Auto Components",
-      "discoveryScore": 75.3,
-      "price": 2404.2,
-      "observedAt": "2026-11-05T04:50:38.861Z",
-      "sessionChangePct": 7.15,
+      "discoveryScore": 75.4,
+      "price": 124005,
+      "observedAt": "2026-11-05T04:55:36.454Z",
+      "sessionChangePct": 5.1,
       "research": null,
       "reasons": [
         "three daily positions already opened",
@@ -1076,77 +1134,9 @@
         "reason": "no confirmed consolidation breakout with bounded extension and volume",
         "version": null
       }
-    },
-    {
-      "ticker": "HUDCO",
-      "fullName": "Housing & Urban Development Corporation Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 74.9,
-      "price": 162.27,
-      "observedAt": "2026-11-05T04:50:38.464Z",
-      "sessionChangePct": 6.02,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "five-position exposure cap",
-        "sector already represented"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-05T04:50:00.000Z",
-        "entryAt": "2026-11-05T04:50:38.464Z",
-        "entryPrice": 162.27,
-        "entryIndex": 13,
-        "breakoutLevel": 161.8,
-        "supportLevel": 159.71,
-        "vwap": 160.32625393736257,
-        "volumeRatio": 1.8032534570040863,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      }
-    },
-    {
-      "ticker": "ASAHIINDIA",
-      "fullName": "Asahi India Glass Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 74.3,
-      "price": 1033.3,
-      "observedAt": "2026-11-05T04:50:31.785Z",
-      "sessionChangePct": 5.07,
-      "research": null,
-      "reasons": [
-        "three daily positions already opened",
-        "five-position exposure cap",
-        "sector already represented"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-05T04:50:00.000Z",
-        "entryAt": "2026-11-05T04:50:31.785Z",
-        "entryPrice": 1033.3,
-        "entryIndex": 13,
-        "breakoutLevel": 1031,
-        "supportLevel": 1018.15,
-        "vwap": 1018.9085252289331,
-        "volumeRatio": 1.603839064809126,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      }
     }
   ],
-  "updatedAt": "2026-11-05T04:55:38.158Z",
+  "updatedAt": "2026-11-05T04:55:40.533Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -1167,8 +1157,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T04:55:38.158Z",
-    "action": "risk",
+    "at": "2026-11-05T04:55:40.533Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -1196,7 +1186,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-05T04:50:40.085Z",
+    "at": "2026-11-05T04:55:40.073Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -1335,12 +1325,6 @@
         ]
       },
       {
-        "ticker": "INDIAMART",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "INDUSTOWER",
         "reasons": [
           "weak or overextended session move"
@@ -1381,6 +1365,12 @@
         "reasons": [
           "weak or overextended session move"
         ]
+      },
+      {
+        "ticker": "KIRLOSENG",
+        "reasons": [
+          "weak or overextended session move"
+        ]
       }
     ],
     "source": "Upstox",
@@ -1388,11 +1378,11 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 1.7941954708980745,
-      "observedAt": "2026-11-05T04:50:40.837Z",
+      "changePct": 1.7885612213383695,
+      "observedAt": "2026-11-05T04:55:40.436Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24390.5,
-      "previousClose": 23960.6
+      "price": 24389.15,
+      "previousClose": 23960.600000000002
     }
   },
   "scanHistory": {
@@ -1481,6 +1471,12 @@
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-05T04:55:40.533Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
       }
     ],
     "candidates": {
@@ -1556,11 +1552,17 @@
             "price": 219.45,
             "score": 79.6,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:55:40.222Z",
+            "price": 218.58,
+            "score": 77,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:50:40.604Z",
-        "lastPrice": 219.45,
-        "discoveryScore": 79.6,
+        "lastSeenAt": "2026-11-05T04:55:40.222Z",
+        "lastPrice": 218.58,
+        "discoveryScore": 77,
         "reasons": [
           "three daily positions already opened",
           "five-position exposure cap",
@@ -2014,11 +2016,17 @@
             "price": 290.75,
             "score": 76.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:55:38.241Z",
+            "price": 290.6,
+            "score": 76,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:50:38.312Z",
-        "lastPrice": 290.75,
-        "discoveryScore": 76.5,
+        "lastSeenAt": "2026-11-05T04:55:38.241Z",
+        "lastPrice": 290.6,
+        "discoveryScore": 76,
         "reasons": [
           "three daily positions already opened",
           "five-position exposure cap",
@@ -2162,15 +2170,22 @@
             "price": 1080.8,
             "score": 75.9,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-05T04:55:38.003Z",
+            "price": 1081.3,
+            "score": 76.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:50:38.561Z",
-        "lastPrice": 1080.8,
-        "discoveryScore": 75.9,
+        "lastSeenAt": "2026-11-05T04:55:38.003Z",
+        "lastPrice": 1081.3,
+        "discoveryScore": 76.1,
         "reasons": [
           "three daily positions already opened",
           "five-position exposure cap",
-          "sector already represented"
+          "sector already represented",
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "CARTRADE": {
@@ -2472,13 +2487,22 @@
             "price": 122495,
             "score": 73,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-05T04:55:36.454Z",
+            "price": 124005,
+            "score": 75.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:20:36.668Z",
-        "lastPrice": 122495,
-        "discoveryScore": 73,
+        "lastSeenAt": "2026-11-05T04:55:36.454Z",
+        "lastPrice": 124005,
+        "discoveryScore": 75.4,
         "reasons": [
-          "sector already represented"
+          "three daily positions already opened",
+          "five-position exposure cap",
+          "sector already represented",
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "APOLLOTYRE": {
@@ -2533,12 +2557,20 @@
             "price": 1485.1,
             "score": 72.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:55:38.935Z",
+            "price": 1493.8,
+            "score": 75.6,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:35:34.446Z",
-        "lastPrice": 1485.1,
-        "discoveryScore": 72.3,
+        "lastSeenAt": "2026-11-05T04:55:38.935Z",
+        "lastPrice": 1493.8,
+        "discoveryScore": 75.6,
         "reasons": [
+          "three daily positions already opened",
+          "five-position exposure cap",
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -2709,11 +2741,17 @@
             "price": 1400.8,
             "score": 75.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:55:39.597Z",
+            "price": 1400,
+            "score": 75.6,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:50:39.518Z",
-        "lastPrice": 1400.8,
-        "discoveryScore": 75.5,
+        "lastSeenAt": "2026-11-05T04:55:39.597Z",
+        "lastPrice": 1400,
+        "discoveryScore": 75.6,
         "reasons": [
           "three daily positions already opened",
           "five-position exposure cap",
@@ -2741,6 +2779,54 @@
           "three daily positions already opened",
           "five-position exposure cap",
           "sector already represented"
+        ]
+      },
+      "SWIGGY": {
+        "ticker": "SWIGGY",
+        "fullName": "Swiggy Ltd.",
+        "sector": "Consumer Services",
+        "firstSeenAt": "2026-11-05T04:55:40.223Z",
+        "firstPrice": 186.75,
+        "observations": [
+          {
+            "at": "2026-11-05T04:55:40.223Z",
+            "price": 186.75,
+            "score": 75.8,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:55:40.223Z",
+        "lastPrice": 186.75,
+        "discoveryScore": 75.8,
+        "reasons": [
+          "three daily positions already opened",
+          "five-position exposure cap",
+          "below 20-session EMA",
+          "sector already represented",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "KEC": {
+        "ticker": "KEC",
+        "fullName": "Kec International Ltd.",
+        "sector": "Construction",
+        "firstSeenAt": "2026-11-05T04:55:39.941Z",
+        "firstPrice": 334.15,
+        "observations": [
+          {
+            "at": "2026-11-05T04:55:39.941Z",
+            "price": 334.15,
+            "score": 75.6,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:55:39.941Z",
+        "lastPrice": 334.15,
+        "discoveryScore": 75.6,
+        "reasons": [
+          "three daily positions already opened",
+          "five-position exposure cap",
+          "below 20-session EMA"
         ]
       }
     }
