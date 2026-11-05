@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {emptySimulation,validateSimulation,dailyReference,transitionSimulation,rankSimulationUniverse,SIM_CONFIG} from '../api/_paper-simulation.js';
+import {emptySimulation,validateSimulation,dailyReference,transitionSimulation,rankSimulationUniverse,SIM_CONFIG,LEGACY_SIM_CONFIG,paperEntryAllocation} from '../api/_paper-simulation.js';
 import {createSimulationHandler} from '../api/_paper-simulation-handler.js';
 import {savedResearchContext,verifiedResearchEvent} from '../api/_paper-research-context.js';
 import {liveSimulationEntry} from '../api/_entry-research.js';
@@ -23,21 +23,23 @@ function market(at,members=[c()]){
 test('experimental simulation opens whole shares with actual quote timestamps and cash accounting',()=>{
   const at=new Date(start),r=transitionSimulation(emptySimulation(),market(at),{at,action:'scan'});
   assert.equal(r.bought,'ABC');const p=r.state.positions[0];
-  assert.ok(Number.isInteger(p.shares));assert.ok(p.investedAmount<=5000);assert.ok(p.modeledInitialRisk<=100);
+  assert.equal(p.shares,1);assert.ok(p.modeledInitialRisk<=100);
   assert.equal(p.addedAt,at.toISOString());assert.equal(p.expectedEdge,null);
-  assert.equal(r.state.cash,Math.round((10000-p.investedAmount-p.entryCost)*100)/100);
+  assert.equal(r.state.cash,0);assert.equal(r.state.contributions,Math.round((p.investedAmount+p.entryCost)*100)/100);
   assert.equal(r.state.days['2026-11-04'].buys.length,1);
+  const invalid=structuredClone(r.state);invalid.positions[0].shares=5;
+  assert.throws(()=>validateSimulation(invalid),/Invalid paper position/);
 });
-test('daily investment is aggregate, costs included, never recycled by an exit',()=>{
+test('legacy replay policy keeps its original aggregate daily budget and count caps',()=>{
   let s=emptySimulation();const all=[c('A','IT'),c('B','Pharma'),c('C','Capital'),c('D','Retail')];
-  for(let i=0;i<4;i++){const at=new Date(start+i*900000);s=transitionSimulation(s,market(at,all),{at,action:'scan'}).state;}
+  for(let i=0;i<4;i++){const at=new Date(start+i*900000);s=transitionSimulation(s,market(at,all),{at,action:'scan',config:LEGACY_SIM_CONFIG}).state;}
   const day=s.days['2026-11-04'];assert.ok(day.invested<=10000);assert.equal(day.buys.length,3);assert.equal(s.contributions,10000);
   assert.ok(s.positions.every(p=>p.modeledInitialRisk<=100));
   const at=new Date(start+4*900000),m=market(at,all);
   for(const key of Object.keys(m.quotes))if(key!=='NSE_INDEX|Nifty 50')m.quotes[key]={...m.quotes[key],price:95,bidPrice:94.95,askPrice:95.05};
-  const sold=transitionSimulation(s,m,{at,action:'risk'});assert.equal(sold.state.positions.length,0);
+  const sold=transitionSimulation(s,m,{at,action:'risk',config:LEGACY_SIM_CONFIG});assert.equal(sold.state.positions.length,0);
   assert.equal(sold.state.days['2026-11-04'].invested,day.invested);
-  const againAt=new Date(start+5*900000),again=transitionSimulation(sold.state,market(againAt,all),{at:againAt,action:'scan'});
+  const againAt=new Date(start+5*900000),again=transitionSimulation(sold.state,market(againAt,all),{at:againAt,action:'scan',config:LEGACY_SIM_CONFIG});
   assert.equal(again.state.positions.length,0);assert.equal(again.state.trades.length,3);
 });
 test('duplicate ticks and stale quotes never duplicate deposits, entries or exit records',()=>{
@@ -48,23 +50,26 @@ test('duplicate ticks and stale quotes never duplicate deposits, entries or exit
   assert.equal(one.state.scanHistory.scans.length,1);assert.equal(twice.state.scanHistory.scans.length,1);
   assert.equal(one.state.scanHistory.candidates.ABC.firstPrice,101);
 });
-test('new day adds exactly one contribution, even across concurrent action kinds',()=>{
+test('days without buys add no fictional capital; capital is contributed once per accepted entry',()=>{
   const at=new Date(start),s=transitionSimulation(emptySimulation(),market(at),{at,action:'risk'}).state;
-  const r=transitionSimulation(s,market(at),{at,action:'scan'});assert.equal(r.state.contributions,10000);
+  assert.equal(s.contributions,0);
+  const r=transitionSimulation(s,market(at),{at,action:'scan'});const funded=r.state.contributions;assert.ok(funded>0&&funded<200);
   const tomorrow=new Date(start+86400000),r2=transitionSimulation(r.state,{quotes:{}},{at:tomorrow,action:'risk'});
-  assert.equal(r2.state.contributions,20000);
+  assert.equal(r2.state.contributions,funded);assert.equal(r2.state.days['2026-11-05'].contribution,0);
 });
 test('new risk evidence can exit at an already-observed fresh quote without reversing price state',()=>{
   const at=new Date(start),m=market(at),s=transitionSimulation(emptySimulation(),m,{at,action:'scan'}).state;
   const r=transitionSimulation(s,{...m,negativeSymbols:['ABC']},{at:new Date(start+1000),action:'risk'});
   assert.equal(r.state.positions.length,0);assert.equal(r.state.trades.length,1);
 });
-test('missing budgets do not matter: fixed experiment caps are explicit and safety context fails closed',()=>{
+test('no rupee/count caps or sector ban, but safety context and modeled risk remain mandatory',()=>{
   const at=new Date(start),m=market(at);m.safetyReady=false;
   const r=transitionSimulation(emptySimulation(),m,{at,action:'scan'});assert.equal(r.bought,null);
   assert.match(r.state.suggestions[0].reasons.join(),/safety context/);
   assert.throws(()=>validateSimulation({...emptySimulation(),cash:NaN}),/Invalid/);
-  assert.equal(SIM_CONFIG.dailyInvestment,10000);
+  assert.equal(SIM_CONFIG.dailyInvestment,null);assert.equal(SIM_CONFIG.maxBuysPerDay,null);assert.equal(SIM_CONFIG.maxOpenPositions,null);
+  assert.equal(SIM_CONFIG.maxPositionInvestment,null);assert.equal(SIM_CONFIG.sharesPerEntry,1);assert.equal(SIM_CONFIG.sectorLimit,false);
+  assert.equal(SIM_CONFIG.modeledRiskPerTrade,100);assert.equal(SIM_CONFIG.maxModeledOpenRisk,500);
 });
 test('daily history excludes signal-day/future bars and requires complete usable baseline',()=>{
   const rows=Array.from({length:22},(_,i)=>[`2026-10-${String(i+1).padStart(2,'0')}T00:00:00Z`,100,101,99,100,2e6]);
@@ -97,7 +102,8 @@ test('simulation handler retries CAS against fresh state without double-counting
   current.dailyCache.ABC={asOf:'2026-11-04',ema20:99,averageTurnoverCr:20};
   const res={status(){return this;},json(d){this.body=d;return this;},setHeader(){}};
   try{await h({method:'POST',query:{action:'scan'},headers:{authorization:'Bearer test'}},res);
-    assert.equal(current.positions.length,1);assert.equal(current.days['2026-11-04'].buys.length,1);assert.equal(current.contributions,10000);
+    assert.equal(current.positions.length,1);assert.equal(current.days['2026-11-04'].buys.length,1);
+    assert.equal(current.contributions,current.positions[0].investedAmount+current.positions[0].entryCost);
     assert.equal(res.body.status,'duplicate');
   }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
 });
@@ -157,6 +163,19 @@ test('a stale universe pauses entries without pausing five-minute stop protectio
     assert.equal(res.body.entryPause,'registry_stale');assert.equal(current.positions.length,0);assert.equal(current.trades.length,1);
   }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
 });
+test('read-only health reports the new uncapped one-share policy without changing the ledger',async()=>{
+  const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';let writes=0;
+  const at=new Date(start),m=market(at),initial=emptySimulation();
+  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},
+    now:()=>at,members:[c()],read:async()=>({data:structuredClone(initial),sha:'x'}),write:async()=>{writes++;return true;},
+    quotes:async()=>m.quotes});
+  const res={setHeader(){},status(){return this;},json(d){this.body=d;return this;}};
+  try{await h({method:'POST',body:{mode:'health'},headers:{authorization:'Bearer test'}},res);
+    assert.equal(res.body.status,'ready');assert.equal(res.body.dailyInvestment,null);assert.equal(res.body.sharesPerEntry,1);
+    assert.equal(res.body.maxBuysPerDay,null);assert.equal(res.body.maxOpenPositions,null);assert.equal(res.body.sectorLimit,false);
+    assert.equal(res.body.ordersExecuted,0);assert.equal(writes,0);
+  }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
+});
 test('saved research requires original dated independent evidence; stale advisor news never gets a verified bonus',()=>{
   const at=new Date(start),event={type:'government order',summary:'Official order',verification:'VERIFIED',evidenceVersion:2,
     hasCatalyst:true,eventPublishedAt:start-3600000,evidence:[{title:'Official order',publisher:'nse-filing'}]};
@@ -176,6 +195,57 @@ test('news can prioritize a suggestion but never bypass missing breakout confirm
   const at=new Date(start),m=market(at);m.researchBySymbol={ABC:{verified:true,summary:'Official order'}};m.candles.ABC=[];
   const r=transitionSimulation(emptySimulation(),m,{at,action:'scan'});
   assert.equal(r.bought,null);assert.equal(r.state.suggestions[0].research.verified,true);
+});
+
+test('six same-sector stocks can open one share each and deploy over ₹10,000 without count/sector caps',()=>{
+  let s=emptySimulation();const members=Array.from({length:6},(_,i)=>c(`S${i}`,'Financial Services'));
+  for(let i=0;i<6;i++){
+    const at=new Date(start+i*300000),m=market(at,members);
+    for(const member of members){
+      const q=m.quotes[member.instrumentKey];
+      for(const field of ['price','bidPrice','askPrice','upperCircuit','lowerCircuit','dayHigh','dayLow','previousClose'])q[field]*=30;
+      for(const bar of m.candles[member.symbol])for(let j=1;j<=4;j++)bar[j]*=30;
+      m.references[member.symbol].ema20*=30;
+    }
+    const result=transitionSimulation(s,m,{at,action:'scan'});assert.ok(result.bought);s=result.state;
+  }
+  assert.equal(s.positions.length,6);assert.equal(s.days['2026-11-04'].buys.length,6);
+  assert.ok(s.positions.every(p=>p.shares===1));assert.ok(s.days['2026-11-04'].invested>10000);
+  assert.ok(s.positions.reduce((sum,p)=>sum+p.modeledInitialRisk,0)<=500);
+  assert.equal(s.cash,0);assert.equal(s.contributions,s.days['2026-11-04'].invested);
+});
+test('uncapped notional funding cannot bypass one-share risk limits and uses existing cash before top-ups',()=>{
+  const args={fill:10000,stop:9950,positions:[],cash:0,day:{invested:20000}};
+  const high=paperEntryAllocation(args);assert.equal(high.shares,1);assert.equal(high.invested,10000);assert.equal(high.contribution,10015);
+  assert.equal(paperEntryAllocation({...args,cash:20000}).contribution,0);
+  assert.equal(paperEntryAllocation({...args,cash:10000}).contribution,15);
+  assert.equal(paperEntryAllocation({...args,fill:20000,stop:19900}).shares,0);
+  assert.equal(paperEntryAllocation({...args,positions:[{modeledInitialRisk:499}]}).shares,0);
+});
+test('legacy positions/history retain original quantity and cost basis while new policy versions migrate safely',()=>{
+  const at=new Date(start),old=transitionSimulation(emptySimulation(),market(at),{at,action:'scan',config:LEGACY_SIM_CONFIG}).state;
+  const before=structuredClone(old.positions),days=structuredClone(old.days),cash=old.cash;
+  assert.ok(before[0].shares>1);
+  const next=transitionSimulation(old,{quotes:{}},{at:new Date(start+86400000),action:'risk'}).state;
+  assert.equal(next.strategyVersion,SIM_CONFIG.version);assert.deepEqual(next.positions,before);assert.equal(next.cash,cash);
+  assert.deepEqual(next.days['2026-11-04'],days['2026-11-04']);assert.equal(next.days['2026-11-05'].contribution,0);
+  assert.equal(next.contributions,old.contributions);
+});
+test('one share never becomes repeated buys and funded capital reconciles after an exit',()=>{
+  const at=new Date(start),first=transitionSimulation(emptySimulation(),market(at),{at,action:'scan'}).state;
+  const againAt=new Date(start+300000),again=transitionSimulation(first,market(againAt),{at:againAt,action:'scan'}).state;
+  assert.equal(again.positions.length,1);assert.equal(again.positions[0].shares,1);assert.equal(again.contributions,first.contributions);
+  const exitAt=new Date(start+600000),m=market(exitAt);m.quotes[c().instrumentKey]=quote(c(),exitAt,95);
+  const sold=transitionSimulation(again,m,{at:exitAt,action:'scan'}).state;
+  assert.equal(sold.trades.length,1);assert.equal(sold.positions.length,0);
+  assert.equal(Math.round((sold.cash-sold.contributions)*100)/100,sold.trades[0].realizedNetPnl);
+  const later=new Date(start+900000),retry=transitionSimulation(sold,market(later),{at:later,action:'scan'}).state;
+  assert.equal(retry.positions.length,0);assert.equal(retry.trades.length,1);assert.equal(retry.days['2026-11-04'].buys.length,1);
+  const nextDay=new Date(start+86400000),nextMarket=market(nextDay);
+  nextMarket.references.ABC.asOf='2026-11-05';
+  const reentry=transitionSimulation(retry,nextMarket,{at:nextDay,action:'scan'}).state;
+  assert.equal(reentry.positions.length,1);assert.equal(reentry.positions[0].shares,1);
+  assert.notEqual(reentry.positions[0].id,reentry.trades[0].id);
 });
 test('handler evaluates a pre-10am non-quarter-hour scan and preserves risk exits if safety reads fail',async()=>{
   const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';

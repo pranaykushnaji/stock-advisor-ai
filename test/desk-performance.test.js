@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {performanceSummary, tradeNetReturnPct, positionReturnPct, tradeNetAmount} from '../desk/performance.js';
 import {simulationSession, simulationSuggestions, renderPositions, renderResults, summarizeLedger, escapeHTML, money, dateTime} from '../desk/desk.js';
-import {renderPerformanceTracker} from '../desk/workspace.js';
+import {renderPerformanceTracker,renderWorkspaceOverview} from '../desk/workspace.js';
 const trade = (ticker,capital,net,extra={}) => ({id:ticker,ticker,investedAmount:capital,realizedNetPnl:net,realizedPnl:net+3,estimatedCostAmount:3,...extra});
 const account = extra => ({cash:3300,contributions:3000,positions:[],trades:[trade('AAA',1000,100),trade('BBB',2000,200)],...extra});
 const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-8,`${a} != ${b}`);
@@ -59,4 +59,13 @@ test('percentage tracker and trade views label denominators, estimated costs and
   assert.match(html,/future exit fees, spread and slippage are not/);
   assert.match(renderResults(sim.trades,summarizeLedger(sim.trades,[])),/Net ₹ \/ return %/);
   assert.match(renderPositions([{ticker:'X',shares:5,entryPrice:100,currentPrice:105}],summarizeLedger([],[{shares:5,entryPrice:100,currentPrice:105}])),/each row is one entry/);
+});
+
+test('deployed one-share policy is visible even before a legacy saved scan migrates',()=>{
+  const sim=account({updatedAt:'2026-11-05T09:55:00Z',strategyVersion:'paper-breakout-v1',days:{'2026-11-05':{invested:9819.15,buys:['A','B','C']}},positions:[{id:'OLD',ticker:'OLD',shares:5,entryPrice:100,currentPrice:100,investedAmount:500}]}),
+    fmt={e:escapeHTML,money,dateTime,decimal:n=>String(n),percent:n=>n===null?'Not available':n.toFixed(2)+'%'};
+  const html=renderWorkspaceOverview({sim,suggestions:[],ledger:summarizeLedger(sim.trades,sim.positions)},fmt);
+  assert.match(html,/1 share per stock/);assert.match(html,/Existing multi-share positions keep their original quantities/);
+  assert.match(html,/No count cap/);assert.doesNotMatch(html,/Daily investment left|<small> \/ 3/);
+  assert.match(html,/paper-one-share-v2/);assert.match(html,/Last saved scan policy: paper-breakout-v1/);
 });

@@ -1,7 +1,7 @@
 // Counterfactual study only. NEVER imported by an execution endpoint or added to its ledger.
 import { liveSimulationEntry } from "../api/_entry-research.js";
 import { researchExitObservation } from "./paper-plan.js";
-import { SIM_CONFIG } from "../api/_paper-simulation.js";
+import { SIM_CONFIG, paperEntryAllocation } from "../api/_paper-simulation.js";
 const round = (n) => Math.round(n * 100) / 100;
 const lastCompleted = (rows, at) =>
   (rows || [])
@@ -19,8 +19,8 @@ export function replayPaperSession({
   config = SIM_CONFIG,
 } = {}) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) throw Error("Session date required");
-  let cash = config.dailyInvestment,
-    invested = 0;
+  let cash = config.dailyInvestment??0,
+    contributions = cash, invested = 0;
   const positions = [],
     trades = [],
     bought = new Set(),
@@ -123,12 +123,12 @@ export function replayPaperSession({
         history = series[row.ticker],
         reference = scan.dailyCache?.[row.ticker];
       if (bought.has(row.ticker)) continue;
-      if (bought.size >= config.maxBuysPerDay) {
+      if (config.maxBuysPerDay!=null && bought.size >= config.maxBuysPerDay) {
         reasons.push("daily new-position limit");
       }
-      if (positions.length >= config.maxOpenPositions)
+      if (config.maxOpenPositions!=null && positions.length >= config.maxOpenPositions)
         reasons.push("open-position cap");
-      if (positions.some((p) => p.sector === row.sector))
+      if (config.sectorLimit!==false && positions.some((p) => p.sector === row.sector))
         reasons.push("sector already represented");
       if (!scan.safetyReady)
         reasons.push("point-in-time safety snapshot unavailable");
@@ -182,35 +182,16 @@ export function replayPaperSession({
         });
         continue;
       }
-      const riskLeft = Math.min(
-        config.modeledRiskPerTrade,
-        config.maxModeledOpenRisk -
-          positions.reduce((s, p) => s + p.modeledInitialRisk, 0),
-      );
-      const lossPerShare =
-        fill -
-        stop +
-        (fill * (config.costBpsPerSide * 2 + config.exitSlippageBps)) / 10000;
-      const capital = Math.min(
-        config.maxPositionInvestment,
-        config.dailyInvestment - invested,
-        cash,
-      );
-      const shares = Math.floor(
-        Math.min(
-          capital / (fill * (1 + config.costBpsPerSide / 10000)),
-          riskLeft / lossPerShare,
-        ),
-      );
+      const allocation=paperEntryAllocation({fill,stop,positions,cash,day:{invested},config});
+      const {shares}=allocation;
       if (shares < 1) {
         result.rejected.push({
           ticker: row.ticker,
-          reasons: ["whole-share capital/risk limit"],
+          reasons: [allocation.reason],
         });
         continue;
       }
-      const amount = round(shares * fill),
-        cost = round((amount * config.costBpsPerSide) / 10000);
+      const amount=allocation.invested, cost=allocation.entryCost;
       const p = {
         id: `replay|${date}|${row.ticker}`,
         ticker: row.ticker,
@@ -229,7 +210,7 @@ export function replayPaperSession({
         peakPrice: fill,
         currentPrice: row.price,
         lastObservedAt: row.observedAt,
-        modeledInitialRisk: round(shares * lossPerShare),
+        modeledInitialRisk: allocation.modeledInitialRisk,
         setup,
         sourceCommit: scan.sourceCommit,
         historicalReplay: true,
@@ -241,7 +222,8 @@ export function replayPaperSession({
       };
       positions.push(p);
       bought.add(row.ticker);
-      cash = round(cash - amount - cost);
+      contributions=round(contributions+allocation.contribution);
+      cash = round(cash + allocation.contribution - amount - cost);
       invested = round(invested + amount + cost);
       result.bought = row.ticker;
       break;
@@ -258,7 +240,9 @@ export function replayPaperSession({
     asOf: checks.at(-1)?.at ?? null,
     strategyVersion: config.version,
     executionRuleVersion: config.executionRuleVersion,
-    capital: config.dailyInvestment,
+    capital: contributions,
+    fundingMode: config.fundingMode??'fixed-daily',
+    config,
     cash,
     invested,
     positions,

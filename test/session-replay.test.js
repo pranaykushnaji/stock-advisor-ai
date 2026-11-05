@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { replayPaperSession } from "../research/session-replay.js";
+import { LEGACY_SIM_CONFIG } from '../api/_paper-simulation.js';
 const at = Date.parse("2026-11-04T04:30:05Z"),
   boundary = Math.floor(at / 300000) * 300000;
 const candles = Array.from({ length: 40 }, (_, i) => [
@@ -52,7 +53,10 @@ test("replay records only a labelled estimated scenario, enforces cash and inclu
   assert.ok(r.invested <= 10000);
   assert.ok(p.investedAmount <= 5000);
   assert.ok(p.modeledInitialRisk <= 100);
-  assert.equal(r.cash, Math.round((10000 + p.realizedNetPnl) * 100) / 100);
+  assert.equal(p.shares,1);
+  assert.equal(r.cash, Math.round((r.capital + p.realizedNetPnl) * 100) / 100);
+  const legacy=replayPaperSession({...input(),config:LEGACY_SIM_CONFIG});
+  assert.equal(legacy.capital,10000);assert.ok(legacy.trades[0].shares>1);
 });
 test("future breakout bars and unavailable historical benchmark cannot authorize an earlier entry", () => {
   const d = input();

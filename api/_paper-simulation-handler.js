@@ -3,7 +3,7 @@ import { marketStatus, nowIST } from './_market-calendar.js';
 import { fetchFullQuotes, fetchIntradayOneMinuteCandles, fetchDailyCandles } from './_upstox-market-data.js';
 import { quoteBatches } from '../research/coverage.js';
 import registry from '../research/universe.json' with {type:'json'};
-import { rankSimulationUniverse, transitionSimulation, validateSimulation, dailyReference } from './_paper-simulation.js';
+import { rankSimulationUniverse, transitionSimulation, validateSimulation, dailyReference, SIM_CONFIG } from './_paper-simulation.js';
 import { savedResearchContext } from './_paper-research-context.js';
 
 const FILE='data/paper-simulation.json',REPO='pranaykushnaji/stock-advisor-ai';
@@ -65,7 +65,9 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           const [h,i]=await Promise.all([daily(sample[0].instrumentKey,from,date),intraday(sample[0].instrumentKey)]);
           candleAccess={historicalDaily:h.length,intradayMinutes:i.length};
         }
-        return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:10000,
+        return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:SIM_CONFIG.dailyInvestment,
+          fundingMode:SIM_CONFIG.fundingMode,sharesPerEntry:SIM_CONFIG.sharesPerEntry,maxBuysPerDay:SIM_CONFIG.maxBuysPerDay,
+          maxOpenPositions:SIM_CONFIG.maxOpenPositions,sectorLimit:SIM_CONFIG.sectorLimit,
           positions:initial.data.positions.length,trades:initial.data.trades.length,
           registryMapped:members.filter(m=>m.instrumentKey).length,quotesRequested:checkedMembers.length,quotesReceived:Object.keys(q).length,candleAccess,
           marketOpen:marketStatus(at).open&&at.getTime()>=Date.parse(`${nowIST(at).ymd}T09:15:00+05:30`)
@@ -145,7 +147,8 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
         if(!result.changed)return res.status(200).json({status:result.status,paperTrading:true});
         if(await write(result.state,current.sha))return res.status(result.status==='partial'?502:200).json({status:result.status,
           mode:'experimental-paper-only',paperTrading:true,bought:result.bought,checked:result.checked,
-          dailyInvestment:10000,dayInvested:result.state.days[date]?.invested||0,positions:result.state.positions.length,
+          dailyInvestment:SIM_CONFIG.dailyInvestment,fundingMode:SIM_CONFIG.fundingMode,sharesPerEntry:SIM_CONFIG.sharesPerEntry,
+          strategyVersion:SIM_CONFIG.version,dayInvested:result.state.days[date]?.invested||0,positions:result.state.positions.length,
           candidates:result.state.suggestions,discovery:result.state.discovery,entryPause,ordersExecuted:0});
       }
       throw Error('simulation state conflict');
