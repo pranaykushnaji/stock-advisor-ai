@@ -25,8 +25,8 @@
       "modeledInitialRisk": 47.11,
       "peakPrice": 1230.7,
       "currentPrice": 1230.7,
-      "lastObservedAt": "2026-11-05T04:10:33.794Z",
-      "lastPriceUpdate": "2026-11-05T04:10:33.794Z",
+      "lastObservedAt": "2026-11-05T04:10:41.055Z",
+      "lastPriceUpdate": "2026-11-05T04:10:41.055Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -67,9 +67,9 @@
       "initialStopPct": 1.2784347072225644,
       "modeledInitialRisk": 28.25,
       "peakPrice": 1798.4,
-      "currentPrice": 1788.7,
-      "lastObservedAt": "2026-11-05T04:10:36.494Z",
-      "lastPriceUpdate": "2026-11-05T04:10:36.494Z",
+      "currentPrice": 1790,
+      "lastObservedAt": "2026-11-05T04:10:39.109Z",
+      "lastPriceUpdate": "2026-11-05T04:10:39.109Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -192,7 +192,7 @@
   },
   "lastSlots": {
     "research": 1793850000000,
-    "scan": 1793851500000,
+    "scan": 1793851800000,
     "risk": 1793851800000
   },
   "dailyCache": {
@@ -678,6 +678,20 @@
       "sessions": 69,
       "ema20": 1941.924219612261,
       "averageTurnoverCr": 65.91790121400001
+    },
+    "IRCON": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 102.57964046652329,
+      "averageTurnoverCr": 35.81245309695
+    },
+    "ZENSARTECH": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 503.5699903113533,
+      "averageTurnoverCr": 102.43921157875
     }
   },
   "suggestions": [
@@ -685,10 +699,10 @@
       "ticker": "GROWW",
       "fullName": "Billionbrains Garage Ventures Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 74.5,
-      "price": 215.72,
-      "observedAt": "2026-11-05T04:05:38.707Z",
-      "sessionChangePct": 4.1,
+      "discoveryScore": 75.9,
+      "price": 216.63,
+      "observedAt": "2026-11-05T04:10:41.562Z",
+      "sessionChangePct": 4.54,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -704,13 +718,32 @@
       "ticker": "CARTRADE",
       "fullName": "Cartrade Tech Ltd.",
       "sector": "Consumer Services",
-      "discoveryScore": 74.2,
-      "price": 2625.8,
-      "observedAt": "2026-11-05T04:05:40.641Z",
-      "sessionChangePct": 5.33,
+      "discoveryScore": 74.4,
+      "price": 2638.8,
+      "observedAt": "2026-11-05T04:10:41.849Z",
+      "sessionChangePct": 5.85,
       "research": null,
       "reasons": [
         "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "IRCON",
+      "fullName": "IRCON International Ltd.",
+      "sector": "Construction",
+      "discoveryScore": 74.3,
+      "price": 110.25,
+      "observedAt": "2026-11-05T04:10:41.919Z",
+      "sessionChangePct": 6.75,
+      "research": null,
+      "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -725,9 +758,67 @@
       "fullName": "Sammaan Capital Ltd.",
       "sector": "Financial Services",
       "discoveryScore": 73.3,
-      "price": 135.19,
-      "observedAt": "2026-11-05T04:05:40.643Z",
-      "sessionChangePct": 7.31,
+      "price": 135.08,
+      "observedAt": "2026-11-05T04:10:41.711Z",
+      "sessionChangePct": 7.22,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "SBICARD",
+      "fullName": "SBI Cards and Payment Services Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 72.7,
+      "price": 584.35,
+      "observedAt": "2026-11-05T04:10:40.408Z",
+      "sessionChangePct": 5.67,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "M&MFIN",
+      "fullName": "Mahindra & Mahindra Financial Services Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 72.5,
+      "price": 286.5,
+      "observedAt": "2026-11-05T04:10:41.607Z",
+      "sessionChangePct": 6.07,
+      "research": null,
+      "reasons": [
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "ZENSARTECH",
+      "fullName": "Zensar Technolgies Ltd.",
+      "sector": "Information Technology",
+      "discoveryScore": 72.5,
+      "price": 560.5,
+      "observedAt": "2026-11-05T04:10:35.374Z",
+      "sessionChangePct": 5.16,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -743,87 +834,10 @@
       "ticker": "MOTILALOFS",
       "fullName": "Motilal Oswal Financial Services Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 73,
-      "price": 1066.5,
-      "observedAt": "2026-11-05T04:05:40.605Z",
-      "sessionChangePct": 5.28,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "BALKRISIND",
-      "fullName": "Balkrishna Industries Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 72.5,
-      "price": 2357.1,
-      "observedAt": "2026-11-05T04:05:39.791Z",
-      "sessionChangePct": 5.05,
-      "research": null,
-      "reasons": [
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "SBICARD",
-      "fullName": "SBI Cards and Payment Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 71.8,
-      "price": 583.4,
-      "observedAt": "2026-11-05T04:05:38.288Z",
-      "sessionChangePct": 5.5,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "HINDPETRO",
-      "fullName": "Hindustan Petroleum Corporation Ltd.",
-      "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 69.9,
-      "price": 388.3,
-      "observedAt": "2026-11-05T04:05:40.709Z",
-      "sessionChangePct": 5.99,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "PIRAMALFIN",
-      "fullName": "Piramal Finance Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 69.7,
-      "price": 2028.8,
-      "observedAt": "2026-11-05T04:05:35.646Z",
-      "sessionChangePct": 4.24,
+      "discoveryScore": 72.1,
+      "price": 1065.75,
+      "observedAt": "2026-11-05T04:10:40.737Z",
+      "sessionChangePct": 5.21,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -836,7 +850,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-05T04:10:39.097Z",
+  "updatedAt": "2026-11-05T04:10:42.099Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -857,8 +871,8 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T04:10:39.097Z",
-    "action": "risk",
+    "at": "2026-11-05T04:10:42.099Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -874,7 +888,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-05T04:05:40.189Z",
+    "at": "2026-11-05T04:10:41.216Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -898,7 +912,19 @@
         ]
       },
       {
+        "ticker": "AIAENG",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "ALKEM",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "APARINDS",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -946,7 +972,7 @@
         ]
       },
       {
-        "ticker": "CPPLUS",
+        "ticker": "CRAFTSMAN",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1000,6 +1026,12 @@
         ]
       },
       {
+        "ticker": "IPCALAB",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
         "ticker": "IRB",
         "reasons": [
           "price below ₹20"
@@ -1040,24 +1072,6 @@
         "reasons": [
           "weak or overextended session move"
         ]
-      },
-      {
-        "ticker": "LAURUSLABS",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "LINDEINDIA",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "LLOYDSME",
-        "reasons": [
-          "weak or overextended session move"
-        ]
       }
     ],
     "source": "Upstox",
@@ -1065,10 +1079,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 1.5258382511289303,
-      "observedAt": "2026-11-05T04:05:40.958Z",
+      "changePct": 1.6821365074330297,
+      "observedAt": "2026-11-05T04:10:41.998Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24326.2,
+      "price": 24363.65,
       "previousClose": 23960.600000000002
     }
   },
@@ -1101,6 +1115,12 @@
       },
       {
         "at": "2026-11-05T04:05:41.071Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-05T04:10:42.099Z",
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
@@ -1137,11 +1157,17 @@
             "price": 215.72,
             "score": 74.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:10:41.562Z",
+            "price": 216.63,
+            "score": 75.9,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:05:38.707Z",
-        "lastPrice": 215.72,
-        "discoveryScore": 74.5,
+        "lastSeenAt": "2026-11-05T04:10:41.562Z",
+        "lastPrice": 216.63,
+        "discoveryScore": 75.9,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -1272,11 +1298,17 @@
             "price": 583.4,
             "score": 71.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:10:40.408Z",
+            "price": 584.35,
+            "score": 72.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:05:38.288Z",
-        "lastPrice": 583.4,
-        "discoveryScore": 71.8,
+        "lastSeenAt": "2026-11-05T04:10:40.408Z",
+        "lastPrice": 584.35,
+        "discoveryScore": 72.7,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -1408,10 +1440,16 @@
             "price": 135.19,
             "score": 73.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:10:41.711Z",
+            "price": 135.08,
+            "score": 73.3,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:05:40.643Z",
-        "lastPrice": 135.19,
+        "lastSeenAt": "2026-11-05T04:10:41.711Z",
+        "lastPrice": 135.08,
         "discoveryScore": 73.3,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -1496,14 +1534,20 @@
             "price": 286.25,
             "score": 71.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:10:41.607Z",
+            "price": 286.5,
+            "score": 72.5,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T03:55:39.195Z",
-        "lastPrice": 286.25,
-        "discoveryScore": 71.1,
+        "lastSeenAt": "2026-11-05T04:10:41.607Z",
+        "lastPrice": 286.5,
+        "discoveryScore": 72.5,
         "reasons": [
           "below 20-session EMA",
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "POONAWALLA": {
@@ -1594,11 +1638,17 @@
             "price": 1066.5,
             "score": 73,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:10:40.737Z",
+            "price": 1065.75,
+            "score": 72.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:05:40.605Z",
-        "lastPrice": 1066.5,
-        "discoveryScore": 73,
+        "lastSeenAt": "2026-11-05T04:10:40.737Z",
+        "lastPrice": 1065.75,
+        "discoveryScore": 72.1,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -1615,11 +1665,17 @@
             "price": 2625.8,
             "score": 74.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:10:41.849Z",
+            "price": 2638.8,
+            "score": 74.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:05:40.641Z",
-        "lastPrice": 2625.8,
-        "discoveryScore": 74.2,
+        "lastSeenAt": "2026-11-05T04:10:41.849Z",
+        "lastPrice": 2638.8,
+        "discoveryScore": 74.4,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -1664,6 +1720,48 @@
         "lastSeenAt": "2026-11-05T04:05:35.646Z",
         "lastPrice": 2028.8,
         "discoveryScore": 69.7,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "IRCON": {
+        "ticker": "IRCON",
+        "fullName": "IRCON International Ltd.",
+        "sector": "Construction",
+        "firstSeenAt": "2026-11-05T04:10:41.919Z",
+        "firstPrice": 110.25,
+        "observations": [
+          {
+            "at": "2026-11-05T04:10:41.919Z",
+            "price": 110.25,
+            "score": 74.3,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:10:41.919Z",
+        "lastPrice": 110.25,
+        "discoveryScore": 74.3,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "ZENSARTECH": {
+        "ticker": "ZENSARTECH",
+        "fullName": "Zensar Technolgies Ltd.",
+        "sector": "Information Technology",
+        "firstSeenAt": "2026-11-05T04:10:35.374Z",
+        "firstPrice": 560.5,
+        "observations": [
+          {
+            "at": "2026-11-05T04:10:35.374Z",
+            "price": 560.5,
+            "score": 72.5,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:10:35.374Z",
+        "lastPrice": 560.5,
+        "discoveryScore": 72.5,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
