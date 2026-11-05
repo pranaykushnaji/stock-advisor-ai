@@ -24,9 +24,9 @@
       "initialStopPct": 0.634147809038621,
       "modeledInitialRisk": 47.11,
       "peakPrice": 1233.6,
-      "currentPrice": 1226.4,
-      "lastObservedAt": "2026-11-05T04:40:36.861Z",
-      "lastPriceUpdate": "2026-11-05T04:40:36.861Z",
+      "currentPrice": 1226.3,
+      "lastObservedAt": "2026-11-05T04:45:36.037Z",
+      "lastPriceUpdate": "2026-11-05T04:45:36.037Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -67,9 +67,9 @@
       "initialStopPct": 1.2784347072225644,
       "modeledInitialRisk": 28.25,
       "peakPrice": 1807.1,
-      "currentPrice": 1796.3,
-      "lastObservedAt": "2026-11-05T04:40:36.440Z",
-      "lastPriceUpdate": "2026-11-05T04:40:36.440Z",
+      "currentPrice": 1800.2,
+      "lastObservedAt": "2026-11-05T04:45:30.735Z",
+      "lastPriceUpdate": "2026-11-05T04:45:30.735Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -110,10 +110,10 @@
       "initialStopPrice": 319.03065000000004,
       "initialStopPct": 2.186744051287215,
       "modeledInitialRisk": 99.29,
-      "peakPrice": 326.16299999999995,
-      "currentPrice": 326.05,
-      "lastObservedAt": "2026-11-05T04:40:37.280Z",
-      "lastPriceUpdate": "2026-11-05T04:40:37.280Z",
+      "peakPrice": 327.25,
+      "currentPrice": 327.25,
+      "lastObservedAt": "2026-11-05T04:45:36.600Z",
+      "lastPriceUpdate": "2026-11-05T04:45:36.600Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -154,9 +154,9 @@
       "initialStopPct": 1.2708364278302686,
       "modeledInitialRisk": 72.81,
       "peakPrice": 561.4806,
-      "currentPrice": 561,
-      "lastObservedAt": "2026-11-05T04:40:38.764Z",
-      "lastPriceUpdate": "2026-11-05T04:40:38.764Z",
+      "currentPrice": 560.6,
+      "lastObservedAt": "2026-11-05T04:45:35.759Z",
+      "lastPriceUpdate": "2026-11-05T04:45:35.759Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -282,7 +282,7 @@
   "lastSlots": {
     "research": 1793850000000,
     "scan": 1793853600000,
-    "risk": 1793853600000
+    "risk": 1793853900000
   },
   "dailyCache": {
     "GROWW": {
@@ -1038,7 +1038,7 @@
       "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-05T04:40:40.449Z",
+  "updatedAt": "2026-11-05T04:45:37.836Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -1059,9 +1059,9 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T04:40:40.449Z",
-    "action": "scan",
-    "bought": "ZENSARTECH",
+    "at": "2026-11-05T04:45:37.836Z",
+    "action": "risk",
+    "bought": null,
     "checked": [
       {
         "ticker": "UNOMINDA",
@@ -1073,6 +1073,10 @@
       },
       {
         "ticker": "ANGELONE",
+        "status": "hold"
+      },
+      {
+        "ticker": "ZENSARTECH",
         "status": "hold"
       }
     ],
