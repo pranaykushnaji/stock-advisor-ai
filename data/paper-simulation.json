@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-breakout-v1",
   "mode": "experimental-paper-only",
-  "cash": 13508.8,
+  "cash": 9588.97,
   "contributions": 20000,
   "positions": [
     {
@@ -24,9 +24,9 @@
       "initialStopPct": 0.634147809038621,
       "modeledInitialRisk": 47.11,
       "peakPrice": 1233.6,
-      "currentPrice": 1227.8,
-      "lastObservedAt": "2026-11-05T04:30:34.968Z",
-      "lastPriceUpdate": "2026-11-05T04:30:34.968Z",
+      "currentPrice": 1227.5,
+      "lastObservedAt": "2026-11-05T04:30:39.575Z",
+      "lastPriceUpdate": "2026-11-05T04:30:39.575Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -91,6 +91,49 @@
       "paperTrading": true,
       "expectedEdge": null,
       "trailingStopPrice": 1784.9182999999998
+    },
+    {
+      "id": "2026-11-05|ANGELONE|paper-breakout-v1",
+      "ticker": "ANGELONE",
+      "symbol": "ANGELONE",
+      "instrumentKey": "NSE_EQ|INE732I01021",
+      "fullName": "Angel One Ltd.",
+      "sector": "Financial Services",
+      "date": "2026-11-05",
+      "addedAt": "2026-11-05T04:30:39.362Z",
+      "strategyVersion": "paper-breakout-v1",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 326.16299999999995,
+      "shares": 12,
+      "investedAmount": 3913.96,
+      "entryCost": 5.87,
+      "initialStopPrice": 319.03065000000004,
+      "initialStopPct": 2.186744051287215,
+      "modeledInitialRisk": 99.29,
+      "peakPrice": 326.16299999999995,
+      "currentPrice": 325.85,
+      "lastObservedAt": "2026-11-05T04:30:39.362Z",
+      "lastPriceUpdate": "2026-11-05T04:30:39.362Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-05T04:30:00.000Z",
+        "entryAt": "2026-11-05T04:30:39.362Z",
+        "entryPrice": 325.85,
+        "entryIndex": 9,
+        "breakoutLevel": 323.8,
+        "supportLevel": 319.35,
+        "vwap": 322.07345987206224,
+        "volumeRatio": 1.800946892455005,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 75.4,
+      "research": null,
+      "executionRuleVersion": "five-minute-opening-v2",
+      "quoteTimestamp": "2026-11-05T04:30:39.362Z",
+      "paperTrading": true,
+      "expectedEdge": null
     }
   ],
   "trades": [
@@ -183,8 +226,10 @@
     },
     "2026-11-05": {
       "contribution": 10000,
-      "invested": 0,
-      "buys": [],
+      "invested": 3919.83,
+      "buys": [
+        "ANGELONE"
+      ],
       "exits": [
         "KAYNES"
       ]
@@ -192,7 +237,7 @@
   },
   "lastSlots": {
     "research": 1793850000000,
-    "scan": 1793852700000,
+    "scan": 1793853000000,
     "risk": 1793853000000
   },
   "dailyCache": {
@@ -734,6 +779,27 @@
       "sessions": 69,
       "ema20": 396.76402032966024,
       "averageTurnoverCr": 23.40251316875
+    },
+    "ANGELONE": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 295.45232921162284,
+      "averageTurnoverCr": 202.0378801625
+    },
+    "JKTYRE": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 324.25241867641574,
+      "averageTurnoverCr": 13.883705999999997
+    },
+    "BBOX": {
+      "asOf": "2026-11-05",
+      "lastSession": "2026-11-04",
+      "sessions": 69,
+      "ema20": 827.7510109663755,
+      "averageTurnoverCr": 102.8945095235
     }
   },
   "suggestions": [
@@ -741,10 +807,10 @@
       "ticker": "BALKRISIND",
       "fullName": "Balkrishna Industries Ltd.",
       "sector": "Automobile and Auto Components",
-      "discoveryScore": 76.8,
-      "price": 2413.5,
-      "observedAt": "2026-11-05T04:25:36.777Z",
-      "sessionChangePct": 7.57,
+      "discoveryScore": 77.7,
+      "price": 2417.8,
+      "observedAt": "2026-11-05T04:30:37.351Z",
+      "sessionChangePct": 7.76,
       "research": null,
       "reasons": [
         "sector already represented",
@@ -761,52 +827,13 @@
       "ticker": "CARTRADE",
       "fullName": "Cartrade Tech Ltd.",
       "sector": "Consumer Services",
-      "discoveryScore": 76.6,
-      "price": 2664.1,
-      "observedAt": "2026-11-05T04:25:38.429Z",
-      "sessionChangePct": 6.87,
+      "discoveryScore": 76.8,
+      "price": 2667,
+      "observedAt": "2026-11-05T04:30:35.006Z",
+      "sessionChangePct": 6.98,
       "research": null,
       "reasons": [
         "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "APOLLOTYRE",
-      "fullName": "Apollo Tyres Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 75.4,
-      "price": 433.05,
-      "observedAt": "2026-11-05T04:25:39.376Z",
-      "sessionChangePct": 7.62,
-      "research": null,
-      "reasons": [
-        "sector already represented",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "M&MFIN",
-      "fullName": "Mahindra & Mahindra Financial Services Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 75.3,
-      "price": 289.55,
-      "observedAt": "2026-11-05T04:25:37.558Z",
-      "sessionChangePct": 7.2,
-      "research": null,
-      "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
@@ -820,10 +847,10 @@
       "ticker": "GROWW",
       "fullName": "Billionbrains Garage Ventures Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 75.2,
-      "price": 216.8,
-      "observedAt": "2026-11-05T04:25:37.813Z",
-      "sessionChangePct": 4.62,
+      "discoveryScore": 76.3,
+      "price": 217.04,
+      "observedAt": "2026-11-05T04:30:37.011Z",
+      "sessionChangePct": 4.73,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -836,23 +863,72 @@
       }
     },
     {
+      "ticker": "ANGELONE",
+      "fullName": "Angel One Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 75.4,
+      "price": 325.85,
+      "observedAt": "2026-11-05T04:30:39.362Z",
+      "sessionChangePct": 4.41,
+      "research": null,
+      "reasons": [
+        "confirmed setup; simulated fill recorded"
+      ],
+      "status": "simulated-buy",
+      "entryDiagnostics": {
+        "status": "setup",
+        "reason": null,
+        "version": "consolidation-v1"
+      },
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-05T04:30:00.000Z",
+        "entryAt": "2026-11-05T04:30:39.362Z",
+        "entryPrice": 325.85,
+        "entryIndex": 9,
+        "breakoutLevel": 323.8,
+        "supportLevel": 319.35,
+        "vwap": 322.07345987206224,
+        "volumeRatio": 1.800946892455005,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      }
+    },
+    {
+      "ticker": "JKTYRE",
+      "fullName": "JK Tyre & Industries Ltd.",
+      "sector": "Automobile and Auto Components",
+      "discoveryScore": 75.4,
+      "price": 357.8,
+      "observedAt": "2026-11-05T04:30:38.420Z",
+      "sessionChangePct": 7.5,
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
       "ticker": "SBICARD",
       "fullName": "SBI Cards and Payment Services Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 74.3,
-      "price": 586.45,
-      "observedAt": "2026-11-05T04:25:35.642Z",
-      "sessionChangePct": 6.05,
+      "discoveryScore": 74.6,
+      "price": 586.85,
+      "observedAt": "2026-11-05T04:30:38.961Z",
+      "sessionChangePct": 6.12,
       "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
+      "ticker": "BBOX",
+      "fullName": "Black Box Ltd.",
+      "sector": "Information Technology",
+      "discoveryScore": 73.9,
+      "price": 863,
+      "observedAt": "2026-11-05T04:30:39.608Z",
+      "sessionChangePct": 6.85,
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
     },
     {
       "ticker": "DALBHARAT",
@@ -860,41 +936,14 @@
       "sector": "Construction Materials",
       "discoveryScore": 73.5,
       "price": 1488.8,
-      "observedAt": "2026-11-05T04:25:35.583Z",
+      "observedAt": "2026-11-05T04:30:38.291Z",
       "sessionChangePct": 5.81,
       "research": null,
-      "reasons": [
-        "below 20-session EMA",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "SAMMAANCAP",
-      "fullName": "Sammaan Capital Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 73.5,
-      "price": 134.9,
-      "observedAt": "2026-11-05T04:25:38.169Z",
-      "sessionChangePct": 7.08,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-05T04:30:37.653Z",
+  "updatedAt": "2026-11-05T04:30:40.441Z",
   "config": {
     "version": "paper-breakout-v1",
     "dailyInvestment": 10000,
@@ -915,9 +964,9 @@
     "maximumSessions": 5
   },
   "lastCheck": {
-    "at": "2026-11-05T04:30:37.653Z",
-    "action": "risk",
-    "bought": null,
+    "at": "2026-11-05T04:30:40.441Z",
+    "action": "scan",
+    "bought": "ANGELONE",
     "checked": [
       {
         "ticker": "UNOMINDA",
@@ -932,7 +981,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-05T04:25:39.793Z",
+    "at": "2026-11-05T04:30:39.943Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -953,6 +1002,12 @@
         "ticker": "AEGISLOG",
         "reasons": [
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AIIL",
+        "reasons": [
+          "missing or stale instrument quote"
         ]
       },
       {
@@ -992,19 +1047,13 @@
         ]
       },
       {
-        "ticker": "AUROPHARMA",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "BHARTIHEXA",
         "reasons": [
           "weak or overextended session move"
         ]
       },
       {
-        "ticker": "CASTROLIND",
+        "ticker": "BHEL",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1022,12 +1071,6 @@
         ]
       },
       {
-        "ticker": "FEDERALBNK",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "FIVESTAR",
         "reasons": [
           "weak or overextended session move"
@@ -1035,18 +1078,6 @@
       },
       {
         "ticker": "GESHIP",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GLAND",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "GLAXO",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1116,6 +1147,24 @@
         "reasons": [
           "weak or overextended session move"
         ]
+      },
+      {
+        "ticker": "LAURUSLABS",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "LINDEINDIA",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "LLOYDSME",
+        "reasons": [
+          "weak or overextended session move"
+        ]
       }
     ],
     "source": "Upstox",
@@ -1123,10 +1172,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 1.957380032219569,
-      "observedAt": "2026-11-05T04:25:40.187Z",
+      "changePct": 1.8572155956027903,
+      "observedAt": "2026-11-05T04:30:40.339Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24429.6,
+      "price": 24405.6,
       "previousClose": 23960.6
     }
   },
@@ -1186,6 +1235,12 @@
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-05T04:30:40.441Z",
+        "bought": "ANGELONE",
+        "shortlisted": 8,
+        "benchmarkFresh": true
       }
     ],
     "candidates": {
@@ -1231,11 +1286,17 @@
             "price": 216.8,
             "score": 75.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:30:37.011Z",
+            "price": 217.04,
+            "score": 76.3,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:25:37.813Z",
-        "lastPrice": 216.8,
-        "discoveryScore": 75.2,
+        "lastSeenAt": "2026-11-05T04:30:37.011Z",
+        "lastPrice": 217.04,
+        "discoveryScore": 76.3,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -1390,14 +1451,18 @@
             "price": 586.45,
             "score": 74.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:30:38.961Z",
+            "price": 586.85,
+            "score": 74.6,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:25:35.642Z",
-        "lastPrice": 586.45,
-        "discoveryScore": 74.3,
-        "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-05T04:30:38.961Z",
+        "lastPrice": 586.85,
+        "discoveryScore": 74.6,
+        "reasons": []
       },
       "VISL": {
         "ticker": "VISL",
@@ -1822,11 +1887,17 @@
             "price": 2664.1,
             "score": 76.6,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:30:35.006Z",
+            "price": 2667,
+            "score": 76.8,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:25:38.429Z",
-        "lastPrice": 2664.1,
-        "discoveryScore": 76.6,
+        "lastSeenAt": "2026-11-05T04:30:35.006Z",
+        "lastPrice": 2667,
+        "discoveryScore": 76.8,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -1862,11 +1933,17 @@
             "price": 2413.5,
             "score": 76.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:30:37.351Z",
+            "price": 2417.8,
+            "score": 77.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:25:36.777Z",
-        "lastPrice": 2413.5,
-        "discoveryScore": 76.8,
+        "lastSeenAt": "2026-11-05T04:30:37.351Z",
+        "lastPrice": 2417.8,
+        "discoveryScore": 77.7,
         "reasons": [
           "sector already represented",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -2053,15 +2130,77 @@
             "price": 1488.8,
             "score": 73.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-05T04:30:38.291Z",
+            "price": 1488.8,
+            "score": 73.5,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-05T04:25:35.583Z",
+        "lastSeenAt": "2026-11-05T04:30:38.291Z",
         "lastPrice": 1488.8,
         "discoveryScore": 73.5,
+        "reasons": []
+      },
+      "ANGELONE": {
+        "ticker": "ANGELONE",
+        "fullName": "Angel One Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-05T04:30:39.362Z",
+        "firstPrice": 325.85,
+        "observations": [
+          {
+            "at": "2026-11-05T04:30:39.362Z",
+            "price": 325.85,
+            "score": 75.4,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:30:39.362Z",
+        "lastPrice": 325.85,
+        "discoveryScore": 75.4,
         "reasons": [
-          "below 20-session EMA",
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "confirmed setup; simulated fill recorded"
         ]
+      },
+      "JKTYRE": {
+        "ticker": "JKTYRE",
+        "fullName": "JK Tyre & Industries Ltd.",
+        "sector": "Automobile and Auto Components",
+        "firstSeenAt": "2026-11-05T04:30:38.420Z",
+        "firstPrice": 357.8,
+        "observations": [
+          {
+            "at": "2026-11-05T04:30:38.420Z",
+            "price": 357.8,
+            "score": 75.4,
+            "setup": "not-evaluated"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:30:38.420Z",
+        "lastPrice": 357.8,
+        "discoveryScore": 75.4,
+        "reasons": []
+      },
+      "BBOX": {
+        "ticker": "BBOX",
+        "fullName": "Black Box Ltd.",
+        "sector": "Information Technology",
+        "firstSeenAt": "2026-11-05T04:30:39.608Z",
+        "firstPrice": 863,
+        "observations": [
+          {
+            "at": "2026-11-05T04:30:39.608Z",
+            "price": 863,
+            "score": 73.9,
+            "setup": "not-evaluated"
+          }
+        ],
+        "lastSeenAt": "2026-11-05T04:30:39.608Z",
+        "lastPrice": 863,
+        "discoveryScore": 73.9,
+        "reasons": []
       }
     }
   }
