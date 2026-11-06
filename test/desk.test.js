@@ -32,9 +32,9 @@ test('paper UI distinguishes picks, unverified news, missing premarket prices an
 });
 
 test('sources use public main branch and the explicit local registry, without fallback', () => {
-  assert.equal(SOURCES.length, 4);
+  assert.equal(SOURCES.length, 5);
   assert.ok(SOURCES.slice(0, 3).every(s => s.url.startsWith('https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/')));
-  assert.equal(SOURCES.at(-1).url, '../research/universe.json');
+  assert.equal(SOURCES.find(s=>s.name==='universe').url, '../research/universe.json');
 });
 
 test('newer daily values and decision supersede old scan blockers and relative volume', () => {

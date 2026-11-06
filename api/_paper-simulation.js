@@ -2,13 +2,15 @@
 // No broker order APIs. A single JSON state holds cash, positions and closed trades atomically.
 import { quoteFreshness, benchmarkObservation } from './_upstox-market-data.js';
 import { rankByDiscoveryScore } from './_discovery-score.js';
-import { ema } from './_indicators.js';
+import { ema,rsi,atrPct } from './_indicators.js';
 import { liveSimulationEntry } from './_entry-research.js';
 import { researchExitObservation } from '../research/paper-plan.js';
 import { tradingSessionsHeld } from './_position-risk.js';
 import {SIM_CONFIG,LEGACY_SIM_CONFIG} from '../research/paper-policy.js';
 import {entryMarketContext,assessPaperEntry,researchCohort} from '../research/entry-quality.js';
 import {captureEntryEvidence} from '../research/entry-evidence.js';
+import {candleIntegrity} from '../research/candle-integrity.js';
+import {decisionEvidence} from '../research/decision-evidence.js';
 export {SIM_CONFIG,LEGACY_SIM_CONFIG};
 const round = n => Math.round(n * 100) / 100;
 const ymd = d => new Date(d.getTime() + 19800000).toISOString().slice(0, 10);
@@ -51,15 +53,21 @@ export function paperEntryAllocation({fill,stop,positions,cash,day,config=SIM_CO
     contribution:config.fundingMode==='as-needed-paper-capital'?round(Math.max(0,total-cash)):0};
 }
 export function dailyReference(candles, date) {
-  const rows = (candles || []).map(r => ({date:String(r[0]).slice(0,10),close:r[4],volume:r[5]}))
+  const earlier=(candles||[]).filter(r=>String(r?.[0]).slice(0,10)<date);
+  const quality=candleIntegrity(earlier,{intervalMs:86400000});
+  if(quality.issues.length)return null;
+  const rows = quality.rows.map(r => ({date:String(r[0]).slice(0,10),high:r[2],low:r[3],close:r[4],volume:r[5]}))
     .filter(r => r.date < date && Number.isFinite(r.close) && r.close > 0 && Number.isFinite(r.volume) && r.volume >= 0)
     .sort((a,b)=>a.date.localeCompare(b.date));
   const unique = [...new Map(rows.map(r=>[r.date,r])).values()];
   if (unique.length < 21) return null;
   const last = unique.slice(-20);
-  return { version:2,asOf:date, lastSession:unique.at(-1).date, sessions:unique.length,
+  return { version:2,contextVersion:1,asOf:date, lastSession:unique.at(-1).date, sessions:unique.length,
     previousClose:unique.at(-1).close,return5Pct:(unique.at(-1).close/unique.at(-6).close-1)*100,
     ema20:ema(unique.map(r=>r.close),20),
+    ema50:ema(unique.map(r=>r.close),50),rsi14:rsi(unique.map(r=>r.close)),
+    atr14Pct:atrPct(unique.map(r=>r.high),unique.map(r=>r.low),unique.map(r=>r.close)),
+    averageVolume:last.reduce((s,r)=>s+r.volume,0)/20,dataQuality:{issues:quality.issues,sessions:unique.length},
     averageTurnoverCr:last.reduce((s,r)=>s+r.close*r.volume,0)/20/1e7 };
 }
 
@@ -172,6 +180,9 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
         fillPrice:q.askPrice*(1+config.entrySlippageBps/10000)}):null;
       const setup=assessment?.setup??(freshQuote(q,c,at)?liveSimulationEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'}):null);
       row.entryAssessment=assessment;row.researchCohort=researchCohort(row.research,at);
+      row.decisionEvidence=decisionEvidence({quote:q,reference,setup,assessment,marketContext:entryMarket,benchmark,at,
+        slippageBps:config.entrySlippageBps,requireMomentum:!!config.entryMode,safetyReady:market.safetyReady});
+      row.historyErrors=market.historyErrors?.[c.symbol]||[];
       if(assessment?.pendingSignalAt)s.pendingEntries[c.symbol]={symbol:c.symbol,signalAt:assessment.pendingSignalAt,discoveryScore:c.discoveryScore??null};
       row.entryDiagnostics=setup?{status:setup.status,reason:setup.reason??null,version:setup.setupVersion??null}:null;
       if(setup?.status==='setup')row.setup=setup;
@@ -189,12 +200,16 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       if(benchChange!=null&&q?.previousClose>0&&(q.price/q.previousClose-1)*100<=benchChange)reasons.push('not outperforming Nifty');
       if(config.sectorLimit!==false&&s.positions.some(p=>p.sector===c.sector))reasons.push('sector already represented');
       if(config.entryMode)reasons.push(...(assessment?.reasons||['entry momentum evidence unavailable']));
+      reasons.push(...row.historyErrors);
+      if(!row.decisionEvidence.readiness.ready)reasons.push('decision evidence incomplete: '+[
+        ...row.decisionEvidence.readiness.missingRequired,...row.decisionEvidence.readiness.invalidInputs].join(', '));
       if(setup?.status!=='setup')reasons.push(setup?.reason||'no usable completed breakout evidence');
       if(reasons.length)continue;
       if(!(q.upperCircuit>q.price && q.lowerCircuit<q.price) || q.price>=q.upperCircuit*0.995 || q.price<=q.lowerCircuit*1.005){reasons.push('official circuit limit unavailable or too close at execution');continue;}
       const fill=q.askPrice*(1+config.entrySlippageBps/10000),stop=setup.supportLevel*0.999;
       const stopPct=(1-stop/fill)*100;
       if(stopPct<config.minStopPct||stopPct>config.maxStopPct){reasons.push('structure stop outside experimental 0.5–3% band');continue;}
+      if(bought){row.status='not-selected';reasons.push('another qualifying entry selected this scan; reconsider next scan');continue;}
       const allocation=paperEntryAllocation({fill,stop,positions:s.positions,cash:s.cash,day,config});
       if(!allocation.shares){reasons.push(allocation.reason);continue;}
       const {shares,invested,entryCost,contribution}=allocation;
@@ -205,15 +220,16 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
         summary:assessment?`Completed ${setup.confirmationType} entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.`:setup.setupVersion==='opening-consolidation-v1'
           ?'Completed opening-range breakout with at least 2x recent-bar volume; above VWAP and EMA20, positive relative strength.'
           :'Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.',
-        setup,entryAssessment:assessment,entryMarket,researchCohort:row.researchCohort,
+        setup,entryAssessment:assessment,entryMarket,researchCohort:row.researchCohort,decisionEvidence:row.decisionEvidence,
         discoveryScore:c.discoveryScore??null,research:market.researchBySymbol?.[c.symbol]??null,executionRuleVersion:config.executionRuleVersion,
         quoteTimestamp:q.lastTradeAt,paperTrading:true,expectedEdge:null};
       s.contributions=round(s.contributions+contribution);day.contribution=round(day.contribution+contribution);
       s.positions.push(p);s.cash=round(s.cash+contribution-invested-entryCost);day.invested=round(day.invested+invested+entryCost);day.buys.push(c.symbol);
+      blocked.add(c.symbol);
       delete s.pendingEntries[c.symbol];
-      row.status='simulated-buy';row.setup=setup;row.reasons=['confirmed setup; simulated fill recorded'];bought=c.symbol;break;
+      row.status='simulated-buy';row.setup=setup;row.reasons=['confirmed setup; simulated fill recorded'];bought=c.symbol;
     }
-    for(const row of s.suggestions){if(row.status!=='simulated-buy')row.status=row.reasons.length?'not-qualified':'not-selected';}
+    for(const row of s.suggestions){if(row.status==='watch')row.status=row.reasons.length?'not-qualified':'not-selected';}
     s.discovery=market.discovery||null;
     const history=s.scanHistory?.date===date?s.scanHistory:{date,scans:[],candidates:{}};
     for(const row of s.suggestions){

@@ -1024,6 +1024,14 @@ dt,
 .opportunity-card .key-values {
   grid-template-columns: 1fr;
 }
+.decision-evidence summary { min-height:44px; display:flex; align-items:center; }
+.decision-evidence .evidence-heading { color:var(--text); }
+.decision-evidence h3 { font-size:1rem; margin:20px 0 10px; }
+.evidence-metrics { margin:0; display:grid; gap:0; }
+.evidence-metrics>div { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 12px; padding:12px 0; border-bottom:1px solid var(--line); }
+.evidence-metrics dt { color:var(--muted); font-size:.875rem; overflow-wrap:anywhere; }
+.evidence-metrics dd { margin:0; color:var(--text); font-variant-numeric:tabular-nums; }
+.evidence-metrics p { grid-column:1/-1; margin:0; color:var(--muted); overflow-wrap:anywhere; }
 .lower-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.65fr) minmax(260px, 1fr);

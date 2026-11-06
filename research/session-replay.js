@@ -3,6 +3,7 @@ import { liveSimulationEntry } from "../api/_entry-research.js";
 import { researchExitObservation } from "./paper-plan.js";
 import { SIM_CONFIG, paperEntryAllocation } from "../api/_paper-simulation.js";
 import {entryMarketContext,assessPaperEntry,researchCohort} from './entry-quality.js';
+import {decisionEvidence} from './decision-evidence.js';
 const round = (n) => Math.round(n * 100) / 100;
 const lastCompleted = (rows, at) =>
   (rows || [])
@@ -173,6 +174,13 @@ export function replayPaperSession({
       if(config.entryMode)reasons.push(...(assessment?.reasons||['entry momentum evidence unavailable']));
       if (setup?.status !== "setup")
         reasons.push(setup?.reason || "completed setup unavailable");
+      const evidence=decisionEvidence({quote:{price:row.price,askPrice:row.price*(1+assumedHalfSpreadBps/10000),
+        bidPrice:row.price*(1-assumedHalfSpreadBps/10000),spreadBps:assumedHalfSpreadBps*2,
+        previousClose:history?.previousClose,lastTradeAt:row.observedAt},reference,setup,assessment,marketContext,
+        benchmark:benchFresh?{price:benchBar[4],previousClose:benchmark.previousClose,responseAt:new Date(Date.parse(benchBar[0])+60000).toISOString()}:null,
+        at:new Date(at),slippageBps:config.entrySlippageBps,requireMomentum:!!config.entryMode,safetyReady:scan.safetyReady,
+        quoteSource:'Estimated historical',dailySource:'Archived / retrospective',candleSource:'Historical completed candles',benchmarkSource:'Historical'});
+      if(!evidence.readiness.ready)reasons.push('decision evidence incomplete: '+evidence.readiness.missingRequired.join(', '));
       if (reasons.length) {
         result.rejected.push({ ticker: row.ticker, reasons });
         continue;
@@ -216,7 +224,7 @@ export function replayPaperSession({
         lastObservedAt: row.observedAt,
         modeledInitialRisk: allocation.modeledInitialRisk,
         setup,
-        entryAssessment:assessment,entryMarket:marketContext,
+        entryAssessment:assessment,entryMarket:marketContext,decisionEvidence:evidence,
         research:row.research??null,researchCohort:researchCohort(row.research,new Date(at)),
         sourceCommit: scan.sourceCommit,
         historicalReplay: true,

@@ -2,6 +2,7 @@
 // calibrated probabilities. Never uses unfinished candles or future observations.
 import {completedFiveMinuteBars, liveSimulationEntry} from '../api/_entry-research.js';
 import {benchmarkObservation} from '../api/_upstox-market-data.js';
+import {candleIntegrity} from './candle-integrity.js';
 
 export const ENTRY_QUALITY = Object.freeze({version:'intraday-confirmation-v1',
   marketDrop5Pct:-0.15,marketDrop15Pct:-0.25,marketQuoteDropPct:-0.10,
@@ -13,6 +14,8 @@ const STEP=300000, pct=(a,b)=>(a/b-1)*100;
 const mean=a=>a.reduce((s,n)=>s+n,0)/a.length;
 function ema(values,period=5){const k=2/(Math.min(period,values.length)+1);return values.reduce((e,v,i)=>i?v*k+e*(1-k):v,0);}
 function frame(candles,now){
+  const integrity=candleIntegrity(candles,{nowMs:now.getTime(),date:new Date(now.getTime()+19800000).toISOString().slice(0,10)});
+  if(integrity.issues.length)return {status:'unavailable',reason:integrity.issues.join('; '),dataQuality:{issues:integrity.issues}};
   const boundary=Math.floor(now.getTime()/STEP)*STEP,bars=completedFiveMinuteBars(Array.isArray(candles)?candles:[],now);
   if(!bars.length||bars.at(-1).ms+STEP!==boundary)return {status:'unavailable',reason:'latest completed five-minute history missing'};
   // A gap in the most recent fifteen minutes is never silently bridged.
@@ -112,6 +115,7 @@ export function assessPaperEntry({candles,quote,reference,marketContext,now=new 
   else if(!(fillPrice>0)||pct(fillPrice,setup.breakoutLevel)>params.maxBreakoutPremiumPct)
     reasons.push('executable ask plus slippage too far above breakout');
   return {version:params.version,mode,status:reasons.length?'blocked':'qualified',reasons:[...new Set(reasons)],metrics,setup,
+    dataQuality:{issues:f.dataQuality?.issues||[]},
     pendingSignalAt:initial.status==='setup'?initial.signalAt:null};
 }
 

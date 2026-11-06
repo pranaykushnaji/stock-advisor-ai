@@ -136,11 +136,16 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
         const benchmarkHistory=config.entryMode?intraday('NSE_INDEX|Nifty 50')
           .then(rows=>{market.benchmarkCandles=rows;}).catch(()=>{market.benchmarkCandles=[];}):Promise.resolve();
         await Promise.all([benchmarkHistory,...market.candidates.map(async c=>{
-          try{
-            const cached=first.data.dailyCache[c.symbol];
-            const [candles,reference]=await Promise.all([intraday(c.instrumentKey),cached?.asOf===date&&(!config.entryMode||cached.version===2)?cached:daily(c.instrumentKey,from,date).then(rows=>dailyReference(rows,date))]);
-            market.candles[c.symbol]=candles;if(reference)preparedReferences[c.symbol]=reference;
-          }catch{/* Missing evidence is a rejection, never a fabricated signal. */}
+          const cached=first.data.dailyCache[c.symbol];
+          const cachedReady=cached?.asOf===date&&(!config.entryMode||(cached.version===2&&cached.contextVersion===1));
+          const [minutes,history]=await Promise.allSettled([intraday(c.instrumentKey),cachedReady?cached:
+            daily(c.instrumentKey,from,date).then(rows=>dailyReference(rows,date))]);
+          if(minutes.status==='fulfilled')market.candles[c.symbol]=minutes.value;
+          if(history.status==='fulfilled'&&history.value)preparedReferences[c.symbol]=history.value;
+          const missing=[];
+          if(minutes.status!=='fulfilled')missing.push('Upstox intraday history request failed');
+          if(history.status!=='fulfilled'||!history.value)missing.push('Upstox daily history failed validation or warm-up');
+          if(missing.length){market.historyErrors??={};market.historyErrors[c.symbol]=missing;}
         })]);
         // Refresh executable quotes AFTER all slower history work. Never book an earlier quote.
         const refreshKeys=[...new Set([...heldKeys,...market.candidates.map(c=>c.instrumentKey),'NSE_INDEX|Nifty 50'])];

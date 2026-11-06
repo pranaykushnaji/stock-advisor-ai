@@ -20,7 +20,7 @@ function fixture(){
       upperCircuit:120,lowerCircuit:80,dayHigh:101,dayLow:99,previousClose:99,volume:10000,
       lastTradeAt:now.toISOString(),responseAt:now.toISOString()},
     benchmarkQuote:{instrumentKey:'NSE_INDEX|Nifty 50',price:100.08,previousClose:100,responseAt:now.toISOString()},
-    reference:{version:2,asOf:'2026-11-04',ema20:99,averageTurnoverCr:20,return5Pct:3}};
+    reference:{version:2,contextVersion:1,asOf:'2026-11-04',ema20:99,averageTurnoverCr:20,return5Pct:3}};
 }
 function assess(f=fixture(),mode='adaptive',at=now){return assessPaperEntry({candles:f.candles,quote:f.quote,
   reference:f.reference,marketContext:entryMarketContext(f.benchmarkCandles,f.benchmarkQuote,{now:at}),now:at,mode,
@@ -114,7 +114,7 @@ test('missing/weak Nifty history cannot prevent an existing position stop exit',
   assert.equal(r.state.trades[0].exitReason,'initial invalidation');assert.equal(r.bought,null);
 });
 test('daily stock movement excludes current/future days and upgrades reference version',()=>{
-  const rows=Array.from({length:25},(_,i)=>[`2026-10-${String(i+1).padStart(2,'0')}`,100,100,100,100+i,1e6]);
+  const rows=Array.from({length:25},(_,i)=>[`2026-10-${String(i+1).padStart(2,'0')}`,100+i,101+i,99+i,100+i,1e6]);
   rows.push(['2026-11-04',999,999,999,999,1e9]);
   const r=dailyReference(rows,'2026-11-04');assert.equal(r.version,2);assert.equal(r.previousClose,124);
   assert.ok(Math.abs(r.return5Pct-(124/119-1)*100)<1e-9);

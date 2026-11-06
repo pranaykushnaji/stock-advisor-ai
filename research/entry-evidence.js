@@ -2,7 +2,7 @@
 // Saving it as a JSON string avoids pretty-print multiplication of minute rows.
 // Only explicitly selected market fields are retained; never environment/config.
 const FIELDS=['symbol','instrumentKey','price','bidPrice','askPrice','spreadBps','upperCircuit','lowerCircuit',
-  'dayHigh','dayLow','previousClose','volume','lastTradeAt','responseAt'];
+  'dayHigh','dayLow','previousClose','volume','averagePrice','lastTradeAt','responseAt'];
 export function captureEntryEvidence(market,at,{maxCharacters=450000}={}){
   const quotes=Object.fromEntries(Object.entries(market.quotes||{}).map(([key,q])=>[key,
     Object.fromEntries(FIELDS.filter(f=>q?.[f]!==undefined).map(f=>[f,q[f]]))]));
