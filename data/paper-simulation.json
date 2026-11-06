@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-one-share-v2",
   "mode": "experimental-paper-only",
-  "cash": 11774.47,
+  "cash": 11217.06,
   "contributions": 20000,
   "positions": [
     {
@@ -68,8 +68,8 @@
       "modeledInitialRisk": 62.18,
       "peakPrice": 3483.8,
       "currentPrice": 3475,
-      "lastObservedAt": "2026-11-06T07:00:36.963Z",
-      "lastPriceUpdate": "2026-11-06T07:00:36.963Z",
+      "lastObservedAt": "2026-11-06T07:00:40.012Z",
+      "lastPriceUpdate": "2026-11-06T07:00:40.012Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -239,9 +239,9 @@
       "initialStopPct": 0.7495433394262507,
       "modeledInitialRisk": 4.03,
       "peakPrice": 367.5,
-      "currentPrice": 367.35,
-      "lastObservedAt": "2026-11-06T07:00:33.203Z",
-      "lastPriceUpdate": "2026-11-06T07:00:33.203Z",
+      "currentPrice": 367.5,
+      "lastObservedAt": "2026-11-06T07:00:38.223Z",
+      "lastPriceUpdate": "2026-11-06T07:00:38.223Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -346,6 +346,49 @@
       "research": null,
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T06:50:40.326Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-06|STARHEALTH|paper-one-share-v2",
+      "ticker": "STARHEALTH",
+      "symbol": "STARHEALTH",
+      "instrumentKey": "NSE_EQ|INE575P01011",
+      "fullName": "Star Health and Allied Insurance Company Ltd.",
+      "sector": "Financial Services",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T07:00:36.291Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 556.5781499999999,
+      "shares": 1,
+      "investedAmount": 556.58,
+      "entryCost": 0.83,
+      "initialStopPrice": 548.7506999999999,
+      "initialStopPct": 1.406352369384245,
+      "modeledInitialRisk": 9.78,
+      "peakPrice": 556.5781499999999,
+      "currentPrice": 556.3,
+      "lastObservedAt": "2026-11-06T07:00:36.291Z",
+      "lastPriceUpdate": "2026-11-06T07:00:36.291Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T07:00:00.000Z",
+        "entryAt": "2026-11-06T07:00:36.291Z",
+        "entryPrice": 556.3,
+        "entryIndex": 39,
+        "breakoutLevel": 554.6,
+        "supportLevel": 549.3,
+        "vwap": 546.9245875404209,
+        "volumeRatio": 2.888680631189686,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 63.4,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T07:00:36.291Z",
       "paperTrading": true,
       "expectedEdge": null
     }
@@ -918,7 +961,7 @@
     },
     "2026-11-06": {
       "contribution": 0,
-      "invested": 8849.65,
+      "invested": 9407.06,
       "buys": [
         "MCX",
         "MGL",
@@ -929,7 +972,8 @@
         "PATANJALI",
         "KARURVYSYA",
         "ABDL",
-        "KALYANKJIL"
+        "KALYANKJIL",
+        "STARHEALTH"
       ],
       "exits": [
         "ZENSARTECH",
@@ -942,7 +986,7 @@
   },
   "lastSlots": {
     "research": 1793936400000,
-    "scan": 1793948100000,
+    "scan": 1793948400000,
     "risk": 1793948400000
   },
   "dailyCache": {
@@ -1897,6 +1941,13 @@
       "sessions": 69,
       "ema20": 3383.595213773262,
       "averageTurnoverCr": 54.94991634999999
+    },
+    "UPL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 524.2748798292691,
+      "averageTurnoverCr": 118.01275755425
     }
   },
   "suggestions": [
@@ -1904,10 +1955,29 @@
       "ticker": "GLENMARK",
       "fullName": "Glenmark Pharmaceuticals Ltd.",
       "sector": "Healthcare",
-      "discoveryScore": 77.7,
-      "price": 2608.7,
-      "observedAt": "2026-11-06T06:55:39.601Z",
-      "sessionChangePct": 5.11,
+      "discoveryScore": 78.1,
+      "price": 2615.5,
+      "observedAt": "2026-11-06T07:00:39.260Z",
+      "sessionChangePct": 5.39,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "INDHOTEL",
+      "fullName": "Indian Hotels Co. Ltd.",
+      "sector": "Consumer Services",
+      "discoveryScore": 66.1,
+      "price": 886.8,
+      "observedAt": "2026-11-06T07:00:37.254Z",
+      "sessionChangePct": 1.35,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -1925,7 +1995,7 @@
       "sector": "Oil Gas & Consumable Fuels",
       "discoveryScore": 64.7,
       "price": 1455.3,
-      "observedAt": "2026-11-06T06:55:38.533Z",
+      "observedAt": "2026-11-06T07:00:32.007Z",
       "sessionChangePct": 2.59,
       "research": null,
       "reasons": [
@@ -1940,122 +2010,87 @@
       }
     },
     {
-      "ticker": "INDHOTEL",
-      "fullName": "Indian Hotels Co. Ltd.",
-      "sector": "Consumer Services",
-      "discoveryScore": 64.5,
-      "price": 885.7,
-      "observedAt": "2026-11-06T06:55:38.217Z",
-      "sessionChangePct": 1.22,
+      "ticker": "STARHEALTH",
+      "fullName": "Star Health and Allied Insurance Company Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 63.4,
+      "price": 556.3,
+      "observedAt": "2026-11-06T07:00:36.291Z",
+      "sessionChangePct": 2.57,
       "research": null,
       "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
+        "confirmed setup; simulated fill recorded"
       ],
-      "status": "not-qualified",
+      "status": "simulated-buy",
       "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "FORCEMOT",
-      "fullName": "Force Motors Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 64,
-      "price": 18866,
-      "observedAt": "2026-11-06T06:55:29.184Z",
-      "sessionChangePct": 2.63,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
+        "status": "setup",
+        "reason": null,
+        "version": "consolidation-v1"
+      },
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T07:00:00.000Z",
+        "entryAt": "2026-11-06T07:00:36.291Z",
+        "entryPrice": 556.3,
+        "entryIndex": 39,
+        "breakoutLevel": 554.6,
+        "supportLevel": 549.3,
+        "vwap": 546.9245875404209,
+        "volumeRatio": 2.888680631189686,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
       }
     },
     {
       "ticker": "CHOLAHLDNG",
       "fullName": "Cholamandalam Financial Holdings Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 63.8,
-      "price": 1475,
-      "observedAt": "2026-11-06T06:55:38.054Z",
-      "sessionChangePct": 4.41,
+      "discoveryScore": 63.1,
+      "price": 1471.6,
+      "observedAt": "2026-11-06T07:00:36.649Z",
+      "sessionChangePct": 4.17,
       "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "STARHEALTH",
-      "fullName": "Star Health and Allied Insurance Company Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 62.5,
-      "price": 553.55,
-      "observedAt": "2026-11-06T06:55:40.182Z",
-      "sessionChangePct": 2.07,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "IREDA",
-      "fullName": "Indian Renewable Energy Development Agency Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 62.4,
-      "price": 111.65,
-      "observedAt": "2026-11-06T06:55:29.577Z",
-      "sessionChangePct": 1.36,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
     },
     {
       "ticker": "FEDERALBNK",
       "fullName": "Federal Bank Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 60.8,
-      "price": 339.75,
-      "observedAt": "2026-11-06T06:55:37.600Z",
-      "sessionChangePct": 0.37,
+      "discoveryScore": 62.9,
+      "price": 340.4,
+      "observedAt": "2026-11-06T07:00:38.086Z",
+      "sessionChangePct": 0.56,
       "research": null,
-      "reasons": [
-        "not outperforming Nifty",
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
+      "ticker": "UPL",
+      "fullName": "UPL Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 61.8,
+      "price": 531.35,
+      "observedAt": "2026-11-06T07:00:36.077Z",
+      "sessionChangePct": 0.92,
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
+    },
+    {
+      "ticker": "IREDA",
+      "fullName": "Indian Renewable Energy Development Agency Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 61.3,
+      "price": 111.51,
+      "observedAt": "2026-11-06T07:00:34.952Z",
+      "sessionChangePct": 1.23,
+      "research": null,
+      "reasons": [],
+      "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-06T07:00:38.244Z",
+  "updatedAt": "2026-11-06T07:00:41.085Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -2079,9 +2114,9 @@
     "fundingMode": "as-needed-paper-capital"
   },
   "lastCheck": {
-    "at": "2026-11-06T07:00:38.244Z",
-    "action": "risk",
-    "bought": null,
+    "at": "2026-11-06T07:00:41.085Z",
+    "action": "scan",
+    "bought": "STARHEALTH",
     "checked": [
       {
         "ticker": "MEESHO",
@@ -2120,7 +2155,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-06T06:55:39.753Z",
+    "at": "2026-11-06T07:00:40.224Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -2234,6 +2269,12 @@
         ]
       },
       {
+        "ticker": "ANURAS",
+        "reasons": [
+          "missing or stale instrument quote"
+        ]
+      },
+      {
         "ticker": "APARINDS",
         "reasons": [
           "weak or overextended session move"
@@ -2298,12 +2339,6 @@
         "reasons": [
           "weak or overextended session move"
         ]
-      },
-      {
-        "ticker": "AVANTIFEED",
-        "reasons": [
-          "weak or overextended session move"
-        ]
       }
     ],
     "source": "Upstox",
@@ -2311,10 +2346,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.5675195422348622,
-      "observedAt": "2026-11-06T06:55:40.761Z",
+      "changePct": 0.6516795318014745,
+      "observedAt": "2026-11-06T07:00:40.977Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24675.85,
+      "price": 24696.5,
       "previousClose": 24536.6
     }
   },
@@ -2552,6 +2587,12 @@
       {
         "at": "2026-11-06T06:55:40.877Z",
         "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:00:41.085Z",
+        "bought": "STARHEALTH",
         "shortlisted": 8,
         "benchmarkFresh": true
       }
@@ -3150,12 +3191,6 @@
         "firstPrice": 1461.6,
         "observations": [
           {
-            "at": "2026-11-06T03:55:36.984Z",
-            "price": 1472,
-            "score": 64.7,
-            "setup": "no_setup"
-          },
-          {
             "at": "2026-11-06T04:00:30.246Z",
             "price": 1483.3,
             "score": 67.5,
@@ -3364,14 +3399,18 @@
             "price": 1475,
             "score": 63.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:36.649Z",
+            "price": 1471.6,
+            "score": 63.1,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:55:38.054Z",
-        "lastPrice": 1475,
-        "discoveryScore": 63.8,
-        "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-06T07:00:36.649Z",
+        "lastPrice": 1471.6,
+        "discoveryScore": 63.1,
+        "reasons": []
       },
       "TTML": {
         "ticker": "TTML",
@@ -3763,9 +3802,15 @@
             "price": 1455.3,
             "score": 64.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:32.007Z",
+            "price": 1455.3,
+            "score": 64.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:55:38.533Z",
+        "lastSeenAt": "2026-11-06T07:00:32.007Z",
         "lastPrice": 1455.3,
         "discoveryScore": 64.7,
         "reasons": [
@@ -3983,11 +4028,17 @@
             "price": 2608.7,
             "score": 77.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:39.260Z",
+            "price": 2615.5,
+            "score": 78.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:55:39.601Z",
-        "lastPrice": 2608.7,
-        "discoveryScore": 77.7,
+        "lastSeenAt": "2026-11-06T07:00:39.260Z",
+        "lastPrice": 2615.5,
+        "discoveryScore": 78.1,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -4889,14 +4940,18 @@
             "price": 111.65,
             "score": 62.4,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:34.952Z",
+            "price": 111.51,
+            "score": 61.3,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:55:29.577Z",
-        "lastPrice": 111.65,
-        "discoveryScore": 62.4,
-        "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-06T07:00:34.952Z",
+        "lastPrice": 111.51,
+        "discoveryScore": 61.3,
+        "reasons": []
       },
       "ABDL": {
         "ticker": "ABDL",
@@ -4949,15 +5004,18 @@
             "price": 339.75,
             "score": 60.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:38.086Z",
+            "price": 340.4,
+            "score": 62.9,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:55:37.600Z",
-        "lastPrice": 339.75,
-        "discoveryScore": 60.8,
-        "reasons": [
-          "not outperforming Nifty",
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-06T07:00:38.086Z",
+        "lastPrice": 340.4,
+        "discoveryScore": 62.9,
+        "reasons": []
       },
       "INDHOTEL": {
         "ticker": "INDHOTEL",
@@ -4989,11 +5047,17 @@
             "price": 885.7,
             "score": 64.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:37.254Z",
+            "price": 886.8,
+            "score": 66.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:55:38.217Z",
-        "lastPrice": 885.7,
-        "discoveryScore": 64.5,
+        "lastSeenAt": "2026-11-06T07:00:37.254Z",
+        "lastPrice": 886.8,
+        "discoveryScore": 66.1,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -5022,13 +5086,19 @@
             "price": 553.55,
             "score": 62.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:36.291Z",
+            "price": 556.3,
+            "score": 63.4,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:55:40.182Z",
-        "lastPrice": 553.55,
-        "discoveryScore": 62.5,
+        "lastSeenAt": "2026-11-06T07:00:36.291Z",
+        "lastPrice": 556.3,
+        "discoveryScore": 63.4,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "confirmed setup; simulated fill recorded"
         ]
       },
       "AJANTPHARM": {
@@ -5054,6 +5124,25 @@
         "lastSeenAt": "2026-11-06T06:50:37.280Z",
         "lastPrice": 3315.5,
         "discoveryScore": 61.6,
+        "reasons": []
+      },
+      "UPL": {
+        "ticker": "UPL",
+        "fullName": "UPL Ltd.",
+        "sector": "Chemicals",
+        "firstSeenAt": "2026-11-06T07:00:36.077Z",
+        "firstPrice": 531.35,
+        "observations": [
+          {
+            "at": "2026-11-06T07:00:36.077Z",
+            "price": 531.35,
+            "score": 61.8,
+            "setup": "not-evaluated"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T07:00:36.077Z",
+        "lastPrice": 531.35,
+        "discoveryScore": 61.8,
         "reasons": []
       }
     }
