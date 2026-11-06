@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {assessTradingSetups,setupShortlist,SETUP_TYPES} from '../research/trading-setups.js';
 import {setupExitPolicy,observeSetupExit} from '../research/setup-exits.js';
 import {entryMarketContext} from '../research/entry-quality.js';
-import {MULTI_SETUP_CONFIG,SIM_CONFIG} from '../research/paper-policy.js';
+import {MULTI_SETUP_CONFIG,SIM_CONFIG,RELEASE_SIM_CONFIG} from '../research/paper-policy.js';
 import {emptySimulation,transitionSimulation} from '../api/_paper-simulation.js';
 import {captureEntryEvidence} from '../research/entry-evidence.js';
 import {compareSetupExperiments} from '../research/setup-study.js';
@@ -85,7 +85,7 @@ test('new lanes save frozen exit profiles, one-share allocation, typed evidence 
   const p=r.state.positions[0];assert.equal(p.shares,1);assert.equal(p.setupType,'catalyst-continuation');
   assert.equal(p.exitPolicy.mode,'setup-risk');assert.equal(p.exitPolicy.activationR,2);
   assert.equal(p.decisionEvidence.readiness.ready,true);assert.equal(p.researchCohort,'research-backed');
-  assert.equal(SIM_CONFIG.setupMode,undefined); // release is explicitly NOT enabled
+  assert.equal(SIM_CONFIG.setupMode,undefined); // original research comparator stays reproducible
   const html=renderSuggestions(simulationSuggestions(r.state,now.getTime()+1));
   assert.match(html,/Setup plans/);assert.match(html,/Observed trigger/);assert.match(html,/Frozen exit experiment/);
   assert.match(html,/Confirmation checklist/);assert.doesNotMatch(html,/80% confidence/);
@@ -171,4 +171,15 @@ test('explicitly configured handler integrates bounded research, shared setup lo
     assert.equal(res.body.setupMode,'three-setups-v1');assert.equal(res.body.ordersExecuted,0);
     assert.equal(state.positions[0].setupType,'catalyst-continuation');assert.equal(state.positions[0].exitPolicy.mode,'setup-risk');
   }finally{if(old==null)delete process.env.CRON_SECRET;else process.env.CRON_SECRET=old;}
+});
+test('approved release selects all three paper setups without changing execution or account safeguards',()=>{
+  assert.equal(RELEASE_SIM_CONFIG,MULTI_SETUP_CONFIG);
+  assert.equal(RELEASE_SIM_CONFIG.setupMode,'three-setups-v1');assert.equal(RELEASE_SIM_CONFIG.exitMode,'setup-risk');
+  assert.equal(RELEASE_SIM_CONFIG.allowedSetupTypes,undefined);assert.equal(RELEASE_SIM_CONFIG.sharesPerEntry,1);
+  assert.equal(RELEASE_SIM_CONFIG.modeledRiskPerTrade,100);assert.equal(RELEASE_SIM_CONFIG.maxModeledOpenRisk,500);
+  const f=fixture(),s=transitionSimulation(emptySimulation(),f.m,{at:now,action:'scan',config:RELEASE_SIM_CONFIG}).state;
+  const policy=structuredClone(s.positions[0].exitPolicy),initialStop=s.positions[0].initialStopPrice;
+  const later=new Date(now.getTime()+300000),q={...f.quote,price:100.7,bidPrice:100.68,lastTradeAt:later.toISOString(),responseAt:later.toISOString()};
+  const r=transitionSimulation(s,{quotes:{[q.instrumentKey]:q}},{at:later,action:'risk',config:{...RELEASE_SIM_CONFIG,exitMode:'setup-volatility'}});
+  assert.deepEqual(r.state.positions[0].exitPolicy,policy);assert.equal(r.state.positions[0].initialStopPrice,initialStop);
 });

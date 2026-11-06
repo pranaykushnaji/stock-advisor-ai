@@ -2,9 +2,9 @@
 
 ## Release status
 
-Implemented on the existing draft review branch. **Not enabled in the default handler configuration, not merged, and not deployed to production.** Historical account records, quantities, entry/exit prices and P&L are unchanged. No scheduler or broker-order code was added.
+Originally implemented on the draft review branch with activation withheld. The user subsequently explicitly authorized **“deploy everything”**, including activation. `RELEASE_SIM_CONFIG` now selects the three-setup paper engine for the default endpoint on release. Historical account records, quantities, entry/exit prices and P&L are unchanged. No scheduler or broker-order code was added. GitHub/Vercel release status must be verified separately; this source document alone is not deployment proof.
 
-The opt-in configuration is `MULTI_SETUP_CONFIG` in `research/paper-policy.js`. The same `transitionSimulation` and injected handler support it; tests and read-only research runners exercise it. Normal calls still use the branch's existing `SIM_CONFIG`. A caller cannot enable the experiment through a request-body override. No new environment secret or production flag has been set.
+The configuration is `MULTI_SETUP_CONFIG` in `research/paper-policy.js`, selected by the explicit `RELEASE_SIM_CONFIG` alias in the default handler export. The same `transitionSimulation` and injected handler support it; tests and read-only research runners exercise it. `SIM_CONFIG` remains an unchanged historical research comparator and factory default for reproducible injected tests. Request-body overrides cannot select another strategy. No new environment secret or production flag is needed.
 
 ## What was implemented
 
@@ -111,6 +111,6 @@ New records: candidate/position `setupReview`, position/trade `setupType` and fr
 - Optional semantic research stays advisory; this batch does not add autonomous multi-LLM debates or an uncalibrated probability score.
 - Strengthening price action is not proof of institutional buying. No delivery/shareholding evidence was invented.
 - Collect sufficient forward observations across rising, falling and choppy sessions; measure rejection opportunity costs and setup overlap. Validate exit buffers over multi-day portfolios, not just same-day marks.
-- Release requires an explicit review/activation decision. Revert the review-branch changes to roll back; no historical ledger migration is necessary.
+- Activation was explicitly authorized after the diagnostic caveats were reported. To roll back new entries, select `SIM_CONFIG` (confirmed breakout) or `BASELINE_SIM_CONFIG` (original breakout) in `RELEASE_SIM_CONFIG` and redeploy. Existing saved exit policies continue unchanged; no historical ledger migration is necessary.
 
 Research context: [targeted public-project review](open-source-review-2026-11-06.md), [Freqtrade exit callbacks](https://www.freqtrade.io/en/stable/strategy-callbacks/), and [Upstox intraday candle semantics](https://upstox.com/developer/api-documentation/v3/get-intra-day-candle-data/). Framework capabilities are not evidence of profitability in NSE stocks.

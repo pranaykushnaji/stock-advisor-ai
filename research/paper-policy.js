@@ -13,6 +13,8 @@ export const BASELINE_SIM_CONFIG = Object.freeze({...LEGACY_SIM_CONFIG,version:'
 // rules separately. Baseline remains available for isolated A/B comparisons.
 export const SIM_CONFIG = Object.freeze({...BASELINE_SIM_CONFIG,
   executionRuleVersion:'five-minute-confirmed-v4',entryMode:'adaptive',entryQualityVersion:'intraday-confirmation-v1'});
-// Explicit opt-in preview. Existing default behavior and old positions are unchanged.
+// Versioned three-setup experiment. Existing positions retain saved protection.
 export const MULTI_SETUP_CONFIG=Object.freeze({...SIM_CONFIG,executionRuleVersion:'five-minute-three-setups-v1',
   setupMode:'three-setups-v1',exitMode:'setup-risk'});
+// Explicit user-approved release selection. Baselines remain available to research.
+export const RELEASE_SIM_CONFIG=MULTI_SETUP_CONFIG;

@@ -6,6 +6,7 @@ import registry from '../research/universe.json' with {type:'json'};
 import { rankSimulationUniverse, transitionSimulation, validateSimulation, dailyReference, SIM_CONFIG } from './_paper-simulation.js';
 import { savedResearchContext } from './_paper-research-context.js';
 import {setupShortlist} from '../research/trading-setups.js';
+import {RELEASE_SIM_CONFIG} from '../research/paper-policy.js';
 
 const FILE='data/paper-simulation.json',REPO='pranaykushnaji/stock-advisor-ai';
 async function readFile(path,env) {
@@ -172,4 +173,6 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
     }catch{return res.status(502).json({status:'simulation_failed',reason:'check quote access, safety context and atomic ledger persistence; no real orders exist',paperTrading:true});}
   };
 }
-export default createSimulationHandler();
+// Only new entries use the approved release selection. Existing positions keep
+// their frozen saved policies, or original protection if no new policy exists.
+export default createSimulationHandler({config:RELEASE_SIM_CONFIG});
