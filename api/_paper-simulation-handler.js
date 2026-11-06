@@ -39,7 +39,7 @@ async function loadSafety(env,at,members) {
 
 export function createSimulationHandler({env=process.env,now=()=>new Date(),read=path=>readFile(path,env),
   write=(state,sha)=>writeFile(state,sha,env),quotes=fetchFullQuotes,intraday=fetchIntradayOneMinuteCandles,
-  daily=fetchDailyCandles,members=registry.members,registryFetchedAt=registry.fetchedAt,safety=at=>loadSafety(env,at,members)}={}){
+  daily=fetchDailyCandles,members=registry.members,registryFetchedAt=registry.fetchedAt,safety=at=>loadSafety(env,at,members),config=SIM_CONFIG}={}){
   return async(req,res)=>{
     res.setHeader?.('Cache-Control','no-store');
     if(!requireCronAuth(req,res))return;
@@ -65,9 +65,10 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           const [h,i]=await Promise.all([daily(sample[0].instrumentKey,from,date),intraday(sample[0].instrumentKey)]);
           candleAccess={historicalDaily:h.length,intradayMinutes:i.length};
         }
-        return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:SIM_CONFIG.dailyInvestment,
-          fundingMode:SIM_CONFIG.fundingMode,sharesPerEntry:SIM_CONFIG.sharesPerEntry,maxBuysPerDay:SIM_CONFIG.maxBuysPerDay,
-          maxOpenPositions:SIM_CONFIG.maxOpenPositions,sectorLimit:SIM_CONFIG.sectorLimit,
+        return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:config.dailyInvestment,
+          fundingMode:config.fundingMode,sharesPerEntry:config.sharesPerEntry,maxBuysPerDay:config.maxBuysPerDay,
+          maxOpenPositions:config.maxOpenPositions,sectorLimit:config.sectorLimit,
+          entryMode:config.entryMode??'baseline',executionRuleVersion:config.executionRuleVersion,entryQualityVersion:config.entryQualityVersion??null,
           positions:initial.data.positions.length,trades:initial.data.trades.length,
           registryMapped:members.filter(m=>m.instrumentKey).length,quotesRequested:checkedMembers.length,quotesReceived:Object.keys(q).length,candleAccess,
           marketOpen:marketStatus(at).open&&at.getTime()>=Date.parse(`${nowIST(at).ymd}T09:15:00+05:30`)
@@ -92,7 +93,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           .sort((a,b)=>Number(market.researchBySymbol[b.symbol].verified)-Number(market.researchBySymbol[a.symbol].verified)).slice(0,12);
         for(let retry=0;retry<4;retry++){
           const current=retry?await read(FILE):initial;
-          const result=transitionSimulation(current.data,market,{at:now(),action});
+          const result=transitionSimulation(current.data,market,{at:now(),action,config});
           if(!result.changed||await write(result.state,current.sha))return res.status(200).json({status:result.status,
             paperTrading:true,candidates:result.state.suggestions,ordersExecuted:0});
         }
@@ -104,7 +105,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
       let first=initial;
       if(action==='scan'&&heldKeys.length){
         for(let retry=0;retry<4;retry++){
-          const result=transitionSimulation(first.data,market,{at:now(),action:'risk'});
+          const result=transitionSimulation(first.data,market,{at:now(),action:'risk',config});
           if(!result.changed||await write(result.state,first.sha)){first=await read(FILE);break;}
           if(retry===3)throw Error('risk state conflict');first=await read(FILE);
         }
@@ -121,20 +122,26 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
         // Reserve up to two slots for current morning/news research, but only AFTER
         // it passes the identical quote, circuit and momentum discovery safeguards.
         const priority=discovery.ranked.filter(r=>market.researchBySymbol?.[r.symbol]&&!market.researchBySymbol[r.symbol].negative).slice(0,2);
-        const shortlist=[...new Map([...priority,...discovery.ranked].map(r=>[r.symbol,r])).values()].slice(0,8)
+        const pending=discovery.ranked.filter(r=>{const p=first.data.pendingEntries?.[r.symbol],age=now().getTime()-Date.parse(p?.signalAt);
+          return age>=0&&age<=15*60000;}).slice(0,4);
+        const shortlist=[...new Map([...pending,...priority,...discovery.ranked].map(r=>[r.symbol,r])).values()].slice(0,8)
           .sort((a,b)=>b.discoveryScore-a.discoveryScore);
         market.candidates=shortlist.map(r=>({...bySymbol.get(r.symbol),discoveryScore:r.discoveryScore}));
         market.discovery={at:now().toISOString(),requested:scanMembers.length,
           quotesReceived:scanMembers.filter(m=>market.quotes[m.instrumentKey]).length,shortlisted:market.candidates.length,
           rejected:discovery.rejected.slice(0,30),source:'Upstox',registryAt:registry.fetchedAt};
         const from=new Date(at.getTime()-100*86400000).toISOString().slice(0,10);
-        await Promise.all(market.candidates.map(async c=>{
+        // One extra candle request per scan, reused by every candidate. Never
+        // substitute the daily percentage move if short-term index history fails.
+        const benchmarkHistory=config.entryMode?intraday('NSE_INDEX|Nifty 50')
+          .then(rows=>{market.benchmarkCandles=rows;}).catch(()=>{market.benchmarkCandles=[];}):Promise.resolve();
+        await Promise.all([benchmarkHistory,...market.candidates.map(async c=>{
           try{
             const cached=first.data.dailyCache[c.symbol];
-            const [candles,reference]=await Promise.all([intraday(c.instrumentKey),cached?.asOf===date?cached:daily(c.instrumentKey,from,date).then(rows=>dailyReference(rows,date))]);
+            const [candles,reference]=await Promise.all([intraday(c.instrumentKey),cached?.asOf===date&&(!config.entryMode||cached.version===2)?cached:daily(c.instrumentKey,from,date).then(rows=>dailyReference(rows,date))]);
             market.candles[c.symbol]=candles;if(reference)preparedReferences[c.symbol]=reference;
           }catch{/* Missing evidence is a rejection, never a fabricated signal. */}
-        }));
+        })]);
         // Refresh executable quotes AFTER all slower history work. Never book an earlier quote.
         const refreshKeys=[...new Set([...heldKeys,...market.candidates.map(c=>c.instrumentKey),'NSE_INDEX|Nifty 50'])];
         if(refreshKeys.length)Object.assign(market.quotes,await quotes(refreshKeys));
@@ -142,13 +149,14 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
       }
       for(let retry=0;retry<4;retry++){
         at=now();const current=retry?await read(FILE):first;validateSimulation(current.data);
-        const result=transitionSimulation(current.data,market,{at,action});
+        const result=transitionSimulation(current.data,market,{at,action,config});
         Object.assign(result.state.dailyCache,preparedReferences);
         if(!result.changed)return res.status(200).json({status:result.status,paperTrading:true});
         if(await write(result.state,current.sha))return res.status(result.status==='partial'?502:200).json({status:result.status,
           mode:'experimental-paper-only',paperTrading:true,bought:result.bought,checked:result.checked,
-          dailyInvestment:SIM_CONFIG.dailyInvestment,fundingMode:SIM_CONFIG.fundingMode,sharesPerEntry:SIM_CONFIG.sharesPerEntry,
-          strategyVersion:SIM_CONFIG.version,dayInvested:result.state.days[date]?.invested||0,positions:result.state.positions.length,
+          dailyInvestment:config.dailyInvestment,fundingMode:config.fundingMode,sharesPerEntry:config.sharesPerEntry,
+          strategyVersion:config.version,entryMode:config.entryMode??'baseline',executionRuleVersion:config.executionRuleVersion,
+          dayInvested:result.state.days[date]?.invested||0,positions:result.state.positions.length,
           candidates:result.state.suggestions,discovery:result.state.discovery,entryPause,ordersExecuted:0});
       }
       throw Error('simulation state conflict');

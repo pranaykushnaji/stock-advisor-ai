@@ -7,6 +7,8 @@ import { liveSimulationEntry } from './_entry-research.js';
 import { researchExitObservation } from '../research/paper-plan.js';
 import { tradingSessionsHeld } from './_position-risk.js';
 import {SIM_CONFIG,LEGACY_SIM_CONFIG} from '../research/paper-policy.js';
+import {entryMarketContext,assessPaperEntry,researchCohort} from '../research/entry-quality.js';
+import {captureEntryEvidence} from '../research/entry-evidence.js';
 export {SIM_CONFIG,LEGACY_SIM_CONFIG};
 const round = n => Math.round(n * 100) / 100;
 const ymd = d => new Date(d.getTime() + 19800000).toISOString().slice(0, 10);
@@ -55,7 +57,8 @@ export function dailyReference(candles, date) {
   const unique = [...new Map(rows.map(r=>[r.date,r])).values()];
   if (unique.length < 21) return null;
   const last = unique.slice(-20);
-  return { asOf:date, lastSession:unique.at(-1).date, sessions:unique.length,
+  return { version:2,asOf:date, lastSession:unique.at(-1).date, sessions:unique.length,
+    previousClose:unique.at(-1).close,return5Pct:(unique.at(-1).close/unique.at(-6).close-1)*100,
     ema20:ema(unique.map(r=>r.close),20),
     averageTurnoverCr:last.reduce((s,r)=>s+r.close*r.volume,0)/20/1e7 };
 }
@@ -153,14 +156,25 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
     const benchmark=market.quotes['NSE_INDEX|Nifty 50'];
     const benchmarkState=benchmarkObservation(benchmark,{nowMs:at.getTime()});
     const benchmarkFresh=benchmarkState.fresh,benchChange=benchmarkState.changePct;
-    market.discovery={...(market.discovery||{}),benchmark:benchmarkState};
+    // Exactly once per scan. Missing/declining index history pauses entries only;
+    // the exit-first loop above remains independent of all entry research.
+    const entryMarket=config.entryMode?entryMarketContext(market.benchmarkCandles,benchmark,{now:at}):null;
+    market.discovery={...(market.discovery||{}),benchmark:benchmarkState,entryMarket};
+    s.pendingEntries=Object.fromEntries(Object.entries(s.pendingEntries||{}).filter(([symbol,p])=>
+      !blocked.has(symbol)&&Date.parse(p.signalAt)<=at.getTime()&&at.getTime()-Date.parse(p.signalAt)<=15*60000));
     for(const c of market.candidates||[]){
       const row=s.suggestions.find(r=>r.ticker===c.symbol),reasons=row.reasons;
       const q=market.quotes[c.instrumentKey],reference=market.references?.[c.symbol];
-      const setup=freshQuote(q,c,at)?liveSimulationEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'}):null;
+      // Never call the buy detector for a name already owned/traded this session.
+      if(blocked.has(c.symbol)){reasons.push('held or traded today');continue;}
+      const assessment=config.entryMode&&freshQuote(q,c,at)?assessPaperEntry({candles:market.candles?.[c.symbol]||[],
+        quote:q,reference,marketContext:entryMarket,now:at,mode:config.entryMode,
+        fillPrice:q.askPrice*(1+config.entrySlippageBps/10000)}):null;
+      const setup=assessment?.setup??(freshQuote(q,c,at)?liveSimulationEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'}):null);
+      row.entryAssessment=assessment;row.researchCohort=researchCohort(row.research,at);
+      if(assessment?.pendingSignalAt)s.pendingEntries[c.symbol]={symbol:c.symbol,signalAt:assessment.pendingSignalAt,discoveryScore:c.discoveryScore??null};
       row.entryDiagnostics=setup?{status:setup.status,reason:setup.reason??null,version:setup.setupVersion??null}:null;
       if(setup?.status==='setup')row.setup=setup;
-      if(blocked.has(c.symbol))reasons.push('held or traded today');
       if(config.maxBuysPerDay!=null&&day.buys.length>=config.maxBuysPerDay)reasons.push('daily new-position cap');
       if(config.maxOpenPositions!=null&&s.positions.length>=config.maxOpenPositions)reasons.push('open-position exposure cap');
       if(!market.safetyReady)reasons.push('current surveillance/event safety context unavailable');
@@ -174,6 +188,7 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       else if(q?.price<=reference.ema20)reasons.push('below 20-session EMA');
       if(benchChange!=null&&q?.previousClose>0&&(q.price/q.previousClose-1)*100<=benchChange)reasons.push('not outperforming Nifty');
       if(config.sectorLimit!==false&&s.positions.some(p=>p.sector===c.sector))reasons.push('sector already represented');
+      if(config.entryMode)reasons.push(...(assessment?.reasons||['entry momentum evidence unavailable']));
       if(setup?.status!=='setup')reasons.push(setup?.reason||'no usable completed breakout evidence');
       if(reasons.length)continue;
       if(!(q.upperCircuit>q.price && q.lowerCircuit<q.price) || q.price>=q.upperCircuit*0.995 || q.price<=q.lowerCircuit*1.005){reasons.push('official circuit limit unavailable or too close at execution');continue;}
@@ -187,13 +202,15 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
         fullName:c.name,sector:c.sector,date,addedAt:q.lastTradeAt,strategyVersion:config.version,entryLane:'experimental-consolidation',
         entryPrice:fill,shares,investedAmount:invested,entryCost,initialStopPrice:stop,initialStopPct:stopPct,
         modeledInitialRisk:allocation.modeledInitialRisk,peakPrice:fill,currentPrice:q.price,lastObservedAt:q.lastTradeAt,lastPriceUpdate:q.lastTradeAt,
-        summary:setup.setupVersion==='opening-consolidation-v1'
+        summary:assessment?`Completed ${setup.confirmationType} entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.`:setup.setupVersion==='opening-consolidation-v1'
           ?'Completed opening-range breakout with at least 2x recent-bar volume; above VWAP and EMA20, positive relative strength.'
           :'Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.',
-        setup,discoveryScore:c.discoveryScore??null,research:market.researchBySymbol?.[c.symbol]??null,executionRuleVersion:config.executionRuleVersion,
+        setup,entryAssessment:assessment,entryMarket,researchCohort:row.researchCohort,
+        discoveryScore:c.discoveryScore??null,research:market.researchBySymbol?.[c.symbol]??null,executionRuleVersion:config.executionRuleVersion,
         quoteTimestamp:q.lastTradeAt,paperTrading:true,expectedEdge:null};
       s.contributions=round(s.contributions+contribution);day.contribution=round(day.contribution+contribution);
       s.positions.push(p);s.cash=round(s.cash+contribution-invested-entryCost);day.invested=round(day.invested+invested+entryCost);day.buys.push(c.symbol);
+      delete s.pendingEntries[c.symbol];
       row.status='simulated-buy';row.setup=setup;row.reasons=['confirmed setup; simulated fill recorded'];bought=c.symbol;break;
     }
     for(const row of s.suggestions){if(row.status!=='simulated-buy')row.status=row.reasons.length?'not-qualified':'not-selected';}
@@ -204,12 +221,14 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       const h=history.candidates[row.ticker]||{ticker:row.ticker,fullName:row.fullName,sector:row.sector,
         firstSeenAt:row.observedAt,firstPrice:row.price,observations:[]};
       h.lastSeenAt=row.observedAt;h.lastPrice=row.price;h.discoveryScore=row.discoveryScore;h.reasons=row.reasons;
-      h.observations=[...h.observations,{at:row.observedAt,price:row.price,score:row.discoveryScore,setup:row.entryDiagnostics?.status??'not-evaluated'}].slice(-36);
+      h.observations=[...h.observations,{at:row.observedAt,price:row.price,score:row.discoveryScore,setup:row.entryDiagnostics?.status??'not-evaluated',
+        entryStatus:row.entryAssessment?.status??null,researchCohort:row.researchCohort??null}].slice(-36);
       history.candidates[row.ticker]=h;
     }
     history.scans=[...history.scans,{at:at.toISOString(),bought,shortlisted:s.suggestions.length,
       benchmarkFresh:benchmarkState.fresh}].slice(-90);
     s.scanHistory=history;
+    if(config.entryMode)s.entryEvidence=captureEntryEvidence(market,at);
   }
   s.lastSlots[action]=slot;s.updatedAt=at.toISOString();s.config=config;
   s.lastCheck={at:s.updatedAt,action,bought,checked,entryPause:market.entryPause??null,

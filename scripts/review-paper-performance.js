@@ -2,6 +2,7 @@
 import {execFileSync} from 'node:child_process';
 import {reviewPaperSession} from '../research/session-review.js';
 import {performanceSummary} from '../desk/performance.js';
+import {entryCohortPerformance} from '../research/entry-cohorts.js';
 const dates=process.argv.slice(2);
 if(!dates.length||dates.some(d=>!/^\d{4}-\d{2}-\d{2}$/.test(d)||!Number.isFinite(Date.parse(d))))throw Error('Supply exchange-session dates as YYYY-MM-DD');
 const git=args=>execFileSync('git',args,{encoding:'utf8',maxBuffer:30000000});
@@ -13,4 +14,4 @@ const sessions=dates.map(date=>{
 });
 const state=at(ref);
 console.log(JSON.stringify({sourceCommit:git(['rev-parse',ref]).trim(),generatedAt:new Date().toISOString(),
-  accountAsOf:state.updatedAt,performance:performanceSummary(state),sessions},null,2));
+  accountAsOf:state.updatedAt,performance:performanceSummary(state),entryCohorts:entryCohortPerformance(state),sessions},null,2));

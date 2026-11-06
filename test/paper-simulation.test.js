@@ -1,9 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {emptySimulation,validateSimulation,dailyReference,transitionSimulation,rankSimulationUniverse,SIM_CONFIG,LEGACY_SIM_CONFIG,paperEntryAllocation} from '../api/_paper-simulation.js';
+import {emptySimulation,validateSimulation,dailyReference,transitionSimulation as executeTransition,rankSimulationUniverse,SIM_CONFIG,LEGACY_SIM_CONFIG,paperEntryAllocation} from '../api/_paper-simulation.js';
+import {BASELINE_SIM_CONFIG} from '../research/paper-policy.js';
 import {createSimulationHandler} from '../api/_paper-simulation-handler.js';
 import {savedResearchContext,verifiedResearchEvent} from '../api/_paper-research-context.js';
 import {liveSimulationEntry} from '../api/_entry-research.js';
+// These are ledger/funding regression fixtures for the original entry signal.
+// The production confirmation path is tested separately in entry-quality.test.js.
+const transitionSimulation=(s,m,options)=>executeTransition(s,m,{config:BASELINE_SIM_CONFIG,...options});
 
 const start=Date.parse('2026-11-04T04:30:05Z');
 const c=(symbol='ABC',sector='IT')=>({symbol,name:symbol,sector,marketCapBucket:'mid',instrumentKey:`NSE_EQ|${symbol}`});
@@ -96,7 +100,7 @@ test('after-hours handler never funds, researches or writes a simulated trade, e
 test('simulation handler retries CAS against fresh state without double-counting a buy',async()=>{
   const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';let current=emptySimulation(),writes=0;
   const at=new Date(start),member=c(),m=market(at,[member]);
-  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},now:()=>at,members:[member],registryFetchedAt:'2026-11-03T00:00:00Z',
+  const h=createSimulationHandler({config:BASELINE_SIM_CONFIG,env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},now:()=>at,members:[member],registryFetchedAt:'2026-11-03T00:00:00Z',
     read:async()=>({data:structuredClone(current),sha:String(writes)}),write:async(state)=>{writes++;if(writes===1){current=state;return false;}current=state;return true;},
     quotes:async keys=>Object.fromEntries(keys.map(k=>[k,m.quotes[k]])),intraday:async()=>candles(at),daily:async()=>[],safety:async()=>({safetyReady:true,negativeSymbols:[],surveillance:[]})});
   current.dailyCache.ABC={asOf:'2026-11-04',ema20:99,averageTurnoverCr:20};
@@ -251,7 +255,7 @@ test('handler evaluates a pre-10am non-quarter-hour scan and preserves risk exit
   const old=process.env.CRON_SECRET;process.env.CRON_SECRET='test';
   let at=new Date('2026-11-04T09:35:05+05:30'),current=emptySimulation(),m=market(at),failSafety=false;
   current.dailyCache.ABC={asOf:'2026-11-04',ema20:99,averageTurnoverCr:20};
-  const h=createSimulationHandler({env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},
+  const h=createSimulationHandler({config:BASELINE_SIM_CONFIG,env:{PAPER_SIMULATION_ENABLED:'true',UPSTOX_ACCESS_TOKEN:'test',GITHUB_TOKEN:'test'},
     now:()=>at,members:[c()],registryFetchedAt:'2026-11-03T00:00:00Z',read:async()=>({data:structuredClone(current),sha:'x'}),
     write:async state=>{current=state;return true;},quotes:async keys=>Object.fromEntries(keys.map(k=>[k,m.quotes[k]])),
     intraday:async()=>candles(at),daily:async()=>[],safety:async()=>{if(failSafety)throw Error('outage');return {safetyReady:true};}});
