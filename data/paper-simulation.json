@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-one-share-v2",
   "mode": "experimental-paper-only",
-  "cash": 12324.59,
+  "cash": 9499.76,
   "contributions": 20000,
   "positions": [
     {
@@ -24,9 +24,9 @@
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
       "peakPrice": 238.2,
-      "currentPrice": 232.14,
-      "lastObservedAt": "2026-11-06T06:05:37.521Z",
-      "lastPriceUpdate": "2026-11-06T06:05:37.521Z",
+      "currentPrice": 233.5,
+      "lastObservedAt": "2026-11-06T09:55:38.694Z",
+      "lastPriceUpdate": "2026-11-06T09:55:38.694Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -66,10 +66,10 @@
       "initialStopPrice": 3394.602,
       "initialStopPct": 1.454965227232441,
       "modeledInitialRisk": 62.18,
-      "peakPrice": 3444.7214999999997,
-      "currentPrice": 3437.5,
-      "lastObservedAt": "2026-11-06T06:05:39.851Z",
-      "lastPriceUpdate": "2026-11-06T06:05:39.851Z",
+      "peakPrice": 3530.1,
+      "currentPrice": 3530.1,
+      "lastObservedAt": "2026-11-06T09:44:59.847Z",
+      "lastPriceUpdate": "2026-11-06T09:44:59.847Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -89,93 +89,8 @@
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T04:40:40.772Z",
       "paperTrading": true,
-      "expectedEdge": null
-    },
-    {
-      "id": "2026-11-06|MGL|paper-one-share-v2",
-      "ticker": "MGL",
-      "symbol": "MGL",
-      "instrumentKey": "NSE_EQ|INE002S01010",
-      "fullName": "Mahanagar Gas Ltd.",
-      "sector": "Oil Gas & Consumable Fuels",
-      "date": "2026-11-06",
-      "addedAt": "2026-11-06T04:45:37.434Z",
-      "strategyVersion": "paper-one-share-v2",
-      "entryLane": "experimental-consolidation",
-      "entryPrice": 1136.3679,
-      "shares": 1,
-      "investedAmount": 1136.37,
-      "entryCost": 1.7,
-      "initialStopPrice": 1121.9769,
-      "initialStopPct": 1.266403248455017,
-      "modeledInitialRisk": 18.37,
-      "peakPrice": 1136.3679,
-      "currentPrice": 1131,
-      "lastObservedAt": "2026-11-06T06:05:20.163Z",
-      "lastPriceUpdate": "2026-11-06T06:05:20.163Z",
-      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-06T04:45:00.000Z",
-        "entryAt": "2026-11-06T04:45:37.434Z",
-        "entryPrice": 1135.3,
-        "entryIndex": 12,
-        "breakoutLevel": 1134,
-        "supportLevel": 1123.1,
-        "vwap": 1124.3072653346578,
-        "volumeRatio": 3.7370566497771347,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      },
-      "discoveryScore": 63.9,
-      "research": null,
-      "executionRuleVersion": "five-minute-one-share-v3",
-      "quoteTimestamp": "2026-11-06T04:45:37.434Z",
-      "paperTrading": true,
-      "expectedEdge": null
-    },
-    {
-      "id": "2026-11-06|BSOFT|paper-one-share-v2",
-      "ticker": "BSOFT",
-      "symbol": "BSOFT",
-      "instrumentKey": "NSE_EQ|INE836A01035",
-      "fullName": "Birlasoft Ltd.",
-      "sector": "Information Technology",
-      "date": "2026-11-06",
-      "addedAt": "2026-11-06T04:55:38.166Z",
-      "strategyVersion": "paper-one-share-v2",
-      "entryLane": "experimental-consolidation",
-      "entryPrice": 341.720775,
-      "shares": 1,
-      "investedAmount": 341.72,
-      "entryCost": 0.51,
-      "initialStopPrice": 336.7629,
-      "initialStopPct": 1.4508555998680506,
-      "modeledInitialRisk": 6.15,
-      "peakPrice": 343.7,
-      "currentPrice": 341.8,
-      "lastObservedAt": "2026-11-06T06:05:36.156Z",
-      "lastPriceUpdate": "2026-11-06T06:05:36.156Z",
-      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-06T04:55:00.000Z",
-        "entryAt": "2026-11-06T04:55:38.166Z",
-        "entryPrice": 341.5,
-        "entryIndex": 14,
-        "breakoutLevel": 339.9,
-        "supportLevel": 337.1,
-        "vwap": 338.0215258105647,
-        "volumeRatio": 3.7066947866567217,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      },
-      "discoveryScore": 69.5,
-      "research": null,
-      "executionRuleVersion": "five-minute-one-share-v3",
-      "quoteTimestamp": "2026-11-06T04:55:38.166Z",
-      "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 3479.9805
     },
     {
       "id": "2026-11-06|HAVELLS|paper-one-share-v2",
@@ -195,10 +110,10 @@
       "initialStopPrice": 1068.0309,
       "initialStopPct": 1.1759719103603183,
       "modeledInitialRisk": 16.49,
-      "peakPrice": 1081.4,
-      "currentPrice": 1081.4,
-      "lastObservedAt": "2026-11-06T06:05:38.022Z",
-      "lastPriceUpdate": "2026-11-06T06:05:38.022Z",
+      "peakPrice": 1125.4,
+      "currentPrice": 1125.4,
+      "lastObservedAt": "2026-11-06T09:44:59.805Z",
+      "lastPriceUpdate": "2026-11-06T09:44:59.805Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -218,48 +133,353 @@
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T05:45:38.024Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 1112.6908
     },
     {
-      "id": "2026-11-06|PATANJALI|paper-one-share-v2",
-      "ticker": "PATANJALI",
-      "symbol": "PATANJALI",
-      "instrumentKey": "NSE_EQ|INE619A01035",
-      "fullName": "Patanjali Foods Ltd.",
-      "sector": "Fast Moving Consumer Goods",
+      "id": "2026-11-06|KARURVYSYA|paper-one-share-v2",
+      "ticker": "KARURVYSYA",
+      "symbol": "KARURVYSYA",
+      "instrumentKey": "NSE_EQ|INE036D01028",
+      "fullName": "Karur Vysya Bank Ltd.",
+      "sector": "Financial Services",
       "date": "2026-11-06",
-      "addedAt": "2026-11-06T06:05:38.621Z",
+      "addedAt": "2026-11-06T06:15:39.142Z",
       "strategyVersion": "paper-one-share-v2",
       "entryLane": "experimental-consolidation",
-      "entryPrice": 415.2075,
+      "entryPrice": 366.533175,
       "shares": 1,
-      "investedAmount": 415.21,
-      "entryCost": 0.62,
-      "initialStopPrice": 411.9876,
-      "initialStopPct": 0.7754917721861987,
-      "modeledInitialRisk": 4.67,
-      "peakPrice": 415.2075,
-      "currentPrice": 415,
-      "lastObservedAt": "2026-11-06T06:05:38.621Z",
-      "lastPriceUpdate": "2026-11-06T06:05:38.621Z",
+      "investedAmount": 366.53,
+      "entryCost": 0.55,
+      "initialStopPrice": 363.78585,
+      "initialStopPct": 0.7495433394262507,
+      "modeledInitialRisk": 4.03,
+      "peakPrice": 370.8,
+      "currentPrice": 368.9,
+      "lastObservedAt": "2026-11-06T09:44:56.544Z",
+      "lastPriceUpdate": "2026-11-06T09:44:56.544Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
-        "signalAt": "2026-11-06T06:05:00.000Z",
-        "entryAt": "2026-11-06T06:05:38.621Z",
-        "entryPrice": 415,
-        "entryIndex": 28,
-        "breakoutLevel": 414.6,
-        "supportLevel": 412.4,
-        "vwap": 410.17965623545786,
-        "volumeRatio": 8.07931012236296,
+        "signalAt": "2026-11-06T06:15:00.000Z",
+        "entryAt": "2026-11-06T06:15:39.142Z",
+        "entryPrice": 366.15,
+        "entryIndex": 30,
+        "breakoutLevel": 365.2,
+        "supportLevel": 364.15,
+        "vwap": 362.44375454884164,
+        "volumeRatio": 1.6495541745474196,
         "setupVersion": "consolidation-v1",
         "execution": "shadow-quote-only"
       },
       "discoveryScore": 63.9,
       "research": null,
       "executionRuleVersion": "five-minute-one-share-v3",
-      "quoteTimestamp": "2026-11-06T06:05:38.621Z",
+      "quoteTimestamp": "2026-11-06T06:15:39.142Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "trailingStopPrice": 368.05267499999997
+    },
+    {
+      "id": "2026-11-06|KALYANKJIL|paper-one-share-v2",
+      "ticker": "KALYANKJIL",
+      "symbol": "KALYANKJIL",
+      "instrumentKey": "NSE_EQ|INE303R01014",
+      "fullName": "Kalyan Jewellers India Ltd.",
+      "sector": "Consumer Durables",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T06:50:40.326Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 585.2925,
+      "shares": 1,
+      "investedAmount": 585.29,
+      "entryCost": 0.88,
+      "initialStopPrice": 578.0713499999999,
+      "initialStopPct": 1.2337677315188644,
+      "modeledInitialRisk": 9.27,
+      "peakPrice": 596.5,
+      "currentPrice": 590.75,
+      "lastObservedAt": "2026-11-06T09:44:58.827Z",
+      "lastPriceUpdate": "2026-11-06T09:44:58.827Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T06:50:00.000Z",
+        "entryAt": "2026-11-06T06:50:40.326Z",
+        "entryPrice": 584.95,
+        "entryIndex": 37,
+        "breakoutLevel": 584.1,
+        "supportLevel": 578.65,
+        "vwap": 576.7360015863276,
+        "volumeRatio": 2.106765841983419,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 75.8,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T06:50:40.326Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "trailingStopPrice": 589.2788499999999
+    },
+    {
+      "id": "2026-11-06|STARHEALTH|paper-one-share-v2",
+      "ticker": "STARHEALTH",
+      "symbol": "STARHEALTH",
+      "instrumentKey": "NSE_EQ|INE575P01011",
+      "fullName": "Star Health and Allied Insurance Company Ltd.",
+      "sector": "Financial Services",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T07:00:36.291Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 556.5781499999999,
+      "shares": 1,
+      "investedAmount": 556.58,
+      "entryCost": 0.83,
+      "initialStopPrice": 548.7506999999999,
+      "initialStopPct": 1.406352369384245,
+      "modeledInitialRisk": 9.78,
+      "peakPrice": 569,
+      "currentPrice": 564.9,
+      "lastObservedAt": "2026-11-06T09:55:36.839Z",
+      "lastPriceUpdate": "2026-11-06T09:55:36.839Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T07:00:00.000Z",
+        "entryAt": "2026-11-06T07:00:36.291Z",
+        "entryPrice": 556.3,
+        "entryIndex": 39,
+        "breakoutLevel": 554.6,
+        "supportLevel": 549.3,
+        "vwap": 546.9245875404209,
+        "volumeRatio": 2.888680631189686,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 63.4,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T07:00:36.291Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "trailingStopPrice": 561.17255
+    },
+    {
+      "id": "2026-11-06|AUROPHARMA|paper-one-share-v2",
+      "ticker": "AUROPHARMA",
+      "symbol": "AUROPHARMA",
+      "instrumentKey": "NSE_EQ|INE406A01037",
+      "fullName": "Aurobindo Pharma Ltd.",
+      "sector": "Healthcare",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T07:05:39.143Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 1800.79995,
+      "shares": 1,
+      "investedAmount": 1800.8,
+      "entryCost": 2.7,
+      "initialStopPrice": 1786.7115,
+      "initialStopPct": 0.7823439799629184,
+      "modeledInitialRisk": 20.39,
+      "peakPrice": 1800.79995,
+      "currentPrice": 1794.8,
+      "lastObservedAt": "2026-11-06T09:44:59.755Z",
+      "lastPriceUpdate": "2026-11-06T09:44:59.755Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T07:05:00.000Z",
+        "entryAt": "2026-11-06T07:05:39.143Z",
+        "entryPrice": 1799.5,
+        "entryIndex": 40,
+        "breakoutLevel": 1798.6,
+        "supportLevel": 1788.5,
+        "vwap": 1789.9000966387164,
+        "volumeRatio": 1.9153247891335305,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 61.2,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T07:05:39.143Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-06|UPL|paper-one-share-v2",
+      "ticker": "UPL",
+      "symbol": "UPL",
+      "instrumentKey": "NSE_EQ|INE628A01036",
+      "fullName": "UPL Ltd.",
+      "sector": "Chemicals",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T07:15:40.266Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 534.9173249999999,
+      "shares": 1,
+      "investedAmount": 534.92,
+      "entryCost": 0.8,
+      "initialStopPrice": 524.72475,
+      "initialStopPct": 1.9054486597531506,
+      "modeledInitialRisk": 12.06,
+      "peakPrice": 537.35,
+      "currentPrice": 532.6,
+      "lastObservedAt": "2026-11-06T09:44:59.963Z",
+      "lastPriceUpdate": "2026-11-06T09:44:59.963Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T07:15:00.000Z",
+        "entryAt": "2026-11-06T07:15:40.266Z",
+        "entryPrice": 534.65,
+        "entryIndex": 42,
+        "breakoutLevel": 532.25,
+        "supportLevel": 525.25,
+        "vwap": 526.406516767346,
+        "volumeRatio": 2.911038987219288,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 65.5,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T07:15:40.266Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-06|MAHABANK|paper-one-share-v2",
+      "ticker": "MAHABANK",
+      "symbol": "MAHABANK",
+      "instrumentKey": "NSE_EQ|INE457A01014",
+      "fullName": "Bank of Maharashtra",
+      "sector": "Financial Services",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T08:30:39.217Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 86.28312,
+      "shares": 1,
+      "investedAmount": 86.28,
+      "entryCost": 0.13,
+      "initialStopPrice": 85.3146,
+      "initialStopPct": 1.122490702700596,
+      "modeledInitialRisk": 1.27,
+      "peakPrice": 86.29,
+      "currentPrice": 86.26,
+      "lastObservedAt": "2026-11-06T09:44:59.216Z",
+      "lastPriceUpdate": "2026-11-06T09:44:59.216Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T08:30:00.000Z",
+        "entryAt": "2026-11-06T08:30:39.217Z",
+        "entryPrice": 86.24,
+        "entryIndex": 57,
+        "breakoutLevel": 85.95,
+        "supportLevel": 85.4,
+        "vwap": 85.39234522910506,
+        "volumeRatio": 4.2420923846326835,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 65.6,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T08:30:39.217Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-06|IREDA|paper-one-share-v2",
+      "ticker": "IREDA",
+      "symbol": "IREDA",
+      "instrumentKey": "NSE_EQ|INE202E01016",
+      "fullName": "Indian Renewable Energy Development Agency Ltd.",
+      "sector": "Financial Services",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T09:05:40.433Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 111.885915,
+      "shares": 1,
+      "investedAmount": 111.89,
+      "entryCost": 0.17,
+      "initialStopPrice": 111.00888,
+      "initialStopPct": 0.7838654222026009,
+      "modeledInitialRisk": 1.27,
+      "peakPrice": 111.97,
+      "currentPrice": 111.65,
+      "lastObservedAt": "2026-11-06T09:44:59.908Z",
+      "lastPriceUpdate": "2026-11-06T09:44:59.908Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T09:05:00.000Z",
+        "entryAt": "2026-11-06T09:05:40.433Z",
+        "entryPrice": 111.83,
+        "entryIndex": 64,
+        "breakoutLevel": 111.69,
+        "supportLevel": 111.12,
+        "vwap": 110.58044772268585,
+        "volumeRatio": 2.241533990396765,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 65.4,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T09:05:40.433Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-06|IIFL|paper-one-share-v2",
+      "ticker": "IIFL",
+      "symbol": "IIFL",
+      "instrumentKey": "NSE_EQ|INE530B01024",
+      "fullName": "IIFL Finance Ltd.",
+      "sector": "Financial Services",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T09:20:39.601Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 624.7121999999999,
+      "shares": 1,
+      "investedAmount": 624.71,
+      "entryCost": 0.94,
+      "initialStopPrice": 615.8835,
+      "initialStopPct": 1.4132427700307315,
+      "modeledInitialRisk": 11.02,
+      "peakPrice": 625.8,
+      "currentPrice": 624.95,
+      "lastObservedAt": "2026-11-06T09:55:35.387Z",
+      "lastPriceUpdate": "2026-11-06T09:55:35.387Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T09:20:00.000Z",
+        "entryAt": "2026-11-06T09:20:39.601Z",
+        "entryPrice": 624.2,
+        "entryIndex": 67,
+        "breakoutLevel": 621,
+        "supportLevel": 616.5,
+        "vwap": 615.3373989499206,
+        "volumeRatio": 7.541847644503843,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 71.2,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T09:20:39.601Z",
       "paperTrading": true,
       "expectedEdge": null
     }
@@ -737,6 +957,336 @@
       "exitCost": 0.8,
       "estimatedCostAmount": 1.61,
       "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-06|MGL|paper-one-share-v2",
+      "ticker": "MGL",
+      "symbol": "MGL",
+      "instrumentKey": "NSE_EQ|INE002S01010",
+      "fullName": "Mahanagar Gas Ltd.",
+      "sector": "Oil Gas & Consumable Fuels",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T04:45:37.434Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 1136.3679,
+      "shares": 1,
+      "investedAmount": 1136.37,
+      "entryCost": 1.7,
+      "initialStopPrice": 1121.9769,
+      "initialStopPct": 1.266403248455017,
+      "modeledInitialRisk": 18.37,
+      "peakPrice": 1136.3679,
+      "currentPrice": 1119.8,
+      "lastObservedAt": "2026-11-06T06:20:34.849Z",
+      "lastPriceUpdate": "2026-11-06T06:20:34.849Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T04:45:00.000Z",
+        "entryAt": "2026-11-06T04:45:37.434Z",
+        "entryPrice": 1135.3,
+        "entryIndex": 12,
+        "breakoutLevel": 1134,
+        "supportLevel": 1123.1,
+        "vwap": 1124.3072653346578,
+        "volumeRatio": 3.7370566497771347,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 63.9,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T04:45:37.434Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "exitIntent": {
+        "id": "2026-11-06|MGL|paper-one-share-v2|risk-unit-trail-v1",
+        "observedAt": "2026-11-06T06:20:34.849Z",
+        "triggerPrice": 1121.9769,
+        "observedFillPrice": 1119.2,
+        "reason": "initial invalidation",
+        "grossReturnPct": -1.510769531592715,
+        "estimatedNetReturnPct": -1.810769531592715,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-06T04:45:37.434Z",
+      "entryDate": "2026-11-06",
+      "exitAt": "2026-11-06T06:20:34.849Z",
+      "exitDate": "2026-11-06",
+      "exitPrice": 1118.6404,
+      "triggerPrice": 1121.9769,
+      "exitReason": "initial invalidation",
+      "realizedPnl": -17.73,
+      "realizedNetPnl": -21.11,
+      "realizedPnlPct": -1.56,
+      "exitCost": 1.68,
+      "estimatedCostAmount": 3.38,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-06|BIOCON|paper-one-share-v2",
+      "ticker": "BIOCON",
+      "symbol": "BIOCON",
+      "instrumentKey": "NSE_EQ|INE376G01013",
+      "fullName": "Biocon Ltd.",
+      "sector": "Healthcare",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T08:00:38.158Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 365.48265,
+      "shares": 1,
+      "investedAmount": 365.48,
+      "entryCost": 0.55,
+      "initialStopPrice": 363.636,
+      "initialStopPct": 0.5052633825435859,
+      "modeledInitialRisk": 3.13,
+      "peakPrice": 365.48265,
+      "currentPrice": 362.55,
+      "lastObservedAt": "2026-11-06T08:25:33.402Z",
+      "lastPriceUpdate": "2026-11-06T08:25:33.402Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T08:00:00.000Z",
+        "entryAt": "2026-11-06T08:00:38.158Z",
+        "entryPrice": 365.15,
+        "entryIndex": 51,
+        "breakoutLevel": 364.9,
+        "supportLevel": 364,
+        "vwap": 361.62588610886695,
+        "volumeRatio": 4.375818426504166,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 64,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T08:00:38.158Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "exitIntent": {
+        "id": "2026-11-06|BIOCON|paper-one-share-v2|risk-unit-trail-v1",
+        "observedAt": "2026-11-06T08:25:33.402Z",
+        "triggerPrice": 363.636,
+        "observedFillPrice": 362.5,
+        "reason": "initial invalidation",
+        "grossReturnPct": -0.816085250558396,
+        "estimatedNetReturnPct": -1.116085250558396,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-06T08:00:38.158Z",
+      "entryDate": "2026-11-06",
+      "exitAt": "2026-11-06T08:25:33.402Z",
+      "exitDate": "2026-11-06",
+      "exitPrice": 362.31875,
+      "triggerPrice": 363.636,
+      "exitReason": "initial invalidation",
+      "realizedPnl": -3.16,
+      "realizedNetPnl": -4.25,
+      "realizedPnlPct": -0.87,
+      "exitCost": 0.54,
+      "estimatedCostAmount": 1.09,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-06|ABDL|paper-one-share-v2",
+      "ticker": "ABDL",
+      "symbol": "ABDL",
+      "instrumentKey": "NSE_EQ|INE552Z01027",
+      "fullName": "Allied Blenders and Distillers Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T06:45:17.481Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 712.7561999999999,
+      "shares": 1,
+      "investedAmount": 712.76,
+      "entryCost": 1.07,
+      "initialStopPrice": 707.2420500000001,
+      "initialStopPct": 0.7736376056777683,
+      "modeledInitialRisk": 8.01,
+      "peakPrice": 712.7561999999999,
+      "currentPrice": 706.8,
+      "lastObservedAt": "2026-11-06T08:45:36.516Z",
+      "lastPriceUpdate": "2026-11-06T08:45:36.516Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T06:45:00.000Z",
+        "entryAt": "2026-11-06T06:45:17.481Z",
+        "entryPrice": 712.45,
+        "entryIndex": 36,
+        "breakoutLevel": 711,
+        "supportLevel": 707.95,
+        "vwap": 706.8020928007938,
+        "volumeRatio": 1.7251243781094527,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 62.5,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T06:45:17.481Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "exitIntent": {
+        "id": "2026-11-06|ABDL|paper-one-share-v2|risk-unit-trail-v1",
+        "observedAt": "2026-11-06T08:45:36.516Z",
+        "triggerPrice": 707.2420500000001,
+        "observedFillPrice": 706.45,
+        "reason": "initial invalidation",
+        "grossReturnPct": -0.8847625597644626,
+        "estimatedNetReturnPct": -1.1847625597644627,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-06T06:45:17.481Z",
+      "entryDate": "2026-11-06",
+      "exitAt": "2026-11-06T08:45:36.516Z",
+      "exitDate": "2026-11-06",
+      "exitPrice": 706.0967750000001,
+      "triggerPrice": 707.2420500000001,
+      "exitReason": "initial invalidation",
+      "realizedPnl": -6.66,
+      "realizedNetPnl": -8.79,
+      "realizedPnlPct": -0.93,
+      "exitCost": 1.06,
+      "estimatedCostAmount": 2.13,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-06|BSOFT|paper-one-share-v2",
+      "ticker": "BSOFT",
+      "symbol": "BSOFT",
+      "instrumentKey": "NSE_EQ|INE836A01035",
+      "fullName": "Birlasoft Ltd.",
+      "sector": "Information Technology",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T04:55:38.166Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 341.720775,
+      "shares": 1,
+      "investedAmount": 341.72,
+      "entryCost": 0.51,
+      "initialStopPrice": 336.7629,
+      "initialStopPct": 1.4508555998680506,
+      "modeledInitialRisk": 6.15,
+      "peakPrice": 343.7,
+      "currentPrice": 336.05,
+      "lastObservedAt": "2026-11-06T09:45:35.238Z",
+      "lastPriceUpdate": "2026-11-06T09:45:35.238Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T04:55:00.000Z",
+        "entryAt": "2026-11-06T04:55:38.166Z",
+        "entryPrice": 341.5,
+        "entryIndex": 14,
+        "breakoutLevel": 339.9,
+        "supportLevel": 337.1,
+        "vwap": 338.0215258105647,
+        "volumeRatio": 3.7066947866567217,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 69.5,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T04:55:38.166Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "exitIntent": {
+        "id": "2026-11-06|BSOFT|paper-one-share-v2|risk-unit-trail-v1",
+        "observedAt": "2026-11-06T09:45:35.238Z",
+        "triggerPrice": 336.7629,
+        "observedFillPrice": 336.05,
+        "reason": "initial invalidation",
+        "grossReturnPct": -1.659476220022027,
+        "estimatedNetReturnPct": -1.959476220022027,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-06T04:55:38.166Z",
+      "entryDate": "2026-11-06",
+      "exitAt": "2026-11-06T09:45:35.238Z",
+      "exitDate": "2026-11-06",
+      "exitPrice": 335.881975,
+      "triggerPrice": 336.7629,
+      "exitReason": "initial invalidation",
+      "realizedPnl": -5.84,
+      "realizedNetPnl": -6.85,
+      "realizedPnlPct": -1.71,
+      "exitCost": 0.5,
+      "estimatedCostAmount": 1.01,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-06|PATANJALI|paper-one-share-v2",
+      "ticker": "PATANJALI",
+      "symbol": "PATANJALI",
+      "instrumentKey": "NSE_EQ|INE619A01035",
+      "fullName": "Patanjali Foods Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T06:05:38.621Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 415.2075,
+      "shares": 1,
+      "investedAmount": 415.21,
+      "entryCost": 0.62,
+      "initialStopPrice": 411.9876,
+      "initialStopPct": 0.7754917721861987,
+      "modeledInitialRisk": 4.67,
+      "peakPrice": 416.7,
+      "currentPrice": 411,
+      "lastObservedAt": "2026-11-06T09:44:59.936Z",
+      "lastPriceUpdate": "2026-11-06T09:44:59.936Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T06:05:00.000Z",
+        "entryAt": "2026-11-06T06:05:38.621Z",
+        "entryPrice": 415,
+        "entryIndex": 28,
+        "breakoutLevel": 414.6,
+        "supportLevel": 412.4,
+        "vwap": 410.17965623545786,
+        "volumeRatio": 8.07931012236296,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 63.9,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T06:05:38.621Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "exitIntent": {
+        "id": "2026-11-06|PATANJALI|paper-one-share-v2|risk-unit-trail-v1",
+        "observedAt": "2026-11-06T09:44:59.936Z",
+        "triggerPrice": 411.9876,
+        "observedFillPrice": 410.7,
+        "reason": "initial invalidation",
+        "grossReturnPct": -1.0856017774245386,
+        "estimatedNetReturnPct": -1.3856017774245386,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-06T06:05:38.621Z",
+      "entryDate": "2026-11-06",
+      "exitAt": "2026-11-06T09:44:59.936Z",
+      "exitDate": "2026-11-06",
+      "exitPrice": 410.49465000000004,
+      "triggerPrice": 411.9876,
+      "exitReason": "initial invalidation",
+      "realizedPnl": -4.72,
+      "realizedNetPnl": -5.96,
+      "realizedPnlPct": -1.14,
+      "exitCost": 0.62,
+      "estimatedCostAmount": 1.24,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
     }
   ],
   "days": {
@@ -766,7 +1316,7 @@
     },
     "2026-11-06": {
       "contribution": 0,
-      "invested": 7182.57,
+      "invested": 12936.43,
       "buys": [
         "MCX",
         "MGL",
@@ -774,20 +1324,35 @@
         "LICHSGFIN",
         "CROMPTON",
         "HAVELLS",
-        "PATANJALI"
+        "PATANJALI",
+        "KARURVYSYA",
+        "ABDL",
+        "KALYANKJIL",
+        "STARHEALTH",
+        "AUROPHARMA",
+        "UPL",
+        "BIOCON",
+        "MAHABANK",
+        "IREDA",
+        "IIFL"
       ],
       "exits": [
         "ZENSARTECH",
         "ANGELONE",
         "CROMPTON",
-        "LICHSGFIN"
+        "LICHSGFIN",
+        "MGL",
+        "BIOCON",
+        "ABDL",
+        "BSOFT",
+        "PATANJALI"
       ]
     }
   },
   "lastSlots": {
     "research": 1793936400000,
-    "scan": 1793945100000,
-    "risk": 1793945100000
+    "scan": 1793958900000,
+    "risk": 1793958900000
   },
   "dailyCache": {
     "GROWW": {
@@ -896,11 +1461,11 @@
       "averageTurnoverCr": 167.48105958635
     },
     "LINDEINDIA": {
-      "asOf": "2026-11-04",
-      "lastSession": "2026-11-03",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 5884.00560187798,
-      "averageTurnoverCr": 9.12464985
+      "ema20": 5968.31567503382,
+      "averageTurnoverCr": 16.2928493125
     },
     "NEULANDLAB": {
       "asOf": "2026-11-04",
@@ -1029,11 +1594,11 @@
       "averageTurnoverCr": 228.64286209375
     },
     "ACE": {
-      "asOf": "2026-11-04",
-      "lastSession": "2026-11-03",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 1084.3642899571757,
-      "averageTurnoverCr": 30.90534650475
+      "ema20": 1090.238889525032,
+      "averageTurnoverCr": 31.694971865500005
     },
     "TARIL": {
       "asOf": "2026-11-04",
@@ -1225,11 +1790,11 @@
       "averageTurnoverCr": 202.52352340595002
     },
     "HINDPETRO": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 347.3445522426443,
-      "averageTurnoverCr": 181.36922758275
+      "ema20": 350.4571257529992,
+      "averageTurnoverCr": 196.76198398575002
     },
     "POONAWALLA": {
       "asOf": "2026-11-05",
@@ -1260,18 +1825,18 @@
       "averageTurnoverCr": 47.533630866500005
     },
     "CARTRADE": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 2685.379529776814,
-      "averageTurnoverCr": 203.18687897
+      "ema20": 2677.2759275042386,
+      "averageTurnoverCr": 216.07696705299998
     },
     "PIRAMALFIN": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 1941.924219612261,
-      "averageTurnoverCr": 65.91790121400001
+      "ema20": 1958.842194517527,
+      "averageTurnoverCr": 70.17883431850001
     },
     "IRCON": {
       "asOf": "2026-11-05",
@@ -1288,11 +1853,11 @@
       "averageTurnoverCr": 102.43921157875
     },
     "INDUSINDBK": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 865.0732584587931,
-      "averageTurnoverCr": 198.88821518975004
+      "ema20": 869.4991237326362,
+      "averageTurnoverCr": 224.84569082450002
     },
     "PINELABS": {
       "asOf": "2026-11-05",
@@ -1351,11 +1916,11 @@
       "averageTurnoverCr": 102.8945095235
     },
     "PAYTM": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 1676.4134646844432,
-      "averageTurnoverCr": 665.0976423175
+      "ema20": 1686.430928007604,
+      "averageTurnoverCr": 648.8567259255
     },
     "ABSLAMC": {
       "asOf": "2026-11-05",
@@ -1379,11 +1944,11 @@
       "averageTurnoverCr": 374.250768897
     },
     "CEMPRO": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 1224.1512990682343,
-      "averageTurnoverCr": 63.01954292099999
+      "ema20": 1230.163625736137,
+      "averageTurnoverCr": 72.66712871
     },
     "ASAHIINDIA": {
       "asOf": "2026-11-05",
@@ -1393,11 +1958,11 @@
       "averageTurnoverCr": 13.33167482825
     },
     "SWIGGY": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 204.5299731287201,
-      "averageTurnoverCr": 422.28357177845004
+      "ema20": 203.10273242769415,
+      "averageTurnoverCr": 432.2612982797
     },
     "KEC": {
       "asOf": "2026-11-05",
@@ -1428,11 +1993,11 @@
       "averageTurnoverCr": 48.69482860600001
     },
     "MAHABANK": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 80.23150095514548,
-      "averageTurnoverCr": 117.98754412000002
+      "ema20": 80.6944269710339,
+      "averageTurnoverCr": 122.92141658475003
     },
     "NAUKRI": {
       "asOf": "2026-11-05",
@@ -1484,11 +2049,11 @@
       "averageTurnoverCr": 121.47237280435002
     },
     "INDHOTEL": {
-      "asOf": "2026-11-05",
-      "lastSession": "2026-11-04",
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
       "sessions": 69,
-      "ema20": 786.1599012260563,
-      "averageTurnoverCr": 443.22299318599994
+      "ema20": 794.6207553026811,
+      "averageTurnoverCr": 457.551148237
     },
     "GICRE": {
       "asOf": "2026-11-05",
@@ -1706,17 +2271,178 @@
       "sessions": 69,
       "ema20": 1056.1547312100904,
       "averageTurnoverCr": 92.8275375275
+    },
+    "IREDA": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 104.85450095055863,
+      "averageTurnoverCr": 50.108827610649996
+    },
+    "ABDL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 699.1111517078143,
+      "averageTurnoverCr": 44.764260505
+    },
+    "FEDERALBNK": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 337.9031547636851,
+      "averageTurnoverCr": 290.12927811024997
+    },
+    "STARHEALTH": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 537.3155861355255,
+      "averageTurnoverCr": 24.099579166250006
+    },
+    "AJANTPHARM": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 3383.595213773262,
+      "averageTurnoverCr": 54.94991634999999
+    },
+    "UPL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 524.2748798292691,
+      "averageTurnoverCr": 118.01275755425
+    },
+    "BIOCON": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 350.74051958760697,
+      "averageTurnoverCr": 110.84972446775001
+    },
+    "GLAXO": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 2546.8594972400374,
+      "averageTurnoverCr": 14.040284244499999
+    },
+    "NAVINFLUOR": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 8394.257024265162,
+      "averageTurnoverCr": 137.23351705
+    },
+    "NYKAA": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 342.5777209284783,
+      "averageTurnoverCr": 190.543913917
+    },
+    "MANKIND": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 2429.7717143401464,
+      "averageTurnoverCr": 183.37014884200002
+    },
+    "HONASA": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 455.6982648148829,
+      "averageTurnoverCr": 29.622487745749996
+    },
+    "PRIVISCL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 3349.5368333234574,
+      "averageTurnoverCr": 42.960368020999994
+    },
+    "ABBOTINDIA": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 26067.415210282223,
+      "averageTurnoverCr": 16.874396975
+    },
+    "PARADEEP": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 140.46305664767968,
+      "averageTurnoverCr": 45.0805608428
+    },
+    "BANDHANBNK": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 160.41219167615344,
+      "averageTurnoverCr": 194.88086131325002
+    },
+    "SIGNATURE": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 717.3997941577609,
+      "averageTurnoverCr": 23.57938400075
+    },
+    "JMFINANCIL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 114.30573962764059,
+      "averageTurnoverCr": 23.182258381849998
+    },
+    "SHYAMMETL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 1165.7607476138412,
+      "averageTurnoverCr": 53.768048027999995
+    },
+    "RBLBANK": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 369.0937726746093,
+      "averageTurnoverCr": 231.30374163199997
+    },
+    "AEGISVOPAK": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 251.48583814240877,
+      "averageTurnoverCr": 19.176572118
+    },
+    "JSL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 700.8780397914418,
+      "averageTurnoverCr": 40.7157225965
+    },
+    "GRANULES": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 819.0734219560029,
+      "averageTurnoverCr": 66.485385033
     }
   },
   "suggestions": [
     {
-      "ticker": "GLENMARK",
-      "fullName": "Glenmark Pharmaceuticals Ltd.",
-      "sector": "Healthcare",
-      "discoveryScore": 75.1,
-      "price": 2586,
-      "observedAt": "2026-11-06T06:05:39.177Z",
-      "sessionChangePct": 4.2,
+      "ticker": "CEMPRO",
+      "fullName": "Cemindia Projects Ltd.",
+      "sector": "Construction",
+      "discoveryScore": 73.7,
+      "price": 1344.9,
+      "observedAt": "2026-11-06T09:55:38.561Z",
+      "sessionChangePct": 4.47,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -1729,13 +2455,13 @@
       }
     },
     {
-      "ticker": "KALYANKJIL",
-      "fullName": "Kalyan Jewellers India Ltd.",
-      "sector": "Consumer Durables",
-      "discoveryScore": 73.4,
-      "price": 582.55,
-      "observedAt": "2026-11-06T06:05:39.746Z",
-      "sessionChangePct": 4.03,
+      "ticker": "CARTRADE",
+      "fullName": "Cartrade Tech Ltd.",
+      "sector": "Consumer Services",
+      "discoveryScore": 71.6,
+      "price": 2702.3,
+      "observedAt": "2026-11-06T09:55:36.804Z",
+      "sessionChangePct": 3.86,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -1748,32 +2474,13 @@
       }
     },
     {
-      "ticker": "FORCEMOT",
-      "fullName": "Force Motors Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 70.1,
-      "price": 19061,
-      "observedAt": "2026-11-06T06:05:39.111Z",
-      "sessionChangePct": 3.69,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "CHENNPETRO",
-      "fullName": "Chennai Petroleum Corporation Ltd.",
+      "ticker": "AEGISVOPAK",
+      "fullName": "Aegis Vopak Terminals Ltd.",
       "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 67.3,
-      "price": 1460,
-      "observedAt": "2026-11-06T06:05:35.909Z",
-      "sessionChangePct": 2.93,
+      "discoveryScore": 71.1,
+      "price": 248.27,
+      "observedAt": "2026-11-06T09:55:38.233Z",
+      "sessionChangePct": 4.92,
       "research": null,
       "reasons": [
         "below 20-session EMA",
@@ -1787,75 +2494,105 @@
       }
     },
     {
-      "ticker": "PATANJALI",
-      "fullName": "Patanjali Foods Ltd.",
-      "sector": "Fast Moving Consumer Goods",
-      "discoveryScore": 63.9,
-      "price": 415,
-      "observedAt": "2026-11-06T06:05:38.621Z",
-      "sessionChangePct": 1.05,
+      "ticker": "JMFINANCIL",
+      "fullName": "JM Financial Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 67.9,
+      "price": 111.75,
+      "observedAt": "2026-11-06T09:55:36.528Z",
+      "sessionChangePct": 2.72,
       "research": null,
       "reasons": [
-        "confirmed setup; simulated fill recorded"
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
-      "status": "simulated-buy",
+      "status": "not-qualified",
       "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-06T06:05:00.000Z",
-        "entryAt": "2026-11-06T06:05:38.621Z",
-        "entryPrice": 415,
-        "entryIndex": 28,
-        "breakoutLevel": 414.6,
-        "supportLevel": 412.4,
-        "vwap": 410.17965623545786,
-        "volumeRatio": 8.07931012236296,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
       }
     },
     {
-      "ticker": "ONESOURCE",
-      "fullName": "Onesource Specialty Pharma Ltd.",
-      "sector": "Healthcare",
-      "discoveryScore": 63.4,
-      "price": 1614,
-      "observedAt": "2026-11-06T06:05:36.358Z",
-      "sessionChangePct": 2.03,
-      "research": null,
-      "reasons": [],
-      "status": "not-selected"
-    },
-    {
-      "ticker": "VIJAYA",
-      "fullName": "Vijaya Diagnostic Centre Ltd.",
-      "sector": "Healthcare",
-      "discoveryScore": 62.8,
-      "price": 1473.2,
-      "observedAt": "2026-11-06T06:05:38.067Z",
-      "sessionChangePct": 2.47,
-      "research": null,
-      "reasons": [],
-      "status": "not-selected"
-    },
-    {
-      "ticker": "KARURVYSYA",
-      "fullName": "Karur Vysya Bank Ltd.",
+      "ticker": "PIRAMALFIN",
+      "fullName": "Piramal Finance Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 62.3,
-      "price": 365,
-      "observedAt": "2026-11-06T06:05:38.147Z",
-      "sessionChangePct": 1.25,
+      "discoveryScore": 66.7,
+      "price": 2173.8,
+      "observedAt": "2026-11-06T09:55:38.543Z",
+      "sessionChangePct": 2.56,
       "research": null,
-      "reasons": [],
-      "status": "not-selected"
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "GRANULES",
+      "fullName": "Granules India Ltd.",
+      "sector": "Healthcare",
+      "discoveryScore": 64.6,
+      "price": 799.75,
+      "observedAt": "2026-11-06T09:55:40.118Z",
+      "sessionChangePct": 0.67,
+      "research": null,
+      "reasons": [
+        "below 20-session EMA",
+        "not outperforming Nifty",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "PRIVISCL",
+      "fullName": "Privi Speciality Chemicals Ltd.",
+      "sector": "Chemicals",
+      "discoveryScore": 64.4,
+      "price": 3363,
+      "observedAt": "2026-11-06T09:55:34.947Z",
+      "sessionChangePct": 2.62,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "SIGNATURE",
+      "fullName": "Signatureglobal (India) Ltd.",
+      "sector": "Realty",
+      "discoveryScore": 64.4,
+      "price": 748.15,
+      "observedAt": "2026-11-06T09:55:39.334Z",
+      "sessionChangePct": 2.12,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
     }
   ],
-  "updatedAt": "2026-11-06T06:05:40.148Z",
+  "updatedAt": "2026-11-06T09:55:41.025Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -1879,9 +2616,9 @@
     "fundingMode": "as-needed-paper-capital"
   },
   "lastCheck": {
-    "at": "2026-11-06T06:05:40.148Z",
+    "at": "2026-11-06T09:55:41.025Z",
     "action": "scan",
-    "bought": "PATANJALI",
+    "bought": null,
     "checked": [
       {
         "ticker": "MEESHO",
@@ -1889,18 +2626,42 @@
       },
       {
         "ticker": "MCX",
-        "status": "hold"
-      },
-      {
-        "ticker": "MGL",
-        "status": "hold"
-      },
-      {
-        "ticker": "BSOFT",
-        "status": "hold"
+        "status": "unusable_price"
       },
       {
         "ticker": "HAVELLS",
+        "status": "unusable_price"
+      },
+      {
+        "ticker": "KARURVYSYA",
+        "status": "unusable_price"
+      },
+      {
+        "ticker": "KALYANKJIL",
+        "status": "unusable_price"
+      },
+      {
+        "ticker": "STARHEALTH",
+        "status": "hold"
+      },
+      {
+        "ticker": "AUROPHARMA",
+        "status": "unusable_price"
+      },
+      {
+        "ticker": "UPL",
+        "status": "unusable_price"
+      },
+      {
+        "ticker": "MAHABANK",
+        "status": "unusable_price"
+      },
+      {
+        "ticker": "IREDA",
+        "status": "unusable_price"
+      },
+      {
+        "ticker": "IIFL",
         "status": "hold"
       }
     ],
@@ -1908,7 +2669,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-06T06:05:39.691Z",
+    "at": "2026-11-06T09:55:40.426Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -1916,6 +2677,7 @@
       {
         "ticker": "360ONE",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -1932,12 +2694,6 @@
         ]
       },
       {
-        "ticker": "AAVAS",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "ABBOTINDIA",
         "reasons": [
           "weak or overextended session move"
@@ -1946,7 +2702,7 @@
       {
         "ticker": "ABCAPITAL",
         "reasons": [
-          "weak or overextended session move"
+          "missing or wide bid/ask spread"
         ]
       },
       {
@@ -1962,12 +2718,6 @@
         ]
       },
       {
-        "ticker": "ACC",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "ACMESOLAR",
         "reasons": [
           "weak or overextended session move"
@@ -1975,18 +2725,6 @@
       },
       {
         "ticker": "AEGISLOG",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "AEGISVOPAK",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "AETHER",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -2018,18 +2756,20 @@
       {
         "ticker": "ALKEM",
         "reasons": [
-          "weak or overextended session move"
+          "missing or wide bid/ask spread"
         ]
       },
       {
         "ticker": "AMBER",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
       {
         "ticker": "ANANDRATHI",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -2048,6 +2788,7 @@
       {
         "ticker": "APLAPOLLO",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -2070,15 +2811,9 @@
         ]
       },
       {
-        "ticker": "ASAHIINDIA",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "ASHOKLEY",
         "reasons": [
-          "weak or overextended session move"
+          "missing or wide bid/ask spread"
         ]
       },
       {
@@ -2090,19 +2825,51 @@
       {
         "ticker": "ASTRAL",
         "reasons": [
+          "missing or wide bid/ask spread",
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ATGL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ATUL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AUBANK",
+        "reasons": [
+          "missing or wide bid/ask spread",
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AVANTIFEED",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "AWL",
+        "reasons": [
           "weak or overextended session move"
         ]
       }
     ],
     "source": "Upstox",
-    "registryAt": "2026-11-06T05:16:55.574Z",
+    "registryAt": "2026-11-06T09:16:51.242Z",
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.3030167178826648,
-      "observedAt": "2026-11-06T06:05:40.048Z",
+      "changePct": 1.6395914674404821,
+      "observedAt": "2026-11-06T09:55:40.920Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24610.95,
+      "price": 24938.9,
       "previousClose": 24536.600000000002
     }
   },
@@ -2282,6 +3049,282 @@
         "bought": "PATANJALI",
         "shortlisted": 8,
         "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:10:40.782Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:15:41.617Z",
+        "bought": "KARURVYSYA",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:20:41.142Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:25:41.081Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:30:41.692Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:35:40.873Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:40:40.783Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:45:41.206Z",
+        "bought": "ABDL",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:50:41.819Z",
+        "bought": "KALYANKJIL",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:55:40.877Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:00:41.085Z",
+        "bought": "STARHEALTH",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:05:41.603Z",
+        "bought": "AUROPHARMA",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:10:41.755Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:15:41.295Z",
+        "bought": "UPL",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:20:40.752Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:25:41.592Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:30:42.225Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:35:41.598Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:40:41.146Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:45:42.189Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:50:41.577Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T07:55:41.073Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:00:40.689Z",
+        "bought": "BIOCON",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:05:40.765Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:10:40.171Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:15:40.188Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:20:40.854Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:25:40.683Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:30:40.350Z",
+        "bought": "MAHABANK",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:35:42.317Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:40:40.750Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:45:40.918Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:50:41.806Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T08:55:41.312Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:00:40.749Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:05:41.292Z",
+        "bought": "IREDA",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:10:41.097Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:15:40.792Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:20:40.944Z",
+        "bought": "IIFL",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:25:40.939Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:30:40.806Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:35:40.890Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:40:41.235Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:45:40.238Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:50:40.281Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:55:41.025Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
       }
     ],
     "candidates": {
@@ -2358,18 +3401,6 @@
         "firstSeenAt": "2026-11-06T03:45:40.454Z",
         "firstPrice": 562.3,
         "observations": [
-          {
-            "at": "2026-11-06T03:45:40.454Z",
-            "price": 562.3,
-            "score": 58.6,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T03:50:40.499Z",
-            "price": 571.5,
-            "score": 67.3,
-            "setup": "no_setup"
-          },
           {
             "at": "2026-11-06T03:55:41.378Z",
             "price": 568.45,
@@ -2531,13 +3562,67 @@
             "price": 582.55,
             "score": 73.4,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:10:40.188Z",
+            "price": 582.75,
+            "score": 74,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:15:40.700Z",
+            "price": 581.45,
+            "score": 72.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:20:40.854Z",
+            "price": 580.3,
+            "score": 71,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:25:40.413Z",
+            "price": 581.85,
+            "score": 73.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:30:40.273Z",
+            "price": 582.6,
+            "score": 73.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:35:39.413Z",
+            "price": 581,
+            "score": 71.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:40:40.222Z",
+            "price": 580.3,
+            "score": 71.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:45:40.848Z",
+            "price": 584.55,
+            "score": 75.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:50:40.326Z",
+            "price": 584.95,
+            "score": 75.8,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:05:39.746Z",
-        "lastPrice": 582.55,
-        "discoveryScore": 73.4,
+        "lastSeenAt": "2026-11-06T06:50:40.326Z",
+        "lastPrice": 584.95,
+        "discoveryScore": 75.8,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "confirmed setup; simulated fill recorded"
         ]
       },
       "HEGAM": {
@@ -2660,13 +3745,19 @@
             "price": 1800.1,
             "score": 55.5,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:05:39.143Z",
+            "price": 1799.5,
+            "score": 61.2,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T03:45:39.833Z",
-        "lastPrice": 1800.1,
-        "discoveryScore": 55.5,
+        "lastSeenAt": "2026-11-06T07:05:39.143Z",
+        "lastPrice": 1799.5,
+        "discoveryScore": 61.2,
         "reasons": [
-          "opening setup needs complete range bars and a completed volume-confirmed breakout"
+          "confirmed setup; simulated fill recorded"
         ]
       },
       "JSWCEMENT": {
@@ -2836,138 +3927,6 @@
         "firstPrice": 1461.6,
         "observations": [
           {
-            "at": "2026-11-06T03:50:36.338Z",
-            "price": 1461.6,
-            "score": 61.2,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T03:55:36.984Z",
-            "price": 1472,
-            "score": 64.7,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:00:30.246Z",
-            "price": 1483.3,
-            "score": 67.5,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:05:38.671Z",
-            "price": 1484.8,
-            "score": 68.9,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:10:36.020Z",
-            "price": 1493.3,
-            "score": 70.4,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:15:38.684Z",
-            "price": 1497.9,
-            "score": 68.7,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:20:39.138Z",
-            "price": 1501,
-            "score": 69.8,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:25:37.879Z",
-            "price": 1500.7,
-            "score": 69.8,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:30:35.304Z",
-            "price": 1499.4,
-            "score": 69.8,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:35:38.255Z",
-            "price": 1508.7,
-            "score": 72.1,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:40:36.401Z",
-            "price": 1496.7,
-            "score": 69,
-            "setup": "not-evaluated"
-          },
-          {
-            "at": "2026-11-06T04:45:32.144Z",
-            "price": 1483.7,
-            "score": 65.6,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:50:37.816Z",
-            "price": 1484.9,
-            "score": 66.2,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:55:39.424Z",
-            "price": 1485,
-            "score": 66.4,
-            "setup": "not-evaluated"
-          },
-          {
-            "at": "2026-11-06T05:00:38.604Z",
-            "price": 1485.1,
-            "score": 66.5,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T05:05:36.779Z",
-            "price": 1484,
-            "score": 65.9,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T05:10:37.310Z",
-            "price": 1483.5,
-            "score": 66.1,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T05:15:38.290Z",
-            "price": 1480.5,
-            "score": 64.7,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T05:20:39.915Z",
-            "price": 1482.7,
-            "score": 65.5,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T05:25:39.016Z",
-            "price": 1482.3,
-            "score": 64.5,
-            "setup": "not-evaluated"
-          },
-          {
-            "at": "2026-11-06T05:30:35.872Z",
-            "price": 1481,
-            "score": 65,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T05:35:39.413Z",
-            "price": 1482.3,
-            "score": 65.6,
-            "setup": "no_setup"
-          },
-          {
             "at": "2026-11-06T05:40:40.003Z",
             "price": 1476.4,
             "score": 64,
@@ -2996,11 +3955,197 @@
             "price": 1473.8,
             "score": 63,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:10:35.035Z",
+            "price": 1473,
+            "score": 63.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:15:38.232Z",
+            "price": 1473.3,
+            "score": 63.7,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:20:37.348Z",
+            "price": 1475,
+            "score": 63.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:25:37.498Z",
+            "price": 1476.2,
+            "score": 64.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:30:39.768Z",
+            "price": 1475.5,
+            "score": 63.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:35:38.109Z",
+            "price": 1473.3,
+            "score": 63.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:40:30.002Z",
+            "price": 1472.9,
+            "score": 62.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:45:37.833Z",
+            "price": 1473.9,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:50:38.107Z",
+            "price": 1473.4,
+            "score": 63.3,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:55:38.054Z",
+            "price": 1475,
+            "score": 63.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:36.649Z",
+            "price": 1471.6,
+            "score": 63.1,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:05:30.697Z",
+            "price": 1472.5,
+            "score": 63.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:10:35.102Z",
+            "price": 1473,
+            "score": 63.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:15:36.764Z",
+            "price": 1472.5,
+            "score": 63.4,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:20:40.222Z",
+            "price": 1474.8,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:25:35.103Z",
+            "price": 1474.3,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:30:35.103Z",
+            "price": 1474.1,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:35:40.860Z",
+            "price": 1473.2,
+            "score": 63.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:40:35.103Z",
+            "price": 1473.3,
+            "score": 63.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:45:38.108Z",
+            "price": 1473.6,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:50:29.288Z",
+            "price": 1472.8,
+            "score": 63.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:55:35.103Z",
+            "price": 1473.1,
+            "score": 63.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:00:33.009Z",
+            "price": 1471.9,
+            "score": 63.5,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:05:33.024Z",
+            "price": 1471.5,
+            "score": 63.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:33.010Z",
+            "price": 1472.7,
+            "score": 63.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:15:34.782Z",
+            "price": 1472.6,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:37.766Z",
+            "price": 1473.4,
+            "score": 64.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:25:38.926Z",
+            "price": 1474.3,
+            "score": 64.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:30:35.103Z",
+            "price": 1474,
+            "score": 64.8,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:35:33.748Z",
+            "price": 1471.7,
+            "score": 64.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:40:36.430Z",
+            "price": 1470.7,
+            "score": 63.9,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:38.229Z",
-        "lastPrice": 1473.8,
-        "discoveryScore": 63,
+        "lastSeenAt": "2026-11-06T08:40:36.430Z",
+        "lastPrice": 1470.7,
+        "discoveryScore": 63.9,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -3187,72 +4332,6 @@
         "firstPrice": 1449,
         "observations": [
           {
-            "at": "2026-11-06T04:05:41.582Z",
-            "price": 1449,
-            "score": 66.9,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:10:39.197Z",
-            "price": 1449.1,
-            "score": 63.8,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:15:39.591Z",
-            "price": 1449.5,
-            "score": 64.5,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:20:39.162Z",
-            "price": 1450.6,
-            "score": 65.2,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:25:36.086Z",
-            "price": 1448,
-            "score": 63.8,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:30:38.058Z",
-            "price": 1457,
-            "score": 69.6,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:35:33.516Z",
-            "price": 1452,
-            "score": 66.4,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:40:38.645Z",
-            "price": 1456.1,
-            "score": 69.1,
-            "setup": "not-evaluated"
-          },
-          {
-            "at": "2026-11-06T04:45:39.392Z",
-            "price": 1457.2,
-            "score": 69.3,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:50:39.912Z",
-            "price": 1461.8,
-            "score": 71.8,
-            "setup": "no_setup"
-          },
-          {
-            "at": "2026-11-06T04:55:40.105Z",
-            "price": 1465,
-            "score": 72.7,
-            "setup": "setup"
-          },
-          {
             "at": "2026-11-06T05:00:38.698Z",
             "price": 1466.7,
             "score": 72.5,
@@ -3335,11 +4414,143 @@
             "price": 1460,
             "score": 67.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:10:36.698Z",
+            "price": 1463.3,
+            "score": 69.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:15:37.007Z",
+            "price": 1460,
+            "score": 67.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:20:40.735Z",
+            "price": 1452,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:25:38.493Z",
+            "price": 1452.3,
+            "score": 63.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:30:40.161Z",
+            "price": 1452.4,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:35:38.968Z",
+            "price": 1453.7,
+            "score": 63.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:40:39.317Z",
+            "price": 1456.8,
+            "score": 65.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:45:37.478Z",
+            "price": 1458.1,
+            "score": 65.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:50:37.656Z",
+            "price": 1457,
+            "score": 65.4,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:55:38.533Z",
+            "price": 1455.3,
+            "score": 64.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:32.007Z",
+            "price": 1455.3,
+            "score": 64.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:05:40.571Z",
+            "price": 1455.9,
+            "score": 65,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:10:40.694Z",
+            "price": 1456.7,
+            "score": 66,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:15:38.764Z",
+            "price": 1455.8,
+            "score": 64.9,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:20:32.007Z",
+            "price": 1455.8,
+            "score": 64.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:25:40.432Z",
+            "price": 1455.4,
+            "score": 64.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:30:36.548Z",
+            "price": 1454.7,
+            "score": 64.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:35:38.346Z",
+            "price": 1453.3,
+            "score": 63.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:40:33.714Z",
+            "price": 1453.5,
+            "score": 63.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:45:31.479Z",
+            "price": 1452.3,
+            "score": 63.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:50:31.870Z",
+            "price": 1451,
+            "score": 62.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:55:33.788Z",
+            "price": 1451.4,
+            "score": 62.6,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:05:35.909Z",
-        "lastPrice": 1460,
-        "discoveryScore": 67.3,
+        "lastSeenAt": "2026-11-06T07:55:33.788Z",
+        "lastPrice": 1451.4,
+        "discoveryScore": 62.6,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -3353,155 +4564,227 @@
         "firstPrice": 2491.7,
         "observations": [
           {
-            "at": "2026-11-06T04:10:39.848Z",
-            "price": 2491.7,
-            "score": 63.4,
+            "at": "2026-11-06T06:50:39.624Z",
+            "price": 2605.8,
+            "score": 77.1,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:15:39.991Z",
-            "price": 2508.5,
-            "score": 67.1,
+            "at": "2026-11-06T06:55:39.601Z",
+            "price": 2608.7,
+            "score": 77.7,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:20:40.229Z",
-            "price": 2510.4,
-            "score": 66.8,
+            "at": "2026-11-06T07:00:39.260Z",
+            "price": 2615.5,
+            "score": 78.1,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:25:40.087Z",
-            "price": 2537.9,
-            "score": 70.4,
+            "at": "2026-11-06T07:05:39.343Z",
+            "price": 2613.9,
+            "score": 77.7,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:30:38.801Z",
-            "price": 2540.8,
-            "score": 69.4,
+            "at": "2026-11-06T07:10:39.351Z",
+            "price": 2609.1,
+            "score": 77.2,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:35:40.692Z",
-            "price": 2541.4,
-            "score": 69.4,
+            "at": "2026-11-06T07:15:41.012Z",
+            "price": 2609.2,
+            "score": 77.1,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:40:39.848Z",
-            "price": 2539.4,
-            "score": 69,
-            "setup": "not-evaluated"
-          },
-          {
-            "at": "2026-11-06T04:45:39.953Z",
-            "price": 2538,
-            "score": 68.7,
+            "at": "2026-11-06T07:20:40.540Z",
+            "price": 2627.9,
+            "score": 78.7,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:50:39.958Z",
-            "price": 2543,
-            "score": 69.3,
+            "at": "2026-11-06T07:25:39.610Z",
+            "price": 2620.8,
+            "score": 77.8,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T04:55:39.660Z",
-            "price": 2548.3,
-            "score": 71.3,
+            "at": "2026-11-06T07:30:39.884Z",
+            "price": 2626.5,
+            "score": 78.4,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:00:39.572Z",
-            "price": 2545.2,
-            "score": 70.9,
+            "at": "2026-11-06T07:35:40.720Z",
+            "price": 2636.7,
+            "score": 79,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:05:40.468Z",
-            "price": 2552.5,
-            "score": 72.1,
+            "at": "2026-11-06T07:40:40.846Z",
+            "price": 2638.1,
+            "score": 78.4,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:10:41.710Z",
-            "price": 2562.7,
-            "score": 74.2,
+            "at": "2026-11-06T07:45:41.975Z",
+            "price": 2670.8,
+            "score": 79.2,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:15:40.147Z",
-            "price": 2562.2,
-            "score": 73.3,
+            "at": "2026-11-06T07:50:41.185Z",
+            "price": 2675.4,
+            "score": 79.3,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:20:39.912Z",
-            "price": 2586,
-            "score": 76.3,
+            "at": "2026-11-06T07:55:40.527Z",
+            "price": 2658.2,
+            "score": 78.4,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:25:39.269Z",
-            "price": 2578.6,
-            "score": 75.1,
+            "at": "2026-11-06T08:00:40.131Z",
+            "price": 2660.2,
+            "score": 78.5,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:30:40.090Z",
-            "price": 2577.5,
+            "at": "2026-11-06T08:05:39.854Z",
+            "price": 2651.9,
+            "score": 77.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:39.566Z",
+            "price": 2648.2,
+            "score": 77.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:15:39.489Z",
+            "price": 2636.2,
+            "score": 76.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:39.794Z",
+            "price": 2644.9,
+            "score": 77,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:25:39.106Z",
+            "price": 2635.5,
+            "score": 76.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:30:39.170Z",
+            "price": 2625.2,
             "score": 75,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:35:39.718Z",
-            "price": 2585.3,
-            "score": 76.3,
+            "at": "2026-11-06T08:35:39.224Z",
+            "price": 2623.1,
+            "score": 74.8,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:40:40.448Z",
-            "price": 2593.6,
-            "score": 76.9,
+            "at": "2026-11-06T08:40:39.766Z",
+            "price": 2615.4,
+            "score": 74,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:45:39.639Z",
-            "price": 2601,
-            "score": 76.9,
+            "at": "2026-11-06T08:45:40.081Z",
+            "price": 2616.2,
+            "score": 74,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:50:39.514Z",
-            "price": 2585.2,
-            "score": 74.7,
+            "at": "2026-11-06T08:50:40.523Z",
+            "price": 2620,
+            "score": 74.5,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T05:55:40.984Z",
-            "price": 2583,
-            "score": 74.4,
+            "at": "2026-11-06T08:55:40.418Z",
+            "price": 2616.3,
+            "score": 74.1,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T06:00:39.320Z",
-            "price": 2574.1,
-            "score": 72.6,
+            "at": "2026-11-06T09:00:39.789Z",
+            "price": 2614.4,
+            "score": 73.9,
             "setup": "no_setup"
           },
           {
-            "at": "2026-11-06T06:05:39.177Z",
-            "price": 2586,
-            "score": 75.1,
+            "at": "2026-11-06T09:05:40.236Z",
+            "price": 2615.7,
+            "score": 74.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:10:39.784Z",
+            "price": 2617.8,
+            "score": 74,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:15:40.347Z",
+            "price": 2616.8,
+            "score": 73.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:20:39.177Z",
+            "price": 2616,
+            "score": 74,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:25:40.313Z",
+            "price": 2616.5,
+            "score": 73.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:30:39.610Z",
+            "price": 2608,
+            "score": 73.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:35:39.981Z",
+            "price": 2611.1,
+            "score": 73.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:40:39.452Z",
+            "price": 2599.3,
+            "score": 73.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:44:59.579Z",
+            "price": 2590,
+            "score": 71.4,
+            "setup": "unavailable"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:05:39.177Z",
-        "lastPrice": 2586,
-        "discoveryScore": 75.1,
+        "lastSeenAt": "2026-11-06T09:44:59.579Z",
+        "lastPrice": 2590,
+        "discoveryScore": 71.4,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "execution quote must be observed after the latest signal candle completed"
         ]
       },
       "NATCOPHARM": {
@@ -3642,13 +4925,67 @@
             "price": 617.2,
             "score": 62.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:30:39.727Z",
+            "price": 615.65,
+            "score": 60.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:45:39.994Z",
+            "price": 618.45,
+            "score": 64.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:50:33.663Z",
+            "price": 617.95,
+            "score": 64.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:55:36.017Z",
+            "price": 619.45,
+            "score": 66.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:00:39.010Z",
+            "price": 620,
+            "score": 66.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:05:39.006Z",
+            "price": 619.8,
+            "score": 66.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:10:37.099Z",
+            "price": 620.7,
+            "score": 67.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:15:32.141Z",
+            "price": 620.65,
+            "score": 67.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:20:39.601Z",
+            "price": 624.2,
+            "score": 71.2,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T05:50:36.468Z",
-        "lastPrice": 617.2,
-        "discoveryScore": 62.1,
+        "lastSeenAt": "2026-11-06T09:20:39.601Z",
+        "lastPrice": 624.2,
+        "discoveryScore": 71.2,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "confirmed setup; simulated fill recorded"
         ]
       },
       "MRPL": {
@@ -3720,13 +5057,43 @@
             "price": 434.6,
             "score": 63.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:36.309Z",
+            "price": 434.6,
+            "score": 62.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:30:37.927Z",
+            "price": 435.35,
+            "score": 64.8,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T09:10:38.376Z",
+            "price": 435.6,
+            "score": 65.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:15:35.011Z",
+            "price": 436,
+            "score": 66.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:44:59.819Z",
+            "price": 437.35,
+            "score": 68.4,
+            "setup": "unavailable"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:45:40.096Z",
-        "lastPrice": 434.6,
-        "discoveryScore": 63.9,
+        "lastSeenAt": "2026-11-06T09:44:59.819Z",
+        "lastPrice": 437.35,
+        "discoveryScore": 68.4,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "execution quote must be observed after the latest signal candle completed"
         ]
       },
       "MARICO": {
@@ -3753,13 +5120,31 @@
             "price": 896.8,
             "score": 61.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:00:37.213Z",
+            "price": 896.65,
+            "score": 62.4,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:45:40.146Z",
+            "price": 897,
+            "score": 63.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:50:38.018Z",
+            "price": 897.3,
+            "score": 64.1,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T05:15:35.148Z",
-        "lastPrice": 896.8,
-        "discoveryScore": 61.3,
+        "lastSeenAt": "2026-11-06T08:50:38.018Z",
+        "lastPrice": 897.3,
+        "discoveryScore": 64.1,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "not outperforming Nifty"
         ]
       },
       "CROMPTON": {
@@ -3891,13 +5276,169 @@
             "price": 19061,
             "score": 70.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:10:39.781Z",
+            "price": 19001,
+            "score": 68.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:15:40.305Z",
+            "price": 18882,
+            "score": 63.7,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:20:39.783Z",
+            "price": 18884,
+            "score": 63.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:25:32.630Z",
+            "price": 18844,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:30:38.555Z",
+            "price": 18879,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:35:27.268Z",
+            "price": 18880,
+            "score": 64.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:40:39.190Z",
+            "price": 18865,
+            "score": 63.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:45:36.242Z",
+            "price": 18908,
+            "score": 65,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:50:35.387Z",
+            "price": 18878,
+            "score": 64.1,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:55:29.184Z",
+            "price": 18866,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:20:39.577Z",
+            "price": 18820,
+            "score": 62.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:25:39.124Z",
+            "price": 18807,
+            "score": 62.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:15:36.036Z",
+            "price": 18816,
+            "score": 62.7,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:25:28.659Z",
+            "price": 18820,
+            "score": 63.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:40:21.847Z",
+            "price": 18843,
+            "score": 63.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:55:38.581Z",
+            "price": 18863,
+            "score": 64.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:00:39.021Z",
+            "price": 18903,
+            "score": 66.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:05:34.065Z",
+            "price": 18910,
+            "score": 66.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:10:36.693Z",
+            "price": 18940,
+            "score": 67.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:15:40.168Z",
+            "price": 18990,
+            "score": 69.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:20:37.378Z",
+            "price": 19047,
+            "score": 71.8,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T09:25:39.095Z",
+            "price": 19028,
+            "score": 71,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:30:38.529Z",
+            "price": 19023,
+            "score": 70.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:35:40.248Z",
+            "price": 19002,
+            "score": 70.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:40:40.513Z",
+            "price": 18984,
+            "score": 70.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:44:59.532Z",
+            "price": 18978,
+            "score": 69.7,
+            "setup": "unavailable"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:05:39.111Z",
-        "lastPrice": 19061,
-        "discoveryScore": 70.1,
+        "lastSeenAt": "2026-11-06T09:44:59.532Z",
+        "lastPrice": 18978,
+        "discoveryScore": 69.7,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "execution quote must be observed after the latest signal candle completed"
         ]
       },
       "MGL": {
@@ -4017,12 +5558,116 @@
             "price": 1473.2,
             "score": 62.8,
             "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:10:34.037Z",
+            "price": 1474.2,
+            "score": 63.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:20:25.855Z",
+            "price": 1471.4,
+            "score": 61.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:25:33.546Z",
+            "price": 1471.4,
+            "score": 61.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:29:57.023Z",
+            "price": 1471.2,
+            "score": 61.6,
+            "setup": "unavailable"
+          },
+          {
+            "at": "2026-11-06T06:35:36.363Z",
+            "price": 1472.6,
+            "score": 62.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:40:37.898Z",
+            "price": 1472.4,
+            "score": 62.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:05:22.243Z",
+            "price": 1472.5,
+            "score": 62.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:10:26.855Z",
+            "price": 1473.4,
+            "score": 63.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:30:29.342Z",
+            "price": 1472.9,
+            "score": 62.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:35:19.067Z",
+            "price": 1472,
+            "score": 62.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:40:36.631Z",
+            "price": 1471.7,
+            "score": 62.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:45:15.531Z",
+            "price": 1472,
+            "score": 62.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:49:58.529Z",
+            "price": 1472.6,
+            "score": 63.1,
+            "setup": "unavailable"
+          },
+          {
+            "at": "2026-11-06T07:55:38.450Z",
+            "price": 1470.9,
+            "score": 62,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:00:09.083Z",
+            "price": 1471.2,
+            "score": 62.2,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:15:26.506Z",
+            "price": 1473.3,
+            "score": 63.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:35.711Z",
+            "price": 1472.7,
+            "score": 63.2,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:05:38.067Z",
-        "lastPrice": 1473.2,
-        "discoveryScore": 62.8,
-        "reasons": []
+        "lastSeenAt": "2026-11-06T08:20:35.711Z",
+        "lastPrice": 1472.7,
+        "discoveryScore": 63.2,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
       },
       "LALPATHLAB": {
         "ticker": "LALPATHLAB",
@@ -4048,11 +5693,29 @@
             "price": 2007.6,
             "score": 65.4,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:35:36.197Z",
+            "price": 1996.9,
+            "score": 61.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:40:38.447Z",
+            "price": 2000.7,
+            "score": 62.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:38.546Z",
+            "price": 1997.5,
+            "score": 62.6,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T05:20:38.211Z",
-        "lastPrice": 2007.6,
-        "discoveryScore": 65.4,
+        "lastSeenAt": "2026-11-06T08:10:38.546Z",
+        "lastPrice": 1997.5,
+        "discoveryScore": 62.6,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -4162,12 +5825,32 @@
             "price": 1614,
             "score": 63.4,
             "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:10:32.083Z",
+            "price": 1613.8,
+            "score": 63.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:15:38.092Z",
+            "price": 1617.4,
+            "score": 65.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:20:15.807Z",
+            "price": 1609.6,
+            "score": 60.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:05:36.358Z",
-        "lastPrice": 1614,
-        "discoveryScore": 63.4,
-        "reasons": []
+        "lastSeenAt": "2026-11-06T06:20:15.807Z",
+        "lastPrice": 1609.6,
+        "discoveryScore": 60.4,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
       },
       "HAVELLS": {
         "ticker": "HAVELLS",
@@ -4220,12 +5903,1703 @@
             "price": 365,
             "score": 62.3,
             "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:15:39.142Z",
+            "price": 366.15,
+            "score": 63.9,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:05:38.147Z",
-        "lastPrice": 365,
-        "discoveryScore": 62.3,
+        "lastSeenAt": "2026-11-06T06:15:39.142Z",
+        "lastPrice": 366.15,
+        "discoveryScore": 63.9,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "IREDA": {
+        "ticker": "IREDA",
+        "fullName": "Indian Renewable Energy Development Agency Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T06:10:39.964Z",
+        "firstPrice": 111.43,
+        "observations": [
+          {
+            "at": "2026-11-06T06:10:39.964Z",
+            "price": 111.43,
+            "score": 63.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:15:39.349Z",
+            "price": 111.74,
+            "score": 62.4,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:50:39.322Z",
+            "price": 111.59,
+            "score": 61.7,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:55:29.577Z",
+            "price": 111.65,
+            "score": 62.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:34.952Z",
+            "price": 111.51,
+            "score": 61.3,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T09:05:40.433Z",
+            "price": 111.83,
+            "score": 65.4,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:05:40.433Z",
+        "lastPrice": 111.83,
+        "discoveryScore": 65.4,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "ABDL": {
+        "ticker": "ABDL",
+        "fullName": "Allied Blenders and Distillers Ltd.",
+        "sector": "Fast Moving Consumer Goods",
+        "firstSeenAt": "2026-11-06T06:20:38.486Z",
+        "firstPrice": 710.6,
+        "observations": [
+          {
+            "at": "2026-11-06T06:20:38.486Z",
+            "price": 710.6,
+            "score": 60.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:35:20.063Z",
+            "price": 710.85,
+            "score": 60.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:45:17.481Z",
+            "price": 712.45,
+            "score": 62.5,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T06:45:17.481Z",
+        "lastPrice": 712.45,
+        "discoveryScore": 62.5,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "FEDERALBNK": {
+        "ticker": "FEDERALBNK",
+        "fullName": "Federal Bank Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T06:25:38.303Z",
+        "firstPrice": 339.6,
+        "observations": [
+          {
+            "at": "2026-11-06T06:25:38.303Z",
+            "price": 339.6,
+            "score": 60,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:55:37.600Z",
+            "price": 339.75,
+            "score": 60.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:38.086Z",
+            "price": 340.4,
+            "score": 62.9,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:05:41.192Z",
+            "price": 340.4,
+            "score": 63.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:10:39.201Z",
+            "price": 340.35,
+            "score": 62.7,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T07:10:39.201Z",
+        "lastPrice": 340.35,
+        "discoveryScore": 62.7,
+        "reasons": [
+          "not outperforming Nifty",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "INDHOTEL": {
+        "ticker": "INDHOTEL",
+        "fullName": "Indian Hotels Co. Ltd.",
+        "sector": "Consumer Services",
+        "firstSeenAt": "2026-11-06T06:25:38.205Z",
+        "firstPrice": 882.55,
+        "observations": [
+          {
+            "at": "2026-11-06T06:25:38.205Z",
+            "price": 882.55,
+            "score": 59.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:45:40.470Z",
+            "price": 885,
+            "score": 62.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:50:41.156Z",
+            "price": 886.35,
+            "score": 64.6,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:55:38.217Z",
+            "price": 885.7,
+            "score": 64.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:37.254Z",
+            "price": 886.8,
+            "score": 66.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:05:40.662Z",
+            "price": 885.55,
+            "score": 64.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:10:41.304Z",
+            "price": 886.1,
+            "score": 65.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:15:38.714Z",
+            "price": 886.45,
+            "score": 65.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:20:39.500Z",
+            "price": 885.6,
+            "score": 64.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:25:38.225Z",
+            "price": 884.8,
+            "score": 63.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:30:39.819Z",
+            "price": 884.9,
+            "score": 63.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:35:38.715Z",
+            "price": 884.55,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:40:39.938Z",
+            "price": 887.45,
+            "score": 67.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:45:41.033Z",
+            "price": 889.75,
+            "score": 69.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:50:38.570Z",
+            "price": 889.25,
+            "score": 67.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:55:38.716Z",
+            "price": 890.8,
+            "score": 69.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:00:37.591Z",
+            "price": 889.65,
+            "score": 67.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:05:37.267Z",
+            "price": 891.1,
+            "score": 69.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:35.983Z",
+            "price": 889.55,
+            "score": 67.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:15:39.065Z",
+            "price": 890,
+            "score": 68.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:37.377Z",
+            "price": 891.5,
+            "score": 70.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:25:40.388Z",
+            "price": 891.6,
+            "score": 70.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:30:37.700Z",
+            "price": 891.6,
+            "score": 69.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:35:41.687Z",
+            "price": 891.3,
+            "score": 69.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:40:37.790Z",
+            "price": 890.4,
+            "score": 68.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:45:40.483Z",
+            "price": 889.75,
+            "score": 67.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:50:37.478Z",
+            "price": 888.75,
+            "score": 66.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:55:38.165Z",
+            "price": 888.6,
+            "score": 66.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:00:40.278Z",
+            "price": 888.15,
+            "score": 65.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:05:36.518Z",
+            "price": 889.95,
+            "score": 68,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:10:39.660Z",
+            "price": 888.1,
+            "score": 66,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:35:35.994Z",
+            "price": 888.3,
+            "score": 66.3,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:35:35.994Z",
+        "lastPrice": 888.3,
+        "discoveryScore": 66.3,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "STARHEALTH": {
+        "ticker": "STARHEALTH",
+        "fullName": "Star Health and Allied Insurance Company Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T06:30:40.615Z",
+        "firstPrice": 551.9,
+        "observations": [
+          {
+            "at": "2026-11-06T06:30:40.615Z",
+            "price": 551.9,
+            "score": 60.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:45:36.495Z",
+            "price": 553.8,
+            "score": 61.7,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T06:55:40.182Z",
+            "price": 553.55,
+            "score": 62.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:00:36.291Z",
+            "price": 556.3,
+            "score": 63.4,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T07:00:36.291Z",
+        "lastPrice": 556.3,
+        "discoveryScore": 63.4,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "AJANTPHARM": {
+        "ticker": "AJANTPHARM",
+        "fullName": "Ajanta Pharmaceuticals Ltd.",
+        "sector": "Healthcare",
+        "firstSeenAt": "2026-11-06T06:40:31.154Z",
+        "firstPrice": 3309.2,
+        "observations": [
+          {
+            "at": "2026-11-06T06:40:31.154Z",
+            "price": 3309.2,
+            "score": 61.4,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T06:50:37.280Z",
+            "price": 3315.5,
+            "score": 61.6,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:45:34.593Z",
+            "price": 3328.8,
+            "score": 63.9,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:50:34.580Z",
+            "price": 3328.7,
+            "score": 63.9,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:50:34.580Z",
+        "lastPrice": 3328.7,
+        "discoveryScore": 63.9,
+        "reasons": [
+          "below 20-session EMA",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "UPL": {
+        "ticker": "UPL",
+        "fullName": "UPL Ltd.",
+        "sector": "Chemicals",
+        "firstSeenAt": "2026-11-06T07:00:36.077Z",
+        "firstPrice": 531.35,
+        "observations": [
+          {
+            "at": "2026-11-06T07:00:36.077Z",
+            "price": 531.35,
+            "score": 61.8,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:15:40.266Z",
+            "price": 534.65,
+            "score": 65.5,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T07:15:40.266Z",
+        "lastPrice": 534.65,
+        "discoveryScore": 65.5,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "BIOCON": {
+        "ticker": "BIOCON",
+        "fullName": "Biocon Ltd.",
+        "sector": "Healthcare",
+        "firstSeenAt": "2026-11-06T07:05:34.130Z",
+        "firstPrice": 363.55,
+        "observations": [
+          {
+            "at": "2026-11-06T07:05:34.130Z",
+            "price": 363.55,
+            "score": 59.5,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:10:17.185Z",
+            "price": 364,
+            "score": 61.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:15:40.653Z",
+            "price": 365.4,
+            "score": 65.3,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:50:40.171Z",
+            "price": 364.6,
+            "score": 63.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:55:37.082Z",
+            "price": 364.8,
+            "score": 63.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:00:38.158Z",
+            "price": 365.15,
+            "score": 64,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:00:38.158Z",
+        "lastPrice": 365.15,
+        "discoveryScore": 64,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "CARTRADE": {
+        "ticker": "CARTRADE",
+        "fullName": "Cartrade Tech Ltd.",
+        "sector": "Consumer Services",
+        "firstSeenAt": "2026-11-06T07:10:38.466Z",
+        "firstPrice": 2619,
+        "observations": [
+          {
+            "at": "2026-11-06T07:10:38.466Z",
+            "price": 2619,
+            "score": 59.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:15:38.466Z",
+            "price": 2627.3,
+            "score": 62.6,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:20:35.679Z",
+            "price": 2637.6,
+            "score": 63,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T07:25:35.232Z",
+            "price": 2635.3,
+            "score": 62.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:30:35.146Z",
+            "price": 2638.7,
+            "score": 63.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:35:39.220Z",
+            "price": 2639.5,
+            "score": 63.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:40:38.718Z",
+            "price": 2646.8,
+            "score": 65.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:45:39.744Z",
+            "price": 2654.2,
+            "score": 66.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:00:38.943Z",
+            "price": 2657.7,
+            "score": 67.4,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T09:05:39.042Z",
+            "price": 2684.2,
+            "score": 69.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:10:39.087Z",
+            "price": 2699.1,
+            "score": 72.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:15:38.933Z",
+            "price": 2701.5,
+            "score": 71.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:20:37.718Z",
+            "price": 2710,
+            "score": 73,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:25:40.355Z",
+            "price": 2702.8,
+            "score": 71.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:30:37.720Z",
+            "price": 2701.3,
+            "score": 71.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:35:34.849Z",
+            "price": 2700.3,
+            "score": 71,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:40:39.170Z",
+            "price": 2700.1,
+            "score": 70.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:45:36.178Z",
+            "price": 2700.9,
+            "score": 71.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:19.118Z",
+            "price": 2700.1,
+            "score": 71.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:55:36.804Z",
+            "price": 2702.3,
+            "score": 71.6,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:36.804Z",
+        "lastPrice": 2702.3,
+        "discoveryScore": 71.6,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "GLAXO": {
+        "ticker": "GLAXO",
+        "fullName": "Glaxosmithkline Pharmaceuticals Ltd.",
+        "sector": "Healthcare",
+        "firstSeenAt": "2026-11-06T07:15:37.366Z",
+        "firstPrice": 2538.9,
+        "observations": [
+          {
+            "at": "2026-11-06T07:15:37.366Z",
+            "price": 2538.9,
+            "score": 63.9,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T07:20:32.376Z",
+            "price": 2539.9,
+            "score": 64.1,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T07:25:03.513Z",
+            "price": 2538.6,
+            "score": 63.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:45:30.336Z",
+            "price": 2541.3,
+            "score": 63.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:50:28.554Z",
+            "price": 2542.5,
+            "score": 63.6,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T07:50:28.554Z",
+        "lastPrice": 2542.5,
+        "discoveryScore": 63.6,
+        "reasons": [
+          "below 20-session EMA",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "NAVINFLUOR": {
+        "ticker": "NAVINFLUOR",
+        "fullName": "Navin Fluorine International Ltd.",
+        "sector": "Chemicals",
+        "firstSeenAt": "2026-11-06T07:20:39.637Z",
+        "firstPrice": 8888.5,
+        "observations": [
+          {
+            "at": "2026-11-06T07:20:39.637Z",
+            "price": 8888.5,
+            "score": 62.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:30:38.412Z",
+            "price": 8898,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:40:40.217Z",
+            "price": 8899,
+            "score": 62.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:05:31.295Z",
+            "price": 8898.5,
+            "score": 62.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:24.101Z",
+            "price": 8911.5,
+            "score": 62.8,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:15:36.942Z",
+            "price": 8910,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:37.400Z",
+            "price": 8913.5,
+            "score": 63.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:25:31.063Z",
+            "price": 8914.5,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:30:31.494Z",
+            "price": 8918.5,
+            "score": 64.6,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:45:37.469Z",
+            "price": 8914,
+            "score": 64,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:30:40.265Z",
+            "price": 9009,
+            "score": 68.6,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T09:40:34.750Z",
+            "price": 9010.5,
+            "score": 67.6,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:40:34.750Z",
+        "lastPrice": 9010.5,
+        "discoveryScore": 67.6,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "LINDEINDIA": {
+        "ticker": "LINDEINDIA",
+        "fullName": "Linde India Ltd.",
+        "sector": "Chemicals",
+        "firstSeenAt": "2026-11-06T07:25:39.723Z",
+        "firstPrice": 6438.5,
+        "observations": [
+          {
+            "at": "2026-11-06T07:25:39.723Z",
+            "price": 6438.5,
+            "score": 62.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:30:19.094Z",
+            "price": 6459.5,
+            "score": 64.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:35:22.694Z",
+            "price": 6436,
+            "score": 61.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:15:39.137Z",
+            "price": 6634,
+            "score": 71.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:35:41.041Z",
+            "price": 6733,
+            "score": 66.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:40:37.285Z",
+            "price": 6768.5,
+            "score": 67.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:45:36.134Z",
+            "price": 6764.5,
+            "score": 67.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:50:37.335Z",
+            "price": 6768.5,
+            "score": 67.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:55:40.194Z",
+            "price": 6686,
+            "score": 65.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:00:25.131Z",
+            "price": 6673.5,
+            "score": 65.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:05:28.169Z",
+            "price": 6673,
+            "score": 65.3,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T09:10:35.293Z",
+            "price": 6682.5,
+            "score": 65.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:15:40.027Z",
+            "price": 6730,
+            "score": 67.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:20:33.706Z",
+            "price": 6726.5,
+            "score": 67.4,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T09:25:36.824Z",
+            "price": 6744.5,
+            "score": 68,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:30:38.742Z",
+            "price": 6763,
+            "score": 68.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:35:36.745Z",
+            "price": 6779.5,
+            "score": 68.9,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:35:36.745Z",
+        "lastPrice": 6779.5,
+        "discoveryScore": 68.9,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "NYKAA": {
+        "ticker": "NYKAA",
+        "fullName": "FSN E-Commerce Ventures Ltd.",
+        "sector": "Consumer Services",
+        "firstSeenAt": "2026-11-06T07:35:39.434Z",
+        "firstPrice": 352.1,
+        "observations": [
+          {
+            "at": "2026-11-06T07:35:39.434Z",
+            "price": 352.1,
+            "score": 61.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:40:37.775Z",
+            "price": 352.25,
+            "score": 62.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T07:45:41.189Z",
+            "price": 352.8,
+            "score": 62.6,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T07:45:41.189Z",
+        "lastPrice": 352.8,
+        "discoveryScore": 62.6,
+        "reasons": [
+          "not outperforming Nifty"
+        ]
+      },
+      "MANKIND": {
+        "ticker": "MANKIND",
+        "fullName": "Mankind Pharma Ltd.",
+        "sector": "Healthcare",
+        "firstSeenAt": "2026-11-06T07:50:39.042Z",
+        "firstPrice": 2536,
+        "observations": [
+          {
+            "at": "2026-11-06T07:50:39.042Z",
+            "price": 2536,
+            "score": 62.3,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T07:55:39.453Z",
+            "price": 2538,
+            "score": 62.1,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:00:35.348Z",
+            "price": 2538.5,
+            "score": 62.9,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:05:39.032Z",
+            "price": 2543.1,
+            "score": 62.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:37.021Z",
+            "price": 2543,
+            "score": 63,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:40.362Z",
+            "price": 2542.5,
+            "score": 63,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:20:40.362Z",
+        "lastPrice": 2542.5,
+        "discoveryScore": 63,
+        "reasons": [
+          "not outperforming Nifty",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "HONASA": {
+        "ticker": "HONASA",
+        "fullName": "Honasa Consumer Ltd.",
+        "sector": "Fast Moving Consumer Goods",
+        "firstSeenAt": "2026-11-06T07:55:40.243Z",
+        "firstPrice": 488,
+        "observations": [
+          {
+            "at": "2026-11-06T07:55:40.243Z",
+            "price": 488,
+            "score": 64.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:05:40.037Z",
+            "price": 486.45,
+            "score": 63.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:34.661Z",
+            "price": 486.35,
+            "score": 62.4,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:10:34.661Z",
+        "lastPrice": 486.35,
+        "discoveryScore": 62.4,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "ACE": {
+        "ticker": "ACE",
+        "fullName": "Action Construction Equipment Ltd.",
+        "sector": "Capital Goods",
+        "firstSeenAt": "2026-11-06T08:00:30.301Z",
+        "firstPrice": 1154.9,
+        "observations": [
+          {
+            "at": "2026-11-06T08:00:30.301Z",
+            "price": 1154.9,
+            "score": 61.3,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:05:28.460Z",
+            "price": 1155.55,
+            "score": 61.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:10:26.447Z",
+            "price": 1157,
+            "score": 62.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:15:35.968Z",
+            "price": 1156.8,
+            "score": 62.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:20:38.853Z",
+            "price": 1158.95,
+            "score": 63.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:25:22.095Z",
+            "price": 1157.1,
+            "score": 63.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:30:22.090Z",
+            "price": 1158.5,
+            "score": 64.1,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:55:38.984Z",
+            "price": 1163.8,
+            "score": 66.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:00:35.756Z",
+            "price": 1164.45,
+            "score": 66.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:05:35.987Z",
+            "price": 1163.8,
+            "score": 65.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:10:33.800Z",
+            "price": 1164.95,
+            "score": 66.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:15:32.511Z",
+            "price": 1164.5,
+            "score": 66.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:30:33.085Z",
+            "price": 1169.2,
+            "score": 66.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:35:34.652Z",
+            "price": 1168.4,
+            "score": 66.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:40:26.731Z",
+            "price": 1169.1,
+            "score": 66.6,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:40:26.731Z",
+        "lastPrice": 1169.1,
+        "discoveryScore": 66.6,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "PRIVISCL": {
+        "ticker": "PRIVISCL",
+        "fullName": "Privi Speciality Chemicals Ltd.",
+        "sector": "Chemicals",
+        "firstSeenAt": "2026-11-06T08:05:37.165Z",
+        "firstPrice": 3331,
+        "observations": [
+          {
+            "at": "2026-11-06T08:05:37.165Z",
+            "price": 3331,
+            "score": 62.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:30:34.930Z",
+            "price": 3340.1,
+            "score": 63.9,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T08:35:20.746Z",
+            "price": 3350.8,
+            "score": 64.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:40:36.802Z",
+            "price": 3355.8,
+            "score": 64.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:55:03.803Z",
+            "price": 3358.8,
+            "score": 64.6,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:00:10.370Z",
+            "price": 3359.3,
+            "score": 64.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:45:38.174Z",
+            "price": 3377.7,
+            "score": 69.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:55:34.947Z",
+            "price": 3363,
+            "score": 64.4,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:34.947Z",
+        "lastPrice": 3363,
+        "discoveryScore": 64.4,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "INDUSINDBK": {
+        "ticker": "INDUSINDBK",
+        "fullName": "IndusInd Bank Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T08:25:40.342Z",
+        "firstPrice": 913.85,
+        "observations": [
+          {
+            "at": "2026-11-06T08:25:40.342Z",
+            "price": 913.85,
+            "score": 64.6,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:35:41.708Z",
+            "price": 916.6,
+            "score": 65.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:40:39.722Z",
+            "price": 919.6,
+            "score": 65.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:50:40.694Z",
+            "price": 925.65,
+            "score": 68.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:55:40.253Z",
+            "price": 924.4,
+            "score": 67.6,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:55:40.253Z",
+        "lastPrice": 924.4,
+        "discoveryScore": 67.6,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "PAYTM": {
+        "ticker": "PAYTM",
+        "fullName": "One 97 Communications Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T08:25:38.417Z",
+        "firstPrice": 1790.4,
+        "observations": [
+          {
+            "at": "2026-11-06T08:25:38.417Z",
+            "price": 1790.4,
+            "score": 64.3,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:35:38.003Z",
+            "price": 1791.8,
+            "score": 64.4,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:35:38.003Z",
+        "lastPrice": 1791.8,
+        "discoveryScore": 64.4,
+        "reasons": [
+          "not outperforming Nifty",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "MAHABANK": {
+        "ticker": "MAHABANK",
+        "fullName": "Bank of Maharashtra",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T08:30:39.217Z",
+        "firstPrice": 86.24,
+        "observations": [
+          {
+            "at": "2026-11-06T08:30:39.217Z",
+            "price": 86.24,
+            "score": 65.6,
+            "setup": "setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:30:39.217Z",
+        "lastPrice": 86.24,
+        "discoveryScore": 65.6,
+        "reasons": [
+          "confirmed setup; simulated fill recorded"
+        ]
+      },
+      "ABBOTINDIA": {
+        "ticker": "ABBOTINDIA",
+        "fullName": "Abbott India Ltd.",
+        "sector": "Healthcare",
+        "firstSeenAt": "2026-11-06T08:35:31.267Z",
+        "firstPrice": 27000,
+        "observations": [
+          {
+            "at": "2026-11-06T08:35:31.267Z",
+            "price": 27000,
+            "score": 64.1,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:40:31.241Z",
+            "price": 27015,
+            "score": 63.9,
+            "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T08:45:33.729Z",
+            "price": 27015,
+            "score": 63.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T08:49:35.311Z",
+            "price": 27035,
+            "score": 63.8,
+            "setup": "unavailable"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T08:49:35.311Z",
+        "lastPrice": 27035,
+        "discoveryScore": 63.8,
+        "reasons": [
+          "execution quote must be observed after the latest signal candle completed"
+        ]
+      },
+      "PARADEEP": {
+        "ticker": "PARADEEP",
+        "fullName": "Paradeep Phosphates Ltd.",
+        "sector": "Chemicals",
+        "firstSeenAt": "2026-11-06T09:15:39.475Z",
+        "firstPrice": 143.04,
+        "observations": [
+          {
+            "at": "2026-11-06T09:15:39.475Z",
+            "price": 143.04,
+            "score": 68,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:20:38.745Z",
+            "price": 143.42,
+            "score": 68.9,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T09:25:38.989Z",
+            "price": 143,
+            "score": 66.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:30:38.389Z",
+            "price": 142.61,
+            "score": 65.3,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:30:38.389Z",
+        "lastPrice": 142.61,
+        "discoveryScore": 65.3,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "BANDHANBNK": {
+        "ticker": "BANDHANBNK",
+        "fullName": "Bandhan Bank Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T09:20:40.288Z",
+        "firstPrice": 165.73,
+        "observations": [
+          {
+            "at": "2026-11-06T09:20:40.288Z",
+            "price": 165.73,
+            "score": 70.1,
+            "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T09:25:40.167Z",
+            "price": 165.4,
+            "score": 66.2,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:25:40.167Z",
+        "lastPrice": 165.4,
+        "discoveryScore": 66.2,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "SWIGGY": {
+        "ticker": "SWIGGY",
+        "fullName": "Swiggy Ltd.",
+        "sector": "Consumer Services",
+        "firstSeenAt": "2026-11-06T09:20:39.778Z",
+        "firstPrice": 191.78,
+        "observations": [
+          {
+            "at": "2026-11-06T09:20:39.778Z",
+            "price": 191.78,
+            "score": 66.5,
+            "setup": "not-evaluated"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:20:39.778Z",
+        "lastPrice": 191.78,
+        "discoveryScore": 66.5,
         "reasons": []
+      },
+      "SIGNATURE": {
+        "ticker": "SIGNATURE",
+        "fullName": "Signatureglobal (India) Ltd.",
+        "sector": "Realty",
+        "firstSeenAt": "2026-11-06T09:25:35.829Z",
+        "firstPrice": 751.8,
+        "observations": [
+          {
+            "at": "2026-11-06T09:25:35.829Z",
+            "price": 751.8,
+            "score": 67.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:36.675Z",
+            "price": 749.05,
+            "score": 65.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:55:39.334Z",
+            "price": 748.15,
+            "score": 64.4,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:39.334Z",
+        "lastPrice": 748.15,
+        "discoveryScore": 64.4,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "JMFINANCIL": {
+        "ticker": "JMFINANCIL",
+        "fullName": "JM Financial Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T09:25:39.967Z",
+        "firstPrice": 111,
+        "observations": [
+          {
+            "at": "2026-11-06T09:25:39.967Z",
+            "price": 111,
+            "score": 66.2,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:38.820Z",
+            "price": 112.03,
+            "score": 69.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:55:36.528Z",
+            "price": 111.75,
+            "score": 67.9,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:36.528Z",
+        "lastPrice": 111.75,
+        "discoveryScore": 67.9,
+        "reasons": [
+          "below 20-session EMA",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "SHYAMMETL": {
+        "ticker": "SHYAMMETL",
+        "fullName": "Shyam Metalics and Energy Ltd.",
+        "sector": "Capital Goods",
+        "firstSeenAt": "2026-11-06T09:30:35.709Z",
+        "firstPrice": 1299.3,
+        "observations": [
+          {
+            "at": "2026-11-06T09:30:35.709Z",
+            "price": 1299.3,
+            "score": 66,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:35.816Z",
+            "price": 1303.1,
+            "score": 66.4,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:50:35.816Z",
+        "lastPrice": 1303.1,
+        "discoveryScore": 66.4,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "RBLBANK": {
+        "ticker": "RBLBANK",
+        "fullName": "RBL Bank Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T09:35:37.872Z",
+        "firstPrice": 379.4,
+        "observations": [
+          {
+            "at": "2026-11-06T09:35:37.872Z",
+            "price": 379.4,
+            "score": 67.6,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:35:37.872Z",
+        "lastPrice": 379.4,
+        "discoveryScore": 67.6,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "PIRAMALFIN": {
+        "ticker": "PIRAMALFIN",
+        "fullName": "Piramal Finance Ltd.",
+        "sector": "Financial Services",
+        "firstSeenAt": "2026-11-06T09:35:40.417Z",
+        "firstPrice": 2155.5,
+        "observations": [
+          {
+            "at": "2026-11-06T09:35:40.417Z",
+            "price": 2155.5,
+            "score": 65.3,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:40:40.860Z",
+            "price": 2163.3,
+            "score": 66.5,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:45:39.365Z",
+            "price": 2164.7,
+            "score": 67.9,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:37.939Z",
+            "price": 2171,
+            "score": 68.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:55:38.543Z",
+            "price": 2173.8,
+            "score": 66.7,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:38.543Z",
+        "lastPrice": 2173.8,
+        "discoveryScore": 66.7,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "HINDPETRO": {
+        "ticker": "HINDPETRO",
+        "fullName": "Hindustan Petroleum Corporation Ltd.",
+        "sector": "Oil Gas & Consumable Fuels",
+        "firstSeenAt": "2026-11-06T09:40:40.627Z",
+        "firstPrice": 384.9,
+        "observations": [
+          {
+            "at": "2026-11-06T09:40:40.627Z",
+            "price": 384.9,
+            "score": 67,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:40:40.627Z",
+        "lastPrice": 384.9,
+        "discoveryScore": 67,
+        "reasons": [
+          "not outperforming Nifty",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "AEGISVOPAK": {
+        "ticker": "AEGISVOPAK",
+        "fullName": "Aegis Vopak Terminals Ltd.",
+        "sector": "Oil Gas & Consumable Fuels",
+        "firstSeenAt": "2026-11-06T09:40:40.368Z",
+        "firstPrice": 243.81,
+        "observations": [
+          {
+            "at": "2026-11-06T09:40:40.368Z",
+            "price": 243.81,
+            "score": 66.7,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:45:39.006Z",
+            "price": 249,
+            "score": 71.1,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:38.009Z",
+            "price": 248.86,
+            "score": 71.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:55:38.233Z",
+            "price": 248.27,
+            "score": 71.1,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:38.233Z",
+        "lastPrice": 248.27,
+        "discoveryScore": 71.1,
+        "reasons": [
+          "below 20-session EMA",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "CEMPRO": {
+        "ticker": "CEMPRO",
+        "fullName": "Cemindia Projects Ltd.",
+        "sector": "Construction",
+        "firstSeenAt": "2026-11-06T09:45:39.137Z",
+        "firstPrice": 1328.4,
+        "observations": [
+          {
+            "at": "2026-11-06T09:45:39.137Z",
+            "price": 1328.4,
+            "score": 70.4,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:39.678Z",
+            "price": 1333.1,
+            "score": 71.8,
+            "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:55:38.561Z",
+            "price": 1344.9,
+            "score": 73.7,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:38.561Z",
+        "lastPrice": 1344.9,
+        "discoveryScore": 73.7,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "JSL": {
+        "ticker": "JSL",
+        "fullName": "Jindal Stainless Ltd.",
+        "sector": "Metals & Mining",
+        "firstSeenAt": "2026-11-06T09:50:34.875Z",
+        "firstPrice": 700.8,
+        "observations": [
+          {
+            "at": "2026-11-06T09:50:34.875Z",
+            "price": 700.8,
+            "score": 66.1,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:50:34.875Z",
+        "lastPrice": 700.8,
+        "discoveryScore": 66.1,
+        "reasons": [
+          "below 20-session EMA",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "GRANULES": {
+        "ticker": "GRANULES",
+        "fullName": "Granules India Ltd.",
+        "sector": "Healthcare",
+        "firstSeenAt": "2026-11-06T09:55:40.118Z",
+        "firstPrice": 799.75,
+        "observations": [
+          {
+            "at": "2026-11-06T09:55:40.118Z",
+            "price": 799.75,
+            "score": 64.6,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:55:40.118Z",
+        "lastPrice": 799.75,
+        "discoveryScore": 64.6,
+        "reasons": [
+          "below 20-session EMA",
+          "not outperforming Nifty",
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
       }
     }
   },
