@@ -11,7 +11,7 @@ export const SOURCES = Object.freeze([
   })),
   {name:'session-replay',url:`${MAIN_DATA}replays/${new Date(Date.now()+19800000).toISOString().slice(0,10)}.json`,
     label:'Isolated historical replay · estimated, not executed',optional:true},
-  { name: 'universe', url: '../research/universe.json', label: 'Local official-universe registry' },
+  { name: 'universe', url: 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/research/universe.json', label: 'Live main-branch universe registry' },
   {name:'decision-audit',url:'../data/decision-audit.json',label:'Recovered original decision evidence',optional:true},
 ]);
 const NA = 'Not available';

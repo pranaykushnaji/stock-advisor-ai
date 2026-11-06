@@ -2,7 +2,7 @@ import { requireCronAuth } from './_cron-auth.js';
 import { marketStatus, nowIST } from './_market-calendar.js';
 import { fetchFullQuotes, fetchIntradayOneMinuteCandles, fetchDailyCandles } from './_upstox-market-data.js';
 import { quoteBatches } from '../research/coverage.js';
-import registry from '../research/universe.json' with {type:'json'};
+import {loadLiveRegistry} from './_live-registry.js';
 import { rankSimulationUniverse, transitionSimulation, validateSimulation, dailyReference, SIM_CONFIG } from './_paper-simulation.js';
 import { savedResearchContext } from './_paper-research-context.js';
 import {setupShortlist} from '../research/trading-setups.js';
@@ -41,7 +41,7 @@ async function loadSafety(env,at,members) {
 
 export function createSimulationHandler({env=process.env,now=()=>new Date(),read=path=>readFile(path,env),
   write=(state,sha)=>writeFile(state,sha,env),quotes=fetchFullQuotes,intraday=fetchIntradayOneMinuteCandles,
-  daily=fetchDailyCandles,members=registry.members,registryFetchedAt=registry.fetchedAt,safety=at=>loadSafety(env,at,members),config=SIM_CONFIG}={}){
+  daily=fetchDailyCandles,members=[],registryFetchedAt=null,safety=at=>loadSafety(env,at,members),config=SIM_CONFIG}={}){
   return async(req,res)=>{
     res.setHeader?.('Cache-Control','no-store');
     if(!requireCronAuth(req,res))return;
@@ -57,6 +57,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
     try{
       const initial=await read(FILE);validateSimulation(initial.data);
       if(body.mode==='health'){
+        if(!members.length)return res.status(503).json({status:'registry_unavailable',paperTrading:true,ordersExecuted:0});
         const sample=members.filter(m=>m.instrumentKey).slice(0,1);
         const q={};
         const checkedMembers=body.testCoverage===true?members.filter(m=>['mid','small'].includes(m.marketCapBucket)&&m.instrumentKey):sample;
@@ -133,7 +134,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
         market.candidates=shortlist.map(r=>({...bySymbol.get(r.symbol),discoveryScore:r.discoveryScore}));
         market.discovery={at:now().toISOString(),requested:scanMembers.length,
           quotesReceived:scanMembers.filter(m=>market.quotes[m.instrumentKey]).length,shortlisted:market.candidates.length,
-          rejected:discovery.rejected.slice(0,30),source:'Upstox',registryAt:registry.fetchedAt};
+          rejected:discovery.rejected.slice(0,30),source:'Upstox',registryAt:registryFetchedAt};
         const from=new Date(at.getTime()-100*86400000).toISOString().slice(0,10);
         // One extra candle request per scan, reused by every candidate. Never
         // substitute the daily percentage move if short-term index history fails.
@@ -175,4 +176,18 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
 }
 // Only new entries use the approved release selection. Existing positions keep
 // their frozen saved policies, or original protection if no new policy exists.
-export default createSimulationHandler({config:RELEASE_SIM_CONFIG});
+export function createLiveSimulationHandler({registryLoader=loadLiveRegistry,env=process.env,...deps}={}){
+  return async(req,res)=>{
+    // Authenticate before any upstream reads. Risk-only protection never depends
+    // on registry availability or waits for its network request.
+    if(!requireCronAuth(req,res))return;
+    if(req.method!=='POST')return res.status(405).json({error:'POST required'});
+    let body=req.body;try{if(typeof body==='string')body=JSON.parse(body);}catch{}
+    let live={members:[],fetchedAt:null};
+    const needsRegistry=req.query?.action!=='risk'||body?.mode==='health';
+    if(needsRegistry&&env.PAPER_SIMULATION_ENABLED==='true'&&env.UPSTOX_ACCESS_TOKEN&&env.GITHUB_TOKEN)
+      try{live=await registryLoader();}catch{/* A missing registry pauses new entries, never existing-price exits. */}
+    return createSimulationHandler({...deps,env,config:RELEASE_SIM_CONFIG,members:live.members,registryFetchedAt:live.fetchedAt})(req,res);
+  };
+}
+export default createLiveSimulationHandler();
