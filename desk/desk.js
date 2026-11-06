@@ -1,6 +1,6 @@
 /* Static, read-only desk. Exported helpers have no browser or network dependencies. */
 import { laneStats, expectedEdge, EDGE_COST_BPS } from '../research/evidence.js';
-import {renderSignalCards,renderWorkspaceOverview,renderWorkspaceSystem,renderReplayPanel,renderPerformanceTracker} from './workspace.js?v=20261106-minimal-1';
+import {renderSignalCards,renderWorkspaceOverview,renderWorkspaceSystem,renderReplayPanel,renderPerformanceTracker} from './workspace.js?v=20261106-minimal-2';
 import {estimatedTradeCost, tradeNetAmount, tradeNetReturnPct, positionReturnPct, performanceSummary} from './performance.js';
 import {visibleRefresh} from './visible-refresh.js';
 const MAIN_DATA = 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/';

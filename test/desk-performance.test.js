@@ -87,3 +87,10 @@ test('homepage retains urgent data checks and shows at most five unpurchased sug
   assert.match(html,/New entries paused/);assert.match(html,/Watching, not bought/);assert.match(html,/WATCH4/);assert.doesNotMatch(html,/WATCH5/);
   assert.match(html,/not trade P&L/);assert.match(html,/#system/);
 });
+
+test('past-session trades do not hide the current session watch list',()=>{
+  const sim=account({updatedAt:'2026-11-06T04:00:00Z',trades:[trade('OLD',1000,100,{entryDate:'2026-11-05',addedAt:'2026-11-05T04:00:00Z'})]}),
+    fmt={e:escapeHTML,money,dateTime,percent:n=>n==null?'Not available':n.toFixed(2)+'%'};
+  const html=renderWorkspaceOverview({sim,suggestions:[{ticker:'NEW',price:100,name:'New idea'}]},fmt);
+  assert.match(html,/Watching, not bought/);assert.match(html,/<h3>NEW<\/h3>/);assert.doesNotMatch(html,/<h3>OLD<\/h3>/);
+});

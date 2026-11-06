@@ -1,5 +1,5 @@
 // Lightweight, data-honest presentation. No synthetic charts, probabilities or orders.
-import {performanceSummary,positionReturnPct,tradeNetReturnPct} from './performance.js';
+import {performanceSummary,positionReturnPct,tradeNetReturnPct,excludedFromPerformance} from './performance.js';
 import {SIM_CONFIG} from '../research/paper-policy.js';
 const paths = {
   grid: "M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z",
@@ -97,7 +97,12 @@ function overviewStatus(sim) {
 
 export function renderWorkspaceOverview({sim,suggestions}, f) {
   const {e,money,percent,dateTime}=f, p=performanceSummary(sim),status=overviewStatus(sim);
-  const records=[...(sim.positions||[]),...(sim.trades||[])].sort((a,b)=>
+  const session=new Date((Date.parse(sim.updatedAt)||Date.now())+19800000).toISOString().slice(0,10);
+  const records=[...(sim.positions||[]),...(sim.trades||[])].filter(r=>{
+    const at=Date.parse(r.addedAt||r.entryAt);
+    const entryDate=r.date||r.entryDate||(Number.isFinite(at)?new Date(at+19800000).toISOString().slice(0,10):null);
+    return entryDate===session&&!excludedFromPerformance(r);
+  }).sort((a,b)=>
     (Date.parse(b.addedAt||b.entryAt)||0)-(Date.parse(a.addedAt||a.entryAt)||0));
   const byTicker=new Map();for(const row of records)if(!byTicker.has(row.ticker))byTicker.set(row.ticker,row);
   const latest=[...byTicker.values()].slice(0,3);
