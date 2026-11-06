@@ -24,9 +24,9 @@
       "initialStopPct": 2.186744051287215,
       "modeledInitialRisk": 99.29,
       "peakPrice": 327.25,
-      "currentPrice": 325.5,
-      "lastObservedAt": "2026-11-05T09:44:59.538Z",
-      "lastPriceUpdate": "2026-11-05T09:44:59.538Z",
+      "currentPrice": 320.2,
+      "lastObservedAt": "2026-11-06T03:45:34.435Z",
+      "lastPriceUpdate": "2026-11-06T03:45:34.435Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -67,9 +67,9 @@
       "initialStopPct": 1.2708364278302686,
       "modeledInitialRisk": 72.81,
       "peakPrice": 570,
-      "currentPrice": 565.95,
-      "lastObservedAt": "2026-11-05T09:55:38.521Z",
-      "lastPriceUpdate": "2026-11-05T09:55:38.521Z",
+      "currentPrice": 565,
+      "lastObservedAt": "2026-11-06T03:45:28.786Z",
+      "lastPriceUpdate": "2026-11-06T03:45:28.786Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -110,9 +110,9 @@
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
       "peakPrice": 236.88,
-      "currentPrice": 232.78,
-      "lastObservedAt": "2026-11-05T09:55:40.953Z",
-      "lastPriceUpdate": "2026-11-05T09:55:40.953Z",
+      "currentPrice": 233.66,
+      "lastObservedAt": "2026-11-06T03:45:33.500Z",
+      "lastPriceUpdate": "2026-11-06T03:45:33.500Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -369,12 +369,18 @@
         "GODREJPROP",
         "UNOMINDA"
       ]
+    },
+    "2026-11-06": {
+      "contribution": 0,
+      "invested": 0,
+      "buys": [],
+      "exits": []
     }
   },
   "lastSlots": {
     "research": 1793936400000,
     "scan": 1793872500000,
-    "risk": 1793872500000
+    "risk": 1793936700000
   },
   "dailyCache": {
     "GROWW": {
@@ -1121,7 +1127,7 @@
     }
   },
   "suggestions": [],
-  "updatedAt": "2026-11-06T03:40:37.901Z",
+  "updatedAt": "2026-11-06T03:45:37.636Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -1145,10 +1151,25 @@
     "fundingMode": "as-needed-paper-capital"
   },
   "lastCheck": {
-    "at": "2026-11-06T03:40:37.901Z",
-    "action": "research",
+    "at": "2026-11-06T03:45:37.636Z",
+    "action": "risk",
     "bought": null,
-    "checked": []
+    "checked": [
+      {
+        "ticker": "ANGELONE",
+        "status": "hold"
+      },
+      {
+        "ticker": "ZENSARTECH",
+        "status": "hold"
+      },
+      {
+        "ticker": "MEESHO",
+        "status": "hold"
+      }
+    ],
+    "entryPause": null,
+    "researchStatus": "loaded"
   },
   "discovery": {
     "at": "2026-11-05T09:55:40.458Z",
