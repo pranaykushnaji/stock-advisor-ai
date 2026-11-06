@@ -25,8 +25,8 @@
       "modeledInitialRisk": 30.85,
       "peakPrice": 238.2,
       "currentPrice": 233.38,
-      "lastObservedAt": "2026-11-06T09:50:35.587Z",
-      "lastPriceUpdate": "2026-11-06T09:50:35.587Z",
+      "lastObservedAt": "2026-11-06T09:50:39.322Z",
+      "lastPriceUpdate": "2026-11-06T09:50:39.322Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -459,9 +459,9 @@
       "initialStopPct": 1.4132427700307315,
       "modeledInitialRisk": 11.02,
       "peakPrice": 625.8,
-      "currentPrice": 625.7,
-      "lastObservedAt": "2026-11-06T09:50:32.748Z",
-      "lastPriceUpdate": "2026-11-06T09:50:32.748Z",
+      "currentPrice": 625.75,
+      "lastObservedAt": "2026-11-06T09:50:35.022Z",
+      "lastPriceUpdate": "2026-11-06T09:50:35.022Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -1351,7 +1351,7 @@
   },
   "lastSlots": {
     "research": 1793936400000,
-    "scan": 1793958300000,
+    "scan": 1793958600000,
     "risk": 1793958600000
   },
   "dailyCache": {
@@ -2418,55 +2418,24 @@
       "sessions": 69,
       "ema20": 251.48583814240877,
       "averageTurnoverCr": 19.176572118
+    },
+    "JSL": {
+      "asOf": "2026-11-06",
+      "lastSession": "2026-11-05",
+      "sessions": 69,
+      "ema20": 700.8780397914418,
+      "averageTurnoverCr": 40.7157225965
     }
   },
   "suggestions": [
     {
-      "ticker": "GLENMARK",
-      "fullName": "Glenmark Pharmaceuticals Ltd.",
-      "sector": "Healthcare",
-      "discoveryScore": 71.4,
-      "price": 2590,
-      "observedAt": "2026-11-06T09:44:59.579Z",
-      "sessionChangePct": 4.36,
-      "research": null,
-      "reasons": [
-        "execution quote must be observed after the latest signal candle completed"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "unavailable",
-        "reason": "execution quote must be observed after the latest signal candle completed",
-        "version": null
-      }
-    },
-    {
-      "ticker": "CARTRADE",
-      "fullName": "Cartrade Tech Ltd.",
-      "sector": "Consumer Services",
-      "discoveryScore": 71.3,
-      "price": 2700.9,
-      "observedAt": "2026-11-06T09:45:36.178Z",
-      "sessionChangePct": 3.8,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
       "ticker": "AEGISVOPAK",
       "fullName": "Aegis Vopak Terminals Ltd.",
       "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 71.1,
-      "price": 249,
-      "observedAt": "2026-11-06T09:45:39.006Z",
-      "sessionChangePct": 5.23,
+      "discoveryScore": 71.8,
+      "price": 248.86,
+      "observedAt": "2026-11-06T09:50:38.009Z",
+      "sessionChangePct": 5.17,
       "research": null,
       "reasons": [
         "below 20-session EMA",
@@ -2483,10 +2452,10 @@
       "ticker": "CEMPRO",
       "fullName": "Cemindia Projects Ltd.",
       "sector": "Construction",
-      "discoveryScore": 70.4,
-      "price": 1328.4,
-      "observedAt": "2026-11-06T09:45:39.137Z",
-      "sessionChangePct": 3.18,
+      "discoveryScore": 71.8,
+      "price": 1333.1,
+      "observedAt": "2026-11-06T09:50:39.678Z",
+      "sessionChangePct": 3.55,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -2499,32 +2468,13 @@
       }
     },
     {
-      "ticker": "FORCEMOT",
-      "fullName": "Force Motors Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 69.7,
-      "price": 18978,
-      "observedAt": "2026-11-06T09:44:59.532Z",
-      "sessionChangePct": 3.24,
-      "research": null,
-      "reasons": [
-        "execution quote must be observed after the latest signal candle completed"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "unavailable",
-        "reason": "execution quote must be observed after the latest signal candle completed",
-        "version": null
-      }
-    },
-    {
-      "ticker": "PRIVISCL",
-      "fullName": "Privi Speciality Chemicals Ltd.",
-      "sector": "Chemicals",
-      "discoveryScore": 69.1,
-      "price": 3377.7,
-      "observedAt": "2026-11-06T09:45:38.174Z",
-      "sessionChangePct": 3.07,
+      "ticker": "CARTRADE",
+      "fullName": "Cartrade Tech Ltd.",
+      "sector": "Consumer Services",
+      "discoveryScore": 71.2,
+      "price": 2700.1,
+      "observedAt": "2026-11-06T09:50:19.118Z",
+      "sessionChangePct": 3.77,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -2537,21 +2487,22 @@
       }
     },
     {
-      "ticker": "ICICILIFE",
-      "fullName": "ICICI Life Insurance Ltd.",
+      "ticker": "JMFINANCIL",
+      "fullName": "JM Financial Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 68.4,
-      "price": 437.35,
-      "observedAt": "2026-11-06T09:44:59.819Z",
-      "sessionChangePct": 2.27,
+      "discoveryScore": 69.7,
+      "price": 112.03,
+      "observedAt": "2026-11-06T09:50:38.820Z",
+      "sessionChangePct": 2.98,
       "research": null,
       "reasons": [
-        "execution quote must be observed after the latest signal candle completed"
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
-        "status": "unavailable",
-        "reason": "execution quote must be observed after the latest signal candle completed",
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
         "version": null
       }
     },
@@ -2559,10 +2510,68 @@
       "ticker": "PIRAMALFIN",
       "fullName": "Piramal Finance Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 67.9,
-      "price": 2164.7,
-      "observedAt": "2026-11-06T09:45:39.365Z",
-      "sessionChangePct": 2.13,
+      "discoveryScore": 68.8,
+      "price": 2171,
+      "observedAt": "2026-11-06T09:50:37.939Z",
+      "sessionChangePct": 2.42,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "SHYAMMETL",
+      "fullName": "Shyam Metalics and Energy Ltd.",
+      "sector": "Capital Goods",
+      "discoveryScore": 66.4,
+      "price": 1303.1,
+      "observedAt": "2026-11-06T09:50:35.816Z",
+      "sessionChangePct": 2.61,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "JSL",
+      "fullName": "Jindal Stainless Ltd.",
+      "sector": "Metals & Mining",
+      "discoveryScore": 66.1,
+      "price": 700.8,
+      "observedAt": "2026-11-06T09:50:34.875Z",
+      "sessionChangePct": 2.18,
+      "research": null,
+      "reasons": [
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "SIGNATURE",
+      "fullName": "Signatureglobal (India) Ltd.",
+      "sector": "Realty",
+      "discoveryScore": 65.4,
+      "price": 749.05,
+      "observedAt": "2026-11-06T09:50:36.675Z",
+      "sessionChangePct": 2.24,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -2575,7 +2584,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-06T09:50:37.605Z",
+  "updatedAt": "2026-11-06T09:50:40.281Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -2599,8 +2608,8 @@
     "fundingMode": "as-needed-paper-capital"
   },
   "lastCheck": {
-    "at": "2026-11-06T09:50:37.605Z",
-    "action": "risk",
+    "at": "2026-11-06T09:50:40.281Z",
+    "action": "scan",
     "bought": null,
     "checked": [
       {
@@ -2652,7 +2661,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-06T09:45:39.724Z",
+    "at": "2026-11-06T09:50:39.770Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -2660,6 +2669,7 @@
       {
         "ticker": "360ONE",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -2673,6 +2683,12 @@
         "ticker": "ABBOTINDIA",
         "reasons": [
           "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ABCAPITAL",
+        "reasons": [
+          "missing or wide bid/ask spread"
         ]
       },
       {
@@ -2726,6 +2742,7 @@
       {
         "ticker": "AMBER",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -2751,6 +2768,7 @@
       {
         "ticker": "APLAPOLLO",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -2773,6 +2791,12 @@
         ]
       },
       {
+        "ticker": "ASHOKLEY",
+        "reasons": [
+          "missing or wide bid/ask spread"
+        ]
+      },
+      {
         "ticker": "ASTERDM",
         "reasons": [
           "weak or overextended session move"
@@ -2781,6 +2805,7 @@
       {
         "ticker": "ASTRAL",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -2799,6 +2824,7 @@
       {
         "ticker": "AUBANK",
         "reasons": [
+          "missing or wide bid/ask spread",
           "weak or overextended session move"
         ]
       },
@@ -2825,18 +2851,6 @@
         "reasons": [
           "weak or overextended session move"
         ]
-      },
-      {
-        "ticker": "BALRAMCHIN",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
-        "ticker": "BANKINDIA",
-        "reasons": [
-          "weak or overextended session move"
-        ]
       }
     ],
     "source": "Upstox",
@@ -2845,7 +2859,7 @@
       "fresh": true,
       "reason": "fresh provider index snapshot",
       "changePct": 1.6395914674404821,
-      "observedAt": "2026-11-06T09:45:40.121Z",
+      "observedAt": "2026-11-06T09:50:40.182Z",
       "timestampBasis": "provider-index-snapshot",
       "price": 24938.9,
       "previousClose": 24536.600000000002
@@ -3288,6 +3302,12 @@
       },
       {
         "at": "2026-11-06T09:45:40.238Z",
+        "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T09:50:40.281Z",
         "bought": null,
         "shortlisted": 8,
         "benchmarkFresh": true
@@ -6492,11 +6512,17 @@
             "price": 2700.9,
             "score": 71.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:19.118Z",
+            "price": 2700.1,
+            "score": 71.2,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T09:45:36.178Z",
-        "lastPrice": 2700.9,
-        "discoveryScore": 71.3,
+        "lastSeenAt": "2026-11-06T09:50:19.118Z",
+        "lastPrice": 2700.1,
+        "discoveryScore": 71.2,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -7261,11 +7287,17 @@
             "price": 751.8,
             "score": 67.8,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:36.675Z",
+            "price": 749.05,
+            "score": 65.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T09:25:35.829Z",
-        "lastPrice": 751.8,
-        "discoveryScore": 67.8,
+        "lastSeenAt": "2026-11-06T09:50:36.675Z",
+        "lastPrice": 749.05,
+        "discoveryScore": 65.4,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -7282,11 +7314,17 @@
             "price": 111,
             "score": 66.2,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:38.820Z",
+            "price": 112.03,
+            "score": 69.7,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T09:25:39.967Z",
-        "lastPrice": 111,
-        "discoveryScore": 66.2,
+        "lastSeenAt": "2026-11-06T09:50:38.820Z",
+        "lastPrice": 112.03,
+        "discoveryScore": 69.7,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -7304,11 +7342,17 @@
             "price": 1299.3,
             "score": 66,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:35.816Z",
+            "price": 1303.1,
+            "score": 66.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T09:30:35.709Z",
-        "lastPrice": 1299.3,
-        "discoveryScore": 66,
+        "lastSeenAt": "2026-11-06T09:50:35.816Z",
+        "lastPrice": 1303.1,
+        "discoveryScore": 66.4,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -7358,11 +7402,17 @@
             "price": 2164.7,
             "score": 67.9,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:37.939Z",
+            "price": 2171,
+            "score": 68.8,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T09:45:39.365Z",
-        "lastPrice": 2164.7,
-        "discoveryScore": 67.9,
+        "lastSeenAt": "2026-11-06T09:50:37.939Z",
+        "lastPrice": 2171,
+        "discoveryScore": 68.8,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -7407,11 +7457,17 @@
             "price": 249,
             "score": 71.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:38.009Z",
+            "price": 248.86,
+            "score": 71.8,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T09:45:39.006Z",
-        "lastPrice": 249,
-        "discoveryScore": 71.1,
+        "lastSeenAt": "2026-11-06T09:50:38.009Z",
+        "lastPrice": 248.86,
+        "discoveryScore": 71.8,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -7429,12 +7485,40 @@
             "price": 1328.4,
             "score": 70.4,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T09:50:39.678Z",
+            "price": 1333.1,
+            "score": 71.8,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T09:45:39.137Z",
-        "lastPrice": 1328.4,
-        "discoveryScore": 70.4,
+        "lastSeenAt": "2026-11-06T09:50:39.678Z",
+        "lastPrice": 1333.1,
+        "discoveryScore": 71.8,
         "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
+      },
+      "JSL": {
+        "ticker": "JSL",
+        "fullName": "Jindal Stainless Ltd.",
+        "sector": "Metals & Mining",
+        "firstSeenAt": "2026-11-06T09:50:34.875Z",
+        "firstPrice": 700.8,
+        "observations": [
+          {
+            "at": "2026-11-06T09:50:34.875Z",
+            "price": 700.8,
+            "score": 66.1,
+            "setup": "no_setup"
+          }
+        ],
+        "lastSeenAt": "2026-11-06T09:50:34.875Z",
+        "lastPrice": 700.8,
+        "discoveryScore": 66.1,
+        "reasons": [
+          "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
       }
