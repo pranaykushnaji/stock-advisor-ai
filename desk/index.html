@@ -15,8 +15,8 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/desk/desk.css" />
-    <script type="module" src="/desk/desk.js"></script>
+    <link rel="stylesheet" href="/desk/desk.css?v=20261106-minimal-1" />
+    <script type="module" src="/desk/desk.js?v=20261106-minimal-1"></script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to workspace</a>
@@ -102,11 +102,11 @@
             <path d="M4 3v17h17 M8 15l4-5 4 2 5-7" /></svg
           ><span>Results</span>
         </button>
+        <button type="button" role="tab" id="tab-system" aria-label="System" aria-controls="system" aria-selected="false" tabindex="-1">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h5l3-8 4 16 3-8h5" /></svg><span>System</span>
+        </button>
       </nav>
       <div class="sidebar-bottom">
-        <a class="side-health" href="#system-health"
-          ><span class="health-dot"></span>Engine & data health ↗</a
-        >
         <div class="paper-mode">
           <span class="paper-icon">P</span>
           <div>
@@ -142,7 +142,6 @@
             id="overview"
             role="tabpanel"
             aria-labelledby="tab-overview"
-            tabindex="0"
           >
             <div class="loading-skeleton">
               <span></span><span></span><span></span>
@@ -152,7 +151,6 @@
             id="suggestions"
             role="tabpanel"
             aria-labelledby="tab-suggestions"
-            tabindex="0"
             hidden
           >
             <div class="section-heading workspace-heading">
@@ -192,7 +190,6 @@
             id="positions"
             role="tabpanel"
             aria-labelledby="tab-positions"
-            tabindex="0"
             hidden
           >
             <div class="empty">Reading paper positions…</div>
@@ -201,17 +198,18 @@
             id="results"
             role="tabpanel"
             aria-labelledby="tab-results"
-            tabindex="0"
             hidden
           >
             <div class="empty">Reading paper results…</div>
           </section>
-        </main>
+          <section id="system" role="tabpanel" aria-labelledby="tab-system" hidden>
+            <div class="section-heading"><div><p class="eyebrow">BEHIND THE SCENES</p><h1>System & strategy</h1><p class="muted">Scan activity, safeguards and source health.</p></div></div>
+            <div id="engine-details"></div>
         <section class="panel health-panel" aria-labelledby="health-heading">
           <details id="system-health">
             <summary>
               <span
-                ><strong id="health-heading">Under the hood</strong
+                ><strong id="health-heading">Data sources & coverage</strong
                 ><span class="muted small"
                   >Source quality, coverage & saved observations</span
                 ></span
@@ -222,6 +220,8 @@
             </div>
           </details>
         </section>
+          </section>
+        </main>
         <footer>
           <span
             ><span class="footer-dot"></span>Research-led. Risk-aware. Paper
