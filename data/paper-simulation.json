@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-one-share-v2",
   "mode": "experimental-paper-only",
-  "cash": 10032.98,
+  "cash": 9491.75,
   "contributions": 20000,
   "positions": [
     {
@@ -24,9 +24,9 @@
       "initialStopPct": 2.186744051287215,
       "modeledInitialRisk": 99.29,
       "peakPrice": 327.25,
-      "currentPrice": 321.2,
-      "lastObservedAt": "2026-11-06T05:00:36.246Z",
-      "lastPriceUpdate": "2026-11-06T05:00:36.246Z",
+      "currentPrice": 321.1,
+      "lastObservedAt": "2026-11-06T05:00:38.420Z",
+      "lastPriceUpdate": "2026-11-06T05:00:38.420Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -67,9 +67,9 @@
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
       "peakPrice": 238.2,
-      "currentPrice": 232.93,
-      "lastObservedAt": "2026-11-06T05:00:37.773Z",
-      "lastPriceUpdate": "2026-11-06T05:00:37.773Z",
+      "currentPrice": 232.81,
+      "lastObservedAt": "2026-11-06T05:00:38.555Z",
+      "lastPriceUpdate": "2026-11-06T05:00:38.555Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -111,8 +111,8 @@
       "modeledInitialRisk": 62.18,
       "peakPrice": 3444.7214999999997,
       "currentPrice": 3443,
-      "lastObservedAt": "2026-11-06T05:00:36.346Z",
-      "lastPriceUpdate": "2026-11-06T05:00:36.346Z",
+      "lastObservedAt": "2026-11-06T05:00:40.747Z",
+      "lastPriceUpdate": "2026-11-06T05:00:40.747Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -153,9 +153,9 @@
       "initialStopPct": 1.266403248455017,
       "modeledInitialRisk": 18.37,
       "peakPrice": 1136.3679,
-      "currentPrice": 1131.8,
-      "lastObservedAt": "2026-11-06T05:00:28.156Z",
-      "lastPriceUpdate": "2026-11-06T05:00:28.156Z",
+      "currentPrice": 1131.7,
+      "lastObservedAt": "2026-11-06T05:00:38.223Z",
+      "lastPriceUpdate": "2026-11-06T05:00:38.223Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -196,9 +196,9 @@
       "initialStopPct": 1.4508555998680506,
       "modeledInitialRisk": 6.15,
       "peakPrice": 343.5,
-      "currentPrice": 343.5,
-      "lastObservedAt": "2026-11-06T05:00:36.531Z",
-      "lastPriceUpdate": "2026-11-06T05:00:36.531Z",
+      "currentPrice": 343.25,
+      "lastObservedAt": "2026-11-06T05:00:39.817Z",
+      "lastPriceUpdate": "2026-11-06T05:00:39.817Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -217,6 +217,49 @@
       "research": null,
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T04:55:38.166Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-06|LICHSGFIN|paper-one-share-v2",
+      "ticker": "LICHSGFIN",
+      "symbol": "LICHSGFIN",
+      "instrumentKey": "NSE_EQ|INE115A01026",
+      "fullName": "LIC Housing Finance Ltd.",
+      "sector": "Financial Services",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T05:00:36.661Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 540.420075,
+      "shares": 1,
+      "investedAmount": 540.42,
+      "entryCost": 0.81,
+      "initialStopPrice": 532.467,
+      "initialStopPct": 1.4716468480561185,
+      "modeledInitialRisk": 9.84,
+      "peakPrice": 540.420075,
+      "currentPrice": 540.1,
+      "lastObservedAt": "2026-11-06T05:00:36.661Z",
+      "lastPriceUpdate": "2026-11-06T05:00:36.661Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T05:00:00.000Z",
+        "entryAt": "2026-11-06T05:00:36.661Z",
+        "entryPrice": 540.1,
+        "entryIndex": 15,
+        "breakoutLevel": 538,
+        "supportLevel": 533,
+        "vwap": 532.085941147346,
+        "volumeRatio": 1.790257840878683,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 65.7,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T05:00:36.661Z",
       "paperTrading": true,
       "expectedEdge": null
     }
@@ -525,11 +568,12 @@
     },
     "2026-11-06": {
       "contribution": 0,
-      "invested": 4930.19,
+      "invested": 5471.42,
       "buys": [
         "MCX",
         "MGL",
-        "BSOFT"
+        "BSOFT",
+        "LICHSGFIN"
       ],
       "exits": [
         "ZENSARTECH"
@@ -538,7 +582,7 @@
   },
   "lastSlots": {
     "research": 1793936400000,
-    "scan": 1793940900000,
+    "scan": 1793941200000,
     "risk": 1793941200000
   },
   "dailyCache": {
@@ -1430,10 +1474,10 @@
       "ticker": "KALYANKJIL",
       "fullName": "Kalyan Jewellers India Ltd.",
       "sector": "Consumer Durables",
-      "discoveryScore": 75.4,
-      "price": 582.05,
-      "observedAt": "2026-11-06T04:55:40.435Z",
-      "sessionChangePct": 3.94,
+      "discoveryScore": 76.8,
+      "price": 585,
+      "observedAt": "2026-11-06T05:00:40.436Z",
+      "sessionChangePct": 4.46,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -1449,42 +1493,30 @@
       "ticker": "CHENNPETRO",
       "fullName": "Chennai Petroleum Corporation Ltd.",
       "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 72.7,
-      "price": 1465,
-      "observedAt": "2026-11-06T04:55:40.105Z",
-      "sessionChangePct": 3.28,
+      "discoveryScore": 72.5,
+      "price": 1466.7,
+      "observedAt": "2026-11-06T05:00:38.698Z",
+      "sessionChangePct": 3.4,
       "research": null,
       "reasons": [
-        "below 20-session EMA"
+        "below 20-session EMA",
+        "no confirmed consolidation breakout with bounded extension and volume"
       ],
       "status": "not-qualified",
       "entryDiagnostics": {
-        "status": "setup",
-        "reason": null,
-        "version": "consolidation-v1"
-      },
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-06T04:55:00.000Z",
-        "entryAt": "2026-11-06T04:55:40.105Z",
-        "entryPrice": 1465,
-        "entryIndex": 14,
-        "breakoutLevel": 1459.1,
-        "supportLevel": 1445.2,
-        "vwap": 1440.4233288481464,
-        "volumeRatio": 2.001864900215181,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
       }
     },
     {
       "ticker": "GLENMARK",
       "fullName": "Glenmark Pharmaceuticals Ltd.",
       "sector": "Healthcare",
-      "discoveryScore": 71.3,
-      "price": 2548.3,
-      "observedAt": "2026-11-06T04:55:39.660Z",
-      "sessionChangePct": 2.68,
+      "discoveryScore": 70.9,
+      "price": 2545.2,
+      "observedAt": "2026-11-06T05:00:39.572Z",
+      "sessionChangePct": 2.55,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -1497,13 +1529,32 @@
       }
     },
     {
-      "ticker": "BSOFT",
-      "fullName": "Birlasoft Ltd.",
-      "sector": "Information Technology",
-      "discoveryScore": 69.5,
-      "price": 341.5,
-      "observedAt": "2026-11-06T04:55:38.166Z",
-      "sessionChangePct": 3.39,
+      "ticker": "CHOLAHLDNG",
+      "fullName": "Cholamandalam Financial Holdings Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 66.5,
+      "price": 1485.1,
+      "observedAt": "2026-11-06T05:00:38.604Z",
+      "sessionChangePct": 5.12,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "LICHSGFIN",
+      "fullName": "LIC Housing Finance Ltd.",
+      "sector": "Financial Services",
+      "discoveryScore": 65.7,
+      "price": 540.1,
+      "observedAt": "2026-11-06T05:00:36.661Z",
+      "sessionChangePct": 2.1,
       "research": null,
       "reasons": [
         "confirmed setup; simulated fill recorded"
@@ -1516,38 +1567,26 @@
       },
       "setup": {
         "status": "setup",
-        "signalAt": "2026-11-06T04:55:00.000Z",
-        "entryAt": "2026-11-06T04:55:38.166Z",
-        "entryPrice": 341.5,
-        "entryIndex": 14,
-        "breakoutLevel": 339.9,
-        "supportLevel": 337.1,
-        "vwap": 338.0215258105647,
-        "volumeRatio": 3.7066947866567217,
+        "signalAt": "2026-11-06T05:00:00.000Z",
+        "entryAt": "2026-11-06T05:00:36.661Z",
+        "entryPrice": 540.1,
+        "entryIndex": 15,
+        "breakoutLevel": 538,
+        "supportLevel": 533,
+        "vwap": 532.085941147346,
+        "volumeRatio": 1.790257840878683,
         "setupVersion": "consolidation-v1",
         "execution": "shadow-quote-only"
       }
     },
     {
-      "ticker": "CHOLAHLDNG",
-      "fullName": "Cholamandalam Financial Holdings Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 66.4,
-      "price": 1485,
-      "observedAt": "2026-11-06T04:55:39.424Z",
-      "sessionChangePct": 5.12,
-      "research": null,
-      "reasons": [],
-      "status": "not-selected"
-    },
-    {
       "ticker": "CROMPTON",
       "fullName": "Crompton Greaves Consumer Electricals Ltd.",
       "sector": "Consumer Durables",
-      "discoveryScore": 66.1,
-      "price": 210.92,
-      "observedAt": "2026-11-06T04:55:39.544Z",
-      "sessionChangePct": 2.13,
+      "discoveryScore": 65.4,
+      "price": 210.87,
+      "observedAt": "2026-11-06T05:00:37.441Z",
+      "sessionChangePct": 2.1,
       "research": null,
       "reasons": [],
       "status": "not-selected"
@@ -1556,10 +1595,10 @@
       "ticker": "IIFL",
       "fullName": "IIFL Finance Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 65.4,
-      "price": 620.3,
-      "observedAt": "2026-11-06T04:55:37.831Z",
-      "sessionChangePct": 2.61,
+      "discoveryScore": 63.9,
+      "price": 618.75,
+      "observedAt": "2026-11-06T05:00:37.714Z",
+      "sessionChangePct": 2.36,
       "research": null,
       "reasons": [],
       "status": "not-selected"
@@ -1568,16 +1607,16 @@
       "ticker": "MRPL",
       "fullName": "Mangalore Refinery & Petrochemicals Ltd.",
       "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 64.6,
-      "price": 175.91,
-      "observedAt": "2026-11-06T04:55:35.606Z",
-      "sessionChangePct": 1.25,
+      "discoveryScore": 63.8,
+      "price": 175.76,
+      "observedAt": "2026-11-06T05:00:37.132Z",
+      "sessionChangePct": 1.17,
       "research": null,
       "reasons": [],
       "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-06T05:00:38.149Z",
+  "updatedAt": "2026-11-06T05:00:40.960Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -1601,9 +1640,9 @@
     "fundingMode": "as-needed-paper-capital"
   },
   "lastCheck": {
-    "at": "2026-11-06T05:00:38.149Z",
-    "action": "risk",
-    "bought": null,
+    "at": "2026-11-06T05:00:40.960Z",
+    "action": "scan",
+    "bought": "LICHSGFIN",
     "checked": [
       {
         "ticker": "ANGELONE",
@@ -1630,7 +1669,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-06T04:55:39.951Z",
+    "at": "2026-11-06T05:00:40.121Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -1702,12 +1741,6 @@
         ]
       },
       {
-        "ticker": "AETHER",
-        "reasons": [
-          "weak or overextended session move"
-        ]
-      },
-      {
         "ticker": "AFCONS",
         "reasons": [
           "weak or overextended session move"
@@ -1739,6 +1772,12 @@
       },
       {
         "ticker": "AMBER",
+        "reasons": [
+          "weak or overextended session move"
+        ]
+      },
+      {
+        "ticker": "ANANDRATHI",
         "reasons": [
           "weak or overextended session move"
         ]
@@ -1821,10 +1860,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.4886577602438935,
-      "observedAt": "2026-11-06T04:55:40.725Z",
+      "changePct": 0.613980747128795,
+      "observedAt": "2026-11-06T05:00:40.861Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24656.5,
+      "price": 24687.25,
       "previousClose": 24536.6
     }
   },
@@ -1918,6 +1957,12 @@
       {
         "at": "2026-11-06T04:55:40.826Z",
         "bought": "BSOFT",
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T05:00:40.960Z",
+        "bought": "LICHSGFIN",
         "shortlisted": 8,
         "benchmarkFresh": true
       }
@@ -2085,11 +2130,17 @@
             "price": 582.05,
             "score": 75.4,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T05:00:40.436Z",
+            "price": 585,
+            "score": 76.8,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:55:40.435Z",
-        "lastPrice": 582.05,
-        "discoveryScore": 75.4,
+        "lastSeenAt": "2026-11-06T05:00:40.436Z",
+        "lastPrice": 585,
+        "discoveryScore": 76.8,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -2472,12 +2523,20 @@
             "price": 1485,
             "score": 66.4,
             "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T05:00:38.604Z",
+            "price": 1485.1,
+            "score": 66.5,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:55:39.424Z",
-        "lastPrice": 1485,
-        "discoveryScore": 66.4,
-        "reasons": []
+        "lastSeenAt": "2026-11-06T05:00:38.604Z",
+        "lastPrice": 1485.1,
+        "discoveryScore": 66.5,
+        "reasons": [
+          "no confirmed consolidation breakout with bounded extension and volume"
+        ]
       },
       "TTML": {
         "ticker": "TTML",
@@ -2725,13 +2784,20 @@
             "price": 1465,
             "score": 72.7,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T05:00:38.698Z",
+            "price": 1466.7,
+            "score": 72.5,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:55:40.105Z",
-        "lastPrice": 1465,
-        "discoveryScore": 72.7,
+        "lastSeenAt": "2026-11-06T05:00:38.698Z",
+        "lastPrice": 1466.7,
+        "discoveryScore": 72.5,
         "reasons": [
-          "below 20-session EMA"
+          "below 20-session EMA",
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "GLENMARK": {
@@ -2800,11 +2866,17 @@
             "price": 2548.3,
             "score": 71.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T05:00:39.572Z",
+            "price": 2545.2,
+            "score": 70.9,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:55:39.660Z",
-        "lastPrice": 2548.3,
-        "discoveryScore": 71.3,
+        "lastSeenAt": "2026-11-06T05:00:39.572Z",
+        "lastPrice": 2545.2,
+        "discoveryScore": 70.9,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -2893,11 +2965,17 @@
             "price": 620.3,
             "score": 65.4,
             "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T05:00:37.714Z",
+            "price": 618.75,
+            "score": 63.9,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:55:37.831Z",
-        "lastPrice": 620.3,
-        "discoveryScore": 65.4,
+        "lastSeenAt": "2026-11-06T05:00:37.714Z",
+        "lastPrice": 618.75,
+        "discoveryScore": 63.9,
         "reasons": []
       },
       "MRPL": {
@@ -2924,11 +3002,17 @@
             "price": 175.91,
             "score": 64.6,
             "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T05:00:37.132Z",
+            "price": 175.76,
+            "score": 63.8,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:55:35.606Z",
-        "lastPrice": 175.91,
-        "discoveryScore": 64.6,
+        "lastSeenAt": "2026-11-06T05:00:37.132Z",
+        "lastPrice": 175.76,
+        "discoveryScore": 63.8,
         "reasons": []
       },
       "ICICILIFE": {
@@ -3015,11 +3099,17 @@
             "price": 210.92,
             "score": 66.1,
             "setup": "not-evaluated"
+          },
+          {
+            "at": "2026-11-06T05:00:37.441Z",
+            "price": 210.87,
+            "score": 65.4,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:55:39.544Z",
-        "lastPrice": 210.92,
-        "discoveryScore": 66.1,
+        "lastSeenAt": "2026-11-06T05:00:37.441Z",
+        "lastPrice": 210.87,
+        "discoveryScore": 65.4,
         "reasons": []
       },
       "FORCEMOT": {
@@ -3074,13 +3164,19 @@
             "price": 537.7,
             "score": 64.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T05:00:36.661Z",
+            "price": 540.1,
+            "score": 65.7,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T04:50:36.942Z",
-        "lastPrice": 537.7,
-        "discoveryScore": 64.7,
+        "lastSeenAt": "2026-11-06T05:00:36.661Z",
+        "lastPrice": 540.1,
+        "discoveryScore": 65.7,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "confirmed setup; simulated fill recorded"
         ]
       }
     }
