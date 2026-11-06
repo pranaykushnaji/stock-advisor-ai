@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-one-share-v2",
   "mode": "experimental-paper-only",
-  "cash": 12740.42,
+  "cash": 12324.59,
   "contributions": 20000,
   "positions": [
     {
@@ -24,9 +24,9 @@
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
       "peakPrice": 238.2,
-      "currentPrice": 232.01,
-      "lastObservedAt": "2026-11-06T06:05:34.035Z",
-      "lastPriceUpdate": "2026-11-06T06:05:34.035Z",
+      "currentPrice": 232.14,
+      "lastObservedAt": "2026-11-06T06:05:37.521Z",
+      "lastPriceUpdate": "2026-11-06T06:05:37.521Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -67,9 +67,9 @@
       "initialStopPct": 1.454965227232441,
       "modeledInitialRisk": 62.18,
       "peakPrice": 3444.7214999999997,
-      "currentPrice": 3437,
-      "lastObservedAt": "2026-11-06T06:05:35.879Z",
-      "lastPriceUpdate": "2026-11-06T06:05:35.879Z",
+      "currentPrice": 3437.5,
+      "lastObservedAt": "2026-11-06T06:05:39.851Z",
+      "lastPriceUpdate": "2026-11-06T06:05:39.851Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -153,9 +153,9 @@
       "initialStopPct": 1.4508555998680506,
       "modeledInitialRisk": 6.15,
       "peakPrice": 343.7,
-      "currentPrice": 341.85,
-      "lastObservedAt": "2026-11-06T06:05:33.949Z",
-      "lastPriceUpdate": "2026-11-06T06:05:33.949Z",
+      "currentPrice": 341.8,
+      "lastObservedAt": "2026-11-06T06:05:36.156Z",
+      "lastPriceUpdate": "2026-11-06T06:05:36.156Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -196,9 +196,9 @@
       "initialStopPct": 1.1759719103603183,
       "modeledInitialRisk": 16.49,
       "peakPrice": 1081.4,
-      "currentPrice": 1080.8,
-      "lastObservedAt": "2026-11-06T06:05:35.001Z",
-      "lastPriceUpdate": "2026-11-06T06:05:35.001Z",
+      "currentPrice": 1081.4,
+      "lastObservedAt": "2026-11-06T06:05:38.022Z",
+      "lastPriceUpdate": "2026-11-06T06:05:38.022Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -217,6 +217,49 @@
       "research": null,
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T05:45:38.024Z",
+      "paperTrading": true,
+      "expectedEdge": null
+    },
+    {
+      "id": "2026-11-06|PATANJALI|paper-one-share-v2",
+      "ticker": "PATANJALI",
+      "symbol": "PATANJALI",
+      "instrumentKey": "NSE_EQ|INE619A01035",
+      "fullName": "Patanjali Foods Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T06:05:38.621Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 415.2075,
+      "shares": 1,
+      "investedAmount": 415.21,
+      "entryCost": 0.62,
+      "initialStopPrice": 411.9876,
+      "initialStopPct": 0.7754917721861987,
+      "modeledInitialRisk": 4.67,
+      "peakPrice": 415.2075,
+      "currentPrice": 415,
+      "lastObservedAt": "2026-11-06T06:05:38.621Z",
+      "lastPriceUpdate": "2026-11-06T06:05:38.621Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T06:05:00.000Z",
+        "entryAt": "2026-11-06T06:05:38.621Z",
+        "entryPrice": 415,
+        "entryIndex": 28,
+        "breakoutLevel": 414.6,
+        "supportLevel": 412.4,
+        "vwap": 410.17965623545786,
+        "volumeRatio": 8.07931012236296,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 63.9,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T06:05:38.621Z",
       "paperTrading": true,
       "expectedEdge": null
     }
@@ -723,14 +766,15 @@
     },
     "2026-11-06": {
       "contribution": 0,
-      "invested": 6766.74,
+      "invested": 7182.57,
       "buys": [
         "MCX",
         "MGL",
         "BSOFT",
         "LICHSGFIN",
         "CROMPTON",
-        "HAVELLS"
+        "HAVELLS",
+        "PATANJALI"
       ],
       "exits": [
         "ZENSARTECH",
@@ -742,7 +786,7 @@
   },
   "lastSlots": {
     "research": 1793936400000,
-    "scan": 1793944800000,
+    "scan": 1793945100000,
     "risk": 1793945100000
   },
   "dailyCache": {
@@ -1666,13 +1710,13 @@
   },
   "suggestions": [
     {
-      "ticker": "KALYANKJIL",
-      "fullName": "Kalyan Jewellers India Ltd.",
-      "sector": "Consumer Durables",
-      "discoveryScore": 73.7,
-      "price": 582.95,
-      "observedAt": "2026-11-06T06:00:40.063Z",
-      "sessionChangePct": 4.1,
+      "ticker": "GLENMARK",
+      "fullName": "Glenmark Pharmaceuticals Ltd.",
+      "sector": "Healthcare",
+      "discoveryScore": 75.1,
+      "price": 2586,
+      "observedAt": "2026-11-06T06:05:39.177Z",
+      "sessionChangePct": 4.2,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -1685,13 +1729,32 @@
       }
     },
     {
-      "ticker": "GLENMARK",
-      "fullName": "Glenmark Pharmaceuticals Ltd.",
-      "sector": "Healthcare",
-      "discoveryScore": 72.6,
-      "price": 2574.1,
-      "observedAt": "2026-11-06T06:00:39.320Z",
-      "sessionChangePct": 3.72,
+      "ticker": "KALYANKJIL",
+      "fullName": "Kalyan Jewellers India Ltd.",
+      "sector": "Consumer Durables",
+      "discoveryScore": 73.4,
+      "price": 582.55,
+      "observedAt": "2026-11-06T06:05:39.746Z",
+      "sessionChangePct": 4.03,
+      "research": null,
+      "reasons": [
+        "no confirmed consolidation breakout with bounded extension and volume"
+      ],
+      "status": "not-qualified",
+      "entryDiagnostics": {
+        "status": "no_setup",
+        "reason": "no confirmed consolidation breakout with bounded extension and volume",
+        "version": null
+      }
+    },
+    {
+      "ticker": "FORCEMOT",
+      "fullName": "Force Motors Ltd.",
+      "sector": "Automobile and Auto Components",
+      "discoveryScore": 70.1,
+      "price": 19061,
+      "observedAt": "2026-11-06T06:05:39.111Z",
+      "sessionChangePct": 3.69,
       "research": null,
       "reasons": [
         "no confirmed consolidation breakout with bounded extension and volume"
@@ -1707,10 +1770,10 @@
       "ticker": "CHENNPETRO",
       "fullName": "Chennai Petroleum Corporation Ltd.",
       "sector": "Oil Gas & Consumable Fuels",
-      "discoveryScore": 69.7,
-      "price": 1464.9,
-      "observedAt": "2026-11-06T06:00:35.476Z",
-      "sessionChangePct": 3.27,
+      "discoveryScore": 67.3,
+      "price": 1460,
+      "observedAt": "2026-11-06T06:05:35.909Z",
+      "sessionChangePct": 2.93,
       "research": null,
       "reasons": [
         "below 20-session EMA",
@@ -1724,18 +1787,18 @@
       }
     },
     {
-      "ticker": "FORCEMOT",
-      "fullName": "Force Motors Ltd.",
-      "sector": "Automobile and Auto Components",
-      "discoveryScore": 67,
-      "price": 18978,
-      "observedAt": "2026-11-06T06:00:39.932Z",
-      "sessionChangePct": 3.24,
+      "ticker": "PATANJALI",
+      "fullName": "Patanjali Foods Ltd.",
+      "sector": "Fast Moving Consumer Goods",
+      "discoveryScore": 63.9,
+      "price": 415,
+      "observedAt": "2026-11-06T06:05:38.621Z",
+      "sessionChangePct": 1.05,
       "research": null,
       "reasons": [
-        "one share exceeds per-position or aggregate modeled risk"
+        "confirmed setup; simulated fill recorded"
       ],
-      "status": "not-qualified",
+      "status": "simulated-buy",
       "entryDiagnostics": {
         "status": "setup",
         "reason": null,
@@ -1743,96 +1806,56 @@
       },
       "setup": {
         "status": "setup",
-        "signalAt": "2026-11-06T06:00:00.000Z",
-        "entryAt": "2026-11-06T06:00:39.932Z",
-        "entryPrice": 18978,
-        "entryIndex": 27,
-        "breakoutLevel": 18899,
-        "supportLevel": 18638,
-        "vwap": 18687.78214014651,
-        "volumeRatio": 5.3037078183585615,
+        "signalAt": "2026-11-06T06:05:00.000Z",
+        "entryAt": "2026-11-06T06:05:38.621Z",
+        "entryPrice": 415,
+        "entryIndex": 28,
+        "breakoutLevel": 414.6,
+        "supportLevel": 412.4,
+        "vwap": 410.17965623545786,
+        "volumeRatio": 8.07931012236296,
         "setupVersion": "consolidation-v1",
         "execution": "shadow-quote-only"
       }
     },
     {
-      "ticker": "CHOLAHLDNG",
-      "fullName": "Cholamandalam Financial Holdings Ltd.",
-      "sector": "Financial Services",
-      "discoveryScore": 63,
-      "price": 1473.8,
-      "observedAt": "2026-11-06T06:00:38.229Z",
-      "sessionChangePct": 4.33,
+      "ticker": "ONESOURCE",
+      "fullName": "Onesource Specialty Pharma Ltd.",
+      "sector": "Healthcare",
+      "discoveryScore": 63.4,
+      "price": 1614,
+      "observedAt": "2026-11-06T06:05:36.358Z",
+      "sessionChangePct": 2.03,
       "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
-    },
-    {
-      "ticker": "PATANJALI",
-      "fullName": "Patanjali Foods Ltd.",
-      "sector": "Fast Moving Consumer Goods",
-      "discoveryScore": 62.3,
-      "price": 413.5,
-      "observedAt": "2026-11-06T06:00:33.768Z",
-      "sessionChangePct": 0.68,
-      "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
     },
     {
       "ticker": "VIJAYA",
       "fullName": "Vijaya Diagnostic Centre Ltd.",
       "sector": "Healthcare",
-      "discoveryScore": 62.1,
-      "price": 1472.3,
-      "observedAt": "2026-11-06T06:00:35.672Z",
-      "sessionChangePct": 2.41,
+      "discoveryScore": 62.8,
+      "price": 1473.2,
+      "observedAt": "2026-11-06T06:05:38.067Z",
+      "sessionChangePct": 2.47,
       "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
     },
     {
       "ticker": "KARURVYSYA",
       "fullName": "Karur Vysya Bank Ltd.",
       "sector": "Financial Services",
-      "discoveryScore": 62,
-      "price": 364.95,
-      "observedAt": "2026-11-06T06:00:35.378Z",
-      "sessionChangePct": 1.23,
+      "discoveryScore": 62.3,
+      "price": 365,
+      "observedAt": "2026-11-06T06:05:38.147Z",
+      "sessionChangePct": 1.25,
       "research": null,
-      "reasons": [
-        "no confirmed consolidation breakout with bounded extension and volume"
-      ],
-      "status": "not-qualified",
-      "entryDiagnostics": {
-        "status": "no_setup",
-        "reason": "no confirmed consolidation breakout with bounded extension and volume",
-        "version": null
-      }
+      "reasons": [],
+      "status": "not-selected"
     }
   ],
-  "updatedAt": "2026-11-06T06:05:37.454Z",
+  "updatedAt": "2026-11-06T06:05:40.148Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -1856,9 +1879,9 @@
     "fundingMode": "as-needed-paper-capital"
   },
   "lastCheck": {
-    "at": "2026-11-06T06:05:37.454Z",
-    "action": "risk",
-    "bought": null,
+    "at": "2026-11-06T06:05:40.148Z",
+    "action": "scan",
+    "bought": "PATANJALI",
     "checked": [
       {
         "ticker": "MEESHO",
@@ -1885,7 +1908,7 @@
     "researchStatus": "loaded"
   },
   "discovery": {
-    "at": "2026-11-06T06:00:40.273Z",
+    "at": "2026-11-06T06:05:39.691Z",
     "requested": 395,
     "quotesReceived": 395,
     "shortlisted": 8,
@@ -2017,12 +2040,6 @@
         ]
       },
       {
-        "ticker": "ANURAS",
-        "reasons": [
-          "missing or stale instrument quote"
-        ]
-      },
-      {
         "ticker": "APARINDS",
         "reasons": [
           "weak or overextended session move"
@@ -2069,6 +2086,12 @@
         "reasons": [
           "weak or overextended session move"
         ]
+      },
+      {
+        "ticker": "ASTRAL",
+        "reasons": [
+          "weak or overextended session move"
+        ]
       }
     ],
     "source": "Upstox",
@@ -2076,10 +2099,10 @@
     "benchmark": {
       "fresh": true,
       "reason": "fresh provider index snapshot",
-      "changePct": 0.26918970028446676,
-      "observedAt": "2026-11-06T06:00:40.640Z",
+      "changePct": 0.3030167178826648,
+      "observedAt": "2026-11-06T06:05:40.048Z",
       "timestampBasis": "provider-index-snapshot",
-      "price": 24602.65,
+      "price": 24610.95,
       "previousClose": 24536.600000000002
     }
   },
@@ -2251,6 +2274,12 @@
       {
         "at": "2026-11-06T06:00:40.743Z",
         "bought": null,
+        "shortlisted": 8,
+        "benchmarkFresh": true
+      },
+      {
+        "at": "2026-11-06T06:05:40.148Z",
+        "bought": "PATANJALI",
         "shortlisted": 8,
         "benchmarkFresh": true
       }
@@ -2496,11 +2525,17 @@
             "price": 582.95,
             "score": 73.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:05:39.746Z",
+            "price": 582.55,
+            "score": 73.4,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:40.063Z",
-        "lastPrice": 582.95,
-        "discoveryScore": 73.7,
+        "lastSeenAt": "2026-11-06T06:05:39.746Z",
+        "lastPrice": 582.55,
+        "discoveryScore": 73.4,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -3294,11 +3329,17 @@
             "price": 1464.9,
             "score": 69.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:05:35.909Z",
+            "price": 1460,
+            "score": 67.3,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:35.476Z",
-        "lastPrice": 1464.9,
-        "discoveryScore": 69.7,
+        "lastSeenAt": "2026-11-06T06:05:35.909Z",
+        "lastPrice": 1460,
+        "discoveryScore": 67.3,
         "reasons": [
           "below 20-session EMA",
           "no confirmed consolidation breakout with bounded extension and volume"
@@ -3448,11 +3489,17 @@
             "price": 2574.1,
             "score": 72.6,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:05:39.177Z",
+            "price": 2586,
+            "score": 75.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:39.320Z",
-        "lastPrice": 2574.1,
-        "discoveryScore": 72.6,
+        "lastSeenAt": "2026-11-06T06:05:39.177Z",
+        "lastPrice": 2586,
+        "discoveryScore": 75.1,
         "reasons": [
           "no confirmed consolidation breakout with bounded extension and volume"
         ]
@@ -3838,13 +3885,19 @@
             "price": 18978,
             "score": 67,
             "setup": "setup"
+          },
+          {
+            "at": "2026-11-06T06:05:39.111Z",
+            "price": 19061,
+            "score": 70.1,
+            "setup": "no_setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:39.932Z",
-        "lastPrice": 18978,
-        "discoveryScore": 67,
+        "lastSeenAt": "2026-11-06T06:05:39.111Z",
+        "lastPrice": 19061,
+        "discoveryScore": 70.1,
         "reasons": [
-          "one share exceeds per-position or aggregate modeled risk"
+          "no confirmed consolidation breakout with bounded extension and volume"
         ]
       },
       "MGL": {
@@ -3958,14 +4011,18 @@
             "price": 1472.3,
             "score": 62.1,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:05:38.067Z",
+            "price": 1473.2,
+            "score": 62.8,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:35.672Z",
-        "lastPrice": 1472.3,
-        "discoveryScore": 62.1,
-        "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-06T06:05:38.067Z",
+        "lastPrice": 1473.2,
+        "discoveryScore": 62.8,
+        "reasons": []
       },
       "LALPATHLAB": {
         "ticker": "LALPATHLAB",
@@ -4060,13 +4117,19 @@
             "price": 413.5,
             "score": 62.3,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:05:38.621Z",
+            "price": 415,
+            "score": 63.9,
+            "setup": "setup"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:33.768Z",
-        "lastPrice": 413.5,
-        "discoveryScore": 62.3,
+        "lastSeenAt": "2026-11-06T06:05:38.621Z",
+        "lastPrice": 415,
+        "discoveryScore": 63.9,
         "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
+          "confirmed setup; simulated fill recorded"
         ]
       },
       "ONESOURCE": {
@@ -4093,14 +4156,18 @@
             "price": 1613.2,
             "score": 62.7,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:05:36.358Z",
+            "price": 1614,
+            "score": 63.4,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T05:40:19.560Z",
-        "lastPrice": 1613.2,
-        "discoveryScore": 62.7,
-        "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-06T06:05:36.358Z",
+        "lastPrice": 1614,
+        "discoveryScore": 63.4,
+        "reasons": []
       },
       "HAVELLS": {
         "ticker": "HAVELLS",
@@ -4147,14 +4214,18 @@
             "price": 364.95,
             "score": 62,
             "setup": "no_setup"
+          },
+          {
+            "at": "2026-11-06T06:05:38.147Z",
+            "price": 365,
+            "score": 62.3,
+            "setup": "not-evaluated"
           }
         ],
-        "lastSeenAt": "2026-11-06T06:00:35.378Z",
-        "lastPrice": 364.95,
-        "discoveryScore": 62,
-        "reasons": [
-          "no confirmed consolidation breakout with bounded extension and volume"
-        ]
+        "lastSeenAt": "2026-11-06T06:05:38.147Z",
+        "lastPrice": 365,
+        "discoveryScore": 62.3,
+        "reasons": []
       }
     }
   },
