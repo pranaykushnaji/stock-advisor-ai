@@ -1,7 +1,10 @@
 // Counterfactual study only. NEVER imported by an execution endpoint or added to its ledger.
 import { liveSimulationEntry } from "../api/_entry-research.js";
-import { researchExitObservation } from "./paper-plan.js";
+import {observeSetupExit,setupExitPolicy} from './setup-exits.js';
+import {assessTradingSetups} from './trading-setups.js';
 import { SIM_CONFIG, paperEntryAllocation } from "../api/_paper-simulation.js";
+import {entryMarketContext,assessPaperEntry,researchCohort} from './entry-quality.js';
+import {decisionEvidence} from './decision-evidence.js';
 const round = (n) => Math.round(n * 100) / 100;
 const lastCompleted = (rows, at) =>
   (rows || [])
@@ -68,7 +71,7 @@ export function replayPaperSession({
         lastTradeAt: observedAt,
         responseAt: observedAt,
       };
-      const exit = researchExitObservation(p, q, { nowMs: at });
+      const exit = observeSetupExit(p, q, { nowMs: at });
       Object.assign(p, exit.state, {
         currentPrice: price,
         lastMarkedAt: observedAt,
@@ -106,6 +109,9 @@ export function replayPaperSession({
       benchFresh && benchmark.previousClose > 0
         ? (benchBar[4] / benchmark.previousClose - 1) * 100
         : null;
+    const marketContext=config.entryMode?entryMarketContext(benchmark?.candles,benchFresh?{
+      instrumentKey:'NSE_INDEX|Nifty 50',price:benchBar[4],previousClose:benchmark.previousClose,
+      responseAt:new Date(Date.parse(benchBar[0])+60000).toISOString()}:undefined, {now:new Date(at)}):null;
     for (const row of scan.suggestions || []) {
       if (!(row.price > 0)) continue;
       const r = seen[row.ticker] || {
@@ -156,24 +162,36 @@ export function replayPaperSession({
       )
         reasons.push("archived price observation stale or future");
       // Only the original, timestamped shortlist is considered, not the day's winners.
-      const setup = history?.candles
+      const fill = row.price * (1 + assumedHalfSpreadBps / 10000) * (1 + config.entrySlippageBps / 10000);
+      const setupReview=config.setupMode&&history?.candles?assessTradingSetups({candles:history.candles,
+        quote:{price:row.price,lastTradeAt:row.observedAt},reference,marketContext,research:row.research,
+        now:new Date(at),fillPrice:fill,allowedTypes:config.allowedSetupTypes}):null;
+      const assessment=config.setupMode?(setupReview?.assessment??{reasons:['no qualifying setup lane'],metrics:setupReview?.lanes[0]?.assessment.metrics??{},
+        setup:{status:'no_setup',reason:'all setup lanes await confirmation'}}):config.entryMode&&history?.candles?assessPaperEntry({candles:history.candles,
+        quote:{price:row.price,lastTradeAt:row.observedAt},reference,marketContext,now:new Date(at),mode:config.entryMode,fillPrice:fill}):null;
+      const setup = assessment?.setup??(history?.candles
         ? liveSimulationEntry(
             history.candles,
             { price: row.price, lastTradeAt: row.observedAt },
             { now: new Date(at), regime: "neutral" },
           )
-        : null;
+        : null);
+      if(config.entryMode)reasons.push(...(assessment?.reasons||['entry momentum evidence unavailable']));
       if (setup?.status !== "setup")
         reasons.push(setup?.reason || "completed setup unavailable");
+      const evidence=decisionEvidence({quote:{price:row.price,askPrice:row.price*(1+assumedHalfSpreadBps/10000),
+        bidPrice:row.price*(1-assumedHalfSpreadBps/10000),spreadBps:assumedHalfSpreadBps*2,
+        previousClose:history?.previousClose,lastTradeAt:row.observedAt},reference,setup,assessment,marketContext,
+        benchmark:benchFresh?{price:benchBar[4],previousClose:benchmark.previousClose,responseAt:new Date(Date.parse(benchBar[0])+60000).toISOString()}:null,
+        at:new Date(at),slippageBps:config.entrySlippageBps,requireMomentum:!!config.entryMode,
+        requireAtr:config.setupMode&&config.exitMode==='setup-volatility',safetyReady:scan.safetyReady,
+        quoteSource:'Estimated historical',dailySource:'Archived / retrospective',candleSource:'Historical completed candles',benchmarkSource:'Historical'});
+      if(!evidence.readiness.ready)reasons.push('decision evidence incomplete: '+evidence.readiness.missingRequired.join(', '));
       if (reasons.length) {
         result.rejected.push({ ticker: row.ticker, reasons });
         continue;
       }
-      const fill =
-          row.price *
-          (1 + assumedHalfSpreadBps / 10000) *
-          (1 + config.entrySlippageBps / 10000),
-        stop = setup.supportLevel * 0.999;
+      const stop = setup.supportLevel * 0.999;
       const stopPct = (1 - stop / fill) * 100;
       if (stopPct < config.minStopPct || stopPct > config.maxStopPct) {
         result.rejected.push({
@@ -182,6 +200,10 @@ export function replayPaperSession({
         });
         continue;
       }
+      let exitPolicy=null;
+      if(config.setupMode){try{exitPolicy=setupExitPolicy(setup.setupType,{mode:config.exitMode??'baseline',entryPrice:fill,
+        initialStopPrice:stop,atr14Pct:reference?.atr14Pct,costBps:config.costBpsPerSide*2});}
+        catch{result.rejected.push({ticker:row.ticker,reasons:['required frozen setup exit inputs unavailable']});continue;}}
       const allocation=paperEntryAllocation({fill,stop,positions,cash,day:{invested},config});
       const {shares}=allocation;
       if (shares < 1) {
@@ -211,7 +233,9 @@ export function replayPaperSession({
         currentPrice: row.price,
         lastObservedAt: row.observedAt,
         modeledInitialRisk: allocation.modeledInitialRisk,
-        setup,
+        setup,setupReview,setupType:setup.setupType??null,entryLane:setup.setupType??'experimental-consolidation',exitPolicy,
+        entryAssessment:assessment,entryMarket:marketContext,decisionEvidence:evidence,
+        research:row.research??null,researchCohort:researchCohort(row.research,new Date(at)),
         sourceCommit: scan.sourceCommit,
         historicalReplay: true,
         synthetic: true,
@@ -276,7 +300,8 @@ export function replayPaperSession({
       "Historical bid/ask depth and execution-time circuit bands were not archived; exact live eligibility cannot be established.",
       "Discovery passed for archived candidates; later execution book/circuit checks remain unverified.",
       "Candles fetched retrospectively can contain provider revisions. Only completed, pre-decision bars are used.",
-      "Intraday candle history is Yahoo, not a recovered Upstox stream. Cross-provider differences can affect setup signals.",
+      "Retrospective candles are not a recovered Upstox order book. Cross-provider differences can affect setup signals.",
+      "Previously observed pending signals can use modeled later candle closes; these are not saved executable quotes.",
       "No old live positions, contributions or performance statistics are overwritten.",
     ],
   };

@@ -5,9 +5,12 @@
 export const RESEARCH_SETUP = Object.freeze({ version: 'consolidation-v1', bars: 6,
   maxRangePct: 2, minVolumeRatio: 1.5, maxAboveVwapPct: 2, maxEntryGapPct: 0.75 });
 
+import {candleIntegrity} from '../research/candle-integrity.js';
 export function completedFiveMinuteBars(candles, now = new Date()) {
   const today = new Date(now.getTime() + 19800000).toISOString().slice(0, 10), buckets = new Map();
-  for (const row of candles) {
+  const checked=candleIntegrity(candles,{nowMs:now.getTime(),date:today});
+  if(checked.issues.length)return [];
+  for (const row of checked.rows) {
     const ms = Date.parse(row?.[0]);
     if (!Number.isFinite(ms) || ms + 60000 > now.getTime() || new Date(ms + 19800000).toISOString().slice(0, 10) !== today
       || row.slice(1, 5).length !== 4 || !row.slice(1, 5).every(x => Number.isFinite(x) && x > 0)

@@ -1,0 +1,1298 @@
+{
+  "version": 1,
+  "mode": "ESTIMATED-setup-and-exit-comparison",
+  "generatedAt": "2026-11-06T10:51:57.415Z",
+  "rules": {
+    "version": "intraday-confirmation-v1",
+    "marketDrop5Pct": -0.15,
+    "marketDrop15Pct": -0.25,
+    "marketQuoteDropPct": -0.1,
+    "maxVwapPremiumPct": 1.5,
+    "maxRise15Pct": 2.5,
+    "maxBreakoutPremiumPct": 0.75,
+    "maxRangeMultiples": 2,
+    "maxSignalAgeBars": 3,
+    "retestTolerancePct": 0.2,
+    "minimumCloseLocation": 0.65,
+    "maxPrior5ReturnPct": 12,
+    "maxEma20PremiumPct": 6
+  },
+  "variants": [
+    {
+      "mode": "original-breakout",
+      "summary": {
+        "entries": 50,
+        "closed": 12,
+        "positive": 13,
+        "negative": 37,
+        "capital": 38732.25,
+        "netAfterEstimatedLiquidationCosts": -133.08,
+        "weightedReturnPct": -0.34357792238465423,
+        "averageStockReturnPct": -0.5429933194809755,
+        "bestReturnPct": 3.380434015478933,
+        "worstReturnPct": -2.4774774774774775
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "price-only": {
+          "entries": 49,
+          "closed": 12,
+          "positive": 13,
+          "negative": 36,
+          "capital": 35432.06,
+          "netAfterEstimatedLiquidationCosts": -116.4,
+          "weightedReturnPct": -0.3285099176574285,
+          "averageStockReturnPct": -0.5437614771817779,
+          "bestReturnPct": 3.380434015478933,
+          "worstReturnPct": -2.4774774774774775
+        }
+      },
+      "setups": {
+        "original-consolidation": {
+          "entries": 50,
+          "closed": 12,
+          "positive": 13,
+          "negative": 37,
+          "capital": 38732.25,
+          "netAfterEstimatedLiquidationCosts": -133.08,
+          "weightedReturnPct": -0.34357792238465423,
+          "averageStockReturnPct": -0.5429933194809755,
+          "bestReturnPct": 3.380434015478933,
+          "worstReturnPct": -2.4774774774774775
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 11,
+            "closed": 1,
+            "positive": 4,
+            "negative": 7,
+            "capital": 10782.18,
+            "netAfterEstimatedLiquidationCosts": -14.77,
+            "weightedReturnPct": -0.13696244925725268,
+            "averageStockReturnPct": -0.28027866019282394,
+            "bestReturnPct": 1.2155829065854036,
+            "worstReturnPct": -2.4774774774774775
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 19,
+            "closed": 2,
+            "positive": 4,
+            "negative": 15,
+            "capital": 12722.72,
+            "netAfterEstimatedLiquidationCosts": -102.98,
+            "weightedReturnPct": -0.8094112665069819,
+            "averageStockReturnPct": -0.5125123319593883,
+            "bestReturnPct": 2.029653625166362,
+            "worstReturnPct": -2.0135220211863247
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 20,
+            "closed": 9,
+            "positive": 5,
+            "negative": 15,
+            "capital": 15227.35,
+            "netAfterEstimatedLiquidationCosts": -15.33,
+            "weightedReturnPct": -0.1006661890963792,
+            "averageStockReturnPct": -0.7164433202349666,
+            "bestReturnPct": 3.380434015478933,
+            "worstReturnPct": -2.3374847555342035
+          }
+        }
+      ]
+    },
+    {
+      "mode": "confirmed-breakout",
+      "summary": {
+        "entries": 15,
+        "closed": 2,
+        "positive": 4,
+        "negative": 11,
+        "capital": 13230.61,
+        "netAfterEstimatedLiquidationCosts": -57.64,
+        "weightedReturnPct": -0.4356479238162426,
+        "averageStockReturnPct": -0.5600156954616095,
+        "bestReturnPct": 0.9750973401488767,
+        "worstReturnPct": -2.091076025549786
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 0,
+          "closed": 0,
+          "positive": 0,
+          "negative": 0,
+          "capital": 0,
+          "netAfterEstimatedLiquidationCosts": 0,
+          "weightedReturnPct": null,
+          "averageStockReturnPct": null,
+          "bestReturnPct": null,
+          "worstReturnPct": null
+        },
+        "price-only": {
+          "entries": 15,
+          "closed": 2,
+          "positive": 4,
+          "negative": 11,
+          "capital": 13230.61,
+          "netAfterEstimatedLiquidationCosts": -57.64,
+          "weightedReturnPct": -0.4356479238162426,
+          "averageStockReturnPct": -0.5600156954616095,
+          "bestReturnPct": 0.9750973401488767,
+          "worstReturnPct": -2.091076025549786
+        }
+      },
+      "setups": {
+        "original-consolidation": {
+          "entries": 15,
+          "closed": 2,
+          "positive": 4,
+          "negative": 11,
+          "capital": 13230.61,
+          "netAfterEstimatedLiquidationCosts": -57.64,
+          "weightedReturnPct": -0.4356479238162426,
+          "averageStockReturnPct": -0.5600156954616095,
+          "bestReturnPct": 0.9750973401488767,
+          "worstReturnPct": -2.091076025549786
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 2,
+            "closed": 0,
+            "positive": 2,
+            "negative": 0,
+            "capital": 2912.12,
+            "netAfterEstimatedLiquidationCosts": 22.7,
+            "weightedReturnPct": 0.7794255493184747,
+            "averageStockReturnPct": 0.7348029346595624,
+            "bestReturnPct": 0.9750973401488767,
+            "worstReturnPct": 0.49450852917024807
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 8,
+            "closed": 1,
+            "positive": 1,
+            "negative": 7,
+            "capital": 5467.23,
+            "netAfterEstimatedLiquidationCosts": -40.04,
+            "weightedReturnPct": -0.7323207119148276,
+            "averageStockReturnPct": -0.7979110469808353,
+            "bestReturnPct": 0.06567408044566396,
+            "worstReturnPct": -1.712821815718157
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 5,
+            "closed": 1,
+            "positive": 1,
+            "negative": 4,
+            "capital": 4851.26,
+            "netAfterEstimatedLiquidationCosts": -40.3,
+            "weightedReturnPct": -0.8306919732608911,
+            "averageStockReturnPct": -0.6973105850793166,
+            "bestReturnPct": 0.32837110038066886,
+            "worstReturnPct": -2.091076025549786
+          }
+        }
+      ]
+    },
+    {
+      "mode": "three-setups-original-exits",
+      "summary": {
+        "entries": 5,
+        "closed": 1,
+        "positive": 1,
+        "negative": 4,
+        "capital": 9710.34,
+        "netAfterEstimatedLiquidationCosts": 22.49,
+        "weightedReturnPct": 0.23161674187507303,
+        "averageStockReturnPct": -0.34790432367064283,
+        "bestReturnPct": 2.015404737647132,
+        "worstReturnPct": -1.5436768084271866
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "price-only": {
+          "entries": 4,
+          "closed": 1,
+          "positive": 1,
+          "negative": 3,
+          "capital": 6410.15,
+          "netAfterEstimatedLiquidationCosts": 39.17,
+          "weightedReturnPct": 0.611037212007388,
+          "averageStockReturnPct": -0.3085420065528903,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "setups": {
+        "catalyst-continuation": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "trend-pullback": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 1110.72,
+          "netAfterEstimatedLiquidationCosts": -4.28,
+          "weightedReturnPct": -0.38514038200443423,
+          "averageStockReturnPct": -0.38514038200443423,
+          "bestReturnPct": -0.38514038200443423,
+          "worstReturnPct": -0.38514038200443423
+        },
+        "compression-breakout": {
+          "entries": 3,
+          "closed": 1,
+          "positive": 1,
+          "negative": 2,
+          "capital": 5299.43,
+          "netAfterEstimatedLiquidationCosts": 43.45,
+          "weightedReturnPct": 0.819828417329623,
+          "averageStockReturnPct": -0.28300921473570906,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 2,
+            "closed": 0,
+            "positive": 0,
+            "negative": 2,
+            "capital": 4410.91,
+            "netAfterEstimatedLiquidationCosts": -20.96,
+            "weightedReturnPct": -0.47508246514889807,
+            "averageStockReturnPct": -0.44524698707304344,
+            "bestReturnPct": -0.38514038200443423,
+            "worstReturnPct": -0.5053535921416527
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 3,
+            "closed": 1,
+            "positive": 1,
+            "negative": 2,
+            "capital": 5299.43,
+            "netAfterEstimatedLiquidationCosts": 43.45,
+            "weightedReturnPct": 0.819828417329623,
+            "averageStockReturnPct": -0.28300921473570906,
+            "bestReturnPct": 2.015404737647132,
+            "worstReturnPct": -1.5436768084271866
+          }
+        }
+      ]
+    },
+    {
+      "mode": "three-setups-risk-exits",
+      "summary": {
+        "entries": 5,
+        "closed": 1,
+        "positive": 1,
+        "negative": 4,
+        "capital": 9710.34,
+        "netAfterEstimatedLiquidationCosts": 22.49,
+        "weightedReturnPct": 0.23161674187507303,
+        "averageStockReturnPct": -0.34790432367064283,
+        "bestReturnPct": 2.015404737647132,
+        "worstReturnPct": -1.5436768084271866
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "price-only": {
+          "entries": 4,
+          "closed": 1,
+          "positive": 1,
+          "negative": 3,
+          "capital": 6410.15,
+          "netAfterEstimatedLiquidationCosts": 39.17,
+          "weightedReturnPct": 0.611037212007388,
+          "averageStockReturnPct": -0.3085420065528903,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "setups": {
+        "catalyst-continuation": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "trend-pullback": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 1110.72,
+          "netAfterEstimatedLiquidationCosts": -4.28,
+          "weightedReturnPct": -0.38514038200443423,
+          "averageStockReturnPct": -0.38514038200443423,
+          "bestReturnPct": -0.38514038200443423,
+          "worstReturnPct": -0.38514038200443423
+        },
+        "compression-breakout": {
+          "entries": 3,
+          "closed": 1,
+          "positive": 1,
+          "negative": 2,
+          "capital": 5299.43,
+          "netAfterEstimatedLiquidationCosts": 43.45,
+          "weightedReturnPct": 0.819828417329623,
+          "averageStockReturnPct": -0.28300921473570906,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 2,
+            "closed": 0,
+            "positive": 0,
+            "negative": 2,
+            "capital": 4410.91,
+            "netAfterEstimatedLiquidationCosts": -20.96,
+            "weightedReturnPct": -0.47508246514889807,
+            "averageStockReturnPct": -0.44524698707304344,
+            "bestReturnPct": -0.38514038200443423,
+            "worstReturnPct": -0.5053535921416527
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 3,
+            "closed": 1,
+            "positive": 1,
+            "negative": 2,
+            "capital": 5299.43,
+            "netAfterEstimatedLiquidationCosts": 43.45,
+            "weightedReturnPct": 0.819828417329623,
+            "averageStockReturnPct": -0.28300921473570906,
+            "bestReturnPct": 2.015404737647132,
+            "worstReturnPct": -1.5436768084271866
+          }
+        }
+      ]
+    },
+    {
+      "mode": "three-setups-volatility-exits",
+      "summary": {
+        "entries": 5,
+        "closed": 1,
+        "positive": 1,
+        "negative": 4,
+        "capital": 9710.34,
+        "netAfterEstimatedLiquidationCosts": 22.49,
+        "weightedReturnPct": 0.23161674187507303,
+        "averageStockReturnPct": -0.34790432367064283,
+        "bestReturnPct": 2.015404737647132,
+        "worstReturnPct": -1.5436768084271866
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "price-only": {
+          "entries": 4,
+          "closed": 1,
+          "positive": 1,
+          "negative": 3,
+          "capital": 6410.15,
+          "netAfterEstimatedLiquidationCosts": 39.17,
+          "weightedReturnPct": 0.611037212007388,
+          "averageStockReturnPct": -0.3085420065528903,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "setups": {
+        "catalyst-continuation": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "trend-pullback": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 1110.72,
+          "netAfterEstimatedLiquidationCosts": -4.28,
+          "weightedReturnPct": -0.38514038200443423,
+          "averageStockReturnPct": -0.38514038200443423,
+          "bestReturnPct": -0.38514038200443423,
+          "worstReturnPct": -0.38514038200443423
+        },
+        "compression-breakout": {
+          "entries": 3,
+          "closed": 1,
+          "positive": 1,
+          "negative": 2,
+          "capital": 5299.43,
+          "netAfterEstimatedLiquidationCosts": 43.45,
+          "weightedReturnPct": 0.819828417329623,
+          "averageStockReturnPct": -0.28300921473570906,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 2,
+            "closed": 0,
+            "positive": 0,
+            "negative": 2,
+            "capital": 4410.91,
+            "netAfterEstimatedLiquidationCosts": -20.96,
+            "weightedReturnPct": -0.47508246514889807,
+            "averageStockReturnPct": -0.44524698707304344,
+            "bestReturnPct": -0.38514038200443423,
+            "worstReturnPct": -0.5053535921416527
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 3,
+            "closed": 1,
+            "positive": 1,
+            "negative": 2,
+            "capital": 5299.43,
+            "netAfterEstimatedLiquidationCosts": 43.45,
+            "weightedReturnPct": 0.819828417329623,
+            "averageStockReturnPct": -0.28300921473570906,
+            "bestReturnPct": 2.015404737647132,
+            "worstReturnPct": -1.5436768084271866
+          }
+        }
+      ]
+    },
+    {
+      "mode": "compression-breakout",
+      "summary": {
+        "entries": 3,
+        "closed": 1,
+        "positive": 1,
+        "negative": 2,
+        "capital": 5299.43,
+        "netAfterEstimatedLiquidationCosts": 43.45,
+        "weightedReturnPct": 0.819828417329623,
+        "averageStockReturnPct": -0.28300921473570906,
+        "bestReturnPct": 2.015404737647132,
+        "worstReturnPct": -1.5436768084271866
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 0,
+          "closed": 0,
+          "positive": 0,
+          "negative": 0,
+          "capital": 0,
+          "netAfterEstimatedLiquidationCosts": 0,
+          "weightedReturnPct": null,
+          "averageStockReturnPct": null,
+          "bestReturnPct": null,
+          "worstReturnPct": null
+        },
+        "price-only": {
+          "entries": 3,
+          "closed": 1,
+          "positive": 1,
+          "negative": 2,
+          "capital": 5299.43,
+          "netAfterEstimatedLiquidationCosts": 43.45,
+          "weightedReturnPct": 0.819828417329623,
+          "averageStockReturnPct": -0.28300921473570906,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "setups": {
+        "compression-breakout": {
+          "entries": 3,
+          "closed": 1,
+          "positive": 1,
+          "negative": 2,
+          "capital": 5299.43,
+          "netAfterEstimatedLiquidationCosts": 43.45,
+          "weightedReturnPct": 0.819828417329623,
+          "averageStockReturnPct": -0.28300921473570906,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.5436768084271866
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 3,
+            "closed": 1,
+            "positive": 1,
+            "negative": 2,
+            "capital": 5299.43,
+            "netAfterEstimatedLiquidationCosts": 43.45,
+            "weightedReturnPct": 0.819828417329623,
+            "averageStockReturnPct": -0.28300921473570906,
+            "bestReturnPct": 2.015404737647132,
+            "worstReturnPct": -1.5436768084271866
+          }
+        }
+      ]
+    },
+    {
+      "mode": "trend-pullback",
+      "summary": {
+        "entries": 3,
+        "closed": 1,
+        "positive": 1,
+        "negative": 2,
+        "capital": 5696.27,
+        "netAfterEstimatedLiquidationCosts": 47,
+        "weightedReturnPct": 0.825152617802982,
+        "averageStockReturnPct": 0.00982791477988565,
+        "bestReturnPct": 2.015404737647132,
+        "worstReturnPct": -1.6007806113030407
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 0,
+          "closed": 0,
+          "positive": 0,
+          "negative": 0,
+          "capital": 0,
+          "netAfterEstimatedLiquidationCosts": 0,
+          "weightedReturnPct": null,
+          "averageStockReturnPct": null,
+          "bestReturnPct": null,
+          "worstReturnPct": null
+        },
+        "price-only": {
+          "entries": 3,
+          "closed": 1,
+          "positive": 1,
+          "negative": 2,
+          "capital": 5696.27,
+          "netAfterEstimatedLiquidationCosts": 47,
+          "weightedReturnPct": 0.825152617802982,
+          "averageStockReturnPct": 0.00982791477988565,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.6007806113030407
+        }
+      },
+      "setups": {
+        "trend-pullback": {
+          "entries": 3,
+          "closed": 1,
+          "positive": 1,
+          "negative": 2,
+          "capital": 5696.27,
+          "netAfterEstimatedLiquidationCosts": 47,
+          "weightedReturnPct": 0.825152617802982,
+          "averageStockReturnPct": 0.00982791477988565,
+          "bestReturnPct": 2.015404737647132,
+          "worstReturnPct": -1.6007806113030407
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 1,
+            "closed": 0,
+            "positive": 0,
+            "negative": 1,
+            "capital": 1110.72,
+            "netAfterEstimatedLiquidationCosts": -4.28,
+            "weightedReturnPct": -0.38514038200443423,
+            "averageStockReturnPct": -0.38514038200443423,
+            "bestReturnPct": -0.38514038200443423,
+            "worstReturnPct": -0.38514038200443423
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 2,
+            "closed": 1,
+            "positive": 1,
+            "negative": 1,
+            "capital": 4585.55,
+            "netAfterEstimatedLiquidationCosts": 51.28,
+            "weightedReturnPct": 1.1183119205575247,
+            "averageStockReturnPct": 0.20731206317204565,
+            "bestReturnPct": 2.015404737647132,
+            "worstReturnPct": -1.6007806113030407
+          }
+        }
+      ]
+    },
+    {
+      "mode": "catalyst-continuation",
+      "summary": {
+        "entries": 1,
+        "closed": 0,
+        "positive": 0,
+        "negative": 1,
+        "capital": 3300.19,
+        "netAfterEstimatedLiquidationCosts": -16.68,
+        "weightedReturnPct": -0.5053535921416527,
+        "averageStockReturnPct": -0.5053535921416527,
+        "bestReturnPct": -0.5053535921416527,
+        "worstReturnPct": -0.5053535921416527
+      },
+      "cohorts": {
+        "research-backed": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        },
+        "price-only": {
+          "entries": 0,
+          "closed": 0,
+          "positive": 0,
+          "negative": 0,
+          "capital": 0,
+          "netAfterEstimatedLiquidationCosts": 0,
+          "weightedReturnPct": null,
+          "averageStockReturnPct": null,
+          "bestReturnPct": null,
+          "worstReturnPct": null
+        }
+      },
+      "setups": {
+        "catalyst-continuation": {
+          "entries": 1,
+          "closed": 0,
+          "positive": 0,
+          "negative": 1,
+          "capital": 3300.19,
+          "netAfterEstimatedLiquidationCosts": -16.68,
+          "weightedReturnPct": -0.5053535921416527,
+          "averageStockReturnPct": -0.5053535921416527,
+          "bestReturnPct": -0.5053535921416527,
+          "worstReturnPct": -0.5053535921416527
+        }
+      },
+      "sessions": [
+        {
+          "date": "2026-11-04",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "264c1520cc8cd3f0148c05030b1f4301a5cb478a",
+            "archivedScans": 75,
+            "consideredTickers": 51,
+            "availableIntradaySeries": 51,
+            "historyFailures": {},
+            "pendingModeledQuotes": 18,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 1,
+            "closed": 0,
+            "positive": 0,
+            "negative": 1,
+            "capital": 3300.19,
+            "netAfterEstimatedLiquidationCosts": -16.68,
+            "weightedReturnPct": -0.5053535921416527,
+            "averageStockReturnPct": -0.5053535921416527,
+            "bestReturnPct": -0.5053535921416527,
+            "worstReturnPct": -0.5053535921416527
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "afd12b77b1194958d119b5ae97fe87b9fb94d3a6",
+            "archivedScans": 75,
+            "consideredTickers": 60,
+            "availableIntradaySeries": 60,
+            "historyFailures": {},
+            "pendingModeledQuotes": 42,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "status": "estimated",
+          "source": {
+            "ref": "origin/main",
+            "lastCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+            "archivedScans": 75,
+            "consideredTickers": 71,
+            "availableIntradaySeries": 71,
+            "historyFailures": {},
+            "pendingModeledQuotes": 53,
+            "historicalProvider": "date-bounded Yahoo OHLC; saved Upstox shortlist quotes where available; NO historical depth"
+          },
+          "missing": [],
+          "summary": {
+            "entries": 0,
+            "closed": 0,
+            "positive": 0,
+            "negative": 0,
+            "capital": 0,
+            "netAfterEstimatedLiquidationCosts": 0,
+            "weightedReturnPct": null,
+            "averageStockReturnPct": null,
+            "bestReturnPct": null,
+            "worstReturnPct": null
+          }
+        }
+      ]
+    }
+  ],
+  "validationStatus": "INSUFFICIENT SESSIONS — diagnostic only, not profit validation",
+  "limitations": [
+    "Uses original timestamped opportunity lists; not complete historical rediscovery.",
+    "One share per name, independent daily studies starting without inherited positions; not an overnight portfolio backtest.",
+    "Historical candle revisions/cross-provider differences, assumed 30bp spread, 5bp slippage and 15bp fee per side.",
+    "Historical depth and execution-time circuit checks remain unverified; simulated eligibility is not proof of a real fill.",
+    "Previously observed pending signals are retained for fifteen minutes; missing later shortlist quotes use modeled completed-minute closes.",
+    "Open positions marked with hypothetical liquidation costs; no sale or retrospective buy is added to any account.",
+    "Missing data is not a winning no-trade session. No automatic selection of best-looking thresholds.",
+    "Fees are modeled estimates, not a broker contract-note calculation."
+  ],
+  "setupRules": {
+    "version": "three-setups-v1",
+    "minimumBars": 8,
+    "maxRangePct": 1.5,
+    "contractionRatio": 0.8,
+    "dryingVolumeRatio": 0.9,
+    "minVolumeRatio": 1.5,
+    "minimumCloseLocation": 0.65,
+    "pullbackTouchPct": 0.2,
+    "maxPullbackPct": 1.5
+  },
+  "exitProfiles": {
+    "compression-breakout": {
+      "activationR": 1.5,
+      "trailR": 1
+    },
+    "trend-pullback": {
+      "activationR": 2,
+      "trailR": 1.5
+    },
+    "catalyst-continuation": {
+      "activationR": 2,
+      "trailR": 1.5
+    }
+  },
+  "scenarioSettings": [
+    {
+      "mode": "original-breakout",
+      "setupMode": null,
+      "entryMode": "baseline",
+      "exitMode": "baseline",
+      "allowedSetupTypes": null
+    },
+    {
+      "mode": "confirmed-breakout",
+      "setupMode": null,
+      "entryMode": "adaptive",
+      "exitMode": "baseline",
+      "allowedSetupTypes": null
+    },
+    {
+      "mode": "three-setups-original-exits",
+      "setupMode": "three-setups-v1",
+      "entryMode": "adaptive",
+      "exitMode": "baseline",
+      "allowedSetupTypes": null
+    },
+    {
+      "mode": "three-setups-risk-exits",
+      "setupMode": "three-setups-v1",
+      "entryMode": "adaptive",
+      "exitMode": "setup-risk",
+      "allowedSetupTypes": null
+    },
+    {
+      "mode": "three-setups-volatility-exits",
+      "setupMode": "three-setups-v1",
+      "entryMode": "adaptive",
+      "exitMode": "setup-volatility",
+      "allowedSetupTypes": null
+    },
+    {
+      "mode": "compression-breakout",
+      "setupMode": "three-setups-v1",
+      "entryMode": "adaptive",
+      "exitMode": "setup-risk",
+      "allowedSetupTypes": [
+        "compression-breakout"
+      ]
+    },
+    {
+      "mode": "trend-pullback",
+      "setupMode": "three-setups-v1",
+      "entryMode": "adaptive",
+      "exitMode": "setup-risk",
+      "allowedSetupTypes": [
+        "trend-pullback"
+      ]
+    },
+    {
+      "mode": "catalyst-continuation",
+      "setupMode": "three-setups-v1",
+      "entryMode": "adaptive",
+      "exitMode": "setup-risk",
+      "allowedSetupTypes": [
+        "catalyst-continuation"
+      ]
+    }
+  ]
+}

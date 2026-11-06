@@ -1,0 +1,1376 @@
+{
+  "date": "2026-11-06",
+  "timeZone": "Asia/Kolkata",
+  "generatedAt": "2026-11-06T11:21:15.153Z",
+  "pages": 1,
+  "total": 85,
+  "states": {
+    "READY": 24,
+    "CANCELED": 61
+  },
+  "targets": {
+    "preview": 2,
+    "production": 83
+  },
+  "dataOnly": {
+    "false": 5,
+    "true": 80
+  },
+  "byHourIST": {
+    "16:00": 3,
+    "15:00": 2,
+    "14:00": 4,
+    "13:00": 4,
+    "12:00": 4,
+    "11:00": 4,
+    "10:00": 24,
+    "09:00": 22,
+    "08:00": 14,
+    "07:00": 1,
+    "00:00": 3
+  },
+  "deployments": [
+    {
+      "id": "dpl_Er7q7Q15p1wkoNSLZoPjcdDPsEif",
+      "at": "2026-11-06T11:03:59.499Z",
+      "ist": "2026-11-06T16:33:59.499 IST",
+      "state": "READY",
+      "target": "preview",
+      "branch": "codex/trading-desk-preview",
+      "sha": "ffbf7920853a5214344edcee81e8673f00421a1c",
+      "message": "Add isolated three-setup entries, actionable plans and frozen exit experiments",
+      "paths": [
+        "api/_paper-simulation-handler.js",
+        "api/_paper-simulation.js",
+        "desk/decision-details.js",
+        "desk/desk.css",
+        "desk/desk.js",
+        "desk/index.html",
+        "desk/setup-lab.html",
+        "desk/setup-lab.js",
+        "docs/three-setup-upgrade-2026-11-06.md",
+        "research/decision-evidence.js",
+        "research/entry-comparison.js",
+        "research/entry-quality.js",
+        "research/paper-policy.js",
+        "research/point-in-time-entry-replay.js",
+        "research/session-replay.js",
+        "research/setup-comparison-2026-11-06.json",
+        "research/setup-exits.js",
+        "research/setup-study.js",
+        "research/trading-setups.js",
+        "scripts/compare-trading-setups.js",
+        "test/trading-setups.test.js"
+      ],
+      "dataOnly": false,
+      "url": "https://stock-advisor-373dmc1xu-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Ahu9b4yqXGhni4K7ErWepi7Nfmro",
+      "at": "2026-11-06T10:40:42.590Z",
+      "ist": "2026-11-06T16:10:42.590 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "ad21328125e13968862bf75190698b72015f2d84",
+      "message": "Analytics: evaluate 110 rejected candidate(s)",
+      "paths": [
+        "data/rejected-candidates.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-my30pqck4-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_8VDzVkYt5tcyKBGPc72onFzFJWHt",
+      "at": "2026-11-06T10:33:28.061Z",
+      "ist": "2026-11-06T16:03:28.061 IST",
+      "state": "READY",
+      "target": "preview",
+      "branch": "codex/trading-desk-preview",
+      "sha": "dd7822386ebab792e310facfb382711967f63bed",
+      "message": "Require auditable paper entry evidence and recover original trade metrics",
+      "paths": [
+        "api/_entry-research.js",
+        "api/_paper-simulation-handler.js",
+        "api/_paper-simulation.js",
+        "data/decision-audit.json",
+        "desk/decision-details.js",
+        "desk/desk.css",
+        "desk/desk.js",
+        "desk/index.html",
+        "docs/open-source-review-2026-11-06.md",
+        "research/candle-integrity.js",
+        "research/decision-audit.js",
+        "research/decision-evidence.js",
+        "research/entry-evidence.js",
+        "research/entry-quality.js",
+        "research/session-replay.js",
+        "scripts/audit-decision-evidence.js",
+        "test/decision-evidence.test.js",
+        "test/desk.test.js",
+        "test/entry-quality.test.js",
+        "test/entry-research.test.js"
+      ],
+      "dataOnly": false,
+      "url": "https://stock-advisor-d3fi0ce7f-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Has9uL3Qw9P7sgJXVcwTVgWDEfk1",
+      "at": "2026-11-06T09:55:40.961Z",
+      "ist": "2026-11-06T15:25:40.961 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "26e88a6bebf94dd20b5bb57732a8feb2192b6de1",
+      "message": "Paper simulation risk 2026-11-06T09:55:37.913Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-qtoa104yw-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_8kJao64YNgyQxD3Cuqi3V8BCrGLU",
+      "at": "2026-11-06T09:40:40.500Z",
+      "ist": "2026-11-06T15:10:40.500 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "09d6af3a9088d5a8c5a284c34ac5315a12052666",
+      "message": "Paper simulation risk 2026-11-06T09:40:37.404Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-momg1fjk9-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_ATZyqAabnNVnBVTd8ssajH4w2AGc",
+      "at": "2026-11-06T09:25:41.136Z",
+      "ist": "2026-11-06T14:55:41.136 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "c90f2be9e8313d4ce8ae8c045a49825b032969c1",
+      "message": "Paper simulation risk 2026-11-06T09:25:38.121Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-ptmj3a31i-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_7m59yJMy7qmYpN7BJDRC7so1rSv8",
+      "at": "2026-11-06T09:10:40.748Z",
+      "ist": "2026-11-06T14:40:40.748 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "4ec63cbe566dace9cb95f9f24f6b5238e67cb80a",
+      "message": "Paper simulation risk 2026-11-06T09:10:37.892Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-303qczk5v-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_3PtbTjHaukR4K9V3X8zYLs4RWHC3",
+      "at": "2026-11-06T08:55:41.560Z",
+      "ist": "2026-11-06T14:25:41.560 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "7dacc0be74ffafa2c473132c821fa82489865bfd",
+      "message": "Paper simulation risk 2026-11-06T08:55:38.739Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-97ntnqk24-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_2gQsKndC9VpiR3myZgB5nyFsguUa",
+      "at": "2026-11-06T08:40:40.569Z",
+      "ist": "2026-11-06T14:10:40.569 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "4547664841856d108a8e39dae79d43fbf9cfbae0",
+      "message": "Paper simulation risk 2026-11-06T08:40:37.519Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-99srawx17-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Fx3zsnuismE2UhX1JYt4RUDfCjB4",
+      "at": "2026-11-06T08:25:40.482Z",
+      "ist": "2026-11-06T13:55:40.482 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "7399b08c003030a0262cdb75412c71f2eeb388fb",
+      "message": "Paper simulation risk 2026-11-06T08:25:37.526Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-ggr38990b-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_DbUHA4bDWwFWv75opKFgYXpUErPd",
+      "at": "2026-11-06T08:10:40.649Z",
+      "ist": "2026-11-06T13:40:40.649 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "018499c5b1fb17862f02e9e56a8cf1467cf3c54a",
+      "message": "Paper simulation risk 2026-11-06T08:10:37.655Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-bcmm5535p-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Frd8uB7LvyxHgHEDydvufxGDsEcP",
+      "at": "2026-11-06T07:55:40.993Z",
+      "ist": "2026-11-06T13:25:40.993 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "ff9ce90a962aafdf52772698ae4dbe4cc19559c4",
+      "message": "Paper simulation risk 2026-11-06T07:55:37.795Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-koqnxhbnw-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_8w2F9c5TYAaQqwRyxoA5zeWyLxnJ",
+      "at": "2026-11-06T07:40:40.649Z",
+      "ist": "2026-11-06T13:10:40.649 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "e1936167fba990c966fa110422fe3646e1cb3f08",
+      "message": "Paper simulation risk 2026-11-06T07:40:37.894Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-9cba82r7p-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_8TEbonkHf3usHqKrrGF3gcZJDjYg",
+      "at": "2026-11-06T07:25:41.706Z",
+      "ist": "2026-11-06T12:55:41.706 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "a3b359a492de4549aee5755eaef5e884d79db50d",
+      "message": "Paper simulation risk 2026-11-06T07:25:38.893Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-dydg1whjj-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_HCZjwfh2Wp5bnzXUYLYWHgRUduRb",
+      "at": "2026-11-06T07:10:42.639Z",
+      "ist": "2026-11-06T12:40:42.639 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "9d30e319e4c37fbd16543e8232c747827b488f3c",
+      "message": "Paper simulation risk 2026-11-06T07:10:38.168Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-5ikkoh5lt-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_F4Hoxf9C9DbGiw42DZMmgkqqcLwW",
+      "at": "2026-11-06T06:55:40.261Z",
+      "ist": "2026-11-06T12:25:40.261 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "bbf10e432591f95c573f3d960371ae9adf44b8ac",
+      "message": "Paper simulation risk 2026-11-06T06:55:37.679Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-m307l3w13-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_87j6GUZanKsjRguGaj5sHUXQgaHr",
+      "at": "2026-11-06T06:40:40.797Z",
+      "ist": "2026-11-06T12:10:40.797 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "93bdae1a3a9c74f9f614218eeb188c977916ce1d",
+      "message": "Paper simulation risk 2026-11-06T06:40:37.957Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-nk5x3s1pb-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_GC8YQ7aKr8R8Npqw3Xe6bR9kXusJ",
+      "at": "2026-11-06T06:25:41.652Z",
+      "ist": "2026-11-06T11:55:41.652 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "fc6f0a074a72d73f325896e6ab4cbfd2f881d908",
+      "message": "Paper simulation risk 2026-11-06T06:25:38.321Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-r8wn011xp-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_4ggwd6DxHfoDuYtB5W5zEcWycwgn",
+      "at": "2026-11-06T06:10:41.345Z",
+      "ist": "2026-11-06T11:40:41.345 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "b902a864d4ff4661afb1c9b4d82ba2350fb131d6",
+      "message": "Paper simulation risk 2026-11-06T06:10:37.847Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-94wdxf8pr-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_96qRKPyESQ7DYenYDNvSXQAxHBdG",
+      "at": "2026-11-06T05:55:40.798Z",
+      "ist": "2026-11-06T11:25:40.798 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "3f58c759b8ef6c9ca894e443db86c4a3fe7c8d7e",
+      "message": "Paper simulation risk 2026-11-06T05:55:38.487Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-m5hx9yi82-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_3Q4yiTBoGz9DNZBpDEMaDr2wRyrQ",
+      "at": "2026-11-06T05:40:41.053Z",
+      "ist": "2026-11-06T11:10:41.053 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "df352b834e0d716380e39023bdc3d9b565cd11f8",
+      "message": "Paper simulation risk 2026-11-06T05:40:37.940Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-pqwo0g0jc-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_CwdimUtvoc2vSmffPBJ3vaScsvtx",
+      "at": "2026-11-06T05:25:41.143Z",
+      "ist": "2026-11-06T10:55:41.143 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "a2a80622419e0f3597dbfb0fd3205f18bcde27c5",
+      "message": "Paper simulation risk 2026-11-06T05:25:37.982Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-5mytawu31-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_A9DBUu64e5bLf2Nd8Cg52wx7aYCQ",
+      "at": "2026-11-06T05:20:43.441Z",
+      "ist": "2026-11-06T10:50:43.441 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "59a56dc743e881cfd1aef55fac076549688904d7",
+      "message": "Paper simulation scan 2026-11-06T05:20:40.498Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-8mmp0ha4n-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_28NJGgaSt9h7B22QQSZBKBbQztZT",
+      "at": "2026-11-06T05:20:40.436Z",
+      "ist": "2026-11-06T10:50:40.436 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "3e190eb889623e5c9281b5225bd2e445f35789ec",
+      "message": "Paper simulation risk 2026-11-06T05:20:37.938Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-9evohjiex-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Jhhci9MgnDy91fKyAp2fhnZGh2rn",
+      "at": "2026-11-06T05:16:59.180Z",
+      "ist": "2026-11-06T10:46:59.180 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "93184b0df713b377870297b52bd8aa799ed821fb",
+      "message": "chore: update NSE snapshot [skip ci]",
+      "paths": [
+        "data/nse-snapshot.json",
+        "research/universe.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-8spgii6es-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_CavSRcsfY5CGp2GT67SDYPaN7kDY",
+      "at": "2026-11-06T05:15:44.183Z",
+      "ist": "2026-11-06T10:45:44.183 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "ddeef1eba2ff41dc853fb9e4d373b433b1fb8a3f",
+      "message": "Paper simulation scan 2026-11-06T05:15:41.289Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-ga99r72yu-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Dvue9fL6oGyy3s9bjwdkDLrpK3xn",
+      "at": "2026-11-06T05:15:41.972Z",
+      "ist": "2026-11-06T10:45:41.972 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "0f88182799792123583a197cfca3b988b0f95997",
+      "message": "Paper simulation risk 2026-11-06T05:15:38.145Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-kcmopc93f-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_2Xt7DJZhapCwbQujq72W8XcmwKbc",
+      "at": "2026-11-06T05:10:44.676Z",
+      "ist": "2026-11-06T10:40:44.676 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "ef4edb134758a0a857fb1f6e7d27bc4e20d8fbce",
+      "message": "Paper simulation scan 2026-11-06T05:10:42.172Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-jtyhw16v0-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_ANsJckkoWNtkfFzgVaXEsBCc5eLs",
+      "at": "2026-11-06T05:10:41.067Z",
+      "ist": "2026-11-06T10:40:41.067 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "4edb59f040bf46611e3001a7125498a2ab769ecd",
+      "message": "Paper simulation risk 2026-11-06T05:10:38.107Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-nnwp507s6-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_BKsPTDw3aTxbxA4q9GjBjkVhPUw8",
+      "at": "2026-11-06T05:05:44.276Z",
+      "ist": "2026-11-06T10:35:44.276 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "f5cdea104defdefc090410760dcb7c3c45410cf9",
+      "message": "Paper simulation scan 2026-11-06T05:05:41.683Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-htcrasdbl-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_6NwsE5QiaSgytMxpANKdLodRTMKd",
+      "at": "2026-11-06T05:05:41.916Z",
+      "ist": "2026-11-06T10:35:41.916 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "5b10f7989aa26a1393ba58cdc84b9fb417dc9f24",
+      "message": "Paper simulation risk 2026-11-06T05:05:38.804Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-ihmbngs28-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_93XxoYbmhBYW1RgG92ZQJXW3Tkw5",
+      "at": "2026-11-06T05:00:43.761Z",
+      "ist": "2026-11-06T10:30:43.761 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "5503e1d2337fb80ee0508ca62788557c4a0ed20d",
+      "message": "Paper simulation scan 2026-11-06T05:00:40.960Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-chc4os67e-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_E6T8ad7HkCb4RC5sYpAh8zfDaxHN",
+      "at": "2026-11-06T05:00:40.874Z",
+      "ist": "2026-11-06T10:30:40.874 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "ebf93206819d336a315c0d4a872dae073cd0ce27",
+      "message": "Paper simulation risk 2026-11-06T05:00:38.149Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-b5iw6oyjb-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_EhPMQTTReFmpdvUbpdHMw3cVeeCF",
+      "at": "2026-11-06T04:55:43.913Z",
+      "ist": "2026-11-06T10:25:43.913 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "95b523c5afbfccd54317857d8e3d1d12614b5b4a",
+      "message": "Paper simulation scan 2026-11-06T04:55:40.826Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-8mlu9o3w7-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_BkAeaLBkgoBrf449vUfMfWPvvzpi",
+      "at": "2026-11-06T04:55:40.544Z",
+      "ist": "2026-11-06T10:25:40.544 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "7c0c428f9d880d8576f917802c9291aac1059867",
+      "message": "Paper simulation risk 2026-11-06T04:55:37.783Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-5h5zu2y7d-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_EHVkQ3c173J3x1DUXA3oE7CQ6ZTG",
+      "at": "2026-11-06T04:50:44.311Z",
+      "ist": "2026-11-06T10:20:44.311 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "6b44796d97d946d7c245521cb4a01faffb6686ad",
+      "message": "Paper simulation scan 2026-11-06T04:50:41.014Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-eqmizsg55-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_FeFtMSAMDckUpbM6sU1PuqVGSLP8",
+      "at": "2026-11-06T04:50:40.720Z",
+      "ist": "2026-11-06T10:20:40.720 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "897220664f75986cfe669d2b693c9ab0cd3c3269",
+      "message": "Paper simulation risk 2026-11-06T04:50:38.092Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-ogu1tekdr-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_DQCZwy5rT3ah7uVraScfvXUpkMHP",
+      "at": "2026-11-06T04:45:43.656Z",
+      "ist": "2026-11-06T10:15:43.656 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "054e76c6adce2413dc385bc1a2359c38118664ec",
+      "message": "Paper simulation scan 2026-11-06T04:45:40.980Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-epu2omble-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_4bnzE7XW17DF4T2dg8CQkfApCm24",
+      "at": "2026-11-06T04:45:41.022Z",
+      "ist": "2026-11-06T10:15:41.022 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "fd7189e8ed99bd9f08e9d51429cb2df473ded298",
+      "message": "Paper simulation risk 2026-11-06T04:45:38.001Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-1o8s9k3xk-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_8xW6QiPPpLYnu1fo9nEthfdPvJJy",
+      "at": "2026-11-06T04:40:44.616Z",
+      "ist": "2026-11-06T10:10:44.616 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "7e2a69d999f3788ff561b034c429f4a97f7564bf",
+      "message": "Paper simulation scan 2026-11-06T04:40:41.848Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-e8qsb4qqw-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_AB7yLGGEZBgaRjpNq2Wwx9rrFYZt",
+      "at": "2026-11-06T04:40:41.877Z",
+      "ist": "2026-11-06T10:10:41.877 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "09a181a5856d06504a9d0c24d4eba3f4f0f0339a",
+      "message": "Paper simulation risk 2026-11-06T04:40:38.733Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-fncjkcxxl-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_FYWd5m2KpHDKPBUKazikvMFh62HV",
+      "at": "2026-11-06T04:35:44.087Z",
+      "ist": "2026-11-06T10:05:44.087 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "7f0cb45cbadc05f8ff05baa32680e1bcf8cd07eb",
+      "message": "Paper simulation scan 2026-11-06T04:35:41.078Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-h7s9xm5wx-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_2qZxAoq23SmrAfagkey9onuGHY41",
+      "at": "2026-11-06T04:35:41.072Z",
+      "ist": "2026-11-06T10:05:41.072 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "f068fae87322832f8eeef6fd2ee5347f62653a66",
+      "message": "Paper simulation risk 2026-11-06T04:35:38.270Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-2opehwu30-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Hzc69wJqw3KpezLdwYpuAVzf7rZP",
+      "at": "2026-11-06T04:30:42.843Z",
+      "ist": "2026-11-06T10:00:42.843 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "ca8f9ce3fb6e3091934efecfbad06a7f8969d142",
+      "message": "Paper simulation scan 2026-11-06T04:30:40.387Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-byykgjbw2-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_9ZfkadSivz47ibJ6EFw8qNYCsfLm",
+      "at": "2026-11-06T04:30:41.053Z",
+      "ist": "2026-11-06T10:00:41.053 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "f1335d66fd9bf8ed32c0ee86591af4de09e36ee1",
+      "message": "Paper simulation risk 2026-11-06T04:30:37.552Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-e867wp272-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_CK3buReaEfewBQqjgs6AoWU9KNAd",
+      "at": "2026-11-06T04:25:42.804Z",
+      "ist": "2026-11-06T09:55:42.804 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "cc0a2d94c57d62747a02ff12119585ec63769588",
+      "message": "Paper simulation scan 2026-11-06T04:25:40.336Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-39rl0i04l-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_7fZXxYHijNyqpf7ctD4aYBz24idX",
+      "at": "2026-11-06T04:25:40.100Z",
+      "ist": "2026-11-06T09:55:40.100 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "cd0ed508fc7f5a6d21f7a23e45edf39dcf20023b",
+      "message": "Paper simulation risk 2026-11-06T04:25:37.756Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-cmxl6lco0-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_5F6xtHoTR9VA83MELeDQ6HtwxTZB",
+      "at": "2026-11-06T04:20:43.546Z",
+      "ist": "2026-11-06T09:50:43.546 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "5eb8fe033e621867af88a3f8c798cf11785ebfe5",
+      "message": "Paper simulation scan 2026-11-06T04:20:40.898Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-dsrm1jftr-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_FpMazHD42E3tKTAywtexK5CAMNpf",
+      "at": "2026-11-06T04:20:40.791Z",
+      "ist": "2026-11-06T09:50:40.791 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "6bbd22fc0f67333567b2f6dcc3fb781d8a727ba4",
+      "message": "Paper simulation risk 2026-11-06T04:20:38.154Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-d9x2q00xa-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_9ucHLPSjsQm6irwaE7N6oa8TV4Xa",
+      "at": "2026-11-06T04:17:01.364Z",
+      "ist": "2026-11-06T09:47:01.364 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "ff099a58c4dd383e74c3966b49ebda4ffbeddb66",
+      "message": "chore: update NSE snapshot [skip ci]",
+      "paths": [
+        "data/nse-snapshot.json",
+        "research/universe.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-11aohzr2z-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_2gbyYZKD7nCiQ5dUfGZaFco6ZxJ3",
+      "at": "2026-11-06T04:15:43.395Z",
+      "ist": "2026-11-06T09:45:43.395 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "83a81f4ee307d3c4e7eef069076457a08fb68c23",
+      "message": "Paper simulation scan 2026-11-06T04:15:40.222Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-h76jh95gv-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_G9jGaUcnFL5LEJDRD5X3DvzSM3Tb",
+      "at": "2026-11-06T04:15:40.398Z",
+      "ist": "2026-11-06T09:45:40.398 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "c02248701cdc9990ac3d0d2f9d748c524e01eee3",
+      "message": "Paper simulation risk 2026-11-06T04:15:37.671Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-mvuvhv3gp-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_DqHHRSjsKsQQwagSM3BKZUQs1tFK",
+      "at": "2026-11-06T04:10:43.252Z",
+      "ist": "2026-11-06T09:40:43.252 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "c46b1f0a7610e0f720f8da9ee40605b59c49bb25",
+      "message": "Paper simulation scan 2026-11-06T04:10:40.640Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-c3p6z443p-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_CE5eJgUxhqmjnFHiu41WdSHnXWr8",
+      "at": "2026-11-06T04:10:40.697Z",
+      "ist": "2026-11-06T09:40:40.697 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "2e7d73ae5af94d50a44ca76335e964a39438f035",
+      "message": "Paper simulation risk 2026-11-06T04:10:37.930Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-phqx43qud-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_C3XWD2VEK7GqmzENwDbX7RWiCovm",
+      "at": "2026-11-06T04:05:44.883Z",
+      "ist": "2026-11-06T09:35:44.883 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "7e8c22fb8fed0d6302f4345a5929640901fcfbe0",
+      "message": "Paper simulation scan 2026-11-06T04:05:41.929Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-u4xo7pdf3-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Ai6M5sQ2Yar1d9BoUjFaFWbgfr4u",
+      "at": "2026-11-06T04:05:41.934Z",
+      "ist": "2026-11-06T09:35:41.934 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "07c7595558eb3cf83d35e7a50a80a9641cf397ec",
+      "message": "Paper simulation risk 2026-11-06T04:05:39.312Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-4aun92gjv-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_DZtuYMwoBPZt2YFvLVX84vgcSL8d",
+      "at": "2026-11-06T04:00:44.341Z",
+      "ist": "2026-11-06T09:30:44.341 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "f9e3aaa6e27a60d06dc9fc217da7268f23177cd0",
+      "message": "Paper simulation scan 2026-11-06T04:00:41.063Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-g9m17sp3g-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_7B6U2Av6cXCPStXAHZFaVSfQbMMH",
+      "at": "2026-11-06T04:00:40.905Z",
+      "ist": "2026-11-06T09:30:40.905 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "f024e40e436b22574485cf88a51ebc27dce878b5",
+      "message": "Paper simulation risk 2026-11-06T04:00:38.276Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-cadr0i7ne-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_DLTbGagh2qTiCdnk7i8nDp6kR7Ws",
+      "at": "2026-11-06T03:55:44.592Z",
+      "ist": "2026-11-06T09:25:44.592 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "d461589bd123972e7eac9f10399c6a45636eb257",
+      "message": "Paper simulation scan 2026-11-06T03:55:42.056Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-8l512r6l1-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_73b4HGrBctYdHW9aB27XsFKB27iP",
+      "at": "2026-11-06T03:55:41.046Z",
+      "ist": "2026-11-06T09:25:41.046 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "4a2bb18f15911ffcb124175bbdc6a625b1ab56fa",
+      "message": "Paper simulation risk 2026-11-06T03:55:37.849Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-d2rouv4z6-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_9GzD5rdJLZZe9jRycR8LGeQ7jdcE",
+      "at": "2026-11-06T03:50:43.377Z",
+      "ist": "2026-11-06T09:20:43.377 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "561e647fbe5318592667597b3ed112cbf02c859a",
+      "message": "Paper simulation scan 2026-11-06T03:50:40.944Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-eotbwx5rk-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_57M96gLTWUHWm5XNeeV4Ac8SNStq",
+      "at": "2026-11-06T03:50:40.231Z",
+      "ist": "2026-11-06T09:20:40.231 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "05ae9de9edaad199bb84c3d5e8a6d3a572993072",
+      "message": "Paper simulation risk 2026-11-06T03:50:37.689Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-ih0d95qxw-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_9WDknKqjFHVqkHParKLBq2KJBxnz",
+      "at": "2026-11-06T03:45:43.748Z",
+      "ist": "2026-11-06T09:15:43.748 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "7b23e53c96d3cc39dc3ae625ce1e3632fe359f51",
+      "message": "Paper simulation scan 2026-11-06T03:45:40.978Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-e9r2hgchg-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_5NjnFhR8d4qxHUhWkM8nSvxWY9zU",
+      "at": "2026-11-06T03:45:40.445Z",
+      "ist": "2026-11-06T09:15:40.445 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "d1a76ff04d190f08a27c5bfb13a7994fb93b8d8a",
+      "message": "Paper simulation risk 2026-11-06T03:45:37.636Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-1s6kdfq5r-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_4sCeBq7J3h1Mz9oR8nNpXYFcSoWp",
+      "at": "2026-11-06T03:40:40.837Z",
+      "ist": "2026-11-06T09:10:40.837 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "8ced79bc0f888004e7214bc63d2abc8528f9c6c8",
+      "message": "Paper simulation research 2026-11-06T03:40:37.901Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-nphlclmpc-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_B7JRnTDQSrY7b3e36invRRb96fkC",
+      "at": "2026-11-06T03:35:40.368Z",
+      "ist": "2026-11-06T09:05:40.368 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "08ffa5f7f66ecd1d4d86df2324feef277c61b1c9",
+      "message": "Paper simulation research 2026-11-06T03:35:37.615Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-34whmg9a8-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_GmbeGDbJ5ezSftDjyU3CTyPoW1k3",
+      "at": "2026-11-06T03:30:41.211Z",
+      "ist": "2026-11-06T09:00:41.211 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "91afea000c004489b21b7fb25de685c33d4a08fa",
+      "message": "Paper simulation research 2026-11-06T03:30:37.485Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-hymfex1d5-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_37GkgNvKVTjCPPDXVKDxaGN5hnEW",
+      "at": "2026-11-06T03:25:40.343Z",
+      "ist": "2026-11-06T08:55:40.343 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "a61e9cb9a5342350f0dbd178523ad65af0e4d9b5",
+      "message": "Paper simulation research 2026-11-06T03:25:37.549Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-1coey37u7-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_6yCNNtKcp2EtGmsVq1PNqBRD3sb3",
+      "at": "2026-11-06T03:20:40.543Z",
+      "ist": "2026-11-06T08:50:40.543 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "4b390165a6767f3aadff9883307852657dce6e81",
+      "message": "Paper simulation research 2026-11-06T03:20:37.938Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-o7k0d24zc-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_8UEq8UtD2L48Y7qgfwAXrto57Xaw",
+      "at": "2026-11-06T03:16:56.821Z",
+      "ist": "2026-11-06T08:46:56.821 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "858fc320f7c6d51ec39412db173e4e8a52e22b24",
+      "message": "chore: update NSE snapshot [skip ci]",
+      "paths": [
+        "data/nse-snapshot.json",
+        "research/universe.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-8jfha25o9-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_22t1Bvk6ybNTxLybmyvdyXuYoYoz",
+      "at": "2026-11-06T03:15:40.528Z",
+      "ist": "2026-11-06T08:45:40.528 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "2a6f9e6f0e7c0ab84f2c8c175c8a63d4b49f336f",
+      "message": "Paper simulation research 2026-11-06T03:15:37.711Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-q1g676a75-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_63zUfDAWMMgDEwiZeDPPzbef7XeE",
+      "at": "2026-11-06T03:10:40.768Z",
+      "ist": "2026-11-06T08:40:40.768 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "cc4d50bd1948c80f5e6511098c30b42ee265b84e",
+      "message": "Paper simulation research 2026-11-06T03:10:37.474Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-2x1upsq4c-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_Gy4pBXGFAhLLhC3e6oXYoVLDqynw",
+      "at": "2026-11-06T03:05:40.582Z",
+      "ist": "2026-11-06T08:35:40.582 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "37a6cca8f8ac0536d74efaaca6edb09961116e82",
+      "message": "Paper simulation research 2026-11-06T03:05:37.637Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-frpzuzi97-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_3QPZe1pyHPuYE5X9WPpxtpeAYG3C",
+      "at": "2026-11-06T03:00:41.206Z",
+      "ist": "2026-11-06T08:30:41.206 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "b35f50348348bce151bcea123e805b057c2b1ad0",
+      "message": "Paper simulation research 2026-11-06T03:00:37.950Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-re4oe5ot2-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_FyhLRWtujU2nvUVKCMthQFF3HFvU",
+      "at": "2026-11-06T02:55:41.045Z",
+      "ist": "2026-11-06T08:25:41.045 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "1b739fcf6843d5e53e21f8de4b2b7688c638c6fd",
+      "message": "Paper simulation research 2026-11-06T02:55:37.816Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-7n9eu1mfy-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_4Woxou9cB8d73bq6MbJAZsstzqaT",
+      "at": "2026-11-06T02:50:40.901Z",
+      "ist": "2026-11-06T08:20:40.901 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "8822833f91afe9b65b4a636b5584aaa8266ee56f",
+      "message": "Paper simulation research 2026-11-06T02:50:38.034Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-6lkdwkttc-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_vix9nsmAdvxF9vezBvSdgShVVnfo",
+      "at": "2026-11-06T02:45:40.404Z",
+      "ist": "2026-11-06T08:15:40.404 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "41f06057559670dfd2f4640969cc7b526c73d644",
+      "message": "Paper simulation research 2026-11-06T02:45:37.741Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-je3g5bb6g-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_AG5TC8cR233kH7Z8NTFBmyH6ZuBd",
+      "at": "2026-11-06T02:40:41.393Z",
+      "ist": "2026-11-06T08:10:41.393 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "b3fc4e42ee05fa68dc25c7caa7c56bf7d69f304f",
+      "message": "Paper simulation research 2026-11-06T02:40:37.919Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-hqh108lyn-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_BvPeDnm3PjT8eyvv4HDh8nbsufXK",
+      "at": "2026-11-06T02:35:50.712Z",
+      "ist": "2026-11-06T08:05:50.712 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "83899eb17c9c2fa1b30723a7301c8431de5b94a7",
+      "message": "Premarket watchlist (2026-11-06): 0 names",
+      "paths": [
+        "data/premarket-watchlist.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-8h7jxmw39-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_49XZ3iQ1XfabvmU8TBTvkY4P1yZt",
+      "at": "2026-11-06T02:35:40.179Z",
+      "ist": "2026-11-06T08:05:40.179 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "23c5085ef490e5fb3fefcb267b743d7659ae4786",
+      "message": "Paper simulation research 2026-11-06T02:35:37.842Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-1e67bg3nz-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_HcT6z9xcFEkHK3AutYBceHtW2hVo",
+      "at": "2026-11-06T02:30:40.745Z",
+      "ist": "2026-11-06T08:00:40.745 IST",
+      "state": "CANCELED",
+      "target": "production",
+      "branch": "main",
+      "sha": "01a62a11c32291f1ab8c41d30b039a424fcf1198",
+      "message": "Paper simulation research 2026-11-06T02:30:37.940Z [skip ci]",
+      "paths": [
+        "data/paper-simulation.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-qzqctyhei-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_B6V4dHkLFS7duVDvpAnEBknmTVFs",
+      "at": "2026-11-06T02:16:57.954Z",
+      "ist": "2026-11-06T07:46:57.954 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "969b2ff0a2537ac28ebe5fc5bd62d9e03a0c5013",
+      "message": "chore: update NSE snapshot [skip ci]",
+      "paths": [
+        "data/nse-snapshot.json",
+        "research/universe.json"
+      ],
+      "dataOnly": true,
+      "url": "https://stock-advisor-omgrsidpr-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_fpcDpEULGTZfDuamUJo8bPs4Jwsn",
+      "at": "2026-11-05T18:56:29.366Z",
+      "ist": "2026-11-06T00:26:29.366 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "95343b2027a5802e8093375929a1928b2f06bbd3",
+      "message": "Use one-share paper entries without notional count or sector caps",
+      "paths": [
+        "api/_paper-simulation-handler.js",
+        "api/_paper-simulation.js",
+        "desk/desk.js",
+        "desk/workspace.js",
+        "docs/paper-one-share-v2.md",
+        "research/paper-policy.js",
+        "research/session-replay.js",
+        "test/desk-performance.test.js",
+        "test/paper-simulation.test.js",
+        "test/session-replay.test.js"
+      ],
+      "dataOnly": false,
+      "url": "https://stock-advisor-cqrdos7tk-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_9MFVWk3JBzQsESnZZnfoj1h1xNyh",
+      "at": "2026-11-05T18:48:16.329Z",
+      "ist": "2026-11-06T00:18:16.329 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "0fcc55319c4584d0a7927a7004cfb46691e18b38",
+      "message": "Refresh visible paper dashboard automatically without overlapping reads",
+      "paths": [
+        "desk/desk.js",
+        "desk/visible-refresh.js",
+        "docs/session-review-2026-11-04-05.md",
+        "test/visible-refresh.test.js"
+      ],
+      "dataOnly": false,
+      "url": "https://stock-advisor-6kml6v8s2-pk7.vercel.app"
+    },
+    {
+      "id": "dpl_7r6vB2JiKowhdMeNiMG51rMFhjnb",
+      "at": "2026-11-05T18:46:48.899Z",
+      "ist": "2026-11-06T00:16:48.899 IST",
+      "state": "READY",
+      "target": "production",
+      "branch": "main",
+      "sha": "1755e1824a680a7cb4f358a738d1fc55111b44e6",
+      "message": "Add auditable percentage returns and review November paper sessions",
+      "paths": [
+        "desk/desk.css",
+        "desk/desk.js",
+        "desk/performance.js",
+        "desk/workspace.js",
+        "docs/session-review-2026-11-04-05.md",
+        "research/session-review.js",
+        "scripts/review-paper-performance.js",
+        "test/desk-performance.test.js",
+        "test/session-review.test.js"
+      ],
+      "dataOnly": false,
+      "url": "https://stock-advisor-89ew55c7m-pk7.vercel.app"
+    }
+  ],
+  "limitations": [
+    "Counts created deployments for this project in this IST calendar day, not every project or the entire rolling owner window.",
+    "Rate-rejected attempts with no deployment object are not included. Unknown Git commits are not guessed."
+  ]
+}

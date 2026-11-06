@@ -2,9 +2,11 @@ import { requireCronAuth } from './_cron-auth.js';
 import { marketStatus, nowIST } from './_market-calendar.js';
 import { fetchFullQuotes, fetchIntradayOneMinuteCandles, fetchDailyCandles } from './_upstox-market-data.js';
 import { quoteBatches } from '../research/coverage.js';
-import registry from '../research/universe.json' with {type:'json'};
+import {loadLiveRegistry} from './_live-registry.js';
 import { rankSimulationUniverse, transitionSimulation, validateSimulation, dailyReference, SIM_CONFIG } from './_paper-simulation.js';
 import { savedResearchContext } from './_paper-research-context.js';
+import {setupShortlist} from '../research/trading-setups.js';
+import {RELEASE_SIM_CONFIG} from '../research/paper-policy.js';
 
 const FILE='data/paper-simulation.json',REPO='pranaykushnaji/stock-advisor-ai';
 async function readFile(path,env) {
@@ -39,7 +41,7 @@ async function loadSafety(env,at,members) {
 
 export function createSimulationHandler({env=process.env,now=()=>new Date(),read=path=>readFile(path,env),
   write=(state,sha)=>writeFile(state,sha,env),quotes=fetchFullQuotes,intraday=fetchIntradayOneMinuteCandles,
-  daily=fetchDailyCandles,members=registry.members,registryFetchedAt=registry.fetchedAt,safety=at=>loadSafety(env,at,members)}={}){
+  daily=fetchDailyCandles,members=[],registryFetchedAt=null,safety=at=>loadSafety(env,at,members),config=SIM_CONFIG}={}){
   return async(req,res)=>{
     res.setHeader?.('Cache-Control','no-store');
     if(!requireCronAuth(req,res))return;
@@ -55,6 +57,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
     try{
       const initial=await read(FILE);validateSimulation(initial.data);
       if(body.mode==='health'){
+        if(!members.length)return res.status(503).json({status:'registry_unavailable',paperTrading:true,ordersExecuted:0});
         const sample=members.filter(m=>m.instrumentKey).slice(0,1);
         const q={};
         const checkedMembers=body.testCoverage===true?members.filter(m=>['mid','small'].includes(m.marketCapBucket)&&m.instrumentKey):sample;
@@ -65,9 +68,11 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           const [h,i]=await Promise.all([daily(sample[0].instrumentKey,from,date),intraday(sample[0].instrumentKey)]);
           candleAccess={historicalDaily:h.length,intradayMinutes:i.length};
         }
-        return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:SIM_CONFIG.dailyInvestment,
-          fundingMode:SIM_CONFIG.fundingMode,sharesPerEntry:SIM_CONFIG.sharesPerEntry,maxBuysPerDay:SIM_CONFIG.maxBuysPerDay,
-          maxOpenPositions:SIM_CONFIG.maxOpenPositions,sectorLimit:SIM_CONFIG.sectorLimit,
+        return res.status(200).json({status:'ready',mode:'experimental-paper-only',dailyInvestment:config.dailyInvestment,
+          fundingMode:config.fundingMode,sharesPerEntry:config.sharesPerEntry,maxBuysPerDay:config.maxBuysPerDay,
+          maxOpenPositions:config.maxOpenPositions,sectorLimit:config.sectorLimit,
+          entryMode:config.entryMode??'baseline',executionRuleVersion:config.executionRuleVersion,entryQualityVersion:config.entryQualityVersion??null,
+          setupMode:config.setupMode??null,exitMode:config.exitMode??'baseline',
           positions:initial.data.positions.length,trades:initial.data.trades.length,
           registryMapped:members.filter(m=>m.instrumentKey).length,quotesRequested:checkedMembers.length,quotesReceived:Object.keys(q).length,candleAccess,
           marketOpen:marketStatus(at).open&&at.getTime()>=Date.parse(`${nowIST(at).ymd}T09:15:00+05:30`)
@@ -92,7 +97,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           .sort((a,b)=>Number(market.researchBySymbol[b.symbol].verified)-Number(market.researchBySymbol[a.symbol].verified)).slice(0,12);
         for(let retry=0;retry<4;retry++){
           const current=retry?await read(FILE):initial;
-          const result=transitionSimulation(current.data,market,{at:now(),action});
+          const result=transitionSimulation(current.data,market,{at:now(),action,config});
           if(!result.changed||await write(result.state,current.sha))return res.status(200).json({status:result.status,
             paperTrading:true,candidates:result.state.suggestions,ordersExecuted:0});
         }
@@ -104,7 +109,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
       let first=initial;
       if(action==='scan'&&heldKeys.length){
         for(let retry=0;retry<4;retry++){
-          const result=transitionSimulation(first.data,market,{at:now(),action:'risk'});
+          const result=transitionSimulation(first.data,market,{at:now(),action:'risk',config});
           if(!result.changed||await write(result.state,first.sha)){first=await read(FILE);break;}
           if(retry===3)throw Error('risk state conflict');first=await read(FILE);
         }
@@ -121,20 +126,32 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
         // Reserve up to two slots for current morning/news research, but only AFTER
         // it passes the identical quote, circuit and momentum discovery safeguards.
         const priority=discovery.ranked.filter(r=>market.researchBySymbol?.[r.symbol]&&!market.researchBySymbol[r.symbol].negative).slice(0,2);
-        const shortlist=[...new Map([...priority,...discovery.ranked].map(r=>[r.symbol,r])).values()].slice(0,8)
-          .sort((a,b)=>b.discoveryScore-a.discoveryScore);
+        const pending=discovery.ranked.filter(r=>{const p=first.data.pendingEntries?.[r.symbol],age=now().getTime()-Date.parse(p?.signalAt);
+          return age>=0&&age<=15*60000;}).slice(0,4);
+        const shortlist=config.setupMode?setupShortlist(discovery.ranked,{pending:pending.map(r=>r.symbol),research:market.researchBySymbol,at:now()}):
+          [...new Map([...pending,...priority,...discovery.ranked].map(r=>[r.symbol,r])).values()].slice(0,8)
+            .sort((a,b)=>b.discoveryScore-a.discoveryScore);
         market.candidates=shortlist.map(r=>({...bySymbol.get(r.symbol),discoveryScore:r.discoveryScore}));
         market.discovery={at:now().toISOString(),requested:scanMembers.length,
           quotesReceived:scanMembers.filter(m=>market.quotes[m.instrumentKey]).length,shortlisted:market.candidates.length,
-          rejected:discovery.rejected.slice(0,30),source:'Upstox',registryAt:registry.fetchedAt};
+          rejected:discovery.rejected.slice(0,30),source:'Upstox',registryAt:registryFetchedAt};
         const from=new Date(at.getTime()-100*86400000).toISOString().slice(0,10);
-        await Promise.all(market.candidates.map(async c=>{
-          try{
-            const cached=first.data.dailyCache[c.symbol];
-            const [candles,reference]=await Promise.all([intraday(c.instrumentKey),cached?.asOf===date?cached:daily(c.instrumentKey,from,date).then(rows=>dailyReference(rows,date))]);
-            market.candles[c.symbol]=candles;if(reference)preparedReferences[c.symbol]=reference;
-          }catch{/* Missing evidence is a rejection, never a fabricated signal. */}
-        }));
+        // One extra candle request per scan, reused by every candidate. Never
+        // substitute the daily percentage move if short-term index history fails.
+        const benchmarkHistory=config.entryMode?intraday('NSE_INDEX|Nifty 50')
+          .then(rows=>{market.benchmarkCandles=rows;}).catch(()=>{market.benchmarkCandles=[];}):Promise.resolve();
+        await Promise.all([benchmarkHistory,...market.candidates.map(async c=>{
+          const cached=first.data.dailyCache[c.symbol];
+          const cachedReady=cached?.asOf===date&&(!config.entryMode||(cached.version===2&&cached.contextVersion===1));
+          const [minutes,history]=await Promise.allSettled([intraday(c.instrumentKey),cachedReady?cached:
+            daily(c.instrumentKey,from,date).then(rows=>dailyReference(rows,date))]);
+          if(minutes.status==='fulfilled')market.candles[c.symbol]=minutes.value;
+          if(history.status==='fulfilled'&&history.value)preparedReferences[c.symbol]=history.value;
+          const missing=[];
+          if(minutes.status!=='fulfilled')missing.push('Upstox intraday history request failed');
+          if(history.status!=='fulfilled'||!history.value)missing.push('Upstox daily history failed validation or warm-up');
+          if(missing.length){market.historyErrors??={};market.historyErrors[c.symbol]=missing;}
+        })]);
         // Refresh executable quotes AFTER all slower history work. Never book an earlier quote.
         const refreshKeys=[...new Set([...heldKeys,...market.candidates.map(c=>c.instrumentKey),'NSE_INDEX|Nifty 50'])];
         if(refreshKeys.length)Object.assign(market.quotes,await quotes(refreshKeys));
@@ -142,17 +159,35 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
       }
       for(let retry=0;retry<4;retry++){
         at=now();const current=retry?await read(FILE):first;validateSimulation(current.data);
-        const result=transitionSimulation(current.data,market,{at,action});
+        const result=transitionSimulation(current.data,market,{at,action,config});
         Object.assign(result.state.dailyCache,preparedReferences);
         if(!result.changed)return res.status(200).json({status:result.status,paperTrading:true});
         if(await write(result.state,current.sha))return res.status(result.status==='partial'?502:200).json({status:result.status,
           mode:'experimental-paper-only',paperTrading:true,bought:result.bought,checked:result.checked,
-          dailyInvestment:SIM_CONFIG.dailyInvestment,fundingMode:SIM_CONFIG.fundingMode,sharesPerEntry:SIM_CONFIG.sharesPerEntry,
-          strategyVersion:SIM_CONFIG.version,dayInvested:result.state.days[date]?.invested||0,positions:result.state.positions.length,
+          dailyInvestment:config.dailyInvestment,fundingMode:config.fundingMode,sharesPerEntry:config.sharesPerEntry,
+          strategyVersion:config.version,entryMode:config.entryMode??'baseline',executionRuleVersion:config.executionRuleVersion,
+          setupMode:config.setupMode??null,exitMode:config.exitMode??'baseline',
+          dayInvested:result.state.days[date]?.invested||0,positions:result.state.positions.length,
           candidates:result.state.suggestions,discovery:result.state.discovery,entryPause,ordersExecuted:0});
       }
       throw Error('simulation state conflict');
     }catch{return res.status(502).json({status:'simulation_failed',reason:'check quote access, safety context and atomic ledger persistence; no real orders exist',paperTrading:true});}
   };
 }
-export default createSimulationHandler();
+// Only new entries use the approved release selection. Existing positions keep
+// their frozen saved policies, or original protection if no new policy exists.
+export function createLiveSimulationHandler({registryLoader=loadLiveRegistry,env=process.env,...deps}={}){
+  return async(req,res)=>{
+    // Authenticate before any upstream reads. Risk-only protection never depends
+    // on registry availability or waits for its network request.
+    if(!requireCronAuth(req,res))return;
+    if(req.method!=='POST')return res.status(405).json({error:'POST required'});
+    let body=req.body;try{if(typeof body==='string')body=JSON.parse(body);}catch{}
+    let live={members:[],fetchedAt:null};
+    const needsRegistry=req.query?.action!=='risk'||body?.mode==='health';
+    if(needsRegistry&&env.PAPER_SIMULATION_ENABLED==='true'&&env.UPSTOX_ACCESS_TOKEN&&env.GITHUB_TOKEN)
+      try{live=await registryLoader();}catch{/* A missing registry pauses new entries, never existing-price exits. */}
+    return createSimulationHandler({...deps,env,config:RELEASE_SIM_CONFIG,members:live.members,registryFetchedAt:live.fetchedAt})(req,res);
+  };
+}
+export default createLiveSimulationHandler();

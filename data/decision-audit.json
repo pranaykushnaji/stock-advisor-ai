@@ -1,0 +1,2080 @@
+{
+  "version": 1,
+  "mode": "original-decision-audit",
+  "sourceCommit": "1e077d784fbb02ec0f9c644365b9ae4e9bdd3630",
+  "asOf": "2026-11-06T09:55:41.025Z",
+  "entries": {
+    "2026-11-04|KAYNES|paper-breakout-v1": {
+      "id": "2026-11-04|KAYNES|paper-breakout-v1",
+      "ticker": "KAYNES",
+      "entryAt": "2026-11-04T06:40:39.704Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-04T06:40:39.704Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 3291.3448499999995,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T06:40:39.704Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 3271.4253,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T06:40:39.704Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 3284.9,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T06:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 3275.184383898991,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T06:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 2.2082311256473153,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-04T06:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 3274.2878454125607,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-03T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 232.8128739895,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-03T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": -0.14888170728890593,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-04T06:40:40.497Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "67d900c0281470cb4a0a4c9de77d633522f87c29",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-04|UNOMINDA|paper-breakout-v1": {
+      "id": "2026-11-04|UNOMINDA|paper-breakout-v1",
+      "ticker": "UNOMINDA",
+      "entryAt": "2026-11-04T07:00:39.517Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-04T07:00:39.517Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 1196.598,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:00:39.517Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 1189.0098,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:00:39.517Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 1194,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 1176.3076388694376,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.9302651029861042,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-04T07:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 1108.115756936075,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-03T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 59.19554736200001,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-03T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.007769567235094144,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-04T07:00:39.785Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "415a52b1653d526f3c0e35f40b0dd1e2d9fd3bc3",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-04|GODREJPROP|paper-breakout-v1": {
+      "id": "2026-11-04|GODREJPROP|paper-breakout-v1",
+      "ticker": "GODREJPROP",
+      "entryAt": "2026-11-04T07:25:39.244Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-04T07:25:39.244Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 1735.0671,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:25:39.244Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 1712.8854,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:25:39.244Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 1726.8,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:25:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 1714.2535243114094,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T07:25:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 14.819430467538826,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-04T07:25:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 1606.840282240524,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-03T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 97.1998546935,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-03T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.012809286522741381,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-04T07:25:40.273Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "947ec9317781752b85506d71b974411c0c84d5f2",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-05|ANGELONE|paper-breakout-v1": {
+      "id": "2026-11-05|ANGELONE|paper-breakout-v1",
+      "ticker": "ANGELONE",
+      "entryAt": "2026-11-05T04:30:39.362Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-05T04:30:39.362Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 326.16299999999995,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:30:39.362Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 319.03065000000004,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:30:39.362Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 323.8,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:30:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 322.07345987206224,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:30:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.800946892455005,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-05T04:30:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 295.45232921162284,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 202.0378801625,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-04T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 1.8572155956027903,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-05T04:30:40.339Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "b0f0ec87ae13dac72605355a339ad2adcd82ab53",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-05|ZENSARTECH|paper-breakout-v1": {
+      "id": "2026-11-05|ZENSARTECH|paper-breakout-v1",
+      "ticker": "ZENSARTECH",
+      "entryAt": "2026-11-05T04:40:38.764Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-05T04:40:38.764Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 561.4806,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:40:38.764Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 554.3451,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:40:38.764Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 560.95,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 554.5873628243943,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.7174195270508015,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-05T04:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 503.5699903113533,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 102.43921157875,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-04T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 1.7290885870971495,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-05T04:40:40.353Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "a20ce50dad3f1fb6333f08ce285995fe0c63aa65",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-05|MEESHO|paper-breakout-v1": {
+      "id": "2026-11-05|MEESHO|paper-breakout-v1",
+      "ticker": "MEESHO",
+      "entryAt": "2026-11-05T04:45:39.355Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-05T04:45:39.355Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 233.106495,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:45:39.355Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 228.78099,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:45:39.355Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 232.16,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 230.18247517530415,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T04:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.8860567106589634,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-05T04:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 223.63576680734434,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-04T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 374.250768897,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-04T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 1.803585886830894,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-05T04:45:40.213Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "43b6db59318d2d8773d136e3c075c5411cc07ebe",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|MCX|paper-one-share-v2": {
+      "id": "2026-11-06|MCX|paper-one-share-v2",
+      "ticker": "MCX",
+      "entryAt": "2026-11-06T04:40:40.772Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T04:40:40.772Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 3444.7214999999997,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:40:40.772Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 3394.602,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:40:40.772Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 3428,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 3398.0348314103,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.9960919085780326,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T04:40:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 3250.2136843733,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 664.5422089495,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.4216150566908272,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T04:40:41.750Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "7e2a69d999f3788ff561b034c429f4a97f7564bf",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|MGL|paper-one-share-v2": {
+      "id": "2026-11-06|MGL|paper-one-share-v2",
+      "ticker": "MGL",
+      "entryAt": "2026-11-06T04:45:37.434Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T04:45:37.434Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 1136.3679,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:45:37.434Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 1121.9769,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:45:37.434Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 1134,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 1124.3072653346578,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 3.7370566497771347,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T04:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 1054.1461257147034,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 20.5247355145,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.4379172338465853,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T04:45:40.881Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "054e76c6adce2413dc385bc1a2359c38118664ec",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|BSOFT|paper-one-share-v2": {
+      "id": "2026-11-06|BSOFT|paper-one-share-v2",
+      "ticker": "BSOFT",
+      "entryAt": "2026-11-06T04:55:38.166Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T04:55:38.166Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 341.720775,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:55:38.166Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 336.7629,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:55:38.166Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 339.9,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:55:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 338.0215258105647,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T04:55:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 3.7066947866567217,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T04:55:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 311.6361801881499,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 211.10651896300004,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.4886577602438935,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T04:55:40.725Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "95b523c5afbfccd54317857d8e3d1d12614b5b4a",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|LICHSGFIN|paper-one-share-v2": {
+      "id": "2026-11-06|LICHSGFIN|paper-one-share-v2",
+      "ticker": "LICHSGFIN",
+      "entryAt": "2026-11-06T05:00:36.661Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T05:00:36.661Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 540.420075,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:00:36.661Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 532.467,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:00:36.661Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 538,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 532.085941147346,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.790257840878683,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T05:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 516.681311514673,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 160.169144181,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.613980747128795,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T05:00:40.861Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "5503e1d2337fb80ee0508ca62788557c4a0ed20d",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|CROMPTON|paper-one-share-v2": {
+      "id": "2026-11-06|CROMPTON|paper-one-share-v2",
+      "ticker": "CROMPTON",
+      "entryAt": "2026-11-06T05:25:38.255Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T05:25:38.255Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 212.63626499999998,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:25:38.255Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 209.79,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:25:38.255Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 211.6,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:25:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 208.5773249858122,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:25:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 3.51741148406,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T05:25:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 203.98142535195086,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 109.65127457085002,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.25655551298875423,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T05:25:40.517Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "127cbeae8f57d0beea5deb14dc889d6df5433bb3",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|HAVELLS|paper-one-share-v2": {
+      "id": "2026-11-06|HAVELLS|paper-one-share-v2",
+      "ticker": "HAVELLS",
+      "entryAt": "2026-11-06T05:45:38.024Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T05:45:38.024Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 1080.7401,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:45:38.024Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 1068.0309,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:45:38.024Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 1078.8,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 1067.283084594382,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T05:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 3.3212959536539617,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T05:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 1056.1547312100904,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 92.8275375275,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.3282850924740899,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T05:45:40.204Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "f978ccf872493769cc14544c714476c8140072ff",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|PATANJALI|paper-one-share-v2": {
+      "id": "2026-11-06|PATANJALI|paper-one-share-v2",
+      "ticker": "PATANJALI",
+      "entryAt": "2026-11-06T06:05:38.621Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T06:05:38.621Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 415.2075,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:05:38.621Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 411.9876,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:05:38.621Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 414.6,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 410.17965623545786,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 8.07931012236296,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T06:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 370.5847150219686,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 175.17289717,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.3030167178826648,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T06:05:40.048Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "e47f7c649740b6e597f9ece7337f9d582d8bb3e5",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|KARURVYSYA|paper-one-share-v2": {
+      "id": "2026-11-06|KARURVYSYA|paper-one-share-v2",
+      "ticker": "KARURVYSYA",
+      "entryAt": "2026-11-06T06:15:39.142Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T06:15:39.142Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 366.533175,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:15:39.142Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 363.78585,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:15:39.142Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 365.2,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:15:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 362.44375454884164,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:15:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.6495541745474196,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T06:15:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 346.09716806751095,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 171.2611874765,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.29588451537703175,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T06:15:41.503Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "4cce7fbe3528048fa763f757c8b9a6353d0bf239",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|ABDL|paper-one-share-v2": {
+      "id": "2026-11-06|ABDL|paper-one-share-v2",
+      "ticker": "ABDL",
+      "entryAt": "2026-11-06T06:45:17.481Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T06:45:17.481Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 712.7561999999999,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:45:17.481Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 707.2420500000001,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:45:17.481Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 711,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 706.8020928007938,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.7251243781094527,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T06:45:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 699.1111517078143,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 44.764260505,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.45727606921903696,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T06:45:41.099Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "4533b7607b6bbc2f42d998a54c32be039895d300",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|KALYANKJIL|paper-one-share-v2": {
+      "id": "2026-11-06|KALYANKJIL|paper-one-share-v2",
+      "ticker": "KALYANKJIL",
+      "entryAt": "2026-11-06T06:50:40.326Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T06:50:40.326Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 585.2925,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:50:40.326Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 578.0713499999999,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:50:40.326Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 584.1,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:50:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 576.7360015863276,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T06:50:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 2.106765841983419,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T06:50:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 533.6966765021666,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 244.10785938925,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.5345076334944521,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T06:50:41.714Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "0dc9aefaa7f308d85cb74fb7250c78440d871681",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|STARHEALTH|paper-one-share-v2": {
+      "id": "2026-11-06|STARHEALTH|paper-one-share-v2",
+      "ticker": "STARHEALTH",
+      "entryAt": "2026-11-06T07:00:36.291Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T07:00:36.291Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 556.5781499999999,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:00:36.291Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 548.7506999999999,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:00:36.291Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 554.6,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 546.9245875404209,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 2.888680631189686,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T07:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 537.3155861355255,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 24.099579166250006,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.6516795318014745,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T07:00:40.977Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "ef68e7dd0ba50a4818ea43a3a4cb71c6460c9feb",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|AUROPHARMA|paper-one-share-v2": {
+      "id": "2026-11-06|AUROPHARMA|paper-one-share-v2",
+      "ticker": "AUROPHARMA",
+      "entryAt": "2026-11-06T07:05:39.143Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T07:05:39.143Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 1800.79995,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:05:39.143Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 1786.7115,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:05:39.143Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 1798.6,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 1789.9000966387164,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 1.9153247891335305,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T07:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 1672.8726710504386,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 170.47518484600002,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.5583495675847594,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T07:05:41.486Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "f902c65dda8d9a25c04ec66ba502b28e12c80b2a",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|UPL|paper-one-share-v2": {
+      "id": "2026-11-06|UPL|paper-one-share-v2",
+      "ticker": "UPL",
+      "entryAt": "2026-11-06T07:15:40.266Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T07:15:40.266Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 534.9173249999999,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:15:40.266Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 524.72475,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:15:40.266Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 532.25,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:15:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 526.406516767346,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T07:15:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 2.911038987219288,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T07:15:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 524.2748798292691,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 118.01275755425,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.6518833090159326,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T07:15:41.191Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "a8b19da888149d6c01a06431f1679d988a1e7f10",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|BIOCON|paper-one-share-v2": {
+      "id": "2026-11-06|BIOCON|paper-one-share-v2",
+      "ticker": "BIOCON",
+      "entryAt": "2026-11-06T08:00:38.158Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T08:00:38.158Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 365.48265,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:00:38.158Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 363.636,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:00:38.158Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 364.9,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 361.62588610886695,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 4.375818426504166,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T08:00:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 350.74051958760697,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 110.84972446775001,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 0.7890253743387365,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T08:00:40.589Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "dd90c0294e5ac08b82a76f4d84e63dccce09bf58",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|MAHABANK|paper-one-share-v2": {
+      "id": "2026-11-06|MAHABANK|paper-one-share-v2",
+      "ticker": "MAHABANK",
+      "entryAt": "2026-11-06T08:30:39.217Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T08:30:39.217Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 86.28312,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:30:39.217Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 85.3146,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:30:39.217Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 85.95,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:30:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 85.39234522910506,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T08:30:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 4.2420923846326835,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T08:30:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 80.6944269710339,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 122.92141658475003,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 1.1584734641311378,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T08:30:40.248Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "e818955599d4ba690f9fd61b3f4d31924244fe73",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|IREDA|paper-one-share-v2": {
+      "id": "2026-11-06|IREDA|paper-one-share-v2",
+      "ticker": "IREDA",
+      "entryAt": "2026-11-06T09:05:40.433Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T09:05:40.433Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 111.885915,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:05:40.433Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 111.00888,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:05:40.433Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 111.69,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 110.58044772268585,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 2.241533990396765,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T09:05:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 104.85450095055863,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 50.108827610649996,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 1.268105605503611,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T09:05:41.176Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "951117e802f95a76068da27bec439f36cbdad31f",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    },
+    "2026-11-06|IIFL|paper-one-share-v2": {
+      "id": "2026-11-06|IIFL|paper-one-share-v2",
+      "ticker": "IIFL",
+      "entryAt": "2026-11-06T09:20:39.601Z",
+      "evidence": {
+        "version": 0,
+        "asOf": "2026-11-06T09:20:39.601Z",
+        "metrics": {
+          "executionPrice": {
+            "label": "Original recorded paper fill",
+            "value": 624.7121999999999,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:20:39.601Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "initialStop": {
+            "label": "Frozen initial stop",
+            "value": 615.8835,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:20:39.601Z",
+            "source": "Original paper trade",
+            "required": false
+          },
+          "breakoutLevel": {
+            "label": "Original breakout level",
+            "value": 621,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:20:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "vwap": {
+            "label": "Signal VWAP · OHLC approximation",
+            "value": 615.3373989499206,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-06T09:20:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "breakoutVolumeRatio": {
+            "label": "Breakout volume / preceding range average",
+            "value": 7.541847644503843,
+            "unit": "×",
+            "status": "available",
+            "asOf": "2026-11-06T09:20:00.000Z",
+            "source": "Original saved setup",
+            "required": false
+          },
+          "ema20": {
+            "label": "20-session EMA at decision",
+            "value": 571.300410946096,
+            "unit": "INR",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 126.01389699,
+            "unit": "₹ Cr",
+            "status": "available",
+            "asOf": "2026-11-05T15:30:00+05:30",
+            "source": "Original daily reference",
+            "required": false
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change at entry scan",
+            "value": 1.390575711386255,
+            "unit": "%",
+            "status": "available",
+            "asOf": "2026-11-06T09:20:40.833Z",
+            "source": "Original Upstox benchmark snapshot",
+            "required": false
+          }
+        },
+        "readiness": null,
+        "auditSourceCommit": "9c448f61b557c929cfd319b314ffde8b82121e9f",
+        "scope": "Recovered original saved measurements; unrecorded execution-book fields remain unknown",
+        "notUsed": [
+          "Legacy composite / institutional scores",
+          "Calibrated probability of profit"
+        ]
+      }
+    }
+  },
+  "unresolved": [],
+  "limitation": "Only fields in the original buy commit are recovered; no contemporary data fills a historical gap."
+}

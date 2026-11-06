@@ -23,7 +23,7 @@ test('lane diagnostics name the actual momentum blockers independently of absent
 
 const start = Date.parse('2026-11-03T04:00:00Z');
 function bars() {
-  return Array.from({ length: 9 }, (_, i) => ({ ms: start + i * 300000, open: i < 7 ? 100 : 101,
+  return Array.from({ length: 9 }, (_, i) => ({ ms: start + i * 300000, open: i < 6 ? 100 : 101,
     high: i < 6 ? 100.2 : 101.5, low: i < 6 ? 99.8 : 100.3, close: i < 6 ? 100 : 101,
     volume: i < 6 ? 100 : 300 }));
 }

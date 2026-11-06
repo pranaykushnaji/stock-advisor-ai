@@ -31,10 +31,10 @@ test('paper UI distinguishes picks, unverified news, missing premarket prices an
   assert.equal(later[0].status,'Simulated pick');assert.equal(later[0].chosenAt,'2026-11-03T04:00:00Z');
 });
 
-test('sources use public main branch and the explicit local registry, without fallback', () => {
-  assert.equal(SOURCES.length, 4);
+test('sources use live public main-branch market data and registry, independent of deployments', () => {
+  assert.equal(SOURCES.length, 5);
   assert.ok(SOURCES.slice(0, 3).every(s => s.url.startsWith('https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/')));
-  assert.equal(SOURCES.at(-1).url, '../research/universe.json');
+  assert.equal(SOURCES.find(s=>s.name==='universe').url, 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/research/universe.json');
 });
 
 test('newer daily values and decision supersede old scan blockers and relative volume', () => {

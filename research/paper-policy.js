@@ -5,7 +5,16 @@ export const LEGACY_SIM_CONFIG = Object.freeze({version:'paper-breakout-v1',dail
   minStopPct:0.5,maxStopPct:3,entrySlippageBps:5,exitSlippageBps:5,
   costBpsPerSide:15,noProgressSessions:3,maximumSessions:5});
 // Notional paper funding is recorded as capital, never counted as profit.
-export const SIM_CONFIG = Object.freeze({...LEGACY_SIM_CONFIG,version:'paper-one-share-v2',
+export const BASELINE_SIM_CONFIG = Object.freeze({...LEGACY_SIM_CONFIG,version:'paper-one-share-v2',
   executionRuleVersion:'five-minute-one-share-v3',sharesPerEntry:1,
   dailyInvestment:null,maxPositionInvestment:null,maxBuysPerDay:null,maxOpenPositions:null,
   sectorLimit:false,fundingMode:'as-needed-paper-capital'});
+// Keep the ledger schema and one-share policy compatible; version the execution
+// rules separately. Baseline remains available for isolated A/B comparisons.
+export const SIM_CONFIG = Object.freeze({...BASELINE_SIM_CONFIG,
+  executionRuleVersion:'five-minute-confirmed-v4',entryMode:'adaptive',entryQualityVersion:'intraday-confirmation-v1'});
+// Versioned three-setup experiment. Existing positions retain saved protection.
+export const MULTI_SETUP_CONFIG=Object.freeze({...SIM_CONFIG,executionRuleVersion:'five-minute-three-setups-v1',
+  setupMode:'three-setups-v1',exitMode:'setup-risk'});
+// Explicit user-approved release selection. Baselines remain available to research.
+export const RELEASE_SIM_CONFIG=MULTI_SETUP_CONFIG;

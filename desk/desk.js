@@ -3,6 +3,7 @@ import { laneStats, expectedEdge, EDGE_COST_BPS } from '../research/evidence.js'
 import {renderSignalCards,renderWorkspaceOverview,renderWorkspaceSystem,renderReplayPanel,renderPerformanceTracker} from './workspace.js?v=20261106-minimal-2';
 import {estimatedTradeCost, tradeNetAmount, tradeNetReturnPct, positionReturnPct, performanceSummary} from './performance.js';
 import {visibleRefresh} from './visible-refresh.js';
+import {renderDecisionDetails} from './decision-details.js';
 const MAIN_DATA = 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/data/';
 export const SOURCES = Object.freeze([
   ...['nse-snapshot', 'paper-simulation'].map(name => ({
@@ -10,7 +11,8 @@ export const SOURCES = Object.freeze([
   })),
   {name:'session-replay',url:`${MAIN_DATA}replays/${new Date(Date.now()+19800000).toISOString().slice(0,10)}.json`,
     label:'Isolated historical replay · estimated, not executed',optional:true},
-  { name: 'universe', url: '../research/universe.json', label: 'Local official-universe registry' },
+  { name: 'universe', url: 'https://raw.githubusercontent.com/pranaykushnaji/stock-advisor-ai/main/research/universe.json', label: 'Live main-branch universe registry' },
+  {name:'decision-audit',url:'../data/decision-audit.json',label:'Recovered original decision evidence',optional:true},
 ]);
 const NA = 'Not available';
 const asArray = value => Array.isArray(value) ? value : [];
@@ -79,6 +81,7 @@ export function validateData(name, data) {
     universe: () => registryMembers(data).length > 0,
     'paper-simulation': () => data.version===1 && data.mode==='experimental-paper-only' && Array.isArray(data.positions) && Array.isArray(data.trades),
     'session-replay': () => data.schemaVersion===1 && data.mode==='historical-replay' && Array.isArray(data.positions) && Array.isArray(data.trades),
+    'decision-audit':()=>data.version===1&&data.mode==='original-decision-audit'&&data.entries&&typeof data.entries==='object',
   };
   if (!valid[name]?.()) throw new Error('Unrecognized or incomplete data structure');
   return data;
@@ -242,6 +245,7 @@ const list = values => `<ul>${values.map(value => `<li>${e(value)}</li>`).join('
 const expiryText = row => row.expiresAt ? `${row.expired ? 'Expired' : 'Expires'} ${dateTime(row.expiresAt)}${row.expiryInferred ? ' · session end inferred' : ''}` : 'Setup expiry not supplied';
 
 function suggestionDetails(row) {
+  if(row.paper)return renderDecisionDetails(row,{e,money,decimal,percent,dateTime});
   return `<details><summary>Research details for ${e(row.ticker)}</summary><div class="details-body">
     <p><strong>Entry lane:</strong> ${e(row.lane ?? 'Not supplied; qualification not established')}</p>
     <p><strong>Registry:</strong> Sector ${e(row.sector ?? NA)} · market-cap bucket ${e(row.marketCapBucket ?? NA)} · mapping ${e(row.mappingStatus ?? NA)}. Registry membership does not establish trade eligibility.</p>
@@ -264,7 +268,7 @@ export function renderSuggestions(rows) {
   return renderSignalCards(rows, {e,money,decimal,percent,dateTime}, suggestionDetails);
 }
 
-export function simulationSuggestions(sim, now=Date.now(), archivedObservations={}) {
+export function simulationSuggestions(sim, now=Date.now(), archivedObservations={},audit=null) {
   const rows=new Map((sim?.suggestions||[]).map(r=>[r.ticker,r]));
   const today=simulationSession(sim,now);
   const history={...(sim?.scanHistory?.date===today?sim.scanHistory.candidates||{}:{})};
@@ -284,10 +288,16 @@ export function simulationSuggestions(sim, now=Date.now(), archivedObservations=
     rows.set(p.ticker,{...rows.get(p.ticker),ticker:p.ticker,fullName:p.fullName,sector:p.sector,
       status:'simulated-buy',price:p.currentPrice,observedAt:p.lastPriceUpdate,pickedAt:p.addedAt,
       entryReturnPct:p.exitAt?tradeNetReturnPct(p):positionReturnPct(p),shares:p.shares,closedPick:!!p.exitAt,
-      setup:p.setup,research:p.research,discoveryScore:p.discoveryScore??rows.get(p.ticker)?.discoveryScore,
+      setup:p.setup,setupReview:p.setupReview,exitPolicy:p.exitPolicy,research:p.research,entryPrice:p.entryPrice,entryAt:p.addedAt||p.entryAt,
+      initialStopPrice:p.initialStopPrice,decisionEvidence:p.decisionEvidence||
+        (audit?.entries?.[p.id]?.entryAt===(p.addedAt||p.entryAt)?audit.entries[p.id].evidence:null),entryAssessment:p.entryAssessment,
+      researchCohort:p.researchCohort,executionRuleVersion:p.executionRuleVersion,
+      discoveryScore:p.discoveryScore??rows.get(p.ticker)?.discoveryScore,
       reasons:[p.exitAt?`Simulated pick; exited: ${p.exitReason}`:'Simulated fill recorded; position is managed by exit checks']});
   }
-  return [...rows.values()].map(r=>({ticker:r.ticker,name:r.fullName||r.ticker,sector:r.sector,
+  return [...rows.values()].map(r=>({paper:true,ticker:r.ticker,name:r.fullName||r.ticker,sector:r.sector,
+    entryPrice:r.entryPrice,entryAt:r.entryAt,decisionEvidence:r.decisionEvidence,entryAssessment:r.entryAssessment,
+    researchCohort:r.researchCohort,executionRuleVersion:r.executionRuleVersion,setupReview:r.setupReview,exitPolicy:r.exitPolicy,
     reasons:r.reasons||[],scanReasons:[],laneReasons:[],sources:['Upstox paper scan',...(r.research?[r.research.source||'Saved research']:[])],
     status:r.status==='simulated-buy'?'Simulated pick':r.status==='not-qualified'?'Not qualified':r.status==='earlier-watch'?'Earlier watch':'Watch',
     chosenSource:r.status==='simulated-buy'?'Simulated fill':'Paper experiment',chosenAt:r.pickedAt||r.observedAt||sim.updatedAt,currentReason:(r.reasons||[]).join('; ')||'Not evaluated after an earlier candidate was selected; reconsidered on the next scan',
@@ -295,7 +305,7 @@ export function simulationSuggestions(sim, now=Date.now(), archivedObservations=
     relVol:r.setup?.volumeRatio??null,verification:r.research?.verification||'No verified event supplied',
     catalyst:r.research?`${r.research.type}: ${r.research.summary}`:'No positive-catalyst requirement; price/volume confirmation remains mandatory',
     price:r.price,priceAt:r.observedAt,priceSource:r.price==null?'No live premarket price claimed':'Saved Upstox observation',
-    vwap:r.setup?.vwap??null,trigger:r.setup?.breakoutLevel??null,stop:null,
+    vwap:r.setup?.vwap??r.entryAssessment?.metrics?.vwap??null,trigger:r.setup?.breakoutLevel??null,stop:r.initialStopPrice??null,
     research:r.research,sessionChangePct:r.sessionChangePct??null,sessionDate:today,
     entryReturnPct:r.entryReturnPct??null,shares:r.shares??null,closedPick:r.closedPick??false,
     observations:history[r.ticker]?.observations||[],
@@ -335,6 +345,7 @@ export function renderPositions(positions, ledger) {
   const intro = heading('Paper ledger', 'Positions', 'Open paper positions valued only from recorded shares, entry and current price.');
   if (positions === null) return intro + empty('Positions unavailable', 'paper-simulation.json could not be read. No position count or value can be inferred.');
   if (!positions.length) return intro + empty('No open paper positions', 'The saved position file contains an empty bouquet. Watching a stock does not create a position.');
+  positions=positions.map(row=>({...row,triggerPrice:row.triggerPrice??row.setup?.breakoutLevel??null}));
   const fields = row => `${field('Quantity · shares in one position', decimal(row.shares))}${field('Entry', money(row.entryPrice))}${field('Recorded current price', money(row.currentPrice))}${field('Unrealized · before costs', money(positionAmount(row)))}${field('Gain since entry · before costs', percent(positionReturnPct(row)))}${field('Trigger', money(row.triggerPrice))}${field('Stop', money(row.trailingStopPrice ?? row.initialStopPrice ?? row.stopPrice))}`;
   return intro + `<p class="notice">${positions.length} open positions · each row is one entry; quantity means shares, not repeated purchases. Open unrealized: ${e(money(ledger.unrealized))}${ledger.missingOpen ? ` · Partial: ${ledger.missingOpen} positions lack shares or prices.` : ' · Before costs.'} Prices are saved observations.</p>
     <div class="panel desktop-table"><table class="stock-table"><caption>Source: paper-simulation.json / main branch</caption><thead><tr><th scope="col">Stock</th><th scope="col">Quantity · shares</th><th scope="col">Entry / current</th><th scope="col">Trigger / stop</th><th scope="col">Unrealized / gain %</th></tr></thead><tbody>${positions.map(row => `<tr><td><strong>${e(row.ticker)}</strong><span class="cell-note">Entry: ${e(dateTime(row.addedAt ?? row.entryAt))}</span><span class="cell-note">Price: ${e(dateTime(row.lastPriceUpdate))}</span></td><td>${e(decimal(row.shares))}<span class="cell-note">1 position</span></td><td>${e(money(row.entryPrice))} / ${e(money(row.currentPrice))}</td><td>${e(money(row.triggerPrice))} / ${e(money(row.trailingStopPrice ?? row.initialStopPrice ?? row.stopPrice))}</td><td class="${tone(positionAmount(row))}">${e(money(positionAmount(row)))}<span class="cell-note">${e(percent(positionReturnPct(row)))} · before costs</span></td></tr>`).join('')}</tbody></table></div>
@@ -435,10 +446,11 @@ export function startDesk(doc = document, win = window) {
     const states = await Promise.all(SOURCES.map(fetchSource));
     const data = Object.fromEntries(states.map(state => [state.name, state.data]));
     const sim=data['paper-simulation'];
-    suggestions = sim ? simulationSuggestions(sim,Date.now(),data['session-replay']?.observations) : [];
+    suggestions = sim ? simulationSuggestions(sim,Date.now(),data['session-replay']?.observations,data['decision-audit']) : [];
     const registryBySymbol=new Map(registryMembers(data.universe).map(m=>[m.symbol,m]));
     for(const row of suggestions){const member=registryBySymbol.get(row.ticker);
-      if(member){if(row.name===row.ticker)row.name=member.name||row.ticker;row.sector ||= member.sector;}}
+      if(member){if(row.name===row.ticker)row.name=member.name||row.ticker;row.sector ||= member.sector;
+        row.marketCapBucket=member.marketCapBucket;row.mappingStatus=member.mappingStatus||(member.instrumentKey?'mapped':'unmapped');}}
     const trades = sim?.trades ?? null, positions = sim?.positions ?? null;
     const ledger = summarizeLedger(trades, positions), coverage = coverageSummary(data['nse-snapshot'], data.universe, suggestions);
     $('overview').innerHTML = sim?renderOverview(data, suggestions, ledger, coverage):empty('Simulation state unavailable','The new paper ledger could not be read. This is not a zero balance or a successful scan. Check file health.');

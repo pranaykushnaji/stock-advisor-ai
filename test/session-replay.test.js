@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { replayPaperSession } from "../research/session-replay.js";
 import { LEGACY_SIM_CONFIG } from '../api/_paper-simulation.js';
+import {BASELINE_SIM_CONFIG} from '../research/paper-policy.js';
 const at = Date.parse("2026-11-04T04:30:05Z"),
   boundary = Math.floor(at / 300000) * 300000;
 const candles = Array.from({ length: 40 }, (_, i) => [
@@ -15,6 +16,7 @@ const candles = Array.from({ length: 40 }, (_, i) => [
 function input() {
   return {
     date: "2026-11-04",
+    config:BASELINE_SIM_CONFIG,
     generatedAt: new Date(at + 600000).toISOString(),
     scans: [0, 300000].map((delta) => ({
       at: new Date(at + delta).toISOString(),

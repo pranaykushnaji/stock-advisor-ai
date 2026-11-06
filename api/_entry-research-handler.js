@@ -3,7 +3,7 @@ import { mapNseSymbols, fetchFullQuotes, fetchIntradayOneMinuteCandles, quoteFre
 import { monitorSession } from './_minute-monitor.js';
 import { liveResearchEntry } from './_entry-research.js';
 import { nowIST } from './_market-calendar.js';
-import registry from '../research/universe.json' with { type: 'json' };
+import {loadLiveRegistry} from './_live-registry.js';
 import { quoteBatches } from '../research/coverage.js';
 import { summarizeQuoteCoverage } from '../research/quote-coverage.js';
 
@@ -21,7 +21,7 @@ async function readContext() {
 }
 
 export function createEntryResearchHandler({ read = readContext, map = mapNseSymbols, quotes = fetchFullQuotes,
-  candles = fetchIntradayOneMinuteCandles, now = () => new Date(), env = process.env } = {}) {
+  candles = fetchIntradayOneMinuteCandles, now = () => new Date(), env = process.env,registryLoader=loadLiveRegistry } = {}) {
   return async (req, res) => {
     res.setHeader?.('Cache-Control', 'no-store');
     if (!requireCronAuth(req, res)) return;
@@ -36,6 +36,7 @@ export function createEntryResearchHandler({ read = readContext, map = mapNseSym
     if (body.mode === 'coverage') {
       if (env.RESEARCH_COVERAGE_ENABLED !== 'true') return res.status(200).json({status:'disabled'});
       try {
+        const registry=await registryLoader();
         // An explicit authenticated diagnostic, never called by the normal scheduler.
         // Current registry is versioned; session membership and quote identity remain explicit.
         const allQuotes = {};
