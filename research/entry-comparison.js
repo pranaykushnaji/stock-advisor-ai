@@ -11,9 +11,8 @@ function summarize(rows){
     weightedReturnPct:capital>0?net/capital*100:null,averageStockReturnPct:rows.length?rows.reduce((s,r)=>s+r.pct,0)/rows.length:null,
     bestReturnPct:rows.length?Math.max(...rows.map(r=>r.pct)):null,worstReturnPct:rows.length?Math.min(...rows.map(r=>r.pct)):null};
 }
-export function compareEntryVariants(sessions,{generatedAt=new Date().toISOString()}={}){
-  const variants=ENTRY_VARIANTS.map(mode=>{
-    const config=mode==='baseline'?BASELINE_SIM_CONFIG:{...SIM_CONFIG,entryMode:mode};
+export function compareEntryVariants(sessions,{generatedAt=new Date().toISOString(),scenarios=null}={}){
+  const variants=(scenarios??ENTRY_VARIANTS.map(mode=>({mode,config:mode==='baseline'?BASELINE_SIM_CONFIG:{...SIM_CONFIG,entryMode:mode}}))).map(({mode,config})=>{
     const results=sessions.map(input=>{
       const replay=replayPaperSession({...input,config,generatedAt});
       const rows=[...replay.trades,...replay.positions].map(p=>{
@@ -22,7 +21,7 @@ export function compareEntryVariants(sessions,{generatedAt=new Date().toISOStrin
         const liquidation=p.currentPrice*(1-15/10000)*(1-config.exitSlippageBps/10000);
         const net=p.exitAt?p.realizedNetPnl:liquidation*p.shares*(1-config.costBpsPerSide/10000)-p.investedAmount-p.entryCost;
         return {ticker:p.ticker,date:input.date,closed:!!p.exitAt,capital:p.investedAmount,net,pct:net/p.investedAmount*100,
-          cohort:p.researchCohort||researchCohort(p.research,new Date(p.addedAt)),entryAt:p.addedAt,
+          setup:p.setupType||'original-consolidation',cohort:p.researchCohort||researchCohort(p.research,new Date(p.addedAt)),entryAt:p.addedAt,
           exitAt:p.exitAt??null,reason:p.exitReason??'session mark, not executed liquidation'};
       });
       const missing=Object.entries(input.series||{}).filter(([,s])=>!s?.candles?.length).map(([t])=>t);
@@ -32,7 +31,8 @@ export function compareEntryVariants(sessions,{generatedAt=new Date().toISOStrin
         rows,rejectionCounts:replay.checks.flatMap(c=>c.rejected).reduce((a,r)=>{for(const why of r.reasons)a[why]=(a[why]||0)+1;return a;},{})};
     });
     const rows=results.flatMap(r=>r.rows);
-    return {mode,summary:summarize(rows),cohorts:Object.fromEntries(['research-backed','price-only'].map(c=>[c,summarize(rows.filter(r=>r.cohort===c))])),sessions:results};
+    return {mode,summary:summarize(rows),cohorts:Object.fromEntries(['research-backed','price-only'].map(c=>[c,summarize(rows.filter(r=>r.cohort===c))])),
+      setups:Object.fromEntries([...new Set(rows.map(r=>r.setup))].map(t=>[t,summarize(rows.filter(r=>r.setup===t))])),sessions:results};
   });
   return {version:1,mode:'isolated-entry-comparison',generatedAt,rules:ENTRY_QUALITY,variants,
     validationStatus:sessions.length>=20?'requires chronological out-of-sample review':'INSUFFICIENT SESSIONS — diagnostic only, not profit validation',

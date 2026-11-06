@@ -84,7 +84,7 @@ function confirmedSetup(candles,quote,now,mode,params){
 }
 
 export function assessPaperEntry({candles,quote,reference,marketContext,now=new Date(),mode='adaptive',
-  fillPrice=quote?.price,params=ENTRY_QUALITY}={}){
+  fillPrice=quote?.price,params=ENTRY_QUALITY,setupOverride=null}={}){
   if(!ENTRY_VARIANTS.includes(mode))throw Error('Unknown entry comparison variant');
   if(mode==='baseline')return {version:'baseline',status:'baseline',reasons:[],metrics:{},
     setup:liveSimulationEntry(candles,quote,{now,regime:'neutral'})};
@@ -109,7 +109,7 @@ export function assessPaperEntry({candles,quote,reference,marketContext,now=new 
   if(reference?.version!==2||!Number.isFinite(reference?.return5Pct))reasons.push('prior-session stock movement reference unavailable');
   else if(reference.return5Pct>params.maxPrior5ReturnPct&&metrics.ema20PremiumPct>params.maxEma20PremiumPct)
     reasons.push('extended multi-session run far above EMA20');
-  const setup=confirmedSetup(candles,quote,now,mode,params);
+  const setup=setupOverride??confirmedSetup(candles,quote,now,mode,params);
   const initial=liveSimulationEntry(Array.isArray(candles)?candles:[],quote,{now,regime:'neutral'});
   if(setup.status!=='setup')reasons.push(setup.reason);
   else if(!(fillPrice>0)||pct(fillPrice,setup.breakoutLevel)>params.maxBreakoutPremiumPct)

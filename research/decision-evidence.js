@@ -3,13 +3,14 @@
 const finite=n=>typeof n==='number'&&Number.isFinite(n),pos=n=>finite(n)&&n>0;
 const ratio=(a,b)=>pos(a)&&pos(b)?(a/b-1)*100:null;
 export function decisionEvidence({quote,reference,setup,assessment,marketContext,benchmark,at,
-  slippageBps=5,requireMomentum=false,safetyReady=false,
+  slippageBps=5,requireMomentum=false,requireAtr=false,safetyReady=false,
   quoteSource='Upstox',dailySource='Upstox',candleSource='Completed five-minute candles',benchmarkSource='Upstox'}={}){
   const asOf=at.toISOString(),metrics={};
   function add(key,label,value,unit,source,measuredAt,required=false,reason='not supplied by the decision input'){
     const available=typeof value==='boolean'||finite(value);
     const time=Date.parse(measuredAt),dated=Number.isFinite(time)&&time<=at.getTime();
-    const domain=available&&(unit==='INR'||unit==='₹ Cr'?value>0:unit==='bp'||unit==='×'||unit==='s'?value>=0:unit==='/100'?value>=0&&value<=100:true);
+    const domain=available&&(unit==='INR'||unit==='₹ Cr'?value>0:unit==='bp'||unit==='×'||unit==='s'?value>=0:unit==='/100'?value>=0&&value<=100:true)
+      &&(key!=='atr14Pct'||value>0);
     const valid=available&&dated&&domain,given=value!==null&&value!==undefined;
     metrics[key]={label,value:valid?value:null,unit,source,asOf:measuredAt??null,required,
       status:valid?'available':given&&(!available||!domain)?'invalid':'missing',
@@ -27,9 +28,9 @@ export function decisionEvidence({quote,reference,setup,assessment,marketContext
   add('ema20','20-session EMA',reference?.ema20,'INR',dailySource+' prior daily closes',day,true);
   add('averageTurnoverCr','20-session average traded value',reference?.averageTurnoverCr,'₹ Cr',dailySource+' prior daily close × volume',day,true);
   add('vwap','Signal session VWAP',setup?.vwap??assessment?.metrics?.vwap,'INR',candleSource+' (typical-price approximation)',signal,true);
-  add('breakoutLevel','Consolidation breakout level',setup?.breakoutLevel,'INR',candleSource+' pre-breakout range',signal,true);
+  add('breakoutLevel',setup?.setupType==='trend-pullback'?'Pullback recovery trigger':'Consolidation breakout level',setup?.breakoutLevel,'INR',candleSource+' pre-signal structure',signal,true);
   add('initialStop','Initial structural stop',stop,'INR','Range support × 0.999',signal,true);
-  add('breakoutVolumeRatio','Breakout volume / preceding range average',setup?.volumeRatio,'×',candleSource,signal,true);
+  add('breakoutVolumeRatio',setup?.setupType==='trend-pullback'?'Recovery volume / pullback-bar average':'Breakout volume / preceding range average',setup?.volumeRatio,'×',candleSource,signal,true);
   add('stockDayReturnPct','Stock change since previous close',ratio(quote?.price,quote?.previousClose),'%',quoteSource+' quote',t,true);
   add('niftyDayReturnPct','Nifty change since previous close',ratio(benchmark?.price,benchmark?.previousClose),'%',benchmarkSource+' index snapshot',benchmark?.responseAt,true);
   add('safetyReady','Surveillance / event context loaded',safetyReady===true,'boolean','NSE snapshot + saved event checks',asOf,true);
@@ -44,7 +45,7 @@ export function decisionEvidence({quote,reference,setup,assessment,marketContext
   add('sessionVolumeRatio','Volume so far / average FULL-day volume',pos(reference?.averageVolume)?quote?.volume/reference.averageVolume:null,
     '×',quoteSource+' session volume / '+dailySource+' prior 20 daily volumes',t,false,'20-session volume baseline unavailable; this is not time-normalized RVOL');
   add('rsi14','Daily RSI (14)',reference?.rsi14,'/100',dailySource+' prior daily closes; Wilder smoothing',day,false,'fifteen completed daily closes required');
-  add('atr14Pct','Daily ATR (14)',reference?.atr14Pct,'%',dailySource+' prior daily OHLC',day,false,'fifteen valid daily OHLC candles required');
+  add('atr14Pct','Daily ATR (14)',reference?.atr14Pct,'%',dailySource+' prior daily OHLC',day,requireAtr,'fifteen valid daily OHLC candles required');
   add('ema50','50-session EMA',reference?.ema50,'INR',dailySource+' prior daily closes',day,false,'fifty completed daily closes required');
   add('exchangeAverage','Exchange average traded price',quote?.averagePrice,'INR',quoteSource+' average_price; separate from the computed signal VWAP',t,false,
     'exchange average_price not supplied; computed VWAP is recorded separately');

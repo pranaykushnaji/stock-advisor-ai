@@ -5,6 +5,7 @@ import { quoteBatches } from '../research/coverage.js';
 import registry from '../research/universe.json' with {type:'json'};
 import { rankSimulationUniverse, transitionSimulation, validateSimulation, dailyReference, SIM_CONFIG } from './_paper-simulation.js';
 import { savedResearchContext } from './_paper-research-context.js';
+import {setupShortlist} from '../research/trading-setups.js';
 
 const FILE='data/paper-simulation.json',REPO='pranaykushnaji/stock-advisor-ai';
 async function readFile(path,env) {
@@ -69,6 +70,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           fundingMode:config.fundingMode,sharesPerEntry:config.sharesPerEntry,maxBuysPerDay:config.maxBuysPerDay,
           maxOpenPositions:config.maxOpenPositions,sectorLimit:config.sectorLimit,
           entryMode:config.entryMode??'baseline',executionRuleVersion:config.executionRuleVersion,entryQualityVersion:config.entryQualityVersion??null,
+          setupMode:config.setupMode??null,exitMode:config.exitMode??'baseline',
           positions:initial.data.positions.length,trades:initial.data.trades.length,
           registryMapped:members.filter(m=>m.instrumentKey).length,quotesRequested:checkedMembers.length,quotesReceived:Object.keys(q).length,candleAccess,
           marketOpen:marketStatus(at).open&&at.getTime()>=Date.parse(`${nowIST(at).ymd}T09:15:00+05:30`)
@@ -124,8 +126,9 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
         const priority=discovery.ranked.filter(r=>market.researchBySymbol?.[r.symbol]&&!market.researchBySymbol[r.symbol].negative).slice(0,2);
         const pending=discovery.ranked.filter(r=>{const p=first.data.pendingEntries?.[r.symbol],age=now().getTime()-Date.parse(p?.signalAt);
           return age>=0&&age<=15*60000;}).slice(0,4);
-        const shortlist=[...new Map([...pending,...priority,...discovery.ranked].map(r=>[r.symbol,r])).values()].slice(0,8)
-          .sort((a,b)=>b.discoveryScore-a.discoveryScore);
+        const shortlist=config.setupMode?setupShortlist(discovery.ranked,{pending:pending.map(r=>r.symbol),research:market.researchBySymbol,at:now()}):
+          [...new Map([...pending,...priority,...discovery.ranked].map(r=>[r.symbol,r])).values()].slice(0,8)
+            .sort((a,b)=>b.discoveryScore-a.discoveryScore);
         market.candidates=shortlist.map(r=>({...bySymbol.get(r.symbol),discoveryScore:r.discoveryScore}));
         market.discovery={at:now().toISOString(),requested:scanMembers.length,
           quotesReceived:scanMembers.filter(m=>market.quotes[m.instrumentKey]).length,shortlisted:market.candidates.length,
@@ -161,6 +164,7 @@ export function createSimulationHandler({env=process.env,now=()=>new Date(),read
           mode:'experimental-paper-only',paperTrading:true,bought:result.bought,checked:result.checked,
           dailyInvestment:config.dailyInvestment,fundingMode:config.fundingMode,sharesPerEntry:config.sharesPerEntry,
           strategyVersion:config.version,entryMode:config.entryMode??'baseline',executionRuleVersion:config.executionRuleVersion,
+          setupMode:config.setupMode??null,exitMode:config.exitMode??'baseline',
           dayInvested:result.state.days[date]?.invested||0,positions:result.state.positions.length,
           candidates:result.state.suggestions,discovery:result.state.discovery,entryPause,ordersExecuted:0});
       }

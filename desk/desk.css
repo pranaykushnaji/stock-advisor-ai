@@ -1977,3 +1977,11 @@ footer > span:first-child {
     scroll-behavior: auto !important;
   }
 }
+.setup-plans{display:grid;gap:12px;margin-block:16px}
+.setup-plan{padding:16px;border:1px solid var(--line);border-radius:12px;min-width:0;overflow-wrap:anywhere}
+.setup-plan h4{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 12px;font-size:1rem}
+.setup-plan summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
+.setup-plan li{margin-block:8px}
+.setup-lab{max-width:960px;margin:auto;padding:clamp(16px,4vw,40px);padding-bottom:calc(32px + env(safe-area-inset-bottom));overflow-wrap:anywhere}
+.lab-controls{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-block:20px}
+.lab-controls select,.lab-controls button{min-height:44px;max-width:100%;padding:10px;font:inherit;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:8px}

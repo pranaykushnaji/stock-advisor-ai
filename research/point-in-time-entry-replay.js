@@ -5,12 +5,11 @@ import {readEntryEvidence} from './entry-evidence.js';
 import {BASELINE_SIM_CONFIG,SIM_CONFIG} from './paper-policy.js';
 import {ENTRY_VARIANTS} from './entry-quality.js';
 import {entryCohortPerformance} from './entry-cohorts.js';
-export function replayPointInTimeEntries(records){
+export function replayPointInTimeEntries(records,{scenarios=null}={}){
   const frames=[...new Map(records.filter(r=>Number.isFinite(Date.parse(r.updatedAt))&&r.entryEvidence?.at===r.updatedAt).map(r=>[r.updatedAt,r])).values()]
     .sort((a,b)=>Date.parse(a.updatedAt)-Date.parse(b.updatedAt));
   return {mode:'isolated-point-in-time-paper-study',status:frames.some(r=>readEntryEvidence(r.entryEvidence))?'evidence_available':'no_recorded_evidence',ordersExecuted:0,
-    variants:ENTRY_VARIANTS.map(mode=>{
-      const config=mode==='baseline'?BASELINE_SIM_CONFIG:{...SIM_CONFIG,entryMode:mode};
+    variants:(scenarios??ENTRY_VARIANTS.map(mode=>({mode,config:mode==='baseline'?BASELINE_SIM_CONFIG:{...SIM_CONFIG,entryMode:mode}}))).map(({mode,config})=>{
       let state=emptySimulation(),unavailableFrames=0;
       for(const r of frames){const market=readEntryEvidence(r.entryEvidence);if(!market){unavailableFrames++;continue;}
         state=transitionSimulation(state,market,{at:new Date(r.updatedAt),action:'scan',config}).state;

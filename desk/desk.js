@@ -288,7 +288,7 @@ export function simulationSuggestions(sim, now=Date.now(), archivedObservations=
     rows.set(p.ticker,{...rows.get(p.ticker),ticker:p.ticker,fullName:p.fullName,sector:p.sector,
       status:'simulated-buy',price:p.currentPrice,observedAt:p.lastPriceUpdate,pickedAt:p.addedAt,
       entryReturnPct:p.exitAt?tradeNetReturnPct(p):positionReturnPct(p),shares:p.shares,closedPick:!!p.exitAt,
-      setup:p.setup,research:p.research,entryPrice:p.entryPrice,entryAt:p.addedAt||p.entryAt,
+      setup:p.setup,setupReview:p.setupReview,exitPolicy:p.exitPolicy,research:p.research,entryPrice:p.entryPrice,entryAt:p.addedAt||p.entryAt,
       initialStopPrice:p.initialStopPrice,decisionEvidence:p.decisionEvidence||
         (audit?.entries?.[p.id]?.entryAt===(p.addedAt||p.entryAt)?audit.entries[p.id].evidence:null),entryAssessment:p.entryAssessment,
       researchCohort:p.researchCohort,executionRuleVersion:p.executionRuleVersion,
@@ -297,7 +297,7 @@ export function simulationSuggestions(sim, now=Date.now(), archivedObservations=
   }
   return [...rows.values()].map(r=>({paper:true,ticker:r.ticker,name:r.fullName||r.ticker,sector:r.sector,
     entryPrice:r.entryPrice,entryAt:r.entryAt,decisionEvidence:r.decisionEvidence,entryAssessment:r.entryAssessment,
-    researchCohort:r.researchCohort,executionRuleVersion:r.executionRuleVersion,
+    researchCohort:r.researchCohort,executionRuleVersion:r.executionRuleVersion,setupReview:r.setupReview,exitPolicy:r.exitPolicy,
     reasons:r.reasons||[],scanReasons:[],laneReasons:[],sources:['Upstox paper scan',...(r.research?[r.research.source||'Saved research']:[])],
     status:r.status==='simulated-buy'?'Simulated pick':r.status==='not-qualified'?'Not qualified':r.status==='earlier-watch'?'Earlier watch':'Watch',
     chosenSource:r.status==='simulated-buy'?'Simulated fill':'Paper experiment',chosenAt:r.pickedAt||r.observedAt||sim.updatedAt,currentReason:(r.reasons||[]).join('; ')||'Not evaluated after an earlier candidate was selected; reconsidered on the next scan',

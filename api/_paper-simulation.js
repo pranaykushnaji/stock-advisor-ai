@@ -4,7 +4,8 @@ import { quoteFreshness, benchmarkObservation } from './_upstox-market-data.js';
 import { rankByDiscoveryScore } from './_discovery-score.js';
 import { ema,rsi,atrPct } from './_indicators.js';
 import { liveSimulationEntry } from './_entry-research.js';
-import { researchExitObservation } from '../research/paper-plan.js';
+import {observeSetupExit,setupExitPolicy} from '../research/setup-exits.js';
+import {assessTradingSetups} from '../research/trading-setups.js';
 import { tradingSessionsHeld } from './_position-risk.js';
 import {SIM_CONFIG,LEGACY_SIM_CONFIG} from '../research/paper-policy.js';
 import {entryMarketContext,assessPaperEntry,researchCohort} from '../research/entry-quality.js';
@@ -132,7 +133,7 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
   for(const p of s.positions){
     const q=market.quotes[p.instrumentKey];
     if(!freshQuote(q,p,at) || !(q.bidPrice>0)) {checked.push({ticker:p.ticker,status:'unusable_price'});continue;}
-    const result=researchExitObservation(p,q,{nowMs:at.getTime()});
+    const result=observeSetupExit(p,q,{nowMs:at.getTime()});
     if(result.status==='unavailable'||Date.parse(q.lastTradeAt)<(Date.parse(p.lastObservedAt)||0)){checked.push({ticker:p.ticker,status:result.status});continue;}
     Object.assign(p,result.state,{currentPrice:q.price,lastPriceUpdate:q.lastTradeAt});
     const held=tradingSessionsHeld(p.date,at),risk=p.entryPrice-p.initialStopPrice;
@@ -140,7 +141,7 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
     if(!decision && negatives.has(p.ticker)) decision={reason:'verified negative event invalidates setup',observedFillPrice:q.bidPrice};
     if(!decision && held>=config.maximumSessions) decision={reason:'experimental five-session horizon',observedFillPrice:q.bidPrice};
     if(!decision && held>=config.noProgressSessions && q.price-p.entryPrice<risk*0.5) decision={reason:'setup failed to make progress after three sessions',observedFillPrice:q.bidPrice};
-    if(!decision){checked.push({ticker:p.ticker,status:'hold'});continue;}
+    if(!decision){checked.push({ticker:p.ticker,status:'hold',...(result.policyWarning?{warning:result.policyWarning}:{})});continue;}
     const fill=Math.min(decision.observedFillPrice,q.bidPrice)*(1-config.exitSlippageBps/10000);
     const proceeds=round(fill*p.shares),exitCost=round(proceeds*config.costBpsPerSide/10000);
     const gross=round(proceeds-p.investedAmount),net=round(gross-p.entryCost-exitCost);
@@ -149,7 +150,7 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       realizedPnlPct:round((fill/p.entryPrice-1)*100),entryCost:p.entryCost,exitCost,
       estimatedCostAmount:round(p.entryCost+exitCost),executionModel:'observed-bid-plus-slippage-paper-only'};
     s.trades.push(trade);s.cash=round(s.cash+proceeds-exitCost);day.exits.push(p.ticker);exits.push(p.id);
-    checked.push({ticker:p.ticker,status:'sold',reason:trade.exitReason,netPnl:net});
+    checked.push({ticker:p.ticker,status:'sold',reason:trade.exitReason,netPnl:net,...(result.policyWarning?{warning:result.policyWarning}:{})});
   }
   s.positions=s.positions.filter(p=>!exits.includes(p.id));
   let bought=null;
@@ -175,13 +176,19 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       const q=market.quotes[c.instrumentKey],reference=market.references?.[c.symbol];
       // Never call the buy detector for a name already owned/traded this session.
       if(blocked.has(c.symbol)){reasons.push('held or traded today');continue;}
-      const assessment=config.entryMode&&freshQuote(q,c,at)?assessPaperEntry({candles:market.candles?.[c.symbol]||[],
+      const setupReview=config.setupMode&&freshQuote(q,c,at)?assessTradingSetups({candles:market.candles?.[c.symbol]||[],
+        quote:q,reference,marketContext:entryMarket,research:row.research,now:at,allowedTypes:config.allowedSetupTypes,
+        fillPrice:q.askPrice*(1+config.entrySlippageBps/10000)}):null;
+      const assessment=config.setupMode?(setupReview?.assessment??{status:'blocked',reasons:['no qualifying setup lane'],
+        metrics:setupReview?.lanes[0]?.assessment.metrics??{},dataQuality:setupReview?.lanes[0]?.assessment.dataQuality,
+        setup:{status:'no_setup',reason:'all setup lanes await confirmation'}}):config.entryMode&&freshQuote(q,c,at)?assessPaperEntry({candles:market.candles?.[c.symbol]||[],
         quote:q,reference,marketContext:entryMarket,now:at,mode:config.entryMode,
         fillPrice:q.askPrice*(1+config.entrySlippageBps/10000)}):null;
       const setup=assessment?.setup??(freshQuote(q,c,at)?liveSimulationEntry(market.candles?.[c.symbol]||[],q,{now:at,regime:'neutral'}):null);
-      row.entryAssessment=assessment;row.researchCohort=researchCohort(row.research,at);
+      row.entryAssessment=assessment;row.researchCohort=researchCohort(row.research,at);row.setupReview=setupReview;
       row.decisionEvidence=decisionEvidence({quote:q,reference,setup,assessment,marketContext:entryMarket,benchmark,at,
-        slippageBps:config.entrySlippageBps,requireMomentum:!!config.entryMode,safetyReady:market.safetyReady});
+        slippageBps:config.entrySlippageBps,requireMomentum:!!config.entryMode,
+        requireAtr:config.setupMode&&config.exitMode==='setup-volatility',safetyReady:market.safetyReady});
       row.historyErrors=market.historyErrors?.[c.symbol]||[];
       if(assessment?.pendingSignalAt)s.pendingEntries[c.symbol]={symbol:c.symbol,signalAt:assessment.pendingSignalAt,discoveryScore:c.discoveryScore??null};
       row.entryDiagnostics=setup?{status:setup.status,reason:setup.reason??null,version:setup.setupVersion??null}:null;
@@ -209,18 +216,25 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
       const fill=q.askPrice*(1+config.entrySlippageBps/10000),stop=setup.supportLevel*0.999;
       const stopPct=(1-stop/fill)*100;
       if(stopPct<config.minStopPct||stopPct>config.maxStopPct){reasons.push('structure stop outside experimental 0.5–3% band');continue;}
+      let exitPolicy=null;
+      if(config.setupMode){
+        try{exitPolicy=setupExitPolicy(setup.setupType,{mode:config.exitMode??'baseline',entryPrice:fill,initialStopPrice:stop,
+          atr14Pct:reference?.atr14Pct,costBps:config.costBpsPerSide*2});}
+        catch{reasons.push('required frozen setup exit inputs unavailable');continue;}
+      }
       if(bought){row.status='not-selected';reasons.push('another qualifying entry selected this scan; reconsider next scan');continue;}
       const allocation=paperEntryAllocation({fill,stop,positions:s.positions,cash:s.cash,day,config});
       if(!allocation.shares){reasons.push(allocation.reason);continue;}
       const {shares,invested,entryCost,contribution}=allocation;
       const p={id:`${date}|${c.symbol}|${config.version}`,ticker:c.symbol,symbol:c.symbol,instrumentKey:c.instrumentKey,
-        fullName:c.name,sector:c.sector,date,addedAt:q.lastTradeAt,strategyVersion:config.version,entryLane:'experimental-consolidation',
+        fullName:c.name,sector:c.sector,date,addedAt:q.lastTradeAt,strategyVersion:config.version,
+        entryLane:setup.setupType??'experimental-consolidation',setupType:setup.setupType??null,exitPolicy,
         entryPrice:fill,shares,investedAmount:invested,entryCost,initialStopPrice:stop,initialStopPct:stopPct,
         modeledInitialRisk:allocation.modeledInitialRisk,peakPrice:fill,currentPrice:q.price,lastObservedAt:q.lastTradeAt,lastPriceUpdate:q.lastTradeAt,
         summary:assessment?`Completed ${setup.confirmationType} entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.`:setup.setupVersion==='opening-consolidation-v1'
           ?'Completed opening-range breakout with at least 2x recent-bar volume; above VWAP and EMA20, positive relative strength.'
           :'Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.',
-        setup,entryAssessment:assessment,entryMarket,researchCohort:row.researchCohort,decisionEvidence:row.decisionEvidence,
+        setup,setupReview,entryAssessment:assessment,entryMarket,researchCohort:row.researchCohort,decisionEvidence:row.decisionEvidence,
         discoveryScore:c.discoveryScore??null,research:market.researchBySymbol?.[c.symbol]??null,executionRuleVersion:config.executionRuleVersion,
         quoteTimestamp:q.lastTradeAt,paperTrading:true,expectedEdge:null};
       s.contributions=round(s.contributions+contribution);day.contribution=round(day.contribution+contribution);
@@ -238,7 +252,9 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
         firstSeenAt:row.observedAt,firstPrice:row.price,observations:[]};
       h.lastSeenAt=row.observedAt;h.lastPrice=row.price;h.discoveryScore=row.discoveryScore;h.reasons=row.reasons;
       h.observations=[...h.observations,{at:row.observedAt,price:row.price,score:row.discoveryScore,setup:row.entryDiagnostics?.status??'not-evaluated',
-        entryStatus:row.entryAssessment?.status??null,researchCohort:row.researchCohort??null}].slice(-36);
+        entryStatus:row.entryAssessment?.status??null,researchCohort:row.researchCohort??null,
+        selectedSetup:row.setupReview?.selectedType??null,
+        setupStates:row.setupReview?.lanes.map(l=>({type:l.type,status:l.status,missing:l.missingConfirmation}))??null}].slice(-36);
       history.candidates[row.ticker]=h;
     }
     history.scans=[...history.scans,{at:at.toISOString(),bought,shortlisted:s.suggestions.length,
@@ -250,5 +266,5 @@ export function transitionSimulation(input, market, {at, action='risk', config=S
   s.lastCheck={at:s.updatedAt,action,bought,checked,entryPause:market.entryPause??null,
     researchStatus:market.researchUnavailable?'unavailable':'loaded'};
   validateSimulation(s);
-  return {state:s,status:checked.some(r=>r.status==='unusable_price')?'partial':'processed',changed:true,bought,checked};
+  return {state:s,status:checked.some(r=>r.status==='unusable_price'||r.warning)?'partial':'processed',changed:true,bought,checked};
 }

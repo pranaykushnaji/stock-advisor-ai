@@ -1,6 +1,7 @@
 // Counterfactual study only. NEVER imported by an execution endpoint or added to its ledger.
 import { liveSimulationEntry } from "../api/_entry-research.js";
-import { researchExitObservation } from "./paper-plan.js";
+import {observeSetupExit,setupExitPolicy} from './setup-exits.js';
+import {assessTradingSetups} from './trading-setups.js';
 import { SIM_CONFIG, paperEntryAllocation } from "../api/_paper-simulation.js";
 import {entryMarketContext,assessPaperEntry,researchCohort} from './entry-quality.js';
 import {decisionEvidence} from './decision-evidence.js';
@@ -70,7 +71,7 @@ export function replayPaperSession({
         lastTradeAt: observedAt,
         responseAt: observedAt,
       };
-      const exit = researchExitObservation(p, q, { nowMs: at });
+      const exit = observeSetupExit(p, q, { nowMs: at });
       Object.assign(p, exit.state, {
         currentPrice: price,
         lastMarkedAt: observedAt,
@@ -162,7 +163,11 @@ export function replayPaperSession({
         reasons.push("archived price observation stale or future");
       // Only the original, timestamped shortlist is considered, not the day's winners.
       const fill = row.price * (1 + assumedHalfSpreadBps / 10000) * (1 + config.entrySlippageBps / 10000);
-      const assessment=config.entryMode&&history?.candles?assessPaperEntry({candles:history.candles,
+      const setupReview=config.setupMode&&history?.candles?assessTradingSetups({candles:history.candles,
+        quote:{price:row.price,lastTradeAt:row.observedAt},reference,marketContext,research:row.research,
+        now:new Date(at),fillPrice:fill,allowedTypes:config.allowedSetupTypes}):null;
+      const assessment=config.setupMode?(setupReview?.assessment??{reasons:['no qualifying setup lane'],metrics:setupReview?.lanes[0]?.assessment.metrics??{},
+        setup:{status:'no_setup',reason:'all setup lanes await confirmation'}}):config.entryMode&&history?.candles?assessPaperEntry({candles:history.candles,
         quote:{price:row.price,lastTradeAt:row.observedAt},reference,marketContext,now:new Date(at),mode:config.entryMode,fillPrice:fill}):null;
       const setup = assessment?.setup??(history?.candles
         ? liveSimulationEntry(
@@ -178,7 +183,8 @@ export function replayPaperSession({
         bidPrice:row.price*(1-assumedHalfSpreadBps/10000),spreadBps:assumedHalfSpreadBps*2,
         previousClose:history?.previousClose,lastTradeAt:row.observedAt},reference,setup,assessment,marketContext,
         benchmark:benchFresh?{price:benchBar[4],previousClose:benchmark.previousClose,responseAt:new Date(Date.parse(benchBar[0])+60000).toISOString()}:null,
-        at:new Date(at),slippageBps:config.entrySlippageBps,requireMomentum:!!config.entryMode,safetyReady:scan.safetyReady,
+        at:new Date(at),slippageBps:config.entrySlippageBps,requireMomentum:!!config.entryMode,
+        requireAtr:config.setupMode&&config.exitMode==='setup-volatility',safetyReady:scan.safetyReady,
         quoteSource:'Estimated historical',dailySource:'Archived / retrospective',candleSource:'Historical completed candles',benchmarkSource:'Historical'});
       if(!evidence.readiness.ready)reasons.push('decision evidence incomplete: '+evidence.readiness.missingRequired.join(', '));
       if (reasons.length) {
@@ -194,6 +200,10 @@ export function replayPaperSession({
         });
         continue;
       }
+      let exitPolicy=null;
+      if(config.setupMode){try{exitPolicy=setupExitPolicy(setup.setupType,{mode:config.exitMode??'baseline',entryPrice:fill,
+        initialStopPrice:stop,atr14Pct:reference?.atr14Pct,costBps:config.costBpsPerSide*2});}
+        catch{result.rejected.push({ticker:row.ticker,reasons:['required frozen setup exit inputs unavailable']});continue;}}
       const allocation=paperEntryAllocation({fill,stop,positions,cash,day:{invested},config});
       const {shares}=allocation;
       if (shares < 1) {
@@ -223,7 +233,7 @@ export function replayPaperSession({
         currentPrice: row.price,
         lastObservedAt: row.observedAt,
         modeledInitialRisk: allocation.modeledInitialRisk,
-        setup,
+        setup,setupReview,setupType:setup.setupType??null,entryLane:setup.setupType??'experimental-consolidation',exitPolicy,
         entryAssessment:assessment,entryMarket:marketContext,decisionEvidence:evidence,
         research:row.research??null,researchCohort:researchCohort(row.research,new Date(at)),
         sourceCommit: scan.sourceCommit,

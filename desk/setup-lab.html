@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <title>StockAdvisor · Setup Lab · demonstration only</title>
+  <link rel="stylesheet" href="/desk/desk.css?v=20261106-setups-1">
+  <script type="module" src="/desk/setup-lab.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to setup examples</a>
+  <main id="main" class="setup-lab">
+    <p class="eyebrow">STOCKADVISOR / RESEARCH PREVIEW</p>
+    <h1>Understand the setup.<br>Then consider the entry.</h1>
+    <p class="notice warning"><strong>Fictional demonstration — not today's suggestions.</strong> SAMPLE is not a stock recommendation. This page runs deterministic example data locally. It never fetches account credentials, writes a ledger or places an order.</p>
+    <div class="lab-controls"><label for="scenario">Example setup</label><select id="scenario">
+      <option value="compression-breakout">Compression breakout</option>
+      <option value="trend-pullback">Trend pullback / recovery</option>
+      <option value="catalyst-continuation">Verified catalyst continuation</option>
+      <option value="weak-market">Strong stock, weakening market</option>
+    </select><button type="button" id="lab-theme" aria-pressed="true">Light mode</button></div>
+    <p id="lab-status" role="status" aria-live="polite"></p>
+    <div id="lab-content"></div>
+    <p class="small">Demonstration confirms software behavior, not profitability. The release mode remains unchanged; research variants require review before activation.</p>
+    <a href="/desk/#suggestions">Back to saved suggestions ↗</a>
+  </main>
+</body>
+</html>
