@@ -1,11 +1,45 @@
 {
-  "date": "2026-11-06",
-  "builtAt": "2026-11-06T02:35:48.105Z",
+  "date": "2026-11-09",
+  "builtAt": "2026-11-09T02:35:42.640Z",
   "marketContext": {
-    "tone": "bullish",
-    "summary": "Deterministic NSE breadth fallback: 77% advancers, average move +1.83%.",
+    "tone": "neutral",
+    "summary": "Deterministic NSE breadth fallback: 49% advancers, average move +0.13%.",
     "sectorsInFocus": [],
     "source": "nse-snapshot-fallback"
   },
-  "watch": []
+  "watch": [
+    {
+      "ticker": "ADANIENT",
+      "source": "overnight-filing",
+      "catalyst": {
+        "points": 25,
+        "hasCatalyst": true,
+        "negative": false,
+        "type": "acquisition",
+        "confidence": 90,
+        "impact": 8,
+        "stars": 4,
+        "freshness": 0.932,
+        "decay": 0.932,
+        "impactClass": "high+",
+        "influenceDays": 12,
+        "ageDays": 0.61,
+        "evidenceVersion": 2,
+        "eventPublishedAt": 1794139329000,
+        "hasFiling": true,
+        "evidence": [
+          {
+            "articleId": 1,
+            "title": "[OFFICIAL NSE FILING] Acquisition",
+            "url": null,
+            "publisher": "nse-filing"
+          }
+        ],
+        "verification": "VERIFIED",
+        "sources": 1,
+        "summary": "Official filing announces acquisition, indicating strategic expansion."
+      },
+      "prevClose": 2731
+    }
+  ]
 }
