@@ -1,7 +1,7 @@
 {
-  "fetchedAt": "2026-11-10T06:16:15.209Z",
+  "fetchedAt": "2026-11-10T07:16:15.211Z",
   "diag": {
-    "marketStatus": false,
+    "marketStatus": true,
     "moversCount": 218,
     "universeCount": 214,
     "universeIndicesScanned": 8,
@@ -23,6 +23,114 @@
     "deliveryData": true
   },
   "data": {
+    "marketStatus": {
+      "marketState": [
+        {
+          "market": "Capital Market",
+          "marketStatus": "Close",
+          "tradeDate": "09-Nov-2026 15:30",
+          "index": "NIFTY 50",
+          "last": 25044.65,
+          "variation": 58.25,
+          "percentChange": 0.23,
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Currency",
+          "marketStatus": "Close",
+          "tradeDate": "09-Nov-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Commodity",
+          "marketStatus": "Open",
+          "tradeDate": "10-Nov-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Debt",
+          "marketStatus": "Close",
+          "tradeDate": "09-Nov-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "index": "NIFTY50 USD",
+          "last": 9237.8,
+          "change": 19.049999999999272,
+          "percentChange": 0.2,
+          "timestamp": "09-Nov-2026 15:40"
+        },
+        {
+          "market": "currencyfuture",
+          "marketStatus": "Close",
+          "tradeDate": "09-Nov-2026",
+          "index": "",
+          "last": "94.0000",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed",
+          "expiryDate": "26-Nov-2026",
+          "underlying": "USDINR",
+          "updated_time": "09-Nov-2026 17:00",
+          "tradeDateFormatted": "09-Nov-2026 17:00",
+          "slickclass": "slick-item"
+        }
+      ],
+      "marketcap": {
+        "timeStamp": "09-Nov-2026",
+        "marketCapinTRDollars": 5.35,
+        "marketCapinLACCRRupees": 502.21309501290574,
+        "marketCapinCRRupees": 50221309.5,
+        "marketCapinCRRupeesFormatted": "50,221,309.50",
+        "marketCapinLACCRRupeesFormatted": "502.21",
+        "underlying": "Market Cap"
+      },
+      "indicativenifty50": {
+        "change": 58.25,
+        "closingValue": 25044.65,
+        "dateTime": "09-Nov-2026 15:30",
+        "finalClosingValue": 25044.65,
+        "indexLast": null,
+        "indexName": "NIFTY 50",
+        "indexPercChange": null,
+        "indexTimeVal": null,
+        "indicativeTime": null,
+        "perChange": 0.23,
+        "status": "CLOSE"
+      },
+      "giftnifty": {
+        "CONTRACTSTRADED": 14747,
+        "DAYCHANGE": 187,
+        "EXPIRYDATE": "23-Nov-2026",
+        "INSTRUMENTTYPE": "FUTIDX",
+        "LASTPRICE": 25308,
+        "OPTIONTYPE": "-",
+        "PERCHANGE": 0.74,
+        "STRIKEPRICE": 0,
+        "SYMBOL": "NIFTY",
+        "TIMESTMP": "10-Nov-2026 12:43",
+        "id": "1/NIFTYFUTIDX23-Nov-2026--"
+      },
+      "niftyusd": {
+        "index": "NIFTY50 USD",
+        "last": 9237.8,
+        "change": 19.049999999999272,
+        "percentChange": 0.2,
+        "timestamp": "09-Nov-2026 15:40"
+      }
+    },
     "topGainers": [
       {
         "symbol": "DATAPATTNS",
@@ -3061,6 +3169,141 @@
     ],
     "announcements": [
       {
+        "symbol": "RADICO",
+        "subject": "Action(s) initiated or orders passed",
+        "date": "10-Nov-2026 12:37:13"
+      },
+      {
+        "symbol": "RADIANTCMS",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 12:36:52"
+      },
+      {
+        "symbol": "KIMS",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 12:34:00"
+      },
+      {
+        "symbol": "MRF",
+        "subject": "Record Date",
+        "date": "10-Nov-2026 12:29:27"
+      },
+      {
+        "symbol": "MRF",
+        "subject": "Outcome of Board Meeting",
+        "date": "10-Nov-2026 12:24:20"
+      },
+      {
+        "symbol": "TATACOMM",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 12:22:26"
+      },
+      {
+        "symbol": "IRB",
+        "subject": "Updates",
+        "date": "10-Nov-2026 12:21:37"
+      },
+      {
+        "symbol": "CREST",
+        "subject": "Credit Rating",
+        "date": "10-Nov-2026 12:20:18"
+      },
+      {
+        "symbol": "RATEGAIN",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 12:18:04"
+      },
+      {
+        "symbol": "SCHAND",
+        "subject": "Change in Director(s)",
+        "date": "10-Nov-2026 12:17:16"
+      },
+      {
+        "symbol": "MICEL",
+        "subject": "Copy of Newspaper Publication",
+        "date": "10-Nov-2026 12:17:08"
+      },
+      {
+        "symbol": "BAJFINANCE",
+        "subject": "Committee Meeting Updates",
+        "date": "10-Nov-2026 12:15:58"
+      },
+      {
+        "symbol": "NCC",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 12:13:22"
+      },
+      {
+        "symbol": "RAMCOIND",
+        "subject": "Copy of Newspaper Publication",
+        "date": "10-Nov-2026 12:13:04"
+      },
+      {
+        "symbol": "EQUITASBNK",
+        "subject": "General Updates",
+        "date": "10-Nov-2026 12:12:22"
+      },
+      {
+        "symbol": "REPCOHOME",
+        "subject": "Cessation",
+        "date": "10-Nov-2026 12:11:58"
+      },
+      {
+        "symbol": "REPCOHOME",
+        "subject": "Cessation",
+        "date": "10-Nov-2026 12:11:58"
+      },
+      {
+        "symbol": "PIRAMALFIN",
+        "subject": "Investor Presentation",
+        "date": "10-Nov-2026 12:06:41"
+      },
+      {
+        "symbol": "HUDCO",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 12:05:09"
+      },
+      {
+        "symbol": "MUFTI",
+        "subject": "Updates",
+        "date": "10-Nov-2026 11:57:48"
+      },
+      {
+        "symbol": "ECOSMOBLTY",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 11:56:19"
+      },
+      {
+        "symbol": "PIRAMALFIN",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 11:56:10"
+      },
+      {
+        "symbol": "MARUTI",
+        "subject": "General Updates",
+        "date": "10-Nov-2026 11:56:00"
+      },
+      {
+        "symbol": "JYOTHYLAB",
+        "subject": "Copy of Newspaper Publication",
+        "date": "10-Nov-2026 11:55:07"
+      },
+      {
+        "symbol": "ONEPOINT",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 11:54:24"
+      },
+      {
+        "symbol": "JYOTHYLAB",
+        "subject": "Updates",
+        "date": "10-Nov-2026 11:53:33"
+      },
+      {
+        "symbol": "PIRAMALFIN",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "10-Nov-2026 11:49:23"
+      },
+      {
         "symbol": "WHIRLPOOL",
         "subject": "Copy of Newspaper Publication",
         "date": "10-Nov-2026 11:46:39"
@@ -5424,141 +5667,6 @@
         "symbol": "ZYDUSLIFE",
         "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
         "date": "07-Nov-2026 15:19:54"
-      },
-      {
-        "symbol": "SUPRIYA",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 15:19:03"
-      },
-      {
-        "symbol": "CLEDUCATE",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 15:18:48"
-      },
-      {
-        "symbol": "JARO",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 15:17:28"
-      },
-      {
-        "symbol": "LXCHEM",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 15:16:41"
-      },
-      {
-        "symbol": "ZYDUSWELL",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 15:15:46"
-      },
-      {
-        "symbol": "CAPACITE",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 15:14:29"
-      },
-      {
-        "symbol": "VIKRAN",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 15:13:08"
-      },
-      {
-        "symbol": "SUPERHOUSE",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 15:11:46"
-      },
-      {
-        "symbol": "SIEMENS",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 15:10:45"
-      },
-      {
-        "symbol": "AJAXENGG",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 15:09:40"
-      },
-      {
-        "symbol": "HESTERBIO",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 15:01:57"
-      },
-      {
-        "symbol": "SHYAMMETL",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 15:01:04"
-      },
-      {
-        "symbol": "MPHASIS",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 14:56:46"
-      },
-      {
-        "symbol": "SENCO",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 14:55:44"
-      },
-      {
-        "symbol": "SRPL",
-        "subject": "Change in Auditors",
-        "date": "07-Nov-2026 14:55:20"
-      },
-      {
-        "symbol": "CENTURYPLY",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 14:54:51"
-      },
-      {
-        "symbol": "DCI",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 14:54:44"
-      },
-      {
-        "symbol": "SUNDROP",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 14:54:08"
-      },
-      {
-        "symbol": "SRPL",
-        "subject": "Appointment",
-        "date": "07-Nov-2026 14:53:45"
-      },
-      {
-        "symbol": "WSTCSTPAPR",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 14:53:27"
-      },
-      {
-        "symbol": "PARASPETRO",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 14:52:23"
-      },
-      {
-        "symbol": "CLSEL",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 14:51:29"
-      },
-      {
-        "symbol": "MAYURUNIQ",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 14:50:01"
-      },
-      {
-        "symbol": "GLASSWALL",
-        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
-        "date": "07-Nov-2026 14:49:05"
-      },
-      {
-        "symbol": "SURYAROSNI",
-        "subject": "Investor Presentation",
-        "date": "07-Nov-2026 14:46:47"
-      },
-      {
-        "symbol": "AMANTA",
-        "subject": "Updates",
-        "date": "07-Nov-2026 14:43:49"
-      },
-      {
-        "symbol": "GTLINFRA",
-        "subject": "Copy of Newspaper Publication",
-        "date": "07-Nov-2026 14:42:33"
       }
     ],
     "deliverySample": {
