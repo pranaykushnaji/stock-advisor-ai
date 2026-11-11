@@ -7,13 +7,34 @@ import { rankSimulationUniverse, transitionSimulation, validateSimulation, daily
 import { savedResearchContext } from './_paper-research-context.js';
 import {setupShortlist} from '../research/trading-setups.js';
 import {RELEASE_SIM_CONFIG} from '../research/paper-policy.js';
+import {createHash} from 'node:crypto';
 
 const FILE='data/paper-simulation.json',REPO='pranaykushnaji/stock-advisor-ai';
-async function readFile(path,env) {
-  const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=main`,{
-    headers:{Authorization:`Bearer ${env.GITHUB_TOKEN}`,Accept:'application/vnd.github+json'},signal:AbortSignal.timeout(8000)});
+export async function readSimulationJson(path,env,fetchImpl=fetch) {
+  const api=`https://api.github.com/repos/${REPO}`;
+  const signal=AbortSignal.timeout(8000);
+  const get=(url,Accept)=>fetchImpl(url,{
+    headers:{Authorization:`Bearer ${env.GITHUB_TOKEN}`,Accept},signal,cache:'no-store',redirect:'error'});
+  const r=await get(`${api}/contents/${path}?ref=main`,'application/vnd.github.object+json');
   if(!r.ok)throw Error('simulation context unavailable');
-  const d=await r.json();return {data:JSON.parse(Buffer.from(d.content,'base64').toString('utf8')),sha:d.sha};
+  const d=await r.json();
+  if(d.type!=='file'||!/^[a-f0-9]{40}$/.test(d.sha)||!Number.isSafeInteger(d.size)||d.size<1)
+    throw Error('invalid simulation file metadata');
+  let bytes;
+  if(d.encoding==='base64'&&d.content){
+    bytes=Buffer.from(d.content,'base64');
+  }else if(d.encoding==='none'&&d.content===''){
+    // Above 1 MB the Contents API supplies metadata only. Fetch the immutable blob,
+    // not the moving main-branch URL: the subsequent CAS write must use this exact SHA.
+    const blob=await get(`${api}/git/blobs/${d.sha}`,'application/vnd.github.raw+json');
+    if(!blob.ok)throw Error('simulation blob unavailable');
+    bytes=Buffer.from(await blob.arrayBuffer());
+  }else{
+    throw Error('unsupported simulation file encoding');
+  }
+  const sha=createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex');
+  if(bytes.length!==d.size||sha!==d.sha)throw Error('simulation file does not match its version');
+  return {data:JSON.parse(bytes.toString('utf8')),sha:d.sha};
 }
 async function writeFile(state,sha,env) {
   const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{method:'PUT',
@@ -24,8 +45,8 @@ async function writeFile(state,sha,env) {
   if(!r.ok)throw Error('simulation write failed');return true;
 }
 async function loadSafety(env,at,members) {
-  const optional=path=>readFile(path,env).then(r=>r.data).catch(()=>({}));
-  const [snap,mem,watchlist,intel]=await Promise.all([readFile('data/nse-snapshot.json',env),
+  const optional=path=>readSimulationJson(path,env).then(r=>r.data).catch(()=>({}));
+  const [snap,mem,watchlist,intel]=await Promise.all([readSimulationJson('data/nse-snapshot.json',env),
     optional('data/catalyst-memory.json'),optional('data/premarket-watchlist.json'),optional('data/news-intel.json')]);
   const ms=Date.parse(snap.data.fetchedAt),age=at.getTime()-ms;
   const safetyReady=Number.isFinite(ms)&&age>=0&&age<=4*3600000&&snap.data.diag?.surveillance===true&&Array.isArray(snap.data.data?.surveillance);
@@ -39,7 +60,7 @@ async function loadSafety(env,at,members) {
   return {...research,safetyReady,surveillance:snap.data.data?.surveillance||[],negativeSymbols};
 }
 
-export function createSimulationHandler({env=process.env,now=()=>new Date(),read=path=>readFile(path,env),
+export function createSimulationHandler({env=process.env,now=()=>new Date(),read=path=>readSimulationJson(path,env),
   write=(state,sha)=>writeFile(state,sha,env),quotes=fetchFullQuotes,intraday=fetchIntradayOneMinuteCandles,
   daily=fetchDailyCandles,members=[],registryFetchedAt=null,safety=at=>loadSafety(env,at,members),config=SIM_CONFIG}={}){
   return async(req,res)=>{
