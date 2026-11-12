@@ -2,7 +2,7 @@
   "version": 1,
   "strategyVersion": "paper-one-share-v2",
   "mode": "experimental-paper-only",
-  "cash": 10535.7,
+  "cash": 12335.1,
   "contributions": 20000,
   "positions": [
     {
@@ -23,10 +23,10 @@
       "initialStopPrice": 228.78099,
       "initialStopPct": 1.855591797216971,
       "modeledInitialRisk": 30.85,
-      "peakPrice": 238.2,
-      "currentPrice": 234.12,
-      "lastObservedAt": "2026-11-09T05:15:34.715Z",
-      "lastPriceUpdate": "2026-11-09T05:15:34.715Z",
+      "peakPrice": 249.11,
+      "currentPrice": 249.11,
+      "lastObservedAt": "2026-11-12T03:45:38.060Z",
+      "lastPriceUpdate": "2026-11-12T03:45:38.060Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -46,7 +46,8 @@
       "executionRuleVersion": "five-minute-opening-v2",
       "quoteTimestamp": "2026-11-05T04:45:39.355Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 244.78449500000002
     },
     {
       "id": "2026-11-06|MCX|paper-one-share-v2",
@@ -66,10 +67,10 @@
       "initialStopPrice": 3394.602,
       "initialStopPct": 1.454965227232441,
       "modeledInitialRisk": 62.18,
-      "peakPrice": 3581.5,
-      "currentPrice": 3555,
-      "lastObservedAt": "2026-11-09T05:15:39.950Z",
-      "lastPriceUpdate": "2026-11-09T05:15:39.950Z",
+      "peakPrice": 3619.9,
+      "currentPrice": 3619.9,
+      "lastObservedAt": "2026-11-12T03:45:38.138Z",
+      "lastPriceUpdate": "2026-11-12T03:45:38.138Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -90,7 +91,7 @@
       "quoteTimestamp": "2026-11-06T04:40:40.772Z",
       "paperTrading": true,
       "expectedEdge": null,
-      "trailingStopPrice": 3531.3805
+      "trailingStopPrice": 3569.7805000000003
     },
     {
       "id": "2026-11-06|HAVELLS|paper-one-share-v2",
@@ -110,10 +111,10 @@
       "initialStopPrice": 1068.0309,
       "initialStopPct": 1.1759719103603183,
       "modeledInitialRisk": 16.49,
-      "peakPrice": 1154.1,
-      "currentPrice": 1151.4,
-      "lastObservedAt": "2026-11-09T05:15:38.316Z",
-      "lastPriceUpdate": "2026-11-09T05:15:38.316Z",
+      "peakPrice": 1172,
+      "currentPrice": 1172,
+      "lastObservedAt": "2026-11-12T03:45:36.257Z",
+      "lastPriceUpdate": "2026-11-12T03:45:36.257Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -134,7 +135,7 @@
       "quoteTimestamp": "2026-11-06T05:45:38.024Z",
       "paperTrading": true,
       "expectedEdge": null,
-      "trailingStopPrice": 1141.3908
+      "trailingStopPrice": 1159.2908
     },
     {
       "id": "2026-11-06|KALYANKJIL|paper-one-share-v2",
@@ -154,10 +155,10 @@
       "initialStopPrice": 578.0713499999999,
       "initialStopPct": 1.2337677315188644,
       "modeledInitialRisk": 9.27,
-      "peakPrice": 613.95,
-      "currentPrice": 609.85,
-      "lastObservedAt": "2026-11-09T05:15:39.284Z",
-      "lastPriceUpdate": "2026-11-09T05:15:39.284Z",
+      "peakPrice": 684.9,
+      "currentPrice": 684.9,
+      "lastObservedAt": "2026-11-12T03:45:38.050Z",
+      "lastPriceUpdate": "2026-11-12T03:45:38.050Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -178,51 +179,7 @@
       "quoteTimestamp": "2026-11-06T06:50:40.326Z",
       "paperTrading": true,
       "expectedEdge": null,
-      "trailingStopPrice": 606.72885
-    },
-    {
-      "id": "2026-11-06|AUROPHARMA|paper-one-share-v2",
-      "ticker": "AUROPHARMA",
-      "symbol": "AUROPHARMA",
-      "instrumentKey": "NSE_EQ|INE406A01037",
-      "fullName": "Aurobindo Pharma Ltd.",
-      "sector": "Healthcare",
-      "date": "2026-11-06",
-      "addedAt": "2026-11-06T07:05:39.143Z",
-      "strategyVersion": "paper-one-share-v2",
-      "entryLane": "experimental-consolidation",
-      "entryPrice": 1800.79995,
-      "shares": 1,
-      "investedAmount": 1800.8,
-      "entryCost": 2.7,
-      "initialStopPrice": 1786.7115,
-      "initialStopPct": 0.7823439799629184,
-      "modeledInitialRisk": 20.39,
-      "peakPrice": 1846,
-      "currentPrice": 1838.4,
-      "lastObservedAt": "2026-11-09T05:15:35.413Z",
-      "lastPriceUpdate": "2026-11-09T05:15:35.413Z",
-      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
-      "setup": {
-        "status": "setup",
-        "signalAt": "2026-11-06T07:05:00.000Z",
-        "entryAt": "2026-11-06T07:05:39.143Z",
-        "entryPrice": 1799.5,
-        "entryIndex": 40,
-        "breakoutLevel": 1798.6,
-        "supportLevel": 1788.5,
-        "vwap": 1789.9000966387164,
-        "volumeRatio": 1.9153247891335305,
-        "setupVersion": "consolidation-v1",
-        "execution": "shadow-quote-only"
-      },
-      "discoveryScore": 61.2,
-      "research": null,
-      "executionRuleVersion": "five-minute-one-share-v3",
-      "quoteTimestamp": "2026-11-06T07:05:39.143Z",
-      "paperTrading": true,
-      "expectedEdge": null,
-      "trailingStopPrice": 1831.9115499999998
+      "trailingStopPrice": 677.6788499999999
     },
     {
       "id": "2026-11-06|UPL|paper-one-share-v2",
@@ -242,10 +199,10 @@
       "initialStopPrice": 524.72475,
       "initialStopPct": 1.9054486597531506,
       "modeledInitialRisk": 12.06,
-      "peakPrice": 537.35,
-      "currentPrice": 529.05,
-      "lastObservedAt": "2026-11-09T05:15:33.290Z",
-      "lastPriceUpdate": "2026-11-09T05:15:33.290Z",
+      "peakPrice": 554.95,
+      "currentPrice": 554.95,
+      "lastObservedAt": "2026-11-12T03:45:33.215Z",
+      "lastPriceUpdate": "2026-11-12T03:45:33.215Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -265,7 +222,8 @@
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T07:15:40.266Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 544.7574250000001
     },
     {
       "id": "2026-11-06|MAHABANK|paper-one-share-v2",
@@ -285,10 +243,10 @@
       "initialStopPrice": 85.3146,
       "initialStopPct": 1.122490702700596,
       "modeledInitialRisk": 1.27,
-      "peakPrice": 87.7,
-      "currentPrice": 86.74,
-      "lastObservedAt": "2026-11-09T05:15:37.441Z",
-      "lastPriceUpdate": "2026-11-09T05:15:37.441Z",
+      "peakPrice": 91.1,
+      "currentPrice": 91.1,
+      "lastObservedAt": "2026-11-12T03:45:35.857Z",
+      "lastPriceUpdate": "2026-11-12T03:45:35.857Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -308,7 +266,8 @@
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T08:30:39.217Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 90.13148
     },
     {
       "id": "2026-11-06|IIFL|paper-one-share-v2",
@@ -328,10 +287,10 @@
       "initialStopPrice": 615.8835,
       "initialStopPct": 1.4132427700307315,
       "modeledInitialRisk": 11.02,
-      "peakPrice": 632.15,
-      "currentPrice": 625.3,
-      "lastObservedAt": "2026-11-09T05:15:37.404Z",
-      "lastPriceUpdate": "2026-11-09T05:15:37.404Z",
+      "peakPrice": 666.3,
+      "currentPrice": 666.3,
+      "lastObservedAt": "2026-11-12T03:45:38.231Z",
+      "lastPriceUpdate": "2026-11-12T03:45:38.231Z",
       "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
       "setup": {
         "status": "setup",
@@ -351,7 +310,8 @@
       "executionRuleVersion": "five-minute-one-share-v3",
       "quoteTimestamp": "2026-11-06T09:20:39.601Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 657.4713
     }
   ],
   "trades": [
@@ -1357,6 +1317,73 @@
       "exitCost": 0.84,
       "estimatedCostAmount": 1.67,
       "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-06|AUROPHARMA|paper-one-share-v2",
+      "ticker": "AUROPHARMA",
+      "symbol": "AUROPHARMA",
+      "instrumentKey": "NSE_EQ|INE406A01037",
+      "fullName": "Aurobindo Pharma Ltd.",
+      "sector": "Healthcare",
+      "date": "2026-11-06",
+      "addedAt": "2026-11-06T07:05:39.143Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "experimental-consolidation",
+      "entryPrice": 1800.79995,
+      "shares": 1,
+      "investedAmount": 1800.8,
+      "entryCost": 2.7,
+      "initialStopPrice": 1786.7115,
+      "initialStopPct": 0.7823439799629184,
+      "modeledInitialRisk": 20.39,
+      "peakPrice": 1846,
+      "currentPrice": 1803,
+      "lastObservedAt": "2026-11-12T03:45:34.180Z",
+      "lastPriceUpdate": "2026-11-12T03:45:34.180Z",
+      "summary": "Confirmed completed 30-minute consolidation breakout, volume expansion, above session VWAP and 20-session EMA; positive relative strength.",
+      "setup": {
+        "status": "setup",
+        "signalAt": "2026-11-06T07:05:00.000Z",
+        "entryAt": "2026-11-06T07:05:39.143Z",
+        "entryPrice": 1799.5,
+        "entryIndex": 40,
+        "breakoutLevel": 1798.6,
+        "supportLevel": 1788.5,
+        "vwap": 1789.9000966387164,
+        "volumeRatio": 1.9153247891335305,
+        "setupVersion": "consolidation-v1",
+        "execution": "shadow-quote-only"
+      },
+      "discoveryScore": 61.2,
+      "research": null,
+      "executionRuleVersion": "five-minute-one-share-v3",
+      "quoteTimestamp": "2026-11-06T07:05:39.143Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "trailingStopPrice": 1831.9115499999998,
+      "exitIntent": {
+        "id": "2026-11-06|AUROPHARMA|paper-one-share-v2|risk-unit-trail-v1",
+        "observedAt": "2026-11-12T03:45:34.180Z",
+        "triggerPrice": 1831.9115499999998,
+        "observedFillPrice": 1803,
+        "reason": "experimental profit protection",
+        "grossReturnPct": 0.12217070530238239,
+        "estimatedNetReturnPct": -0.1778292946976176,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-06T07:05:39.143Z",
+      "entryDate": "2026-11-06",
+      "exitAt": "2026-11-12T03:45:34.180Z",
+      "exitDate": "2026-11-12",
+      "exitPrice": 1802.0985,
+      "triggerPrice": 1831.9115499999998,
+      "exitReason": "experimental profit protection",
+      "realizedPnl": 1.3,
+      "realizedNetPnl": -4.1,
+      "realizedPnlPct": 0.07,
+      "exitCost": 2.7,
+      "estimatedCostAmount": 5.4,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
     }
   ],
   "days": {
@@ -1427,12 +1454,20 @@
         "IREDA",
         "STARHEALTH"
       ]
+    },
+    "2026-11-12": {
+      "contribution": 0,
+      "invested": 0,
+      "buys": [],
+      "exits": [
+        "AUROPHARMA"
+      ]
     }
   },
   "lastSlots": {
     "research": 1794454800000,
     "scan": 1794201300000,
-    "risk": 1794201300000
+    "risk": 1794455100000
   },
   "dailyCache": {
     "GROWW": {
@@ -3304,7 +3339,7 @@
     }
   },
   "suggestions": [],
-  "updatedAt": "2026-11-12T03:40:37.601Z",
+  "updatedAt": "2026-11-12T03:45:39.013Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -3332,10 +3367,47 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-12T03:40:37.601Z",
-    "action": "research",
+    "at": "2026-11-12T03:45:39.013Z",
+    "action": "risk",
     "bought": null,
-    "checked": []
+    "checked": [
+      {
+        "ticker": "MEESHO",
+        "status": "hold"
+      },
+      {
+        "ticker": "MCX",
+        "status": "hold"
+      },
+      {
+        "ticker": "HAVELLS",
+        "status": "hold"
+      },
+      {
+        "ticker": "KALYANKJIL",
+        "status": "hold"
+      },
+      {
+        "ticker": "AUROPHARMA",
+        "status": "sold",
+        "reason": "experimental profit protection",
+        "netPnl": -4.1
+      },
+      {
+        "ticker": "UPL",
+        "status": "hold"
+      },
+      {
+        "ticker": "MAHABANK",
+        "status": "hold"
+      },
+      {
+        "ticker": "IIFL",
+        "status": "hold"
+      }
+    ],
+    "entryPause": null,
+    "researchStatus": "loaded"
   },
   "discovery": {
     "at": "2026-11-09T05:15:40.047Z",
