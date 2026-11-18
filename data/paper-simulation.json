@@ -2,743 +2,9 @@
   "version": 1,
   "strategyVersion": "paper-one-share-v2",
   "mode": "experimental-paper-only",
-  "cash": 20470.52,
+  "cash": 20515.43,
   "contributions": 20000,
-  "positions": [
-    {
-      "id": "2026-11-18|SAGILITY|paper-one-share-v2",
-      "ticker": "SAGILITY",
-      "symbol": "SAGILITY",
-      "instrumentKey": "NSE_EQ|INE0W2G01015",
-      "fullName": "Sagility Ltd.",
-      "sector": "Information Technology",
-      "date": "2026-11-18",
-      "addedAt": "2026-11-18T06:05:36.315Z",
-      "strategyVersion": "paper-one-share-v2",
-      "entryLane": "trend-pullback",
-      "setupType": "trend-pullback",
-      "exitPolicy": {
-        "version": "setup-exits-v1",
-        "mode": "setup-risk",
-        "setupType": "trend-pullback",
-        "activationR": 2,
-        "trailR": 1.5,
-        "roundTripCostBps": 30,
-        "atr14Pct": null
-      },
-      "entryPrice": 45.342659999999995,
-      "shares": 1,
-      "investedAmount": 45.34,
-      "entryCost": 0.07,
-      "initialStopPrice": 45.06489,
-      "initialStopPct": 0.6126019073428801,
-      "modeledInitialRisk": 0.44,
-      "peakPrice": 45.47,
-      "currentPrice": 45.29,
-      "lastObservedAt": "2026-11-18T08:05:41.845Z",
-      "lastPriceUpdate": "2026-11-18T08:05:41.845Z",
-      "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
-      "setup": {
-        "status": "setup",
-        "reason": "",
-        "signalAt": "2026-11-18T06:05:00.000Z",
-        "entryAt": "2026-11-18T06:05:36.315Z",
-        "entryPrice": 45.342659999999995,
-        "breakoutLevel": 45.25,
-        "supportLevel": 45.11,
-        "vwap": 44.878764585962195,
-        "volumeRatio": 3.717105746957385,
-        "setupVersion": "three-setups-v1",
-        "setupType": "trend-pullback",
-        "confirmationType": "trend-pullback",
-        "confirmationAt": "2026-11-18T06:05:00.000Z"
-      },
-      "setupReview": {
-        "version": "three-setups-v1",
-        "asOf": "2026-11-18T06:05:38.877Z",
-        "selectedType": "trend-pullback",
-        "assessment": {
-          "version": "intraday-confirmation-v1",
-          "mode": "adaptive",
-          "status": "qualified",
-          "reasons": [],
-          "metrics": {
-            "return5Pct": 0.3984063745019917,
-            "return15Pct": 0.17667844522968323,
-            "return30Pct": 0.755219902265658,
-            "relative15Pct": 0.16421173925000865,
-            "vwap": 44.878764585962195,
-            "vwapPremiumPct": 1.0336635117244475,
-            "ema5": 45.23803088765277,
-            "typicalRangePct": 0.3919008989190546,
-            "prior5SessionReturnPct": -1.8120805369127524,
-            "ema20PremiumPct": 3.2646163188789323
-          },
-          "setup": {
-            "status": "setup",
-            "reason": "",
-            "signalAt": "2026-11-18T06:05:00.000Z",
-            "entryAt": "2026-11-18T06:05:36.315Z",
-            "entryPrice": 45.342659999999995,
-            "breakoutLevel": 45.25,
-            "supportLevel": 45.11,
-            "vwap": 44.878764585962195,
-            "volumeRatio": 3.717105746957385,
-            "setupVersion": "three-setups-v1",
-            "setupType": "trend-pullback",
-            "confirmationType": "trend-pullback",
-            "confirmationAt": "2026-11-18T06:05:00.000Z"
-          },
-          "dataQuality": {
-            "issues": []
-          },
-          "pendingSignalAt": null
-        },
-        "lanes": [
-          {
-            "type": "compression-breakout",
-            "label": "Compression breakout",
-            "status": "blocked",
-            "checks": [
-              {
-                "label": "Eight contiguous completed five-minute bars",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Fresh completed signal and subsequent execution quote",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Strong positive signal close",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Close and executable price above trigger",
-                "passed": false,
-                "measurement": null
-              },
-              {
-                "label": "At least 1.5× preceding setup-bar volume",
-                "passed": true,
-                "measurement": 2.177682877081052
-              },
-              {
-                "label": "Above session VWAP and prior daily EMA20",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Consolidation no wider than 1.5%",
-                "passed": true,
-                "measurement": 1.225490196078427
-              },
-              {
-                "label": "Recent range contracts to 80% or less",
-                "passed": true,
-                "measurement": 0.6666666666666706
-              },
-              {
-                "label": "Volume dries to 90% or less before breakout",
-                "passed": true,
-                "measurement": 0.5650750779087251
-              },
-              {
-                "label": "Consolidation lows are not deteriorating",
-                "passed": true,
-                "measurement": null
-              }
-            ],
-            "assessment": {
-              "version": "intraday-confirmation-v1",
-              "mode": "adaptive",
-              "status": "blocked",
-              "reasons": [
-                "Close and executable price above trigger"
-              ],
-              "metrics": {
-                "return5Pct": 0.3984063745019917,
-                "return15Pct": 0.17667844522968323,
-                "return30Pct": 0.755219902265658,
-                "relative15Pct": 0.16421173925000865,
-                "vwap": 44.878764585962195,
-                "vwapPremiumPct": 1.0336635117244475,
-                "ema5": 45.23803088765277,
-                "typicalRangePct": 0.3919008989190546,
-                "prior5SessionReturnPct": -1.8120805369127524,
-                "ema20PremiumPct": 3.2646163188789323
-              },
-              "setup": {
-                "status": "no_setup",
-                "reason": "Close and executable price above trigger",
-                "signalAt": "2026-11-18T06:05:00.000Z",
-                "entryAt": "2026-11-18T06:05:36.315Z",
-                "entryPrice": 45.342659999999995,
-                "breakoutLevel": 45.43,
-                "supportLevel": 44.88,
-                "vwap": 44.878764585962195,
-                "volumeRatio": 2.177682877081052,
-                "setupVersion": "three-setups-v1",
-                "setupType": "compression-breakout",
-                "confirmationType": "compression-breakout",
-                "confirmationAt": "2026-11-18T06:05:00.000Z"
-              },
-              "dataQuality": {
-                "issues": []
-              },
-              "pendingSignalAt": null
-            },
-            "trigger": 45.43,
-            "invalidation": 44.83512,
-            "extensionPct": -0.19225181598063745,
-            "missingConfirmation": [
-              "Close and executable price above trigger"
-            ],
-            "researchStatus": "price-only",
-            "asOf": "2026-11-18T06:05:38.877Z"
-          },
-          {
-            "type": "trend-pullback",
-            "label": "Trend pullback / recovery",
-            "status": "qualified",
-            "checks": [
-              {
-                "label": "Eight contiguous completed five-minute bars",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Fresh completed signal and subsequent execution quote",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Strong positive signal close",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Close and executable price above trigger",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "At least 1.5× preceding setup-bar volume",
-                "passed": true,
-                "measurement": 3.717105746957385
-              },
-              {
-                "label": "Above session VWAP and prior daily EMA20",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Established rising impulse before pullback",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Controlled pullback of no more than 1.5%",
-                "passed": true,
-                "measurement": 0.7093770782531594
-              },
-              {
-                "label": "Pullback actually retraces from prior impulse",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Pullback holds VWAP or touches short EMA",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Pullback volume contracts versus impulse",
-                "passed": true,
-                "measurement": null
-              }
-            ],
-            "assessment": {
-              "version": "intraday-confirmation-v1",
-              "mode": "adaptive",
-              "status": "qualified",
-              "reasons": [],
-              "metrics": {
-                "return5Pct": 0.3984063745019917,
-                "return15Pct": 0.17667844522968323,
-                "return30Pct": 0.755219902265658,
-                "relative15Pct": 0.16421173925000865,
-                "vwap": 44.878764585962195,
-                "vwapPremiumPct": 1.0336635117244475,
-                "ema5": 45.23803088765277,
-                "typicalRangePct": 0.3919008989190546,
-                "prior5SessionReturnPct": -1.8120805369127524,
-                "ema20PremiumPct": 3.2646163188789323
-              },
-              "setup": {
-                "status": "setup",
-                "reason": "",
-                "signalAt": "2026-11-18T06:05:00.000Z",
-                "entryAt": "2026-11-18T06:05:36.315Z",
-                "entryPrice": 45.342659999999995,
-                "breakoutLevel": 45.25,
-                "supportLevel": 45.11,
-                "vwap": 44.878764585962195,
-                "volumeRatio": 3.717105746957385,
-                "setupVersion": "three-setups-v1",
-                "setupType": "trend-pullback",
-                "confirmationType": "trend-pullback",
-                "confirmationAt": "2026-11-18T06:05:00.000Z"
-              },
-              "dataQuality": {
-                "issues": []
-              },
-              "pendingSignalAt": null
-            },
-            "trigger": 45.25,
-            "invalidation": 45.06489,
-            "extensionPct": 0.20477348066296752,
-            "missingConfirmation": [],
-            "researchStatus": "price-only",
-            "asOf": "2026-11-18T06:05:38.877Z"
-          },
-          {
-            "type": "catalyst-continuation",
-            "label": "Verified catalyst continuation",
-            "status": "blocked",
-            "checks": [
-              {
-                "label": "Eight contiguous completed five-minute bars",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Fresh completed signal and subsequent execution quote",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Strong positive signal close",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Close and executable price above trigger",
-                "passed": false,
-                "measurement": null
-              },
-              {
-                "label": "At least 1.5× preceding setup-bar volume",
-                "passed": true,
-                "measurement": 2.177682877081052
-              },
-              {
-                "label": "Above session VWAP and prior daily EMA20",
-                "passed": true,
-                "measurement": null
-              },
-              {
-                "label": "Fresh verified positive company-specific event",
-                "passed": false,
-                "measurement": null
-              },
-              {
-                "label": "Event was known before the signal began",
-                "passed": false,
-                "measurement": null
-              },
-              {
-                "label": "Bounded consolidation before continuation",
-                "passed": true,
-                "measurement": 1.225490196078427
-              }
-            ],
-            "assessment": {
-              "version": "intraday-confirmation-v1",
-              "mode": "adaptive",
-              "status": "blocked",
-              "reasons": [
-                "Close and executable price above trigger; Fresh verified positive company-specific event; Event was known before the signal began"
-              ],
-              "metrics": {
-                "return5Pct": 0.3984063745019917,
-                "return15Pct": 0.17667844522968323,
-                "return30Pct": 0.755219902265658,
-                "relative15Pct": 0.16421173925000865,
-                "vwap": 44.878764585962195,
-                "vwapPremiumPct": 1.0336635117244475,
-                "ema5": 45.23803088765277,
-                "typicalRangePct": 0.3919008989190546,
-                "prior5SessionReturnPct": -1.8120805369127524,
-                "ema20PremiumPct": 3.2646163188789323
-              },
-              "setup": {
-                "status": "no_setup",
-                "reason": "Close and executable price above trigger; Fresh verified positive company-specific event; Event was known before the signal began",
-                "signalAt": "2026-11-18T06:05:00.000Z",
-                "entryAt": "2026-11-18T06:05:36.315Z",
-                "entryPrice": 45.342659999999995,
-                "breakoutLevel": 45.43,
-                "supportLevel": 44.88,
-                "vwap": 44.878764585962195,
-                "volumeRatio": 2.177682877081052,
-                "setupVersion": "three-setups-v1",
-                "setupType": "catalyst-continuation",
-                "confirmationType": "catalyst-continuation",
-                "confirmationAt": "2026-11-18T06:05:00.000Z"
-              },
-              "dataQuality": {
-                "issues": []
-              },
-              "pendingSignalAt": null
-            },
-            "trigger": 45.43,
-            "invalidation": 44.83512,
-            "extensionPct": -0.19225181598063745,
-            "missingConfirmation": [
-              "Close and executable price above trigger",
-              "Fresh verified positive company-specific event",
-              "Event was known before the signal began",
-              "Close and executable price above trigger; Fresh verified positive company-specific event; Event was known before the signal began"
-            ],
-            "researchStatus": "price-only",
-            "asOf": "2026-11-18T06:05:38.877Z"
-          }
-        ]
-      },
-      "entryAssessment": {
-        "version": "intraday-confirmation-v1",
-        "mode": "adaptive",
-        "status": "qualified",
-        "reasons": [],
-        "metrics": {
-          "return5Pct": 0.3984063745019917,
-          "return15Pct": 0.17667844522968323,
-          "return30Pct": 0.755219902265658,
-          "relative15Pct": 0.16421173925000865,
-          "vwap": 44.878764585962195,
-          "vwapPremiumPct": 1.0336635117244475,
-          "ema5": 45.23803088765277,
-          "typicalRangePct": 0.3919008989190546,
-          "prior5SessionReturnPct": -1.8120805369127524,
-          "ema20PremiumPct": 3.2646163188789323
-        },
-        "setup": {
-          "status": "setup",
-          "reason": "",
-          "signalAt": "2026-11-18T06:05:00.000Z",
-          "entryAt": "2026-11-18T06:05:36.315Z",
-          "entryPrice": 45.342659999999995,
-          "breakoutLevel": 45.25,
-          "supportLevel": 45.11,
-          "vwap": 44.878764585962195,
-          "volumeRatio": 3.717105746957385,
-          "setupVersion": "three-setups-v1",
-          "setupType": "trend-pullback",
-          "confirmationType": "trend-pullback",
-          "confirmationAt": "2026-11-18T06:05:00.000Z"
-        },
-        "dataQuality": {
-          "issues": []
-        },
-        "pendingSignalAt": null
-      },
-      "entryMarket": {
-        "version": "intraday-confirmation-v1",
-        "at": "2026-11-18T06:05:38.877Z",
-        "status": "supportive",
-        "reasons": [],
-        "metrics": {
-          "return5Pct": -0.03322935972165375,
-          "return15Pct": 0.012466705979674586,
-          "return30Pct": 0.20242353109114486,
-          "close": 25270.45,
-          "ema5": 25264.619155763416,
-          "lastBarAt": "2026-11-18T06:05:00.000Z",
-          "dayChangePct": -0.49296107517903254
-        },
-        "source": "completed provider candles + timestamped index snapshot"
-      },
-      "researchCohort": "price-only",
-      "decisionEvidence": {
-        "version": 1,
-        "asOf": "2026-11-18T06:05:38.877Z",
-        "scope": "decision-time inputs; not current live metrics",
-        "metrics": {
-          "executionPrice": {
-            "label": "Modeled entry ask + slippage",
-            "value": 45.342659999999995,
-            "unit": "INR",
-            "source": "Upstox order book",
-            "asOf": "2026-11-18T06:05:36.315Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "bidPrice": {
-            "label": "Observed best bid",
-            "value": 45.31,
-            "unit": "INR",
-            "source": "Upstox order book",
-            "asOf": "2026-11-18T06:05:36.315Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "askPrice": {
-            "label": "Observed best ask",
-            "value": 45.32,
-            "unit": "INR",
-            "source": "Upstox order book",
-            "asOf": "2026-11-18T06:05:36.315Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "spreadBps": {
-            "label": "Bid/ask spread",
-            "value": 2.2067747986313604,
-            "unit": "bp",
-            "source": "Upstox order book",
-            "asOf": "2026-11-18T06:05:36.315Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "quoteAgeSeconds": {
-            "label": "Execution quote age",
-            "value": 2.562,
-            "unit": "s",
-            "source": "Upstox last trade timestamp",
-            "asOf": "2026-11-18T06:05:38.877Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "ema20": {
-            "label": "20-session EMA",
-            "value": 43.90919330972269,
-            "unit": "INR",
-            "source": "Upstox prior daily closes",
-            "asOf": "2026-11-17T15:30:00+05:30",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "averageTurnoverCr": {
-            "label": "20-session average traded value",
-            "value": 287.99775763365,
-            "unit": "₹ Cr",
-            "source": "Upstox prior daily close × volume",
-            "asOf": "2026-11-17T15:30:00+05:30",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "vwap": {
-            "label": "Signal session VWAP",
-            "value": 44.878764585962195,
-            "unit": "INR",
-            "source": "Completed five-minute candles (typical-price approximation)",
-            "asOf": "2026-11-18T06:05:00.000Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "breakoutLevel": {
-            "label": "Pullback recovery trigger",
-            "value": 45.25,
-            "unit": "INR",
-            "source": "Completed five-minute candles pre-signal structure",
-            "asOf": "2026-11-18T06:05:00.000Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "initialStop": {
-            "label": "Initial structural stop",
-            "value": 45.06489,
-            "unit": "INR",
-            "source": "Range support × 0.999",
-            "asOf": "2026-11-18T06:05:00.000Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "breakoutVolumeRatio": {
-            "label": "Recovery volume / pullback-bar average",
-            "value": 3.717105746957385,
-            "unit": "×",
-            "source": "Completed five-minute candles",
-            "asOf": "2026-11-18T06:05:00.000Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "stockDayReturnPct": {
-            "label": "Stock change since previous close",
-            "value": 3.235361130097969,
-            "unit": "%",
-            "source": "Upstox quote",
-            "asOf": "2026-11-18T06:05:36.315Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "niftyDayReturnPct": {
-            "label": "Nifty change since previous close",
-            "value": -0.49296107517903254,
-            "unit": "%",
-            "source": "Upstox index snapshot",
-            "asOf": "2026-11-18T06:05:38.556Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "safetyReady": {
-            "label": "Surveillance / event context loaded",
-            "value": true,
-            "unit": "boolean",
-            "source": "NSE snapshot + saved event checks",
-            "asOf": "2026-11-18T06:05:38.877Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "stock5Pct": {
-            "label": "Stock: recent 5 minutes",
-            "value": 0.3984063745019917,
-            "unit": "%",
-            "source": "Completed five-minute candles",
-            "asOf": "2026-11-18T06:05:38.877Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "stock15Pct": {
-            "label": "Stock: recent 15 minutes",
-            "value": 0.17667844522968323,
-            "unit": "%",
-            "source": "Completed five-minute candles",
-            "asOf": "2026-11-18T06:05:38.877Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "relative15Pct": {
-            "label": "Stock minus Nifty: recent 15 minutes",
-            "value": 0.16421173925000865,
-            "unit": "%",
-            "source": "Completed five-minute candles",
-            "asOf": "2026-11-18T06:05:38.877Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "nifty5Pct": {
-            "label": "Nifty: recent 5 minutes",
-            "value": -0.03322935972165375,
-            "unit": "%",
-            "source": "Completed five-minute candles",
-            "asOf": "2026-11-18T06:05:38.877Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "nifty15Pct": {
-            "label": "Nifty: recent 15 minutes",
-            "value": 0.012466705979674586,
-            "unit": "%",
-            "source": "Completed five-minute candles",
-            "asOf": "2026-11-18T06:05:38.877Z",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "prior5Pct": {
-            "label": "Stock: prior 5 completed sessions",
-            "value": -1.8120805369127524,
-            "unit": "%",
-            "source": "Upstox completed daily history",
-            "asOf": "2026-11-17T15:30:00+05:30",
-            "required": true,
-            "status": "available",
-            "reason": null
-          },
-          "sessionVolumeRatio": {
-            "label": "Volume so far / average FULL-day volume",
-            "value": 0.7271604700366315,
-            "unit": "×",
-            "source": "Upstox session volume / Upstox prior 20 daily volumes",
-            "asOf": "2026-11-18T06:05:36.315Z",
-            "required": false,
-            "status": "available",
-            "reason": null
-          },
-          "rsi14": {
-            "label": "Daily RSI (14)",
-            "value": 49.41,
-            "unit": "/100",
-            "source": "Upstox prior daily closes; Wilder smoothing",
-            "asOf": "2026-11-17T15:30:00+05:30",
-            "required": false,
-            "status": "available",
-            "reason": null
-          },
-          "atr14Pct": {
-            "label": "Daily ATR (14)",
-            "value": 2.9,
-            "unit": "%",
-            "source": "Upstox prior daily OHLC",
-            "asOf": "2026-11-17T15:30:00+05:30",
-            "required": false,
-            "status": "available",
-            "reason": null
-          },
-          "ema50": {
-            "label": "50-session EMA",
-            "value": 44.12003623462641,
-            "unit": "INR",
-            "source": "Upstox prior daily closes",
-            "asOf": "2026-11-17T15:30:00+05:30",
-            "required": false,
-            "status": "available",
-            "reason": null
-          },
-          "exchangeAverage": {
-            "label": "Exchange average traded price",
-            "value": 44.9,
-            "unit": "INR",
-            "source": "Upstox average_price; separate from the computed signal VWAP",
-            "asOf": "2026-11-18T06:05:36.315Z",
-            "required": false,
-            "status": "available",
-            "reason": null
-          }
-        },
-        "readiness": {
-          "ready": true,
-          "requiredTotal": 20,
-          "requiredAvailable": 20,
-          "missingRequired": [],
-          "invalidInputs": []
-        },
-        "notUsed": [
-          "LLM confidence / win probability",
-          "Institutional ownership or delivery percentage",
-          "Legacy composite / flow score"
-        ]
-      },
-      "discoveryScore": 70.9,
-      "research": null,
-      "executionRuleVersion": "five-minute-three-setups-v1",
-      "quoteTimestamp": "2026-11-18T06:05:36.315Z",
-      "paperTrading": true,
-      "expectedEdge": null
-    }
-  ],
+  "positions": [],
   "trades": [
     {
       "id": "2026-11-04|KAYNES|paper-breakout-v1",
@@ -9079,6 +8345,762 @@
       "exitCost": 3.56,
       "estimatedCostAmount": 7.16,
       "executionModel": "observed-bid-plus-slippage-paper-only"
+    },
+    {
+      "id": "2026-11-18|SAGILITY|paper-one-share-v2",
+      "ticker": "SAGILITY",
+      "symbol": "SAGILITY",
+      "instrumentKey": "NSE_EQ|INE0W2G01015",
+      "fullName": "Sagility Ltd.",
+      "sector": "Information Technology",
+      "date": "2026-11-18",
+      "addedAt": "2026-11-18T06:05:36.315Z",
+      "strategyVersion": "paper-one-share-v2",
+      "entryLane": "trend-pullback",
+      "setupType": "trend-pullback",
+      "exitPolicy": {
+        "version": "setup-exits-v1",
+        "mode": "setup-risk",
+        "setupType": "trend-pullback",
+        "activationR": 2,
+        "trailR": 1.5,
+        "roundTripCostBps": 30,
+        "atr14Pct": null
+      },
+      "entryPrice": 45.342659999999995,
+      "shares": 1,
+      "investedAmount": 45.34,
+      "entryCost": 0.07,
+      "initialStopPrice": 45.06489,
+      "initialStopPct": 0.6126019073428801,
+      "modeledInitialRisk": 0.44,
+      "peakPrice": 45.47,
+      "currentPrice": 45.03,
+      "lastObservedAt": "2026-11-18T08:10:38.295Z",
+      "lastPriceUpdate": "2026-11-18T08:10:38.295Z",
+      "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
+      "setup": {
+        "status": "setup",
+        "reason": "",
+        "signalAt": "2026-11-18T06:05:00.000Z",
+        "entryAt": "2026-11-18T06:05:36.315Z",
+        "entryPrice": 45.342659999999995,
+        "breakoutLevel": 45.25,
+        "supportLevel": 45.11,
+        "vwap": 44.878764585962195,
+        "volumeRatio": 3.717105746957385,
+        "setupVersion": "three-setups-v1",
+        "setupType": "trend-pullback",
+        "confirmationType": "trend-pullback",
+        "confirmationAt": "2026-11-18T06:05:00.000Z"
+      },
+      "setupReview": {
+        "version": "three-setups-v1",
+        "asOf": "2026-11-18T06:05:38.877Z",
+        "selectedType": "trend-pullback",
+        "assessment": {
+          "version": "intraday-confirmation-v1",
+          "mode": "adaptive",
+          "status": "qualified",
+          "reasons": [],
+          "metrics": {
+            "return5Pct": 0.3984063745019917,
+            "return15Pct": 0.17667844522968323,
+            "return30Pct": 0.755219902265658,
+            "relative15Pct": 0.16421173925000865,
+            "vwap": 44.878764585962195,
+            "vwapPremiumPct": 1.0336635117244475,
+            "ema5": 45.23803088765277,
+            "typicalRangePct": 0.3919008989190546,
+            "prior5SessionReturnPct": -1.8120805369127524,
+            "ema20PremiumPct": 3.2646163188789323
+          },
+          "setup": {
+            "status": "setup",
+            "reason": "",
+            "signalAt": "2026-11-18T06:05:00.000Z",
+            "entryAt": "2026-11-18T06:05:36.315Z",
+            "entryPrice": 45.342659999999995,
+            "breakoutLevel": 45.25,
+            "supportLevel": 45.11,
+            "vwap": 44.878764585962195,
+            "volumeRatio": 3.717105746957385,
+            "setupVersion": "three-setups-v1",
+            "setupType": "trend-pullback",
+            "confirmationType": "trend-pullback",
+            "confirmationAt": "2026-11-18T06:05:00.000Z"
+          },
+          "dataQuality": {
+            "issues": []
+          },
+          "pendingSignalAt": null
+        },
+        "lanes": [
+          {
+            "type": "compression-breakout",
+            "label": "Compression breakout",
+            "status": "blocked",
+            "checks": [
+              {
+                "label": "Eight contiguous completed five-minute bars",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Fresh completed signal and subsequent execution quote",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Strong positive signal close",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Close and executable price above trigger",
+                "passed": false,
+                "measurement": null
+              },
+              {
+                "label": "At least 1.5× preceding setup-bar volume",
+                "passed": true,
+                "measurement": 2.177682877081052
+              },
+              {
+                "label": "Above session VWAP and prior daily EMA20",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Consolidation no wider than 1.5%",
+                "passed": true,
+                "measurement": 1.225490196078427
+              },
+              {
+                "label": "Recent range contracts to 80% or less",
+                "passed": true,
+                "measurement": 0.6666666666666706
+              },
+              {
+                "label": "Volume dries to 90% or less before breakout",
+                "passed": true,
+                "measurement": 0.5650750779087251
+              },
+              {
+                "label": "Consolidation lows are not deteriorating",
+                "passed": true,
+                "measurement": null
+              }
+            ],
+            "assessment": {
+              "version": "intraday-confirmation-v1",
+              "mode": "adaptive",
+              "status": "blocked",
+              "reasons": [
+                "Close and executable price above trigger"
+              ],
+              "metrics": {
+                "return5Pct": 0.3984063745019917,
+                "return15Pct": 0.17667844522968323,
+                "return30Pct": 0.755219902265658,
+                "relative15Pct": 0.16421173925000865,
+                "vwap": 44.878764585962195,
+                "vwapPremiumPct": 1.0336635117244475,
+                "ema5": 45.23803088765277,
+                "typicalRangePct": 0.3919008989190546,
+                "prior5SessionReturnPct": -1.8120805369127524,
+                "ema20PremiumPct": 3.2646163188789323
+              },
+              "setup": {
+                "status": "no_setup",
+                "reason": "Close and executable price above trigger",
+                "signalAt": "2026-11-18T06:05:00.000Z",
+                "entryAt": "2026-11-18T06:05:36.315Z",
+                "entryPrice": 45.342659999999995,
+                "breakoutLevel": 45.43,
+                "supportLevel": 44.88,
+                "vwap": 44.878764585962195,
+                "volumeRatio": 2.177682877081052,
+                "setupVersion": "three-setups-v1",
+                "setupType": "compression-breakout",
+                "confirmationType": "compression-breakout",
+                "confirmationAt": "2026-11-18T06:05:00.000Z"
+              },
+              "dataQuality": {
+                "issues": []
+              },
+              "pendingSignalAt": null
+            },
+            "trigger": 45.43,
+            "invalidation": 44.83512,
+            "extensionPct": -0.19225181598063745,
+            "missingConfirmation": [
+              "Close and executable price above trigger"
+            ],
+            "researchStatus": "price-only",
+            "asOf": "2026-11-18T06:05:38.877Z"
+          },
+          {
+            "type": "trend-pullback",
+            "label": "Trend pullback / recovery",
+            "status": "qualified",
+            "checks": [
+              {
+                "label": "Eight contiguous completed five-minute bars",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Fresh completed signal and subsequent execution quote",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Strong positive signal close",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Close and executable price above trigger",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "At least 1.5× preceding setup-bar volume",
+                "passed": true,
+                "measurement": 3.717105746957385
+              },
+              {
+                "label": "Above session VWAP and prior daily EMA20",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Established rising impulse before pullback",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Controlled pullback of no more than 1.5%",
+                "passed": true,
+                "measurement": 0.7093770782531594
+              },
+              {
+                "label": "Pullback actually retraces from prior impulse",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Pullback holds VWAP or touches short EMA",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Pullback volume contracts versus impulse",
+                "passed": true,
+                "measurement": null
+              }
+            ],
+            "assessment": {
+              "version": "intraday-confirmation-v1",
+              "mode": "adaptive",
+              "status": "qualified",
+              "reasons": [],
+              "metrics": {
+                "return5Pct": 0.3984063745019917,
+                "return15Pct": 0.17667844522968323,
+                "return30Pct": 0.755219902265658,
+                "relative15Pct": 0.16421173925000865,
+                "vwap": 44.878764585962195,
+                "vwapPremiumPct": 1.0336635117244475,
+                "ema5": 45.23803088765277,
+                "typicalRangePct": 0.3919008989190546,
+                "prior5SessionReturnPct": -1.8120805369127524,
+                "ema20PremiumPct": 3.2646163188789323
+              },
+              "setup": {
+                "status": "setup",
+                "reason": "",
+                "signalAt": "2026-11-18T06:05:00.000Z",
+                "entryAt": "2026-11-18T06:05:36.315Z",
+                "entryPrice": 45.342659999999995,
+                "breakoutLevel": 45.25,
+                "supportLevel": 45.11,
+                "vwap": 44.878764585962195,
+                "volumeRatio": 3.717105746957385,
+                "setupVersion": "three-setups-v1",
+                "setupType": "trend-pullback",
+                "confirmationType": "trend-pullback",
+                "confirmationAt": "2026-11-18T06:05:00.000Z"
+              },
+              "dataQuality": {
+                "issues": []
+              },
+              "pendingSignalAt": null
+            },
+            "trigger": 45.25,
+            "invalidation": 45.06489,
+            "extensionPct": 0.20477348066296752,
+            "missingConfirmation": [],
+            "researchStatus": "price-only",
+            "asOf": "2026-11-18T06:05:38.877Z"
+          },
+          {
+            "type": "catalyst-continuation",
+            "label": "Verified catalyst continuation",
+            "status": "blocked",
+            "checks": [
+              {
+                "label": "Eight contiguous completed five-minute bars",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Fresh completed signal and subsequent execution quote",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Strong positive signal close",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Close and executable price above trigger",
+                "passed": false,
+                "measurement": null
+              },
+              {
+                "label": "At least 1.5× preceding setup-bar volume",
+                "passed": true,
+                "measurement": 2.177682877081052
+              },
+              {
+                "label": "Above session VWAP and prior daily EMA20",
+                "passed": true,
+                "measurement": null
+              },
+              {
+                "label": "Fresh verified positive company-specific event",
+                "passed": false,
+                "measurement": null
+              },
+              {
+                "label": "Event was known before the signal began",
+                "passed": false,
+                "measurement": null
+              },
+              {
+                "label": "Bounded consolidation before continuation",
+                "passed": true,
+                "measurement": 1.225490196078427
+              }
+            ],
+            "assessment": {
+              "version": "intraday-confirmation-v1",
+              "mode": "adaptive",
+              "status": "blocked",
+              "reasons": [
+                "Close and executable price above trigger; Fresh verified positive company-specific event; Event was known before the signal began"
+              ],
+              "metrics": {
+                "return5Pct": 0.3984063745019917,
+                "return15Pct": 0.17667844522968323,
+                "return30Pct": 0.755219902265658,
+                "relative15Pct": 0.16421173925000865,
+                "vwap": 44.878764585962195,
+                "vwapPremiumPct": 1.0336635117244475,
+                "ema5": 45.23803088765277,
+                "typicalRangePct": 0.3919008989190546,
+                "prior5SessionReturnPct": -1.8120805369127524,
+                "ema20PremiumPct": 3.2646163188789323
+              },
+              "setup": {
+                "status": "no_setup",
+                "reason": "Close and executable price above trigger; Fresh verified positive company-specific event; Event was known before the signal began",
+                "signalAt": "2026-11-18T06:05:00.000Z",
+                "entryAt": "2026-11-18T06:05:36.315Z",
+                "entryPrice": 45.342659999999995,
+                "breakoutLevel": 45.43,
+                "supportLevel": 44.88,
+                "vwap": 44.878764585962195,
+                "volumeRatio": 2.177682877081052,
+                "setupVersion": "three-setups-v1",
+                "setupType": "catalyst-continuation",
+                "confirmationType": "catalyst-continuation",
+                "confirmationAt": "2026-11-18T06:05:00.000Z"
+              },
+              "dataQuality": {
+                "issues": []
+              },
+              "pendingSignalAt": null
+            },
+            "trigger": 45.43,
+            "invalidation": 44.83512,
+            "extensionPct": -0.19225181598063745,
+            "missingConfirmation": [
+              "Close and executable price above trigger",
+              "Fresh verified positive company-specific event",
+              "Event was known before the signal began",
+              "Close and executable price above trigger; Fresh verified positive company-specific event; Event was known before the signal began"
+            ],
+            "researchStatus": "price-only",
+            "asOf": "2026-11-18T06:05:38.877Z"
+          }
+        ]
+      },
+      "entryAssessment": {
+        "version": "intraday-confirmation-v1",
+        "mode": "adaptive",
+        "status": "qualified",
+        "reasons": [],
+        "metrics": {
+          "return5Pct": 0.3984063745019917,
+          "return15Pct": 0.17667844522968323,
+          "return30Pct": 0.755219902265658,
+          "relative15Pct": 0.16421173925000865,
+          "vwap": 44.878764585962195,
+          "vwapPremiumPct": 1.0336635117244475,
+          "ema5": 45.23803088765277,
+          "typicalRangePct": 0.3919008989190546,
+          "prior5SessionReturnPct": -1.8120805369127524,
+          "ema20PremiumPct": 3.2646163188789323
+        },
+        "setup": {
+          "status": "setup",
+          "reason": "",
+          "signalAt": "2026-11-18T06:05:00.000Z",
+          "entryAt": "2026-11-18T06:05:36.315Z",
+          "entryPrice": 45.342659999999995,
+          "breakoutLevel": 45.25,
+          "supportLevel": 45.11,
+          "vwap": 44.878764585962195,
+          "volumeRatio": 3.717105746957385,
+          "setupVersion": "three-setups-v1",
+          "setupType": "trend-pullback",
+          "confirmationType": "trend-pullback",
+          "confirmationAt": "2026-11-18T06:05:00.000Z"
+        },
+        "dataQuality": {
+          "issues": []
+        },
+        "pendingSignalAt": null
+      },
+      "entryMarket": {
+        "version": "intraday-confirmation-v1",
+        "at": "2026-11-18T06:05:38.877Z",
+        "status": "supportive",
+        "reasons": [],
+        "metrics": {
+          "return5Pct": -0.03322935972165375,
+          "return15Pct": 0.012466705979674586,
+          "return30Pct": 0.20242353109114486,
+          "close": 25270.45,
+          "ema5": 25264.619155763416,
+          "lastBarAt": "2026-11-18T06:05:00.000Z",
+          "dayChangePct": -0.49296107517903254
+        },
+        "source": "completed provider candles + timestamped index snapshot"
+      },
+      "researchCohort": "price-only",
+      "decisionEvidence": {
+        "version": 1,
+        "asOf": "2026-11-18T06:05:38.877Z",
+        "scope": "decision-time inputs; not current live metrics",
+        "metrics": {
+          "executionPrice": {
+            "label": "Modeled entry ask + slippage",
+            "value": 45.342659999999995,
+            "unit": "INR",
+            "source": "Upstox order book",
+            "asOf": "2026-11-18T06:05:36.315Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "bidPrice": {
+            "label": "Observed best bid",
+            "value": 45.31,
+            "unit": "INR",
+            "source": "Upstox order book",
+            "asOf": "2026-11-18T06:05:36.315Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "askPrice": {
+            "label": "Observed best ask",
+            "value": 45.32,
+            "unit": "INR",
+            "source": "Upstox order book",
+            "asOf": "2026-11-18T06:05:36.315Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "spreadBps": {
+            "label": "Bid/ask spread",
+            "value": 2.2067747986313604,
+            "unit": "bp",
+            "source": "Upstox order book",
+            "asOf": "2026-11-18T06:05:36.315Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "quoteAgeSeconds": {
+            "label": "Execution quote age",
+            "value": 2.562,
+            "unit": "s",
+            "source": "Upstox last trade timestamp",
+            "asOf": "2026-11-18T06:05:38.877Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "ema20": {
+            "label": "20-session EMA",
+            "value": 43.90919330972269,
+            "unit": "INR",
+            "source": "Upstox prior daily closes",
+            "asOf": "2026-11-17T15:30:00+05:30",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "averageTurnoverCr": {
+            "label": "20-session average traded value",
+            "value": 287.99775763365,
+            "unit": "₹ Cr",
+            "source": "Upstox prior daily close × volume",
+            "asOf": "2026-11-17T15:30:00+05:30",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "vwap": {
+            "label": "Signal session VWAP",
+            "value": 44.878764585962195,
+            "unit": "INR",
+            "source": "Completed five-minute candles (typical-price approximation)",
+            "asOf": "2026-11-18T06:05:00.000Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "breakoutLevel": {
+            "label": "Pullback recovery trigger",
+            "value": 45.25,
+            "unit": "INR",
+            "source": "Completed five-minute candles pre-signal structure",
+            "asOf": "2026-11-18T06:05:00.000Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "initialStop": {
+            "label": "Initial structural stop",
+            "value": 45.06489,
+            "unit": "INR",
+            "source": "Range support × 0.999",
+            "asOf": "2026-11-18T06:05:00.000Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "breakoutVolumeRatio": {
+            "label": "Recovery volume / pullback-bar average",
+            "value": 3.717105746957385,
+            "unit": "×",
+            "source": "Completed five-minute candles",
+            "asOf": "2026-11-18T06:05:00.000Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "stockDayReturnPct": {
+            "label": "Stock change since previous close",
+            "value": 3.235361130097969,
+            "unit": "%",
+            "source": "Upstox quote",
+            "asOf": "2026-11-18T06:05:36.315Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "niftyDayReturnPct": {
+            "label": "Nifty change since previous close",
+            "value": -0.49296107517903254,
+            "unit": "%",
+            "source": "Upstox index snapshot",
+            "asOf": "2026-11-18T06:05:38.556Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "safetyReady": {
+            "label": "Surveillance / event context loaded",
+            "value": true,
+            "unit": "boolean",
+            "source": "NSE snapshot + saved event checks",
+            "asOf": "2026-11-18T06:05:38.877Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "stock5Pct": {
+            "label": "Stock: recent 5 minutes",
+            "value": 0.3984063745019917,
+            "unit": "%",
+            "source": "Completed five-minute candles",
+            "asOf": "2026-11-18T06:05:38.877Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "stock15Pct": {
+            "label": "Stock: recent 15 minutes",
+            "value": 0.17667844522968323,
+            "unit": "%",
+            "source": "Completed five-minute candles",
+            "asOf": "2026-11-18T06:05:38.877Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "relative15Pct": {
+            "label": "Stock minus Nifty: recent 15 minutes",
+            "value": 0.16421173925000865,
+            "unit": "%",
+            "source": "Completed five-minute candles",
+            "asOf": "2026-11-18T06:05:38.877Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "nifty5Pct": {
+            "label": "Nifty: recent 5 minutes",
+            "value": -0.03322935972165375,
+            "unit": "%",
+            "source": "Completed five-minute candles",
+            "asOf": "2026-11-18T06:05:38.877Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "nifty15Pct": {
+            "label": "Nifty: recent 15 minutes",
+            "value": 0.012466705979674586,
+            "unit": "%",
+            "source": "Completed five-minute candles",
+            "asOf": "2026-11-18T06:05:38.877Z",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "prior5Pct": {
+            "label": "Stock: prior 5 completed sessions",
+            "value": -1.8120805369127524,
+            "unit": "%",
+            "source": "Upstox completed daily history",
+            "asOf": "2026-11-17T15:30:00+05:30",
+            "required": true,
+            "status": "available",
+            "reason": null
+          },
+          "sessionVolumeRatio": {
+            "label": "Volume so far / average FULL-day volume",
+            "value": 0.7271604700366315,
+            "unit": "×",
+            "source": "Upstox session volume / Upstox prior 20 daily volumes",
+            "asOf": "2026-11-18T06:05:36.315Z",
+            "required": false,
+            "status": "available",
+            "reason": null
+          },
+          "rsi14": {
+            "label": "Daily RSI (14)",
+            "value": 49.41,
+            "unit": "/100",
+            "source": "Upstox prior daily closes; Wilder smoothing",
+            "asOf": "2026-11-17T15:30:00+05:30",
+            "required": false,
+            "status": "available",
+            "reason": null
+          },
+          "atr14Pct": {
+            "label": "Daily ATR (14)",
+            "value": 2.9,
+            "unit": "%",
+            "source": "Upstox prior daily OHLC",
+            "asOf": "2026-11-17T15:30:00+05:30",
+            "required": false,
+            "status": "available",
+            "reason": null
+          },
+          "ema50": {
+            "label": "50-session EMA",
+            "value": 44.12003623462641,
+            "unit": "INR",
+            "source": "Upstox prior daily closes",
+            "asOf": "2026-11-17T15:30:00+05:30",
+            "required": false,
+            "status": "available",
+            "reason": null
+          },
+          "exchangeAverage": {
+            "label": "Exchange average traded price",
+            "value": 44.9,
+            "unit": "INR",
+            "source": "Upstox average_price; separate from the computed signal VWAP",
+            "asOf": "2026-11-18T06:05:36.315Z",
+            "required": false,
+            "status": "available",
+            "reason": null
+          }
+        },
+        "readiness": {
+          "ready": true,
+          "requiredTotal": 20,
+          "requiredAvailable": 20,
+          "missingRequired": [],
+          "invalidInputs": []
+        },
+        "notUsed": [
+          "LLM confidence / win probability",
+          "Institutional ownership or delivery percentage",
+          "Legacy composite / flow score"
+        ]
+      },
+      "discoveryScore": 70.9,
+      "research": null,
+      "executionRuleVersion": "five-minute-three-setups-v1",
+      "quoteTimestamp": "2026-11-18T06:05:36.315Z",
+      "paperTrading": true,
+      "expectedEdge": null,
+      "exitIntent": {
+        "id": "2026-11-18|SAGILITY|paper-one-share-v2|setup-exits-v1",
+        "observedAt": "2026-11-18T08:10:38.295Z",
+        "triggerPrice": 45.06489,
+        "observedFillPrice": 45,
+        "reason": "initial invalidation",
+        "grossReturnPct": -0.7557121703931635,
+        "estimatedNetReturnPct": -1.0557121703931636,
+        "execution": "shadow-observation-only"
+      },
+      "entryAt": "2026-11-18T06:05:36.315Z",
+      "entryDate": "2026-11-18",
+      "exitAt": "2026-11-18T08:10:38.295Z",
+      "exitDate": "2026-11-18",
+      "exitPrice": 44.9775,
+      "triggerPrice": 45.06489,
+      "exitReason": "initial invalidation",
+      "realizedPnl": -0.36,
+      "realizedNetPnl": -0.5,
+      "realizedPnlPct": -0.81,
+      "exitCost": 0.07,
+      "estimatedCostAmount": 0.14,
+      "executionModel": "observed-bid-plus-slippage-paper-only"
     }
   ],
   "days": {
@@ -9213,14 +9235,15 @@
       ],
       "exits": [
         "KARURVYSYA",
-        "EMCURE"
+        "EMCURE",
+        "SAGILITY"
       ]
     }
   },
   "lastSlots": {
     "research": 1794973200000,
     "scan": 1794989100000,
-    "risk": 1794989100000
+    "risk": 1794989400000
   },
   "dailyCache": {
     "GROWW": {
@@ -21247,7 +21270,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-18T08:05:42.585Z",
+  "updatedAt": "2026-11-18T08:10:38.496Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -21275,13 +21298,15 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-18T08:05:42.585Z",
-    "action": "scan",
+    "at": "2026-11-18T08:10:38.496Z",
+    "action": "risk",
     "bought": null,
     "checked": [
       {
         "ticker": "SAGILITY",
-        "status": "hold"
+        "status": "sold",
+        "reason": "initial invalidation",
+        "netPnl": -0.5
       }
     ],
     "entryPause": null,
