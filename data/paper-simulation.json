@@ -34,9 +34,9 @@
       "initialStopPct": 1.2718359921162992,
       "modeledInitialRisk": 2.05,
       "peakPrice": 128.36,
-      "currentPrice": 128.07,
-      "lastObservedAt": "2026-11-19T07:05:40.858Z",
-      "lastPriceUpdate": "2026-11-19T07:05:40.858Z",
+      "currentPrice": 128.25,
+      "lastObservedAt": "2026-11-19T07:10:37.480Z",
+      "lastPriceUpdate": "2026-11-19T07:10:37.480Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -769,10 +769,10 @@
       "initialStopPrice": 1690.7076000000002,
       "initialStopPct": 1.1776217154580548,
       "modeledInitialRisk": 26.14,
-      "peakPrice": 1738.8,
-      "currentPrice": 1738.8,
-      "lastObservedAt": "2026-11-19T07:05:39.006Z",
-      "lastPriceUpdate": "2026-11-19T07:05:39.006Z",
+      "peakPrice": 1741.9,
+      "currentPrice": 1741.9,
+      "lastObservedAt": "2026-11-19T07:10:38.481Z",
+      "lastPriceUpdate": "2026-11-19T07:10:38.481Z",
       "summary": "Completed compression-breakout entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -1471,7 +1471,8 @@
       "executionRuleVersion": "five-minute-three-setups-v1",
       "quoteTimestamp": "2026-11-19T06:00:39.669Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 1721.7526000000003
     },
     {
       "id": "2026-11-19|HEROMOTOCO|paper-one-share-v2",
@@ -1502,9 +1503,9 @@
       "initialStopPct": 0.6943638322605139,
       "modeledInitialRisk": 57.49,
       "peakPrice": 5524,
-      "currentPrice": 5499.5,
-      "lastObservedAt": "2026-11-19T07:05:40.235Z",
-      "lastPriceUpdate": "2026-11-19T07:05:40.235Z",
+      "currentPrice": 5502,
+      "lastObservedAt": "2026-11-19T07:10:37.003Z",
+      "lastPriceUpdate": "2026-11-19T07:10:37.003Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -11458,7 +11459,7 @@
   "lastSlots": {
     "research": 1795059600000,
     "scan": 1795071900000,
-    "risk": 1795071900000
+    "risk": 1795072200000
   },
   "dailyCache": {
     "GROWW": {
@@ -23663,7 +23664,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-19T07:05:41.693Z",
+  "updatedAt": "2026-11-19T07:10:39.073Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -23691,8 +23692,8 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-19T07:05:41.693Z",
-    "action": "scan",
+    "at": "2026-11-19T07:10:39.073Z",
+    "action": "risk",
     "bought": null,
     "checked": [
       {
