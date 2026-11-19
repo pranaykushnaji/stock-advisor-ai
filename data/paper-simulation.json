@@ -33,10 +33,10 @@
       "initialStopPrice": 124.83503999999999,
       "initialStopPct": 1.2718359921162992,
       "modeledInitialRisk": 2.05,
-      "peakPrice": 128.94,
-      "currentPrice": 128.9,
-      "lastObservedAt": "2026-11-19T07:50:41.101Z",
-      "lastPriceUpdate": "2026-11-19T07:50:41.101Z",
+      "peakPrice": 129.76,
+      "currentPrice": 129.76,
+      "lastObservedAt": "2026-11-19T07:55:37.136Z",
+      "lastPriceUpdate": "2026-11-19T07:55:37.136Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -739,7 +739,8 @@
       "executionRuleVersion": "five-minute-three-setups-v1",
       "quoteTimestamp": "2026-11-19T04:35:38.832Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 127.347775
     },
     {
       "id": "2026-11-19|BLUESTARCO|paper-one-share-v2",
@@ -769,10 +770,10 @@
       "initialStopPrice": 1690.7076000000002,
       "initialStopPct": 1.1776217154580548,
       "modeledInitialRisk": 26.14,
-      "peakPrice": 1747.4,
-      "currentPrice": 1746.2,
-      "lastObservedAt": "2026-11-19T07:50:40.148Z",
-      "lastPriceUpdate": "2026-11-19T07:50:40.148Z",
+      "peakPrice": 1748.1,
+      "currentPrice": 1748.1,
+      "lastObservedAt": "2026-11-19T07:55:35.381Z",
+      "lastPriceUpdate": "2026-11-19T07:55:35.381Z",
       "summary": "Completed compression-breakout entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -1472,7 +1473,7 @@
       "quoteTimestamp": "2026-11-19T06:00:39.669Z",
       "paperTrading": true,
       "expectedEdge": null,
-      "trailingStopPrice": 1727.2526000000003
+      "trailingStopPrice": 1727.9526
     },
     {
       "id": "2026-11-19|HEROMOTOCO|paper-one-share-v2",
@@ -1503,9 +1504,9 @@
       "initialStopPct": 0.6943638322605139,
       "modeledInitialRisk": 57.49,
       "peakPrice": 5524,
-      "currentPrice": 5506,
-      "lastObservedAt": "2026-11-19T07:50:39.629Z",
-      "lastPriceUpdate": "2026-11-19T07:50:39.629Z",
+      "currentPrice": 5513,
+      "lastObservedAt": "2026-11-19T07:55:37.003Z",
+      "lastPriceUpdate": "2026-11-19T07:55:37.003Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -11459,7 +11460,7 @@
   "lastSlots": {
     "research": 1795059600000,
     "scan": 1795074600000,
-    "risk": 1795074600000
+    "risk": 1795074900000
   },
   "dailyCache": {
     "GROWW": {
@@ -23740,7 +23741,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-19T07:50:42.337Z",
+  "updatedAt": "2026-11-19T07:55:38.214Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -23768,8 +23769,8 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-19T07:50:42.337Z",
-    "action": "scan",
+    "at": "2026-11-19T07:55:38.214Z",
+    "action": "risk",
     "bought": null,
     "checked": [
       {
