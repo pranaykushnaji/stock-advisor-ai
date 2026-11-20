@@ -33,10 +33,10 @@
       "initialStopPrice": 1690.7076000000002,
       "initialStopPct": 1.1776217154580548,
       "modeledInitialRisk": 26.14,
-      "peakPrice": 1770.9,
-      "currentPrice": 1770.9,
-      "lastObservedAt": "2026-11-19T09:44:57.461Z",
-      "lastPriceUpdate": "2026-11-19T09:44:57.461Z",
+      "peakPrice": 1800.5,
+      "currentPrice": 1800.5,
+      "lastObservedAt": "2026-11-20T03:45:37.029Z",
+      "lastPriceUpdate": "2026-11-20T03:45:37.029Z",
       "summary": "Completed compression-breakout entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -736,7 +736,7 @@
       "quoteTimestamp": "2026-11-19T06:00:39.669Z",
       "paperTrading": true,
       "expectedEdge": null,
-      "trailingStopPrice": 1750.7526000000003
+      "trailingStopPrice": 1780.3526000000002
     },
     {
       "id": "2026-11-19|HEROMOTOCO|paper-one-share-v2",
@@ -767,9 +767,9 @@
       "initialStopPct": 0.6943638322605139,
       "modeledInitialRisk": 57.49,
       "peakPrice": 5541.5,
-      "currentPrice": 5536,
-      "lastObservedAt": "2026-11-19T09:44:58.701Z",
-      "lastPriceUpdate": "2026-11-19T09:44:58.701Z",
+      "currentPrice": 5532,
+      "lastObservedAt": "2026-11-20T03:45:36.400Z",
+      "lastPriceUpdate": "2026-11-20T03:45:36.400Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -1503,9 +1503,9 @@
       "initialStopPct": 0.7961473172806599,
       "modeledInitialRisk": 6.56,
       "peakPrice": 578.5,
-      "currentPrice": 578.1,
-      "lastObservedAt": "2026-11-19T09:44:56.409Z",
-      "lastPriceUpdate": "2026-11-19T09:44:56.409Z",
+      "currentPrice": 573.75,
+      "lastObservedAt": "2026-11-20T03:45:32.005Z",
+      "lastPriceUpdate": "2026-11-20T03:45:32.005Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -12214,12 +12214,18 @@
       "exits": [
         "IREDA"
       ]
+    },
+    "2026-11-20": {
+      "contribution": 0,
+      "invested": 0,
+      "buys": [],
+      "exits": []
     }
   },
   "lastSlots": {
     "research": 1795146000000,
     "scan": 1795082100000,
-    "risk": 1795082100000
+    "risk": 1795146300000
   },
   "dailyCache": {
     "GROWW": {
@@ -18884,7 +18890,7 @@
     }
   },
   "suggestions": [],
-  "updatedAt": "2026-11-20T03:40:37.696Z",
+  "updatedAt": "2026-11-20T03:45:37.707Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -18912,10 +18918,25 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-20T03:40:37.696Z",
-    "action": "research",
+    "at": "2026-11-20T03:45:37.707Z",
+    "action": "risk",
     "bought": null,
-    "checked": []
+    "checked": [
+      {
+        "ticker": "BLUESTARCO",
+        "status": "hold"
+      },
+      {
+        "ticker": "HEROMOTOCO",
+        "status": "hold"
+      },
+      {
+        "ticker": "PGEL",
+        "status": "hold"
+      }
+    ],
+    "entryPause": null,
+    "researchStatus": "loaded"
   },
   "discovery": {
     "at": "2026-11-19T09:55:42.095Z",
