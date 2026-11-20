@@ -33,10 +33,10 @@
       "initialStopPrice": 5466.528,
       "initialStopPct": 0.6943638322605139,
       "modeledInitialRisk": 57.49,
-      "peakPrice": 5567,
-      "currentPrice": 5567,
-      "lastObservedAt": "2026-11-20T04:20:37.025Z",
-      "lastPriceUpdate": "2026-11-20T04:20:37.025Z",
+      "peakPrice": 5581.5,
+      "currentPrice": 5581.5,
+      "lastObservedAt": "2026-11-20T04:25:35.150Z",
+      "lastPriceUpdate": "2026-11-20T04:25:35.150Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -739,7 +739,8 @@
       "executionRuleVersion": "five-minute-three-setups-v1",
       "quoteTimestamp": "2026-11-19T06:15:41.471Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 5524.165500000001
     },
     {
       "id": "2026-11-19|PGEL|paper-one-share-v2",
@@ -769,10 +770,10 @@
       "initialStopPrice": 567.432,
       "initialStopPct": 0.7961473172806599,
       "modeledInitialRisk": 6.56,
-      "peakPrice": 578.5,
-      "currentPrice": 578.4,
-      "lastObservedAt": "2026-11-20T04:20:38.452Z",
-      "lastPriceUpdate": "2026-11-20T04:20:38.452Z",
+      "peakPrice": 586.45,
+      "currentPrice": 586.45,
+      "lastObservedAt": "2026-11-20T04:25:36.217Z",
+      "lastPriceUpdate": "2026-11-20T04:25:36.217Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -1472,7 +1473,8 @@
       "executionRuleVersion": "five-minute-three-setups-v1",
       "quoteTimestamp": "2026-11-19T08:10:35.525Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 579.619225
     }
   ],
   "trades": [
@@ -12250,7 +12252,7 @@
   "lastSlots": {
     "research": 1795146000000,
     "scan": 1795148400000,
-    "risk": 1795148400000
+    "risk": 1795148700000
   },
   "dailyCache": {
     "GROWW": {
@@ -24649,7 +24651,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-20T04:20:42.573Z",
+  "updatedAt": "2026-11-20T04:25:37.672Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -24677,8 +24679,8 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-20T04:20:42.573Z",
-    "action": "scan",
+    "at": "2026-11-20T04:25:37.672Z",
+    "action": "risk",
     "bought": null,
     "checked": [
       {
