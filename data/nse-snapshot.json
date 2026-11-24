@@ -1,7 +1,7 @@
 {
-  "fetchedAt": "2026-11-24T03:16:22.296Z",
+  "fetchedAt": "2026-11-24T04:16:22.115Z",
   "diag": {
-    "marketStatus": false,
+    "marketStatus": true,
     "moversCount": 218,
     "universeCount": 214,
     "universeIndicesScanned": 8,
@@ -23,6 +23,114 @@
     "deliveryData": true
   },
   "data": {
+    "marketStatus": {
+      "marketState": [
+        {
+          "market": "Capital Market",
+          "marketStatus": "Close",
+          "tradeDate": "23-Nov-2026 15:30",
+          "index": "NIFTY 50",
+          "last": 25349.65,
+          "variation": -450.9499999999971,
+          "percentChange": -1.75,
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Currency",
+          "marketStatus": "Close",
+          "tradeDate": "23-Nov-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Commodity",
+          "marketStatus": "Open",
+          "tradeDate": "24-Nov-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "market": "Debt",
+          "marketStatus": "Close",
+          "tradeDate": "23-Nov-2026",
+          "index": "",
+          "last": "",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed"
+        },
+        {
+          "index": "NIFTY50 USD",
+          "last": 9451.1,
+          "change": -195.28999999999905,
+          "percentChange": -2.02,
+          "timestamp": "23-Nov-2026 15:40"
+        },
+        {
+          "market": "currencyfuture",
+          "marketStatus": "Close",
+          "tradeDate": "23-Nov-2026",
+          "index": "",
+          "last": "92.9025",
+          "variation": "",
+          "percentChange": "",
+          "marketStatusMessage": "Market is Closed",
+          "expiryDate": "26-Nov-2026",
+          "underlying": "USDINR",
+          "updated_time": "23-Nov-2026 17:05",
+          "tradeDateFormatted": "23-Nov-2026 17:05",
+          "slickclass": "slick-item"
+        }
+      ],
+      "marketcap": {
+        "timeStamp": "23-Nov-2026",
+        "marketCapinTRDollars": 5.42,
+        "marketCapinLACCRRupees": 503.1383895440397,
+        "marketCapinCRRupees": 50313838.95,
+        "marketCapinCRRupeesFormatted": "50,313,838.95",
+        "marketCapinLACCRRupeesFormatted": "503.14",
+        "underlying": "Market Cap"
+      },
+      "indicativenifty50": {
+        "change": -450.95,
+        "closingValue": 25349.65,
+        "dateTime": "23-Nov-2026 15:30",
+        "finalClosingValue": 25349.65,
+        "indexLast": null,
+        "indexName": "NIFTY 50",
+        "indexPercChange": null,
+        "indexTimeVal": null,
+        "indicativeTime": null,
+        "perChange": -1.75,
+        "status": "CLOSE"
+      },
+      "giftnifty": {
+        "CONTRACTSTRADED": 5639,
+        "DAYCHANGE": 23,
+        "EXPIRYDATE": "29-Dec-2026",
+        "INSTRUMENTTYPE": "FUTIDX",
+        "LASTPRICE": 25559.5,
+        "OPTIONTYPE": "-",
+        "PERCHANGE": 0.09,
+        "STRIKEPRICE": 0,
+        "SYMBOL": "NIFTY",
+        "TIMESTMP": "24-Nov-2026 09:44",
+        "id": "0/NIFTYFUTIDX29-Dec-2026--"
+      },
+      "niftyusd": {
+        "index": "NIFTY50 USD",
+        "last": 9451.1,
+        "change": -195.28999999999905,
+        "percentChange": -2.02,
+        "timestamp": "23-Nov-2026 15:40"
+      }
+    },
     "topGainers": [
       {
         "symbol": "POLICYBZR",
@@ -3087,6 +3195,16 @@
     ],
     "announcements": [
       {
+        "symbol": "WINDMACHIN",
+        "subject": "Spurt in Volume",
+        "date": "24-Nov-2026 09:45:16"
+      },
+      {
+        "symbol": "CYIENTDLM",
+        "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
+        "date": "24-Nov-2026 09:37:07"
+      },
+      {
         "symbol": "PTCIL",
         "subject": "Analysts/Institutional Investor Meet/Con. Call Updates",
         "date": "24-Nov-2026 08:35:55"
@@ -5575,16 +5693,6 @@
         "symbol": "RATNAVEER",
         "subject": "Press Release",
         "date": "21-Nov-2026 14:33:49"
-      },
-      {
-        "symbol": "VISAKAIND",
-        "subject": "Updates",
-        "date": "21-Nov-2026 14:32:19"
-      },
-      {
-        "symbol": "AVROIND",
-        "subject": "Resignation",
-        "date": "21-Nov-2026 14:20:39"
       }
     ],
     "deliverySample": {
