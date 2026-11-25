@@ -34,9 +34,9 @@
       "initialStopPct": 0.6558556613074806,
       "modeledInitialRisk": 10.23,
       "peakPrice": 1016.9082,
-      "currentPrice": 1016.4,
-      "lastObservedAt": "2026-11-25T05:55:38.115Z",
-      "lastPriceUpdate": "2026-11-25T05:55:38.115Z",
+      "currentPrice": 1014.4,
+      "lastObservedAt": "2026-11-25T06:00:36.410Z",
+      "lastPriceUpdate": "2026-11-25T06:00:36.410Z",
       "summary": "Completed compression-breakout entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -13046,7 +13046,7 @@
   "lastSlots": {
     "research": 1795578000000,
     "scan": 1795586100000,
-    "risk": 1795159500000
+    "risk": 1795586400000
   },
   "dailyCache": {
     "GROWW": {
@@ -25790,7 +25790,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-25T05:55:39.817Z",
+  "updatedAt": "2026-11-25T06:00:37.917Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -25818,10 +25818,15 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-25T05:55:39.817Z",
-    "action": "scan",
-    "bought": "AUBANK",
-    "checked": [],
+    "at": "2026-11-25T06:00:37.917Z",
+    "action": "risk",
+    "bought": null,
+    "checked": [
+      {
+        "ticker": "AUBANK",
+        "status": "hold"
+      }
+    ],
     "entryPause": null,
     "researchStatus": "loaded"
   },
