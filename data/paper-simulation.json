@@ -34,9 +34,9 @@
       "initialStopPct": 0.5987444329486058,
       "modeledInitialRisk": 23.23,
       "peakPrice": 2455.3,
-      "currentPrice": 2445.6,
-      "lastObservedAt": "2026-11-25T09:44:59.499Z",
-      "lastPriceUpdate": "2026-11-25T09:44:59.499Z",
+      "currentPrice": 2450,
+      "lastObservedAt": "2026-11-26T03:45:32.976Z",
+      "lastPriceUpdate": "2026-11-26T03:45:32.976Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -14558,12 +14558,18 @@
         "AUBANK",
         "BLUESTARCO"
       ]
+    },
+    "2026-11-26": {
+      "contribution": 0,
+      "invested": 0,
+      "buys": [],
+      "exits": []
     }
   },
   "lastSlots": {
     "research": 1795664400000,
     "scan": 1795600500000,
-    "risk": 1795600500000
+    "risk": 1795664700000
   },
   "dailyCache": {
     "GROWW": {
@@ -21621,7 +21627,7 @@
     }
   },
   "suggestions": [],
-  "updatedAt": "2026-11-26T03:40:37.503Z",
+  "updatedAt": "2026-11-26T03:45:37.492Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -21649,10 +21655,17 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-26T03:40:37.503Z",
-    "action": "research",
+    "at": "2026-11-26T03:45:37.492Z",
+    "action": "risk",
     "bought": null,
-    "checked": []
+    "checked": [
+      {
+        "ticker": "LAURUSLABS",
+        "status": "hold"
+      }
+    ],
+    "entryPause": null,
+    "researchStatus": "loaded"
   },
   "discovery": {
     "at": "2026-11-25T09:55:42.044Z",
