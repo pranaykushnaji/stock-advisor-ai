@@ -34,9 +34,9 @@
       "initialStopPct": 0.5987444329486058,
       "modeledInitialRisk": 23.23,
       "peakPrice": 2516.3,
-      "currentPrice": 2515.1,
-      "lastObservedAt": "2026-11-26T07:25:40.667Z",
-      "lastPriceUpdate": "2026-11-26T07:25:40.667Z",
+      "currentPrice": 2507.5,
+      "lastObservedAt": "2026-11-26T07:30:37.146Z",
+      "lastPriceUpdate": "2026-11-26T07:30:37.146Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -766,10 +766,10 @@
       "initialStopPrice": 1705.293,
       "initialStopPct": 1.8744513753485958,
       "modeledInitialRisk": 38.66,
-      "peakPrice": 1785.1,
-      "currentPrice": 1783.1,
-      "lastObservedAt": "2026-11-26T07:25:39.277Z",
-      "lastPriceUpdate": "2026-11-26T07:25:39.277Z",
+      "peakPrice": 1788,
+      "currentPrice": 1788,
+      "lastObservedAt": "2026-11-26T07:30:36.442Z",
+      "lastPriceUpdate": "2026-11-26T07:30:36.442Z",
       "summary": "Completed compression-breakout entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -1464,7 +1464,8 @@
       "executionRuleVersion": "five-minute-three-setups-v1",
       "quoteTimestamp": "2026-11-26T04:50:40.513Z",
       "paperTrading": true,
-      "expectedEdge": null
+      "expectedEdge": null,
+      "trailingStopPrice": 1755.4245
     }
   ],
   "trades": [
@@ -15300,7 +15301,7 @@
   "lastSlots": {
     "research": 1795664400000,
     "scan": 1795677900000,
-    "risk": 1795677900000
+    "risk": 1795678200000
   },
   "dailyCache": {
     "GROWW": {
@@ -28246,7 +28247,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-26T07:25:41.132Z",
+  "updatedAt": "2026-11-26T07:30:37.575Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -28274,8 +28275,8 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-26T07:25:41.132Z",
-    "action": "scan",
+    "at": "2026-11-26T07:30:37.575Z",
+    "action": "risk",
     "bought": null,
     "checked": [
       {
