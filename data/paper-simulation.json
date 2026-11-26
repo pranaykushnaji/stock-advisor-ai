@@ -34,9 +34,9 @@
       "initialStopPct": 0.5987444329486058,
       "modeledInitialRisk": 23.23,
       "peakPrice": 2496.7,
-      "currentPrice": 2483.6,
-      "lastObservedAt": "2026-11-26T04:50:37.222Z",
-      "lastPriceUpdate": "2026-11-26T04:50:37.222Z",
+      "currentPrice": 2482.5,
+      "lastObservedAt": "2026-11-26T04:55:35.912Z",
+      "lastPriceUpdate": "2026-11-26T04:55:35.912Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -767,9 +767,9 @@
       "initialStopPct": 1.8744513753485958,
       "modeledInitialRisk": 38.66,
       "peakPrice": 1737.8684999999998,
-      "currentPrice": 1737,
-      "lastObservedAt": "2026-11-26T04:50:40.513Z",
-      "lastPriceUpdate": "2026-11-26T04:50:40.513Z",
+      "currentPrice": 1728.4,
+      "lastObservedAt": "2026-11-26T04:55:35.667Z",
+      "lastPriceUpdate": "2026-11-26T04:55:35.667Z",
       "summary": "Completed compression-breakout entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -15300,7 +15300,7 @@
   "lastSlots": {
     "research": 1795664400000,
     "scan": 1795668600000,
-    "risk": 1795668600000
+    "risk": 1795668900000
   },
   "dailyCache": {
     "GROWW": {
@@ -28135,7 +28135,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-26T04:50:41.850Z",
+  "updatedAt": "2026-11-26T04:55:37.367Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -28163,12 +28163,16 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-26T04:50:41.850Z",
-    "action": "scan",
-    "bought": "PRESTIGE",
+    "at": "2026-11-26T04:55:37.367Z",
+    "action": "risk",
+    "bought": null,
     "checked": [
       {
         "ticker": "LAURUSLABS",
+        "status": "hold"
+      },
+      {
+        "ticker": "PRESTIGE",
         "status": "hold"
       }
     ],
