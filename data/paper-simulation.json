@@ -34,9 +34,9 @@
       "initialStopPct": 0.5987444329486058,
       "modeledInitialRisk": 23.23,
       "peakPrice": 2516.3,
-      "currentPrice": 2506,
-      "lastObservedAt": "2026-11-26T09:44:59.578Z",
-      "lastPriceUpdate": "2026-11-26T09:44:59.578Z",
+      "currentPrice": 2515.5,
+      "lastObservedAt": "2026-11-27T03:45:35.694Z",
+      "lastPriceUpdate": "2026-11-27T03:45:35.694Z",
       "summary": "Completed trend-pullback entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -767,9 +767,9 @@
       "initialStopPct": 1.8744513753485958,
       "modeledInitialRisk": 38.66,
       "peakPrice": 1838,
-      "currentPrice": 1835.2,
-      "lastObservedAt": "2026-11-26T09:44:59.678Z",
-      "lastPriceUpdate": "2026-11-26T09:44:59.678Z",
+      "currentPrice": 1829.5,
+      "lastObservedAt": "2026-11-27T03:45:36.247Z",
+      "lastPriceUpdate": "2026-11-27T03:45:36.247Z",
       "summary": "Completed compression-breakout entry; recent stock/Nifty momentum, prior-session structure and executable-price extension checked.",
       "setup": {
         "status": "setup",
@@ -15296,12 +15296,18 @@
         "PRESTIGE"
       ],
       "exits": []
+    },
+    "2026-11-27": {
+      "contribution": 0,
+      "invested": 0,
+      "buys": [],
+      "exits": []
     }
   },
   "lastSlots": {
     "research": 1795750800000,
     "scan": 1795686900000,
-    "risk": 1795686900000
+    "risk": 1795751100000
   },
   "dailyCache": {
     "GROWW": {
@@ -22485,7 +22491,7 @@
     }
   },
   "suggestions": [],
-  "updatedAt": "2026-11-27T03:40:37.370Z",
+  "updatedAt": "2026-11-27T03:45:37.550Z",
   "config": {
     "version": "paper-one-share-v2",
     "dailyInvestment": null,
@@ -22513,10 +22519,21 @@
     "exitMode": "setup-risk"
   },
   "lastCheck": {
-    "at": "2026-11-27T03:40:37.370Z",
-    "action": "research",
+    "at": "2026-11-27T03:45:37.550Z",
+    "action": "risk",
     "bought": null,
-    "checked": []
+    "checked": [
+      {
+        "ticker": "LAURUSLABS",
+        "status": "hold"
+      },
+      {
+        "ticker": "PRESTIGE",
+        "status": "hold"
+      }
+    ],
+    "entryPause": null,
+    "researchStatus": "loaded"
   },
   "discovery": {
     "at": "2026-11-26T09:55:41.081Z",
